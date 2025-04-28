@@ -7,18 +7,14 @@ jobs:
   deploy:
     runs-on: ubuntu-22.04
     permissions:
-      contents: write
+      contents: read
+      pages: write
+      id-token: write
     steps:
       - uses: actions/checkout@v3
 
       - name: Install Dependencies
         run: npm install
 
-      - name: Build
-        run: npm run build-storybook
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+      - id: build-publish
+        uses: bitovi/github-actions-storybook-to-github-pages@v1.0.0
