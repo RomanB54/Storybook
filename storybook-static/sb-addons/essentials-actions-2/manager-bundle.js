@@ -1021,7 +1021,7 @@ try {
       },
       Qt = (e, t, r, n) => {
         if ((t && typeof t == 'object') || typeof t == 'function')
-          for (let a of tt(t))
+          for (const a of tt(t))
             !Zt.call(e, a) &&
               a !== r &&
               pe(e, a, {
@@ -1371,7 +1371,7 @@ try {
       de =
         (e) =>
         ({ theme: t = le, ...r }) => {
-          let n = Ce(() => {
+          const n = Ce(() => {
             switch (Object.prototype.toString.call(t)) {
               case '[object String]':
                 return Y(q[t]);
@@ -1451,26 +1451,26 @@ try {
           [X].concat(Array.from({ length: r }, () => '*')).join('.'),
         ),
       ur = (e, t, r, n, a) => {
-        let i = []
+        const i = []
             .concat(lr(n))
             .concat(r)
             .filter((l) => typeof l == 'string'),
           s = [];
         return (
           i.forEach((l) => {
-            let u = l.split('.'),
+            const u = l.split('.'),
               c = (p, d, f) => {
                 if (f === u.length) {
                   s.push(d);
                   return;
                 }
-                let E = u[f];
+                const E = u[f];
                 if (f === 0) J(p, t) && (E === X || E === Xe) && c(p, X, f + 1);
                 else if (E === Xe)
-                  for (let { name: m, data: y } of t(p))
+                  for (const { name: m, data: y } of t(p))
                     J(y, t) && c(y, `${d}.${m}`, f + 1);
                 else {
-                  let m = p[E];
+                  const m = p[E];
                   J(m, t) && c(m, `${d}.${E}`, f + 1);
                 }
               };
@@ -1551,12 +1551,12 @@ try {
         },
       ),
       me = ({ name: e, dimmed: t = !1, styles: r = {} }) => {
-        let n = S('ObjectName'),
+        const n = S('ObjectName'),
           a = { ...n.base, ...(t ? n.dimmed : {}), ...r };
         return o.createElement('span', { style: a }, e);
       },
       H = ({ object: e, styles: t }) => {
-        let r = S('ObjectValue'),
+        const r = S('ObjectValue'),
           n = (a) => ({ ...r[a], ...t });
         switch (typeof e) {
           case 'bigint':
@@ -1640,7 +1640,7 @@ try {
       it = Object.prototype.hasOwnProperty,
       cr = Object.prototype.propertyIsEnumerable;
     function ue(e, t) {
-      let r = Object.getOwnPropertyDescriptor(e, t);
+      const r = Object.getOwnPropertyDescriptor(e, t);
       if (r.get)
         try {
           return r.get();
@@ -1655,7 +1655,7 @@ try {
         : e.slice(1).reduce((r, n) => r.concat([t, n]), [e[0]]);
     }
     var ce = ({ data: e }) => {
-        let t = S('ObjectPreview'),
+        const t = S('ObjectPreview'),
           r = e;
         if (
           typeof r != 'object' ||
@@ -1665,13 +1665,13 @@ try {
         )
           return o.createElement(H, { object: r });
         if (Array.isArray(r)) {
-          let n = t.arrayMaxProperties,
+          const n = t.arrayMaxProperties,
             a = r
               .slice(0, n)
               .map((s, l) => o.createElement(H, { key: l, object: s }));
           r.length > n &&
             a.push(o.createElement('span', { key: 'ellipsis' }, '\u2026'));
-          let i = r.length;
+          const i = r.length;
           return o.createElement(
             o.Fragment,
             null,
@@ -1689,15 +1689,15 @@ try {
             ),
           );
         } else {
-          let n = t.objectMaxProperties,
+          const n = t.objectMaxProperties,
             a = [];
-          for (let s in r)
+          for (const s in r)
             if (it.call(r, s)) {
               let l;
               a.length === n - 1 &&
                 Object.keys(r).length > n &&
                 (l = o.createElement('span', { key: 'ellipsis' }, '\u2026'));
-              let u = ue(r, s);
+              const u = ue(r, s);
               if (
                 (a.push(
                   o.createElement(
@@ -1713,7 +1713,7 @@ try {
               )
                 break;
             }
-          let i = r.constructor ? r.constructor.name : 'Object';
+          const i = r.constructor ? r.constructor.name : 'Object';
           return o.createElement(
             o.Fragment,
             null,
@@ -1743,7 +1743,7 @@ try {
             )
           : o.createElement(ce, { data: t }),
       fr = ({ name: e, data: t, isNonenumerable: r = !1 }) => {
-        let n = t;
+        const n = t;
         return o.createElement(
           'span',
           null,
@@ -1758,22 +1758,22 @@ try {
         function* (r) {
           if (!((typeof r == 'object' && r !== null) || typeof r == 'function'))
             return;
-          let n = Array.isArray(r);
+          const n = Array.isArray(r);
           if (!n && r[Symbol.iterator]) {
             let a = 0;
-            for (let i of r) {
+            for (const i of r) {
               if (Array.isArray(i) && i.length === 2) {
-                let [s, l] = i;
+                const [s, l] = i;
                 yield { name: s, data: l };
               } else yield { name: a.toString(), data: i };
               a++;
             }
           } else {
-            let a = Object.getOwnPropertyNames(r);
+            const a = Object.getOwnPropertyNames(r);
             t === !0 && !n ? a.sort() : typeof t == 'function' && a.sort(t);
-            for (let i of a)
+            for (const i of a)
               if (cr.call(r, i)) {
-                let s = ue(r, i);
+                const s = ue(r, i);
                 yield { name: i || '""', data: s };
               } else if (e) {
                 let s;
@@ -1802,7 +1802,7 @@ try {
         nodeRenderer: r,
         ...n
       }) => {
-        let a = dr(e, t),
+        const a = dr(e, t),
           i = r || mr;
         return o.createElement(ot, { nodeRenderer: i, dataIterator: a, ...n });
       },
@@ -1811,11 +1811,11 @@ try {
       if (typeof e == 'object') {
         let t = [];
         if (Array.isArray(e)) {
-          let n = e.length;
+          const n = e.length;
           t = [...Array(n).keys()];
         } else e !== null && (t = Object.keys(e));
-        let r = t.reduce((n, a) => {
-          let i = e[a];
+        const r = t.reduce((n, a) => {
+          const i = e[a];
           return (
             typeof i == 'object' &&
               i !== null &&
@@ -1830,7 +1830,7 @@ try {
       }
     }
     var Er = ({ rows: e, columns: t, rowsData: r }) => {
-        let n = S('TableInspectorDataContainer'),
+        const n = S('TableInspectorDataContainer'),
           a = S('TableInspectorLeftBorder');
         return o.createElement(
           'div',
@@ -1848,7 +1848,7 @@ try {
                   { key: i, style: n.tr },
                   o.createElement('td', { style: { ...n.td, ...a.none } }, i),
                   t.map((l) => {
-                    let u = r[s];
+                    const u = r[s];
                     return typeof u == 'object' && u !== null && it.call(u, l)
                       ? o.createElement(
                           'td',
@@ -1882,7 +1882,7 @@ try {
           e.children,
         ),
       Or = ({ sortAscending: e }) => {
-        let t = S('TableInspectorSortIcon'),
+        const t = S('TableInspectorSortIcon'),
           r = e ? '\u25B2' : '\u25BC';
         return o.createElement('div', { style: t }, r);
       },
@@ -1894,7 +1894,7 @@ try {
         children: a,
         ...i
       }) => {
-        let s = S('TableInspectorTH'),
+        const s = S('TableInspectorTH'),
           [l, u] = j(!1),
           c = x(() => u(!0), []),
           p = x(() => u(!1), []);
@@ -1926,7 +1926,7 @@ try {
         onTHClick: s,
         onIndexTHClick: l,
       }) => {
-        let u = S('TableInspectorHeaderContainer'),
+        const u = S('TableInspectorHeaderContainer'),
           c = S('TableInspectorLeftBorder');
         return o.createElement(
           'div',
@@ -2009,7 +2009,7 @@ try {
             : a && (E = p.map((m, y) => [p[y], y])),
           E !== void 0)
         ) {
-          let m = (O, w) => (ut, ct) => {
+          const m = (O, w) => (ut, ct) => {
               let ge = O(ut),
                 be = O(ct),
                 he = typeof ge,
@@ -2018,7 +2018,7 @@ try {
                 M;
               if (he === Ee) M = ye(ge, be);
               else {
-                let P = {
+                const P = {
                   string: 0,
                   number: 1,
                   object: 2,
@@ -2064,9 +2064,9 @@ try {
           o.createElement('span', { style: r.tagName }, e),
           (() => {
             if (t) {
-              let n = [];
+              const n = [];
               for (let a = 0; a < t.length; a++) {
-                let i = t[a];
+                const i = t[a];
                 n.push(
                   o.createElement(
                     'span',
@@ -2110,7 +2110,7 @@ try {
         11: 'DOCUMENT_FRAGMENT_NODE',
       },
       Cr = ({ isCloseTag: e, data: t, expanded: r }) => {
-        let n = S('DOMNodePreview');
+        const n = S('DOMNodePreview');
         if (e)
           return o.createElement(Qe, {
             styles: n.htmlCloseTag,
@@ -2175,7 +2175,7 @@ try {
         if (e && e.childNodes) {
           if (st(e)) return;
           for (let t = 0; t < e.childNodes.length; t++) {
-            let r = e.childNodes[t];
+            const r = e.childNodes[t];
             (r.nodeType === Node.TEXT_NODE &&
               r.textContent.trim().length === 0) ||
               (yield { name: `${r.tagName}[${t}]`, data: r });
@@ -2235,7 +2235,7 @@ try {
         }),
       ),
       Hr = ({ actions: e, onClear: t }) => {
-        let r = Ne(null),
+        const r = Ne(null),
           n = r.current,
           a = n && n.scrollHeight - n.scrollTop === n.clientHeight;
         return (
@@ -2283,14 +2283,14 @@ try {
         constructor(e) {
           super(e),
             (this.handleStoryChange = () => {
-              let { actions: t } = this.state;
+              const { actions: t } = this.state;
               t.length > 0 &&
                 t[0].options.clearOnStoryChange &&
                 this.clearActions();
             }),
             (this.addAction = (t) => {
               this.setState((r) => {
-                let n = [...r.actions],
+                const n = [...r.actions],
                   a = n.length && n[n.length - 1];
                 return (
                   a && zr(a.data, t.data)
@@ -2301,7 +2301,7 @@ try {
               });
             }),
             (this.clearActions = () => {
-              let { api: t } = this.props;
+              const { api: t } = this.props;
               t.emit(et), this.setState({ actions: [] });
             }),
             (this.mounted = !1),
@@ -2309,23 +2309,23 @@ try {
         }
         componentDidMount() {
           this.mounted = !0;
-          let { api: e } = this.props;
+          const { api: e } = this.props;
           e.on(se, this.addAction), e.on(k, this.handleStoryChange);
         }
         componentWillUnmount() {
           this.mounted = !1;
-          let { api: e } = this.props;
+          const { api: e } = this.props;
           e.off(k, this.handleStoryChange), e.off(se, this.addAction);
         }
         render() {
-          let { actions: e = [] } = this.state,
+          const { actions: e = [] } = this.state,
             { active: t } = this.props,
             r = { actions: e, onClear: this.clearActions };
           return t ? o.createElement(Hr, { ...r }) : null;
         }
       };
     function jr() {
-      let [{ count: e }, t] = Me(z, { count: 0 });
+      const [{ count: e }, t] = Me(z, { count: 0 });
       return (
         Pe({
           [se]: () => {

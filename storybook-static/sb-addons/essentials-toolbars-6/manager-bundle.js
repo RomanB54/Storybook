@@ -156,7 +156,7 @@ try {
         toolbar: {
           ...t.toolbar,
           items: t.toolbar.items.map((e) => {
-            let o = typeof e == 'string' ? { value: e, title: e } : e;
+            const o = typeof e == 'string' ? { value: e, title: e } : e;
             return (
               o.type === 'reset' &&
                 t.toolbar.icon &&
@@ -208,14 +208,14 @@ try {
             i({ [e]: '' });
           }, [i]),
           I = f(() => {
-            let s = l.current,
+            const s = l.current,
               m = s.indexOf(u),
               d = m === s.length - 1 ? 0 : m + 1,
               p = l.current[d];
             i({ [e]: p });
           }, [l, u, i]),
           O = f(() => {
-            let s = l.current,
+            const s = l.current,
               m = s.indexOf(u),
               d = m > -1 ? m : 0,
               p = d === 0 ? s.length - 1 : d - 1,
@@ -240,11 +240,11 @@ try {
       W = ({ currentValue: r, items: t }) =>
         r != null && t.find((e) => e.value === r && e.type !== 'reset'),
       j = ({ currentValue: r, items: t }) => {
-        let e = W({ currentValue: r, items: t });
+        const e = W({ currentValue: r, items: t });
         if (e) return e.icon;
       },
       Z = ({ currentValue: r, items: t }) => {
-        let e = W({ currentValue: r, items: t });
+        const e = W({ currentValue: r, items: t });
         if (e) return e.title;
       },
       J = ({
@@ -272,7 +272,7 @@ try {
         disabled: _,
         currentValue: i,
       }) => {
-        let l =
+        const l =
             o &&
             n.createElement(A, {
               style: { opacity: 1 },
@@ -312,7 +312,7 @@ try {
           _ || (p = j({ currentValue: s, items: a }) || p),
             i && (b = Z({ currentValue: s, items: a }) || b),
             !b && !p && console.warn(`Toolbar '${t}' has no title or icon`);
-          let F = f(
+          const F = f(
             (E) => {
               u({ [r]: E });
             },
@@ -323,7 +323,7 @@ try {
             {
               placement: 'top',
               tooltip: ({ onHide: E }) => {
-                let G = a
+                const G = a
                   .filter(({ type: x }) => {
                     let R = !0;
                     return x === 'reset' && !s && (R = !1), R;
@@ -354,7 +354,7 @@ try {
         },
       ),
       ee = () => {
-        let r = P(),
+        const r = P(),
           t = Object.keys(r).filter((e) => !!r[e].toolbar);
         return t.length
           ? n.createElement(
@@ -362,7 +362,7 @@ try {
               null,
               n.createElement(D, null),
               t.map((e) => {
-                let o = U(e, r[e]);
+                const o = U(e, r[e]);
                 return n.createElement(X, { key: e, id: e, ...o });
               }),
             )

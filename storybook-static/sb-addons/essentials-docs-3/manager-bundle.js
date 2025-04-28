@@ -26,7 +26,7 @@ try {
       },
       Zc = (e, t, r, n) => {
         if ((t && typeof t == 'object') || typeof t == 'function')
-          for (let o of Kc(t))
+          for (const o of Kc(t))
             !Xc.call(e, o) &&
               o !== r &&
               mn(e, o, {
@@ -411,7 +411,7 @@ try {
           if (g !== T) throw new Error('Unterminated String');
           return s.slice(0, f);
         }
-        let l = new RegExp(
+        const l = new RegExp(
             '[$_\\p{ID_Start}]|\\\\u\\p{Hex_Digit}{4}|\\\\u\\{0*(?:\\p{Hex_Digit}{1,5}|10\\p{Hex_Digit}{4})\\}',
             'u',
           ),
@@ -429,7 +429,7 @@ try {
           } while (g < s.length);
           return s.slice(0, g);
         }
-        let d = /^(NaN|-?((\d*\.\d+|\d+)([Ee][+-]?\d+)?|Infinity))/;
+        const d = /^(NaN|-?((\d*\.\d+|\d+)([Ee][+-]?\d+)?|Infinity))/;
         function p(s) {
           var f, g;
           return (g =
@@ -438,24 +438,24 @@ try {
             ? g
             : null;
         }
-        let h = (s) => {
-          let f = c(s);
+        const h = (s) => {
+          const f = c(s);
           return f == null ? null : { type: 'Identifier', text: f };
         };
         function y(s) {
           return (f) => {
             if (!f.startsWith(s)) return null;
-            let g = f[s.length];
+            const g = f[s.length];
             return g !== void 0 && u.test(g) ? null : { type: s, text: s };
           };
         }
-        let E = (s) => {
-            let f = a(s);
+        const E = (s) => {
+            const f = a(s);
             return f == null ? null : { type: 'StringValue', text: f };
           },
           v = (s) => (s.length > 0 ? null : { type: 'EOF', text: '' }),
           A = (s) => {
-            let f = p(s);
+            const f = p(s);
             return f === null ? null : { type: 'Number', text: f };
           },
           D = [
@@ -506,9 +506,9 @@ try {
           S = /^\s*\n\s*/;
         class F {
           static create(f) {
-            let g = this.read(f);
+            const g = this.read(f);
             f = g.text;
-            let T = this.read(f);
+            const T = this.read(f);
             return (f = T.text), new F(f, void 0, g.token, T.token);
           }
           constructor(f, g, T, B) {
@@ -520,17 +520,19 @@ try {
           }
           static read(f, g = !1) {
             (g = g || S.test(f)), (f = f.trim());
-            for (let T of D) {
-              let B = T(f);
+            for (const T of D) {
+              const B = T(f);
               if (B !== null) {
-                let q = Object.assign(Object.assign({}, B), { startOfLine: g });
+                const q = Object.assign(Object.assign({}, B), {
+                  startOfLine: g,
+                });
                 return (f = f.slice(q.text.length)), { text: f, token: q };
               }
             }
             throw new Error('Unexpected Token ' + f);
           }
           advance() {
-            let f = F.read(this.text);
+            const f = F.read(this.text);
             return new F(f.text, this.current, this.next, f.token);
           }
         }
@@ -615,7 +617,7 @@ try {
             return this._lexer;
           }
           parse() {
-            let f = this.parseType(P.ALL);
+            const f = this.parseType(P.ALL);
             if (this.lexer.current.type !== 'EOF')
               throw new n(this.lexer.current);
             return f;
@@ -624,7 +626,7 @@ try {
             return x(this.parseIntermediateType(f));
           }
           parseIntermediateType(f) {
-            let g = this.tryParslets(null, f);
+            const g = this.tryParslets(null, f);
             if (g === null) throw new r(this.lexer.current);
             return this.parseInfixIntermediateType(g, f);
           }
@@ -634,8 +636,8 @@ try {
             return f;
           }
           tryParslets(f, g) {
-            for (let T of this.grammar) {
-              let B = T(this, g, f);
+            for (const T of this.grammar) {
+              const B = T(this, g, f);
               if (B !== null) return B;
             }
             return null;
@@ -657,8 +659,8 @@ try {
             s === 'EOF' || s === '|' || s === ',' || s === ')' || s === '>'
           );
         }
-        let z = (s, f, g) => {
-          let T = s.lexer.current.type,
+        const z = (s, f, g) => {
+          const T = s.lexer.current.type,
             B = s.lexer.next.type;
           return (g == null && T === '?' && !L(B)) || (g != null && T === '?')
             ? (s.consume('?'),
@@ -676,8 +678,8 @@ try {
             : null;
         };
         function b(s) {
-          let f = (g, T, B) => {
-            let q = g.lexer.current.type,
+          const f = (g, T, B) => {
+            const q = g.lexer.current.type,
               W = g.lexer.next.type;
             if (B === null) {
               if ('parsePrefix' in s && s.accept(q, W)) return s.parsePrefix(g);
@@ -687,7 +689,7 @@ try {
           };
           return Object.defineProperty(f, 'name', { value: s.name }), f;
         }
-        let w = b({
+        const w = b({
             name: 'optionalParslet',
             accept: (s) => s === '=',
             precedence: P.OPTIONAL,
@@ -712,7 +714,7 @@ try {
             name: 'numberParslet',
             accept: (s) => s === 'Number',
             parsePrefix: (s) => {
-              let f = parseFloat(s.lexer.current.text);
+              const f = parseFloat(s.lexer.current.text);
               return s.consume('Number'), { type: 'JsdocTypeNumber', value: f };
             },
           }),
@@ -722,7 +724,7 @@ try {
             parsePrefix: (s) => {
               if ((s.consume('('), s.consume(')')))
                 return { type: 'JsdocTypeParameterList', elements: [] };
-              let f = s.parseIntermediateType(P.ALL);
+              const f = s.parseIntermediateType(P.ALL);
               if (!s.consume(')')) throw new Error('Unterminated parenthesis');
               return f.type === 'JsdocTypeParameterList'
                 ? f
@@ -773,11 +775,11 @@ try {
             accept: (f) => f === ',',
             precedence: P.PARAMETER_LIST,
             parseInfix: (f, g) => {
-              let T = [O(g)];
+              const T = [O(g)];
               f.consume(',');
               do
                 try {
-                  let B = f.parseIntermediateType(P.PARAMETER_LIST);
+                  const B = f.parseIntermediateType(P.PARAMETER_LIST);
                   T.push(O(B));
                 } catch (B) {
                   if (s && B instanceof r) break;
@@ -795,14 +797,14 @@ try {
             },
           });
         }
-        let Z = b({
+        const Z = b({
             name: 'genericParslet',
             accept: (s, f) => s === '<' || (s === '.' && f === '<'),
             precedence: P.GENERIC,
             parseInfix: (s, f) => {
-              let g = s.consume('.');
+              const g = s.consume('.');
               s.consume('<');
-              let T = [];
+              const T = [];
               do T.push(s.parseType(P.PARAMETER_LIST));
               while (s.consume(','));
               if (!s.consume('>'))
@@ -821,7 +823,7 @@ try {
             precedence: P.UNION,
             parseInfix: (s, f) => {
               s.consume('|');
-              let g = [];
+              const g = [];
               do g.push(s.parseType(P.UNION));
               while (s.consume('|'));
               return { type: 'JsdocTypeUnion', elements: [x(f), ...g] };
@@ -835,7 +837,7 @@ try {
         }) {
           return function (B, q, W) {
             if (W == null || q >= P.NAME_PATH) return null;
-            let te = B.lexer.current.type,
+            const te = B.lexer.current.type,
               Ce = B.lexer.next.type;
             if (
               !(
@@ -854,7 +856,7 @@ try {
                 : B.consume('~')
                   ? (_e = 'inner')
                   : (B.consume('#'), (_e = 'instance'));
-            let pa = g !== null ? new K(g, B.lexer, B) : B,
+            const pa = g !== null ? new K(g, B.lexer, B) : B,
               He = pa.parseIntermediateType(P.NAME_PATH);
             B.acceptLexerState(pa);
             let Wt;
@@ -895,7 +897,7 @@ try {
                 );
             }
             if (Ar && !B.consume(']')) {
-              let ha = B.lexer.current;
+              const ha = B.lexer.current;
               throw new Error(
                 `Unterminated square brackets. Next token is '${ha.type}' with text '${ha.text}'`,
               );
@@ -917,16 +919,16 @@ try {
               f === 'new' ||
               s.includes(f),
             parsePrefix: (f) => {
-              let { type: g, text: T } = f.lexer.current;
+              const { type: g, text: T } = f.lexer.current;
               return f.consume(g), { type: 'JsdocTypeName', value: T };
             },
           });
         }
-        let Se = b({
+        const Se = b({
           name: 'stringValueParslet',
           accept: (s) => s === 'StringValue',
           parsePrefix: (s) => {
-            let f = s.lexer.current.text;
+            const f = s.lexer.current.text;
             return (
               s.consume('StringValue'),
               {
@@ -942,7 +944,7 @@ try {
             name: 'specialNamePathParslet',
             accept: (g) => f.includes(g),
             parsePrefix: (g) => {
-              let T = g.lexer.current.type;
+              const T = g.lexer.current.type;
               if ((g.consume(T), !g.consume(':')))
                 return { type: 'JsdocTypeName', value: T };
               let B,
@@ -966,13 +968,13 @@ try {
                   meta: { quote: void 0 },
                 };
               }
-              let W = new K(s, g.lexer, g),
+              const W = new K(s, g.lexer, g),
                 te = W.parseInfixIntermediateType(B, P.ALL);
               return g.acceptLexerState(W), x(te);
             },
           });
         }
-        let je = [
+        const je = [
             ue({ allowedAdditionalTokens: ['external', 'module'] }),
             Se,
             I,
@@ -991,7 +993,7 @@ try {
           return f.map((g) => O(g));
         }
         function Ht(s) {
-          let f = Je(s);
+          const f = Je(s);
           if (f.some((g) => g.type === 'JsdocTypeKeyValue'))
             throw new Error('No parameter should be named');
           return f;
@@ -1007,9 +1009,9 @@ try {
             accept: (B, q) =>
               B === 'function' || (T && B === 'new' && q === '('),
             parsePrefix: (B) => {
-              let q = B.consume('new');
+              const q = B.consume('new');
               B.consume('function');
-              let W = B.lexer.current.type === '(';
+              const W = B.lexer.current.type === '(';
               if (!W) {
                 if (!g) throw new Error('function is missing parameter list');
                 return { type: 'JsdocTypeName', value: 'function' };
@@ -1027,7 +1029,7 @@ try {
                 if (q && Ce.type === 'JsdocTypeFunction' && Ce.arrow)
                   return (te = Ce), (te.constructor = !0), te;
                 te.parameters = Je(Ce);
-                for (let Ae of te.parameters)
+                for (const Ae of te.parameters)
                   if (Ae.type === 'JsdocTypeKeyValue' && !s.includes(Ae.key))
                     throw new Error(
                       `only allowed named parameters are ${s.join(', ')} but got ${Ae.type}`,
@@ -1046,9 +1048,9 @@ try {
             precedence: P.PREFIX,
             parsePrefix: (g) => {
               g.consume('...');
-              let T = f && g.consume('[');
+              const T = f && g.consume('[');
               try {
-                let B = g.parseType(P.PREFIX);
+                const B = g.parseType(P.PREFIX);
                 if (T && !g.consume(']'))
                   throw new Error("Unterminated variadic type. Missing ']'");
                 return {
@@ -1081,7 +1083,7 @@ try {
               : void 0,
           });
         }
-        let br = b({
+        const br = b({
             name: 'symbolParslet',
             accept: (s) => s === '(',
             precedence: P.SYMBOL,
@@ -1091,9 +1093,9 @@ try {
                   "Symbol expects a name on the left side. (Reacting on '(')",
                 );
               s.consume('(');
-              let g = { type: 'JsdocTypeSymbol', value: f.value };
+              const g = { type: 'JsdocTypeSymbol', value: f.value };
               if (!s.consume(')')) {
-                let T = s.parseIntermediateType(P.SYMBOL);
+                const T = s.parseIntermediateType(P.SYMBOL);
                 if (((g.element = j(T)), !s.consume(')')))
                   throw new Error('Symbol does not end after value');
               }
@@ -1121,7 +1123,7 @@ try {
             accept: (g) => g === '{',
             parsePrefix: (g) => {
               g.consume('{');
-              let T = {
+              const T = {
                 type: 'JsdocTypeObject',
                 meta: { separator: 'comma' },
                 elements: [],
@@ -1193,7 +1195,7 @@ try {
                 g &&
                   q.type === 'JsdocTypeReadonlyProperty' &&
                   ((Ce = !0), (q = q.element));
-              let Ae = (W = B.baseParser) !== null && W !== void 0 ? W : B;
+              const Ae = (W = B.baseParser) !== null && W !== void 0 ? W : B;
               if (
                 (Ae.acceptLexerState(B),
                 q.type === 'JsdocTypeNumber' ||
@@ -1205,7 +1207,7 @@ try {
                 Ae.consume(':');
                 let _e;
                 q.type === 'JsdocTypeStringValue' && (_e = q.meta.quote);
-                let Ar = Ae.parseType(P.KEY_VALUE);
+                const Ar = Ae.parseType(P.KEY_VALUE);
                 return (
                   B.acceptLexerState(Ae),
                   {
@@ -1220,7 +1222,7 @@ try {
               } else {
                 if (!f) throw new o(q);
                 Ae.consume(':');
-                let _e = Ae.parseType(P.KEY_VALUE);
+                const _e = Ae.parseType(P.KEY_VALUE);
                 return (
                   B.acceptLexerState(Ae),
                   { type: 'JsdocTypeJsdocObjectField', left: x(q), right: _e }
@@ -1249,7 +1251,7 @@ try {
               )
                 throw new o(T);
               g.consume(':');
-              let W = g.parseType(P.KEY_VALUE);
+              const W = g.parseType(P.KEY_VALUE);
               return {
                 type: 'JsdocTypeKeyValue',
                 key: T.value,
@@ -1260,7 +1262,7 @@ try {
             },
           });
         }
-        let Er = [
+        const Er = [
             ...ee,
             Ct({
               allowWithoutParenthesis: !0,
@@ -1359,7 +1361,7 @@ try {
             accept: (s) => s === 'asserts',
             parsePrefix: (s) => {
               s.consume('asserts');
-              let f = s.parseIntermediateType(P.SYMBOL);
+              const f = s.parseIntermediateType(P.SYMBOL);
               if (f.type !== 'JsdocTypeName')
                 throw new o(
                   f,
@@ -1381,9 +1383,9 @@ try {
             accept: (f) => f === '[',
             parsePrefix: (f) => {
               f.consume('[');
-              let g = { type: 'JsdocTypeTuple', elements: [] };
+              const g = { type: 'JsdocTypeTuple', elements: [] };
               if (f.consume(']')) return g;
-              let T = f.parseIntermediateType(P.ALL);
+              const T = f.parseIntermediateType(P.ALL);
               if (
                 (T.type === 'JsdocTypeParameterList'
                   ? T.elements[0].type === 'JsdocTypeKeyValue'
@@ -1401,7 +1403,7 @@ try {
             },
           });
         }
-        let Tc = b({
+        const Tc = b({
             name: 'keyOfParslet',
             accept: (s) => s === 'keyof',
             parsePrefix: (s) => (
@@ -1418,7 +1420,7 @@ try {
             parsePrefix: (s) => {
               if ((s.consume('import'), !s.consume('(')))
                 throw new Error('Missing parenthesis after import keyword');
-              let f = s.parseType(P.PREFIX);
+              const f = s.parseType(P.PREFIX);
               if (f.type !== 'JsdocTypeStringValue')
                 throw new Error(
                   'Only string values are allowed as paths for imports',
@@ -1463,7 +1465,7 @@ try {
             precedence: P.INTERSECTION,
             parseInfix: (s, f) => {
               s.consume('&');
-              let g = [];
+              const g = [];
               do g.push(s.parseType(P.INTERSECTION));
               while (s.consume('&'));
               return { type: 'JsdocTypeIntersection', elements: [x(f), ...g] };
@@ -1496,11 +1498,11 @@ try {
               if (s.baseParser === void 0)
                 throw new Error('Only allowed inside object grammar');
               s.consume('[');
-              let f = s.lexer.current.text;
+              const f = s.lexer.current.text;
               s.consume('Identifier');
               let g;
               if (s.consume(':')) {
-                let T = s.baseParser;
+                const T = s.baseParser;
                 T.acceptLexerState(s),
                   (g = {
                     type: 'JsdocTypeIndexSignature',
@@ -1509,7 +1511,7 @@ try {
                   }),
                   s.acceptLexerState(T);
               } else if (s.consume('in')) {
-                let T = s.baseParser;
+                const T = s.baseParser;
                 T.acceptLexerState(s),
                   (g = {
                     type: 'JsdocTypeMappedType',
@@ -1591,7 +1593,7 @@ try {
         }
         function Nc(s, f = ['typescript', 'closure', 'jsdoc']) {
           let g;
-          for (let T of f)
+          for (const T of f)
             try {
               return la(s, T);
             } catch (B) {
@@ -1600,7 +1602,7 @@ try {
           throw g;
         }
         function Gt(s, f) {
-          let g = s[f.type];
+          const g = s[f.type];
           if (g === void 0)
             throw new Error(
               `In this set of transform rules exists no rule for type ${f.type}.`,
@@ -1613,8 +1615,8 @@ try {
           );
         }
         function ua(s) {
-          let f = { params: [] };
-          for (let g of s.parameters)
+          const f = { params: [] };
+          for (const g of s.parameters)
             g.type === 'JsdocTypeKeyValue'
               ? g.key === 'this'
                 ? (f.this = g.right)
@@ -1665,7 +1667,7 @@ try {
                 ? '...'
                 : vr(s.meta.position, f(s.element), '...'),
             JsdocTypeNamePath: (s, f) => {
-              let g = f(s.left),
+              const g = f(s.left),
                 T = f(s.right);
               switch (s.pathType) {
                 case 'inner':
@@ -1682,7 +1684,7 @@ try {
             JsdocTypeAny: () => '*',
             JsdocTypeGeneric: (s, f) => {
               if (s.meta.brackets === 'square') {
-                let g = s.elements[0],
+                const g = s.elements[0],
                   T = f(g);
                 return g.type === 'JsdocTypeUnion' ||
                   g.type === 'JsdocTypeIntersection'
@@ -1736,11 +1738,11 @@ try {
             JsdocTypeAsserts: (s, f) => `asserts ${f(s.left)} is ${f(s.right)}`,
           };
         }
-        let jc = ca();
+        const jc = ca();
         function Lc(s) {
           return Gt(jc, s);
         }
-        let Mc = [
+        const Mc = [
           'null',
           'true',
           'false',
@@ -1779,20 +1781,20 @@ try {
           'yield',
         ];
         function Ze(s) {
-          let f = { type: 'NameExpression', name: s };
+          const f = { type: 'NameExpression', name: s };
           return Mc.includes(s) && (f.reservedWord = !0), f;
         }
-        let Uc = {
+        const Uc = {
           JsdocTypeOptional: (s, f) => {
-            let g = f(s.element);
+            const g = f(s.element);
             return (g.optional = !0), g;
           },
           JsdocTypeNullable: (s, f) => {
-            let g = f(s.element);
+            const g = f(s.element);
             return (g.nullable = !0), g;
           },
           JsdocTypeNotNullable: (s, f) => {
-            let g = f(s.element);
+            const g = f(s.element);
             return (g.nullable = !1), g;
           },
           JsdocTypeVariadic: (s, f) => {
@@ -1800,7 +1802,7 @@ try {
               throw new Error(
                 'dots without value are not allowed in catharsis mode',
               );
-            let g = f(s.element);
+            const g = f(s.element);
             return (g.repeatable = !0), g;
           },
           JsdocTypeAny: () => ({ type: 'AllLiteral' }),
@@ -1809,7 +1811,7 @@ try {
           JsdocTypeUndefined: () => ({ type: 'UndefinedLiteral' }),
           JsdocTypeUnknown: () => ({ type: 'UnknownLiteral' }),
           JsdocTypeFunction: (s, f) => {
-            let g = ua(s),
+            const g = ua(s),
               T = { type: 'FunctionType', params: g.params.map(f) };
             return (
               g.this !== void 0 && (T.this = f(g.this)),
@@ -1831,8 +1833,8 @@ try {
               : { type: 'FunctionType', params: [] },
           JsdocTypeNumber: (s) => Ze(s.value.toString()),
           JsdocTypeObject: (s, f) => {
-            let g = { type: 'RecordType', fields: [] };
-            for (let T of s.elements)
+            const g = { type: 'RecordType', fields: [] };
+            for (const T of s.elements)
               T.type !== 'JsdocTypeObjectField' &&
               T.type !== 'JsdocTypeJsdocObjectField'
                 ? g.fields.push({ type: 'FieldType', key: f(T), value: void 0 })
@@ -1870,7 +1872,7 @@ try {
             s.right.type === 'JsdocTypeSpecialNamePath'
               ? (T = f(s.right).name)
               : (T = Qe(s.right.value, s.right.meta.quote));
-            let B =
+            const B =
               s.pathType === 'inner'
                 ? '~'
                 : s.pathType === 'instance'
@@ -1935,7 +1937,7 @@ try {
             ? { type: s, left: f[0], right: f[1] }
             : { type: s, left: f[0], right: hn(s, f.slice(1)) };
         }
-        let Vc = {
+        const Vc = {
           JsdocTypeOptional: (s, f) => ({
             type: 'OPTIONAL',
             value: f(s.element),
@@ -1965,7 +1967,7 @@ try {
             },
           }),
           JsdocTypeVariadic: (s, f) => {
-            let g = {
+            const g = {
               type: 'VARIADIC',
               meta: {
                 syntax:
@@ -2002,7 +2004,7 @@ try {
           JsdocTypeUndefined: () => ({ type: 'NAME', name: 'undefined' }),
           JsdocTypeAny: () => ({ type: 'ANY' }),
           JsdocTypeFunction: (s, f) => {
-            let g = ua(s),
+            const g = ua(s),
               T = {
                 type: s.arrow ? 'ARROW' : 'FUNCTION',
                 params: g.params.map((B) => {
@@ -2031,7 +2033,7 @@ try {
             );
           },
           JsdocTypeGeneric: (s, f) => {
-            let g = {
+            const g = {
               type: 'GENERIC',
               subject: f(s.left),
               objects: s.elements.map(f),
@@ -2112,8 +2114,8 @@ try {
             );
           },
           JsdocTypeObject: (s, f) => {
-            let g = [];
-            for (let T of s.elements)
+            const g = [];
+            for (const T of s.elements)
               (T.type === 'JsdocTypeObjectField' ||
                 T.type === 'JsdocTypeJsdocObjectField') &&
                 g.push(f(T));
@@ -2141,7 +2143,7 @@ try {
             s.right.specialType === 'event'
               ? ((g = !0), (T = s.right.value), (B = pt(s.right.meta.quote)))
               : ((T = s.right.value), (B = pt(s.right.meta.quote)));
-            let q = {
+            const q = {
               type: qc(s.pathType),
               owner: f(s.left),
               name: T,
@@ -2149,7 +2151,7 @@ try {
               hasEventPrefix: g,
             };
             if (q.owner.type === 'MODULE') {
-              let W = q.owner;
+              const W = q.owner;
               return (q.owner = q.owner.value), (W.value = q), W;
             } else return q;
           },
@@ -2205,7 +2207,7 @@ try {
               element: f(s.element),
             }),
             JsdocTypeSymbol: (s, f) => {
-              let g = { type: 'JsdocTypeSymbol', value: s.value };
+              const g = { type: 'JsdocTypeSymbol', value: s.value };
               return s.element !== void 0 && (g.element = f(s.element)), g;
             },
             JsdocTypeOptional: (s, f) => ({
@@ -2254,7 +2256,7 @@ try {
             JsdocTypeStringValue: (s) => s,
             JsdocTypeNamePath: (s) => s,
             JsdocTypeVariadic: (s, f) => {
-              let g = {
+              const g = {
                 type: 'JsdocTypeVariadic',
                 meta: {
                   position: s.meta.position,
@@ -2269,7 +2271,7 @@ try {
             }),
             JsdocTypeName: (s) => s,
             JsdocTypeFunction: (s, f) => {
-              let g = {
+              const g = {
                 type: 'JsdocTypeFunction',
                 arrow: s.arrow,
                 parameters: s.parameters.map(f),
@@ -2311,7 +2313,7 @@ try {
             }),
           };
         }
-        let da = {
+        const da = {
           JsdocTypeAny: [],
           JsdocTypeFunction: ['parameters', 'returnType'],
           JsdocTypeGeneric: ['left', 'elements'],
@@ -2347,11 +2349,11 @@ try {
         };
         function fn(s, f, g, T, B) {
           T?.(s, f, g);
-          let q = da[s.type];
-          for (let W of q) {
-            let te = s[W];
+          const q = da[s.type];
+          for (const W of q) {
+            const te = s[W];
             if (te !== void 0)
-              if (Array.isArray(te)) for (let Ce of te) fn(Ce, s, W, T, B);
+              if (Array.isArray(te)) for (const Ce of te) fn(Ce, s, W, T, B);
               else fn(te, s, W, T, B);
           }
           B?.(s, f, g);
@@ -2458,7 +2460,7 @@ try {
         v = function (...A) {
           if (r?.aborted) return;
           (o = this), (i = A);
-          let D = d == null;
+          const D = d == null;
           p(), a && D && u();
         };
       return (
@@ -2539,7 +2541,7 @@ try {
             }),
           (Vf = (e, t, r, n) => {
             if ((t && typeof t == 'object') || typeof t == 'function')
-              for (let o of au(t))
+              for (const o of au(t))
                 !qf.call(e, o) &&
                   o !== r &&
                   ou(e, o, {
@@ -3363,7 +3365,7 @@ try {
             '../../node_modules/color-convert/conversions.js'(e, t) {
               var r = em(),
                 n = {};
-              for (let a of Object.keys(r)) n[r[a]] = a;
+              for (const a of Object.keys(r)) n[r[a]] = a;
               var o = {
                 rgb: { channels: 3, labels: 'rgb' },
                 hsl: { channels: 3, labels: 'hsl' },
@@ -3382,14 +3384,14 @@ try {
                 gray: { channels: 1, labels: ['gray'] },
               };
               t.exports = o;
-              for (let a of Object.keys(o)) {
+              for (const a of Object.keys(o)) {
                 if (!('channels' in o[a]))
                   throw new Error('missing channels property: ' + a);
                 if (!('labels' in o[a]))
                   throw new Error('missing channel labels property: ' + a);
                 if (o[a].labels.length !== o[a].channels)
                   throw new Error('channel and label counts mismatch: ' + a);
-                let { channels: l, labels: u } = o[a];
+                const { channels: l, labels: u } = o[a];
                 delete o[a].channels,
                   delete o[a].labels,
                   Object.defineProperty(o[a], 'channels', { value: l }),
@@ -3413,7 +3415,7 @@ try {
                       : c === p && (y = 4 + (l - u) / h),
                   (y = Math.min(y * 60, 360)),
                   y < 0 && (y += 360);
-                let v = (d + p) / 2;
+                const v = (d + p) / 2;
                 return (
                   p === d
                     ? (E = 0)
@@ -3465,7 +3467,7 @@ try {
                   );
                 }),
                 (o.rgb.cmyk = function (a) {
-                  let l = a[0] / 255,
+                  const l = a[0] / 255,
                     u = a[1] / 255,
                     c = a[2] / 255,
                     d = Math.min(1 - l, 1 - u, 1 - c),
@@ -3480,12 +3482,12 @@ try {
                 );
               }
               (o.rgb.keyword = function (a) {
-                let l = n[a];
+                const l = n[a];
                 if (l) return l;
                 let u = 1 / 0,
                   c;
-                for (let d of Object.keys(r)) {
-                  let p = r[d],
+                for (const d of Object.keys(r)) {
+                  const p = r[d],
                     h = i(a, p);
                   h < u && ((u = h), (c = d));
                 }
@@ -3503,7 +3505,7 @@ try {
                       u > 0.04045 ? ((u + 0.055) / 1.055) ** 2.4 : u / 12.92),
                     (c =
                       c > 0.04045 ? ((c + 0.055) / 1.055) ** 2.4 : c / 12.92);
-                  let d = l * 0.4124 + u * 0.3576 + c * 0.1805,
+                  const d = l * 0.4124 + u * 0.3576 + c * 0.1805,
                     p = l * 0.2126 + u * 0.7152 + c * 0.0722,
                     h = l * 0.0193 + u * 0.1192 + c * 0.9505;
                   return [d * 100, p * 100, h * 100];
@@ -3519,7 +3521,7 @@ try {
                     (u = u > 0.008856 ? u ** (1 / 3) : 7.787 * u + 16 / 116),
                     (c = c > 0.008856 ? c ** (1 / 3) : 7.787 * c + 16 / 116),
                     (d = d > 0.008856 ? d ** (1 / 3) : 7.787 * d + 16 / 116);
-                  let p = 116 * c - 16,
+                  const p = 116 * c - 16,
                     h = 500 * (u - c),
                     y = 200 * (c - d);
                   return [p, h, y];
@@ -3533,7 +3535,7 @@ try {
                     h;
                   if (u === 0) return (h = c * 255), [h, h, h];
                   c < 0.5 ? (d = c * (1 + u)) : (d = c + u - c * u);
-                  let y = 2 * c - d,
+                  const y = 2 * c - d,
                     E = [0, 0, 0];
                   for (let v = 0; v < 3; v++)
                     (p = l + (1 / 3) * -(v - 1)),
@@ -3558,7 +3560,7 @@ try {
                   (c *= 2),
                     (u *= c <= 1 ? c : 2 - c),
                     (d *= p <= 1 ? p : 2 - p);
-                  let h = (c + u) / 2,
+                  const h = (c + u) / 2,
                     y = c === 0 ? (2 * d) / (p + d) : (2 * u) / (c + u);
                   return [l, y * 100, h * 100];
                 }),
@@ -3594,7 +3596,7 @@ try {
                     p,
                     h;
                   h = (2 - u) * c;
-                  let y = (2 - u) * d;
+                  const y = (2 - u) * d;
                   return (
                     (p = u * d),
                     (p /= y <= 1 ? y : 2 - y),
@@ -3610,7 +3612,7 @@ try {
                     d = u + c,
                     p;
                   d > 1 && ((u /= d), (c /= d));
-                  let h = Math.floor(6 * l),
+                  const h = Math.floor(6 * l),
                     y = 1 - c;
                   (p = 6 * l - h), (h & 1) !== 0 && (p = 1 - p);
                   let E = u + p * (y - u),
@@ -3642,7 +3644,7 @@ try {
                   return [v * 255, A * 255, D * 255];
                 }),
                 (o.cmyk.rgb = function (a) {
-                  let l = a[0] / 100,
+                  const l = a[0] / 100,
                     u = a[1] / 100,
                     c = a[2] / 100,
                     d = a[3] / 100,
@@ -3690,7 +3692,7 @@ try {
                     (l = l > 0.008856 ? l ** (1 / 3) : 7.787 * l + 16 / 116),
                     (u = u > 0.008856 ? u ** (1 / 3) : 7.787 * u + 16 / 116),
                     (c = c > 0.008856 ? c ** (1 / 3) : 7.787 * c + 16 / 116);
-                  let d = 116 * u - 16,
+                  const d = 116 * u - 16,
                     p = 500 * (l - u),
                     h = 200 * (u - c);
                   return [d, p, h];
@@ -3703,7 +3705,7 @@ try {
                     p,
                     h;
                   (p = (l + 16) / 116), (d = u / 500 + p), (h = p - c / 200);
-                  let y = p ** 3,
+                  const y = p ** 3,
                     E = d ** 3,
                     v = h ** 3;
                   return (
@@ -3723,11 +3725,11 @@ try {
                     d;
                   (d = (Math.atan2(c, u) * 360) / 2 / Math.PI),
                     d < 0 && (d += 360);
-                  let p = Math.sqrt(u * u + c * c);
+                  const p = Math.sqrt(u * u + c * c);
                   return [l, p, d];
                 }),
                 (o.lch.lab = function (a) {
-                  let l = a[0],
+                  const l = a[0],
                     u = a[1],
                     c = (a[2] / 360) * 2 * Math.PI,
                     d = u * Math.cos(c),
@@ -3749,7 +3751,7 @@ try {
                   return o.rgb.ansi16(o.hsv.rgb(a), a[2]);
                 }),
                 (o.rgb.ansi256 = function (a) {
-                  let l = a[0],
+                  const l = a[0],
                     u = a[1],
                     c = a[2];
                   return l === u && u === c
@@ -3769,7 +3771,7 @@ try {
                     return (
                       a > 50 && (l += 3.5), (l = (l / 10.5) * 255), [l, l, l]
                     );
-                  let u = (~~(a > 50) + 1) * 0.5,
+                  const u = (~~(a > 50) + 1) * 0.5,
                     c = (l & 1) * u * 255,
                     d = ((l >> 1) & 1) * u * 255,
                     p = ((l >> 2) & 1) * u * 255;
@@ -3777,7 +3779,7 @@ try {
                 }),
                 (o.ansi256.rgb = function (a) {
                   if (a >= 232) {
-                    let p = (a - 232) * 10 + 8;
+                    const p = (a - 232) * 10 + 8;
                     return [p, p, p];
                   }
                   a -= 16;
@@ -3788,7 +3790,7 @@ try {
                   return [u, c, d];
                 }),
                 (o.rgb.hex = function (a) {
-                  let l = (
+                  const l = (
                     ((Math.round(a[0]) & 255) << 16) +
                     ((Math.round(a[1]) & 255) << 8) +
                     (Math.round(a[2]) & 255)
@@ -3798,7 +3800,7 @@ try {
                   return '000000'.substring(l.length) + l;
                 }),
                 (o.hex.rgb = function (a) {
-                  let l = a.toString(16).match(/[a-f0-9]{6}|[a-f0-9]{3}/i);
+                  const l = a.toString(16).match(/[a-f0-9]{6}|[a-f0-9]{3}/i);
                   if (!l) return [0, 0, 0];
                   let u = l[0];
                   l[0].length === 3 &&
@@ -3806,7 +3808,7 @@ try {
                       .split('')
                       .map((y) => y + y)
                       .join(''));
-                  let c = parseInt(u, 16),
+                  const c = parseInt(u, 16),
                     d = (c >> 16) & 255,
                     p = (c >> 8) & 255,
                     h = c & 255;
@@ -3855,7 +3857,7 @@ try {
                   );
                 }),
                 (o.hcg.rgb = function (a) {
-                  let l = a[0] / 360,
+                  const l = a[0] / 360,
                     u = a[1] / 100,
                     c = a[2] / 100;
                   if (u === 0) return [c * 255, c * 255, c * 255];
@@ -3911,7 +3913,7 @@ try {
                   );
                 }),
                 (o.hcg.hwb = function (a) {
-                  let l = a[1] / 100,
+                  const l = a[1] / 100,
                     u = a[2] / 100,
                     c = l + u * (1 - l);
                   return [a[0], (c - l) * 100, (1 - c) * 100];
@@ -3960,7 +3962,7 @@ try {
                   return [a[0], 0, 0];
                 }),
                 (o.gray.hex = function (a) {
-                  let l = Math.round((a[0] / 100) * 255) & 255,
+                  const l = Math.round((a[0] / 100) * 255) & 255,
                     u = ((l << 16) + (l << 8) + l).toString(16).toUpperCase();
                   return '000000'.substring(u.length) + u;
                 }),
@@ -3973,20 +3975,20 @@ try {
             '../../node_modules/color-convert/route.js'(e, t) {
               var r = Su();
               function n() {
-                let l = {},
+                const l = {},
                   u = Object.keys(r);
                 for (let c = u.length, d = 0; d < c; d++)
                   l[u[d]] = { distance: -1, parent: null };
                 return l;
               }
               function o(l) {
-                let u = n(),
+                const u = n(),
                   c = [l];
                 for (u[l].distance = 0; c.length; ) {
-                  let d = c.pop(),
+                  const d = c.pop(),
                     p = Object.keys(r[d]);
                   for (let h = p.length, y = 0; y < h; y++) {
-                    let E = p[y],
+                    const E = p[y],
                       v = u[E];
                     v.distance === -1 &&
                       ((v.distance = u[d].distance + 1),
@@ -4012,11 +4014,11 @@ try {
                 return (d.conversion = c), d;
               }
               t.exports = function (l) {
-                let u = o(l),
+                const u = o(l),
                   c = {},
                   d = Object.keys(u);
                 for (let p = d.length, h = 0; h < p; h++) {
-                  let y = d[h];
+                  const y = d[h];
                   u[y].parent !== null && (c[y] = a(y, u));
                 }
                 return c;
@@ -4030,18 +4032,18 @@ try {
                 o = {},
                 i = Object.keys(r);
               function a(u) {
-                let c = function (...d) {
-                  let p = d[0];
+                const c = function (...d) {
+                  const p = d[0];
                   return p == null ? p : (p.length > 1 && (d = p), u(d));
                 };
                 return 'conversion' in u && (c.conversion = u.conversion), c;
               }
               function l(u) {
-                let c = function (...d) {
-                  let p = d[0];
+                const c = function (...d) {
+                  const p = d[0];
                   if (p == null) return p;
                   p.length > 1 && (d = p);
-                  let h = u(d);
+                  const h = u(d);
                   if (typeof h == 'object')
                     for (let y = h.length, E = 0; E < y; E++)
                       h[E] = Math.round(h[E]);
@@ -4055,9 +4057,9 @@ try {
                     value: r[u].channels,
                   }),
                   Object.defineProperty(o[u], 'labels', { value: r[u].labels });
-                let c = n(u);
+                const c = n(u);
                 Object.keys(c).forEach((d) => {
-                  let p = c[d];
+                  const p = c[d];
                   (o[u][d] = l(p)), (o[u][d].raw = a(p));
                 });
               }),
@@ -4615,7 +4617,7 @@ try {
           }))),
           (Fm = `url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill-opacity=".05"><path d="M8 0h8v8H8zM0 8h8v8H0z"/></svg>')`),
           (Au = ({ value: e, style: t, ...r }) => {
-            let n = `linear-gradient(${e}, ${e}), ${Fm}, linear-gradient(#fff, #fff)`;
+            const n = `linear-gradient(${e}, ${e}), ${Fm}, linear-gradient(#fff, #fff)`;
             return C.createElement(Tm, {
               ...r,
               style: { ...t, backgroundImage: n },
@@ -4658,16 +4660,16 @@ try {
             hsl: 'hsla(0, 0%, 0%, 0)',
           }),
           (Du = (e) => {
-            let t = e?.match(Rm);
+            const t = e?.match(Rm);
             if (!t) return [0, 0, 0, 1];
-            let [, r, n, o, i = 1] = t;
+            const [, r, n, o, i = 1] = t;
             return [r, n, o, i].map(Number);
           }),
           (Lt = (e) => {
             if (!e) return;
             let t = !0;
             if (Om.test(e)) {
-              let [a, l, u, c] = Du(e),
+              const [a, l, u, c] = Du(e),
                 [d, p, h] = Be.default.rgb.hsl([a, l, u]) || [0, 0, 0];
               return {
                 valid: t,
@@ -4680,7 +4682,7 @@ try {
               };
             }
             if (_m.test(e)) {
-              let [a, l, u, c] = Du(e),
+              const [a, l, u, c] = Du(e),
                 [d, p, h] = Be.default.hsl.rgb([a, l, u]) || [0, 0, 0];
               return {
                 valid: t,
@@ -4726,24 +4728,24 @@ try {
               } catch {
                 return Xr.hex;
               }
-            let n = t.hex.match(Pm);
+            const n = t.hex.match(Pm);
             if (!n) return Mo.test(t.hex) ? t.hex : Xr.hex;
-            let [o, i, a] = n[1].split('');
+            const [o, i, a] = n[1].split('');
             return `#${o}${o}${i}${i}${a}${a}`;
           }),
           (jm = (e, t) => {
-            let [r, n] = Ue(e || ''),
+            const [r, n] = Ue(e || ''),
               [o, i] = Ue(() => Lt(r)),
               [a, l] = Ue(o?.colorSpace || 'hex');
             rt(() => {
-              let p = e || '',
+              const p = e || '',
                 h = Lt(p);
               n(p), i(h), l(h?.colorSpace || 'hex');
             }, [e]);
-            let u = Yt(() => Nm(r, o, a).toLowerCase(), [r, o, a]),
+            const u = Yt(() => Nm(r, o, a).toLowerCase(), [r, o, a]),
               c = tt(
                 (p) => {
-                  let h = Lt(p),
+                  const h = Lt(p),
                     y = h?.value || p || '';
                   n(y),
                     y === '' && (i(void 0), t(void 0)),
@@ -4754,7 +4756,7 @@ try {
               d = tt(() => {
                 let p = Yr.indexOf(a) + 1;
                 p >= Yr.length && (p = 0), l(Yr[p]);
-                let h = o?.[Yr[p]] || '';
+                const h = o?.[Yr[p]] || '';
                 n(h), t(h);
               }, [o, a, t]);
             return {
@@ -4768,11 +4770,11 @@ try {
           }),
           (Zr = (e) => e.replace(/\s*/, '').toLowerCase()),
           (Lm = (e, t, r) => {
-            let [n, o] = Ue(t?.valid ? [t] : []);
+            const [n, o] = Ue(t?.valid ? [t] : []);
             rt(() => {
               t === void 0 && o([]);
             }, [t]);
-            let i = Yt(
+            const i = Yt(
                 () =>
                   (e || [])
                     .map((l) =>
@@ -4807,7 +4809,7 @@ try {
             startOpen: a = !1,
             argType: l,
           }) => {
-            let u = tt(iu(r, 200), [r]),
+            const u = tt(iu(r, 200), [r]),
               {
                 value: c,
                 realValue: d,
@@ -4962,7 +4964,7 @@ try {
     }
     ce(pe, 'dedent');
     function Cn({ code: e, category: t }) {
-      let r = String(e).padStart(4, '0');
+      const r = String(e).padStart(4, '0');
       return `SB_${t}_${r}`;
     }
     ce(Cn, 'parseErrorCode');
@@ -4979,7 +4981,7 @@ try {
         return Cn({ code: this.code, category: this.category });
       }
       get name() {
-        let t = this.constructor.name;
+        const t = this.constructor.name;
         return `${this.fullErrorCode} (${t})`;
       }
       static getFullMessage({
@@ -5480,7 +5482,7 @@ This is deprecated and won't work in Storybook 8 anymore.
       ),
       sp = (e, t, r, n) => {
         if ((t && typeof t == 'object') || typeof t == 'function')
-          for (let o of np(t))
+          for (const o of np(t))
             !ap.call(e, o) &&
               o !== r &&
               On(e, o, {
@@ -5603,7 +5605,7 @@ This is deprecated and won't work in Storybook 8 anymore.
         'count',
       ),
       cp = he((e, t) => {
-        let { exists: r, eq: n, neq: o, truthy: i } = e;
+        const { exists: r, eq: n, neq: o, truthy: i } = e;
         if (Ti([r, n, o, i]) > 1)
           throw new Error(
             `Invalid conditional test ${JSON.stringify({ exists: r, eq: n, neq: o })}`,
@@ -5611,19 +5613,19 @@ This is deprecated and won't work in Storybook 8 anymore.
         if (typeof n < 'u') return (0, wi.isEqual)(t, n);
         if (typeof o < 'u') return !(0, wi.isEqual)(t, o);
         if (typeof r < 'u') {
-          let a = typeof t < 'u';
+          const a = typeof t < 'u';
           return r ? a : !a;
         }
         return typeof i > 'u' || i ? !!t : !t;
       }, 'testValue'),
       _n = he((e, t, r) => {
         if (!e.if) return !0;
-        let { arg: n, global: o } = e.if;
+        const { arg: n, global: o } = e.if;
         if (Ti([n, o]) !== 1)
           throw new Error(
             `Invalid conditional value ${JSON.stringify({ arg: n, global: o })}`,
           );
-        let i = n ? t[n] : r[o];
+        const i = n ? t[n] : r[o];
         return cp(e.if, i);
       }, 'includeConditionalArg');
     function dp(e) {
@@ -5633,7 +5635,7 @@ This is deprecated and won't work in Storybook 8 anymore.
           input: e,
           get composed() {
             if (t) return t;
-            let { addons: n, ...o } = e;
+            const { addons: n, ...o } = e;
             return (t = Rt(at([...(n ?? []), o]))), t;
           },
           meta(n) {
@@ -5700,7 +5702,7 @@ This is deprecated and won't work in Storybook 8 anymore.
         'sanitize',
       ),
       Ci = he((e, t) => {
-        let r = Pn(e);
+        const r = Pn(e);
         if (r === '')
           throw new Error(
             `Invalid ${t} '${e}', must include alphanumeric characters`,
@@ -5721,12 +5723,12 @@ This is deprecated and won't work in Storybook 8 anymore.
     }
     he(kt, 'isExportStory');
     var sE = he((e, { rootSeparator: t, groupSeparator: r }) => {
-        let [n, o] = e.split(t, 2),
+        const [n, o] = e.split(t, 2),
           i = (o || e).split(r).filter((a) => !!a);
         return { root: o ? n : null, groups: i };
       }, 'parseKind'),
       Oi = he((...e) => {
-        let t = e.reduce(
+        const t = e.reduce(
           (r, n) => (n.startsWith('!') ? r.delete(n.slice(1)) : r.add(n), r),
           new Set(),
         );
@@ -5753,7 +5755,7 @@ This is deprecated and won't work in Storybook 8 anymore.
       ),
       Ep = (e, t, r, n) => {
         if ((t && typeof t == 'object') || typeof t == 'function')
-          for (let o of yp(t))
+          for (const o of yp(t))
             !bp.call(e, o) &&
               o !== r &&
               ro(e, o, {
@@ -6030,7 +6032,7 @@ This is deprecated and won't work in Storybook 8 anymore.
             1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0,
           ]);
         function n(o) {
-          let i = o.length;
+          const i = o.length;
           if (i === 0) return '';
           let a = '',
             l = 0,
@@ -6059,7 +6061,7 @@ This is deprecated and won't work in Storybook 8 anymore.
               continue;
             }
             if ((++u, u >= i)) throw new Error('URI malformed');
-            let d = o.charCodeAt(u) & 1023;
+            const d = o.charCodeAt(u) & 1023;
             (l = u + 1),
               (c = 65536 + (((c & 1023) << 10) | d)),
               (a +=
@@ -6125,7 +6127,7 @@ This is deprecated and won't work in Storybook 8 anymore.
         m(n, 'isPrototypeKey');
         function o(p, h, y, E, v) {
           if (n(h)) return p;
-          let A = p[h];
+          const A = p[h];
           return typeof A == 'object' && A !== null
             ? A
             : !E &&
@@ -6160,7 +6162,7 @@ This is deprecated and won't work in Storybook 8 anymore.
           let P = '',
             K = !0,
             L = !1;
-          for (let z in p) {
+          for (const z in p) {
             let b = p[z],
               w;
             E
@@ -6284,12 +6286,12 @@ This is deprecated and won't work in Storybook 8 anymore.
           n = no(),
           o = t(vp()),
           i = m((p) => {
-            let h = Number(p);
+            const h = Number(p);
             return Number.isNaN(h) ? p : h;
           }, 'numberKeyDeserializer');
         e.numberKeyDeserializer = i;
         var a = m((p) => {
-          let h = Number(p);
+          const h = Number(p);
           return Number.isNaN(h) ? p : h;
         }, 'numberValueDeserializer');
         e.numberValueDeserializer = a;
@@ -6304,7 +6306,7 @@ This is deprecated and won't work in Storybook 8 anymore.
         }
         m(c, 'computeKeySlice');
         function d(p, h) {
-          let {
+          const {
               valueDeserializer: y = n.defaultOptions.valueDeserializer,
               keyDeserializer: E = n.defaultOptions.keyDeserializer,
               arrayRepeatSyntax: v = n.defaultOptions.arrayRepeatSyntax,
@@ -6353,9 +6355,9 @@ This is deprecated and won't work in Storybook 8 anymore.
                   ((j = p.slice(P + 1, ne)),
                   Y && (j = j.replace(l, ' ')),
                   M && (j = (0, o.default)(j) || j));
-                let je = y(j, b);
+                const je = y(j, b);
                 if (D) {
-                  let Re = L[b];
+                  const Re = L[b];
                   Re === void 0
                     ? ge > -1
                       ? (L[b] = [je])
@@ -6448,7 +6450,7 @@ This is deprecated and won't work in Storybook 8 anymore.
         var t = Yi();
         function r(n, o) {
           if (n === null || typeof n != 'object') return '';
-          let i = o ?? {};
+          const i = o ?? {};
           return (0, t.stringifyObject)(n, i);
         }
         m(r, 'stringify');
@@ -9595,7 +9597,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         );
       })();
     function Zi() {
-      let e = {
+      const e = {
         setHandler: m(() => {}, 'setHandler'),
         send: m(() => {}, 'send'),
       };
@@ -9606,7 +9608,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       constructor() {
         (this.getChannel = m(() => {
           if (!this.channel) {
-            let t = Zi();
+            const t = Zi();
             return this.setChannel(t), t;
           }
           return this.channel;
@@ -9675,7 +9677,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
           this.removeRenderListeners();
       }
       getNextHook() {
-        let t = this.currentHooks[this.nextHookIndex];
+        const t = this.currentHooks[this.nextHookIndex];
         return (this.nextHookIndex += 1), t;
       }
       triggerEffects() {
@@ -9699,8 +9701,8 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     m(rs, 'HooksContext');
     var ns = rs;
     function qn(e) {
-      let t = m((...r) => {
-        let { hooks: n } = typeof r[0] == 'function' ? r[1] : r[0],
+      const t = m((...r) => {
+        const { hooks: n } = typeof r[0] == 'function' ? r[1] : r[0],
           o = n.currentPhase,
           i = n.currentHooks,
           a = n.nextHookIndex,
@@ -9714,9 +9716,9 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
               n.hookListsMap.set(e, n.currentHooks),
               n.prevMountedDecorators.add(e)),
           (n.nextHookIndex = 0);
-        let u = Ee.STORYBOOK_HOOKS_CONTEXT;
+        const u = Ee.STORYBOOK_HOOKS_CONTEXT;
         Ee.STORYBOOK_HOOKS_CONTEXT = n;
-        let c = e(...r);
+        const c = e(...r);
         if (
           ((Ee.STORYBOOK_HOOKS_CONTEXT = u),
           n.currentPhase === 'UPDATE' && n.getNextHook() != null)
@@ -9739,12 +9741,12 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       kp = 25,
       Rp = m(
         (e) => (t, r) => {
-          let n = e(
+          const n = e(
             qn(t),
             r.map((o) => qn(o)),
           );
           return (o) => {
-            let { hooks: i } = o;
+            const { hooks: i } = o;
             (i.prevMountedDecorators ??= new Set()),
               (i.mountedDecorators = new Set([t, ...r])),
               (i.currentContext = o),
@@ -9782,24 +9784,24 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     }
     m(io, 'getHooksContextOrNull');
     function Ur() {
-      let e = io();
+      const e = io();
       if (e == null) throw ao();
       return e;
     }
     m(Ur, 'getHooksContextOrThrow');
     function os(e, t, r) {
-      let n = Ur();
+      const n = Ur();
       if (n.currentPhase === 'MOUNT') {
         r != null &&
           !Array.isArray(r) &&
           Q.warn(
             `${e} received a final argument that is not an array (instead, received ${r}). When specified, the final argument must be an array.`,
           );
-        let o = { name: e, deps: r };
+        const o = { name: e, deps: r };
         return n.currentHooks.push(o), t(o), o;
       }
       if (n.currentPhase === 'UPDATE') {
-        let o = n.getNextHook();
+        const o = n.getNextHook();
         if (o == null)
           throw new Error(
             'Rendered more hooks than during the previous render.',
@@ -9829,7 +9831,7 @@ Incoming: ${r}`),
     }
     m(os, 'useHook');
     function ar(e, t, r) {
-      let { memoizedState: n } = os(
+      const { memoizedState: n } = os(
         e,
         (o) => {
           o.memoizedState = t();
@@ -9856,7 +9858,7 @@ Incoming: ${r}`),
     }
     m(Pp, 'useRef');
     function as() {
-      let e = io();
+      const e = io();
       if (e != null && e.currentPhase !== 'NONE') e.hasUpdates = !0;
       else
         try {
@@ -9869,7 +9871,7 @@ Incoming: ${r}`),
     }
     m(as, 'triggerUpdate');
     function lo(e, t) {
-      let r = so(e, typeof t == 'function' ? t() : t),
+      const r = so(e, typeof t == 'function' ? t() : t),
         n = m((o) => {
           (r.current = typeof o == 'function' ? o(r.current) : o), as();
         }, 'setState');
@@ -9881,19 +9883,19 @@ Incoming: ${r}`),
     }
     m(uo, 'useState');
     function Bp(e, t, r) {
-      let n = r != null ? () => r(t) : t,
+      const n = r != null ? () => r(t) : t,
         [o, i] = lo('useReducer', n);
       return [o, m((a) => i((l) => e(l, a)), 'dispatch')];
     }
     m(Bp, 'useReducer');
     function $r(e, t) {
-      let r = Ur(),
+      const r = Ur(),
         n = ar('useEffect', () => ({ create: e }), t);
       r.currentEffects.includes(n) || r.currentEffects.push(n);
     }
     m($r, 'useEffect');
     function Np(e, t = []) {
-      let r = bt.getChannel();
+      const r = bt.getChannel();
       return (
         $r(
           () => (
@@ -9909,18 +9911,18 @@ Incoming: ${r}`),
     }
     m(Np, 'useChannel');
     function qr() {
-      let { currentContext: e } = Ur();
+      const { currentContext: e } = Ur();
       if (e == null) throw ao();
       return e;
     }
     m(qr, 'useStoryContext');
     function jp(e, t) {
-      let { parameters: r } = qr();
+      const { parameters: r } = qr();
       if (e) return r[e] ?? t;
     }
     m(jp, 'useParameter');
     function Lp() {
-      let e = bt.getChannel(),
+      const e = bt.getChannel(),
         { id: t, args: r } = qr(),
         n = or((i) => e.emit(tr, { storyId: t, updatedArgs: i }), [e, t]),
         o = or((i) => e.emit(Zt, { storyId: t, argNames: i }), [e, t]);
@@ -9928,7 +9930,7 @@ Incoming: ${r}`),
     }
     m(Lp, 'useArgs');
     function Mp() {
-      let e = bt.getChannel(),
+      const e = bt.getChannel(),
         { globals: t } = qr(),
         r = or((n) => e.emit(kr, { globals: n }), [e]);
       return [t, r];
@@ -9941,9 +9943,9 @@ Incoming: ${r}`),
         wrapper: r,
         skipIfNoParametersOrOptions: n = !1,
       }) => {
-        let o = m(
+        const o = m(
           (i) => (a, l) => {
-            let u = l.parameters && l.parameters[t];
+            const u = l.parameters && l.parameters[t];
             return (u && u.disable) || (n && !i && !u)
               ? a(l)
               : r(a, l, { options: i, parameters: u });
@@ -10038,7 +10040,7 @@ Incoming: ${r}`),
               'getState',
             )),
             (this.subscribe = m((n, o) => {
-              let i = typeof n == 'function',
+              const i = typeof n == 'function',
                 a = i ? '*' : n,
                 l = i ? n : o;
               if ((this.debug('subscribe', { eventType: a, listener: l }), !l))
@@ -10179,7 +10181,7 @@ Incoming: ${r}`),
         create`,
               { options: t },
             );
-          let r = Bi.get(t.id);
+          const r = Bi.get(t.id);
           if (r)
             return (
               console.warn(fe`UniversalStore with id "${t.id}" already exists in this environment, re-using existing.
@@ -10187,7 +10189,7 @@ Incoming: ${r}`),
               r
             );
           G.isInternalConstructing = !0;
-          let n = new G(t);
+          const n = new G(t);
           return Bi.set(t.id, n), n;
         }
         static __prepare(t, r) {
@@ -10196,7 +10198,7 @@ Incoming: ${r}`),
             G.preparation.resolve({ channel: t, environment: r });
         }
         setState(t) {
-          let r = this.state,
+          const r = this.state,
             n = typeof t == 'function' ? t(r) : t;
           if (
             (this.debug('setState', {
@@ -10210,7 +10212,7 @@ Incoming: ${r}`),
         or await store.readyPromise to wait for the store to be ready before sending events.
         ${JSON.stringify({ newState: n, id: this.id, actor: this.actor, environment: this.environment }, null, 2)}`);
           this.state = n;
-          let o = {
+          const o = {
             type: G.InternalEventType.SET_STATE,
             payload: { state: n, previousState: r },
           };
@@ -10266,7 +10268,7 @@ Incoming: ${r}`),
                 }, 1e3));
         }
         emitToListeners(t, r) {
-          let n = this.listeners.get(t.type),
+          const n = this.listeners.get(t.type),
             o = this.listeners.get('*');
           this.debug('emitToListeners', {
             event: t,
@@ -10277,7 +10279,7 @@ Incoming: ${r}`),
             [...(n ?? []), ...(o ?? [])].forEach((i) => i(t, r));
         }
         handleChannelEvents(t) {
-          let { event: r, eventInfo: n } = t;
+          const { event: r, eventInfo: n } = t;
           if ([n.actor.id, n.forwardingActor?.id].includes(this.actor.id)) {
             this.debug('handleChannelEvents: Ignoring event from self', {
               channelEvent: t,
@@ -10300,7 +10302,7 @@ Incoming: ${r}`),
             switch (r.type) {
               case G.InternalEventType.EXISTING_STATE_REQUEST:
                 o = !1;
-                let i = {
+                const i = {
                   type: G.InternalEventType.EXISTING_STATE_RESPONSE,
                   payload: this.state,
                 };
@@ -10345,7 +10347,7 @@ Incoming: ${r}`),
                 )
                   break;
                 this.syncing.resolve?.();
-                let o = {
+                const o = {
                   type: G.InternalEventType.SET_STATE,
                   payload: { state: r.payload, previousState: this.state },
                 };
@@ -10409,29 +10411,29 @@ Incoming: ${r}`),
       it.setupPreparationPromise();
     var Or = it;
     function is(e, t) {
-      let r = {},
+      const r = {},
         n = Object.entries(e);
       for (let o = 0; o < n.length; o++) {
-        let [i, a] = n[o];
+        const [i, a] = n[o];
         t(a, i) || (r[i] = a);
       }
       return r;
     }
     m(is, 'omitBy');
     function ss(e, t) {
-      let r = {};
+      const r = {};
       for (let n = 0; n < t.length; n++) {
-        let o = t[n];
+        const o = t[n];
         Object.prototype.hasOwnProperty.call(e, o) && (r[o] = e[o]);
       }
       return r;
     }
     m(ss, 'pick');
     function ls(e, t) {
-      let r = {},
+      const r = {},
         n = Object.entries(e);
       for (let o = 0; o < n.length; o++) {
-        let [i, a] = n[o];
+        const [i, a] = n[o];
         t(a, i) && (r[i] = a);
       }
       return r;
@@ -10447,10 +10449,10 @@ Incoming: ${r}`),
     }
     m(Le, 'isPlainObject');
     function Et(e, t) {
-      let r = {},
+      const r = {},
         n = Object.keys(e);
       for (let o = 0; o < n.length; o++) {
-        let i = n[o],
+        const i = n[o],
           a = e[i];
         r[i] = t(a, i, e);
       }
@@ -10525,7 +10527,7 @@ Incoming: ${r}`),
         case Vp:
           return e.toString() === t.toString();
         case Jp: {
-          let l = e.valueOf(),
+          const l = e.valueOf(),
             u = t.valueOf();
           return l === u || (Number.isNaN(l) && Number.isNaN(u));
         }
@@ -10539,7 +10541,7 @@ Incoming: ${r}`),
           return e === t;
       }
       r = r ?? new Map();
-      let i = r.get(e),
+      const i = r.get(e),
         a = r.get(t);
       if (i != null && a != null) return i === t;
       r.set(e, t), r.set(t, e);
@@ -10547,16 +10549,16 @@ Incoming: ${r}`),
         switch (n) {
           case Wp: {
             if (e.size !== t.size) return !1;
-            for (let [l, u] of e.entries())
+            for (const [l, u] of e.entries())
               if (!t.has(l) || !$e(u, t.get(l), r)) return !1;
             return !0;
           }
           case Kp: {
             if (e.size !== t.size) return !1;
-            let l = Array.from(e.values()),
+            const l = Array.from(e.values()),
               u = Array.from(t.values());
             for (let c = 0; c < l.length; c++) {
-              let d = l[c],
+              const d = l[c],
                 p = u.findIndex((h) => $e(d, h, r));
               if (p === -1) return !1;
               u.splice(p, 1);
@@ -10599,14 +10601,14 @@ Incoming: ${r}`),
           case jn: {
             if (!($e(e.constructor, t.constructor, r) || (Le(e) && Le(t))))
               return !1;
-            let l = [...Object.keys(e), ...Vn(e)],
+            const l = [...Object.keys(e), ...Vn(e)],
               u = [...Object.keys(t), ...Vn(t)];
             if (l.length !== u.length) return !1;
             for (let c = 0; c < l.length; c++) {
-              let d = l[c],
+              const d = l[c],
                 p = e[d];
               if (!Object.prototype.hasOwnProperty.call(t, d)) return !1;
-              let h = t[d];
+              const h = t[d];
               if (!$e(p, h, r)) return !1;
             }
             return !0;
@@ -10620,7 +10622,7 @@ Incoming: ${r}`),
     }
     m($e, 'areObjectsEqual');
     var EE = m((e, t) => {
-        let [r, n] = uo(t ? t(e.getState()) : e.getState());
+        const [r, n] = uo(t ? t(e.getState()) : e.getState());
         return (
           $r(
             () =>
@@ -10629,7 +10631,7 @@ Incoming: ${r}`),
                   n(o);
                   return;
                 }
-                let a = t(o),
+                const a = t(o),
                   l = t(i);
                 !co(a, l) && n(a);
               }),
@@ -10661,7 +10663,7 @@ Incoming: ${r}`),
           if (!this.testUtils)
             throw new Error(Up`Cannot call unsubscribeAll on a store that does not have testUtils.
         Please provide testUtils as the second argument when creating the store.`);
-          let t = m((r) => {
+          const t = m((r) => {
             try {
               r.value();
             } catch {}
@@ -10674,7 +10676,7 @@ Incoming: ${r}`),
     var Ln = Bt(Wi(), 1),
       Ot = Symbol('incompatible'),
       Hn = m((e, t) => {
-        let r = t.type;
+        const r = t.type;
         if (e == null || !r || t.mapping) return e;
         switch (r.name) {
           case 'string':
@@ -10689,7 +10691,7 @@ Incoming: ${r}`),
             return !r.value || !Array.isArray(e)
               ? Ot
               : e.reduce((n, o, i) => {
-                  let a = Hn(o, { type: r.value });
+                  const a = Hn(o, { type: r.value });
                   return a !== Ot && (n[i] = a), n;
                 }, new Array(e.length));
           case 'object':
@@ -10698,7 +10700,7 @@ Incoming: ${r}`),
               : !r.value || typeof e != 'object'
                 ? Ot
                 : Object.entries(e).reduce((n, [o, i]) => {
-                    let a = Hn(i, { type: r.value[o] });
+                    const a = Hn(i, { type: r.value[o] });
                     return a === Ot ? n : Object.assign(n, { [o]: a });
                   }, {});
           default:
@@ -10709,7 +10711,7 @@ Incoming: ${r}`),
         (e, t) =>
           Object.entries(e).reduce((r, [n, o]) => {
             if (!t[n]) return r;
-            let i = Hn(o, t[n]);
+            const i = Hn(o, t[n]);
             return i === Ot ? r : Object.assign(r, { [n]: i });
           }, {}),
         'mapArgsToTypes',
@@ -10724,7 +10726,7 @@ Incoming: ${r}`),
               ? t
               : Object.keys({ ...e, ...t }).reduce((r, n) => {
                   if (n in t) {
-                    let o = zn(e[n], t[n]);
+                    const o = zn(e[n], t[n]);
                     o !== void 0 && (r[n] = o);
                   } else r[n] = e[n];
                   return r;
@@ -10756,11 +10758,11 @@ Incoming: ${r}`),
       `),
                 i()
               );
-            let a = Array.isArray(e[n]),
+            const a = Array.isArray(e[n]),
               l = a && e[n].findIndex((p) => !o.includes(p)),
               u = a && l === -1;
             if (e[n] === void 0 || o.includes(e[n]) || u) return i();
-            let c = a ? `${n}[${l}]` : n,
+            const c = a ? `${n}[${l}]` : n,
               d = o
                 .map((p) => (typeof p == 'string' ? `'${p}'` : String(p)))
                 .join(', ');
@@ -10778,8 +10780,8 @@ Incoming: ${r}`),
         if (typeof e != typeof t) return t;
         if (co(e, t)) return rr;
         if (Array.isArray(e) && Array.isArray(t)) {
-          let r = t.reduce((n, o, i) => {
-            let a = Nr(e[i], o);
+          const r = t.reduce((n, o, i) => {
+            const a = Nr(e[i], o);
             return a !== rr && (n[i] = a), n;
           }, new Array(t.length));
           return t.length >= e.length
@@ -10788,17 +10790,17 @@ Incoming: ${r}`),
         }
         return Le(e) && Le(t)
           ? Object.keys({ ...e, ...t }).reduce((r, n) => {
-              let o = Nr(e?.[n], t?.[n]);
+              const o = Nr(e?.[n], t?.[n]);
               return o === rr ? r : Object.assign(r, { [n]: o });
             }, {})
           : t;
       }, 'deepDiff'),
       cs = 'UNTARGETED';
     function ds({ args: e, argTypes: t }) {
-      let r = {};
+      const r = {};
       return (
         Object.entries(e).forEach(([n, o]) => {
-          let { target: i = cs } = t[n] || {};
+          const { target: i = cs } = t[n] || {};
           (r[i] = r[i] || {}), (r[i][n] = o);
         }),
         r
@@ -10825,18 +10827,21 @@ Incoming: ${r}`),
           (this.initialArgsByStoryId[t.id] = t.initialArgs),
             (this.argsByStoryId[t.id] = t.initialArgs);
         else if (this.initialArgsByStoryId[t.id] !== t.initialArgs) {
-          let r = Nr(this.initialArgsByStoryId[t.id], this.argsByStoryId[t.id]);
+          const r = Nr(
+            this.initialArgsByStoryId[t.id],
+            this.argsByStoryId[t.id],
+          );
           (this.initialArgsByStoryId[t.id] = t.initialArgs),
             (this.argsByStoryId[t.id] = t.initialArgs),
             r !== rr && this.updateFromDelta(t, r);
         }
       }
       updateFromDelta(t, r) {
-        let n = fh(r, t.argTypes);
+        const n = fh(r, t.argTypes);
         this.argsByStoryId[t.id] = zn(this.argsByStoryId[t.id], n);
       }
       updateFromPersisted(t, r) {
-        let n = hh(r, t.argTypes);
+        const n = hh(r, t.argTypes);
         return this.updateFromDelta(t, n);
       }
       update(t, r) {
@@ -10862,12 +10867,13 @@ Incoming: ${r}`),
           this.set({ globals: t, globalTypes: r });
         }
         set({ globals: t = {}, globalTypes: r = {} }) {
-          let n = this.initialGlobals && Nr(this.initialGlobals, this.globals);
+          const n =
+            this.initialGlobals && Nr(this.initialGlobals, this.globals);
           this.allowedGlobalNames = new Set([
             ...Object.keys(t),
             ...Object.keys(r),
           ]);
-          let o = fs(r);
+          const o = fs(r);
           (this.initialGlobals = { ...o, ...t }),
             (this.globals = this.initialGlobals),
             n && n !== rr && this.updateFromPersisted(n);
@@ -10886,7 +10892,7 @@ Incoming: ${r}`),
           );
         }
         updateFromPersisted(t) {
-          let r = this.filterAllowedGlobals(t);
+          const r = this.filterAllowedGlobals(t);
           this.globals = { ...this.globals, ...r };
         }
         get() {
@@ -10910,17 +10916,17 @@ Incoming: ${r}`),
           this.entries = t;
         }
         entryFromSpecifier(t) {
-          let r = Object.values(this.entries);
+          const r = Object.values(this.entries);
           if (t === '*') return r[0];
           if (typeof t == 'string')
             return this.entries[t]
               ? this.entries[t]
               : r.find((i) => i.id.startsWith(t));
-          let { name: n, title: o } = t;
+          const { name: n, title: o } = t;
           return r.find((i) => i.name === n && i.title === o);
         }
         storyIdToEntry(t) {
-          let r = this.entries[t];
+          const r = this.entries[t];
           if (!r) throw new _a({ storyId: t });
           return r;
         }
@@ -10953,11 +10959,11 @@ CSF .story annotations deprecated; annotate story functions directly:
 See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-annotations for details and codemod.
 `;
     function Lr(e, t, r) {
-      let n = t,
+      const n = t,
         o = typeof t == 'function' ? t : null,
         { story: i } = n;
       i && (Q.debug('deprecated story', i), Ge(Sh));
-      let a = Ri(e),
+      const a = Ri(e),
         l = (typeof n != 'function' && n.name) || n.storyName || i?.name || a,
         u = [...se(n.decorators), ...se(i?.decorators)],
         c = { ...i?.parameters, ...n.parameters },
@@ -10988,7 +10994,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     }
     m(Lr, 'normalizeStory');
     function Mr(e, t = e.title, r) {
-      let { id: n, argTypes: o } = e;
+      const { id: n, argTypes: o } = e;
       return {
         id: Pn(n || t),
         ...e,
@@ -10999,7 +11005,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     }
     m(Mr, 'normalizeComponentAnnotations');
     var wh = m((e) => {
-        let { globals: t, globalTypes: r } = e;
+        const { globals: t, globalTypes: r } = e;
         (t || r) &&
           Q.error(
             'Global args/argTypes can only be set globally',
@@ -11007,7 +11013,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
           );
       }, 'checkGlobals'),
       Ch = m((e) => {
-        let { options: t } = e;
+        const { options: t } = e;
         t?.storySort &&
           Q.error('The storySort option parameter can only be set globally');
       }, 'checkStorySort'),
@@ -11018,13 +11024,13 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
       let { default: n, __namedExportsOrder: o, ...i } = e,
         a = Object.values(i)[0];
       if (mt(a)) {
-        let c = Mr(a.meta.input, r, t);
+        const c = Mr(a.meta.input, r, t);
         _r(c.parameters);
-        let d = { meta: c, stories: {}, moduleExports: e };
+        const d = { meta: c, stories: {}, moduleExports: e };
         return (
           Object.keys(i).forEach((p) => {
             if (kt(p, c)) {
-              let h = Lr(p, i[p].input, c);
+              const h = Lr(p, i[p].input, c);
               _r(h.parameters), (d.stories[h.id] = h);
             }
           }),
@@ -11032,13 +11038,13 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
           d
         );
       }
-      let l = Mr(n, r, t);
+      const l = Mr(n, r, t);
       _r(l.parameters);
-      let u = { meta: l, stories: {}, moduleExports: e };
+      const u = { meta: l, stories: {}, moduleExports: e };
       return (
         Object.keys(i).forEach((c) => {
           if (kt(c, l)) {
-            let d = Lr(c, i[c], l);
+            const d = Lr(c, i[c], l);
             _r(d.parameters), (u.stories[d.id] = d);
           }
         }),
@@ -11051,11 +11057,11 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     }
     m(bs, 'mountDestructured');
     function Es(e) {
-      let t = e.toString().match(/[^(]*\(([^)]*)/);
+      const t = e.toString().match(/[^(]*\(([^)]*)/);
       if (!t) return [];
-      let r = Gn(t[1]);
+      const r = Gn(t[1]);
       if (!r.length) return [];
-      let n = r[0];
+      const n = r[0];
       return n.startsWith('{') && n.endsWith('}')
         ? Gn(n.slice(1, -1).replace(/\s/g, '')).map((o) =>
             o.replace(/:.*|=.*/g, ''),
@@ -11071,15 +11077,15 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
         if (e[i] === '{' || e[i] === '[') r.push(e[i] === '{' ? '}' : ']');
         else if (e[i] === r[r.length - 1]) r.pop();
         else if (!r.length && e[i] === ',') {
-          let a = e.substring(n, i).trim();
+          const a = e.substring(n, i).trim();
           a && t.push(a), (n = i + 1);
         }
-      let o = e.substring(n).trim();
+      const o = e.substring(n).trim();
       return o && t.push(o), t;
     }
     m(Gn, 'splitByComma');
     function vs(e, t, r) {
-      let n = r(e);
+      const n = r(e);
       return (o) => t(n, o);
     }
     m(vs, 'decorateStory');
@@ -11099,7 +11105,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     }
     m(As, 'sanitizeStoryContextUpdate');
     function Ds(e, t) {
-      let r = {},
+      const r = {},
         n = m(
           (i) => (a) => {
             if (!r.value)
@@ -11113,12 +11119,12 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     }
     m(Ds, 'defaultDecorateStory');
     var Ke = m((...e) => {
-      let t = {},
+      const t = {},
         r = e.filter(Boolean),
         n = r.reduce(
           (o, i) => (
             Object.entries(i).forEach(([a, l]) => {
-              let u = o[a];
+              const u = o[a];
               Array.isArray(l) || typeof u > 'u'
                 ? (o[a] = l)
                 : Le(l) && Le(u)
@@ -11131,7 +11137,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
         );
       return (
         Object.keys(t).forEach((o) => {
-          let i = r
+          const i = r
             .filter(Boolean)
             .map((a) => a[o])
             .filter((a) => typeof a < 'u');
@@ -11141,11 +11147,11 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
       );
     }, 'combineParameters');
     function po(e, t, r) {
-      let { moduleExport: n, id: o, name: i } = e || {},
+      const { moduleExport: n, id: o, name: i } = e || {},
         a = ho(e, t, r),
         l = m(async (R) => {
-          let N = {};
-          for (let j of [
+          const N = {};
+          for (const j of [
             ...('__STORYBOOK_TEST_LOADERS__' in Ee &&
             Array.isArray(Ee.__STORYBOOK_TEST_LOADERS__)
               ? [Ee.__STORYBOOK_TEST_LOADERS__]
@@ -11155,31 +11161,31 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
             se(e.loaders),
           ]) {
             if (R.abortSignal.aborted) return N;
-            let U = await Promise.all(j.map((P) => P(R)));
+            const U = await Promise.all(j.map((P) => P(R)));
             Object.assign(N, ...U);
           }
           return N;
         }, 'applyLoaders'),
         u = m(async (R) => {
-          let N = new Array();
-          for (let j of [
+          const N = [];
+          for (const j of [
             ...se(r.beforeEach),
             ...se(t.beforeEach),
             ...se(e.beforeEach),
           ]) {
             if (R.abortSignal.aborted) return N;
-            let U = await j(R);
+            const U = await j(R);
             U && N.push(U);
           }
           return N;
         }, 'applyBeforeEach'),
         c = m(async (R) => {
-          let N = [
+          const N = [
             ...se(r.experimental_afterEach),
             ...se(t.experimental_afterEach),
             ...se(e.experimental_afterEach),
           ].reverse();
-          for (let j of N) {
+          for (const j of N) {
             if (R.abortSignal.aborted) return;
             await j(R);
           }
@@ -11193,7 +11199,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
         D = e?.play ?? t?.play,
         S = bs(D);
       if (!E && !S) throw new Za({ id: o });
-      let F = m(
+      const F = m(
           (R) => async () => (await R.renderToCanvas(), R.canvas),
           'defaultMount',
         ),
@@ -11226,7 +11232,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     }
     m(Ss, 'prepareMeta');
     function ho(e, t, r) {
-      let n = ['dev', 'test'],
+      const n = ['dev', 'test'],
         o = Ee.DOCS_OPTIONS?.autodocs === !0 ? ['autodocs'] : [],
         i = Oi(
           ...n,
@@ -11239,10 +11245,10 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
         { argTypesEnhancers: l = [], argsEnhancers: u = [] } = r,
         c = Ke(r.argTypes, t.argTypes, e?.argTypes);
       if (e) {
-        let D = e?.userStoryFn || e?.render || t.render || r.render;
+        const D = e?.userStoryFn || e?.render || t.render || r.render;
         a.__isArgsStory = D && D.length > 0;
       }
-      let d = { ...r.args, ...t.args, ...e?.args },
+      const d = { ...r.args, ...t.args, ...e?.args },
         p = { ...t.globals, ...e?.globals },
         h = {
           componentId: t.id,
@@ -11260,12 +11266,12 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
           storyGlobals: p,
         };
       h.argTypes = l.reduce((D, S) => S({ ...h, argTypes: D }), h.argTypes);
-      let y = { ...d };
+      const y = { ...d };
       h.initialArgs = u.reduce(
         (D, S) => ({ ...D, ...S({ ...h, initialArgs: D }) }),
         y,
       );
-      let { name: E, story: v, ...A } = h;
+      const { name: E, story: v, ...A } = h;
       return A;
     }
     m(ho, 'preparePartialAnnotations');
@@ -11273,26 +11279,26 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
       let { args: t } = e,
         r = { ...e, allArgs: void 0, argsByTarget: void 0 };
       if (Ee.FEATURES?.argTypeTargetsV7) {
-        let i = ds(e);
+        const i = ds(e);
         r = { ...e, allArgs: e.args, argsByTarget: i, args: i[cs] || {} };
       }
-      let n = Object.entries(r.args).reduce((i, [a, l]) => {
+      const n = Object.entries(r.args).reduce((i, [a, l]) => {
           if (!r.argTypes[a]?.mapping) return (i[a] = l), i;
-          let u = m((c) => {
-            let d = r.argTypes[a].mapping;
+          const u = m((c) => {
+            const d = r.argTypes[a].mapping;
             return d && c in d ? d[c] : c;
           }, 'mappingFn');
           return (i[a] = Array.isArray(l) ? l.map(u) : u(l)), i;
         }, {}),
         o = Object.entries(n).reduce((i, [a, l]) => {
-          let u = r.argTypes[a] || {};
+          const u = r.argTypes[a] || {};
           return _n(u, n, r.globals) && (i[a] = l), i;
         }, {});
       return { ...r, unmappedArgs: t, args: o };
     }
     m(fo, 'prepareContext');
     var Wn = m((e, t, r) => {
-        let n = typeof e;
+        const n = typeof e;
         switch (n) {
           case 'boolean':
           case 'string':
@@ -11345,16 +11351,16 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
             ? e
             : e &&
               ls(e, (n, o) => {
-                let i = n.name || o.toString();
+                const i = n.name || o.toString();
                 return !!(!t || ji(i, t)) && (!r || !ji(i, r));
               }),
         'filterArgTypes',
       ),
       xh = m((e, t, r) => {
-        let { type: n, options: o } = e;
+        const { type: n, options: o } = e;
         if (n) {
           if (r.color && r.color.test(t)) {
-            let i = n.name;
+            const i = n.name;
             if (i === 'string') return { control: { type: 'color' } };
             i !== 'enum' &&
               Q.warn(
@@ -11372,7 +11378,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
             case 'number':
               return { control: { type: 'number' } };
             case 'enum': {
-              let { value: i } = n;
+              const { value: i } = n;
               return {
                 control: { type: i?.length <= 5 ? 'radio' : 'select' },
                 options: i,
@@ -11387,7 +11393,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
         }
       }, 'inferControl'),
       xs = m((e) => {
-        let {
+        const {
           argTypes: t,
           parameters: {
             __isArgsStory: r,
@@ -11399,7 +11405,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
           },
         } = e;
         if (!r) return t;
-        let a = Cs(t, n, o),
+        const a = Cs(t, n, o),
           l = Et(a, (u, c) => u?.type && xh(u, c.toString(), i));
         return Ke(l, a);
       }, 'inferControls');
@@ -11441,13 +11447,13 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     m(Rt, 'normalizeProjectAnnotations');
     var Th = m(
       (e) => async () => {
-        let t = [];
-        for (let r of e) {
-          let n = await r();
+        const t = [];
+        for (const r of e) {
+          const n = await r();
           n && t.unshift(n);
         }
         return async () => {
-          for (let r of t) await r();
+          for (const r of t) await r();
         };
       },
       'composeBeforeAllHooks',
@@ -11467,7 +11473,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     m(Pt, 'getField');
     function We(e, t, r = {}) {
       return Pt(e, t).reduce((n, o) => {
-        let i = se(o);
+        const i = se(o);
         return r.reverseFileOrder ? [...i, ...n] : [...n, ...i];
       }, []);
     }
@@ -11481,7 +11487,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     }
     m(yt, 'getSingletonField');
     function at(e) {
-      let t = We(e, 'argTypesEnhancers'),
+      const t = We(e, 'argTypesEnhancers'),
         r = Pt(e, 'runStep'),
         n = We(e, 'beforeAll');
       return {
@@ -11545,7 +11551,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     }
     m(Rs, 'extractAnnotation');
     function Rh(e) {
-      let t = Array.isArray(e) ? e : [e];
+      const t = Array.isArray(e) ? e : [e];
       return (
         (globalThis.globalProjectAnnotations = at([
           globalThis.defaultProjectAnnotations ?? {},
@@ -11568,7 +11574,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
         d = { ...fs(u.globalTypes), ...u.initialGlobals, ...c.storyGlobals },
         p = new Is(),
         h = m(() => {
-          let D = fo({
+          const D = fo({
             hooks: new ns(),
             globals: d,
             args: { ...c.initialArgs },
@@ -11589,7 +11595,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
             (D.context = D),
             c.renderToCanvas &&
               (D.renderToCanvas = async () => {
-                let S = await c.renderToCanvas?.(
+                const S = await c.renderToCanvas?.(
                   {
                     componentId: c.componentId,
                     title: c.title,
@@ -11619,7 +11625,7 @@ ${F.description}`);
         }, 'initializeContext'),
         y,
         E = m(async (D) => {
-          let S = h();
+          const S = h();
           return (
             (S.canvasElement ??= globalThis?.document?.body),
             y && (S.loaded = y.loaded),
@@ -11628,13 +11634,13 @@ ${F.description}`);
           );
         }, 'play'),
         v = m((D) => {
-          let S = h();
+          const S = h();
           return Object.assign(S, D), _s(c, S);
         }, 'run'),
         A = c.playFunction ? E : void 0;
       return Object.assign(
         m(function (D) {
-          let S = h();
+          const S = h();
           return (
             y && (S.loaded = y.loaded),
             (S.args = { ...S.initialArgs, ...D }),
@@ -11645,9 +11651,9 @@ ${F.description}`);
           id: c.id,
           storyName: a,
           load: m(async () => {
-            for (let S of [...st].reverse()) await S();
+            for (const S of [...st].reverse()) await S();
             st.length = 0;
-            let D = h();
+            const D = h();
             (D.loaded = await c.applyLoaders(D)),
               st.push(...(await c.applyBeforeEach(D)).filter(Boolean)),
               (y = D);
@@ -11669,7 +11675,7 @@ ${F.description}`);
       let { default: n, __esModule: o, __namedExportsOrder: i, ...a } = e,
         l = n;
       return Object.entries(a).reduce((u, [c, d]) => {
-        let { story: p, meta: h } = ks(d);
+        const { story: p, meta: h } = ks(d);
         return (
           !l && h && (l = h),
           kt(c, l) ? Object.assign(u, { [c]: r(p, l, t, c) }) : u
@@ -11698,13 +11704,13 @@ ${F.description}`);
               More info: https://storybook.js.org/docs/api/portable-stories-playwright
             `);
             await r.evaluate(async (l) => {
-              let u = await globalThis.__pwUnwrapObject?.(l);
+              const u = await globalThis.__pwUnwrapObject?.(l);
               return ('__pw_type' in u ? u.type : u)?.load?.();
             }, o);
-            let a = await t(o, ...i);
+            const a = await t(o, ...i);
             return (
               await r.evaluate(async (l) => {
-                let u = await globalThis.__pwUnwrapObject?.(l),
+                const u = await globalThis.__pwUnwrapObject?.(l),
                   c = '__pw_type' in u ? u.type : u,
                   d = document.querySelector('#root');
                 return c?.play?.({ canvasElement: d });
@@ -11717,9 +11723,9 @@ ${F.description}`);
     }
     m(Ph, 'createPlaywrightTest');
     async function _s(e, t) {
-      for (let o of [...st].reverse()) await o();
+      for (const o of [...st].reverse()) await o();
       if (((st.length = 0), !t.canvasElement)) {
-        let o = document.createElement('div');
+        const o = document.createElement('div');
         globalThis?.document?.body?.appendChild(o),
           (t.canvasElement = o),
           st.push(() => {
@@ -11729,7 +11735,7 @@ ${F.description}`);
       }
       if (((t.loaded = await e.applyLoaders(t)), t.abortSignal.aborted)) return;
       st.push(...(await e.applyBeforeEach(t)).filter(Boolean));
-      let r = e.playFunction,
+      const r = e.playFunction,
         n = e.usesMount;
       n || (await t.mount()),
         !t.abortSignal.aborted &&
@@ -11752,7 +11758,7 @@ ${F.description}`);
         constructor(t, r, n) {
           (this.importFn = r),
             (this.getStoriesJsonData = m(() => {
-              let a = this.getSetStoriesPayload(),
+              const a = this.getSetStoriesPayload(),
                 l = [
                   'fileName',
                   'docsOnly',
@@ -11763,7 +11769,7 @@ ${F.description}`);
               return {
                 v: 3,
                 stories: Et(a.stories, (u) => {
-                  let { importPath: c } = this.storyIndex.entries[u.id];
+                  const { importPath: c } = this.storyIndex.entries[u.id];
                   return {
                     ...Kn(u, ['id', 'name', 'title']),
                     importPath: c,
@@ -11776,7 +11782,7 @@ ${F.description}`);
             }, 'getStoriesJsonData')),
             (this.storyIndex = new Eh(t)),
             (this.projectAnnotations = Rt(n));
-          let { initialGlobals: o, globalTypes: i } = this.projectAnnotations;
+          const { initialGlobals: o, globalTypes: i } = this.projectAnnotations;
           (this.args = new mh()),
             (this.userGlobals = new yh({ globals: o, globalTypes: i })),
             (this.hooks = {}),
@@ -11787,7 +11793,7 @@ ${F.description}`);
         }
         setProjectAnnotations(t) {
           this.projectAnnotations = Rt(t);
-          let { initialGlobals: r, globalTypes: n } = t;
+          const { initialGlobals: r, globalTypes: n } = t;
           this.userGlobals.set({ globals: r, globalTypes: n });
         }
         async onStoriesChanged({ importFn: t, storyIndex: r }) {
@@ -11799,12 +11805,12 @@ ${F.description}`);
           return this.storyIndex.storyIdToEntry(t);
         }
         async loadCSFFileByStoryId(t) {
-          let { importPath: r, title: n } = this.storyIndex.storyIdToEntry(t),
+          const { importPath: r, title: n } = this.storyIndex.storyIdToEntry(t),
             o = await this.importFn(r);
           return this.processCSFFileWithCache(o, r, n);
         }
         async loadAllCSFFiles() {
-          let t = {};
+          const t = {};
           return (
             Object.entries(this.storyIndex.entries).forEach(
               ([r, { importPath: n }]) => {
@@ -11825,7 +11831,7 @@ ${F.description}`);
           this.cachedCSFFiles = await this.loadAllCSFFiles();
         }
         preparedMetaFromCSFFile({ csfFile: t }) {
-          let r = t.meta;
+          const r = t.meta;
           return this.prepareMetaWithCache(
             r,
             this.projectAnnotations,
@@ -11833,13 +11839,13 @@ ${F.description}`);
           );
         }
         async loadStory({ storyId: t }) {
-          let r = await this.loadCSFFileByStoryId(t);
+          const r = await this.loadCSFFileByStoryId(t);
           return this.storyFromCSFFile({ storyId: t, csfFile: r });
         }
         storyFromCSFFile({ storyId: t, csfFile: r }) {
-          let n = r.stories[t];
+          const n = r.stories[t];
           if (!n) throw new Wa({ storyId: t });
-          let o = r.meta,
+          const o = r.meta,
             i = this.prepareStoryWithCache(
               n,
               o,
@@ -11857,19 +11863,19 @@ ${F.description}`);
             .map((r) => this.storyFromCSFFile({ storyId: r, csfFile: t }));
         }
         async loadEntry(t) {
-          let r = await this.storyIdToEntry(t),
+          const r = await this.storyIdToEntry(t),
             n = r.type === 'docs' ? r.storiesImports : [],
             [o, ...i] = await Promise.all([
               this.importFn(r.importPath),
               ...n.map((a) => {
-                let l = this.storyIndex.importPathToEntry(a);
+                const l = this.storyIndex.importPathToEntry(a);
                 return this.loadCSFFileByStoryId(l.id);
               }),
             ]);
           return { entryExports: o, csfFiles: i };
         }
         getStoryContext(t, { forceInitialArgs: r = !1 } = {}) {
-          let n = this.userGlobals.get(),
+          const n = this.userGlobals.get(),
             { initialGlobals: o } = this.userGlobals,
             i = new Is();
           return fo({
@@ -11888,17 +11894,17 @@ ${F.description}`);
         }
         async cleanupStory(t) {
           this.hooks[t.id].clean();
-          let r = this.cleanupCallbacks[t.id];
-          if (r) for (let n of [...r].reverse()) await n();
+          const r = this.cleanupCallbacks[t.id];
+          if (r) for (const n of [...r].reverse()) await n();
           delete this.cleanupCallbacks[t.id];
         }
         extract(t = { includeDocsOnly: !1 }) {
-          let { cachedCSFFiles: r } = this;
+          const { cachedCSFFiles: r } = this;
           if (!r) throw new Ba();
           return Object.entries(this.storyIndex.entries).reduce(
             (n, [o, { type: i, importPath: a }]) => {
               if (i === 'docs') return n;
-              let l = r[a],
+              const l = r[a],
                 u = this.storyFromCSFFile({ storyId: o, csfFile: l });
               return (
                 (!t.includeDocsOnly && u.parameters.docsOnly) ||
@@ -11925,7 +11931,7 @@ ${F.description}`);
           );
         }
         getSetStoriesPayload() {
-          let t = this.extract({ includeDocsOnly: !0 }),
+          const t = this.extract({ includeDocsOnly: !0 }),
             r = Object.values(t).reduce(
               (n, { title: o }) => ((n[o] = {}), n),
               {},
@@ -11964,12 +11970,12 @@ ${F.description}`);
           } catch {
             return null;
           }
-          let n = this.cachedCSFFiles[r],
+          const n = this.cachedCSFFiles[r],
             o = this.storyFromCSFFile({ storyId: t, csfFile: n });
           return {
             ...o,
             storyFn: m((i) => {
-              let a = {
+              const a = {
                 ...this.getStoryContext(o),
                 abortSignal: new AbortController().signal,
                 canvasElement: null,
@@ -11993,10 +11999,10 @@ ${F.description}`);
     m(Bs, 'slash');
     var jh = m((e) => {
       if (e.length === 0) return e;
-      let t = e[e.length - 1],
+      const t = e[e.length - 1],
         r = t?.replace(/(?:[.](?:story|stories))?([.][^.]+)$/i, '');
       if (e.length === 1) return [r];
-      let n = e[e.length - 2];
+      const n = e[e.length - 2];
       return r && n && r.toLowerCase() === n.toLowerCase()
         ? [...e.slice(0, -2), r]
         : r && (/^(story|stories)([.][^.]+)$/i.test(t) || /^index$/i.test(r))
@@ -12011,7 +12017,7 @@ ${F.description}`);
     }
     m(Yn, 'pathJoin');
     var Lh = m((e, t, r) => {
-        let {
+        const {
           directory: n,
           importPathMatcher: o,
           titlePrefix: i = '',
@@ -12022,7 +12028,7 @@ ${F.description}`);
       webpack is mis-configured in production mode. To force webpack to produce
       filenames, set optimization.moduleIds = "named" in your webpack config.
     `);
-        let a = Bs(String(e));
+        const a = Bs(String(e));
         if (o.exec(a)) {
           if (!r) {
             let l = a.replace(n, ''),
@@ -12034,7 +12040,7 @@ ${F.description}`);
       }, 'userOrAutoTitleFromSpecifier'),
       HE = m((e, t, r) => {
         for (let n = 0; n < t.length; n += 1) {
-          let o = Lh(e, t[n], r);
+          const o = Lh(e, t[n], r);
           if (o) return o;
         }
         return r || void 0;
@@ -12053,7 +12059,7 @@ ${F.description}`);
             for (; i[l] || a[l]; ) {
               if (!i[l]) return -1;
               if (!a[l]) return 1;
-              let u = i[l],
+              const u = i[l],
                 c = a[l];
               if (u !== c) {
                 let p = o.indexOf(u),
@@ -12106,7 +12112,7 @@ ${F.description}`);
       { AbortController: Ui } = globalThis;
     function Xn(e) {
       try {
-        let { name: t = 'Error', message: r = String(e), stack: n } = e;
+        const { name: t = 'Error', message: r = String(e), stack: n } = e;
         return { name: t, message: r, stack: n };
       } catch {
         return { name: 'Error', message: String(e) };
@@ -12189,15 +12195,15 @@ ${F.description}`);
       storyContext() {
         if (!this.story)
           throw new Error('Cannot call storyContext before preparing');
-        let { forceInitialArgs: t } = this.renderOptions;
+        const { forceInitialArgs: t } = this.renderOptions;
         return this.store.getStoryContext(this.story, { forceInitialArgs: t });
       }
       async render({ initial: t = !1, forceRemount: r = !1 } = {}) {
-        let { canvasElement: n } = this;
+        const { canvasElement: n } = this;
         if (!this.story) throw new Error('cannot render when not prepared');
-        let o = this.story;
+        const o = this.story;
         if (!n) throw new Error('cannot render when canvasElement is unset');
-        let {
+        const {
           id: i,
           componentId: a,
           title: l,
@@ -12215,7 +12221,7 @@ ${F.description}`);
           D = !1,
           S = o.usesMount;
         try {
-          let F = {
+          const F = {
             ...this.storyContext(),
             viewMode: this.viewMode,
             abortSignal: A,
@@ -12225,7 +12231,7 @@ ${F.description}`);
             context: null,
             canvas: {},
             renderToCanvas: m(async () => {
-              let L = await this.renderToScreen(x, n);
+              const L = await this.renderToScreen(x, n);
               (this.teardownRender = L || (() => {})), (D = !0);
             }, 'renderToCanvas'),
             mount: m(async (...L) => {
@@ -12241,7 +12247,7 @@ ${F.description}`);
             }, 'mount'),
           };
           F.context = F;
-          let x = {
+          const x = {
             componentId: a,
             title: l,
             kind: l,
@@ -12272,7 +12278,7 @@ ${F.description}`);
             A.aborted)
           )
             return;
-          let O = await p(F);
+          const O = await p(F);
           if (
             (this.store.addCleanupCallbacks(o, O),
             this.checkIfAborted(A) ||
@@ -12281,7 +12287,7 @@ ${F.description}`);
               A.aborted))
           )
             return;
-          let R =
+          const R =
               this.story.parameters?.test?.dangerouslyIgnoreUnhandledErrors ===
               !0,
             N = new Set(),
@@ -12337,7 +12343,7 @@ ${F.description}`);
               (await this.runPhase(A, 'afterEach', async () => {
                 await h(F);
               }));
-          let U = !R && N.size > 0,
+          const U = !R && N.size > 0,
             P = F.reporting.reports.some((L) => L.status === 'failed'),
             K = U || P;
           await this.runPhase(A, 'finished', async () =>
@@ -12421,7 +12427,7 @@ ${F.description}`);
         async initialize() {
           this.setupListeners();
           try {
-            let t = await this.getProjectAnnotationsOrRenderError();
+            const t = await this.getProjectAnnotationsOrRenderError();
             await this.runBeforeAllHook(t),
               await this.initializeWithProjectAnnotations(t);
           } catch (t) {
@@ -12442,7 +12448,7 @@ ${F.description}`);
         }
         async getProjectAnnotationsOrRenderError() {
           try {
-            let t = await this.getProjectAnnotations();
+            const t = await this.getProjectAnnotations();
             if (
               ((this.renderToCanvas = t.renderToCanvas), !this.renderToCanvas)
             )
@@ -12457,7 +12463,7 @@ ${F.description}`);
         async initializeWithProjectAnnotations(t) {
           this.projectAnnotationsBeforeInitialization = t;
           try {
-            let r = await this.getStoryIndexFromServer();
+            const r = await this.getStoryIndexFromServer();
             return this.initializeWithStoryIndex(r);
           } catch (r) {
             throw (
@@ -12476,7 +12482,7 @@ ${F.description}`);
           }
         }
         async getStoryIndexFromServer() {
-          let t = await $h(qh);
+          const t = await $h(qh);
           if (t.status === 200) return t.json();
           throw new Ua({ text: await t.text() });
         }
@@ -12500,7 +12506,7 @@ ${F.description}`);
         emitGlobals() {
           if (!this.storyStoreValue)
             throw new ke({ methodName: 'emitGlobals' });
-          let t = {
+          const t = {
             globals: this.storyStoreValue.userGlobals.get() || {},
             globalTypes:
               this.storyStoreValue.projectAnnotations.globalTypes || {},
@@ -12509,7 +12515,7 @@ ${F.description}`);
         }
         async onGetProjectAnnotationsChanged({ getProjectAnnotations: t }) {
           delete this.previewEntryError, (this.getProjectAnnotations = t);
-          let r = await this.getProjectAnnotationsOrRenderError();
+          const r = await this.getProjectAnnotationsOrRenderError();
           if ((await this.runBeforeAllHook(r), !this.storyStoreValue)) {
             await this.initializeWithProjectAnnotations(r);
             return;
@@ -12525,7 +12531,7 @@ ${F.description}`);
             ))
           )
             try {
-              let t = await this.getStoryIndexFromServer();
+              const t = await this.getStoryIndexFromServer();
               if (this.projectAnnotationsBeforeInitialization) {
                 this.initializeWithStoryIndex(t);
                 return;
@@ -12553,7 +12559,7 @@ ${F.description}`);
           )
             throw new ke({ methodName: 'onUpdateGlobals' });
           if ((this.storyStoreValue.userGlobals.update(t), r)) {
-            let {
+            const {
               initialGlobals: n,
               storyGlobals: o,
               userGlobals: i,
@@ -12566,7 +12572,7 @@ ${F.description}`);
               globals: a,
             });
           } else {
-            let { initialGlobals: n, globals: o } =
+            const { initialGlobals: n, globals: o } =
               this.storyStoreValue.userGlobals;
             this.channel.emit(ft, {
               initialGlobals: n,
@@ -12596,7 +12602,7 @@ ${F.description}`);
         async onRequestArgTypesInfo({ id: t, payload: r }) {
           try {
             await this.storeInitializationPromise;
-            let n = await this.storyStoreValue?.loadStory(r);
+            const n = await this.storyStoreValue?.loadStory(r);
             this.channel.emit(xn, {
               id: t,
               success: !0,
@@ -12610,7 +12616,7 @@ ${F.description}`);
         async onResetArgs({ storyId: t, argNames: r }) {
           if (!this.storyStoreValue)
             throw new ke({ methodName: 'onResetArgs' });
-          let n =
+          const n =
               this.storyRenders.find((i) => i.id === t)?.story ||
               (await this.storyStoreValue.loadStory({ storyId: t })),
             o = (
@@ -12634,7 +12640,7 @@ ${F.description}`);
         renderStoryToElement(t, r, n, o) {
           if (!this.renderToCanvas || !this.storyStoreValue)
             throw new ke({ methodName: 'renderStoryToElement' });
-          let i = new Qn(
+          const i = new Qn(
             this.channel,
             this.storyStoreValue,
             this.renderToCanvas,
@@ -12701,7 +12707,7 @@ ${F.description}`);
           (this.store = r),
           (this.renderStoryToElement = n),
           (this.storyIdByName = m((i) => {
-            let a = this.nameToStoryId.get(i);
+            const a = this.nameToStoryId.get(i);
             if (a) return a;
             throw new Error(`No story found with that name: ${i}`);
           }, 'storyIdByName')),
@@ -12721,7 +12727,7 @@ ${F.description}`);
                 );
               return this.primaryStory;
             }
-            let a = this.storyIdToCSFFile.get(i);
+            const a = this.storyIdToCSFFile.get(i);
             if (!a)
               throw new Error(
                 `Called \`storyById\` for story that was never loaded: ${i}`,
@@ -12756,7 +12762,7 @@ ${F.description}`);
           this.store
             .componentStoriesFromCSFFile({ csfFile: t })
             .forEach((r) => {
-              let n = t.stories[r.id];
+              const n = t.stories[r.id];
               this.storyIdToCSFFile.set(n.id, t),
                 this.exportToStory.set(n.moduleExport, r);
             });
@@ -12777,7 +12783,7 @@ ${F.description}`);
             }));
       }
       referenceMeta(t, r) {
-        let n = this.resolveModuleExport(t);
+        const n = this.resolveModuleExport(t);
         if (n.type !== 'meta')
           throw new Error(
             '<Meta of={} /> must reference a CSF file module export or meta export. Did you mistakenly reference your component instead of your CSF file?',
@@ -12785,7 +12791,7 @@ ${F.description}`);
         r && this.attachCSFFile(n.csfFile);
       }
       get projectAnnotations() {
-        let { projectAnnotations: t } = this.store;
+        const { projectAnnotations: t } = this.store;
         if (!t)
           throw new Error(
             "Can't get projectAnnotations from DocsContext before they are initialized",
@@ -12804,9 +12810,9 @@ ${F.description}`);
           throw new Error(
             'No CSF file attached to this docs file, did you forget to use <Meta of={} />?',
           );
-        let r = Array.from(this.attachedCSFFiles)[0];
+        const r = Array.from(this.attachedCSFFiles)[0];
         if (t === 'meta') return { type: 'meta', csfFile: r };
-        let { component: n } = r.meta;
+        const { component: n } = r.meta;
         if (!n)
           throw new Error(
             'Attached CSF file does not defined a component, did you forget to export one?',
@@ -12814,9 +12820,9 @@ ${F.description}`);
         return { type: 'component', component: n };
       }
       resolveModuleExport(t) {
-        let r = this.exportsToCSFFile.get(t);
+        const r = this.exportsToCSFFile.get(t);
         if (r) return { type: 'meta', csfFile: r };
-        let n = this.exportToStory.get(mt(t) ? t.input : t);
+        const n = this.exportToStory.get(mt(t) ? t.input : t);
         return n
           ? { type: 'story', story: n }
           : { type: 'component', component: t };
@@ -12824,11 +12830,11 @@ ${F.description}`);
       resolveOf(t, r = []) {
         let n;
         if (['component', 'meta', 'story'].includes(t)) {
-          let o = t;
+          const o = t;
           n = this.resolveAttachedModuleExportType(o);
         } else n = this.resolveModuleExport(t);
         if (r.length && !r.includes(n.type)) {
-          let o = n.type === 'component' ? 'component or unknown' : n.type;
+          const o = n.type === 'component' ? 'component or unknown' : n.type;
           throw new Error(fe`Invalid value passed to the 'of' prop. The value was resolved to a '${o}' type but the only types for this block are: ${r.join(', ')}.
         - Did you pass a component to the 'of' prop when the block only supports a story or a meta?
         - ... or vice versa?
@@ -12870,10 +12876,10 @@ ${F.description}`);
         }
         async prepare() {
           this.preparing = !0;
-          let { entryExports: t, csfFiles: r = [] } =
+          const { entryExports: t, csfFiles: r = [] } =
             await this.store.loadEntry(this.id);
           if (this.torndown) throw Vr;
-          let { importPath: n, title: o } = this.entry,
+          const { importPath: n, title: o } = this.entry,
             i = this.store.processCSFFileWithCache(t, n, o),
             a = Object.keys(i.stories)[0];
           (this.story = this.store.storyFromCSFFile({
@@ -12889,19 +12895,19 @@ ${F.description}`);
         docsContext(t) {
           if (!this.csfFiles)
             throw new Error('Cannot render docs before preparing');
-          let r = new mo(this.channel, this.store, t, this.csfFiles);
+          const r = new mo(this.channel, this.store, t, this.csfFiles);
           return this.csfFiles.forEach((n) => r.attachCSFFile(n)), r;
         }
         async renderToElement(t, r) {
           if (!this.story || !this.csfFiles)
             throw new Error('Cannot render docs before preparing');
-          let n = this.docsContext(r),
+          const n = this.docsContext(r),
             { docs: o } = this.story.parameters || {};
           if (!o)
             throw new Error(
               'Cannot render a story in viewMode=docs if `@storybook/addon-docs` is not installed',
             );
-          let i = await o.renderer(),
+          const i = await o.renderer(),
             { render: a } = i,
             l = m(async () => {
               try {
@@ -12942,7 +12948,7 @@ ${F.description}`);
         }
         async prepare() {
           this.preparing = !0;
-          let { entryExports: t, csfFiles: r = [] } =
+          const { entryExports: t, csfFiles: r = [] } =
             await this.store.loadEntry(this.id);
           if (this.torndown) throw Vr;
           (this.csfFiles = r), (this.exports = t), (this.preparing = !1);
@@ -12962,13 +12968,13 @@ ${F.description}`);
         async renderToElement(t, r) {
           if (!this.exports || !this.csfFiles || !this.store.projectAnnotations)
             throw new Error('Cannot render docs before preparing');
-          let n = this.docsContext(r),
+          const n = this.docsContext(r),
             { docs: o } = this.store.projectAnnotations.parameters || {};
           if (!o)
             throw new Error(
               'Cannot render a story in viewMode=docs if `@storybook/addon-docs` is not installed',
             );
-          let i = { ...o, page: this.exports.default },
+          const i = { ...o, page: this.exports.default },
             a = await o.renderer(),
             { render: l } = a,
             u = m(async () => {
@@ -12994,7 +13000,7 @@ ${F.description}`);
     var qi = $s,
       Jh = globalThis;
     function qs(e) {
-      let t = (e.composedPath && e.composedPath()[0]) || e.target;
+      const t = (e.composedPath && e.composedPath()[0]) || e.target;
       return (
         /input|textarea/i.test(t.tagName) ||
         t.getAttribute('contenteditable') !== null
@@ -13038,7 +13044,7 @@ ${F.description}`);
       async setInitialGlobals() {
         if (!this.storyStoreValue)
           throw new ke({ methodName: 'setInitialGlobals' });
-        let { globals: t } = this.selectionStore.selectionSpecifier || {};
+        const { globals: t } = this.selectionStore.selectionSpecifier || {};
         t && this.storyStoreValue.userGlobals.updateFromPersisted(t),
           this.emitGlobals();
       }
@@ -13058,7 +13064,7 @@ ${F.description}`);
           this.renderMissingStory();
           return;
         }
-        let { storySpecifier: t, args: r } =
+        const { storySpecifier: t, args: r } =
             this.selectionStore.selectionSpecifier,
           n = this.storyStoreValue.storyIndex.entryFromSpecifier(t);
         if (!n) {
@@ -13070,7 +13076,7 @@ ${F.description}`);
               );
           return;
         }
-        let { id: o, type: i } = n;
+        const { id: o, type: i } = n;
         this.selectionStore.setSelection({ storyId: o, viewMode: i }),
           this.channel.emit(Ei, this.selectionStore.selection),
           this.channel.emit(Tn, this.selectionStore.selection),
@@ -13090,7 +13096,7 @@ ${F.description}`);
       }
       onKeydown(t) {
         if (!this.storyRenders.find((r) => r.disableKeyListeners) && !qs(t)) {
-          let {
+          const {
             altKey: r,
             ctrlKey: n,
             metaKey: o,
@@ -13122,7 +13128,7 @@ ${F.description}`);
         this.selectionStore.setQueryParams(t);
       }
       async onUpdateGlobals({ globals: t }) {
-        let r =
+        const r =
           (this.currentRender instanceof Qn && this.currentRender.story) ||
           void 0;
         super.onUpdateGlobals({ globals: t, currentStory: r }),
@@ -13141,10 +13147,10 @@ ${F.description}`);
             ));
       }
       async renderSelection({ persistedArgs: t } = {}) {
-        let { renderToCanvas: r } = this;
+        const { renderToCanvas: r } = this;
         if (!this.storyStoreValue || !r)
           throw new ke({ methodName: 'renderSelection' });
-        let { selection: n } = this.selectionStore;
+        const { selection: n } = this.selectionStore;
         if (!n)
           throw new Error(
             'Cannot call renderSelection as no selection was made',
@@ -13158,7 +13164,7 @@ ${F.description}`);
             this.renderStoryLoadingException(o, h);
           return;
         }
-        let a = this.currentSelection?.storyId !== o,
+        const a = this.currentSelection?.storyId !== o,
           l = this.currentRender?.type !== i.type;
         i.type === 'story'
           ? this.view.showPreparingStory({ immediate: l })
@@ -13188,9 +13194,9 @@ ${F.description}`);
                 i,
                 this.mainStoryCallbacks(o),
               ));
-        let c = this.currentSelection;
+        const c = this.currentSelection;
         this.currentSelection = n;
-        let d = this.currentRender;
+        const d = this.currentRender;
         this.currentRender = u;
         try {
           await u.prepare();
@@ -13199,7 +13205,7 @@ ${F.description}`);
             h !== Vr && this.renderStoryLoadingException(o, h);
           return;
         }
-        let p = !a && d && !u.isEqual(d);
+        const p = !a && d && !u.isEqual(d);
         if (
           (t &&
             Br(u) &&
@@ -13218,7 +13224,7 @@ ${F.description}`);
           Br(u))
         ) {
           Pr(!!u.story);
-          let {
+          const {
             parameters: h,
             initialArgs: y,
             argTypes: E,
@@ -13297,7 +13303,7 @@ ${F.description}`);
         Q.error(r), this.view.showErrorDisplay(r), this.channel.emit(kn, t);
       }
       renderException(t, r) {
-        let { name: n = 'Error', message: o = String(r), stack: i } = r;
+        const { name: n = 'Error', message: o = String(r), stack: i } = r;
         this.channel.emit(vi, { name: n, message: o, stack: i }),
           this.channel.emit(It, { newPhase: 'errored', storyId: t }),
           this.view.showErrorDisplay(r),
@@ -13354,7 +13360,7 @@ ${F.description}`);
               return new Date(e.replaceAll(' ', '+').slice(6, -1));
             if (e.startsWith('!hex(') && e.endsWith(')'))
               return `#${e.slice(5, -1)}`;
-            let t = e.slice(1).match(Ks);
+            const t = e.slice(1).match(Ks);
             if (t)
               return e.startsWith('!rgba') || e.startsWith('!RGBA')
                 ? `${t[1]}(${t[2]}, ${t[3]}, ${t[4]}, ${t[5]})`
@@ -13368,7 +13374,9 @@ ${F.description}`);
         },
       },
       Ji = m((e) => {
-        let t = e.split(';').map((r) => r.replace('=', '~').replace(':', '='));
+        const t = e
+          .split(';')
+          .map((r) => r.replace('=', '~').replace(':', '='));
         return Object.entries((0, Gh.parse)(t.join(';'), Kh)).reduce(
           (r, [n, o]) =>
             eo(n, o)
@@ -13384,14 +13392,14 @@ ${F.description}`);
       }, 'parseArgsParam'),
       { history: Ys, document: lt } = Ee;
     function Xs(e) {
-      let t = (e || '').match(/^\/story\/(.+)/);
+      const t = (e || '').match(/^\/story\/(.+)/);
       if (!t)
         throw new Error(`Invalid path '${e}',  must start with '/story/'`);
       return t[1];
     }
     m(Xs, 'pathToId');
     var Qs = m(({ selection: e, extraParams: t }) => {
-        let r = lt?.location.search.slice(1),
+        const r = lt?.location.search.slice(1),
           {
             path: n,
             selectedKind: o,
@@ -13402,7 +13410,7 @@ ${F.description}`);
       }, 'getQueryString'),
       Yh = m((e) => {
         if (!e) return;
-        let t = Qs({ selection: e }),
+        const t = Qs({ selection: e }),
           { hash: r = '' } = lt.location;
         (lt.title = e.storyId),
           Ys.replaceState({}, '', `${lt.location.pathname}${t}${r}`);
@@ -13426,7 +13434,7 @@ ${F.description}`);
             n = typeof t.globals == 'string' ? Ji(t.globals) : void 0,
             o = nr(t.viewMode);
           (typeof o != 'string' || !o.match(/docs|story/)) && (o = 'story');
-          let i = nr(t.path),
+          const i = nr(t.path),
             a = i ? Xs(i) : nr(t.id);
           if (a) return { storySpecifier: a, args: r, globals: n, viewMode: o };
         }
@@ -13440,7 +13448,7 @@ ${F.description}`);
           (this.selection = t), Yh(this.selection);
         }
         setQueryParams(t) {
-          let r = Qs({ extraParams: t }),
+          const r = Qs({ extraParams: t }),
             { hash: n = '' } = lt.location;
           Ys.replaceState({}, '', `${lt.location.pathname}${r}${n}`);
         }
@@ -13475,7 +13483,7 @@ ${F.description}`);
       tl = class {
         constructor() {
           if (((this.testing = !1), typeof xe < 'u')) {
-            let { __SPECIAL_TEST_PARAMETER__: t } = (0, tf.parse)(
+            const { __SPECIAL_TEST_PARAMETER__: t } = (0, tf.parse)(
               xe.location.search.slice(1),
             );
             switch (t) {
@@ -13523,7 +13531,7 @@ ${F.description}`);
             return;
           }
           this.checkIfLayoutExists(t);
-          let r = $n[t];
+          const r = $n[t];
           xe.body.classList.remove(this.currentLayoutClass),
             xe.body.classList.add(r),
             (this.currentLayoutClass = r);
@@ -13634,12 +13642,12 @@ ${F.description}`);
       af = 'script',
       Gi = 'scripts-root';
     function to() {
-      let e = gt.createEvent('Event');
+      const e = gt.createEvent('Event');
       e.initEvent('DOMContentLoaded', !0, !0), gt.dispatchEvent(e);
     }
     m(to, 'simulateDOMContentLoaded');
     function rl(e, t, r) {
-      let n = gt.createElement('script');
+      const n = gt.createElement('script');
       (n.type = e.type === 'module' ? 'module' : 'text/javascript'),
         e.src
           ? ((n.onload = t), (n.onerror = t), (n.src = e.src))
@@ -13660,11 +13668,11 @@ ${F.description}`);
       t
         ? (t.innerHTML = '')
         : ((t = gt.createElement('div')), (t.id = Gi), gt.body.appendChild(t));
-      let r = Array.from(e.querySelectorAll(af));
+      const r = Array.from(e.querySelectorAll(af));
       if (r.length) {
-        let n = [];
+        const n = [];
         r.forEach((o) => {
-          let i = o.getAttribute('type');
+          const i = o.getAttribute('type');
           (!i || of.includes(i)) && n.push((a) => rl(o, a, t));
         }),
           n.length && yo(n, to, void 0);
@@ -13680,7 +13688,7 @@ ${F.description}`);
           case 'function':
             return { name: 'function' };
           case 'object':
-            let t = {};
+            const t = {};
             return (
               e.signature.properties.forEach((r) => {
                 t[r.key] = sr(r.value);
@@ -13717,10 +13725,10 @@ ${F.description}`);
         }
       }, 'convert');
     function nl(e, t) {
-      let r = {},
+      const r = {},
         n = Object.keys(e);
       for (let o = 0; o < n.length; o++) {
-        let i = n[o],
+        const i = n[o],
           a = e[i];
         r[i] = t(a, i, e);
       }
@@ -13731,7 +13739,7 @@ ${F.description}`);
       pf = _((e) => e.replace(ol, ''), 'trimQuotes'),
       hf = _((e) => ol.test(e), 'includesQuotes'),
       al = _((e) => {
-        let t = pf(e);
+        const t = pf(e);
         return hf(e) || Number.isNaN(Number(t)) ? t : Number(t);
       }, 'parseLiteral'),
       ff = /^\(.*\) => /,
@@ -13740,7 +13748,7 @@ ${F.description}`);
           i = {};
         switch ((typeof r < 'u' && (i.raw = r), t)) {
           case 'enum': {
-            let l = n ? o : o.map((u) => al(u.value));
+            const l = n ? o : o.map((u) => al(u.value));
             return { ...i, name: t, value: l };
           }
           case 'string':
@@ -13761,7 +13769,7 @@ ${F.description}`);
             return { ...i, name: t, value: ir(o) };
           case 'shape':
           case 'exact':
-            let a = nl(o, (l) => ir(l));
+            const a = nl(o, (l) => ir(l));
             return { ...i, name: 'object', value: a };
           case 'union':
             return { ...i, name: 'union', value: o.map((l) => ir(l)) };
@@ -13771,10 +13779,10 @@ ${F.description}`);
           default: {
             if (t?.indexOf('|') > 0)
               try {
-                let c = t.split('|').map((d) => JSON.parse(d));
+                const c = t.split('|').map((d) => JSON.parse(d));
                 return { ...i, name: 'enum', value: c };
               } catch {}
-            let l = o ? `${t}(${o})` : t,
+            const l = o ? `${t}(${o})` : t,
               u = ff.test(t) ? 'function' : 'other';
             return { ...i, name: u, value: l };
           }
@@ -13785,7 +13793,7 @@ ${F.description}`);
           case 'function':
             return { name: 'function' };
           case 'object':
-            let t = {};
+            const t = {};
             return (
               e.signature.properties.forEach((r) => {
                 t[r.key] = lr(r.value);
@@ -13828,7 +13836,7 @@ ${F.description}`);
         }
       }, 'convert'),
       go = _((e) => {
-        let { type: t, tsType: r, flowType: n } = e;
+        const { type: t, tsType: r, flowType: n } = e;
         try {
           if (t != null) return ir(t);
           if (r != null) return lr(r);
@@ -13882,14 +13890,14 @@ ${F.description}`);
     }
     _(ul, 'isSpace');
     function cl(e) {
-      let t = e.match(/\r+$/);
+      const t = e.match(/\r+$/);
       return t == null
         ? ['', e]
         : [e.slice(-t[0].length), e.slice(0, -t[0].length)];
     }
     _(cl, 'splitCR');
     function vt(e) {
-      let t = e.match(/^\s+/);
+      const t = e.match(/^\s+/);
       return t == null
         ? ['', e]
         : [e.slice(0, t[0].length), e.slice(t[0].length)];
@@ -13936,12 +13944,12 @@ ${F.description}`);
     _(hl, 'seedTokens');
     var Ef = /^@\S+/;
     function fl({ fence: e = '```' } = {}) {
-      let t = ml(e),
+      const t = ml(e),
         r = _((n, o) => (t(n) ? !o : o), 'toggleFence');
       return _(function (n) {
         let o = [[]],
           i = !1;
-        for (let a of n)
+        for (const a of n)
           Ef.test(a.tokens.description) && !i
             ? o.push([a])
             : o[o.length - 1].push(a),
@@ -13973,7 +13981,7 @@ ${F.description}`);
           r === null)
         )
           return n++, null;
-        let l = i.trimRight().endsWith(t.end);
+        const l = i.trimRight().endsWith(t.end);
         if (
           (a.delimiter === '' &&
             i.startsWith(t.delim) &&
@@ -13983,7 +13991,7 @@ ${F.description}`);
             ([a.postDelimiter, i] = vt(i))),
           l)
         ) {
-          let u = i.trimRight();
+          const u = i.trimRight();
           (a.end = i.slice(u.length - t.end.length)),
             (i = u.slice(0, -t.end.length));
         }
@@ -13993,7 +14001,7 @@ ${F.description}`);
           n++,
           l)
         ) {
-          let u = r.slice();
+          const u = r.slice();
           return (r = null), u;
         }
         return null;
@@ -14004,7 +14012,7 @@ ${F.description}`);
       return _(function (t) {
         var r;
         let n = pl({ source: t });
-        for (let o of e)
+        for (const o of e)
           if (
             ((n = o(n)),
             !(
@@ -14018,7 +14026,7 @@ ${F.description}`);
     _(gl, 'getParser');
     function bl() {
       return (e) => {
-        let { tokens: t } = e.source[0],
+        const { tokens: t } = e.source[0],
           r = t.description.match(/\s*(@(\S+))(\s*)/);
         return r === null
           ? (e.problems.push({
@@ -14037,14 +14045,14 @@ ${F.description}`);
     }
     _(bl, 'tagTokenizer');
     function El(e = 'compact') {
-      let t = vl(e);
+      const t = vl(e);
       return (r) => {
         let n = 0,
           o = [];
-        for (let [l, { tokens: u }] of r.source.entries()) {
+        for (const [l, { tokens: u }] of r.source.entries()) {
           let c = '';
           if (l === 0 && u.description[0] !== '{') return r;
-          for (let d of u.description)
+          for (const d of u.description)
             if ((d === '{' && n++, d === '}' && n--, (c += d), n === 0)) break;
           if ((o.push([u, c]), n === 0)) break;
         }
@@ -14058,9 +14066,9 @@ ${F.description}`);
             }),
             r
           );
-        let i = [],
+        const i = [],
           a = o[0][0].postDelimiter.length;
-        for (let [l, [u, c]] of o.entries())
+        for (const [l, [u, c]] of o.entries())
           (u.type = c),
             l > 0 &&
               ((u.type = u.postDelimiter.slice(a) + c),
@@ -14089,9 +14097,9 @@ ${F.description}`);
     _(vl, 'getJoiner');
     var Af = _((e) => e && e.startsWith('"') && e.endsWith('"'), 'isQuoted');
     function Al() {
-      let e = _((t, { tokens: r }, n) => (r.type === '' ? t : n), 'typeEnd');
+      const e = _((t, { tokens: r }, n) => (r.type === '' ? t : n), 'typeEnd');
       return (t) => {
-        let { tokens: r } = t.source[t.source.reduce(e, 0)],
+        const { tokens: r } = t.source[t.source.reduce(e, 0)],
           n = r.description.trimLeft(),
           o = n.split('"');
         if (o.length > 1 && o[0] === '' && o.length % 2 === 1)
@@ -14105,7 +14113,7 @@ ${F.description}`);
           a = '',
           l = !1,
           u;
-        for (let d of n) {
+        for (const d of n) {
           if (i === 0 && ul(d)) break;
           d === '[' && i++, d === ']' && i--, (a += d);
         }
@@ -14119,10 +14127,10 @@ ${F.description}`);
             }),
             t
           );
-        let c = a;
+        const c = a;
         if (a[0] === '[' && a[a.length - 1] === ']') {
           (l = !0), (a = a.slice(1, -1));
-          let d = a.split('=');
+          const d = a.split('=');
           if (
             ((a = d[0].trim()),
             d[1] !== void 0 && (u = d.slice(1).join('=').trim()),
@@ -14170,7 +14178,7 @@ ${F.description}`);
     }
     _(Al, 'nameTokenizer');
     function Dl(e = 'compact', t = ut) {
-      let r = Eo(e);
+      const r = Eo(e);
       return (n) => ((n.description = r(n.source, t)), n);
     }
     _(Dl, 'descriptionTokenizer');
@@ -14197,7 +14205,7 @@ ${F.description}`);
       e[0].tokens.description === '' &&
         e[0].tokens.delimiter === t.start &&
         (e = e.slice(1));
-      let r = e[e.length - 1];
+      const r = e[e.length - 1];
       return (
         r !== void 0 &&
           r.tokens.description === '' &&
@@ -14217,16 +14225,16 @@ ${F.description}`);
       tokenizers: o = [bl(), El(r), Al(), Dl(r)],
     } = {}) {
       if (e < 0 || e % 1 > 0) throw new Error('Invalid startLine');
-      let i = yl({ startLine: e, markers: n }),
+      const i = yl({ startLine: e, markers: n }),
         a = fl({ fence: t }),
         l = gl({ tokenizers: o }),
         u = Eo(r);
       return function (c) {
-        let d = [];
-        for (let p of dl(c)) {
-          let h = i(p);
+        const d = [];
+        for (const p of dl(c)) {
+          const h = i(p);
           if (h === null) continue;
-          let y = a(h),
+          const y = a(h),
             E = y.slice(1).map(l);
           d.push({
             description: u(y[0], n),
@@ -14288,7 +14296,7 @@ ${F.description}`);
     }
     _(Il, 'containsJsDoc');
     function kl(e) {
-      let t =
+      const t =
           `/**
 ` +
           (e ?? '')
@@ -14310,7 +14318,7 @@ ${F.description}`);
       },
       xf = _((e, t = Cf) => {
         if (!Il(e)) return { includesJsDoc: !1, ignore: !1 };
-        let r = kl(e),
+        const r = kl(e),
           n = Rl(r, t.tags);
         return n.ignore
           ? { includesJsDoc: !0, ignore: !0 }
@@ -14322,8 +14330,8 @@ ${F.description}`);
             };
       }, 'parseJsDoc');
     function Rl(e, t) {
-      let r = { params: null, deprecated: null, returns: null, ignore: !1 };
-      for (let n of e.tags)
+      const r = { params: null, deprecated: null, returns: null, ignore: !1 };
+      for (const n of e.tags)
         if (!(t !== void 0 && !t.includes(n.tag)))
           if (n.tag === 'ignore') {
             r.ignore = !0;
@@ -14333,18 +14341,18 @@ ${F.description}`);
               case 'param':
               case 'arg':
               case 'argument': {
-                let o = _l(n);
+                const o = _l(n);
                 o != null &&
                   (r.params == null && (r.params = []), r.params.push(o));
                 break;
               }
               case 'deprecated': {
-                let o = Pl(n);
+                const o = Pl(n);
                 o != null && (r.deprecated = o);
                 break;
               }
               case 'returns': {
-                let o = Bl(n);
+                const o = Bl(n);
                 o != null && (r.returns = o);
                 break;
               }
@@ -14360,7 +14368,7 @@ ${F.description}`);
     _(Ol, 'normaliseParamName');
     function _l(e) {
       if (!e.name || e.name === '-') return null;
-      let t = Do(e.type);
+      const t = Do(e.type);
       return {
         name: e.name,
         type: t,
@@ -14375,17 +14383,17 @@ ${F.description}`);
     }
     _(Pl, 'extractDeprecated');
     function vo(e, t) {
-      let r = e === '' ? t : `${e} ${t}`;
+      const r = e === '' ? t : `${e} ${t}`;
       return Ao(r);
     }
     _(vo, 'joinNameAndDescription');
     function Ao(e) {
-      let t = e.replace(/^- /g, '').trim();
+      const t = e.replace(/^- /g, '').trim();
       return t === '' ? null : t;
     }
     _(Ao, 'normaliseDescription');
     function Bl(e) {
-      let t = Do(e.type);
+      const t = Do(e.type);
       return t
         ? {
             type: t,
@@ -14430,7 +14438,7 @@ ${F.description}`);
     var wv = _((e) => e.replace(/\\r\\n/g, '\\n'), 'normalizeNewlines');
     function jl(e, t) {
       if (e != null) {
-        let { value: r } = e;
+        const { value: r } = e;
         if (!Jr(r)) return Nl(r) ? me(t?.name, r) : me(r);
       }
       return null;
@@ -14457,7 +14465,7 @@ ${F.description}`);
     }
     _(Ul, 'generateObjectSignature');
     function $l(e) {
-      let { type: t } = e;
+      const { type: t } = e;
       return t === 'object' ? Ul(e) : Ml(e);
     }
     _($l, 'generateSignature');
@@ -14478,7 +14486,7 @@ ${F.description}`);
     }
     _(Vl, 'createType');
     var Ff = _((e, t) => {
-      let { flowType: r, description: n, required: o, defaultValue: i } = t;
+      const { flowType: r, description: n, required: o, defaultValue: i } = t;
       return {
         name: e,
         type: Vl(r),
@@ -14489,7 +14497,7 @@ ${F.description}`);
     }, 'createFlowPropDef');
     function Jl({ defaultValue: e }) {
       if (e != null) {
-        let { value: t } = e;
+        const { value: t } = e;
         if (!Jr(t)) return me(t);
       }
       return null;
@@ -14505,7 +14513,7 @@ ${F.description}`);
     }
     _(Hl, 'createType');
     var If = _((e, t) => {
-      let { description: r, required: n } = t;
+      const { description: r, required: n } = t;
       return {
         name: e,
         type: Hl(t),
@@ -14519,7 +14527,7 @@ ${F.description}`);
     }
     _(zl, 'createType');
     function Gl(e) {
-      let { computed: t, func: r } = e;
+      const { computed: t, func: r } = e;
       return typeof t > 'u' && typeof r > 'u';
     }
     _(Gl, 'isReactDocgenTypescript');
@@ -14541,14 +14549,14 @@ ${F.description}`);
     _(Wl, 'isStringValued');
     function Kl(e, t) {
       if (e != null) {
-        let { value: r } = e;
+        const { value: r } = e;
         if (!Jr(r)) return Gl(e) && Wl(t) ? me(JSON.stringify(r)) : me(r);
       }
       return null;
     }
     _(Kl, 'createDefaultValue');
     function xo(e, t, r) {
-      let { description: n, required: o, defaultValue: i } = r;
+      const { description: n, required: o, defaultValue: i } = r;
       return {
         name: e,
         type: zl(t),
@@ -14560,9 +14568,9 @@ ${F.description}`);
     _(xo, 'createBasicPropDef');
     function ur(e, t) {
       if (t?.includesJsDoc) {
-        let { description: r, extractedTags: n } = t;
+        const { description: r, extractedTags: n } = t;
         r != null && (e.description = t.description);
-        let o = {
+        const o = {
           ...n,
           params: n?.params?.map((i) => ({
             name: i.getPrettyName(),
@@ -14575,19 +14583,19 @@ ${F.description}`);
     }
     _(ur, 'applyJsDocResult');
     var kf = _((e, t, r) => {
-        let n = xo(e, t.type, t);
+        const n = xo(e, t.type, t);
         return (n.sbType = go(t)), ur(n, r);
       }, 'javaScriptFactory'),
       Rf = _((e, t, r) => {
-        let n = If(e, t);
+        const n = If(e, t);
         return (n.sbType = go(t)), ur(n, r);
       }, 'tsFactory'),
       Of = _((e, t, r) => {
-        let n = Ff(e, t);
+        const n = Ff(e, t);
         return (n.sbType = go(t)), ur(n, r);
       }, 'flowFactory'),
       _f = _((e, t, r) => {
-        let n = xo(e, { name: 'unknown' }, t);
+        const n = xo(e, { name: 'unknown' }, t);
         return ur(n, r);
       }, 'unknownFactory'),
       Yl = _((e) => {
@@ -14614,7 +14622,7 @@ ${F.description}`);
         'getTypeSystem',
       ),
       Pf = _((e) => {
-        let t = Xl(e[0]),
+        const t = Xl(e[0]),
           r = Yl(t);
         return e.map((n) => {
           let o = n;
@@ -14626,22 +14634,22 @@ ${F.description}`);
         });
       }, 'extractComponentSectionArray'),
       Bf = _((e) => {
-        let t = Object.keys(e),
+        const t = Object.keys(e),
           r = Xl(e[t[0]]),
           n = Yl(r);
         return t
           .map((o) => {
-            let i = e[o];
+            const i = e[o];
             return i != null ? To(o, i, r, n) : null;
           })
           .filter(Boolean);
       }, 'extractComponentSectionObject'),
       Cv = _((e, t) => {
-        let r = sl(e, t);
+        const r = sl(e, t);
         return il(r) ? (Array.isArray(r) ? Pf(r) : Bf(r)) : [];
       }, 'extractComponentProps');
     function To(e, t, r, n) {
-      let o = xf(t.description);
+      const o = xf(t.description);
       return o.includesJsDoc && o.ignore
         ? null
         : {
@@ -15270,7 +15278,7 @@ ${F.description}`);
                 (!p.offsetHeight || !p.offsetParent)
               )
                 return null;
-              let h =
+              const h =
                 p.getAttribute('data-heading-label') ||
                 (r.headingLabelCallback
                   ? String(r.headingLabelCallback(p.innerText))
@@ -16333,10 +16341,10 @@ ${F.description}`);
         format: i = !1,
         ...a
       }) => {
-        let { typography: l } = Gr();
+        const { typography: l } = Gr();
         if (e) return C.createElement(xy, null);
         if (t) return C.createElement(Sy, null, t);
-        let u = C.createElement(
+        const u = C.createElement(
           wy,
           {
             bordered: !0,
@@ -16349,7 +16357,7 @@ ${F.description}`);
           n,
         );
         if (typeof o > 'u') return u;
-        let c = o ? Ro.dark : Ro.light;
+        const c = o ? Ro.dark : Ro.light;
         return C.createElement(
           ru,
           {
@@ -16386,7 +16394,7 @@ ${F.description}`);
         color: le(0.25, e.color.defaultText),
       })),
       ET = k.div(({ theme: e }) => {
-        let t = {
+        const t = {
             fontFamily: e.typography.fonts.base,
             fontSize: e.typography.size.s3,
             margin: 0,
@@ -16877,7 +16885,7 @@ ${F.description}`);
       };
     function By(e) {
       if (ma.count(e) === 1) {
-        let t = e;
+        const t = e;
         if (t.props) return t.props.id;
       }
       return null;
@@ -16903,7 +16911,7 @@ ${F.description}`);
         layout: c = 'padded',
         ...d
       }) => {
-        let [p, h] = Ue(a),
+        const [p, h] = Ue(a),
           { source: y, actionItem: E } = Py(o, p, h),
           [v, A] = Ue(1),
           D = [u].concat(['sbdocs', 'sbdocs-preview', 'sb-unstyled']),
@@ -16912,12 +16920,12 @@ ${F.description}`);
           O = [...S, ...F],
           { window: R } = globalThis,
           N = tt(async (U) => {
-            let { createCopyToClipboardFunction: P } =
+            const { createCopyToClipboardFunction: P } =
               await Promise.resolve().then(() => (Qt(), Ia));
             P();
           }, []),
           j = (U) => {
-            let P = R.getSelection();
+            const P = R.getSelection();
             (P && P.type === 'Range') ||
               (U.preventDefault(),
               F.filter((K) => K.title === 'Copied').length === 0 &&
@@ -17061,7 +17069,7 @@ ${F.description}`);
     var Ky = tc(1),
       Yy = tc(2);
     function rc(e) {
-      let t = e === 1 ? Zo : ea;
+      const t = e === 1 ? Zo : ea;
       return new RegExp(
         '^( *)(' +
           t +
@@ -17293,7 +17301,7 @@ ${F.description}`);
         : Object.prototype.toString.call(e).slice(8, -1);
     }
     function ic(e, t) {
-      let r = wt(e),
+      const r = wt(e),
         n = wt(t);
       return (r === 'Function' || n === 'Function') && n !== r;
     }
@@ -17307,7 +17315,7 @@ ${F.description}`);
           (this.onSubmit = this.onSubmit.bind(this));
       }
       componentDidMount() {
-        let { inputRefKey: e, inputRefValue: t } = this.state,
+        const { inputRefKey: e, inputRefValue: t } = this.state,
           { onlyValue: r } = this.props;
         e && typeof e.focus == 'function' && e.focus(),
           r && t && typeof t.focus == 'function' && t.focus(),
@@ -17328,7 +17336,7 @@ ${F.description}`);
             (e.preventDefault(), this.props.handleCancel()));
       }
       onSubmit() {
-        let {
+        const {
             handleAdd: e,
             onlyValue: t,
             onSubmitValueParser: r,
@@ -17365,7 +17373,7 @@ ${F.description}`);
           d = de(c, { placeholder: 'Value', ref: this.refInputValue }),
           p = null;
         if (!t) {
-          let h = o(pg, i, a);
+          const h = o(pg, i, a);
           p = de(h, { placeholder: 'Key', ref: this.refInputKey });
         }
         return C.createElement(
@@ -17386,7 +17394,7 @@ ${F.description}`);
     var sc = class extends et {
       constructor(e) {
         super(e);
-        let t = [...e.keyPath, e.name];
+        const t = [...e.keyPath, e.name];
         (this.state = {
           data: e.data,
           name: e.name,
@@ -17410,9 +17418,9 @@ ${F.description}`);
         return e.data !== t.data ? { data: e.data } : null;
       }
       onChildUpdate(e, t) {
-        let { data: r, keyPath: n } = this.state;
+        const { data: r, keyPath: n } = this.state;
         (r[e] = t), this.setState({ data: r });
-        let { onUpdate: o } = this.props,
+        const { onUpdate: o } = this.props,
           i = n.length;
         o(n[i - 1], r);
       }
@@ -17424,27 +17432,27 @@ ${F.description}`);
       }
       handleRemoveItem(e) {
         return () => {
-          let { beforeRemoveAction: t, logger: r } = this.props,
+          const { beforeRemoveAction: t, logger: r } = this.props,
             { data: n, keyPath: o, nextDeep: i } = this.state,
             a = n[e];
           t(e, o, i, a)
             .then(() => {
-              let l = { keyPath: o, deep: i, key: e, oldValue: a, type: oc };
+              const l = { keyPath: o, deep: i, key: e, oldValue: a, type: oc };
               n.splice(e, 1), this.setState({ data: n });
-              let { onUpdate: u, onDeltaUpdate: c } = this.props;
+              const { onUpdate: u, onDeltaUpdate: c } = this.props;
               u(o[o.length - 1], n), c(l);
             })
             .catch(r.error);
         };
       }
       handleAddValueAdd({ newValue: e }) {
-        let { data: t, keyPath: r, nextDeep: n } = this.state,
+        const { data: t, keyPath: r, nextDeep: n } = this.state,
           { beforeAddAction: o, logger: i } = this.props;
         o(t.length, r, n, e)
           .then(() => {
-            let a = [...t, e];
+            const a = [...t, e];
             this.setState({ data: a }), this.handleAddValueCancel();
-            let { onUpdate: l, onDeltaUpdate: u } = this.props;
+            const { onUpdate: l, onDeltaUpdate: u } = this.props;
             l(r[r.length - 1], a),
               u({
                 type: nc,
@@ -17461,13 +17469,13 @@ ${F.description}`);
       }
       handleEditValue({ key: e, value: t }) {
         return new Promise((r, n) => {
-          let { beforeUpdateAction: o } = this.props,
+          const { beforeUpdateAction: o } = this.props,
             { data: i, keyPath: a, nextDeep: l } = this.state,
             u = i[e];
           o(e, a, l, u, t)
             .then(() => {
               (i[e] = t), this.setState({ data: i });
-              let { onUpdate: c, onDeltaUpdate: d } = this.props;
+              const { onUpdate: c, onDeltaUpdate: d } = this.props;
               c(a[a.length - 1], i),
                 d({
                   type: ac,
@@ -17483,7 +17491,7 @@ ${F.description}`);
         });
       }
       renderCollapsed() {
-        let { name: e, data: t, keyPath: r, deep: n } = this.state,
+        const { name: e, data: t, keyPath: r, deep: n } = this.state,
           {
             handleRemove: o,
             readOnly: i,
@@ -17513,7 +17521,7 @@ ${F.description}`);
         );
       }
       renderNotCollapsed() {
-        let {
+        const {
             name: e,
             data: t,
             keyPath: r,
@@ -17622,7 +17630,7 @@ ${F.description}`);
         );
       }
       render() {
-        let {
+        const {
             name: e,
             collapsed: t,
             data: r,
@@ -17659,7 +17667,7 @@ ${F.description}`);
     var lc = class extends et {
       constructor(e) {
         super(e);
-        let t = [...e.keyPath, e.name];
+        const t = [...e.keyPath, e.name];
         (this.state = {
           value: e.value,
           name: e.name,
@@ -17678,7 +17686,7 @@ ${F.description}`);
         return e.value !== t.value ? { value: e.value } : null;
       }
       componentDidUpdate() {
-        let {
+        const {
             editEnabled: e,
             inputRef: t,
             name: r,
@@ -17708,7 +17716,7 @@ ${F.description}`);
             (e.preventDefault(), this.handleCancelEdit()));
       }
       handleEdit() {
-        let {
+        const {
             handleUpdateValue: e,
             originalValue: t,
             logger: r,
@@ -17717,7 +17725,7 @@ ${F.description}`);
           } = this.props,
           { inputRef: i, name: a, deep: l } = this.state;
         if (!i) return;
-        let u = n(!0, o, l, a, i.value);
+        const u = n(!0, o, l, a, i.value);
         e({ value: u, key: a })
           .then(() => {
             ic(t, u) || this.handleCancelEdit();
@@ -17758,7 +17766,7 @@ ${F.description}`);
           D = null,
           S = l(e, a, n, o, u);
         if (r && !S) {
-          let F = h(ta, E, o, e, a, u),
+          const F = h(ta, E, o, e, a, u),
             x = de(d, { onClick: this.handleEdit }),
             O = de(p, { onClick: this.handleCancelEdit }),
             R = de(F, { ref: this.refInput, defaultValue: a });
@@ -17781,7 +17789,7 @@ ${F.description}`);
             },
             t,
           );
-          let F = de(y, {
+          const F = de(y, {
             onClick: i,
             className: 'rejt-minus-menu',
             style: v.minus,
@@ -17825,7 +17833,7 @@ ${F.description}`);
         return e.data !== t.data ? { data: e.data } : null;
       }
       render() {
-        let { data: e, name: t, keyPath: r, deep: n } = this.state,
+        const { data: e, name: t, keyPath: r, deep: n } = this.state,
           {
             isCollapsed: o,
             handleRemove: i,
@@ -18089,7 +18097,7 @@ ${F.description}`);
     var Xo = class extends et {
       constructor(e) {
         super(e);
-        let t = e.deep === -1 ? [] : [...e.keyPath, e.name];
+        const t = e.deep === -1 ? [] : [...e.keyPath, e.name];
         (this.state = {
           name: e.name,
           data: e.data,
@@ -18113,9 +18121,9 @@ ${F.description}`);
         return e.data !== t.data ? { data: e.data } : null;
       }
       onChildUpdate(e, t) {
-        let { data: r, keyPath: n } = this.state;
+        const { data: r, keyPath: n } = this.state;
         (r[e] = t), this.setState({ data: r });
-        let { onUpdate: o } = this.props,
+        const { onUpdate: o } = this.props,
           i = n.length;
         o(n[i - 1], r);
       }
@@ -18126,12 +18134,12 @@ ${F.description}`);
         this.setState({ addFormVisible: !1 });
       }
       handleAddValueAdd({ key: e, newValue: t }) {
-        let { data: r, keyPath: n, nextDeep: o } = this.state,
+        const { data: r, keyPath: n, nextDeep: o } = this.state,
           { beforeAddAction: i, logger: a } = this.props;
         i(e, n, o, t)
           .then(() => {
             (r[e] = t), this.setState({ data: r }), this.handleAddValueCancel();
-            let { onUpdate: l, onDeltaUpdate: u } = this.props;
+            const { onUpdate: l, onDeltaUpdate: u } = this.props;
             l(n[n.length - 1], r),
               u({ type: nc, keyPath: n, deep: o, key: e, newValue: t });
           })
@@ -18139,14 +18147,14 @@ ${F.description}`);
       }
       handleRemoveValue(e) {
         return () => {
-          let { beforeRemoveAction: t, logger: r } = this.props,
+          const { beforeRemoveAction: t, logger: r } = this.props,
             { data: n, keyPath: o, nextDeep: i } = this.state,
             a = n[e];
           t(e, o, i, a)
             .then(() => {
-              let l = { keyPath: o, deep: i, key: e, oldValue: a, type: oc };
+              const l = { keyPath: o, deep: i, key: e, oldValue: a, type: oc };
               delete n[e], this.setState({ data: n });
-              let { onUpdate: u, onDeltaUpdate: c } = this.props;
+              const { onUpdate: u, onDeltaUpdate: c } = this.props;
               u(o[o.length - 1], n), c(l);
             })
             .catch(r.error);
@@ -18157,13 +18165,13 @@ ${F.description}`);
       }
       handleEditValue({ key: e, value: t }) {
         return new Promise((r, n) => {
-          let { beforeUpdateAction: o } = this.props,
+          const { beforeUpdateAction: o } = this.props,
             { data: i, keyPath: a, nextDeep: l } = this.state,
             u = i[e];
           o(e, a, l, u, t)
             .then(() => {
               (i[e] = t), this.setState({ data: i });
-              let { onUpdate: c, onDeltaUpdate: d } = this.props;
+              const { onUpdate: c, onDeltaUpdate: d } = this.props;
               c(a[a.length - 1], i),
                 d({
                   type: ac,
@@ -18179,7 +18187,7 @@ ${F.description}`);
         });
       }
       renderCollapsed() {
-        let { name: e, keyPath: t, deep: r, data: n } = this.state,
+        const { name: e, keyPath: t, deep: r, data: n } = this.state,
           {
             handleRemove: o,
             readOnly: i,
@@ -18211,7 +18219,7 @@ ${F.description}`);
         );
       }
       renderNotCollapsed() {
-        let {
+        const {
             name: e,
             data: t,
             keyPath: r,
@@ -18321,7 +18329,7 @@ ${F.description}`);
         );
       }
       render() {
-        let {
+        const {
             name: e,
             collapsed: t,
             data: r,
@@ -18358,7 +18366,7 @@ ${F.description}`);
     var dt = class extends et {
       constructor(e) {
         super(e);
-        let t = [...e.keyPath, e.name];
+        const t = [...e.keyPath, e.name];
         (this.state = {
           value: e.value,
           name: e.name,
@@ -18377,7 +18385,7 @@ ${F.description}`);
         return e.value !== t.value ? { value: e.value } : null;
       }
       componentDidUpdate() {
-        let {
+        const {
             editEnabled: e,
             inputRef: t,
             name: r,
@@ -18407,7 +18415,7 @@ ${F.description}`);
             (e.preventDefault(), this.handleCancelEdit()));
       }
       handleEdit() {
-        let {
+        const {
             handleUpdateValue: e,
             originalValue: t,
             logger: r,
@@ -18416,7 +18424,7 @@ ${F.description}`);
           } = this.props,
           { inputRef: i, name: a, deep: l } = this.state;
         if (!i) return;
-        let u = n(!0, o, l, a, i.value);
+        const u = n(!0, o, l, a, i.value);
         e({ value: u, key: a })
           .then(() => {
             ic(t, u) || this.handleCancelEdit();
@@ -18433,7 +18441,7 @@ ${F.description}`);
         this.setState({ editEnabled: !1 });
       }
       render() {
-        let {
+        const {
             name: e,
             value: t,
             editEnabled: r,
@@ -19031,7 +19039,7 @@ ${F.description}`);
       hF = k(du)({ marginLeft: 4 }),
       fF = k(cu)({ marginLeft: 4 });
     var mF = (0, Eg.default)(1e3)((e) => {
-      let t = e.split(/\r?\n/);
+      const t = e.split(/\r?\n/);
       return `${Math.max(...t.map((r) => r.length))}ch`;
     });
     var yF = k.span({ fontWeight: 'bold' }),
@@ -19428,7 +19436,7 @@ ${F.description}`);
         },
       wg = (e, t, r, n) => {
         if ((t && typeof t == 'object') || typeof t == 'function')
-          for (let o of dc(t))
+          for (const o of dc(t))
             !Sg.call(e, o) &&
               o !== r &&
               cc(e, o, {
@@ -19463,7 +19471,7 @@ ${F.description}`);
       ],
       xg = ['detail'];
     function Tg(e) {
-      let t = Cg.filter((r) => e[r] !== void 0).reduce(
+      const t = Cg.filter((r) => e[r] !== void 0).reduce(
         (r, n) => ({ ...r, [n]: e[n] }),
         {},
       );
@@ -20396,7 +20404,7 @@ ${F.description}`);
       },
       _2 = (0, Fg.default)(1e4)((e) => O2(e).replace(/\n\s*/g, '').trim()),
       P2 = function (e, t) {
-        let r = t.slice(0, t.indexOf('{')),
+        const r = t.slice(0, t.indexOf('{')),
           n = t.slice(t.indexOf('{'));
         if (r.includes('=>') || r.includes('function')) return t;
         let o = r;
@@ -20432,7 +20440,7 @@ ${F.description}`);
                 (n = []),
                 a
               );
-            let l = r.get(this) || this;
+            const l = r.get(this) || this;
             for (; n.length && l !== n[0]; ) n.shift(), o.pop();
             if (typeof a == 'boolean') return a;
             if (a === void 0) return e.allowUndefined ? '_undefined_' : void 0;
@@ -20462,7 +20470,7 @@ ${F.description}`);
             }
             if ((0, Mg.default)(a)) {
               if (!e.allowSymbol) return;
-              let c = Symbol.keyFor(a);
+              const c = Symbol.keyFor(a);
               return c !== void 0
                 ? `_gsymbol_${c}`
                 : `_symbol_${a.toString().slice(7, -1)}`;
@@ -20490,9 +20498,9 @@ ${F.description}`);
               !e.allowClass
             )
               return;
-            let u = t.get(a);
+            const u = t.get(a);
             if (!u) {
-              let c = Array.isArray(a) ? a : Ec(a);
+              const c = Array.isArray(a) ? a : Ec(a);
               if (
                 a.constructor &&
                 a.constructor.name &&
@@ -20532,7 +20540,7 @@ ${F.description}`);
         lazyEval: !0,
       },
       L2 = (e, t = {}) => {
-        let r = { ...j2, ...t };
+        const r = { ...j2, ...t };
         return JSON.stringify(Ec(e), N2(r), t.space);
       };
     function M2(e) {
@@ -20551,11 +20559,11 @@ ${F.description}`);
         typeFromProps: r,
         transformFromProps: n,
       }) => {
-        let { __isArgsStory: o } = t.parameters,
+        const { __isArgsStory: o } = t.parameters,
           i = t.parameters.docs?.source || {},
           a = r || i.type || cr.AUTO;
         if (i.code !== void 0) return i.code;
-        let l =
+        const l =
           a === cr.DYNAMIC || (a === cr.AUTO && e && o)
             ? e
             : i.originalSource || '';
@@ -20580,7 +20588,7 @@ ${F.description}`);
           c = e.dark ?? i.dark ?? !1;
         if (!a && !n) return { error: 'Oh no! The source is not available.' };
         if (a) return { code: a, format: l, language: u, dark: c };
-        let d = t.getStoryContext(n),
+        const d = t.getStoryContext(n),
           p = e.__forceInitialArgs ? d.initialArgs : d.unmappedArgs,
           h = q2(n.id, p, r);
         return (
@@ -20599,7 +20607,7 @@ ${F.description}`);
         );
       },
       vc = (e) => {
-        let t = Dr(U2),
+        const t = Dr(U2),
           r = Dr(uc),
           n = J2(e, r, t);
         return C.createElement(Yu, { ...n });
@@ -20632,7 +20640,7 @@ ${F.description}`);
         color: 'inherit',
       })),
       K2 = ({ as: e, id: t, children: r, ...n }) => {
-        let o = Dr(uc),
+        const o = Dr(uc),
           i = G2[e],
           a = `#${t}`;
         return C.createElement(
@@ -20655,9 +20663,9 @@ ${F.description}`);
         );
       },
       Dc = (e) => {
-        let { as: t, id: r, children: n, ...o } = e;
+        const { as: t, id: r, children: n, ...o } = e;
         if (r) return C.createElement(K2, { as: t, id: r, ...o }, n);
-        let i = t,
+        const i = t,
           { as: a, ...l } = e;
         return C.createElement(i, { ...wn(l, t) });
       },
@@ -20768,7 +20776,7 @@ ${F.description}`);
     var t1 = new Z2(),
       r1 = ({ children: e, disableAnchor: t, ...r }) => {
         if (t || typeof e != 'string') return C.createElement(En, null, e);
-        let n = t1.slug(e.toLowerCase());
+        const n = t1.slug(e.toLowerCase());
         return C.createElement(Dc, { as: 'h2', id: n, ...r }, e);
       };
     var m5 = k(r1)(({ theme: e }) => ({
@@ -20790,14 +20798,14 @@ ${F.description}`);
         disabled: (t) => !t?.docs?.codePanel,
         match: ({ viewMode: t }) => t === 'story',
         render: ({ active: t }) => {
-          let r = tu(Fo, { source: { code: '' }, theme: 'dark' }),
+          const r = tu(Fo, { source: { code: '' }, theme: 'dark' }),
             [n, o] = C.useState({});
           eu({
             [Io]: ({ source: a, format: l }) => {
               o({ source: a, format: l });
             },
           });
-          let i = Gr().base !== 'light';
+          const i = Gr().base !== 'light';
           return C.createElement(
             gn,
             { active: !!t },

@@ -22,7 +22,7 @@ var q = (r, e) => () => (e || r((e = { exports: {} }).exports, e), e.exports),
   },
   al = (r, e, t, o) => {
     if ((e && typeof e == 'object') || typeof e == 'function')
-      for (let s of nl(e))
+      for (const s of nl(e))
         !il.call(r, s) &&
           s !== t &&
           et(r, s, {
@@ -380,7 +380,7 @@ var qn = q((Gn) => {
       0, 1, 0,
     ]);
   function mu(r) {
-    let e = r.length;
+    const e = r.length;
     if (e === 0) return '';
     let t = '',
       o = 0,
@@ -409,7 +409,7 @@ var qn = q((Gn) => {
         continue;
       }
       if ((++s, s >= e)) throw new Error('URI malformed');
-      let a = r.charCodeAt(s) & 1023;
+      const a = r.charCodeAt(s) & 1023;
       (o = s + 1),
         (i = 65536 + (((i & 1023) << 10) | a)),
         (t +=
@@ -480,7 +480,7 @@ var Vn = q((Ft) => {
   n(bu, 'isPrototypeKey');
   function Tu(r, e, t, o, s) {
     if (bu(e)) return r;
-    let i = r[e];
+    const i = r[e];
     return typeof i == 'object' && i !== null
       ? i
       : !o &&
@@ -513,7 +513,7 @@ var Vn = q((Ft) => {
     let T = '',
       y = !0,
       R = !1;
-    for (let x in r) {
+    for (const x in r) {
       let g = r[x],
         b;
       o
@@ -643,12 +643,12 @@ var la = q((he) => {
     qe = It(),
     sa = Pu(na()),
     Ou = /* @__PURE__ */ n((r) => {
-      let e = Number(r);
+      const e = Number(r);
       return Number.isNaN(e) ? r : e;
     }, 'numberKeyDeserializer');
   he.numberKeyDeserializer = Ou;
   var Iu = /* @__PURE__ */ n((r) => {
-    let e = Number(r);
+    const e = Number(r);
     return Number.isNaN(e) ? r : e;
   }, 'numberValueDeserializer');
   he.numberValueDeserializer = Iu;
@@ -661,7 +661,7 @@ var la = q((he) => {
   }
   n(Nt, 'computeKeySlice');
   function Fu(r, e) {
-    let {
+    const {
         valueDeserializer: t = qe.defaultOptions.valueDeserializer,
         keyDeserializer: o = qe.defaultOptions.keyDeserializer,
         arrayRepeatSyntax: s = qe.defaultOptions.arrayRepeatSyntax,
@@ -710,9 +710,9 @@ var la = q((he) => {
             ((S = r.slice(T + 1, N)),
             U && (S = S.replace(ia, ' ')),
             C && (S = (0, sa.default)(S) || S));
-          let H = t(S, g);
+          const H = t(S, g);
           if (a) {
-            let re = R[g];
+            const re = R[g];
             re === void 0
               ? D > -1
                 ? (R[g] = [H])
@@ -804,7 +804,7 @@ var ca = q((zn) => {
   var Du = Vn();
   function Nu(r, e) {
     if (r === null || typeof r != 'object') return '';
-    let t = e ?? {};
+    const t = e ?? {};
     return (0, Du.stringifyObject)(r, t);
   }
   n(Nu, 'stringify');
@@ -3448,7 +3448,6 @@ var ba = q((zr) => {
   Object.defineProperty(zr, '__esModule', { value: !0 });
   var Sa = Ku(ga()),
     Xu =
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       String.fromCodePoint ||
       function (r) {
         var e = '';
@@ -3590,10 +3589,8 @@ var es = q((J) => {
   var Pa =
       /(?:[\x80-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])/g,
     nf =
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       String.prototype.codePointAt != null
-        ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          function (r) {
+        ? function (r) {
             return r.codePointAt(0);
           }
         : // http://mathiasbynens.be/notes/javascript-encoding#surrogate-formulae
@@ -4926,7 +4923,7 @@ var Ml = 'UNIVERSAL_STORE:',
        * @returns A function to unsubscribe
        */
       this.subscribe = /* @__PURE__ */ n((e, t) => {
-        let o = typeof e == 'function',
+        const o = typeof e == 'function',
           s = o ? '*' : e,
           i = o ? e : t;
         if ((this.debug('subscribe', { eventType: s, listener: i }), !i))
@@ -5091,7 +5088,7 @@ var Ml = 'UNIVERSAL_STORE:',
         create`,
           { options: e },
         );
-      let t = mo.get(e.id);
+      const t = mo.get(e.id);
       if (t)
         return (
           console.warn(_`UniversalStore with id "${e.id}" already exists in this environment, re-using existing.
@@ -5099,7 +5096,7 @@ var Ml = 'UNIVERSAL_STORE:',
           t
         );
       w.isInternalConstructing = !0;
-      let o = new w(e);
+      const o = new w(e);
       return mo.set(e.id, o), o;
     }
     /**
@@ -5119,7 +5116,7 @@ var Ml = 'UNIVERSAL_STORE:',
      * Either a new state or a state updater function can be passed to the method.
      */
     setState(e) {
-      let t = this.state,
+      const t = this.state,
         o = typeof e == 'function' ? e(t) : e;
       if (
         (this.debug('setState', { newState: o, previousState: t, updater: e }),
@@ -5140,7 +5137,7 @@ var Ml = 'UNIVERSAL_STORE:',
         )}`,
         );
       this.state = o;
-      let s = {
+      const s = {
         type: w.InternalEventType.SET_STATE,
         payload: {
           state: o,
@@ -5202,7 +5199,7 @@ var Ml = 'UNIVERSAL_STORE:',
             }, 1e3));
     }
     emitToListeners(e, t) {
-      let o = this.listeners.get(e.type),
+      const o = this.listeners.get(e.type),
         s = this.listeners.get('*');
       this.debug('emitToListeners', {
         event: e,
@@ -5213,7 +5210,7 @@ var Ml = 'UNIVERSAL_STORE:',
         [...(o ?? []), ...(s ?? [])].forEach((i) => i(e, t));
     }
     handleChannelEvents(e) {
-      let { event: t, eventInfo: o } = e;
+      const { event: t, eventInfo: o } = e;
       if ([o.actor.id, o.forwardingActor?.id].includes(this.actor.id)) {
         this.debug('handleChannelEvents: Ignoring event from self', {
           channelEvent: e,
@@ -5236,7 +5233,7 @@ var Ml = 'UNIVERSAL_STORE:',
         switch (t.type) {
           case w.InternalEventType.EXISTING_STATE_REQUEST:
             s = !1;
-            let i = {
+            const i = {
               type: w.InternalEventType.EXISTING_STATE_RESPONSE,
               payload: this.state,
             };
@@ -5289,7 +5286,7 @@ var Ml = 'UNIVERSAL_STORE:',
             )
               break;
             this.syncing.resolve?.();
-            let s = {
+            const s = {
               type: w.InternalEventType.SET_STATE,
               payload: {
                 state: t.payload,
@@ -5410,7 +5407,7 @@ nerateRandomId',
       let o = { type: e, args: t, from: this.sender },
         s = {};
       t.length >= 1 && t[0] && t[0].options && (s = t[0].options);
-      let i = /* @__PURE__ */ n(() => {
+      const i = /* @__PURE__ */ n(() => {
         this.transports.forEach((a) => {
           a.send(o, s);
         }),
@@ -5425,21 +5422,21 @@ nerateRandomId',
       return Object.keys(this.events);
     }
     listenerCount(e) {
-      let t = this.listeners(e);
+      const t = this.listeners(e);
       return t ? t.length : 0;
     }
     listeners(e) {
       return this.events[e] || void 0;
     }
     once(e, t) {
-      let o = this.onceListener(e, t);
+      const o = this.onceListener(e, t);
       this.addListener(e, o);
     }
     removeAllListeners(e) {
       e ? this.events[e] && delete this.events[e] : (this.events = {});
     }
     removeListener(e, t) {
-      let o = this.listeners(e);
+      const o = this.listeners(e);
       o && (this.events[e] = o.filter((s) => s !== t));
     }
     on(e, t) {
@@ -5449,7 +5446,7 @@ nerateRandomId',
       this.removeListener(e, t);
     }
     handleEvent(e) {
-      let t = this.listeners(e.type);
+      const t = this.listeners(e.type);
       t &&
         t.length &&
         t.forEach((o) => {
@@ -5458,7 +5455,7 @@ nerateRandomId',
         (this.data[e.type] = e.args);
     }
     onceListener(e, t) {
-      let o = /* @__PURE__ */ n(
+      const o = /* @__PURE__ */ n(
         (...s) => (this.removeListener(e, o), t(...s)),
         'onceListener',
       );
@@ -5526,7 +5523,7 @@ var ae = j('warn'),
   X = /* @__PURE__ */ n(
     (r) =>
       (...e) => {
-        let t = [];
+        const t = [];
         if (e.length) {
           let o = /<span\s+style=(['"])([^'"]*)\1\s*>/gi,
             s = /<\/span>/gi,
@@ -5567,7 +5564,7 @@ var Vl = Object.create,
   ),
   $l = /* @__PURE__ */ n((r, e, t, o) => {
     if ((e && typeof e == 'object') || typeof e == 'function')
-      for (let s of us(e))
+      for (const s of us(e))
         !Wl.call(r, s) &&
           s !== t &&
           ds(r, s, {
@@ -5605,7 +5602,7 @@ var Vl = Object.create,
   ],
   Kl = ['detail'];
 function fs(r) {
-  let e = Yl.filter((t) => r[t] !== void 0).reduce(
+  const e = Yl.filter((t) => r[t] !== void 0).reduce(
     (t, o) => ({ ...t, [o]: r[o] }),
     {},
   );
@@ -6663,7 +6660,7 @@ var Rd = Ed,
   }, 'removeCodeComments'),
   xd = (0, Ps.default)(1e4)((r) => Ad(r).replace(/\n\s*/g, '').trim()),
   vd = /* @__PURE__ */ n(function (e, t) {
-    let o = t.slice(0, t.indexOf('{')),
+    const o = t.slice(0, t.indexOf('{')),
       s = t.slice(t.indexOf('{'));
     if (o.includes('=>') || o.includes('function')) return t;
     let i = o;
@@ -6701,7 +6698,7 @@ var _d = /* @__PURE__ */ n(function (e) {
             (s = []),
             l
           );
-        let p = o.get(this) || this;
+        const p = o.get(this) || this;
         for (; s.length && p !== s[0]; ) s.shift(), i.pop();
         if (typeof l == 'boolean') return l;
         if (l === void 0) return e.allowUndefined ? '_undefined_' : void 0;
@@ -6731,7 +6728,7 @@ var _d = /* @__PURE__ */ n(function (e) {
         }
         if ((0, ic.default)(l)) {
           if (!e.allowSymbol) return;
-          let d = Symbol.keyFor(l);
+          const d = Symbol.keyFor(l);
           return d !== void 0
             ? `_gsymbol_${d}`
             : `_symbol_${l.toString().slice(7, -1)}`;
@@ -6759,9 +6756,9 @@ var _d = /* @__PURE__ */ n(function (e) {
           !e.allowClass
         )
           return;
-        let u = t.get(l);
+        const u = t.get(l);
         if (!u) {
-          let d = Array.isArray(l) ? l : Os(l);
+          const d = Array.isArray(l) ? l : Os(l);
           if (
             l.constructor &&
             l.constructor.name &&
@@ -6794,21 +6791,21 @@ var _d = /* @__PURE__ */ n(function (e) {
         (key === '' &&
           ((root = value),
           refs.forEach(({ target: r, container: e, replacement: t }) => {
-            let o = Sr(t) ? JSON.parse(t) : t.split('.');
+            const o = Sr(t) ? JSON.parse(t) : t.split('.');
             o.length === 0 ? (e[r] = root) : (e[r] = Rd(root, o));
           })),
         key === '_constructor-name_')
       )
         return value;
       if (at(value) && value.__isConvertedError__) {
-        let { message: r, ...e } = value.errorProperties,
+        const { message: r, ...e } = value.errorProperties,
           t = new Error(r);
         return Object.assign(t, e), t;
       }
       if (at(value) && value['_constructor-name_'] && options.allowFunction) {
-        let r = value['_constructor-name_'];
+        const r = value['_constructor-name_'];
         if (r !== 'Object') {
-          let e = new Function(
+          const e = new Function(
             `return function ${r.replace(/[^a-zA-Z0-9$_]+/g, '')}(){}`,
           )();
           Object.setPrototypeOf(value, new e());
@@ -6823,8 +6820,8 @@ var _d = /* @__PURE__ */ n(function (e) {
         let [, name, source] = value.match(/_function_([^|]*)\|(.*)/) || [],
           sourceSanitized = source.replace(/[(\(\))|\\| |\]|`]*$/, '');
         if (!options.lazyEval) return eval(`(${sourceSanitized})`);
-        let result = /* @__PURE__ */ n((...args) => {
-          let f = eval(`(${sourceSanitized})`);
+        const result = /* @__PURE__ */ n((...args) => {
+          const f = eval(`(${sourceSanitized})`);
           return f(...args);
         }, 'result');
         return (
@@ -6842,7 +6839,7 @@ var _d = /* @__PURE__ */ n(function (e) {
         value.startsWith('_regexp_') &&
         options.allowRegExp
       ) {
-        let [, r, e] = value.match(/_regexp_([^|]*)\|(.*)/) || [];
+        const [, r, e] = value.match(/_regexp_([^|]*)\|(.*)/) || [];
         return new RegExp(e, r);
       }
       return typeof value == 'string' &&
@@ -6893,11 +6890,11 @@ NaN_'
     lazyEval: !0,
   },
   pt = /* @__PURE__ */ n((r, e = {}) => {
-    let t = { ...Is, ...e };
+    const t = { ...Is, ...e };
     return JSON.stringify(Os(r), _d(t), e.space);
   }, 'stringify'),
   Pd = /* @__PURE__ */ n(() => {
-    let r = /* @__PURE__ */ new Map();
+    const r = /* @__PURE__ */ new Map();
     return /* @__PURE__ */ n(function e(t) {
       at(t) &&
         Object.entries(t).forEach(([o, s]) => {
@@ -6914,7 +6911,7 @@ NaN_'
     }, 'mutateUndefined');
   }, 'mutator'),
   dt = /* @__PURE__ */ n((r, e = {}) => {
-    let t = { ...Is, ...e },
+    const t = { ...Is, ...e },
       o = JSON.parse(r, Cd(t));
     return Pd()(o), o;
   }, 'parse');
@@ -6934,7 +6931,7 @@ n(fe, 'invariant');
 
 // src/channels/postmessage/getEventSourceUrl.ts
 var Fs = /* @__PURE__ */ n((r) => {
-  let e = Array.from(document.querySelectorAll('iframe[data-is-storybook]')),
+  const e = Array.from(document.querySelectorAll('iframe[data-is-storybook]')),
     [t, ...o] = e.filter((i) => {
       try {
         return (
@@ -6957,7 +6954,7 @@ var Fs = /* @__PURE__ */ n((r) => {
     }),
     s = t?.getAttribute('src');
   if (s && o.length === 0) {
-    let {
+    const {
       protocol: i,
       host: a,
       pathname: c,
@@ -7000,7 +6997,7 @@ var { document: wo, location: _o } = E,
      * @param event
      */
     send(e, t) {
-      let {
+      const {
           target: o,
           // telejson options
           allowRegExp: s,
@@ -7058,7 +7055,7 @@ var { document: wo, location: _o } = E,
           });
     }
     flush() {
-      let { buffer: e } = this;
+      const { buffer: e } = this;
       (this.buffer = []),
         e.forEach((t) => {
           this.send(t.event).then(t.resolve).catch(t.reject);
@@ -7066,7 +7063,7 @@ var { document: wo, location: _o } = E,
     }
     getFrames(e) {
       if (this.config.page === 'manager') {
-        let o = Array.from(
+        const o = Array.from(
           wo.querySelectorAll('iframe[data-is-storybook][data-is-loaded]'),
         ).flatMap((s) => {
           try {
@@ -7112,7 +7109,7 @@ var { document: wo, location: _o } = E,
             ? dt(t, E.CHANNEL_OPTIONS || {})
             : t;
         if (o === Ds) {
-          let a =
+          const a =
               this.config.page === 'manager'
                 ? '<span style="color: #37D5D3; background: black"> manager </span>'
                 : '<span style="color: #\
@@ -7131,7 +7128,7 @@ pan style="color: #FFAE00">${s.type}</span>`;
             );
             return;
           }
-          let l = `${a} received ${c} (${t.length})`;
+          const l = `${a} received ${c} (${t.length})`;
           X.debug(
             _o.origin !== s.source
               ? l
@@ -7164,7 +7161,7 @@ var { WebSocket: Fd } = E,
           (this.isReady = !0), this.heartbeat(), this.flush();
         }),
         (this.socket.onmessage = ({ data: s }) => {
-          let i = typeof s == 'string' && Sr(s) ? dt(s) : s;
+          const i = typeof s == 'string' && Sr(s) ? dt(s) : s;
           fe(this.handler, 'WebsocketTransport handler should be set'),
             this.handler(i),
             i.type === 'ping' &&
@@ -7204,7 +7201,7 @@ pong',
       this.buffer.push(e);
     }
     sendNow(e) {
-      let t = pt(e, {
+      const t = pt(e, {
         maxDepth: 15,
         allowFunction: !1,
         ...E.CHANNEL_OPTIONS,
@@ -7212,7 +7209,7 @@ pong',
       this.socket.send(t);
     }
     flush() {
-      let { buffer: e } = this;
+      const { buffer: e } = this;
       (this.buffer = []), e.forEach((t) => this.send(t));
     }
   };
@@ -7223,9 +7220,9 @@ var Ze = Io;
 var { CONFIG_TYPE: Dd } = E,
   Nd = ie;
 function kd({ page: r, extraTransports: e = [] }) {
-  let t = [new Qe({ page: r }), ...e];
+  const t = [new Qe({ page: r }), ...e];
   if (Dd === 'DEVELOPMENT') {
-    let s = window.location.protocol === 'http:' ? 'ws' : 'wss',
+    const s = window.location.protocol === 'http:' ? 'ws' : 'wss',
       { hostname: i, port: a } = window.location,
       c = `${s}://${i}:${a}/storybook\
 -server-channel`;
@@ -7237,7 +7234,7 @@ function kd({ page: r, extraTransports: e = [] }) {
       }),
     );
   }
-  let o = new ie({ transports: t });
+  const o = new ie({ transports: t });
   return (
     Q.__prepare(
       o,
@@ -7329,7 +7326,7 @@ _e(Yr, {
 
 // src/preview-api/modules/addons/storybook-channel-mock.ts
 function ut() {
-  let r = {
+  const r = {
     setHandler: /* @__PURE__ */ n(() => {}, 'setHandler'),
     send: /* @__PURE__ */ n(() => {}, 'send'),
   };
@@ -7342,7 +7339,7 @@ var No = class No {
   constructor() {
     this.getChannel = /* @__PURE__ */ n(() => {
       if (!this.channel) {
-        let e = ut();
+        const e = ut();
         return this.setChannel(e), e;
       }
       return this.channel;
@@ -7415,7 +7412,7 @@ var Mo = class Mo {
       this.removeRenderListeners();
   }
   getNextHook() {
-    let e = this.currentHooks[this.nextHookIndex];
+    const e = this.currentHooks[this.nextHookIndex];
     return (this.nextHookIndex += 1), e;
   }
   triggerEffects() {
@@ -7438,8 +7435,8 @@ var Mo = class Mo {
 n(Mo, 'HooksContext');
 var be = Mo;
 function Ls(r) {
-  let e = /* @__PURE__ */ n((...t) => {
-    let { hooks: o } = typeof t[0] == 'function' ? t[1] : t[0],
+  const e = /* @__PURE__ */ n((...t) => {
+    const { hooks: o } = typeof t[0] == 'function' ? t[1] : t[0],
       s = o.currentPhase,
       i = o.currentHooks,
       a = o.nextHookIndex,
@@ -7453,9 +7450,9 @@ function Ls(r) {
           o.hookListsMap.set(r, o.currentHooks),
           o.prevMountedDecorators.add(r)),
       (o.nextHookIndex = 0);
-    let l = E.STORYBOOK_HOOKS_CONTEXT;
+    const l = E.STORYBOOK_HOOKS_CONTEXT;
     E.STORYBOOK_HOOKS_CONTEXT = o;
-    let p = r(...t);
+    const p = r(...t);
     if (
       ((E.STORYBOOK_HOOKS_CONTEXT = l),
       o.currentPhase === 'UPDATE' && o.getNextHook() != null)
@@ -7478,12 +7475,12 @@ var ko = 0,
   jd = 25,
   ft = /* @__PURE__ */ n(
     (r) => (e, t) => {
-      let o = r(
+      const o = r(
         Ls(e),
         t.map((s) => Ls(s)),
       );
       return (s) => {
-        let { hooks: i } = s;
+        const { hooks: i } = s;
         (i.prevMountedDecorators ??= /* @__PURE__ */ new Set()),
           (i.mountedDecorators = /* @__PURE__ */ new Set([e, ...t])),
           (i.currentContext = s),
@@ -7521,24 +7518,24 @@ function js() {
 }
 n(js, 'getHooksContextOrNull');
 function jo() {
-  let r = js();
+  const r = js();
   if (r == null) throw Lo();
   return r;
 }
 n(jo, 'getHooksContextOrThrow');
 function Ud(r, e, t) {
-  let o = jo();
+  const o = jo();
   if (o.currentPhase === 'MOUNT') {
     t != null &&
       !Array.isArray(t) &&
       I.warn(
         `${r} received a final argument that is not an array (instead, received ${t}). When specified, the final argument must be an array.`,
       );
-    let s = { name: r, deps: t };
+    const s = { name: r, deps: t };
     return o.currentHooks.push(s), e(s), s;
   }
   if (o.currentPhase === 'UPDATE') {
-    let s = o.getNextHook();
+    const s = o.getNextHook();
     if (s == null)
       throw new Error('Rendered more hooks than during the previous render.');
     return (
@@ -7568,7 +7565,7 @@ Incoming: ${t}`),
 }
 n(Ud, 'useHook');
 function yt(r, e, t) {
-  let { memoizedState: o } = Ud(
+  const { memoizedState: o } = Ud(
     r,
     (s) => {
       s.memoizedState = e();
@@ -7595,7 +7592,7 @@ function Gs(r) {
 }
 n(Gs, 'useRef');
 function Gd() {
-  let r = js();
+  const r = js();
   if (r != null && r.currentPhase !== 'NONE') r.hasUpdates = !0;
   else
     try {
@@ -7606,7 +7603,7 @@ function Gd() {
 }
 n(Gd, 'triggerUpdate');
 function qs(r, e) {
-  let t = Us(
+  const t = Us(
       r,
       // @ts-expect-error S type should never be function, but there's no way to tell that to TypeScript
       typeof e == 'function' ? e() : e,
@@ -7622,19 +7619,19 @@ function mt(r) {
 }
 n(mt, 'useState');
 function Bs(r, e, t) {
-  let o = t != null ? () => t(e) : e,
+  const o = t != null ? () => t(e) : e,
     [s, i] = qs('useReducer', o);
   return [s, /* @__PURE__ */ n((c) => i((l) => r(l, c)), 'dispatch')];
 }
 n(Bs, 'useReducer');
 function Er(r, e) {
-  let t = jo(),
+  const t = jo(),
     o = yt('useEffect', () => ({ create: r }), e);
   t.currentEffects.includes(o) || t.currentEffects.push(o);
 }
 n(Er, 'useEffect');
 function Vs(r, e = []) {
-  let t = te.getChannel();
+  const t = te.getChannel();
   return (
     Er(
       () => (
@@ -7650,18 +7647,18 @@ function Vs(r, e = []) {
 }
 n(Vs, 'useChannel');
 function Rr() {
-  let { currentContext: r } = jo();
+  const { currentContext: r } = jo();
   if (r == null) throw Lo();
   return r;
 }
 n(Rr, 'useStoryContext');
 function Hs(r, e) {
-  let { parameters: t } = Rr();
+  const { parameters: t } = Rr();
   if (r) return t[r] ?? e;
 }
 n(Hs, 'useParameter');
 function zs() {
-  let r = te.getChannel(),
+  const r = te.getChannel(),
     { id: e, args: t } = Rr(),
     o = er((i) => r.emit(yr, { storyId: e, updatedArgs: i }), [r, e]),
     s = er((i) => r.emit(ur, { storyId: e, argNames: i }), [r, e]);
@@ -7669,7 +7666,7 @@ function zs() {
 }
 n(zs, 'useArgs');
 function Ws() {
-  let r = te.getChannel(),
+  const r = te.getChannel(),
     { globals: e } = Rr(),
     t = er((o) => r.emit(fr, { globals: o }), [r]);
   return [e, t];
@@ -7684,9 +7681,9 @@ var $s = /* @__PURE__ */ n(
     wrapper: t,
     skipIfNoParametersOrOptions: o = !1,
   }) => {
-    let s = /* @__PURE__ */ n(
+    const s = /* @__PURE__ */ n(
       (i) => (a, c) => {
-        let l = c.parameters && c.parameters[e];
+        const l = c.parameters && c.parameters[e];
         return (l && l.disable) || (o && !i && !l)
           ? a(c)
           : t(a, c, {
@@ -7712,10 +7709,10 @@ var $s = /* @__PURE__ */ n(
 
 // ../node_modules/es-toolkit/dist/object/omitBy.mjs
 function Uo(r, e) {
-  let t = {},
+  const t = {},
     o = Object.entries(r);
   for (let s = 0; s < o.length; s++) {
-    let [i, a] = o[s];
+    const [i, a] = o[s];
     e(a, i) || (t[i] = a);
   }
   return t;
@@ -7724,9 +7721,9 @@ n(Uo, 'omitBy');
 
 // ../node_modules/es-toolkit/dist/object/pick.mjs
 function Go(r, e) {
-  let t = {};
+  const t = {};
   for (let o = 0; o < e.length; o++) {
-    let s = e[o];
+    const s = e[o];
     Object.prototype.hasOwnProperty.call(r, s) && (t[s] = r[s]);
   }
   return t;
@@ -7735,10 +7732,10 @@ n(Go, 'pick');
 
 // ../node_modules/es-toolkit/dist/object/pickBy.mjs
 function qo(r, e) {
-  let t = {},
+  const t = {},
     o = Object.entries(r);
   for (let s = 0; s < o.length; s++) {
-    let [i, a] = o[s];
+    const [i, a] = o[s];
     e(a, i) && (t[i] = a);
   }
   return t;
@@ -7758,10 +7755,10 @@ n($, 'isPlainObject');
 
 // ../node_modules/es-toolkit/dist/object/mapValues.mjs
 function oe(r, e) {
-  let t = {},
+  const t = {},
     o = Object.keys(r);
   for (let s = 0; s < o.length; s++) {
-    let i = o[s],
+    const i = o[s],
       a = r[i];
     t[i] = e(a, i, r);
   }
@@ -7852,7 +7849,7 @@ function ye(r, e, t) {
     case Ks:
       return r.toString() === e.toString();
     case Xs: {
-      let c = r.valueOf(),
+      const c = r.valueOf(),
         l = e.valueOf();
       return c === l || (Number.isNaN(c) && Number.isNaN(l));
     }
@@ -7866,7 +7863,7 @@ function ye(r, e, t) {
       return r === e;
   }
   t = t ?? /* @__PURE__ */ new Map();
-  let i = t.get(r),
+  const i = t.get(r),
     a = t.get(e);
   if (i != null && a != null) return i === e;
   t.set(r, e), t.set(e, r);
@@ -7874,16 +7871,16 @@ function ye(r, e, t) {
     switch (o) {
       case ei: {
         if (r.size !== e.size) return !1;
-        for (let [c, l] of r.entries())
+        for (const [c, l] of r.entries())
           if (!e.has(c) || !ye(l, e.get(c), t)) return !1;
         return !0;
       }
       case ri: {
         if (r.size !== e.size) return !1;
-        let c = Array.from(r.values()),
+        const c = Array.from(r.values()),
           l = Array.from(e.values());
         for (let p = 0; p < c.length; p++) {
-          let u = c[p],
+          const u = c[p],
             d = l.findIndex((h) => ye(u, h, t));
           if (d === -1) return !1;
           l.splice(d, 1);
@@ -7922,14 +7919,14 @@ function ye(r, e, t) {
         return r.name === e.name && r.message === e.message;
       case ht: {
         if (!(ye(r.constructor, e.constructor, t) || ($(r) && $(e)))) return !1;
-        let l = [...Object.keys(r), ...Vo(r)],
+        const l = [...Object.keys(r), ...Vo(r)],
           p = [...Object.keys(e), ...Vo(e)];
         if (l.length !== p.length) return !1;
         for (let u = 0; u < l.length; u++) {
-          let d = l[u],
+          const d = l[u],
             h = r[d];
           if (!Object.prototype.hasOwnProperty.call(e, d)) return !1;
-          let S = e[d];
+          const S = e[d];
           if (!ye(h, S, t)) return !1;
         }
         return !0;
@@ -7945,7 +7942,7 @@ n(ye, 'areObjectsEqual');
 
 // src/shared/universal-store/use-universal-store-preview.ts
 var Si = /* @__PURE__ */ n((r, e) => {
-  let [t, o] = mt(e ? e(r.getState()) : r.getState());
+  const [t, o] = mt(e ? e(r.getState()) : r.getState());
   return (
     Er(
       () =>
@@ -7954,7 +7951,7 @@ var Si = /* @__PURE__ */ n((r, e) => {
             o(s);
             return;
           }
-          let a = e(s),
+          const a = e(s),
             c = e(i);
           !Ar(a, c) && o(a);
         }),
@@ -7991,7 +7988,7 @@ var St = class St extends Q {
         ps`Cannot call unsubscribeAll on a store that does not have testUtils.
         Please provide testUtils as the second argument when creating the store.`,
       );
-    let e = /* @__PURE__ */ n((t) => {
+    const e = /* @__PURE__ */ n((t) => {
       try {
         t.value();
       } catch {}
@@ -8029,7 +8026,7 @@ _e(kr, {
 
 // src/storybook-error.ts
 function bi({ code: r, category: e }) {
-  let t = String(r).padStart(4, '0');
+  const t = String(r).padStart(4, '0');
   return `SB_${e}_${t}`;
 }
 n(bi, 'parseErrorCode');
@@ -8052,7 +8049,7 @@ var bt = class bt extends Error {
   }
   /** Overrides the default `Error.name` property in the format: SB_<CATEGORY>_<CODE>. */
   get name() {
-    let t = this.constructor.name;
+    const t = this.constructor.name;
     return `${this.fullErrorCode} (${t})`;
   }
   /** Generates the error message along with additional documentation link (if applicable). */
@@ -8461,7 +8458,7 @@ var Ot = ue(it(), 1);
 // src/preview-api/modules/store/args.ts
 var rr = Symbol('incompatible'),
   mn = /* @__PURE__ */ n((r, e) => {
-    let t = e.type;
+    const t = e.type;
     if (r == null || !t || e.mapping) return r;
     switch (t.name) {
       case 'string':
@@ -8476,7 +8473,7 @@ var rr = Symbol('incompatible'),
         return !t.value || !Array.isArray(r)
           ? rr
           : r.reduce((o, s, i) => {
-              let a = mn(s, { type: t.value });
+              const a = mn(s, { type: t.value });
               return a !== rr && (o[i] = a), o;
             }, new Array(r.length));
       case 'object':
@@ -8485,7 +8482,7 @@ var rr = Symbol('incompatible'),
           : !t.value || typeof r != 'object'
             ? rr
             : Object.entries(r).reduce((o, [s, i]) => {
-                let a = mn(i, { type: t.value[s] });
+                const a = mn(i, { type: t.value[s] });
                 return a === rr ? o : Object.assign(o, { [s]: a });
               }, {});
       default:
@@ -8496,7 +8493,7 @@ var rr = Symbol('incompatible'),
     (r, e) =>
       Object.entries(r).reduce((t, [o, s]) => {
         if (!e[o]) return t;
-        let i = mn(s, e[o]);
+        const i = mn(s, e[o]);
         return i === rr ? t : Object.assign(t, { [o]: i });
       }, {}),
     'mapArgsToTypes',
@@ -8511,7 +8508,7 @@ var rr = Symbol('incompatible'),
           ? e
           : Object.keys({ ...r, ...e }).reduce((t, o) => {
               if (o in e) {
-                let s = tr(r[o], e[o]);
+                const s = tr(r[o], e[o]);
                 s !== void 0 && (t[o] = s);
               } else t[o] = r[o];
               return t;
@@ -8543,11 +8540,11 @@ var rr = Symbol('incompatible'),
       `),
             i()
           );
-        let a = Array.isArray(r[o]),
+        const a = Array.isArray(r[o]),
           c = a && r[o].findIndex((d) => !s.includes(d)),
           l = a && c === -1;
         if (r[o] === void 0 || s.includes(r[o]) || l) return i();
-        let p = a ? `${o}[${c}]` : o,
+        const p = a ? `${o}[${c}]` : o,
           u = s
             .map((d) => (typeof d == 'string' ? `'${d}'` : String(d)))
             .join(', ');
@@ -8563,8 +8560,8 @@ var rr = Symbol('incompatible'),
     if (typeof r != typeof e) return e;
     if (Ar(r, e)) return Ie;
     if (Array.isArray(r) && Array.isArray(e)) {
-      let t = e.reduce((o, s, i) => {
-        let a = or(r[i], s);
+      const t = e.reduce((o, s, i) => {
+        const a = or(r[i], s);
         return a !== Ie && (o[i] = a), o;
       }, new Array(e.length));
       return e.length >= r.length
@@ -8573,17 +8570,17 @@ var rr = Symbol('incompatible'),
     }
     return $(r) && $(e)
       ? Object.keys({ ...r, ...e }).reduce((t, o) => {
-          let s = or(r?.[o], e?.[o]);
+          const s = or(r?.[o], e?.[o]);
           return s === Ie ? t : Object.assign(t, { [o]: s });
         }, {})
       : e;
   }, 'deepDiff'),
   hn = 'UNTARGETED';
 function Ai({ args: r, argTypes: e }) {
-  let t = {};
+  const t = {};
   return (
     Object.entries(r).forEach(([o, s]) => {
-      let { target: i = hn } = e[o] || {};
+      const { target: i = hn } = e[o] || {};
       (t[i] = t[i] || {}), (t[i][o] = s);
     }),
     t
@@ -8611,18 +8608,18 @@ var gn = class gn {
       (this.initialArgsByStoryId[e.id] = e.initialArgs),
         (this.argsByStoryId[e.id] = e.initialArgs);
     else if (this.initialArgsByStoryId[e.id] !== e.initialArgs) {
-      let t = or(this.initialArgsByStoryId[e.id], this.argsByStoryId[e.id]);
+      const t = or(this.initialArgsByStoryId[e.id], this.argsByStoryId[e.id]);
       (this.initialArgsByStoryId[e.id] = e.initialArgs),
         (this.argsByStoryId[e.id] = e.initialArgs),
         t !== Ie && this.updateFromDelta(e, t);
     }
   }
   updateFromDelta(e, t) {
-    let o = Ri(t, e.argTypes);
+    const o = Ri(t, e.argTypes);
     this.argsByStoryId[e.id] = tr(this.argsByStoryId[e.id], o);
   }
   updateFromPersisted(e, t) {
-    let o = Ei(t, e.argTypes);
+    const o = Ei(t, e.argTypes);
     return this.updateFromDelta(e, o);
   }
   update(e, t) {
@@ -8654,12 +8651,12 @@ var Sn = class Sn {
     this.set({ globals: e, globalTypes: t });
   }
   set({ globals: e = {}, globalTypes: t = {} }) {
-    let o = this.initialGlobals && or(this.initialGlobals, this.globals);
+    const o = this.initialGlobals && or(this.initialGlobals, this.globals);
     this.allowedGlobalNames = /* @__PURE__ */ new Set([
       ...Object.keys(e),
       ...Object.keys(t),
     ]);
-    let s = Et(t);
+    const s = Et(t);
     (this.initialGlobals = { ...s, ...e }),
       (this.globals = this.initialGlobals),
       o && o !== Ie && this.updateFromPersisted(o);
@@ -8678,7 +8675,7 @@ var Sn = class Sn {
     );
   }
   updateFromPersisted(e) {
-    let t = this.filterAllowedGlobals(e);
+    const t = this.filterAllowedGlobals(e);
     this.globals = { ...this.globals, ...t };
   }
   get() {
@@ -8704,17 +8701,17 @@ var Bd = (0, xi.default)(1)((r) =>
       this.entries = e;
     }
     entryFromSpecifier(e) {
-      let t = Object.values(this.entries);
+      const t = Object.values(this.entries);
       if (e === '*') return t[0];
       if (typeof e == 'string')
         return this.entries[e]
           ? this.entries[e]
           : t.find((i) => i.id.startsWith(e));
-      let { name: o, title: s } = e;
+      const { name: o, title: s } = e;
       return t.find((i) => i.name === o && i.title === s);
     }
     storyIdToEntry(e) {
-      let t = this.entries[e];
+      const t = this.entries[e];
       if (!t) throw new xr({ storyId: e });
       return t;
     }
@@ -8780,7 +8777,7 @@ var _i = /* @__PURE__ */ n(
     'count',
   ),
   Wd = /* @__PURE__ */ n((r, e) => {
-    let { exists: t, eq: o, neq: s, truthy: i } = r;
+    const { exists: t, eq: o, neq: s, truthy: i } = r;
     if (_i([t, o, s, i]) > 1)
       throw new Error(
         `Invalid conditional test ${JSON.stringify({ exists: t, eq: o, neq: s })}`,
@@ -8788,19 +8785,19 @@ var _i = /* @__PURE__ */ n(
     if (typeof o < 'u') return (0, En.isEqual)(e, o);
     if (typeof s < 'u') return !(0, En.isEqual)(e, s);
     if (typeof t < 'u') {
-      let c = typeof e < 'u';
+      const c = typeof e < 'u';
       return t ? c : !c;
     }
     return (typeof i > 'u' ? !0 : i) ? !!e : !e;
   }, 'testValue'),
   Rn = /* @__PURE__ */ n((r, e, t) => {
     if (!r.if) return !0;
-    let { arg: o, global: s } = r.if;
+    const { arg: o, global: s } = r.if;
     if (_i([o, s]) !== 1)
       throw new Error(
         `Invalid conditional value ${JSON.stringify({ arg: o, global: s })}`,
       );
-    let i = o ? e[o] : t[s];
+    const i = o ? e[o] : t[s];
     return Wd(r.if, i);
   }, 'includeConditionalArg');
 
@@ -8824,7 +8821,7 @@ var An = /* @__PURE__ */ n(
     'sanitize',
   ),
   Ci = /* @__PURE__ */ n((r, e) => {
-    let t = An(r);
+    const t = An(r);
     if (t === '')
       throw new Error(
         `Invalid ${e} '${r}', must include alphanumeric characters`,
@@ -8848,7 +8845,7 @@ function Lr(r, { includeStories: e, excludeStories: t }) {
 }
 n(Lr, 'isExportStory');
 var Fi = /* @__PURE__ */ n((...r) => {
-  let e = r.reduce(
+  const e = r.reduce(
     (t, o) => (o.startsWith('!') ? t.delete(o.slice(1)) : t.add(o), t),
     /* @__PURE__ */ new Set(),
   );
@@ -8869,11 +8866,11 @@ CSF .story annotations deprecated; annotate story functions directly:
 See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-annotations for details and codemod.
 `;
 function De(r, e, t) {
-  let o = e,
+  const o = e,
     s = typeof e == 'function' ? e : null,
     { story: i } = o;
   i && (I.debug('deprecated story', i), ae($d));
-  let a = Ii(r),
+  const a = Ii(r),
     c = (typeof o != 'function' && o.name) || o.storyName || i?.name || a,
     l = [...k(o.decorators), ...k(i?.decorators)],
     p = { ...i?.parameters, ...o.parameters },
@@ -8906,7 +8903,7 @@ n(De, 'normalizeStory');
 
 // src/preview-api/modules/store/csf/normalizeComponentAnnotations.ts
 function jr(r, e = r.title, t) {
-  let { id: o, argTypes: s } = r;
+  const { id: o, argTypes: s } = r;
   return {
     id: An(o || e),
     ...r,
@@ -8922,7 +8919,7 @@ n(jr, 'normalizeComponentAnnotations');
 
 // src/preview-api/modules/store/csf/processCSFFile.ts
 var Yd = /* @__PURE__ */ n((r) => {
-    let { globals: e, globalTypes: t } = r;
+    const { globals: e, globalTypes: t } = r;
     (e || t) &&
       I.error(
         'Global args/argTypes can only be set globally',
@@ -8933,7 +8930,7 @@ var Yd = /* @__PURE__ */ n((r) => {
       );
   }, 'checkGlobals'),
   Kd = /* @__PURE__ */ n((r) => {
-    let { options: e } = r;
+    const { options: e } = r;
     e?.storySort &&
       I.error('The storySort option parameter can only be set globally');
   }, 'checkStorySort'),
@@ -8944,13 +8941,13 @@ function Di(r, e, t) {
   let { default: o, __namedExportsOrder: s, ...i } = r,
     a = Object.values(i)[0];
   if (nr(a)) {
-    let p = jr(a.meta.input, t, e);
+    const p = jr(a.meta.input, t, e);
     xt(p.parameters);
-    let u = { meta: p, stories: {}, moduleExports: r };
+    const u = { meta: p, stories: {}, moduleExports: r };
     return (
       Object.keys(i).forEach((d) => {
         if (Lr(d, p)) {
-          let h = De(d, i[d].input, p);
+          const h = De(d, i[d].input, p);
           xt(h.parameters), (u.stories[h.id] = h);
         }
       }),
@@ -8958,13 +8955,13 @@ function Di(r, e, t) {
       u
     );
   }
-  let c = jr(o, t, e);
+  const c = jr(o, t, e);
   xt(c.parameters);
-  let l = { meta: c, stories: {}, moduleExports: r };
+  const l = { meta: c, stories: {}, moduleExports: r };
   return (
     Object.keys(i).forEach((p) => {
       if (Lr(p, c)) {
-        let u = De(p, i[p], c);
+        const u = De(p, i[p], c);
         xt(u.parameters), (l.stories[u.id] = u);
       }
     }),
@@ -8979,11 +8976,11 @@ function ki(r) {
 }
 n(ki, 'mountDestructured');
 function Xd(r) {
-  let e = r.toString().match(/[^(]*\(([^)]*)/);
+  const e = r.toString().match(/[^(]*\(([^)]*)/);
   if (!e) return [];
-  let t = Ni(e[1]);
+  const t = Ni(e[1]);
   if (!t.length) return [];
-  let o = t[0];
+  const o = t[0];
   return o.startsWith('{') && o.endsWith('}')
     ? Ni(o.slice(1, -1).replace(/\s/g, '')).map((i) =>
         i.replace(/:.*|=.*/g, ''),
@@ -8999,17 +8996,17 @@ function Ni(r) {
     if (r[i] === '{' || r[i] === '[') t.push(r[i] === '{' ? '}' : ']');
     else if (r[i] === t[t.length - 1]) t.pop();
     else if (!t.length && r[i] === ',') {
-      let a = r.substring(o, i).trim();
+      const a = r.substring(o, i).trim();
       a && e.push(a), (o = i + 1);
     }
-  let s = r.substring(o).trim();
+  const s = r.substring(o).trim();
   return s && e.push(s), e;
 }
 n(Ni, 'splitByComma');
 
 // src/preview-api/modules/store/decorators.ts
 function xn(r, e, t) {
-  let o = t(r);
+  const o = t(r);
   return (s) => e(o, s);
 }
 n(xn, 'decorateStory');
@@ -9029,7 +9026,7 @@ function vn({
 }
 n(vn, 'sanitizeStoryContextUpdate');
 function vt(r, e) {
-  let t = {},
+  const t = {},
     o = /* @__PURE__ */ n(
       (i) => (a) => {
         if (!t.value) throw new Error('Decorated function called without init');
@@ -9050,12 +9047,12 @@ n(vt, 'defaultDecorateStory');
 
 // src/preview-api/modules/store/parameters.ts
 var Y = /* @__PURE__ */ n((...r) => {
-  let e = {},
+  const e = {},
     t = r.filter(Boolean),
     o = t.reduce(
       (s, i) => (
         Object.entries(i).forEach(([a, c]) => {
-          let l = s[a];
+          const l = s[a];
           Array.isArray(c) || typeof l > 'u'
             ? (s[a] = c)
             : $(c) && $(l)
@@ -9068,7 +9065,7 @@ var Y = /* @__PURE__ */ n((...r) => {
     );
   return (
     Object.keys(e).forEach((s) => {
-      let i = t
+      const i = t
         .filter(Boolean)
         .map((a) => a[s])
         .filter((a) => typeof a < 'u');
@@ -9080,11 +9077,11 @@ var Y = /* @__PURE__ */ n((...r) => {
 
 // src/preview-api/modules/store/csf/prepareStory.ts
 function sr(r, e, t) {
-  let { moduleExport: o, id: s, name: i } = r || {},
+  const { moduleExport: o, id: s, name: i } = r || {},
     a = Li(r, e, t),
     c = /* @__PURE__ */ n(async (C) => {
-      let F = {};
-      for (let U of [
+      const F = {};
+      for (const U of [
         ...('__STORYBOOK_TEST_LOADERS__' in E &&
         Array.isArray(E.__STORYBOOK_TEST_LOADERS__)
           ? [E.__STORYBOOK_TEST_LOADERS__]
@@ -9094,31 +9091,31 @@ function sr(r, e, t) {
         k(r.loaders),
       ]) {
         if (C.abortSignal.aborted) return F;
-        let B = await Promise.all(U.map((W) => W(C)));
+        const B = await Promise.all(U.map((W) => W(C)));
         Object.assign(F, ...B);
       }
       return F;
     }, 'applyLoaders'),
     l = /* @__PURE__ */ n(async (C) => {
-      let F = new Array();
-      for (let U of [
+      const F = [];
+      for (const U of [
         ...k(t.beforeEach),
         ...k(e.beforeEach),
         ...k(r.beforeEach),
       ]) {
         if (C.abortSignal.aborted) return F;
-        let B = await U(C);
+        const B = await U(C);
         B && F.push(B);
       }
       return F;
     }, 'applyBeforeEach'),
     p = /* @__PURE__ */ n(async (C) => {
-      let F = [
+      const F = [
         ...k(t.experimental_afterEach),
         ...k(e.experimental_afterEach),
         ...k(r.experimental_afterEach),
       ].reverse();
-      for (let U of F) {
+      for (const U of F) {
         if (C.abortSignal.aborted) return;
         await U(C);
       }
@@ -9135,7 +9132,7 @@ function sr(r, e, t) {
     R = r?.play ?? e?.play,
     x = ki(R);
   if (!m && !x) throw new Dr({ id: s });
-  let g = /* @__PURE__ */ n(
+  const g = /* @__PURE__ */ n(
       (C) => async () => (await C.renderToCanvas(), C.canvas),
       'defaultMount',
     ),
@@ -9171,7 +9168,7 @@ function wt(r, e, t) {
 }
 n(wt, 'prepareMeta');
 function Li(r, e, t) {
-  let o = ['dev', 'test'],
+  const o = ['dev', 'test'],
     s = E.DOCS_OPTIONS?.autodocs === !0 ? ['autodocs'] : [],
     i = Fi(
       ...o,
@@ -9184,10 +9181,10 @@ function Li(r, e, t) {
     { argTypesEnhancers: c = [], argsEnhancers: l = [] } = t,
     p = Y(t.argTypes, e.argTypes, r?.argTypes);
   if (r) {
-    let R = r?.userStoryFn || r?.render || e.render || t.render;
+    const R = r?.userStoryFn || r?.render || e.render || t.render;
     a.__isArgsStory = R && R.length > 0;
   }
-  let u = {
+  const u = {
       ...t.args,
       ...e.args,
       ...r?.args,
@@ -9215,7 +9212,7 @@ function Li(r, e, t) {
       storyGlobals: d,
     };
   h.argTypes = c.reduce((R, x) => x({ ...h, argTypes: R }), h.argTypes);
-  let S = { ...u };
+  const S = { ...u };
   h.initialArgs = l.reduce(
     (R, x) => ({
       ...R,
@@ -9226,7 +9223,7 @@ function Li(r, e, t) {
     }),
     S,
   );
-  let { name: m, story: T, ...y } = h;
+  const { name: m, story: T, ...y } = h;
   return y;
 }
 n(Li, 'preparePartialAnnotations');
@@ -9238,7 +9235,7 @@ function _t(r) {
       argsByTarget: void 0,
     };
   if (E.FEATURES?.argTypeTargetsV7) {
-    let i = Ai(r);
+    const i = Ai(r);
     t = {
       ...r,
       allArgs: r.args,
@@ -9246,16 +9243,16 @@ function _t(r) {
       args: i[hn] || {},
     };
   }
-  let o = Object.entries(t.args).reduce((i, [a, c]) => {
+  const o = Object.entries(t.args).reduce((i, [a, c]) => {
       if (!t.argTypes[a]?.mapping) return (i[a] = c), i;
-      let l = /* @__PURE__ */ n((p) => {
-        let u = t.argTypes[a].mapping;
+      const l = /* @__PURE__ */ n((p) => {
+        const u = t.argTypes[a].mapping;
         return u && p in u ? u[p] : p;
       }, 'mappingFn');
       return (i[a] = Array.isArray(c) ? c.map(l) : l(c)), i;
     }, {}),
     s = Object.entries(o).reduce((i, [a, c]) => {
-      let l = t.argTypes[a] || {};
+      const l = t.argTypes[a] || {};
       return Rn(l, o, t.globals) && (i[a] = c), i;
     }, {});
   return { ...t, unmappedArgs: e, args: s };
@@ -9264,7 +9261,7 @@ n(_t, 'prepareContext');
 
 // src/preview-api/modules/store/inferArgTypes.ts
 var wn = /* @__PURE__ */ n((r, e, t) => {
-    let o = typeof r;
+    const o = typeof r;
     switch (o) {
       case 'boolean':
       case 'string':
@@ -9321,7 +9318,7 @@ var ji = /* @__PURE__ */ n(
         ? r
         : r &&
           qo(r, (o, s) => {
-            let i = o.name || s.toString();
+            const i = o.name || s.toString();
             return !!(!e || ji(i, e)) && (!t || !ji(i, t));
           }),
     'filterArgTypes',
@@ -9329,10 +9326,10 @@ var ji = /* @__PURE__ */ n(
 
 // src/preview-api/modules/store/inferControls.ts
 var Jd = /* @__PURE__ */ n((r, e, t) => {
-    let { type: o, options: s } = r;
+    const { type: o, options: s } = r;
     if (o) {
       if (t.color && t.color.test(e)) {
-        let i = o.name;
+        const i = o.name;
         if (i === 'string') return { control: { type: 'color' } };
         i !== 'enum' &&
           I.warn(
@@ -9350,7 +9347,7 @@ var Jd = /* @__PURE__ */ n((r, e, t) => {
         case 'number':
           return { control: { type: 'number' } };
         case 'enum': {
-          let { value: i } = o;
+          const { value: i } = o;
           return {
             control: { type: i?.length <= 5 ? 'radio' : 'select' },
             options: i,
@@ -9365,9 +9362,9 @@ var Jd = /* @__PURE__ */ n((r, e, t) => {
     }
   }, 'inferControl'),
   ir = /* @__PURE__ */ n((r) => {
-    let {
+    const {
       argTypes: e,
-      // eslint-disable-next-line @typescript-eslint/naming-convention
+
       parameters: {
         __isArgsStory: t,
         controls: {
@@ -9378,7 +9375,7 @@ var Jd = /* @__PURE__ */ n((r, e, t) => {
       },
     } = r;
     if (!t) return e;
-    let a = Mr(e, o, s),
+    const a = Mr(e, o, s),
       c = oe(a, (l, p) => l?.type && Jd(l, p.toString(), i));
     return Y(c, a);
   }, 'inferControls');
@@ -9432,13 +9429,13 @@ n(Ne, 'normalizeProjectAnnotations');
 // src/preview-api/modules/store/csf/beforeAll.ts
 var Mi = /* @__PURE__ */ n(
   (r) => async () => {
-    let e = [];
-    for (let t of r) {
-      let o = await t();
+    const e = [];
+    for (const t of r) {
+      const o = await t();
       o && e.unshift(o);
     }
     return async () => {
-      for (let t of e) await t();
+      for (const t of e) await t();
     };
   },
   'composeBeforeAllHooks',
@@ -9462,7 +9459,7 @@ function Gr(r, e) {
 n(Gr, 'getField');
 function Te(r, e, t = {}) {
   return Gr(r, e).reduce((o, s) => {
-    let i = k(s);
+    const i = k(s);
     return t.reverseFileOrder ? [...i, ...o] : [...o, ...i];
   }, []);
 }
@@ -9476,7 +9473,7 @@ function ar(r, e) {
 }
 n(ar, 'getSingletonField');
 function ke(r) {
-  let e = Te(r, 'argTypesEnhancers'),
+  const e = Te(r, 'argTypesEnhancers'),
     t = Gr(r, 'runStep'),
     o = Te(r, 'beforeAll');
   return {
@@ -9547,7 +9544,7 @@ function eu(r) {
 }
 n(eu, 'extractAnnotation');
 function Gi(r) {
-  let e = Array.isArray(r) ? r : [r];
+  const e = Array.isArray(r) ? r : [r];
   return (
     (globalThis.globalProjectAnnotations = ke([
       globalThis.defaultProjectAnnotations ?? {},
@@ -9574,7 +9571,7 @@ function Pn(r, e, t, o, s) {
     },
     h = new Ee(),
     S = /* @__PURE__ */ n(() => {
-      let g = _t({
+      const g = _t({
         hooks: new be(),
         globals: d,
         args: { ...p.initialArgs },
@@ -9595,7 +9592,7 @@ function Pn(r, e, t, o, s) {
         (g.context = g),
         p.renderToCanvas &&
           (g.renderToCanvas = async () => {
-            let b = await p.renderToCanvas?.(
+            const b = await p.renderToCanvas?.(
               {
                 componentId: p.componentId,
                 title: p.title,
@@ -9628,7 +9625,7 @@ ${v.description}`);
     }, 'initializeContext'),
     m,
     T = /* @__PURE__ */ n(async (g) => {
-      let b = S();
+      const b = S();
       return (
         (b.canvasElement ??= globalThis?.document?.body),
         m && (b.loaded = m.loaded),
@@ -9637,13 +9634,13 @@ ${v.description}`);
       );
     }, 'play'),
     y = /* @__PURE__ */ n((g) => {
-      let b = S();
+      const b = S();
       return Object.assign(b, g), tu(p, b);
     }, 'run'),
     R = p.playFunction ? T : void 0;
   return Object.assign(
     /* @__PURE__ */ n(function (b) {
-      let v = S();
+      const v = S();
       return (
         m && (v.loaded = m.loaded),
         (v.args = {
@@ -9657,9 +9654,9 @@ ${v.description}`);
       id: p.id,
       storyName: a,
       load: /* @__PURE__ */ n(async () => {
-        for (let b of [...Re].reverse()) await b();
+        for (const b of [...Re].reverse()) await b();
         Re.length = 0;
-        let g = S();
+        const g = S();
         (g.loaded = await p.applyLoaders(g)),
           Re.push(...(await p.applyBeforeEach(g)).filter(Boolean)),
           (m = g);
@@ -9684,7 +9681,7 @@ function qi(r, e, t = ru) {
   let { default: o, __esModule: s, __namedExportsOrder: i, ...a } = r,
     c = o;
   return Object.entries(a).reduce((p, [u, d]) => {
-    let { story: h, meta: S } = Pt(d);
+    const { story: h, meta: S } = Pt(d);
     return (
       !c && S && (c = S),
       Lr(u, c)
@@ -9714,13 +9711,13 @@ function Bi(r) {
               More info: https://storybook.js.org/docs/api/portable-stories-playwright
             `);
         await t.evaluate(async (c) => {
-          let l = await globalThis.__pwUnwrapObject?.(c);
+          const l = await globalThis.__pwUnwrapObject?.(c);
           return ('__pw_type' in l ? l.type : l)?.load?.();
         }, s);
-        let a = await e(s, ...i);
+        const a = await e(s, ...i);
         return (
           await t.evaluate(async (c) => {
-            let l = await globalThis.__pwUnwrapObject?.(c),
+            const l = await globalThis.__pwUnwrapObject?.(c),
               p = '__pw_type' in l ? l.type : l,
               u = document.querySelector('#root');
             return p?.play?.({ canvasElement: u });
@@ -9733,9 +9730,9 @@ function Bi(r) {
 }
 n(Bi, 'createPlaywrightTest');
 async function tu(r, e) {
-  for (let s of [...Re].reverse()) await s();
+  for (const s of [...Re].reverse()) await s();
   if (((Re.length = 0), !e.canvasElement)) {
-    let s = document.createElement('div');
+    const s = document.createElement('div');
     globalThis?.document?.body?.appendChild(s),
       (e.canvasElement = s),
       Re.push(() => {
@@ -9745,7 +9742,7 @@ async function tu(r, e) {
   }
   if (((e.loaded = await r.applyLoaders(e)), e.abortSignal.aborted)) return;
   Re.push(...(await r.applyBeforeEach(e)).filter(Boolean));
-  let t = r.playFunction,
+  const t = r.playFunction,
     o = r.usesMount;
   o || (await e.mount()),
     !e.abortSignal.aborted &&
@@ -9774,12 +9771,12 @@ var Hi = 1e3,
       // It is used to allow v7 Storybooks to be composed in v6 Storybooks, which expect a
       // `stories.json` file with legacy fields (`kind` etc).
       this.getStoriesJsonData = /* @__PURE__ */ n(() => {
-        let e = this.getSetStoriesPayload(),
+        const e = this.getSetStoriesPayload(),
           t = ['fileName', 'docsOnly', 'framework', '__id', '__isArgsStory'];
         return {
           v: 3,
           stories: oe(e.stories, (s) => {
-            let { importPath: i } = this.storyIndex.entries[s.id];
+            const { importPath: i } = this.storyIndex.entries[s.id];
             return {
               ...Vi(s, ['id', 'name', 'title']),
               importPath: i,
@@ -9797,7 +9794,7 @@ var Hi = 1e3,
         };
       }, 'getStoriesJsonData');
       (this.storyIndex = new At(e)), (this.projectAnnotations = Ne(o));
-      let { initialGlobals: s, globalTypes: i } = this.projectAnnotations;
+      const { initialGlobals: s, globalTypes: i } = this.projectAnnotations;
       (this.args = new Tt()),
         (this.userGlobals = new Rt({ globals: s, globalTypes: i })),
         (this.hooks = {}),
@@ -9808,7 +9805,7 @@ var Hi = 1e3,
     }
     setProjectAnnotations(e) {
       this.projectAnnotations = Ne(e);
-      let { initialGlobals: t, globalTypes: o } = e;
+      const { initialGlobals: t, globalTypes: o } = e;
       this.userGlobals.set({ globals: t, globalTypes: o });
     }
     // This means that one of the CSF files has changed.
@@ -9826,12 +9823,12 @@ var Hi = 1e3,
     }
     // To load a single CSF file to service a story we need to look up the importPath in the index
     async loadCSFFileByStoryId(e) {
-      let { importPath: t, title: o } = this.storyIndex.storyIdToEntry(e),
+      const { importPath: t, title: o } = this.storyIndex.storyIdToEntry(e),
         s = await this.importFn(t);
       return this.processCSFFileWithCache(s, t, o);
     }
     async loadAllCSFFiles() {
-      let e = {};
+      const e = {};
       return (
         Object.entries(this.storyIndex.entries).forEach(
           ([o, { importPath: s }]) => {
@@ -9852,7 +9849,7 @@ var Hi = 1e3,
       this.cachedCSFFiles = await this.loadAllCSFFiles();
     }
     preparedMetaFromCSFFile({ csfFile: e }) {
-      let t = e.meta;
+      const t = e.meta;
       return this.prepareMetaWithCache(
         t,
         this.projectAnnotations,
@@ -9861,15 +9858,15 @@ var Hi = 1e3,
     }
     // Load the CSF file for a story and prepare the story from it and the project annotations.
     async loadStory({ storyId: e }) {
-      let t = await this.loadCSFFileByStoryId(e);
+      const t = await this.loadCSFFileByStoryId(e);
       return this.storyFromCSFFile({ storyId: e, csfFile: t });
     }
     // This function is synchronous for convenience -- often times if you have a CSF file already
     // it is easier not to have to await `loadStory`.
     storyFromCSFFile({ storyId: e, csfFile: t }) {
-      let o = t.stories[e];
+      const o = t.stories[e];
       if (!o) throw new Ir({ storyId: e });
-      let s = t.meta,
+      const s = t.meta,
         i = this.prepareStoryWithCache(
           o,
           s,
@@ -9888,12 +9885,12 @@ var Hi = 1e3,
         .map((t) => this.storyFromCSFFile({ storyId: t, csfFile: e }));
     }
     async loadEntry(e) {
-      let t = await this.storyIdToEntry(e),
+      const t = await this.storyIdToEntry(e),
         o = t.type === 'docs' ? t.storiesImports : [],
         [s, ...i] = await Promise.all([
           this.importFn(t.importPath),
           ...o.map((a) => {
-            let c = this.storyIndex.importPathToEntry(a);
+            const c = this.storyIndex.importPathToEntry(a);
             return this.loadCSFFileByStoryId(c.id);
           }),
         ]);
@@ -9902,7 +9899,7 @@ var Hi = 1e3,
     // A prepared story does not include args, globals or hooks. These are stored in the story store
     // and updated separtely to the (immutable) story.
     getStoryContext(e, { forceInitialArgs: t = !1 } = {}) {
-      let o = this.userGlobals.get(),
+      const o = this.userGlobals.get(),
         { initialGlobals: s } = this.userGlobals,
         i = new Ee();
       return _t({
@@ -9924,17 +9921,17 @@ var Hi = 1e3,
     }
     async cleanupStory(e) {
       this.hooks[e.id].clean();
-      let t = this.cleanupCallbacks[e.id];
-      if (t) for (let o of [...t].reverse()) await o();
+      const t = this.cleanupCallbacks[e.id];
+      if (t) for (const o of [...t].reverse()) await o();
       delete this.cleanupCallbacks[e.id];
     }
     extract(e = { includeDocsOnly: !1 }) {
-      let { cachedCSFFiles: t } = this;
+      const { cachedCSFFiles: t } = this;
       if (!t) throw new vr();
       return Object.entries(this.storyIndex.entries).reduce(
         (o, [s, { type: i, importPath: a }]) => {
           if (i === 'docs') return o;
-          let c = t[a],
+          const c = t[a],
             l = this.storyFromCSFFile({ storyId: s, csfFile: c });
           return (
             (!e.includeDocsOnly && l.parameters.docsOnly) ||
@@ -9963,7 +9960,7 @@ var Hi = 1e3,
     }
     // TODO: Remove in 9.0
     getSetStoriesPayload() {
-      let e = this.extract({ includeDocsOnly: !0 }),
+      const e = this.extract({ includeDocsOnly: !0 }),
         t = Object.values(e).reduce((o, { title: s }) => ((o[s] = {}), o), {});
       return {
         v: 2,
@@ -9999,12 +9996,12 @@ var Hi = 1e3,
       } catch {
         return null;
       }
-      let o = this.cachedCSFFiles[t],
+      const o = this.cachedCSFFiles[t],
         s = this.storyFromCSFFile({ storyId: e, csfFile: o });
       return {
         ...s,
         storyFn: /* @__PURE__ */ n((i) => {
-          let a = {
+          const a = {
             ...this.getStoryContext(s),
             abortSignal: new AbortController().signal,
             canvasElement: null,
@@ -10032,10 +10029,10 @@ n(In, 'slash');
 // src/preview-api/modules/store/autoTitle.ts
 var nu = /* @__PURE__ */ n((r) => {
   if (r.length === 0) return r;
-  let e = r[r.length - 1],
+  const e = r[r.length - 1],
     t = e?.replace(/(?:[.](?:story|stories))?([.][^.]+)$/i, '');
   if (r.length === 1) return [t];
-  let o = r[r.length - 2];
+  const o = r[r.length - 2];
   return t && o && t.toLowerCase() === o.toLowerCase()
     ? [...r.slice(0, -2), t]
     : t && (/^(story|stories)([.][^.]+)$/i.test(e) || /^index$/i.test(t))
@@ -10050,14 +10047,14 @@ function zi(r) {
 }
 n(zi, 'pathJoin');
 var Fn = /* @__PURE__ */ n((r, e, t) => {
-    let { directory: o, importPathMatcher: s, titlePrefix: i = '' } = e || {};
+    const { directory: o, importPathMatcher: s, titlePrefix: i = '' } = e || {};
     typeof r == 'number' &&
       j.warn(_`
       CSF Auto-title received a numeric fileName. This typically happens when
       webpack is mis-configured in production mode. To force webpack to produce
       filenames, set optimization.moduleIds = "named" in your webpack config.
     `);
-    let a = In(String(r));
+    const a = In(String(r));
     if (s.exec(a)) {
       if (!t) {
         let c = a.replace(o, ''),
@@ -10069,7 +10066,7 @@ var Fn = /* @__PURE__ */ n((r, e, t) => {
   }, 'userOrAutoTitleFromSpecifier'),
   Wi = /* @__PURE__ */ n((r, e, t) => {
     for (let o = 0; o < e.length; o += 1) {
-      let s = Fn(r, e[o], t);
+      const s = Fn(r, e[o], t);
       if (s) return s;
     }
     return t || void 0;
@@ -10090,7 +10087,7 @@ var $i = /\s*\/\s*/,
         for (; i[c] || a[c]; ) {
           if (!i[c]) return -1;
           if (!a[c]) return 1;
-          let l = i[c],
+          const l = i[c],
             p = a[c];
           if (l !== p) {
             let d = s.indexOf(l),
@@ -10148,7 +10145,7 @@ var Ae = new Error('prepareAborted');
 var { AbortController: Xi } = globalThis;
 function Ji(r) {
   try {
-    let { name: e = 'Error', message: t = String(r), stack: o } = r;
+    const { name: e = 'Error', message: t = String(r), stack: o } = r;
     return { name: e, message: t, stack: o };
   } catch {
     return { name: 'Error', message: String(r) };
@@ -10222,15 +10219,15 @@ var Dn = class Dn {
   storyContext() {
     if (!this.story)
       throw new Error('Cannot call storyContext before preparing');
-    let { forceInitialArgs: e } = this.renderOptions;
+    const { forceInitialArgs: e } = this.renderOptions;
     return this.store.getStoryContext(this.story, { forceInitialArgs: e });
   }
   async render({ initial: e = !1, forceRemount: t = !1 } = {}) {
-    let { canvasElement: o } = this;
+    const { canvasElement: o } = this;
     if (!this.story) throw new Error('cannot render when not prepared');
-    let s = this.story;
+    const s = this.story;
     if (!o) throw new Error('cannot render when canvasElement is unset');
-    let {
+    const {
       id: i,
       componentId: a,
       title: c,
@@ -10248,7 +10245,7 @@ var Dn = class Dn {
       R = !1,
       x = s.usesMount;
     try {
-      let g = {
+      const g = {
         ...this.storyContext(),
         viewMode: this.viewMode,
         abortSignal: y,
@@ -10258,7 +10255,7 @@ var Dn = class Dn {
         context: null,
         canvas: {},
         renderToCanvas: /* @__PURE__ */ n(async () => {
-          let P = await this.renderToScreen(b, o);
+          const P = await this.renderToScreen(b, o);
           (this.teardownRender = P || (() => {})), (R = !0);
         }, 'renderToCanvas'),
         // The story provides (set in a renderer) a mount function that is a higher order function
@@ -10279,7 +10276,7 @@ var Dn = class Dn {
         }, 'mount'),
       };
       g.context = g;
-      let b = {
+      const b = {
         componentId: a,
         title: c,
         kind: c,
@@ -10308,7 +10305,7 @@ var Dn = class Dn {
         y.aborted)
       )
         return;
-      let v = await d(g);
+      const v = await d(g);
       if (
         (this.store.addCleanupCallbacks(s, v),
         this.checkIfAborted(y) ||
@@ -10317,7 +10314,7 @@ var Dn = class Dn {
           y.aborted))
       )
         return;
-      let C =
+      const C =
           this.story.parameters?.test?.dangerouslyIgnoreUnhandledErrors === !0,
         F = /* @__PURE__ */ new Set(),
         U = /* @__PURE__ */ n(
@@ -10368,7 +10365,7 @@ var Dn = class Dn {
           (await this.runPhase(y, 'afterEach', async () => {
             await h(g);
           }));
-      let B = !C && F.size > 0,
+      const B = !C && F.size > 0,
         W = g.reporting.reports.some((P) => P.status === 'failed'),
         se = B || W;
       await this.runPhase(y, 'finished', async () =>
@@ -10471,7 +10468,7 @@ var { fetch: iu } = E,
     async initialize() {
       this.setupListeners();
       try {
-        let e = await this.getProjectAnnotationsOrRenderError();
+        const e = await this.getProjectAnnotationsOrRenderError();
         await this.runBeforeAllHook(e),
           await this.initializeWithProjectAnnotations(e);
       } catch (e) {
@@ -10492,7 +10489,7 @@ var { fetch: iu } = E,
     }
     async getProjectAnnotationsOrRenderError() {
       try {
-        let e = await this.getProjectAnnotations();
+        const e = await this.getProjectAnnotations();
         if (((this.renderToCanvas = e.renderToCanvas), !this.renderToCanvas))
           throw new wr();
         return e;
@@ -10504,7 +10501,7 @@ var { fetch: iu } = E,
     async initializeWithProjectAnnotations(e) {
       this.projectAnnotationsBeforeInitialization = e;
       try {
-        let t = await this.getStoryIndexFromServer();
+        const t = await this.getStoryIndexFromServer();
         return this.initializeWithStoryIndex(t);
       } catch (t) {
         throw (
@@ -10521,7 +10518,7 @@ var { fetch: iu } = E,
       }
     }
     async getStoryIndexFromServer() {
-      let e = await iu(au);
+      const e = await iu(au);
       if (e.status === 200) return e.json();
       throw new _r({ text: await e.text() });
     }
@@ -10545,7 +10542,7 @@ var { fetch: iu } = E,
     }
     emitGlobals() {
       if (!this.storyStoreValue) throw new V({ methodName: 'emitGlobals' });
-      let e = {
+      const e = {
         globals: this.storyStoreValue.userGlobals.get() || {},
         globalTypes: this.storyStoreValue.projectAnnotations.globalTypes || {},
       };
@@ -10555,7 +10552,7 @@ var { fetch: iu } = E,
     // This happens when a config file gets reloaded
     async onGetProjectAnnotationsChanged({ getProjectAnnotations: e }) {
       delete this.previewEntryError, (this.getProjectAnnotations = e);
-      let t = await this.getProjectAnnotationsOrRenderError();
+      const t = await this.getProjectAnnotationsOrRenderError();
       if ((await this.runBeforeAllHook(t), !this.storyStoreValue)) {
         await this.initializeWithProjectAnnotations(t);
         return;
@@ -10570,7 +10567,7 @@ var { fetch: iu } = E,
         ))
       )
         try {
-          let e = await this.getStoryIndexFromServer();
+          const e = await this.getStoryIndexFromServer();
           if (this.projectAnnotationsBeforeInitialization) {
             this.initializeWithStoryIndex(e);
             return;
@@ -10598,7 +10595,7 @@ var { fetch: iu } = E,
       )
         throw new V({ methodName: 'onUpdateGlobals' });
       if ((this.storyStoreValue.userGlobals.update(e), t)) {
-        let {
+        const {
           initialGlobals: o,
           storyGlobals: s,
           userGlobals: i,
@@ -10611,7 +10608,7 @@ var { fetch: iu } = E,
           globals: a,
         });
       } else {
-        let { initialGlobals: o, globals: s } =
+        const { initialGlobals: o, globals: s } =
           this.storyStoreValue.userGlobals;
         this.channel.emit(Ce, {
           initialGlobals: o,
@@ -10642,7 +10639,7 @@ var { fetch: iu } = E,
     async onRequestArgTypesInfo({ id: e, payload: t }) {
       try {
         await this.storeInitializationPromise;
-        let o = await this.storyStoreValue?.loadStory(t);
+        const o = await this.storyStoreValue?.loadStory(t);
         this.channel.emit(nt, {
           id: e,
           success: !0,
@@ -10659,7 +10656,7 @@ var { fetch: iu } = E,
     }
     async onResetArgs({ storyId: e, argNames: t }) {
       if (!this.storyStoreValue) throw new V({ methodName: 'onResetArgs' });
-      let s =
+      const s =
           this.storyRenders.find((c) => c.id === e)?.story ||
           (await this.storyStoreValue.loadStory({ storyId: e })),
         a = (
@@ -10692,7 +10689,7 @@ var { fetch: iu } = E,
         throw new V({
           methodName: 'renderStoryToElement',
         });
-      let i = new je(
+      const i = new je(
         this.channel,
         this.storyStoreValue,
         this.renderToCanvas,
@@ -10749,7 +10746,7 @@ var kn = class kn {
     this.store = t;
     this.renderStoryToElement = o;
     this.storyIdByName = /* @__PURE__ */ n((e) => {
-      let t = this.nameToStoryId.get(e);
+      const t = this.nameToStoryId.get(e);
       if (t) return t;
       throw new Error(`No story found with that name: ${e}`);
     }, 'storyIdByName');
@@ -10770,7 +10767,7 @@ mCSFFile',
           );
         return this.primaryStory;
       }
-      let t = this.storyIdToCSFFile.get(e);
+      const t = this.storyIdToCSFFile.get(e);
       if (!t)
         throw new Error(
           `Called \`storyById\` for story that was never loaded: ${e}`,
@@ -10806,7 +10803,7 @@ mCSFFile',
     this.exportsToCSFFile.set(e.moduleExports, e),
       this.exportsToCSFFile.set(e.moduleExports.default, e),
       this.store.componentStoriesFromCSFFile({ csfFile: e }).forEach((o) => {
-        let s = e.stories[o.id];
+        const s = e.stories[o.id];
         this.storyIdToCSFFile.set(s.id, e),
           this.exportToStory.set(s.moduleExport, o);
       });
@@ -10823,7 +10820,7 @@ mCSFFile',
       });
   }
   referenceMeta(e, t) {
-    let o = this.resolveModuleExport(e);
+    const o = this.resolveModuleExport(e);
     if (o.type !== 'meta')
       throw new Error(
         '<Meta of={} /> must reference a CSF file module export or meta export. Did you mistakenly reference your component instead of your \
@@ -10832,7 +10829,7 @@ CSF file?',
     t && this.attachCSFFile(o.csfFile);
   }
   get projectAnnotations() {
-    let { projectAnnotations: e } = this.store;
+    const { projectAnnotations: e } = this.store;
     if (!e)
       throw new Error(
         "Can't get projectAnnotations from DocsContext before they are initialized",
@@ -10851,9 +10848,9 @@ CSF file?',
       throw new Error(
         'No CSF file attached to this docs file, did you forget to use <Meta of={} />?',
       );
-    let t = Array.from(this.attachedCSFFiles)[0];
+    const t = Array.from(this.attachedCSFFiles)[0];
     if (e === 'meta') return { type: 'meta', csfFile: t };
-    let { component: o } = t.meta;
+    const { component: o } = t.meta;
     if (!o)
       throw new Error(
         'Attached CSF file does not defined a component, did you forget to export one?',
@@ -10861,9 +10858,9 @@ CSF file?',
     return { type: 'component', component: o };
   }
   resolveModuleExport(e) {
-    let t = this.exportsToCSFFile.get(e);
+    const t = this.exportsToCSFFile.get(e);
     if (t) return { type: 'meta', csfFile: t };
-    let o = this.exportToStory.get(nr(e) ? e.input : e);
+    const o = this.exportToStory.get(nr(e) ? e.input : e);
     return o
       ? { type: 'story', story: o }
       : { type: 'component', component: e };
@@ -10871,11 +10868,11 @@ CSF file?',
   resolveOf(e, t = []) {
     let o;
     if (['component', 'meta', 'story'].includes(e)) {
-      let s = e;
+      const s = e;
       o = this.resolveAttachedModuleExportType(s);
     } else o = this.resolveModuleExport(e);
     if (t.length && !t.includes(o.type)) {
-      let s = o.type === 'component' ? 'component or unknown' : o.type;
+      const s = o.type === 'component' ? 'component or unknown' : o.type;
       throw new Error(_`Invalid value passed to the 'of' prop. The value was resolved to a '${s}' type but the only types for this block are: ${t.join(
         ', ',
       )}.
@@ -10924,11 +10921,11 @@ var Ln = class Ln {
   }
   async prepare() {
     this.preparing = !0;
-    let { entryExports: e, csfFiles: t = [] } = await this.store.loadEntry(
+    const { entryExports: e, csfFiles: t = [] } = await this.store.loadEntry(
       this.id,
     );
     if (this.torndown) throw Ae;
-    let { importPath: o, title: s } = this.entry,
+    const { importPath: o, title: s } = this.entry,
       i = this.store.processCSFFileWithCache(e, o, s),
       a = Object.keys(i.stories)[0];
     (this.story = this.store.storyFromCSFFile({ storyId: a, csfFile: i })),
@@ -10940,19 +10937,19 @@ var Ln = class Ln {
   }
   docsContext(e) {
     if (!this.csfFiles) throw new Error('Cannot render docs before preparing');
-    let t = new me(this.channel, this.store, e, this.csfFiles);
+    const t = new me(this.channel, this.store, e, this.csfFiles);
     return this.csfFiles.forEach((o) => t.attachCSFFile(o)), t;
   }
   async renderToElement(e, t) {
     if (!this.story || !this.csfFiles)
       throw new Error('Cannot render docs before preparing');
-    let o = this.docsContext(t),
+    const o = this.docsContext(t),
       { docs: s } = this.story.parameters || {};
     if (!s)
       throw new Error(
         'Cannot render a story in viewMode=docs if `@storybook/addon-docs` is not installed',
       );
-    let i = await s.renderer(),
+    const i = await s.renderer(),
       { render: a } = i,
       c = /* @__PURE__ */ n(async () => {
         try {
@@ -10995,7 +10992,7 @@ var jn = class jn {
   }
   async prepare() {
     this.preparing = !0;
-    let { entryExports: e, csfFiles: t = [] } = await this.store.loadEntry(
+    const { entryExports: e, csfFiles: t = [] } = await this.store.loadEntry(
       this.id,
     );
     if (this.torndown) throw Ae;
@@ -11011,13 +11008,13 @@ var jn = class jn {
   async renderToElement(e, t) {
     if (!this.exports || !this.csfFiles || !this.store.projectAnnotations)
       throw new Error('Cannot render docs before preparing');
-    let o = this.docsContext(t),
+    const o = this.docsContext(t),
       { docs: s } = this.store.projectAnnotations.parameters || {};
     if (!s)
       throw new Error(
         'Cannot render a story in viewMode=docs if `@storybook/addon-docs` is not installed',
       );
-    let i = { ...s, page: this.exports.default },
+    const i = { ...s, page: this.exports.default },
       a = await s.renderer(),
       { render: c } = a,
       l = /* @__PURE__ */ n(async () => {
@@ -11045,7 +11042,7 @@ var Br = jn;
 // src/preview-api/modules/preview-web/PreviewWithSelection.tsx
 var lu = globalThis;
 function cu(r) {
-  let e = (r.composedPath && r.composedPath()[0]) || r.target;
+  const e = (r.composedPath && r.composedPath()[0]) || r.target;
   return (
     /input|textarea/i.test(e.tagName) ||
     e.getAttribute('contenteditable') !== null
@@ -11088,7 +11085,7 @@ var Un = class Un extends Me {
   }
   async setInitialGlobals() {
     if (!this.storyStoreValue) throw new V({ methodName: 'setInitialGlobals' });
-    let { globals: t } = this.selectionStore.selectionSpecifier || {};
+    const { globals: t } = this.selectionStore.selectionSpecifier || {};
     t && this.storyStoreValue.userGlobals.updateFromPersisted(t),
       this.emitGlobals();
   }
@@ -11110,7 +11107,8 @@ var Un = class Un extends Me {
       this.renderMissingStory();
       return;
     }
-    let { storySpecifier: t, args: o } = this.selectionStore.selectionSpecifier,
+    const { storySpecifier: t, args: o } =
+        this.selectionStore.selectionSpecifier,
       s = this.storyStoreValue.storyIndex.entryFromSpecifier(t);
     if (!s) {
       t === '*'
@@ -11121,7 +11119,7 @@ var Un = class Un extends Me {
           );
       return;
     }
-    let { id: i, type: a } = s;
+    const { id: i, type: a } = s;
     this.selectionStore.setSelection({ storyId: i, viewMode: a }),
       this.channel.emit(ao, this.selectionStore.selection),
       this.channel.emit(rt, this.selectionStore.selection),
@@ -11142,7 +11140,7 @@ var Un = class Un extends Me {
   }
   onKeydown(t) {
     if (!this.storyRenders.find((o) => o.disableKeyListeners) && !cu(t)) {
-      let {
+      const {
         altKey: o,
         ctrlKey: s,
         metaKey: i,
@@ -11174,7 +11172,7 @@ var Un = class Un extends Me {
     this.selectionStore.setQueryParams(t);
   }
   async onUpdateGlobals({ globals: t }) {
-    let o =
+    const o =
       (this.currentRender instanceof je && this.currentRender.story) || void 0;
     super.onUpdateGlobals({ globals: t, currentStory: o }),
       (this.currentRender instanceof Br || this.currentRender instanceof qr) &&
@@ -11197,10 +11195,10 @@ var Un = class Un extends Me {
   // - a story selected in "docs" viewMode,
   //     in which case we render the docsPage for that story
   async renderSelection({ persistedArgs: t } = {}) {
-    let { renderToCanvas: o } = this;
+    const { renderToCanvas: o } = this;
     if (!this.storyStoreValue || !o)
       throw new V({ methodName: 'renderSelection' });
-    let { selection: s } = this.selectionStore;
+    const { selection: s } = this.selectionStore;
     if (!s)
       throw new Error('Cannot call renderSelection as no selection was made');
     let { storyId: i } = s,
@@ -11212,7 +11210,7 @@ var Un = class Un extends Me {
         this.renderStoryLoadingException(i, S);
       return;
     }
-    let c = this.currentSelection?.storyId !== i,
+    const c = this.currentSelection?.storyId !== i,
       l = this.currentRender?.type !== a.type;
     a.type === 'story'
       ? this.view.showPreparingStory({ immediate: l })
@@ -11242,9 +11240,9 @@ var Un = class Un extends Me {
             a,
             this.mainStoryCallbacks(i),
           ));
-    let u = this.currentSelection;
+    const u = this.currentSelection;
     this.currentSelection = s;
-    let d = this.currentRender;
+    const d = this.currentRender;
     this.currentRender = p;
     try {
       await p.prepare();
@@ -11253,7 +11251,7 @@ var Un = class Un extends Me {
         S !== Ae && this.renderStoryLoadingException(i, S);
       return;
     }
-    let h = !c && d && !p.isEqual(d);
+    const h = !c && d && !p.isEqual(d);
     if (
       (t &&
         Mn(p) &&
@@ -11270,7 +11268,7 @@ var Un = class Un extends Me {
       Mn(p))
     ) {
       fe(!!p.story);
-      let {
+      const {
         parameters: S,
         initialArgs: m,
         argTypes: T,
@@ -11355,7 +11353,7 @@ var Un = class Un extends Me {
   }
   // renderException is used if we fail to render the story and it is uncaught by the app layer
   renderException(t, o) {
-    let { name: s = 'Error', message: i = String(o), stack: a } = o;
+    const { name: s = 'Error', message: i = String(o), stack: a } = o;
     this.channel.emit(lo, { name: s, message: i, stack: a }),
       this.channel.emit(Pe, { newPhase: 'errored', storyId: t }),
       this.view.showErrorDisplay(o),
@@ -11428,7 +11426,7 @@ var pa = /^[a-zA-Z0-9 _-]*$/,
           return new Date(r.replaceAll(' ', '+').slice(6, -1));
         if (r.startsWith('!hex(') && r.endsWith(')'))
           return `#${r.slice(5, -1)}`;
-        let e = r.slice(1).match(fa);
+        const e = r.slice(1).match(fa);
         if (e)
           return r.startsWith('!rgba') || r.startsWith('!RGBA')
             ? `${e[1]}(${e[2]}, ${e[3]}, ${e[4]}, ${e[5]})`
@@ -11443,7 +11441,7 @@ var pa = /^[a-zA-Z0-9 _-]*$/,
     },
   },
   $n = /* @__PURE__ */ n((r) => {
-    let e = r.split(';').map((t) => t.replace('=', '~').replace(':', '='));
+    const e = r.split(';').map((t) => t.replace('=', '~').replace(':', '='));
     return Object.entries((0, da.parse)(e.join(';'), Gu)).reduce(
       (t, [o, s]) =>
         Wn(o, s)
@@ -11461,13 +11459,13 @@ var pa = /^[a-zA-Z0-9 _-]*$/,
 // src/preview-api/modules/preview-web/UrlStore.ts
 var { history: ya, document: xe } = E;
 function qu(r) {
-  let e = (r || '').match(/^\/story\/(.+)/);
+  const e = (r || '').match(/^\/story\/(.+)/);
   if (!e) throw new Error(`Invalid path '${r}',  must start with '/story/'`);
   return e[1];
 }
 n(qu, 'pathToId');
 var ma = /* @__PURE__ */ n(({ selection: r, extraParams: e }) => {
-    let t = xe?.location.search.slice(1),
+    const t = xe?.location.search.slice(1),
       { path: o, selectedKind: s, selectedStory: i, ...a } = (0, Hr.parse)(t);
     return `?${(0, Hr.stringify)({
       ...a,
@@ -11477,7 +11475,7 @@ var ma = /* @__PURE__ */ n(({ selection: r, extraParams: e }) => {
   }, 'getQueryString'),
   Bu = /* @__PURE__ */ n((r) => {
     if (!r) return;
-    let e = ma({ selection: r }),
+    const e = ma({ selection: r }),
       { hash: t = '' } = xe.location;
     (xe.title = r.storyId),
       ya.replaceState({}, '', `${xe.location.pathname}${e}${t}`);
@@ -11506,7 +11504,7 @@ string'
             : void 0,
         s = Vr(e.viewMode);
       (typeof s != 'string' || !s.match(/docs|story/)) && (s = 'story');
-      let i = Vr(e.path),
+      const i = Vr(e.path),
         a = i ? qu(i) : Vr(e.id);
       if (a) return { storySpecifier: a, args: t, globals: o, viewMode: s };
     }
@@ -11520,7 +11518,7 @@ string'
       (this.selection = e), Bu(this.selection);
     }
     setQueryParams(e) {
-      let t = ma({ extraParams: e }),
+      const t = ma({ extraParams: e }),
         { hash: o = '' } = xe.location;
       ya.replaceState({}, '', `${xe.location.pathname}${t}${o}`);
     }
@@ -11562,7 +11560,7 @@ STORY'),
     constructor() {
       this.testing = !1;
       if (typeof z < 'u') {
-        let { __SPECIAL_TEST_PARAMETER__: e } = (0, Ya.parse)(
+        const { __SPECIAL_TEST_PARAMETER__: e } = (0, Ya.parse)(
           z.location.search.slice(1),
         );
         switch (e) {
@@ -11611,7 +11609,7 @@ STORY'),
         return;
       }
       this.checkIfLayoutExists(e);
-      let t = ts[e];
+      const t = ts[e];
       z.body.classList.remove(this.currentLayoutClass),
         z.body.classList.add(t),
         (this.currentLayoutClass = t);
@@ -11738,12 +11736,12 @@ var { document: ze } = E,
   _f = 'script',
   Xa = 'scripts-root';
 function $r() {
-  let r = ze.createEvent('Event');
+  const r = ze.createEvent('Event');
   r.initEvent('DOMContentLoaded', !0, !0), ze.dispatchEvent(r);
 }
 n($r, 'simulateDOMContentLoaded');
 function Cf(r, e, t) {
-  let o = ze.createElement('script');
+  const o = ze.createElement('script');
   (o.type = r.type === 'module' ? 'module' : 'text/javascript'),
     r.src
       ? ((o.onload = e), (o.onerror = e), (o.src = r.src))
@@ -11764,11 +11762,11 @@ function ss(r) {
   e
     ? (e.innerHTML = '')
     : ((e = ze.createElement('div')), (e.id = Xa), ze.body.appendChild(e));
-  let t = Array.from(r.querySelectorAll(_f));
+  const t = Array.from(r.querySelectorAll(_f));
   if (t.length) {
-    let o = [];
+    const o = [];
     t.forEach((s) => {
-      let i = s.getAttribute('type');
+      const i = s.getAttribute('type');
       (!i || wf.includes(i)) && o.push((a) => Cf(s, a, e));
     }),
       o.length && Ja(o, $r, void 0);
@@ -11815,7 +11813,7 @@ n(rl, 'prepareForTelemetry');
 
 // src/preview/runtime.ts
 function Of(r) {
-  let e = r.error || r;
+  const e = r.error || r;
   e.fromStorybook && E.sendTelemetryError(e);
 }
 n(Of, 'errorListener');

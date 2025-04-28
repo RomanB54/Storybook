@@ -105,7 +105,7 @@
       };
       var config = { depth: 10, clearOnStoryChange: !0, limit: 50 },
         findProto = (obj, callback) => {
-          let proto = Object.getPrototypeOf(obj);
+          const proto = Object.getPrototypeOf(obj);
           return !proto || callback(proto) ? proto : findProto(proto, callback);
         },
         serializeArg = (a) => {
@@ -117,12 +117,12 @@
             ) &&
             'function' == typeof e.persist
           ) {
-            let e = Object.create(
+            const e = Object.create(
               a.constructor.prototype,
               Object.getOwnPropertyDescriptors(a),
             );
             e.persist();
-            let viewDescriptor = Object.getOwnPropertyDescriptor(e, 'view'),
+            const viewDescriptor = Object.getOwnPropertyDescriptor(e, 'view'),
               view = viewDescriptor?.value;
             return (
               'object' == typeof view &&
@@ -138,10 +138,10 @@
           return a;
         };
       function action(name, options = {}) {
-        let actionOptions = { ...config, ...options },
+        const actionOptions = { ...config, ...options },
           handler = function (...args) {
             if (options.implicit) {
-              let storyRenderer = (
+              const storyRenderer = (
                 '__STORYBOOK_PREVIEW__' in
                 external_STORYBOOK_MODULE_GLOBAL_.global
                   ? external_STORYBOOK_MODULE_GLOBAL_.global
@@ -152,7 +152,7 @@
                   'playing' === render.phase || 'rendering' === render.phase,
               );
               if (storyRenderer) {
-                let deprecated =
+                const deprecated =
                     !globalThis?.FEATURES?.disallowImplicitActionsInRenderV8,
                   error =
                     new external_STORYBOOK_MODULE_CORE_EVENTS_PREVIEW_ERRORS_.ImplicitActionsDuringRendering(
@@ -162,7 +162,7 @@
                 console.warn(error);
               }
             }
-            let channel =
+            const channel =
                 external_STORYBOOK_MODULE_PREVIEW_API_.addons.getChannel(),
               id =
                 'object' == typeof crypto &&
@@ -195,7 +195,7 @@
           typeof initialArgs[name] > 'u' && !(name in initialArgs),
         argsEnhancers = [
           (context) => {
-            let {
+            const {
               initialArgs,
               argTypes,
               parameters: { actions },
@@ -218,7 +218,7 @@
                   );
           },
           (context) => {
-            let {
+            const {
               initialArgs,
               argTypes,
               id,
@@ -231,7 +231,7 @@
               !argTypes
             )
               return {};
-            let argTypesRegex = new RegExp(actions.argTypesRegex);
+            const argTypesRegex = new RegExp(actions.argTypesRegex);
             return Object.entries(argTypes)
               .filter(([name]) => !!argTypesRegex.test(name))
               .reduce(
@@ -247,7 +247,7 @@
         subscribed = !1,
         loaders = [
           (context) => {
-            let {
+            const {
               parameters: { actions },
             } = context;
             if (
@@ -262,7 +262,7 @@
               (0,
               external_STORYBOOK_MODULE_GLOBAL_.global
                 .__STORYBOOK_TEST_ON_MOCK_CALL__)((mock, args) => {
-                let name = mock.getMockName();
+                const name = mock.getMockName();
                 'spy' !== name &&
                   (!/^next\/.*::/.test(name) ||
                     [
@@ -317,28 +317,28 @@
           (Array.isArray(selector) ? selector : [selector]).forEach(clearStyle);
         },
         clearStyle = (selector) => {
-          let element = preview_document.getElementById(selector);
+          const element = preview_document.getElementById(selector);
           element && element.parentElement?.removeChild(element);
         },
         addGridStyle = (selector, css) => {
-          let existingStyle = preview_document.getElementById(selector);
+          const existingStyle = preview_document.getElementById(selector);
           if (existingStyle)
             existingStyle.innerHTML !== css && (existingStyle.innerHTML = css);
           else {
-            let style = preview_document.createElement('style');
+            const style = preview_document.createElement('style');
             style.setAttribute('id', selector),
               (style.innerHTML = css),
               preview_document.head.appendChild(style);
           }
         },
         addBackgroundStyle = (selector, css, storyId) => {
-          let existingStyle = preview_document.getElementById(selector);
+          const existingStyle = preview_document.getElementById(selector);
           if (existingStyle)
             existingStyle.innerHTML !== css && (existingStyle.innerHTML = css);
           else {
-            let style = preview_document.createElement('style');
+            const style = preview_document.createElement('style');
             style.setAttribute('id', selector), (style.innerHTML = css);
-            let gridStyleSelector =
+            const gridStyleSelector =
                 'addon-backgrounds-grid' + (storyId ? `-docs-${storyId}` : ''),
               existingGridStyle =
                 preview_document.getElementById(gridStyleSelector);
@@ -414,14 +414,14 @@
                   shownBackground,
                   value,
                 ]);
-                let gridSelectorId =
+                const gridSelectorId =
                   'docs' === viewMode
                     ? `addon-backgrounds-grid-docs-${id}`
                     : 'addon-backgrounds-grid';
                 return (
                   (0, external_STORYBOOK_MODULE_PREVIEW_API_.useEffect)(() => {
                     if (!showGrid) return void clearStyles(gridSelectorId);
-                    let gridSize = [
+                    const gridSize = [
                       `${cellSize * cellAmount}px ${cellSize * cellAmount}px`,
                       `${cellSize * cellAmount}px ${cellSize * cellAmount}px`,
                       `${cellSize}px ${cellSize}px`,
@@ -471,7 +471,7 @@
                   );
                 return (
                   (0, external_STORYBOOK_MODULE_PREVIEW_API_.useEffect)(() => {
-                    let selectorId =
+                    const selectorId =
                       'docs' === context.viewMode
                         ? `addon-backgrounds-grid-docs-${context.id}`
                         : 'addon-backgrounds-grid';
@@ -506,13 +506,13 @@
                               currentSelectedValue
                             )
                               return currentSelectedValue;
-                            let defaultBackground = backgrounds.find(
+                            const defaultBackground = backgrounds.find(
                               (background) => background.name === defaultName,
                             );
                             if (defaultBackground)
                               return defaultBackground.value;
                             if (defaultName) {
-                              let availableColors = backgrounds
+                              const availableColors = backgrounds
                                 .map((background) => background.name)
                                 .join(', ');
                               external_STORYBOOK_MODULE_CLIENT_LOGGER_.logger
@@ -549,7 +549,7 @@
                   );
                 return (
                   (0, external_STORYBOOK_MODULE_PREVIEW_API_.useEffect)(() => {
-                    let selectorId =
+                    const selectorId =
                       'docs' === context.viewMode
                         ? `addon-backgrounds-docs-${context.id}`
                         : 'addon-backgrounds-color';
@@ -595,7 +595,7 @@
       ).VA)({}, { parameters: () => parameters });
       var excludeTags = Object.entries(globalThis.TAGS_OPTIONS ?? {}).reduce(
           (acc, entry) => {
-            let [tag, option] = entry;
+            const [tag, option] = entry;
             return option.excludeFromDocsStories && (acc[tag] = !0), acc;
           },
           {},
@@ -603,7 +603,7 @@
         parameters = {
           docs: {
             renderer: async () => {
-              let { DocsRenderer } = await Promise.all([
+              const { DocsRenderer } = await Promise.all([
                 __webpack_require__.e(844),
                 __webpack_require__.e(735),
                 __webpack_require__.e(167),
@@ -642,7 +642,7 @@
           external_STORYBOOK_MODULE_GLOBAL_.global,
         channel = external_STORYBOOK_MODULE_PREVIEW_API_.addons.getChannel(),
         resetHighlight = () => {
-          let sheetToBeRemoved =
+          const sheetToBeRemoved =
             preview_document.getElementById('storybookHighlight');
           sheetToBeRemoved &&
             sheetToBeRemoved.parentNode?.removeChild(sheetToBeRemoved);
@@ -654,7 +654,7 @@
         channel.on('storybook/highlight/reset', resetHighlight),
         channel.on('storybook/highlight/add', (infos) => {
           resetHighlight();
-          let elements = Array.from(new Set(infos.elements)),
+          const elements = Array.from(new Set(infos.elements)),
             sheet = preview_document.createElement('style');
           sheet.setAttribute('id', 'storybookHighlight'),
             (sheet.innerHTML = elements
@@ -688,7 +688,7 @@
       }
       var PARAM_KEY = 'measureEnabled';
       function getDocumentWidthAndHeight() {
-        let container =
+        const container =
             external_STORYBOOK_MODULE_GLOBAL_.global.document.documentElement,
           height = Math.max(container.scrollHeight, container.offsetHeight);
         return {
@@ -699,7 +699,7 @@
       function setCanvasWidthAndHeight(canvas, context, { width, height }) {
         (canvas.style.width = `${width}px`),
           (canvas.style.height = `${height}px`);
-        let scale =
+        const scale =
           external_STORYBOOK_MODULE_GLOBAL_.global.window.devicePixelRatio;
         (canvas.width = Math.floor(width * scale)),
           (canvas.height = Math.floor(height * scale)),
@@ -709,14 +709,14 @@
       function init() {
         state.canvas ||
           (state = (function createCanvas() {
-            let canvas =
+            const canvas =
               external_STORYBOOK_MODULE_GLOBAL_.global.document.createElement(
                 'canvas',
               );
             canvas.id = 'storybook-addon-measure';
-            let context = canvas.getContext('2d');
+            const context = canvas.getContext('2d');
             invariant(null != context);
-            let { width, height } = getDocumentWidthAndHeight();
+            const { width, height } = getDocumentWidthAndHeight();
             return (
               setCanvasWidthAndHeight(canvas, context, { width, height }),
               (canvas.style.position = 'absolute'),
@@ -778,7 +778,7 @@
         (context.font = '600 12px monospace'),
           (context.textBaseline = 'middle'),
           (context.textAlign = 'center');
-        let metrics = context.measureText(text),
+        const metrics = context.measureText(text),
           actualHeight =
             metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent;
         return { w: metrics.width + 12, h: actualHeight + 12 };
@@ -860,7 +860,7 @@
             );
           })(type, position, measurements, 7, external);
         (x += offsetX), (y += offsetY);
-        let { w, h } = configureText(context, text);
+        const { w, h } = configureText(context, text);
         if (
           prevRect &&
           (function collide(a, b) {
@@ -870,7 +870,7 @@
             );
           })({ x, y, w, h }, prevRect)
         ) {
-          let adjusted = (function overlapAdjustment(
+          const adjusted = (function overlapAdjustment(
             position,
             currentRect,
             prevRect,
@@ -894,9 +894,9 @@
         return textWithRect(context, type, { x, y, w, h }, text);
       }
       function drawStack(context, measurements, stack, external) {
-        let rects = [];
+        const rects = [];
         stack.forEach((l, idx) => {
-          let rect =
+          const rect =
             external && 'center' === l.position
               ? (function drawFloatingLabel(
                   context,
@@ -912,7 +912,7 @@
                       alignment,
                       { w, h },
                     ) {
-                      let deltaW = 0.5 * w + 6,
+                      const deltaW = 0.5 * w + 6,
                         deltaH = 0.5 * h + 6;
                       return {
                         offsetX: ('left' === alignment.x ? -1 : 1) * deltaW,
@@ -943,7 +943,7 @@
         return labels.filter((l) => 0 !== l.text && '0' !== l.text);
       }
       function floatingAlignment(extremities) {
-        let windowExtremities_top =
+        const windowExtremities_top =
             external_STORYBOOK_MODULE_GLOBAL_.global.window.scrollY,
           windowExtremities_bottom =
             external_STORYBOOK_MODULE_GLOBAL_.global.window.scrollY +
@@ -969,7 +969,7 @@
       function drawBoxModel(element) {
         return (context) => {
           if (element && context) {
-            let measurements = (function measureElement(element) {
+            const measurements = (function measureElement(element) {
                 let style =
                     external_STORYBOOK_MODULE_GLOBAL_.global.getComputedStyle(
                       element,
@@ -998,7 +998,7 @@
                     external_STORYBOOK_MODULE_GLOBAL_.global.window.scrollY),
                   (right +=
                     external_STORYBOOK_MODULE_GLOBAL_.global.window.scrollX);
-                let margin = {
+                const margin = {
                     top: pxToNumber(marginTop),
                     bottom: pxToNumber(marginBottom),
                     left: pxToNumber(marginLeft),
@@ -1040,7 +1040,7 @@
                 context,
                 { margin, width, height, top, left, bottom, right },
               ) {
-                let marginHeight = height + margin.bottom + margin.top;
+                const marginHeight = height + margin.bottom + margin.top;
                 return (
                   (context.fillStyle = colors2_margin),
                   context.fillRect(left, top - margin.top, width, margin.top),
@@ -1085,7 +1085,7 @@
                 context,
                 { padding, border, width, height, top, left, bottom, right },
               ) {
-                let paddingWidth = width - border.left - border.right,
+                const paddingWidth = width - border.left - border.right,
                   paddingHeight =
                     height -
                     padding.top -
@@ -1134,7 +1134,7 @@
                 context,
                 { border, width, height, top, left, bottom, right },
               ) {
-                let borderHeight = height - border.top - border.bottom;
+                const borderHeight = height - border.top - border.bottom;
                 return (
                   (context.fillStyle = colors2_border),
                   context.fillRect(left, top, width, border.top),
@@ -1168,7 +1168,7 @@
                 context,
                 { padding, border, width, height, top, left },
               ) {
-                let contentWidth =
+                const contentWidth =
                     width -
                     border.left -
                     border.right -
@@ -1203,7 +1203,7 @@
               labels,
               externalLabels,
             ) {
-              let stacks = labels.reduce(
+              const stacks = labels.reduce(
                 (acc, l) => (
                   Object.prototype.hasOwnProperty.call(acc, l.position) ||
                     (acc[l.position] = []),
@@ -1260,14 +1260,14 @@
         pointer = { x: 0, y: 0 };
       function findAndDrawElement(x, y) {
         (nodeAtPointerRef = ((x, y) => {
-          let element =
+          const element =
               external_STORYBOOK_MODULE_GLOBAL_.global.document.elementFromPoint(
                 x,
                 y,
               ),
             crawlShadows = (node) => {
               if (node && node.shadowRoot) {
-                let nestedElement = node.shadowRoot.elementFromPoint(x, y);
+                const nestedElement = node.shadowRoot.elementFromPoint(x, y);
                 return node.isEqualNode(nestedElement)
                   ? node
                   : nestedElement.shadowRoot
@@ -1282,10 +1282,10 @@
       }
       var decorators = [
           (StoryFn, context) => {
-            let { measureEnabled } = context.globals;
+            const { measureEnabled } = context.globals;
             return (
               (0, external_STORYBOOK_MODULE_PREVIEW_API_.useEffect)(() => {
-                let onPointerMove = (event) => {
+                const onPointerMove = (event) => {
                   window.requestAnimationFrame(() => {
                     event.stopPropagation(),
                       (pointer.x = event.clientX),
@@ -1300,7 +1300,7 @@
                 );
               }, []),
               (0, external_STORYBOOK_MODULE_PREVIEW_API_.useEffect)(() => {
-                let onResize = () => {
+                const onResize = () => {
                   window.requestAnimationFrame(() => {
                     !(function rescale() {
                       invariant(state.canvas),
@@ -1309,7 +1309,7 @@
                           width: 0,
                           height: 0,
                         });
-                      let { width, height } = getDocumentWidthAndHeight();
+                      const { width, height } = getDocumentWidthAndHeight();
                       setCanvasWidthAndHeight(state.canvas, state.context, {
                         width,
                         height,
@@ -1370,7 +1370,7 @@
           (Array.isArray(selector) ? selector : [selector]).forEach(clearStyle);
         },
         clearStyle = (input) => {
-          let selector = 'string' == typeof input ? input : input.join(''),
+          const selector = 'string' == typeof input ? input : input.join(''),
             element =
               external_STORYBOOK_MODULE_GLOBAL_.global.document.getElementById(
                 selector,
@@ -1789,13 +1789,13 @@
               );
             return (
               (0, external_STORYBOOK_MODULE_PREVIEW_API_.useEffect)(() => {
-                let selectorId = isInDocs
+                const selectorId = isInDocs
                   ? `addon-outline-docs-${context.id}`
                   : 'addon-outline';
                 return (
                   isActive
                     ? ((selector, css) => {
-                        let existingStyle =
+                        const existingStyle =
                           external_STORYBOOK_MODULE_GLOBAL_.global.document.getElementById(
                             selector,
                           );
@@ -1803,7 +1803,7 @@
                           existingStyle.innerHTML !== css &&
                             (existingStyle.innerHTML = css);
                         else {
-                          let style =
+                          const style =
                             external_STORYBOOK_MODULE_GLOBAL_.global.document.createElement(
                               'style',
                             );
@@ -1992,7 +1992,7 @@
           (t = null != e ? b(O(e)) : {}),
           ((e, r, t, n) => {
             if ((r && 'object' == typeof r) || 'function' == typeof r)
-              for (let a of P(r))
+              for (const a of P(r))
                 !_.call(e, a) &&
                   a !== t &&
                   f(e, a, {
@@ -2012,7 +2012,7 @@
           'count',
         ),
         E = s((e, r) => {
-          let { exists: t, eq: n, neq: a, truthy: d } = e;
+          const { exists: t, eq: n, neq: a, truthy: d } = e;
           if (x([t, n, a, d]) > 1)
             throw new Error(
               `Invalid conditional test ${JSON.stringify({ exists: t, eq: n, neq: a })}`,
@@ -2020,19 +2020,19 @@
           if (typeof n < 'u') return (0, y.isEqual)(r, n);
           if (typeof a < 'u') return !(0, y.isEqual)(r, a);
           if (typeof t < 'u') {
-            let i = typeof r < 'u';
+            const i = typeof r < 'u';
             return t ? i : !i;
           }
           return typeof d > 'u' || d ? !!r : !r;
         }, 'testValue'),
         z = s((e, r, t) => {
           if (!e.if) return !0;
-          let { arg: n, global: a } = e.if;
+          const { arg: n, global: a } = e.if;
           if (1 !== x([n, a]))
             throw new Error(
               `Invalid conditional value ${JSON.stringify({ arg: n, global: a })}`,
             );
-          let d = n ? r[n] : t[a];
+          const d = n ? r[n] : t[a];
           return E(e.if, d);
         }, 'includeConditionalArg');
       function W(e) {
@@ -2073,7 +2073,7 @@
             input: e,
             get composed() {
               if (r) return r;
-              let { addons: n, ...a } = e;
+              const { addons: n, ...a } = e;
               return (
                 (r = (0,
                 _storybook_core_preview_api__WEBPACK_IMPORTED_MODULE_0__.normalizeProjectAnnotations)(
@@ -2164,7 +2164,7 @@
             case 'function':
               return { name: 'function' };
             case 'object':
-              let t = {};
+              const t = {};
               return (
                 e.signature.properties.forEach((r) => {
                   t[r.key] = d(r.value);
@@ -2203,10 +2203,10 @@
           }
         }, 'convert');
       function j(e, t) {
-        let r = {},
+        const r = {},
           n = Object.keys(e);
         for (let s = 0; s < n.length; s++) {
-          let i = n[s],
+          const i = n[s],
             p = e[i];
           r[i] = t(p, i, e);
         }
@@ -2217,7 +2217,7 @@
         Se = o((e) => e.replace(W, ''), 'trimQuotes'),
         Oe = o((e) => W.test(e), 'includesQuotes'),
         h = o((e) => {
-          let t = Se(e);
+          const t = Se(e);
           return Oe(e) || Number.isNaN(Number(t)) ? t : Number(t);
         }, 'parseLiteral'),
         ve = /^\(.*\) => /,
@@ -2226,7 +2226,7 @@
             i = {};
           switch ((typeof r < 'u' && (i.raw = r), t)) {
             case 'enum': {
-              let a = n ? s : s.map((c) => h(c.value));
+              const a = n ? s : s.map((c) => h(c.value));
               return { ...i, name: t, value: a };
             }
             case 'string':
@@ -2246,17 +2246,17 @@
               return { ...i, name: t, value: x(s) };
             case 'shape':
             case 'exact':
-              let p = j(s, (a) => x(a));
+              const p = j(s, (a) => x(a));
               return { ...i, name: 'object', value: p };
             case 'union':
               return { ...i, name: 'union', value: s.map((a) => x(a)) };
             default: {
               if (t?.indexOf('|') > 0)
                 try {
-                  let u = t.split('|').map((m) => JSON.parse(m));
+                  const u = t.split('|').map((m) => JSON.parse(m));
                   return { ...i, name: 'enum', value: u };
                 } catch {}
-              let a = s ? `${t}(${s})` : t,
+              const a = s ? `${t}(${s})` : t,
                 c = ve.test(t) ? 'function' : 'other';
               return { ...i, name: c, value: a };
             }
@@ -2267,7 +2267,7 @@
             case 'function':
               return { name: 'function' };
             case 'object':
-              let t = {};
+              const t = {};
               return (
                 e.signature.properties.forEach((r) => {
                   t[r.key] = D(r.value);
@@ -2312,7 +2312,7 @@
           }
         }, 'convert'),
         b = o((e) => {
-          let { type: t, tsType: r, flowType: n } = e;
+          const { type: t, tsType: r, flowType: n } = e;
           try {
             if (null != t) return x(t);
             if (null != r) return D(r);
@@ -2359,13 +2359,13 @@
         return /^\s+$/.test(e);
       }
       function G(e) {
-        let t = e.match(/\r+$/);
+        const t = e.match(/\r+$/);
         return null == t
           ? ['', e]
           : [e.slice(-t[0].length), e.slice(0, -t[0].length)];
       }
       function y(e) {
-        let t = e.match(/^\s+/);
+        const t = e.match(/^\s+/);
         return null == t
           ? ['', e]
           : [e.slice(0, t[0].length), e.slice(t[0].length)];
@@ -2422,12 +2422,12 @@
         o(F, 'seedTokens');
       var Fe = /^@\S+/;
       function J({ fence: e = '```' } = {}) {
-        let t = Je(e),
+        const t = Je(e),
           r = o((n, s) => (t(n) ? !s : s), 'toggleFence');
         return o(function (s) {
           let i = [[]],
             p = !1;
-          for (let a of s)
+          for (const a of s)
             Fe.test(a.tokens.description) && !p
               ? i.push([a])
               : i[i.length - 1].push(a),
@@ -2457,7 +2457,7 @@
             null === r)
           )
             return n++, null;
-          let c = p.trimRight().endsWith(t.end);
+          const c = p.trimRight().endsWith(t.end);
           if (
             ('' === a.delimiter &&
               p.startsWith(t.delim) &&
@@ -2467,7 +2467,7 @@
               ([a.postDelimiter, p] = y(p))),
             c)
           ) {
-            let u = p.trimRight();
+            const u = p.trimRight();
             (a.end = p.slice(u.length - t.end.length)),
               (p = u.slice(0, -t.end.length));
           }
@@ -2477,7 +2477,7 @@
             n++,
             c)
           ) {
-            let u = r.slice();
+            const u = r.slice();
             return (r = null), u;
           }
           return null;
@@ -2487,7 +2487,7 @@
         return o(function (r) {
           var n;
           let s = X({ source: r });
-          for (let i of e)
+          for (const i of e)
             if (
               ((s = i(s)),
               null !== (n = s.problems[s.problems.length - 1]) &&
@@ -2500,7 +2500,7 @@
       }
       function P() {
         return (e) => {
-          let { tokens: t } = e.source[0],
+          const { tokens: t } = e.source[0],
             r = t.description.match(/\s*(@(\S+))(\s*)/);
           return null === r
             ? (e.problems.push({
@@ -2518,14 +2518,14 @@
         };
       }
       function S(e = 'compact') {
-        let t = Re(e);
+        const t = Re(e);
         return (r) => {
           let n = 0,
             s = [];
-          for (let [a, { tokens: c }] of r.source.entries()) {
+          for (const [a, { tokens: c }] of r.source.entries()) {
             let u = '';
             if (0 === a && '{' !== c.description[0]) return r;
-            for (let m of c.description)
+            for (const m of c.description)
               if (('{' === m && n++, '}' === m && n--, (u += m), 0 === n))
                 break;
             if ((s.push([c, u]), 0 === n)) break;
@@ -2540,9 +2540,9 @@
               }),
               r
             );
-          let i = [],
+          const i = [],
             p = s[0][0].postDelimiter.length;
-          for (let [a, [c, u]] of s.entries())
+          for (const [a, [c, u]] of s.entries())
             (c.type = u),
               a > 0 &&
                 ((c.type = c.postDelimiter.slice(p) + u),
@@ -2574,9 +2574,12 @@
       o(Re, 'getJoiner');
       var Ae = o((e) => e && e.startsWith('"') && e.endsWith('"'), 'isQuoted');
       function O() {
-        let e = o((t, { tokens: r }, n) => ('' === r.type ? t : n), 'typeEnd');
+        const e = o(
+          (t, { tokens: r }, n) => ('' === r.type ? t : n),
+          'typeEnd',
+        );
         return (t) => {
-          let { tokens: r } = t.source[t.source.reduce(e, 0)],
+          const { tokens: r } = t.source[t.source.reduce(e, 0)],
             n = r.description.trimLeft(),
             s = n.split('"');
           if (s.length > 1 && '' === s[0] && s.length % 2 == 1)
@@ -2590,7 +2593,7 @@
             i = 0,
             p = '',
             a = !1;
-          for (let m of n) {
+          for (const m of n) {
             if (0 === i && k(m)) break;
             '[' === m && i++, ']' === m && i--, (p += m);
           }
@@ -2604,10 +2607,10 @@
               }),
               t
             );
-          let u = p;
+          const u = p;
           if ('[' === p[0] && ']' === p[p.length - 1]) {
             (a = !0), (p = p.slice(1, -1));
-            let m = p.split('=');
+            const m = p.split('=');
             if (
               ((p = m[0].trim()),
               void 0 !== m[1] && (c = m.slice(1).join('=').trim()),
@@ -2654,7 +2657,7 @@
         };
       }
       function v(e = 'compact', t = f) {
-        let r = A(e);
+        const r = A(e);
         return (n) => ((n.description = r(n.source, t)), n);
       }
       function A(e) {
@@ -2682,7 +2685,7 @@
         '' === e[0].tokens.description &&
           e[0].tokens.delimiter === t.start &&
           (e = e.slice(1));
-        let r = e[e.length - 1];
+        const r = e[e.length - 1];
         return (
           void 0 !== r &&
             '' === r.tokens.description &&
@@ -2698,7 +2701,7 @@
         markers: n = f,
         tokenizers: s = [
           (e) => {
-            let { tokens: t } = e.source[0],
+            const { tokens: t } = e.source[0],
               r = t.description.match(/\s*(@(\S+))(\s*)/);
             return null === r
               ? (e.problems.push({
@@ -2720,16 +2723,16 @@
         ],
       } = {}) {
         if (e < 0 || e % 1 > 0) throw new Error('Invalid startLine');
-        let i = N({ startLine: e, markers: n }),
+        const i = N({ startLine: e, markers: n }),
           p = J({ fence: t }),
           a = R({ tokenizers: s }),
           c = A(r);
         return function (u) {
-          let m = [];
-          for (let ge of K(u)) {
-            let E = i(ge);
+          const m = [];
+          for (const ge of K(u)) {
+            const E = i(ge);
             if (null === E) continue;
-            let L = p(E),
+            const L = p(E),
               U = L.slice(1).map(a);
             m.push({
               description: c(L[0], n),
@@ -2788,7 +2791,7 @@
         return null != e && e.includes('@');
       }
       function $e(e) {
-        let s = H(
+        const s = H(
           '/**\n' +
             (e ?? '')
               .split('\n')
@@ -2806,7 +2809,7 @@
         },
         Q = o((e, t = Ye) => {
           if (!ze(e)) return { includesJsDoc: !1, ignore: !1 };
-          let r = $e(e),
+          const r = $e(e),
             n = qe(r, t.tags);
           return n.ignore
             ? { includesJsDoc: !0, ignore: !0 }
@@ -2818,8 +2821,8 @@
               };
         }, 'parseJsDoc');
       function qe(e, t) {
-        let r = { params: null, deprecated: null, returns: null, ignore: !1 };
-        for (let n of e.tags)
+        const r = { params: null, deprecated: null, returns: null, ignore: !1 };
+        for (const n of e.tags)
           if (void 0 === t || t.includes(n.tag)) {
             if ('ignore' === n.tag) {
               r.ignore = !0;
@@ -2829,18 +2832,18 @@
               case 'param':
               case 'arg':
               case 'argument': {
-                let s = Ke(n);
+                const s = Ke(n);
                 null != s &&
                   (null == r.params && (r.params = []), r.params.push(s));
                 break;
               }
               case 'deprecated': {
-                let s = Xe(n);
+                const s = Xe(n);
                 null != s && (r.deprecated = s);
                 break;
               }
               case 'returns': {
-                let s = He(n);
+                const s = He(n);
                 null != s && (r.returns = s);
                 break;
               }
@@ -2853,7 +2856,7 @@
       }
       function Ke(e) {
         if (!e.name || '-' === e.name) return null;
-        let t = te(e.type);
+        const t = te(e.type);
         return {
           name: e.name,
           type: t,
@@ -2869,11 +2872,11 @@
         return ee('' === e ? t : `${e} ${t}`);
       }
       function ee(e) {
-        let t = e.replace(/^- /g, '').trim();
+        const t = e.replace(/^- /g, '').trim();
         return '' === t ? null : t;
       }
       function He(e) {
-        let t = te(e.type);
+        const t = te(e.type);
         return t
           ? {
               type: t,
@@ -2929,7 +2932,7 @@
         o(l, 'createSummaryValue');
       function ne(e, t) {
         if (null != e) {
-          let { value: r } = e;
+          const { value: r } = e;
           if (!T(r)) return oe(r) ? l(t?.name, r) : l(r);
         }
         return null;
@@ -2953,7 +2956,7 @@
         return null != t ? (B(t) ? l(e, t) : l(t)) : l(e);
       }
       function rt(e) {
-        let { type: t } = e;
+        const { type: t } = e;
         return 'object' === t ? tt(e) : et(e);
       }
       function ot({ name: e, raw: t }) {
@@ -2979,7 +2982,7 @@
         o(ot, 'generateDefault'),
         o(ie, 'createType');
       var pe = o((e, t) => {
-        let { flowType: r, description: n, required: s, defaultValue: i } = t;
+        const { flowType: r, description: n, required: s, defaultValue: i } = t;
         return {
           name: e,
           type: ie(r),
@@ -2990,7 +2993,7 @@
       }, 'createFlowPropDef');
       function ae({ defaultValue: e }) {
         if (null != e) {
-          let { value: t } = e;
+          const { value: t } = e;
           if (!T(t)) return l(t);
         }
         return null;
@@ -3005,7 +3008,7 @@
       }
       o(ae, 'createDefaultValue'), o(ce, 'createType');
       var le = o((e, t) => {
-        let { description: r, required: n } = t;
+        const { description: r, required: n } = t;
         return {
           name: e,
           type: ce(t),
@@ -3018,7 +3021,7 @@
         return null != e ? l(e.name) : null;
       }
       function st(e) {
-        let { computed: t, func: r } = e;
+        const { computed: t, func: r } = e;
         return typeof t > 'u' && typeof r > 'u';
       }
       function it(e) {
@@ -3037,13 +3040,13 @@
       }
       function pt(e, t) {
         if (null != e) {
-          let { value: r } = e;
+          const { value: r } = e;
           if (!T(r)) return st(e) && it(t) ? l(JSON.stringify(r)) : l(r);
         }
         return null;
       }
       function ue(e, t, r) {
-        let { description: n, required: s, defaultValue: i } = r;
+        const { description: n, required: s, defaultValue: i } = r;
         return {
           name: e,
           type: nt(t),
@@ -3054,9 +3057,9 @@
       }
       function w(e, t) {
         if (t?.includesJsDoc) {
-          let { description: r, extractedTags: n } = t;
+          const { description: r, extractedTags: n } = t;
           null != r && (e.description = t.description);
-          let s = {
+          const s = {
             ...n,
             params: n?.params?.map((i) => ({
               name: i.getPrettyName(),
@@ -3074,15 +3077,15 @@
         o(ue, 'createBasicPropDef'),
         o(w, 'applyJsDocResult');
       var at = o((e, t, r) => {
-          let n = ue(e, t.type, t);
+          const n = ue(e, t.type, t);
           return (n.sbType = b(t)), w(n, r);
         }, 'javaScriptFactory'),
         ct = o((e, t, r) => {
-          let n = le(e, t);
+          const n = le(e, t);
           return (n.sbType = b(t)), w(n, r);
         }, 'tsFactory'),
         lt = o((e, t, r) => {
-          let n = pe(e, t);
+          const n = pe(e, t);
           return (n.sbType = b(t)), w(n, r);
         }, 'flowFactory'),
         ut = o(
@@ -3113,7 +3116,7 @@
           'getTypeSystem',
         ),
         mt = o((e) => {
-          let t = me(e[0]),
+          const t = me(e[0]),
             r = I(t);
           return e.map((n) => {
             let s = n;
@@ -3125,22 +3128,22 @@
           });
         }, 'extractComponentSectionArray'),
         ft = o((e) => {
-          let t = Object.keys(e),
+          const t = Object.keys(e),
             r = me(e[t[0]]),
             n = I(r);
           return t
             .map((s) => {
-              let i = e[s];
+              const i = e[s];
               return null != i ? fe(s, i, r, n) : null;
             })
             .filter(Boolean);
         }, 'extractComponentSectionObject'),
         on = o((e, t) => {
-          let r = Y(e, t);
+          const r = Y(e, t);
           return $(r) ? (Array.isArray(r) ? mt(r) : ft(r)) : [];
         }, 'extractComponentProps');
       function fe(e, t, r, n) {
-        let s = Q(t.description);
+        const s = Q(t.description);
         return s.includesJsDoc && s.ignore
           ? null
           : {
@@ -3243,8 +3246,8 @@
       }
       (a.open = ''), (a.close = '');
       var f2 = (function p(n = !1) {
-        let e = (function C(n = !1) {
-            let e = typeof process < 'u' ? process : void 0,
+        const e = (function C(n = !1) {
+            const e = typeof process < 'u' ? process : void 0,
               i = e?.env || {},
               g = e?.argv || [];
             return (
@@ -3258,8 +3261,8 @@
             );
           })(n),
           g = (r, t, c = r) => {
-            let o = (l) => {
-              let s = String(l),
+            const o = (l) => {
+              const s = String(l),
                 b = s.indexOf(t, r.length);
               return ~b
                 ? r +
@@ -3280,7 +3283,7 @@
           },
           u = { isColorSupported: e },
           d = (r) => `[${r}m`;
-        for (let [r, t] of h) u[r] = e ? g(d(t[0]), d(t[1]), t[2]) : a;
+        for (const [r, t] of h) u[r] = e ? g(d(t[0]), d(t[1]), t[2]) : a;
         return u;
       })(!1);
       function printIteratorEntries(
@@ -3297,7 +3300,7 @@
           current = iterator.next();
         if (!current.done) {
           result += config.spacingOuter;
-          let indentationNext = indentation + config.indent;
+          const indentationNext = indentation + config.indent;
           for (; !current.done; ) {
             if (((result += indentationNext), width++ === config.maxWidth)) {
               result += '…';
@@ -3329,7 +3332,7 @@
           current = iterator.next();
         if (!current.done) {
           result += config.spacingOuter;
-          let indentationNext = indentation + config.indent;
+          const indentationNext = indentation + config.indent;
           for (; !current.done; ) {
             if (((result += indentationNext), width++ === config.maxWidth)) {
               result += '…';
@@ -3368,7 +3371,7 @@
             : list.length;
         if (length > 0) {
           result += config.spacingOuter;
-          let indentationNext = indentation + config.indent;
+          const indentationNext = indentation + config.indent;
           for (let i = 0; i < length; i++) {
             if (((result += indentationNext), i === config.maxWidth)) {
               result += '…';
@@ -3400,19 +3403,19 @@
       ) {
         let result = '',
           keys = (function getKeysOfEnumerableProperties(object, compareKeys) {
-            let rawKeys = Object.keys(object),
+            const rawKeys = Object.keys(object),
               keys = null === compareKeys ? rawKeys : rawKeys.sort(compareKeys);
             if (Object.getOwnPropertySymbols)
-              for (let symbol of Object.getOwnPropertySymbols(object))
+              for (const symbol of Object.getOwnPropertySymbols(object))
                 Object.getOwnPropertyDescriptor(object, symbol).enumerable &&
                   keys.push(symbol);
             return keys;
           })(val, config.compareKeys);
         if (keys.length > 0) {
           result += config.spacingOuter;
-          let indentationNext = indentation + config.indent;
+          const indentationNext = indentation + config.indent;
           for (let i = 0; i < keys.length; i++) {
-            let key = keys[i];
+            const key = keys[i];
             (result += `${indentationNext + printer2(key, config, indentationNext, depth, refs)}: ${printer2(val[key], config, indentationNext, depth, refs)}`),
               i < keys.length - 1
                 ? (result += `,${config.spacingInner}`)
@@ -3428,7 +3431,7 @@
             : 1267621,
         plugin$5 = {
           serialize: (val, config, indentation, depth, refs, printer2) => {
-            let stringedValue = val.toString();
+            const stringedValue = val.toString();
             if (
               'ArrayContaining' === stringedValue ||
               'ArrayNotContaining' === stringedValue
@@ -3466,7 +3469,7 @@
         ARRAY_REGEXP = /^(?:HTML\w*Collection|NodeList)$/;
       var plugin$4 = {
         serialize: (collection, config, indentation, depth, refs, printer2) => {
-          let name = collection.constructor.name;
+          const name = collection.constructor.name;
           return ++depth > config.maxDepth
             ? `[${name}]`
             : (config.min ? '' : name + ' ') +
@@ -3510,7 +3513,7 @@
         refs,
         printer2,
       ) {
-        let indentationNext = indentation + config.indent,
+        const indentationNext = indentation + config.indent,
           colors = config.colors;
         return keys
           .map((key) => {
@@ -3551,7 +3554,7 @@
           .join('');
       }
       function printText(text, config) {
-        let contentColor = config.colors.content;
+        const contentColor = config.colors.content;
         return contentColor.open + escapeHTML(text) + contentColor.close;
       }
       function printElement(
@@ -3561,11 +3564,11 @@
         config,
         indentation,
       ) {
-        let tagColor = config.colors.tag;
+        const tagColor = config.colors.tag;
         return `${tagColor.open}<${type}${printedProps && tagColor.close + printedProps + config.spacingOuter + indentation + tagColor.open}${printedChildren ? `>${tagColor.close}${printedChildren}${config.spacingOuter}${indentation}${tagColor.open}</${type}` : (printedProps && !config.min ? '' : ' ') + '/'}>${tagColor.close}`;
       }
       function printElementAsLeaf(type, config) {
-        let tagColor = config.colors.tag;
+        const tagColor = config.colors.tag;
         return `${tagColor.open}<${type}${tagColor.close} …${tagColor.open} />${tagColor.close}`;
       }
       var ELEMENT_REGEXP = /^(?:(?:HTML|SVG)\w*)?Element$/;
@@ -3586,10 +3589,10 @@
               })(node)
             )
               return (function printComment(comment, config) {
-                let commentColor = config.colors.comment;
+                const commentColor = config.colors.comment;
                 return `${commentColor.open}\x3c!--${escapeHTML(comment)}--\x3e${commentColor.close}`;
               })(node.data, config);
-            let type = nodeIsFragment(node)
+            const type = nodeIsFragment(node)
               ? 'DocumentFragment'
               : node.tagName.toLowerCase();
             return ++depth > config.maxDepth
@@ -3633,7 +3636,7 @@
             return (
               (null == (_a = val?.constructor) ? void 0 : _a.name) &&
               (function testNode(val) {
-                let constructorName = val.constructor.name,
+                const constructorName = val.constructor.name,
                   { nodeType, tagName } = val,
                   isCustomElement =
                     ('string' == typeof tagName && tagName.includes('-')) ||
@@ -3738,7 +3741,7 @@
                           refs,
                           printer2,
                         ) {
-                          let name = getImmutableName('Seq');
+                          const name = getImmutableName('Seq');
                           return ++depth > config.maxDepth
                             ? printAsLeaf(name)
                             : val['@@__IMMUTABLE_KEYED__@@']
@@ -3753,7 +3756,7 @@
                           refs,
                           printer2,
                         ) {
-                          let name = getImmutableName(val._name || 'Record');
+                          const name = getImmutableName(val._name || 'Record');
                           return ++depth > config.maxDepth
                             ? printAsLeaf(name)
                             : `${name + ' '}{${printIteratorEntries(
@@ -3762,7 +3765,7 @@
                                   return {
                                     next() {
                                       if (i < val._keys.length) {
-                                        let key = val._keys[i++];
+                                        const key = val._keys[i++];
                                         return {
                                           done: !1,
                                           value: [key, val.get(key)],
@@ -3928,12 +3931,12 @@
       })();
       function getChildren(arg, children = []) {
         if (Array.isArray(arg))
-          for (let item of arg) getChildren(item, children);
+          for (const item of arg) getChildren(item, children);
         else null != arg && !1 !== arg && '' !== arg && children.push(arg);
         return children;
       }
       function getType(element) {
-        let type = element.type;
+        const type = element.type;
         if ('string' == typeof type) return type;
         if ('function' == typeof type)
           return type.displayName || type.name || 'Unknown';
@@ -3946,14 +3949,14 @@
             return 'Context.Consumer';
           if (reactIsExports.isForwardRef(element)) {
             if (type.displayName) return type.displayName;
-            let functionName =
+            const functionName =
               type.render.displayName || type.render.name || '';
             return '' === functionName
               ? 'ForwardRef'
               : `ForwardRef(${functionName})`;
           }
           if (reactIsExports.isMemo(element)) {
-            let functionName =
+            const functionName =
               type.displayName || type.type.displayName || type.type.name || '';
             return '' === functionName ? 'Memo' : `Memo(${functionName})`;
           }
@@ -3968,7 +3971,7 @@
                   getType(element),
                   printProps(
                     (function getPropKeys$1(element) {
-                      let { props } = element;
+                      const { props } = element;
                       return Object.keys(props)
                         .filter(
                           (key) => 'children' !== key && void 0 !== props[key],
@@ -4008,7 +4011,7 @@
                   object.props
                     ? printProps(
                         (function getPropKeys(object) {
-                          let { props } = object;
+                          const { props } = object;
                           return props
                             ? Object.keys(props)
                                 .filter((key) => void 0 !== props[key])
@@ -4077,7 +4080,7 @@
         if (!0 === val || !1 === val) return `${val}`;
         if (void 0 === val) return 'undefined';
         if (null === val) return 'null';
-        let typeOf = typeof val;
+        const typeOf = typeof val;
         if ('number' === typeOf)
           return (function printNumber(val) {
             return Object.is(val, -0) ? '-0' : String(val);
@@ -4092,7 +4095,7 @@
             : `"${val}"`;
         if ('function' === typeOf) return printFunction(val, printFunctionName);
         if ('symbol' === typeOf) return printSymbol(val);
-        let toStringed = toString.call(val);
+        const toStringed = toString.call(val);
         return '[object WeakMap]' === toStringed
           ? 'WeakMap {}'
           : '[object WeakSet]' === toStringed
@@ -4128,7 +4131,7 @@
       ) {
         if (refs.includes(val)) return '[Circular]';
         (refs = [...refs]).push(val);
-        let hitMaxDepth = ++depth > config.maxDepth,
+        const hitMaxDepth = ++depth > config.maxDepth,
           min = config.min;
         if (
           config.callToJSON &&
@@ -4138,7 +4141,7 @@
           !hasCalledToJSON
         )
           return printer(val.toJSON(), config, indentation, depth, refs, !0);
-        let toStringed = toString.call(val);
+        const toStringed = toString.call(val);
         return '[object Arguments]' === toStringed
           ? hitMaxDepth
             ? '[Arguments]'
@@ -4189,7 +4192,7 @@
                 (valChild) =>
                   printer(valChild, config, indentation, depth, refs),
                 (str) => {
-                  let indentationNext = indentation + config.indent;
+                  const indentationNext = indentation + config.indent;
                   return (
                     indentationNext +
                     str.replaceAll(NEWLINE_REGEXP, `\n${indentationNext}`)
@@ -4212,7 +4215,7 @@
         return printed;
       }
       function findPlugin(plugins2, val) {
-        for (let plugin2 of plugins2)
+        for (const plugin2 of plugins2)
           try {
             if (plugin2.test(val)) return plugin2;
           } catch (error) {
@@ -4221,10 +4224,10 @@
         return null;
       }
       function printer(val, config, indentation, depth, refs, hasCalledToJSON) {
-        let plugin2 = findPlugin(config.plugins, val);
+        const plugin2 = findPlugin(config.plugins, val);
         if (null !== plugin2)
           return printPlugin(plugin2, val, config, indentation, depth, refs);
-        let basicResult = printBasicValue(
+        const basicResult = printBasicValue(
           val,
           config.printFunctionName,
           config.escapeRegex,
@@ -4278,7 +4281,7 @@
           callToJSON: options?.callToJSON ?? DEFAULT_OPTIONS.callToJSON,
           colors: options?.highlight
             ? DEFAULT_THEME_KEYS.reduce((colors, key) => {
-                let value = DEFAULT_THEME[key],
+                const value = DEFAULT_THEME[key],
                   color = value && f2[value];
                 if (
                   !color ||
@@ -4322,7 +4325,7 @@
         if (
           options &&
           ((function validateOptions(options) {
-            for (let key of Object.keys(options))
+            for (const key of Object.keys(options))
               if (!Object.prototype.hasOwnProperty.call(DEFAULT_OPTIONS, key))
                 throw new Error(`pretty-format: Unknown option "${key}".`);
             if (
@@ -4336,11 +4339,11 @@
           })(options),
           options.plugins)
         ) {
-          let plugin2 = findPlugin(options.plugins, val);
+          const plugin2 = findPlugin(options.plugins, val);
           if (null !== plugin2)
             return printPlugin(plugin2, val, getConfig(options), '', 0, []);
         }
-        let basicResult = printBasicValue(
+        const basicResult = printBasicValue(
           val,
           getPrintFunctionName(options),
           getEscapeRegex(options),
@@ -4397,7 +4400,7 @@
           regexp: 'red',
         };
       function colorise(value, styleType) {
-        let color =
+        const color =
           ansiColors[styles[styleType]] || ansiColors[styleType] || '';
         return color
           ? `[${color[0]}m${String(value)}[${color[1]}m`
@@ -4405,7 +4408,7 @@
       }
       function truncate(string, length, tail = '…') {
         string = String(string);
-        let tailLength = tail.length,
+        const tailLength = tail.length,
           stringLength = string.length;
         if (tailLength > length && stringLength > tailLength) return tail;
         if (stringLength > length && stringLength > tailLength) {
@@ -4423,20 +4426,20 @@
       }
       function inspectList(list, options, inspectItem, separator = ', ') {
         inspectItem = inspectItem || options.inspect;
-        let size = list.length;
+        const size = list.length;
         if (0 === size) return '';
         let originalLength = options.truncate,
           output = '',
           peek = '',
           truncated = '';
         for (let i = 0; i < size; i += 1) {
-          let last = i + 1 === list.length,
+          const last = i + 1 === list.length,
             secondToLast = i + 2 === list.length;
           truncated = `…(${list.length - i})`;
-          let value = list[i];
+          const value = list[i];
           options.truncate =
             originalLength - output.length - (last ? 0 : separator.length);
-          let string =
+          const string =
               peek || inspectItem(value, options) + (last ? '' : separator),
             nextLength = output.length + string.length,
             truncatedLength = nextLength + truncated.length;
@@ -4487,18 +4490,18 @@
         );
       }
       function inspectTypedArray(array, options) {
-        let name = ((array) =>
+        const name = ((array) =>
           'function' == typeof Buffer && array instanceof Buffer
             ? 'Buffer'
             : array[Symbol.toStringTag]
               ? array[Symbol.toStringTag]
               : array.constructor.name)(array);
         options.truncate -= name.length + 4;
-        let nonIndexProperties = Object.keys(array).slice(array.length);
+        const nonIndexProperties = Object.keys(array).slice(array.length);
         if (!array.length && !nonIndexProperties.length) return `${name}[]`;
         let output = '';
         for (let i = 0; i < array.length; i++) {
-          let string = `${options.stylize(truncate(array[i], options.truncate), 'number')}${i === array.length - 1 ? '' : ', '}`;
+          const string = `${options.stylize(truncate(array[i], options.truncate), 'number')}${i === array.length - 1 ? '' : ', '}`;
           if (
             ((options.truncate -= string.length),
             array[i] !== array.length && options.truncate <= 3)
@@ -4520,7 +4523,7 @@
         );
       }
       function inspectFunction(func, options) {
-        let functionType = func[Symbol.toStringTag] || 'Function',
+        const functionType = func[Symbol.toStringTag] || 'Function',
           name = func.name;
         return name
           ? options.stylize(
@@ -4594,11 +4597,11 @@
       }
       var getPromiseValue = () => 'Promise{…}';
       try {
-        let { getPromiseDetails, kPending, kRejected } =
+        const { getPromiseDetails, kPending, kRejected } =
           process.binding('util');
         Array.isArray(getPromiseDetails(Promise.resolve())) &&
           (getPromiseValue = (value, options) => {
-            let [state, innerValue] = getPromiseDetails(value);
+            const [state, innerValue] = getPromiseDetails(value);
             return state === kPending
               ? 'Promise{<pending>}'
               : `Promise${state === kRejected ? '!' : ''}{${options.inspect(innerValue, options)}}`;
@@ -4606,7 +4609,7 @@
       } catch {}
       var promise_default = getPromiseValue;
       function inspectObject(object, options) {
-        let properties = Object.getOwnPropertyNames(object),
+        const properties = Object.getOwnPropertyNames(object),
           symbols = Object.getOwnPropertySymbols
             ? Object.getOwnPropertySymbols(object)
             : [];
@@ -4618,7 +4621,7 @@
         )
           return '[Circular]';
         options.seen.push(object);
-        let propertyContents = inspectList(
+        const propertyContents = inspectList(
             properties.map((key) => [key, object[key]]),
             options,
             inspectProperty,
@@ -4662,7 +4665,7 @@
         return inspectList(collection, options, inspectHTML, '\n');
       }
       function inspectHTML(element, options) {
-        let properties = element.getAttributeNames(),
+        const properties = element.getAttributeNames(),
           name = element.tagName.toLowerCase(),
           head = options.stylize(`<${name}`, 'special'),
           headClose = options.stylize('>', 'special'),
@@ -4693,7 +4696,7 @@
             : '@@chai/inspect',
         nodeInspect = !1;
       try {
-        let nodeUtil = __require('util');
+        const nodeUtil = __require('util');
         nodeInspect = !!nodeUtil.inspect && nodeUtil.inspect.custom;
       } catch {
         nodeInspect = !1;
@@ -4719,10 +4722,10 @@
           symbol: inspectSymbol,
           Symbol: inspectSymbol,
           Array: function inspectArray(array, options) {
-            let nonIndexProperties = Object.keys(array).slice(array.length);
+            const nonIndexProperties = Object.keys(array).slice(array.length);
             if (!array.length && !nonIndexProperties.length) return '[]';
             options.truncate -= 4;
-            let listContents = inspectList(array, options);
+            const listContents = inspectList(array, options);
             options.truncate -= listContents.length;
             let propertyContents = '';
             return (
@@ -4736,9 +4739,9 @@
             );
           },
           Date: function inspectDate(dateObject, options) {
-            let stringRepresentation = dateObject.toJSON();
+            const stringRepresentation = dateObject.toJSON();
             if (null === stringRepresentation) return 'Invalid Date';
-            let split = stringRepresentation.split('T'),
+            const split = stringRepresentation.split('T'),
               date = split[0];
             return options.stylize(
               `${date}T${truncate(split[1], options.truncate - date.length - 1)}`,
@@ -4751,7 +4754,7 @@
               : ((options.truncate -= 7),
                 `Map{ ${inspectList(
                   (function mapToEntries(map) {
-                    let entries = [];
+                    const entries = [];
                     return (
                       map.forEach((value, key) => {
                         entries.push([key, value]);
@@ -4769,7 +4772,7 @@
               : ((options.truncate -= 7),
                 `Set{ ${inspectList(
                   (function arrayFromSet(set) {
-                    let values = [];
+                    const values = [];
                     return (
                       set.forEach((value) => {
                         values.push(value);
@@ -4781,7 +4784,7 @@
                 )} }`);
           },
           RegExp: function inspectRegExp(value, options) {
-            let flags = value.toString().split('/')[2],
+            const flags = value.toString().split('/')[2],
               sourceLength = options.truncate - (2 + flags.length),
               source = value.source;
             return options.stylize(
@@ -4811,7 +4814,7 @@
           DataView: () => '',
           ArrayBuffer: () => '',
           Error: function inspectObject2(error, options) {
-            let properties = Object.getOwnPropertyNames(error).filter(
+            const properties = Object.getOwnPropertyNames(error).filter(
                 (key) => -1 === errorKeys.indexOf(key),
               ),
               name = error.name;
@@ -4828,7 +4831,7 @@
             )
               return '[Circular]';
             options.seen.push(error);
-            let propertyContents = inspectList(
+            const propertyContents = inspectList(
               properties.map((key) => [key, error[key]]),
               options,
               inspectProperty,
@@ -4855,7 +4858,7 @@
             } = {},
             inspect3,
           ) {
-            let options = {
+            const options = {
               showHidden: !!showHidden,
               depth: Number(depth),
               colors: !!colors,
@@ -4878,7 +4881,7 @@
         )
           return baseTypesMap[type](value, options);
         if (customInspect && value) {
-          let output = ((value, options, type) =>
+          const output = ((value, options, type) =>
             chaiInspect in value && 'function' == typeof value[chaiInspect]
               ? value[chaiInspect](options)
               : nodeInspect &&
@@ -4898,7 +4901,7 @@
               ? output
               : inspect(output, options);
         }
-        let proto = !!value && Object.getPrototypeOf(value);
+        const proto = !!value && Object.getPrototypeOf(value);
         return proto === Object.prototype || null === proto
           ? inspectObject(value, options)
           : value &&
@@ -4980,7 +4983,7 @@
         return Object.prototype.toString.apply(value).slice(8, -1);
       }
       function getOwnProperties(obj) {
-        let ownProps = new Set();
+        const ownProps = new Set();
         return (function isFinalObj(obj) {
           return (
             obj === Object.prototype ||
@@ -4990,7 +4993,7 @@
         })(obj)
           ? []
           : ((function collectOwnProperties(obj, collector) {
-              let collect =
+              const collect =
                 'function' == typeof collector
                   ? collector
                   : (key) => collector.add(key);
@@ -5017,11 +5020,11 @@
         }
         if ('[object Object]' === Object.prototype.toString.call(val)) {
           (out = Object.create(Object.getPrototypeOf(val))), seen.set(val, out);
-          let props = getOwnProperties(val);
-          for (let k2 of props) {
-            let descriptor = Object.getOwnPropertyDescriptor(val, k2);
+          const props = getOwnProperties(val);
+          for (const k2 of props) {
+            const descriptor = Object.getOwnPropertyDescriptor(val, k2);
             if (!descriptor) continue;
-            let cloned = clone(val[k2], seen, options);
+            const cloned = clone(val[k2], seen, options);
             options.forceWritable
               ? Object.defineProperty(out, k2, {
                   enumerable: descriptor.enumerable,
@@ -5115,19 +5118,19 @@
           return pointermid;
         },
         diff_commonOverlap_ = function (text1, text2) {
-          let text1_length = text1.length,
+          const text1_length = text1.length,
             text2_length = text2.length;
           if (0 === text1_length || 0 === text2_length) return 0;
           text1_length > text2_length
             ? (text1 = text1.substring(text1_length - text2_length))
             : text1_length < text2_length &&
               (text2 = text2.substring(0, text1_length));
-          let text_length = Math.min(text1_length, text2_length);
+          const text_length = Math.min(text1_length, text2_length);
           if (text1 === text2) return text_length;
           let best = 0,
             length = 1;
           for (;;) {
-            let pattern = text1.substring(text_length - length),
+            const pattern = text1.substring(text_length - length),
               found = text2.indexOf(pattern);
             if (-1 === found) return best;
             (length += found),
@@ -5196,7 +5199,7 @@
                       equality2 = diffs[pointer + 1][1],
                       commonOffset = diff_commonSuffix(equality1, edit);
                     if (commonOffset) {
-                      let commonString = edit.substring(
+                      const commonString = edit.substring(
                         edit.length - commonOffset,
                       );
                       (equality1 = equality1.substring(
@@ -5218,7 +5221,7 @@
                       (equality1 += edit.charAt(0)),
                         (edit = edit.substring(1) + equality2.charAt(0)),
                         (equality2 = equality2.substring(1));
-                      let score =
+                      const score =
                         diff_cleanupSemanticScore_(equality1, edit) +
                         diff_cleanupSemanticScore_(edit, equality2);
                       score >= bestScore &&
@@ -5244,7 +5247,7 @@
 
           ) {
             if (-1 === diffs[pointer - 1][0] && 1 === diffs[pointer][0]) {
-              let deletion = diffs[pointer - 1][1],
+              const deletion = diffs[pointer - 1][1],
                 insertion = diffs[pointer][1],
                 overlap_length1 = diff_commonOverlap_(deletion, insertion),
                 overlap_length2 = diff_commonOverlap_(insertion, deletion);
@@ -5392,7 +5395,7 @@
       }
       function diff_cleanupSemanticScore_(one, two) {
         if (!one || !two) return 6;
-        let char1 = one.charAt(one.length - 1),
+        const char1 = one.charAt(one.length - 1),
           char2 = two.charAt(0),
           nonAlphaNumeric1 = char1.match(nonAlphaNumericRegex_),
           nonAlphaNumeric2 = char2.match(nonAlphaNumericRegex_),
@@ -5437,7 +5440,7 @@
                 validateLength('bLength', bLength),
                 validateCallback('isCommon', isCommon),
                 validateCallback('foundSubsequence', foundSubsequence);
-              let nCommonF = countCommonItemsF(
+              const nCommonF = countCommonItemsF(
                 0,
                 aLength,
                 0,
@@ -5448,7 +5451,7 @@
                 (0 !== nCommonF && foundSubsequence(nCommonF, 0, 0),
                 aLength !== nCommonF || bLength !== nCommonF)
               ) {
-                let aStart = nCommonF,
+                const aStart = nCommonF,
                   bStart = nCommonF,
                   nCommonR = countCommonItemsR(
                     aStart,
@@ -5490,7 +5493,7 @@
                   0 !== nCommonR && foundSubsequence(nCommonR, aEnd, bEnd);
               }
             });
-          let pkg = 'diff-sequences',
+          const pkg = 'diff-sequences',
             NOT_YET_SET = 0,
             countCommonItemsF = (aIndex, aEnd, bIndex, bEnd, isCommon) => {
               let nCommon = 0;
@@ -5526,7 +5529,7 @@
                 bEnd,
                 isCommon,
               );
-              let nF = d < iMaxF ? d : iMaxF;
+              const nF = d < iMaxF ? d : iMaxF;
               for (iF += 1, kF += 2; iF <= nF; iF += 1, kF += 2) {
                 if (iF !== d && aIndexPrev1 < aIndexesF[iF])
                   aFirst = aIndexesF[iF];
@@ -5565,7 +5568,7 @@
                 bR + aFirst - kR - 1,
                 isCommon,
               );
-              let nR = d < iMaxR ? d : iMaxR;
+              const nR = d < iMaxR ? d : iMaxR;
               for (iR += 1, kR -= 2; iR <= nR; iR += 1, kR -= 2) {
                 if (iR !== d && aIndexesR[iR] < aIndexPrev1)
                   aFirst = aIndexesR[iR];
@@ -5604,7 +5607,7 @@
                 aIndexPrev1 = NOT_YET_SET,
                 nF = d < iMaxF ? d : iMaxF;
               for (let iF = 0, kF = -d; iF <= nF; iF += 1, kF += 2) {
-                let insert =
+                const insert =
                     0 === iF || (iF !== d && aIndexPrev1 < aIndexesF[iF]),
                   aLastPrev = insert ? aIndexesF[iF] : aIndexPrev1,
                   aFirst = insert ? aLastPrev : aLastPrev + 1,
@@ -5622,9 +5625,10 @@
                   (aIndexesF[iF] = aLast),
                   kMinOverlapF <= kF && kF <= kMaxOverlapF)
                 ) {
-                  let iR = (d - 1 - (kF + baDeltaLength)) / 2;
+                  const iR = (d - 1 - (kF + baDeltaLength)) / 2;
                   if (iR <= iMaxR && aIndexesR[iR] - 1 <= aLast) {
-                    let bLastPrev = bF + aLastPrev - (insert ? kF + 1 : kF - 1),
+                    const bLastPrev =
+                        bF + aLastPrev - (insert ? kF + 1 : kF - 1),
                       nCommonR = countCommonItemsR(
                         aStart,
                         aLastPrev,
@@ -5648,7 +5652,7 @@
                       0 !== nCommonF &&
                         ((division.aCommonFollowing = aFirst + 1),
                         (division.bCommonFollowing = bFirst + 1));
-                    let aStartFollowing = aLast + 1,
+                    const aStartFollowing = aLast + 1,
                       bStartFollowing = bFirst + nCommonF + 1;
                     return (
                       (division.nChangeFollowing = d - 1),
@@ -5684,7 +5688,7 @@
                 aIndexPrev1 = NOT_YET_SET,
                 nR = d < iMaxR ? d : iMaxR;
               for (let iR = 0, kR = d; iR <= nR; iR += 1, kR -= 2) {
-                let insert =
+                const insert =
                     0 === iR || (iR !== d && aIndexesR[iR] < aIndexPrev1),
                   aLastPrev = insert ? aIndexesR[iR] : aIndexPrev1,
                   aFirst = insert ? aLastPrev : aLastPrev - 1,
@@ -5702,9 +5706,9 @@
                   (aIndexesR[iR] = aLast),
                   kMinOverlapR <= kR && kR <= kMaxOverlapR)
                 ) {
-                  let iF = (d + (kR - baDeltaLength)) / 2;
+                  const iF = (d + (kR - baDeltaLength)) / 2;
                   if (iF <= iMaxF && aLast - 1 <= aIndexesF[iF]) {
-                    let bLast = bFirst - nCommonR;
+                    const bLast = bFirst - nCommonR;
                     if (
                       ((division.nChangePreceding = d),
                       d === aLast + bLast - aStart - bStart
@@ -5723,7 +5727,7 @@
                         (division.aStartFollowing = aEnd),
                         (division.bStartFollowing = bEnd);
                     else {
-                      let bLastPrev =
+                      const bLastPrev =
                           bR + aLastPrev - (insert ? kR - 1 : kR + 1),
                         nCommonF = countCommonItemsF(
                           aLastPrev,
@@ -5736,7 +5740,7 @@
                         0 !== nCommonF &&
                           ((division.aCommonFollowing = aLastPrev),
                           (division.bCommonFollowing = bLastPrev));
-                      let aStartFollowing = aLastPrev + nCommonF,
+                      const aStartFollowing = aLastPrev + nCommonF,
                         bStartFollowing = bLastPrev + nCommonF;
                       d - 1 == aEnd + bEnd - aStartFollowing - bStartFollowing
                         ? ((division.aStartFollowing = aEnd),
@@ -5764,7 +5768,7 @@
             ) => {
               if (bEnd - bStart < aEnd - aStart) {
                 if ((transposed = !transposed) && 1 === callbacks.length) {
-                  let {
+                  const {
                     foundSubsequence: foundSubsequence2,
                     isCommon: isCommon2,
                   } = callbacks[0];
@@ -5775,14 +5779,14 @@
                     isCommon: (bIndex, aIndex) => isCommon2(aIndex, bIndex),
                   };
                 }
-                let tStart = aStart,
+                const tStart = aStart,
                   tEnd = aEnd;
                 (aStart = bStart),
                   (aEnd = bEnd),
                   (bStart = tStart),
                   (bEnd = tEnd);
               }
-              let { foundSubsequence, isCommon } =
+              const { foundSubsequence, isCommon } =
                 callbacks[transposed ? 1 : 0];
               ((
                 nChange,
@@ -5807,7 +5811,7 @@
                   (aIndexesR[0] = aEnd),
                   baDeltaLength % 2 == 0)
                 ) {
-                  let dMin = (nChange || baDeltaLength) / 2,
+                  const dMin = (nChange || baDeltaLength) / 2,
                     dMax = (aLength + bLength) / 2;
                   for (let d = 1; d <= dMax; d += 1)
                     if (
@@ -5917,7 +5921,7 @@
                 aIndexesR,
                 division,
               );
-              let {
+              const {
                 nChangePreceding,
                 aEndPreceding,
                 bEndPreceding,
@@ -5987,7 +5991,7 @@
                 );
             },
             validateCallback = (name, arg) => {
-              let type = typeof arg;
+              const type = typeof arg;
               if ('function' !== type)
                 throw new TypeError(
                   `${pkg}: ${name} typeof ${type} is not a function`,
@@ -6145,7 +6149,7 @@
             let aRest = '',
               bRest = '';
             if (includeChangeCounts) {
-              let aCount = String(changeCounts.a),
+              const aCount = String(changeCounts.a),
                 bCount = String(changeCounts.b),
                 baAnnotationLengthDiff =
                   bAnnotation.length - aAnnotation.length,
@@ -6159,7 +6163,7 @@
               (aRest = `${aAnnotationPadding}  ${aIndicator} ${' '.repeat(Math.max(0, baCountLengthDiff))}${aCount}`),
                 (bRest = `${bAnnotationPadding}  ${bIndicator} ${' '.repeat(Math.max(0, -baCountLengthDiff))}${bCount}`);
             }
-            let b = `${bIndicator} ${bAnnotation}${bRest}`;
+            const b = `${bIndicator} ${bAnnotation}${bRest}`;
             return `${aColor(`${aIndicator} ${aAnnotation}${aRest}`)}\n${bColor(b)}\n\n`;
           })(
             options,
@@ -6184,7 +6188,7 @@
             ? (function joinAlignedDiffsExpand(diffs, options) {
                 return diffs
                   .map((diff2, i, diffs2) => {
-                    let line = diff2[1],
+                    const line = diff2[1],
                       isFirstOrLast = 0 === i || i === diffs2.length - 1;
                     switch (diff2[0]) {
                       case -1:
@@ -6206,7 +6210,7 @@
                   nExcessesBetweenChanges = 0,
                   i = 0;
                 for (; i !== iLength; ) {
-                  let iStart = i;
+                  const iStart = i;
                   for (; i !== iLength && 0 === diffs[i][0]; ) i += 1;
                   if (iStart !== i)
                     if (0 === iStart)
@@ -6214,19 +6218,19 @@
                         ((jLength -= i - nContextLines),
                         (hasExcessAtStartOrEnd = !0));
                     else if (i === iLength) {
-                      let n = i - iStart;
+                      const n = i - iStart;
                       n > nContextLines &&
                         ((jLength -= n - nContextLines),
                         (hasExcessAtStartOrEnd = !0));
                     } else {
-                      let n = i - iStart;
+                      const n = i - iStart;
                       n > nContextLines2 &&
                         ((jLength -= n - nContextLines2),
                         (nExcessesBetweenChanges += 1));
                     }
                   for (; i !== iLength && 0 !== diffs[i][0]; ) i += 1;
                 }
-                let hasPatch =
+                const hasPatch =
                   0 !== nExcessesBetweenChanges || hasExcessAtStartOrEnd;
                 0 !== nExcessesBetweenChanges
                   ? (jLength += nExcessesBetweenChanges + 1)
@@ -6240,7 +6244,7 @@
                   aEnd = 0,
                   bEnd = 0,
                   pushCommonLine = (line) => {
-                    let j = lines.length;
+                    const j = lines.length;
                     lines.push(
                       printCommonLine(line, 0 === j || j === jLast, options),
                     ),
@@ -6248,14 +6252,14 @@
                       (bEnd += 1);
                   },
                   pushDeleteLine = (line) => {
-                    let j = lines.length;
+                    const j = lines.length;
                     lines.push(
                       printDeleteLine(line, 0 === j || j === jLast, options),
                     ),
                       (aEnd += 1);
                   },
                   pushInsertLine = (line) => {
-                    let j = lines.length;
+                    const j = lines.length;
                     lines.push(
                       printInsertLine(line, 0 === j || j === jLast, options),
                     ),
@@ -6275,14 +6279,14 @@
                       for (let iCommon = iStart; iCommon !== i; iCommon += 1)
                         pushCommonLine(diffs[iCommon][1]);
                     } else if (i === iLength) {
-                      let iEnd =
+                      const iEnd =
                         i - iStart > nContextLines ? iStart + nContextLines : i;
                       for (let iCommon = iStart; iCommon !== iEnd; iCommon += 1)
                         pushCommonLine(diffs[iCommon][1]);
                     } else {
-                      let nCommon = i - iStart;
+                      const nCommon = i - iStart;
                       if (nCommon > nContextLines2) {
-                        let iEnd = iStart + nContextLines;
+                        const iEnd = iStart + nContextLines;
                         for (
                           let iCommon = iStart;
                           iCommon !== iEnd;
@@ -6298,7 +6302,7 @@
                         )),
                           (jPatchMark = lines.length),
                           lines.push('');
-                        let nOmit = nCommon - nContextLines2;
+                        const nOmit = nCommon - nContextLines2;
                         (aStart = aEnd + nOmit),
                           (bStart = bEnd + nOmit),
                           (aEnd = aStart),
@@ -6336,7 +6340,7 @@
         );
       }
       function diffLinesUnified(aLines, bLines, options) {
-        let normalizedOptions = normalizeDiffOptions(options),
+        const normalizedOptions = normalizeDiffOptions(options),
           [diffs, truncated] = diffLinesRaw(
             isEmptyString(aLines) ? [] : aLines,
             isEmptyString(bLines) ? [] : bLines,
@@ -6430,9 +6434,9 @@
             this.line.push(diff2);
           }
           align(diff2) {
-            let string = diff2[1];
+            const string = diff2[1];
             if (string.includes('\n')) {
-              let substrings = string.split('\n'),
+              const substrings = string.split('\n'),
                 iLast = substrings.length - 1;
               substrings.forEach((substring, i) => {
                 i < iLast
@@ -6460,7 +6464,7 @@
             this.lines.push(diff2);
           }
           pushDiffChangeLines(diff2) {
-            let isDiffEmpty = 0 === diff2[1].length;
+            const isDiffEmpty = 0 === diff2[1].length;
             (!isDiffEmpty || this.deleteBuffer.isLineEmpty()) &&
               this.deleteBuffer.pushDiff(diff2),
               (!isDiffEmpty || this.insertBuffer.isLineEmpty()) &&
@@ -6471,14 +6475,14 @@
               this.insertBuffer.moveLinesTo(this.lines);
           }
           align(diff2) {
-            let op = diff2[0],
+            const op = diff2[0],
               string = diff2[1];
             if (string.includes('\n')) {
-              let substrings = string.split('\n'),
+              const substrings = string.split('\n'),
                 iLast = substrings.length - 1;
               substrings.forEach((substring, i) => {
                 if (0 === i) {
-                  let subdiff = new Diff(op, substring);
+                  const subdiff = new Diff(op, substring);
                   this.deleteBuffer.isLineEmpty() &&
                   this.insertBuffer.isLineEmpty()
                     ? (this.flushChangeLines(),
@@ -6499,7 +6503,7 @@
         };
       function diffStringsUnified(a2, b, options) {
         if (a2 !== b && 0 !== a2.length && 0 !== b.length) {
-          let isMultiline = a2.includes('\n') || b.includes('\n'),
+          const isMultiline = a2.includes('\n') || b.includes('\n'),
             [diffs, truncated] = diffStringsRaw(
               isMultiline ? `${a2}\n` : a2,
               isMultiline ? `${b}\n` : b,
@@ -6509,7 +6513,7 @@
           if (
             (function hasCommonDiff(diffs, isMultiline) {
               if (isMultiline) {
-                let iLast = diffs.length - 1;
+                const iLast = diffs.length - 1;
                 return diffs.some(
                   (diff2, i) =>
                     0 === diff2[0] && (i !== iLast || '\n' !== diff2[1]),
@@ -6518,9 +6522,9 @@
               return diffs.some((diff2) => 0 === diff2[0]);
             })(diffs, isMultiline)
           ) {
-            let optionsNormalized = normalizeDiffOptions(options),
+            const optionsNormalized = normalizeDiffOptions(options),
               lines = (function getAlignedDiffs(diffs, changeColor) {
-                let deleteBuffer = new ChangeBuffer(-1, changeColor),
+                const deleteBuffer = new ChangeBuffer(-1, changeColor),
                   insertBuffer = new ChangeBuffer(1, changeColor),
                   commonBuffer = new CommonBuffer(deleteBuffer, insertBuffer);
                 return (
@@ -6545,7 +6549,7 @@
         return diffLinesUnified(a2.split('\n'), b.split('\n'), options);
       }
       function diffStringsRaw(a2, b, cleanup, options) {
-        let [diffs, truncated] = (function diffStrings(a2, b, options) {
+        const [diffs, truncated] = (function diffStrings(a2, b, options) {
           let truncate2 = options?.truncateThreshold ?? !1,
             truncateThreshold = Math.max(
               Math.floor(options?.truncateThreshold ?? 0),
@@ -6554,7 +6558,7 @@
             aLength = a2.length,
             bLength = b.length;
           if (truncate2) {
-            let aMultipleLines = a2.includes('\n'),
+            const aMultipleLines = a2.includes('\n'),
               bMultipleLines = b.includes('\n'),
               aNewLineSymbol = getNewLineSymbol(a2),
               bNewLineSymbol = getNewLineSymbol(b),
@@ -6593,7 +6597,7 @@
         return cleanup && diff_cleanupSemantic(diffs), [diffs, truncated];
       }
       function getCommonMessage(message, options) {
-        let { commonColor } = normalizeDiffOptions(options);
+        const { commonColor } = normalizeDiffOptions(options);
         return commonColor(message);
       }
       var {
@@ -6633,7 +6637,7 @@
             (omitDifference = 'string' === expectedType);
         }
         if (expectedType !== getType3(b)) {
-          let {
+          const {
               aAnnotation,
               aColor,
               aIndicator,
@@ -6653,7 +6657,7 @@
             case 'boolean':
             case 'number':
               return (function comparePrimitive(a2, b, options) {
-                let aFormat = format(a2, FORMAT_OPTIONS),
+                const aFormat = format(a2, FORMAT_OPTIONS),
                   bFormat = format(b, FORMAT_OPTIONS);
                 return aFormat === bFormat
                   ? ''
@@ -6690,7 +6694,7 @@
         } catch {
           hasThrown = !0;
         }
-        let noDiffMessage = getCommonMessage(
+        const noDiffMessage = getCommonMessage(
           'Compared values have no visual difference.',
           options,
         );
@@ -6708,11 +6712,11 @@
         return difference;
       }
       function getFormatOptions(formatOptions, options) {
-        let { compareKeys } = normalizeDiffOptions(options);
+        const { compareKeys } = normalizeDiffOptions(options);
         return { ...formatOptions, compareKeys };
       }
       function getObjectsDifference(a2, b, formatOptions, options) {
-        let formatOptionsZeroIndent = { ...formatOptions, indent: 0 },
+        const formatOptionsZeroIndent = { ...formatOptions, indent: 0 },
           aCompare = format(a2, formatOptionsZeroIndent),
           bCompare = format(b, formatOptionsZeroIndent);
         if (aCompare === bCompare)
@@ -6721,7 +6725,7 @@
             options,
           );
         {
-          let aDisplay = format(a2, formatOptions),
+          const aDisplay = format(a2, formatOptions),
             bDisplay = format(b, formatOptions);
           return (function diffLinesUnified2(
             aLinesDisplay,
@@ -6781,14 +6785,14 @@
         );
       }
       function isReplaceable(obj1, obj2) {
-        let obj1Type = getType2(obj1);
+        const obj1Type = getType2(obj1);
         return (
           obj1Type === getType2(obj2) &&
           ('Object' === obj1Type || 'Array' === obj1Type)
         );
       }
       function printDiffOrStringify(expected, received, options) {
-        let { aAnnotation, bAnnotation } = normalizeDiffOptions(options);
+        const { aAnnotation, bAnnotation } = normalizeDiffOptions(options);
         if (
           'string' == typeof expected &&
           'string' == typeof received &&
@@ -6800,10 +6804,10 @@
         ) {
           if (expected.includes('\n') || received.includes('\n'))
             return diffStringsUnified(received, expected, options);
-          let [diffs] = diffStringsRaw(received, expected, !0),
+          const [diffs] = diffStringsRaw(received, expected, !0),
             hasCommonDiff2 = diffs.some((diff2) => 0 === diff2[0]),
             printLabel = (function getLabelPrinter(...strings) {
-              let maxLength = strings.reduce(
+              const maxLength = strings.reduce(
                 (max, string) => (string.length > max ? string.length : max),
                 0,
               );
@@ -6822,7 +6826,7 @@
             })(getCommonAndChangedSubstrings(diffs, 1, hasCommonDiff2))
           }`;
         }
-        let clonedExpected = deepClone(expected, { forceWritable: !0 }),
+        const clonedExpected = deepClone(expected, { forceWritable: !0 }),
           clonedReceived = deepClone(received, { forceWritable: !0 }),
           { replacedExpected, replacedActual } = replaceAsymmetricMatcher(
             clonedExpected,
@@ -6842,7 +6846,7 @@
               (actualReplaced.add(actual),
               expectedReplaced.add(expected),
               getOwnProperties(expected).forEach((key) => {
-                let expectedValue = expected[key],
+                const expectedValue = expected[key],
                   actualValue = actual[key];
                 if (isAsymmetricMatcher(expectedValue))
                   expectedValue.asymmetricMatch(actualValue) &&
@@ -6851,7 +6855,7 @@
                   actualValue.asymmetricMatch(expectedValue) &&
                     (expected[key] = actualValue);
                 else if (isReplaceable(actualValue, expectedValue)) {
-                  let replaced = replaceAsymmetricMatcher(
+                  const replaced = replaceAsymmetricMatcher(
                     actualValue,
                     expectedValue,
                     actualReplaced,
@@ -6916,7 +6920,7 @@
         if ('function' == typeof val.asymmetricMatch)
           return `${val.toString()} ${(function format2(...args) {
             if ('string' != typeof args[0]) {
-              let objects = [];
+              const objects = [];
               for (let i2 = 0; i2 < args.length; i2++)
                 objects.push(inspect2(args[i2], { depth: 0, colors: !1 }));
               return objects.join(' ');
@@ -6929,7 +6933,7 @@
                 if (i >= len) return x;
                 switch (x) {
                   case '%s': {
-                    let value = args[i++];
+                    const value = args[i++];
                     return 'bigint' == typeof value
                       ? `${value.toString()}n`
                       : 'number' == typeof value && 0 === value && 1 / value < 0
@@ -6939,13 +6943,13 @@
                           : String(value);
                   }
                   case '%d': {
-                    let value = args[i++];
+                    const value = args[i++];
                     return 'bigint' == typeof value
                       ? `${value.toString()}n`
                       : Number(value).toString();
                   }
                   case '%i': {
-                    let value = args[i++];
+                    const value = args[i++];
                     return 'bigint' == typeof value
                       ? `${value.toString()}n`
                       : Number.parseInt(String(value)).toString();
@@ -6965,7 +6969,7 @@
                     try {
                       return JSON.stringify(args[i++]);
                     } catch (err) {
-                      let m2 = err.message;
+                      const m2 = err.message;
                       if (
                         m2.includes('circular structure') ||
                         m2.includes('cyclic structures') ||
@@ -6989,7 +6993,7 @@
           return serializeValue(val.toJSON(), seen);
         if (seen.has(val)) return seen.get(val);
         if (Array.isArray(val)) {
-          let clone2 = new Array(val.length);
+          const clone2 = new Array(val.length);
           return (
             seen.set(val, clone2),
             val.forEach((e, i) => {
@@ -7003,7 +7007,7 @@
           );
         }
         {
-          let clone2 = Object.create(null);
+          const clone2 = Object.create(null);
           seen.set(val, clone2);
           let obj = val;
           for (; obj && obj !== OBJECT_PROTO; )
@@ -7022,7 +7026,7 @@
       }
       function processError(_err, diffOptions, seen = new WeakSet()) {
         if (!_err || 'object' != typeof _err) return { message: String(_err) };
-        let err = _err;
+        const err = _err;
         err.stack && (err.stackStr = String(err.stack)),
           err.name && (err.nameStr = String(err.name)),
           (err.showDiff ||
@@ -7089,7 +7093,7 @@
           )
             return !1;
           if (void 0 === o.constructor) return !0;
-          let proto = o.constructor.prototype;
+          const proto = o.constructor.prototype;
           return !!isObject(proto);
         },
         getInitialState = () => ({
@@ -7108,11 +7112,11 @@
           syncTimeout: void 0,
         }),
         getRetainedState = (state, isDebugging = !1) => {
-          let calls = (isDebugging ? state.shadowCalls : state.calls).filter(
+          const calls = (isDebugging ? state.shadowCalls : state.calls).filter(
             (call) => call.retain,
           );
           if (!calls.length) return;
-          let callRefsByResult = new Map(
+          const callRefsByResult = new Map(
             Array.from(state.callRefsByResult.entries()).filter(
               ([, ref]) => ref.retain,
             ),
@@ -7128,12 +7132,12 @@
                 _storybook_global__WEBPACK_IMPORTED_MODULE_3__.global.window
                   ?.parent
                   .__STORYBOOK_ADDON_INTERACTIONS_INSTRUMENTER_STATE__ || {});
-            let resetState = ({
+            const resetState = ({
               storyId,
               isPlaying = !0,
               isDebugging = !1,
             }) => {
-              let state = this.getState(storyId);
+              const state = this.getState(storyId);
               this.setState(storyId, {
                 ...getInitialState(),
                 ...getRetainedState(state, isDebugging),
@@ -7152,7 +7156,7 @@
               this.channel.on(
                 storybook_internal_core_events__WEBPACK_IMPORTED_MODULE_1__.STORY_RENDER_PHASE_CHANGED,
                 ({ storyId, newPhase }) => {
-                  let { isDebugging } = this.getState(storyId);
+                  const { isDebugging } = this.getState(storyId);
                   this.setState(storyId, { renderPhase: newPhase }),
                     'preparing' === newPhase &&
                       isDebugging &&
@@ -7175,7 +7179,7 @@
                   this.initialized ? this.cleanup() : (this.initialized = !0);
                 },
               );
-            let start = ({ storyId, playUntil }) => {
+            const start = ({ storyId, playUntil }) => {
                 this.getState(storyId).isDebugging ||
                   this.setState(storyId, ({ calls }) => ({
                     calls: [],
@@ -7185,10 +7189,10 @@
                     })),
                     isDebugging: !0,
                   }));
-                let log = this.getLog(storyId);
+                const log = this.getLog(storyId);
                 this.setState(storyId, ({ shadowCalls }) => {
                   if (playUntil || !log.length) return { playUntil };
-                  let firstRowIndex = shadowCalls.findIndex(
+                  const firstRowIndex = shadowCalls.findIndex(
                     (call) => call.id === log[0].callId,
                   );
                   return {
@@ -7213,7 +7217,7 @@
               };
             this.channel.on(EVENTS_START, start),
               this.channel.on(EVENTS_BACK, ({ storyId }) => {
-                let log = this.getLog(storyId).filter(
+                const log = this.getLog(storyId).filter(
                     (call) => !call.ancestors?.length,
                   ),
                   last = log.reduceRight(
@@ -7224,7 +7228,8 @@
                 start({ storyId, playUntil: log[last - 1]?.callId });
               }),
               this.channel.on(EVENTS_GOTO, ({ storyId, callId }) => {
-                let { calls, shadowCalls, resolvers } = this.getState(storyId),
+                const { calls, shadowCalls, resolvers } =
+                    this.getState(storyId),
                   call = calls.find(({ id }) => id === callId),
                   shadowCall = shadowCalls.find(({ id }) => id === callId);
                 if (
@@ -7232,7 +7237,7 @@
                   shadowCall &&
                   Object.values(resolvers).length > 0
                 ) {
-                  let nextId = this.getLog(storyId).find(
+                  const nextId = this.getLog(storyId).find(
                     (c) => 'waiting' === c.status,
                   )?.callId;
                   shadowCall.id !== nextId &&
@@ -7241,11 +7246,11 @@
                 } else start({ storyId, playUntil: callId });
               }),
               this.channel.on(EVENTS_NEXT, ({ storyId }) => {
-                let { resolvers } = this.getState(storyId);
+                const { resolvers } = this.getState(storyId);
                 if (Object.values(resolvers).length > 0)
                   Object.values(resolvers).forEach((resolve) => resolve());
                 else {
-                  let nextId = this.getLog(storyId).find(
+                  const nextId = this.getLog(storyId).find(
                     (c) => 'waiting' === c.status,
                   )?.callId;
                   nextId
@@ -7259,7 +7264,7 @@
             return this.state[storyId] || getInitialState();
           }
           setState(storyId, update) {
-            let state = this.getState(storyId),
+            const state = this.getState(storyId),
               patch = 'function' == typeof update ? update(state) : update;
             (this.state = { ...this.state, [storyId]: { ...state, ...patch } }),
               _storybook_global__WEBPACK_IMPORTED_MODULE_3__.global.window
@@ -7270,7 +7275,7 @@
           cleanup() {
             this.state = Object.entries(this.state).reduce(
               (acc, [storyId, state]) => {
-                let retainedState = getRetainedState(state);
+                const retainedState = getRetainedState(state);
                 return (
                   retainedState &&
                     (acc[storyId] = Object.assign(
@@ -7282,7 +7287,7 @@
               },
               {},
             );
-            let payload = { controlStates: controlsDisabled, logItems: [] };
+            const payload = { controlStates: controlsDisabled, logItems: [] };
             this.channel.emit(EVENTS_SYNC, payload),
               _storybook_global__WEBPACK_IMPORTED_MODULE_3__.global.window
                 ?.parent &&
@@ -7290,12 +7295,12 @@
                   this.state);
           }
           getLog(storyId) {
-            let { calls, shadowCalls } = this.getState(storyId),
+            const { calls, shadowCalls } = this.getState(storyId),
               merged = [...shadowCalls];
             calls.forEach((call, index) => {
               merged[index] = call;
             });
-            let seen = new Set();
+            const seen = new Set();
             return merged.reduceRight(
               (acc, call) => (
                 call.args.forEach((arg) => {
@@ -7327,13 +7332,13 @@
               (depth += 1),
               keys.reduce(
                 (acc, key) => {
-                  let descriptor = (function getPropertyDescriptor(
+                  const descriptor = (function getPropertyDescriptor(
                     obj,
                     propName,
                   ) {
                     let target = obj;
                     for (; null != target; ) {
-                      let descriptor = Object.getOwnPropertyDescriptor(
+                      const descriptor = Object.getOwnPropertyDescriptor(
                         target,
                         propName,
                       );
@@ -7342,7 +7347,7 @@
                     }
                   })(obj, key);
                   if ('function' == typeof descriptor?.get) {
-                    let getter = () => descriptor?.get?.bind(obj)?.();
+                    const getter = () => descriptor?.get?.bind(obj)?.();
                     return (
                       Object.defineProperty(acc, key, {
                         get: () =>
@@ -7355,7 +7360,7 @@
                       acc
                     );
                   }
-                  let value = obj[key];
+                  const value = obj[key];
                   return 'function' != typeof value
                     ? ((acc[key] = this.instrument(
                         value,
@@ -7397,13 +7402,13 @@
             );
           }
           track(method, fn, object, args, options) {
-            let storyId =
+            const storyId =
                 args?.[0]?.__storyId__ ||
                 _storybook_global__WEBPACK_IMPORTED_MODULE_3__.global
                   .__STORYBOOK_PREVIEW__?.selectionStore?.selection?.storyId,
               { cursor, ancestors } = this.getState(storyId);
             this.setState(storyId, { cursor: cursor + 1 });
-            let id = `${ancestors.slice(-1)[0] || storyId} [${cursor}] ${method}`,
+            const id = `${ancestors.slice(-1)[0] || storyId} [${cursor}] ${method}`,
               { path = [], intercept = !1, retain = !1 } = options,
               interceptable =
                 'function' == typeof intercept
@@ -7432,7 +7437,7 @@
             });
           }
           intercept(fn, object, call, options) {
-            let { chainedCallIds, isDebugging, playUntil } = this.getState(
+            const { chainedCallIds, isDebugging, playUntil } = this.getState(
                 call.storyId,
               ),
               isChainedUpon = chainedCallIds.has(call.id);
@@ -7448,7 +7453,7 @@
                 }).then(
                   () => (
                     this.setState(call.storyId, (state) => {
-                      let { [call.id]: _, ...resolvers } = state.resolvers;
+                      const { [call.id]: _, ...resolvers } = state.resolvers;
                       return { isLocked: !0, resolvers };
                     }),
                     this.invoke(fn, object, call, options)
@@ -7456,7 +7461,9 @@
                 );
           }
           invoke(fn, object, call, options) {
-            let { callRefsByResult, renderPhase } = this.getState(call.storyId),
+            const { callRefsByResult, renderPhase } = this.getState(
+                call.storyId,
+              ),
               serializeValues = (value, depth, seen) => {
                 if (seen.includes(value)) return '[Circular]';
                 if (((seen = [...seen, value]), depth > 25)) return '...';
@@ -7467,11 +7474,11 @@
                 if (value instanceof Date)
                   return { __date__: { value: value.toISOString() } };
                 if (value instanceof Error) {
-                  let { name, message, stack } = value;
+                  const { name, message, stack } = value;
                   return { __error__: { name, message, stack } };
                 }
                 if (value instanceof RegExp) {
-                  let { flags, source } = value;
+                  const { flags, source } = value;
                   return { __regexp__: { flags, source } };
                 }
                 if (
@@ -7479,7 +7486,7 @@
                   _storybook_global__WEBPACK_IMPORTED_MODULE_3__.global.window
                     ?.HTMLElement
                 ) {
-                  let { prefix, localName, id, classList, innerText } = value;
+                  const { prefix, localName, id, classList, innerText } = value;
                   return {
                     __element__: {
                       prefix,
@@ -7527,7 +7534,7 @@
                   ),
                 }));
             });
-            let handleException = (e) => {
+            const handleException = (e) => {
               if (e instanceof Error) {
                 let { name, message, stack, callId = call.id } = e,
                   {
@@ -7567,7 +7574,7 @@
             try {
               if ('played' === renderPhase && !call.retain)
                 throw alreadyCompletedException;
-              let finalArgs = (
+              const finalArgs = (
                   options.getArgs
                     ? options.getArgs(call, this.getState(call.storyId))
                     : call.args
@@ -7575,7 +7582,9 @@
                   'function' != typeof arg || Object.keys(arg).length
                     ? arg
                     : (...args) => {
-                        let { cursor, ancestors } = this.getState(call.storyId);
+                        const { cursor, ancestors } = this.getState(
+                          call.storyId,
+                        );
                         this.setState(call.storyId, {
                           cursor: 0,
                           ancestors: [...ancestors, call.id],
@@ -7584,7 +7593,7 @@
                             this.setState(call.storyId, { cursor, ancestors }),
                           willRestore = !1;
                         try {
-                          let res = arg(...args);
+                          const res = arg(...args);
                           return res instanceof Promise
                             ? ((willRestore = !0), res.finally(restore))
                             : res;
@@ -7623,7 +7632,7 @@
           update(call) {
             this.channel.emit(EVENTS_CALL, call),
               this.setState(call.storyId, ({ calls }) => {
-                let callsById = calls
+                const callsById = calls
                   .concat(call)
                   .reduce((a2, c) => Object.assign(a2, { [c.id]: c }), {});
                 return {
@@ -7635,18 +7644,18 @@
               this.sync(call.storyId);
           }
           sync(storyId) {
-            let synchronize = () => {
-              let { isLocked, isPlaying } = this.getState(storyId),
+            const synchronize = () => {
+              const { isLocked, isPlaying } = this.getState(storyId),
                 logItems = this.getLog(storyId),
                 pausedAt = logItems
                   .filter(({ ancestors }) => !ancestors.length)
                   .find((item) => 'waiting' === item.status)?.callId,
                 hasActive = logItems.some((item) => 'active' === item.status);
               if (isLocked || hasActive || 0 === logItems.length) {
-                let payload2 = { controlStates: controlsDisabled, logItems };
+                const payload2 = { controlStates: controlsDisabled, logItems };
                 return void this.channel.emit(EVENTS_SYNC, payload2);
               }
-              let hasPrevious = logItems.some(
+              const hasPrevious = logItems.some(
                   (item) => 'done' === item.status || 'error' === item.status,
                 ),
                 payload = {
@@ -7751,7 +7760,7 @@
         },
         __copyProps = (to, from, except, desc) => {
           if ((from && 'object' == typeof from) || 'function' == typeof from)
-            for (let key of __getOwnPropNames(from))
+            for (const key of __getOwnPropNames(from))
               !__hasOwnProp.call(to, key) &&
                 key !== except &&
                 __defProp(to, key, {
@@ -20493,7 +20502,7 @@
               acorn = acorn.Parser.acorn || acorn;
               let acornJsx = acornJsxMap.get(acorn);
               if (!acornJsx) {
-                let tt = acorn.tokTypes,
+                const tt = acorn.tokTypes,
                   TokContext3 = acorn.TokContext,
                   TokenType3 = acorn.TokenType,
                   tc_oTag = new TokContext3('<tag', !1),
@@ -20514,7 +20523,7 @@
                     (this.exprAllowed = !1);
                 }),
                   (tokTypes.jsxTagEnd.updateContext = function (prevType) {
-                    let out = this.context.pop();
+                    const out = this.context.pop();
                     (out === tc_oTag && prevType === tt.slash) ||
                     out === tc_cTag
                       ? (this.context.pop(),
@@ -20544,7 +20553,7 @@
                 (options = options || {}),
                 function (Parser3) {
                   return (function plugin(options, Parser3) {
-                    let acorn =
+                    const acorn =
                         Parser3.acorn ||
                         (init_acorn(), (0, chunk_XP5HYGXS.Yp)(acorn_exports)),
                       acornJsx = getJsxTokens(acorn),
@@ -20567,7 +20576,7 @@
                         for (;;) {
                           this.pos >= this.input.length &&
                             this.raise(this.start, 'Unterminated JSX contents');
-                          let ch = this.input.charCodeAt(this.pos);
+                          const ch = this.input.charCodeAt(this.pos);
                           switch (ch) {
                             case 60:
                             case 123:
@@ -20633,7 +20642,7 @@
                               this.start,
                               'Unterminated string constant',
                             );
-                          let ch = this.input.charCodeAt(this.pos);
+                          const ch = this.input.charCodeAt(this.pos);
                           if (ch === quote) break;
                           38 === ch
                             ? ((out += this.input.slice(chunkStart, this.pos)),
@@ -20663,7 +20672,7 @@
                             this.pos,
                             'Entity must start with an ampersand',
                           );
-                        let startPos = ++this.pos;
+                        const startPos = ++this.pos;
                         for (; this.pos < this.input.length && count++ < 10; ) {
                           if (((ch = this.input[this.pos++]), ';' === ch)) {
                             '#' === str[0]
@@ -20697,7 +20706,7 @@
                         );
                       }
                       jsx_parseIdentifier() {
-                        let node = this.startNode();
+                        const node = this.startNode();
                         return (
                           this.type === tok.jsxName
                             ? (node.name = this.value)
@@ -20709,7 +20718,7 @@
                         );
                       }
                       jsx_parseNamespacedName() {
-                        let startPos = this.start,
+                        const startPos = this.start,
                           startLoc = this.startLoc,
                           name = this.jsx_parseIdentifier();
                         if (!options.allowNamespaces || !this.eat(tt.colon))
@@ -20734,7 +20743,7 @@
                           this.eat(tt.dot);
 
                         ) {
-                          let newNode = this.startNodeAt(startPos, startLoc);
+                          const newNode = this.startNodeAt(startPos, startLoc);
                           (newNode.object = node),
                             (newNode.property = this.jsx_parseIdentifier()),
                             (node = this.finishNode(
@@ -20747,7 +20756,7 @@
                       jsx_parseAttributeValue() {
                         switch (this.type) {
                           case tt.braceL:
-                            let node = this.jsx_parseExpressionContainer();
+                            const node = this.jsx_parseExpressionContainer();
                             return (
                               'JSXEmptyExpression' === node.expression.type &&
                                 this.raise(
@@ -20767,7 +20776,7 @@
                         }
                       }
                       jsx_parseEmptyExpression() {
-                        let node = this.startNodeAt(
+                        const node = this.startNodeAt(
                           this.lastTokEnd,
                           this.lastTokEndLoc,
                         );
@@ -20779,7 +20788,7 @@
                         );
                       }
                       jsx_parseExpressionContainer() {
-                        let node = this.startNode();
+                        const node = this.startNode();
                         return (
                           this.next(),
                           (node.expression =
@@ -20791,7 +20800,7 @@
                         );
                       }
                       jsx_parseAttribute() {
-                        let node = this.startNode();
+                        const node = this.startNode();
                         return this.eat(tt.braceL)
                           ? (this.expect(tt.ellipsis),
                             (node.argument = this.parseMaybeAssign()),
@@ -20804,9 +20813,9 @@
                             this.finishNode(node, 'JSXAttribute'));
                       }
                       jsx_parseOpeningElementAt(startPos, startLoc) {
-                        let node = this.startNodeAt(startPos, startLoc);
+                        const node = this.startNodeAt(startPos, startLoc);
                         node.attributes = [];
-                        let nodeName = this.jsx_parseElementName();
+                        const nodeName = this.jsx_parseElementName();
                         for (
                           nodeName && (node.name = nodeName);
                           this.type !== tt.slash && this.type !== tok.jsxTagEnd;
@@ -20825,7 +20834,7 @@
                         );
                       }
                       jsx_parseClosingElementAt(startPos, startLoc) {
-                        let node = this.startNodeAt(startPos, startLoc),
+                        const node = this.startNodeAt(startPos, startLoc),
                           nodeName = this.jsx_parseElementName();
                         return (
                           nodeName && (node.name = nodeName),
@@ -20887,7 +20896,7 @@
                                 '>',
                             );
                         }
-                        let fragmentOrElement = openingElement.name
+                        const fragmentOrElement = openingElement.name
                           ? 'Element'
                           : 'Fragment';
                         return (
@@ -20906,11 +20915,11 @@
                         );
                       }
                       jsx_parseText() {
-                        let node = this.parseLiteral(this.value);
+                        const node = this.parseLiteral(this.value);
                         return (node.type = 'JSXText'), node;
                       }
                       jsx_parseElement() {
-                        let startPos = this.start,
+                        const startPos = this.start,
                           startLoc = this.startLoc;
                         return (
                           this.next(),
@@ -20925,7 +20934,7 @@
                             : super.parseExprAtom(refShortHandDefaultPos);
                       }
                       readToken(code) {
-                        let context = this.curContext();
+                        const context = this.curContext();
                         if (context === tc_expr) return this.jsx_readToken();
                         if (context === tc_oTag || context === tc_cTag) {
                           if (isIdentifierStart2(code))
@@ -21720,7 +21729,7 @@
         );
       }
       function calculateNodeDepth(node) {
-        let depths = [];
+        const depths = [];
         return (
           (function ancestor(node, visitors, baseVisitor, state, override) {
             var ancestors = [];
@@ -21787,7 +21796,7 @@
                 },
                 ACORN_WALK_VISITORS,
               );
-              let inferredType = {
+              const inferredType = {
                   type: null != innerJsxElementNode ? 'Element' : 'Function',
                   params: funcNode.params,
                   hasParams: 0 !== funcNode.params.length,
@@ -21823,7 +21832,7 @@
             })(expression);
           case 'JSXElement':
             return (function parseJsxElement(jsxElementNode) {
-              let inferredType = { type: 'Element' },
+              const inferredType = { type: 'Element' },
                 identifierName = extractIdentifierName(
                   jsxElementNode.openingElement.name,
                 );
@@ -21864,10 +21873,10 @@
         let ast = acornParser.parse(`(${value})`, { ecmaVersion: 2020 }),
           parsingResult = { inferredType: { type: 'Unknown' }, ast };
         if (null != ast.body[0]) {
-          let rootNode = ast.body[0];
+          const rootNode = ast.body[0];
           switch (rootNode.type) {
             case 'ExpressionStatement': {
-              let expressionResult = parseExpression(rootNode.expression);
+              const expressionResult = parseExpression(rootNode.expression);
               null != expressionResult && (parsingResult = expressionResult);
               break;
             }
@@ -21882,18 +21891,18 @@
         return { inferredType: { type: 'Unknown' } };
       }
       function generateArray({ inferredType, ast }) {
-        let { depth } = inferredType;
+        const { depth } = inferredType;
         if (depth <= 2) {
-          let compactArray = generateArrayCode(ast, !0);
+          const compactArray = generateArrayCode(ast, !0);
           if (!(0, docs_tools.Sy)(compactArray))
             return (0, docs_tools.Ux)(compactArray);
         }
         return (0, docs_tools.Ux)('array', generateArrayCode(ast));
       }
       function generateObject({ inferredType, ast }) {
-        let { depth } = inferredType;
+        const { depth } = inferredType;
         if (1 === depth) {
-          let compactObject = generateObjectCode(ast, !0);
+          const compactObject = generateObjectCode(ast, !0);
           if (!(0, docs_tools.Sy)(compactObject))
             return (0, docs_tools.Ux)(compactObject);
         }
@@ -21906,7 +21915,7 @@
         return `<${identifier} />`;
       }
       function getPrettyIdentifier(inferredType) {
-        let { type, identifier } = inferredType;
+        const { type, identifier } = inferredType;
         switch (type) {
           case 'Function':
             return getPrettyFuncIdentifier(identifier, inferredType.hasParams);
@@ -21918,19 +21927,19 @@
       }
       function createDefaultValue(defaultValue) {
         try {
-          let inspectionResult = inspectValue(defaultValue);
+          const inspectionResult = inspectValue(defaultValue);
           switch (inspectionResult.inferredType.type) {
             case 'Object':
               return generateObject(inspectionResult);
             case 'Function':
               return (function generateFunc({ inferredType, ast }) {
-                let { identifier } = inferredType;
+                const { identifier } = inferredType;
                 if (null != identifier)
                   return (0, docs_tools.Ux)(
                     getPrettyIdentifier(inferredType),
                     generateCode(ast),
                   );
-                let prettyCaption = generateCode(ast, !0);
+                const prettyCaption = generateCode(ast, !0);
                 return (0, docs_tools.Sy)(prettyCaption)
                   ? (0, docs_tools.Ux)('func', generateCode(ast))
                   : (0, docs_tools.Ux)(prettyCaption);
@@ -21940,7 +21949,7 @@
                 let { inferredType } = inspectionResult,
                   { identifier } = inferredType;
                 if (null != identifier && !isHtmlTag(identifier)) {
-                  let prettyIdentifier = getPrettyIdentifier(inferredType);
+                  const prettyIdentifier = getPrettyIdentifier(inferredType);
                   return (0, docs_tools.Ux)(prettyIdentifier, defaultValue);
                 }
                 return (0, docs_tools.Sy)(defaultValue)
@@ -22669,7 +22678,7 @@
         return null != element.$$typeof;
       }
       function extractFunctionName(func, propName) {
-        let { name } = func;
+        const { name } = func;
         return '' !== name && 'anonymous' !== name && name !== propName
           ? name
           : null;
@@ -22679,7 +22688,7 @@
           { displayName } = type,
           jsx2 = reactElementToJSXString(rawDefaultProp, {});
         if (null != displayName) {
-          let prettyIdentifier = getPrettyElementIdentifier(displayName);
+          const prettyIdentifier = getPrettyElementIdentifier(displayName);
           return (0, docs_tools.Ux)(prettyIdentifier, jsx2);
         }
         if (
@@ -22688,7 +22697,7 @@
           })(type) &&
           isHtmlTag(type)
         ) {
-          let jsxSummary = reactElementToJSXString(rawDefaultProp, {
+          const jsxSummary = reactElementToJSXString(rawDefaultProp, {
             tabStop: 0,
           }).replace(/\r?\n|\r/g, '');
           if (!(0, docs_tools.Sy)(jsxSummary))
@@ -22709,7 +22718,7 @@
               if (
                 '[object Object]' !== Object.prototype.toString.call(object)
               ) {
-                let tag = object[Symbol.toStringTag];
+                const tag = object[Symbol.toStringTag];
                 return (
                   !(
                     null == tag ||
@@ -22744,7 +22753,7 @@
             let innerElement;
             try {
               inspectionResult = inspectValue(rawDefaultProp.toString());
-              let { hasParams, params } = inspectionResult.inferredType;
+              const { hasParams, params } = inspectionResult.inferredType;
               hasParams
                 ? 1 === params.length &&
                   'ObjectPattern' === params[0].type &&
@@ -22755,13 +22764,13 @@
                   (isElement = !0);
             } catch {}
           }
-          let funcName = extractFunctionName(rawDefaultProp, propDef.name);
+          const funcName = extractFunctionName(rawDefaultProp, propDef.name);
           if (null != funcName) {
             if (isElement)
               return (0, docs_tools.Ux)(getPrettyElementIdentifier(funcName));
             null != inspectionResult &&
               (inspectionResult = inspectValue(rawDefaultProp.toString()));
-            let { hasParams } = inspectionResult.inferredType;
+            const { hasParams } = inspectionResult.inferredType;
             return (0, docs_tools.Ux)(
               getPrettyFuncIdentifier(funcName, hasParams),
             );
@@ -22793,13 +22802,13 @@
         return null;
       }
       function generateFuncSignature(params, returns) {
-        let hasParams = null != params,
+        const hasParams = null != params,
           hasReturns = null != returns;
         if (!hasParams && !hasReturns) return '';
-        let funcParts = [];
+        const funcParts = [];
         if (hasParams) {
-          let funcParams = params.map((x) => {
-            let prettyName = x.getPrettyName(),
+          const funcParams = params.map((x) => {
+            const prettyName = x.getPrettyName(),
               typeName = x.getTypeName();
             return null != typeName ? `${prettyName}: ${typeName}` : prettyName;
           });
@@ -22811,10 +22820,10 @@
         );
       }
       function generateShortFuncSignature(params, returns) {
-        let hasParams = null != params,
+        const hasParams = null != params,
           hasReturns = null != returns;
         if (!hasParams && !hasReturns) return '';
-        let funcParts = [];
+        const funcParts = [];
         return (
           hasParams ? funcParts.push('( ... )') : funcParts.push('()'),
           hasReturns && funcParts.push(`=> ${returns.getTypeName()}`),
@@ -22848,14 +22857,14 @@
             (short = value), (compact = value);
             break;
           case 'Object': {
-            let { depth } = inferredType;
+            const { depth } = inferredType;
             (short = 'object'),
               (compact = 1 === depth ? prettyObject(ast, !0) : null),
               (full = prettyObject(ast));
             break;
           }
           case 'Element': {
-            let { identifier } = inferredType;
+            const { identifier } = inferredType;
             (short =
               null == identifier || isHtmlTag(identifier)
                 ? 'element'
@@ -22865,7 +22874,7 @@
             break;
           }
           case 'Array': {
-            let { depth } = inferredType;
+            const { depth } = inferredType;
             (short = 'array'),
               (compact = depth <= 2 ? prettyArray(ast, !0) : null),
               (full = prettyArray(ast));
@@ -22904,9 +22913,9 @@
       }
       function generateEnum(type) {
         if (Array.isArray(type.value)) {
-          let values = type.value.reduce(
+          const values = type.value.reduce(
             (acc, v) => {
-              let { short, compact, full } = (function generateEnumValue({
+              const { short, compact, full } = (function generateEnumValue({
                 value,
                 computed,
               }) {
@@ -22971,7 +22980,7 @@
               })(type);
             case 'func':
               return (function generateFunc2(extractedProp) {
-                let { jsDocTags } = extractedProp;
+                const { jsDocTags } = extractedProp;
                 return null == jsDocTags ||
                   (null == jsDocTags.params && null == jsDocTags.returns)
                   ? createTypeDef({
@@ -22994,7 +23003,7 @@
               })(extractedProp);
             case 'shape':
               return (function generateShape(type, extractedProp) {
-                let fields = Object.keys(type.value)
+                const fields = Object.keys(type.value)
                     .map(
                       (key) =>
                         `${key}: ${generateType(type.value[key], extractedProp).full}`,
@@ -23017,7 +23026,7 @@
               });
             case 'objectOf':
               return (function generateObjectOf(type, extractedProp) {
-                let { short, compact, full } = generateType(
+                const { short, compact, full } = generateType(
                   type.value,
                   extractedProp,
                 );
@@ -23031,9 +23040,9 @@
             case 'union':
               return (function generateUnion(type, extractedProp) {
                 if (Array.isArray(type.value)) {
-                  let values = type.value.reduce(
+                  const values = type.value.reduce(
                     (acc, v) => {
-                      let { short, compact, full } = generateType(
+                      const { short, compact, full } = generateType(
                         v,
                         extractedProp,
                       );
@@ -23065,10 +23074,8 @@
               return generateEnum(type);
             case 'arrayOf':
               return (function generateArray2(type, extractedProp) {
-                let { name, short, compact, full, inferredType } = generateType(
-                  type.value,
-                  extractedProp,
-                );
+                const { name, short, compact, full, inferredType } =
+                  generateType(type.value, extractedProp);
                 if ('custom' === name) {
                   if ('Object' === inferredType)
                     return createArrayOfObjectTypeDef(short, compact, full);
@@ -23102,13 +23109,13 @@
         return { ...DEFAULT_TYPE_RESOLVERS, ...customResolvers };
       })({
         function: (rawDefaultProp, { name, type }) => {
-          let isElement =
+          const isElement =
               'element' === type?.summary || 'elementType' === type?.summary,
             funcName = extractFunctionName(rawDefaultProp, name);
           if (null != funcName) {
             if (isElement)
               return (0, docs_tools.Ux)(getPrettyElementIdentifier(funcName));
-            let { hasParams } = inspectValue(
+            const { hasParams } = inspectValue(
               rawDefaultProp.toString(),
             ).inferredType;
             return (0, docs_tools.Ux)(
@@ -23121,7 +23128,7 @@
       function enhancePropTypesProp(extractedProp, rawDefaultProp) {
         let { propDef } = extractedProp,
           newtype = (function createType(extractedProp) {
-            let { type } = extractedProp.docgenInfo;
+            const { type } = extractedProp.docgenInfo;
             if (null == type) return null;
             try {
               switch (type.name) {
@@ -23132,7 +23139,7 @@
                 case 'union':
                 case 'enum':
                 case 'arrayOf': {
-                  let { short, compact, full } = generateType(
+                  const { short, compact, full } = generateType(
                     type,
                     extractedProp,
                   );
@@ -23165,12 +23172,12 @@
             return null;
           })(extractedProp);
         null != newtype && (propDef.type = newtype);
-        let { defaultValue } = extractedProp.docgenInfo;
+        const { defaultValue } = extractedProp.docgenInfo;
         if (null != defaultValue && null != defaultValue.value) {
-          let newDefaultValue = createDefaultValue(defaultValue.value);
+          const newDefaultValue = createDefaultValue(defaultValue.value);
           null != newDefaultValue && (propDef.defaultValue = newDefaultValue);
         } else if (null != rawDefaultProp) {
-          let newDefaultValue = createDefaultValueFromRawDefaultProp(
+          const newDefaultValue = createDefaultValueFromRawDefaultProp(
             rawDefaultProp,
             propDef,
             rawDefaultPropTypeResolvers,
@@ -23180,13 +23187,13 @@
         return propDef;
       }
       function enhancePropTypesProps(extractedProps, component) {
-        let rawDefaultProps =
+        const rawDefaultProps =
           null != component.defaultProps ? component.defaultProps : {};
         return (function keepOriginalDefinitionOrder(
           extractedProps,
           component,
         ) {
-          let { propTypes } = component;
+          const { propTypes } = component;
           return null != propTypes
             ? Object.keys(propTypes)
                 .map((x) => extractedProps.find((y) => y.name === x))
@@ -23205,11 +23212,11 @@
             let { propDef } = extractedProp,
               { defaultValue } = extractedProp.docgenInfo;
             if (null != defaultValue && null != defaultValue.value) {
-              let newDefaultValue = createDefaultValue(defaultValue.value);
+              const newDefaultValue = createDefaultValue(defaultValue.value);
               null != newDefaultValue &&
                 (propDef.defaultValue = newDefaultValue);
             } else if (null != rawDefaultProp) {
-              let newDefaultValue = createDefaultValueFromRawDefaultProp(
+              const newDefaultValue = createDefaultValueFromRawDefaultProp(
                 rawDefaultProp,
                 propDef,
               );
@@ -23227,7 +23234,7 @@
           !component.propTypes &&
           isMemo(component) &&
           (processedComponent = component.type);
-        let extractedProps = (0, docs_tools.p6)(processedComponent, section);
+        const extractedProps = (0, docs_tools.p6)(processedComponent, section);
         if (0 === extractedProps.length) return [];
         switch (extractedProps[0].typeSystem) {
           case docs_tools.YF.JAVASCRIPT:
@@ -23239,7 +23246,7 @@
         }
       }
       Object.keys(import_prop_types.default).forEach((typeName) => {
-        let type = import_prop_types.default[typeName];
+        const type = import_prop_types.default[typeName];
         propTypesMap.set(type, typeName),
           propTypesMap.set(type.isRequired, typeName);
       });
@@ -23247,7 +23254,7 @@
         toPascalCase = (str) => str.charAt(0).toUpperCase() + str.slice(1);
       function simplifyNodeForStringify(node) {
         if ((0, react.isValidElement)(node)) {
-          let props = Object.keys(node.props).reduce(
+          const props = Object.keys(node.props).reduce(
             (acc, cur) => (
               (acc[cur] = simplifyNodeForStringify(node.props[cur])), acc
             ),
@@ -23332,7 +23339,7 @@
                     var elementType;
                   },
                 };
-          let opts = {
+          const opts = {
             ...displayNameDefaults,
             filterProps: (value, key) => void 0 !== value,
             ...options,
@@ -23345,7 +23352,7 @@
                   : reactElementToJSXString2.default
               )(simplifyNodeForStringify(child), opts);
             if (string.indexOf('&quot;') > -1) {
-              let matches = string.match(/\S+=\\"([^"]*)\\"/g);
+              const matches = string.match(/\S+=\\"([^"]*)\\"/g);
               matches &&
                 matches.forEach((match) => {
                   string = string.replace(match, match.replace(/&quot;/g, "'"));
@@ -23383,7 +23390,7 @@
           let channel =
               external_STORYBOOK_MODULE_PREVIEW_API_.addons.getChannel(),
             skip = ((context) => {
-              let sourceParams = context?.parameters.docs?.source,
+              const sourceParams = context?.parameters.docs?.source,
                 isArgsStory = context?.parameters.__isArgsStory;
               return (
                 sourceParams?.type !== docs_tools.Y1.DYNAMIC &&
@@ -23395,7 +23402,7 @@
             jsx2 = '';
           (0, external_STORYBOOK_MODULE_PREVIEW_API_.useEffect)(() => {
             if (!skip) {
-              let { id, unmappedArgs } = context;
+              const { id, unmappedArgs } = context;
               channel.emit(docs_tools.Op, {
                 id,
                 source: jsx2,
@@ -23403,9 +23410,12 @@
               });
             }
           });
-          let story = storyFn();
+          const story = storyFn();
           if (skip) return story;
-          let options = { ...defaultOpts, ...(context?.parameters.jsx || {}) },
+          const options = {
+              ...defaultOpts,
+              ...(context?.parameters.jsx || {}),
+            },
             storyJsx = context?.parameters.docs?.source?.excludeDecorators
               ? context.originalStoryFn(context.args, context)
               : story,
@@ -23414,7 +23424,7 @@
           return rendered && (jsx2 = rendered), story;
         },
         applyDecorators = (storyFn, decorators2) => {
-          let jsxIndex = decorators2.findIndex(
+          const jsxIndex = decorators2.findIndex(
               (d) => d.originalFn === jsxDecorator,
             ),
             reorderedDecorators =
@@ -23432,12 +23442,12 @@
             story: { inline: !0 },
             extractArgTypes: (component) => {
               if (component) {
-                let { rows } = ((component) => ({
+                const { rows } = ((component) => ({
                   rows: getPropDefs(component, 'props'),
                 }))(component);
                 if (rows)
                   return rows.reduce((acc, row) => {
-                    let {
+                    const {
                       name,
                       description,
                       type,
@@ -23547,8 +23557,8 @@
                 ['[a-zA-Z0-9-]', MAX_SAFE_BUILD_LENGTH],
               ],
               createToken = (name, value, isGlobal) => {
-                let safe = ((value) => {
-                    for (let [token, max] of safeRegexReplacements)
+                const safe = ((value) => {
+                    for (const [token, max] of safeRegexReplacements)
                       value = value
                         .split(`${token}*`)
                         .join(`${token}{0,${max}}`)
@@ -23711,7 +23721,7 @@
           '../../node_modules/semver/internal/identifiers.js'(exports, module) {
             var numeric = /^[0-9]+$/,
               compareIdentifiers = (a, b) => {
-                let anum = numeric.test(a),
+                const anum = numeric.test(a),
                   bnum = numeric.test(b);
                 return (
                   anum && bnum && ((a = +a), (b = +b)),
@@ -23763,7 +23773,7 @@
                   (this.options = options),
                   (this.loose = !!options.loose),
                   (this.includePrerelease = !!options.includePrerelease);
-                let m = version2
+                const m = version2
                   .trim()
                   .match(options.loose ? re[t.LOOSE] : re[t.FULL]);
                 if (!m) throw new TypeError(`Invalid Version: ${version2}`);
@@ -23782,7 +23792,7 @@
                 m[4]
                   ? (this.prerelease = m[4].split('.').map((id) => {
                       if (/^[0-9]+$/.test(id)) {
-                        let num = +id;
+                        const num = +id;
                         if (num >= 0 && num < MAX_SAFE_INTEGER) return num;
                       }
                       return id;
@@ -23837,7 +23847,7 @@
                   return 0;
                 let i = 0;
                 do {
-                  let a = this.prerelease[i],
+                  const a = this.prerelease[i],
                     b = other.prerelease[i];
                   if (
                     (debug('prerelease compare', i, a, b),
@@ -23854,7 +23864,7 @@
                   (other = new _SemVer(other, this.options));
                 let i = 0;
                 do {
-                  let a = this.build[i],
+                  const a = this.build[i],
                     b = other.build[i];
                   if (
                     (debug('build compare', i, a, b),
@@ -23873,7 +23883,7 @@
                       'invalid increment argument: identifier is empty',
                     );
                   if (identifier) {
-                    let r = new RegExp(
+                    const r = new RegExp(
                         `^${this.options.loose ? src[t.PRERELEASELOOSE] : src[t.PRERELEASE]}$`,
                       ),
                       match = `-${identifier}`.match(r);
@@ -23932,7 +23942,7 @@
                       (this.prerelease = []);
                     break;
                   case 'pre': {
-                    let base = Number(identifierBase) ? 1 : 0;
+                    const base = Number(identifierBase) ? 1 : 0;
                     if (0 === this.prerelease.length) this.prerelease = [base];
                     else {
                       let i = this.prerelease.length;
@@ -23990,7 +24000,7 @@
           '../../node_modules/semver/functions/valid.js'(exports, module) {
             var parse = require_parse();
             module.exports = (version2, options) => {
-              let v = parse(version2, options);
+              const v = parse(version2, options);
               return v ? v.version : null;
             };
           },
@@ -23999,7 +24009,7 @@
           '../../node_modules/semver/functions/clean.js'(exports, module) {
             var parse = require_parse();
             module.exports = (version2, options) => {
-              let s = parse(version2.trim().replace(/^[=v]+/, ''), options);
+              const s = parse(version2.trim().replace(/^[=v]+/, ''), options);
               return s ? s.version : null;
             };
           },
@@ -24033,11 +24043,11 @@
           '../../node_modules/semver/functions/diff.js'(exports, module) {
             var parse = require_parse();
             module.exports = (version1, version2) => {
-              let v1 = parse(version1, null, !0),
+              const v1 = parse(version1, null, !0),
                 v2 = parse(version2, null, !0),
                 comparison = v1.compare(v2);
               if (0 === comparison) return null;
-              let v1Higher = comparison > 0,
+              const v1Higher = comparison > 0,
                 highVersion = v1Higher ? v1 : v2,
                 lowVersion = v1Higher ? v2 : v1,
                 highHasPre = !!highVersion.prerelease.length;
@@ -24048,7 +24058,7 @@
                     ? 'minor'
                     : 'patch';
               }
-              let prefix = highHasPre ? 'pre' : '';
+              const prefix = highHasPre ? 'pre' : '';
               return v1.major !== v2.major
                 ? prefix + 'major'
                 : v1.minor !== v2.minor
@@ -24081,7 +24091,7 @@
           '../../node_modules/semver/functions/prerelease.js'(exports, module) {
             var parse = require_parse();
             module.exports = (version2, options) => {
-              let parsed = parse(version2, options);
+              const parsed = parse(version2, options);
               return parsed && parsed.prerelease.length
                 ? parsed.prerelease
                 : null;
@@ -24117,7 +24127,7 @@
           ) {
             var SemVer = require_semver();
             module.exports = (a, b, loose) => {
-              let versionA = new SemVer(a, loose),
+              const versionA = new SemVer(a, loose),
                 versionB = new SemVer(b, loose);
               return (
                 versionA.compare(versionB) || versionA.compareBuild(versionB)
@@ -24253,7 +24263,7 @@
                   options.includePrerelease ? re[t.COERCEFULL] : re[t.COERCE],
                 );
               if (null === match) return null;
-              let major = match[2],
+              const major = match[2],
                 minor = match[3] || '0',
                 patch = match[4] || '0',
                 prerelease =
@@ -24274,7 +24284,7 @@
                 (this.max = 1e3), (this.map = new Map());
               }
               get(key) {
-                let value = this.map.get(key);
+                const value = this.map.get(key);
                 if (void 0 !== value)
                   return this.map.delete(key), this.map.set(key, value), value;
               }
@@ -24284,7 +24294,7 @@
               set(key, value) {
                 if (!this.delete(key) && void 0 !== value) {
                   if (this.map.size >= this.max) {
-                    let firstKey = this.map.keys().next().value;
+                    const firstKey = this.map.keys().next().value;
                     this.delete(firstKey);
                   }
                   this.map.set(key, value);
@@ -24326,14 +24336,14 @@
                 )
                   throw new TypeError(`Invalid SemVer Range: ${this.raw}`);
                 if (this.set.length > 1) {
-                  let first = this.set[0];
+                  const first = this.set[0];
                   if (
                     ((this.set = this.set.filter((c) => !isNullSet(c[0]))),
                     0 === this.set.length)
                   )
                     this.set = [first];
                   else if (this.set.length > 1)
-                    for (let c of this.set)
+                    for (const c of this.set)
                       if (1 === c.length && isAny(c[0])) {
                         this.set = [c];
                         break;
@@ -24346,7 +24356,7 @@
                   this.formatted = '';
                   for (let i = 0; i < this.set.length; i++) {
                     i > 0 && (this.formatted += '||');
-                    let comps = this.set[i];
+                    const comps = this.set[i];
                     for (let k = 0; k < comps.length; k++)
                       k > 0 && (this.formatted += ' '),
                         (this.formatted += comps[k].toString().trim());
@@ -24361,7 +24371,7 @@
                 return this.range;
               }
               parseRange(range) {
-                let memoKey =
+                const memoKey =
                     ((this.options.includePrerelease &&
                       FLAG_INCLUDE_PRERELEASE) |
                       (this.options.loose && FLAG_LOOSE)) +
@@ -24369,7 +24379,7 @@
                     range,
                   cached = cache.get(memoKey);
                 if (cached) return cached;
-                let loose = this.options.loose,
+                const loose = this.options.loose,
                   hr = loose ? re[t.HYPHENRANGELOOSE] : re[t.HYPHENRANGE];
                 (range = range.replace(
                   hr,
@@ -24399,16 +24409,16 @@
                     ),
                   )),
                   debug('range list', rangeList);
-                let rangeMap = new Map(),
+                const rangeMap = new Map(),
                   comparators = rangeList.map(
                     (comp) => new Comparator(comp, this.options),
                   );
-                for (let comp of comparators) {
+                for (const comp of comparators) {
                   if (isNullSet(comp)) return [comp];
                   rangeMap.set(comp.value, comp);
                 }
                 rangeMap.size > 1 && rangeMap.has('') && rangeMap.delete('');
-                let result = [...rangeMap.values()];
+                const result = [...rangeMap.values()];
                 return cache.set(memoKey, result), result;
               }
               intersects(range, options) {
@@ -24487,7 +24497,7 @@
                   .map((c) => replaceTilde(c, options))
                   .join(' '),
               replaceTilde = (comp, options) => {
-                let r = options.loose ? re[t.TILDELOOSE] : re[t.TILDE];
+                const r = options.loose ? re[t.TILDELOOSE] : re[t.TILDE];
                 return comp.replace(r, (_, M, m, p, pr) => {
                   let ret;
                   return (
@@ -24515,7 +24525,7 @@
                   .join(' '),
               replaceCaret = (comp, options) => {
                 debug('caret', comp, options);
-                let r = options.loose ? re[t.CARETLOOSE] : re[t.CARET],
+                const r = options.loose ? re[t.CARETLOOSE] : re[t.CARET],
                   z = options.includePrerelease ? '-0' : '';
                 return comp.replace(r, (_, M, m, p, pr) => {
                   let ret;
@@ -24559,10 +24569,10 @@
               ),
               replaceXRange = (comp, options) => {
                 comp = comp.trim();
-                let r = options.loose ? re[t.XRANGELOOSE] : re[t.XRANGE];
+                const r = options.loose ? re[t.XRANGELOOSE] : re[t.XRANGE];
                 return comp.replace(r, (ret, gtlt, M, m, p, pr) => {
                   debug('xRange', comp, ret, gtlt, M, m, p, pr);
-                  let xM = isX(M),
+                  const xM = isX(M),
                     xm = xM || isX(m),
                     xp = xm || isX(p),
                     anyX = xp;
@@ -24619,7 +24629,7 @@
                       set[i].semver !== Comparator.ANY &&
                         set[i].semver.prerelease.length > 0)
                     ) {
-                      let allowed = set[i].semver;
+                      const allowed = set[i].semver;
                       if (
                         allowed.major === version2.major &&
                         allowed.minor === version2.minor &&
@@ -24659,7 +24669,7 @@
                   debug('comp', this);
               }
               parse(comp) {
-                let r = this.options.loose
+                const r = this.options.loose
                     ? re[t.COMPARATORLOOSE]
                     : re[t.COMPARATOR],
                   m = comp.match(r);
@@ -24830,7 +24840,7 @@
                 let comparators = range.set[i],
                   setMin = null;
                 comparators.forEach((comparator) => {
-                  let compver = new SemVer(comparator.semver.version);
+                  const compver = new SemVer(comparator.semver.version);
                   switch (comparator.operator) {
                     case '>':
                       0 === compver.prerelease.length
@@ -24967,15 +24977,15 @@
                 first = null,
                 prev = null,
                 v = versions.sort((a, b) => compare(a, b, options));
-              for (let version2 of v)
+              for (const version2 of v)
                 satisfies(version2, range, options)
                   ? ((prev = version2), first || (first = version2))
                   : (prev && set.push([first, prev]),
                     (prev = null),
                     (first = null));
               first && set.push([first, null]);
-              let ranges = [];
-              for (let [min, max] of set)
+              const ranges = [];
+              for (const [min, max] of set)
                 min === max
                   ? ranges.push(min)
                   : max || min !== v[0]
@@ -24985,7 +24995,7 @@
                         : ranges.push(`${min} - ${max}`)
                       : ranges.push(`>=${min}`)
                     : ranges.push('*');
-              let simplified = ranges.join(' || '),
+              const simplified = ranges.join(' || '),
                 original =
                   'string' == typeof range.raw ? range.raw : String(range);
               return simplified.length < original.length ? simplified : range;
@@ -25017,7 +25027,7 @@
                   lt,
                   gtltComp,
                   eqSet = new Set();
-                for (let c of sub)
+                for (const c of sub)
                   '>' === c.operator || '>=' === c.operator
                     ? (gt = higherGT(gt, c, options))
                     : '<' === c.operator || '<=' === c.operator
@@ -25036,13 +25046,13 @@
                   )
                     return null;
                 }
-                for (let eq of eqSet) {
+                for (const eq of eqSet) {
                   if (
                     (gt && !satisfies(eq, String(gt), options)) ||
                     (lt && !satisfies(eq, String(lt), options))
                   )
                     return null;
-                  for (let c of dom)
+                  for (const c of dom)
                     if (!satisfies(eq, String(c), options)) return !1;
                   return !0;
                 }
@@ -25067,7 +25077,7 @@
                   '<' === lt.operator &&
                   0 === needDomLTPre.prerelease[0] &&
                   (needDomLTPre = !1);
-                for (let c of dom) {
+                for (const c of dom) {
                   if (
                     ((hasDomGT =
                       hasDomGT || '>' === c.operator || '>=' === c.operator),
@@ -25127,7 +25137,7 @@
               },
               higherGT = (a, b, options) => {
                 if (!a) return b;
-                let comp = compare(a.semver, b.semver, options);
+                const comp = compare(a.semver, b.semver, options);
                 return comp > 0
                   ? a
                   : comp < 0 || ('>' === b.operator && '>=' === a.operator)
@@ -25136,7 +25146,7 @@
               },
               lowerLT = (a, b, options) => {
                 if (!a) return b;
-                let comp = compare(a.semver, b.semver, options);
+                const comp = compare(a.semver, b.semver, options);
                 return comp < 0
                   ? a
                   : comp > 0 || ('<' === b.operator && '<=' === a.operator)
@@ -25147,9 +25157,9 @@
               if (sub === dom) return !0;
               (sub = new Range(sub, options)), (dom = new Range(dom, options));
               let sawNonNull = !1;
-              OUTER: for (let simpleSub of sub.set) {
-                for (let simpleDom of dom.set) {
-                  let isSub = simpleSubset(simpleSub, simpleDom, options);
+              OUTER: for (const simpleSub of sub.set) {
+                for (const simpleDom of dom.set) {
+                  const isSub = simpleSubset(simpleSub, simpleDom, options);
                   if (((sawNonNull = sawNonNull || null !== isSub), isSub))
                     continue OUTER;
                 }
@@ -25274,7 +25284,7 @@
           let reactAct;
           if ('function' == typeof clonedReact.act) reactAct = clonedReact.act;
           else {
-            let deprecatedTestUtils = await __webpack_require__
+            const deprecatedTestUtils = await __webpack_require__
               .e(161)
               .then(
                 __webpack_require__.t.bind(
@@ -25289,7 +25299,7 @@
           return (cb) => cb();
         },
         render = (args, context) => {
-          let { id, component: Component } = context;
+          const { id, component: Component } = context;
           if (!Component)
             throw new Error(
               `Unable to render story ${id} as the component annotation is missing from the default export`,
@@ -25305,16 +25315,16 @@
             return { hasError: !0 };
           }
           componentDidMount() {
-            let { hasError } = this.state,
+            const { hasError } = this.state,
               { showMain } = this.props;
             hasError || showMain();
           }
           componentDidCatch(err) {
-            let { showException } = this.props;
+            const { showException } = this.props;
             showException(err);
           }
           render() {
-            let { hasError } = this.state,
+            const { hasError } = this.state,
               { children } = this.props;
             return hasError ? null : children;
           }
@@ -25327,14 +25337,14 @@
         processActQueue = async () => {
           if (isActing || 0 === actQueue.length) return;
           isActing = !0;
-          let actTask = actQueue.shift();
+          const actTask = actQueue.shift();
           actTask && (await actTask()), (isActing = !1), processActQueue();
         };
       async function renderToCanvas(
         { storyContext, unboundStoryFn, showMain, showException, forceRemount },
         canvasElement,
       ) {
-        let { renderElement, unmountElement } = await Promise.all([
+        const { renderElement, unmountElement } = await Promise.all([
             __webpack_require__.e(735),
             __webpack_require__.e(961),
           ]).then(
@@ -25355,7 +25365,7 @@
             ? react.createElement(Wrapper, null, content)
             : content;
         forceRemount && unmountElement(canvasElement);
-        let act = await getAct();
+        const act = await getAct();
         return (
           await new Promise(async (resolve, reject) => {
             actQueue.push(async () => {
@@ -25390,7 +25400,7 @@
         decorators = [
           (story, context) => {
             if (!context.parameters?.react?.rsc) return story();
-            let major = import_semver.default.major(react.version),
+            const major = import_semver.default.major(react.version),
               minor = import_semver.default.minor(react.version);
             if (major < 18 || (18 === major && minor < 3))
               throw new Error('React Server Components require React >= 18.3');
@@ -25399,7 +25409,7 @@
         ],
         beforeAll = async () => {
           try {
-            let { configure } = await Promise.resolve().then(
+            const { configure } = await Promise.resolve().then(
                 __webpack_require__.bind(
                   __webpack_require__,
                   './node_modules/@storybook/test/dist/index.mjs',
@@ -25409,10 +25419,10 @@
             configure({
               unstable_advanceTimersWrapper: (cb) => act(cb),
               asyncWrapper: async (cb) => {
-                let previousActEnvironment = getReactActEnvironment();
+                const previousActEnvironment = getReactActEnvironment();
                 setReactActEnvironment(!1);
                 try {
-                  let result = await cb();
+                  const result = await cb();
                   return (
                     await new Promise((resolve) => {
                       setTimeout(() => {
@@ -25497,7 +25507,7 @@
           (target = null != mod ? __create(__getProtoOf(mod)) : {}),
           ((to, from, except, desc) => {
             if ((from && 'object' == typeof from) || 'function' == typeof from)
-              for (let key of __getOwnPropNames(from))
+              for (const key of __getOwnPropNames(from))
                 !__hasOwnProp.call(to, key) &&
                   key !== except &&
                   __defProp(to, key, {
@@ -25516,7 +25526,7 @@
         require_min_indent = __commonJS({
           '../../node_modules/min-indent/index.js'(exports, module2) {
             module2.exports = (string) => {
-              let match = string.match(/^[ \t]*(?=\S)/gm);
+              const match = string.match(/^[ \t]*(?=\S)/gm);
               return match
                 ? match.reduce((r, a2) => Math.min(r, a2.length), 1 / 0)
                 : 0;
@@ -25527,9 +25537,9 @@
           '../../node_modules/strip-indent/index.js'(exports, module2) {
             var minIndent = require_min_indent();
             module2.exports = (string) => {
-              let indent = minIndent(string);
+              const indent = minIndent(string);
               if (0 === indent) return string;
-              let regex = new RegExp(`^[ \\t]{${indent}}`, 'gm');
+              const regex = new RegExp(`^[ \\t]{${indent}}`, 'gm');
               return string.replace(regex, '');
             };
           },
@@ -25553,7 +25563,7 @@
                   `Expected \`options.indent\` to be a \`string\`, got \`${typeof options.indent}\``,
                 );
               if (0 === count) return string;
-              let regex = options.includeEmptyLines ? /^/gm : /^(?!\s*$)/gm;
+              const regex = options.includeEmptyLines ? /^/gm : /^(?!\s*$)/gm;
               return string.replace(regex, options.indent.repeat(count));
             };
           },
@@ -31785,7 +31795,7 @@
           '../../node_modules/color-convert/conversions.js'(exports, module2) {
             var cssKeywords = require_color_name(),
               reverseKeywords = {};
-            for (let key of Object.keys(cssKeywords))
+            for (const key of Object.keys(cssKeywords))
               reverseKeywords[cssKeywords[key]] = key;
             var convert = {
               rgb: { channels: 3, labels: 'rgb' },
@@ -31805,14 +31815,14 @@
               gray: { channels: 1, labels: ['gray'] },
             };
             module2.exports = convert;
-            for (let model of Object.keys(convert)) {
+            for (const model of Object.keys(convert)) {
               if (!('channels' in convert[model]))
                 throw new Error('missing channels property: ' + model);
               if (!('labels' in convert[model]))
                 throw new Error('missing channel labels property: ' + model);
               if (convert[model].labels.length !== convert[model].channels)
                 throw new Error('channel and label counts mismatch: ' + model);
-              let { channels, labels } = convert[model];
+              const { channels, labels } = convert[model];
               delete convert[model].channels,
                 delete convert[model].labels,
                 Object.defineProperty(convert[model], 'channels', {
@@ -31840,7 +31850,7 @@
                     : b === max && (h2 = 4 + (r - g2) / delta),
                 (h2 = Math.min(60 * h2, 360)),
                 h2 < 0 && (h2 += 360);
-              let l2 = (min + max) / 2;
+              const l2 = (min + max) / 2;
               return (
                 (s =
                   max === min
@@ -31893,7 +31903,7 @@
                 );
               }),
               (convert.rgb.cmyk = function (rgb) {
-                let r = rgb[0] / 255,
+                const r = rgb[0] / 255,
                   g2 = rgb[1] / 255,
                   b = rgb[2] / 255,
                   k2 = Math.min(1 - r, 1 - g2, 1 - b);
@@ -31905,12 +31915,12 @@
                 ];
               }),
               (convert.rgb.keyword = function (rgb) {
-                let reversed = reverseKeywords[rgb];
+                const reversed = reverseKeywords[rgb];
                 if (reversed) return reversed;
                 let currentClosestKeyword,
                   currentClosestDistance = 1 / 0;
-                for (let keyword of Object.keys(cssKeywords)) {
-                  let value = cssKeywords[keyword],
+                for (const keyword of Object.keys(cssKeywords)) {
+                  const value = cssKeywords[keyword],
                     distance =
                       ((y2 = value),
                       ((x2 = rgb)[0] - y2[0]) ** 2 +
@@ -31966,7 +31976,7 @@
                   l2 = hsl[2] / 100;
                 if (0 === s) return (val = 255 * l2), [val, val, val];
                 t2 = l2 < 0.5 ? l2 * (1 + s) : l2 + s - l2 * s;
-                let t1 = 2 * l2 - t2,
+                const t1 = 2 * l2 - t2,
                   rgb = [0, 0, 0];
                 for (let i = 0; i < 3; i++)
                   (t3 = h2 + (1 / 3) * -(i - 1)),
@@ -32035,7 +32045,7 @@
                   v = hsv[2] / 100,
                   vmin = Math.max(v, 0.01);
                 l2 = (2 - s) * v;
-                let lmin = (2 - s) * vmin;
+                const lmin = (2 - s) * vmin;
                 return (
                   (sl = s * vmin),
                   (sl /= lmin <= 1 ? lmin : 2 - lmin),
@@ -32051,7 +32061,7 @@
                   bl = hwb[2] / 100,
                   ratio = wh + bl;
                 ratio > 1 && ((wh /= ratio), (bl /= ratio));
-                let i = Math.floor(6 * h2),
+                const i = Math.floor(6 * h2),
                   v = 1 - bl;
                 (f4 = 6 * h2 - i), 1 & i && (f4 = 1 - f4);
                 let r,
@@ -32082,7 +32092,7 @@
                 return [255 * r, 255 * g2, 255 * b];
               }),
               (convert.cmyk.rgb = function (cmyk) {
-                let c = cmyk[0] / 100,
+                const c = cmyk[0] / 100,
                   m3 = cmyk[1] / 100,
                   y2 = cmyk[2] / 100,
                   k2 = cmyk[3] / 100;
@@ -32136,7 +32146,7 @@
                 (y2 = (lab[0] + 16) / 116),
                   (x2 = lab[1] / 500 + y2),
                   (z = y2 - lab[2] / 200);
-                let y22 = y2 ** 3,
+                const y22 = y2 ** 3,
                   x22 = x2 ** 3,
                   z2 = z ** 3;
                 return (
@@ -32161,7 +32171,7 @@
                 );
               }),
               (convert.lch.lab = function (lch) {
-                let l2 = lch[0],
+                const l2 = lch[0],
                   c = lch[1],
                   hr = (lch[2] / 360) * 2 * Math.PI;
                 return [l2, c * Math.cos(hr), c * Math.sin(hr)];
@@ -32182,7 +32192,7 @@
                 return convert.rgb.ansi16(convert.hsv.rgb(args), args[2]);
               }),
               (convert.rgb.ansi256 = function (args) {
-                let r = args[0],
+                const r = args[0],
                   g2 = args[1],
                   b = args[2];
                 return r === g2 && g2 === b
@@ -32204,7 +32214,7 @@
                     (color = (color / 10.5) * 255),
                     [color, color, color]
                   );
-                let mult = 0.5 * (1 + ~~(args > 50));
+                const mult = 0.5 * (1 + ~~(args > 50));
                 return [
                   (1 & color) * mult * 255,
                   ((color >> 1) & 1) * mult * 255,
@@ -32213,7 +32223,7 @@
               }),
               (convert.ansi256.rgb = function (args) {
                 if (args >= 232) {
-                  let c = 10 * (args - 232) + 8;
+                  const c = 10 * (args - 232) + 8;
                   return [c, c, c];
                 }
                 let rem;
@@ -32227,7 +32237,7 @@
                 );
               }),
               (convert.rgb.hex = function (args) {
-                let string = (
+                const string = (
                   ((255 & Math.round(args[0])) << 16) +
                   ((255 & Math.round(args[1])) << 8) +
                   (255 & Math.round(args[2]))
@@ -32237,7 +32247,9 @@
                 return '000000'.substring(string.length) + string;
               }),
               (convert.hex.rgb = function (args) {
-                let match = args.toString(16).match(/[a-f0-9]{6}|[a-f0-9]{3}/i);
+                const match = args
+                  .toString(16)
+                  .match(/[a-f0-9]{6}|[a-f0-9]{3}/i);
                 if (!match) return [0, 0, 0];
                 let colorString = match[0];
                 3 === match[0].length &&
@@ -32245,7 +32257,7 @@
                     .split('')
                     .map((char) => char + char)
                     .join(''));
-                let integer = parseInt(colorString, 16);
+                const integer = parseInt(colorString, 16);
                 return [
                   (integer >> 16) & 255,
                   (integer >> 8) & 255,
@@ -32296,7 +32308,7 @@
                 );
               }),
               (convert.hcg.rgb = function (hcg) {
-                let h2 = hcg[0] / 360,
+                const h2 = hcg[0] / 360,
                   c = hcg[1] / 100,
                   g2 = hcg[2] / 100;
                 if (0 === c) return [255 * g2, 255 * g2, 255 * g2];
@@ -32351,7 +32363,7 @@
                 );
               }),
               (convert.hcg.hwb = function (hcg) {
-                let c = hcg[1] / 100,
+                const c = hcg[1] / 100,
                   v = c + (hcg[2] / 100) * (1 - c);
                 return [hcg[0], 100 * (v - c), 100 * (1 - v)];
               }),
@@ -32399,7 +32411,7 @@
                 return [gray[0], 0, 0];
               }),
               (convert.gray.hex = function (gray) {
-                let val = 255 & Math.round((gray[0] / 100) * 255),
+                const val = 255 & Math.round((gray[0] / 100) * 255),
                   string = ((val << 16) + (val << 8) + val)
                     .toString(16)
                     .toUpperCase();
@@ -32414,8 +32426,8 @@
           '../../node_modules/color-convert/route.js'(exports, module2) {
             var conversions = require_conversions();
             function deriveBFS(fromModel) {
-              let graph = (function buildGraph() {
-                  let graph = {},
+              const graph = (function buildGraph() {
+                  const graph = {},
                     models = Object.keys(conversions);
                   for (let len = models.length, i = 0; i < len; i++)
                     graph[models[i]] = { distance: -1, parent: null };
@@ -32423,10 +32435,10 @@
                 })(),
                 queue = [fromModel];
               for (graph[fromModel].distance = 0; queue.length; ) {
-                let current = queue.pop(),
+                const current = queue.pop(),
                   adjacents = Object.keys(conversions[current]);
                 for (let len = adjacents.length, i = 0; i < len; i++) {
-                  let adjacent = adjacents[i],
+                  const adjacent = adjacents[i],
                     node = graph[adjacent];
                   -1 === node.distance &&
                     ((node.distance = graph[current].distance + 1),
@@ -32452,11 +32464,11 @@
               return (fn3.conversion = path), fn3;
             }
             module2.exports = function (fromModel) {
-              let graph = deriveBFS(fromModel),
+              const graph = deriveBFS(fromModel),
                 conversion = {},
                 models = Object.keys(graph);
               for (let len = models.length, i = 0; i < len; i++) {
-                let toModel = models[i];
+                const toModel = models[i];
                 null !== graph[toModel].parent &&
                   (conversion[toModel] = wrapConversion(toModel, graph));
               }
@@ -32477,15 +32489,15 @@
                 Object.defineProperty(convert[fromModel], 'labels', {
                   value: conversions[fromModel].labels,
                 });
-              let routes = route(fromModel);
+              const routes = route(fromModel);
               Object.keys(routes).forEach((toModel) => {
-                let fn3 = routes[toModel];
+                const fn3 = routes[toModel];
                 (convert[fromModel][toModel] = (function wrapRounded(fn3) {
-                  let wrappedFn = function (...args) {
-                    let arg0 = args[0];
+                  const wrappedFn = function (...args) {
+                    const arg0 = args[0];
                     if (null == arg0) return arg0;
                     arg0.length > 1 && (args = arg0);
-                    let result = fn3(args);
+                    const result = fn3(args);
                     if ('object' == typeof result)
                       for (let len = result.length, i = 0; i < len; i++)
                         result[i] = Math.round(result[i]);
@@ -32498,8 +32510,8 @@
                   );
                 })(fn3)),
                   (convert[fromModel][toModel].raw = (function wrapRaw(fn3) {
-                    let wrappedFn = function (...args) {
-                      let arg0 = args[0];
+                    const wrappedFn = function (...args) {
+                      const arg0 = args[0];
                       return null == arg0
                         ? arg0
                         : (arg0.length > 1 && (args = arg0), fn3(args));
@@ -32525,13 +32537,13 @@
               wrapAnsi256 =
                 (fn3, offset) =>
                 (...args) => {
-                  let code = fn3(...args);
+                  const code = fn3(...args);
                   return `[${38 + offset};5;${code}m`;
                 },
               wrapAnsi16m =
                 (fn3, offset) =>
                 (...args) => {
-                  let rgb = fn3(...args);
+                  const rgb = fn3(...args);
                   return `[${38 + offset};2;${rgb[0]};${rgb[1]};${rgb[2]}m`;
                 },
               ansi2ansi = (n) => n,
@@ -32539,7 +32551,7 @@
               setLazyProperty = (object, property, get2) => {
                 Object.defineProperty(object, property, {
                   get: () => {
-                    let value = get2();
+                    const value = get2();
                     return (
                       Object.defineProperty(object, property, {
                         value,
@@ -32561,10 +32573,12 @@
               ) => {
                 void 0 === colorConvert &&
                   (colorConvert = require_color_convert());
-                let offset = isBackground ? 10 : 0,
+                const offset = isBackground ? 10 : 0,
                   styles3 = {};
-                for (let [sourceSpace, suite] of Object.entries(colorConvert)) {
-                  let name = 'ansi16' === sourceSpace ? 'ansi' : sourceSpace;
+                for (const [sourceSpace, suite] of Object.entries(
+                  colorConvert,
+                )) {
+                  const name = 'ansi16' === sourceSpace ? 'ansi' : sourceSpace;
                   sourceSpace === targetSpace
                     ? (styles3[name] = wrap(identity, offset))
                     : 'object' == typeof suite &&
@@ -32575,7 +32589,7 @@
             Object.defineProperty(module2, 'exports', {
               enumerable: !0,
               get: function assembleStyles() {
-                let codes = new Map(),
+                const codes = new Map(),
                   styles3 = {
                     modifier: {
                       reset: [0, 0],
@@ -32628,8 +32642,8 @@
                   (styles3.bgColor.bgGray = styles3.bgColor.bgBlackBright),
                   (styles3.color.grey = styles3.color.blackBright),
                   (styles3.bgColor.bgGrey = styles3.bgColor.bgBlackBright);
-                for (let [groupName, group] of Object.entries(styles3)) {
-                  for (let [styleName, style] of Object.entries(group))
+                for (const [groupName, group] of Object.entries(styles3)) {
+                  for (const [styleName, style] of Object.entries(group))
                     (styles3[styleName] = {
                       open: `[${style[0]}m`,
                       close: `[${style[1]}m`,
@@ -32708,7 +32722,7 @@
                 let endIndex = 0,
                   returnValue = '';
                 do {
-                  let gotCR = '\r' === string[index - 1];
+                  const gotCR = '\r' === string[index - 1];
                   (returnValue +=
                     string.substr(
                       endIndex,
@@ -32749,7 +32763,7 @@
                 ['a', ''],
               ]);
             function unescape(c) {
-              let u2 = 'u' === c[0],
+              const u2 = 'u' === c[0],
                 bracket = '{' === c[1];
               return (u2 && !bracket && 5 === c.length) ||
                 ('x' === c[0] && 3 === c.length)
@@ -32762,8 +32776,8 @@
               let matches3,
                 results = [],
                 chunks = arguments_.trim().split(/\s*,\s*/g);
-              for (let chunk of chunks) {
-                let number = Number(chunk);
+              for (const chunk of chunks) {
+                const number = Number(chunk);
                 if (Number.isNaN(number)) {
                   if (!(matches3 = chunk.match(STRING_REGEX)))
                     throw new Error(
@@ -32785,21 +32799,21 @@
               let matches3,
                 results = [];
               for (; null !== (matches3 = STYLE_REGEX.exec(style)); ) {
-                let name = matches3[1];
+                const name = matches3[1];
                 if (matches3[2]) {
-                  let args = parseArguments(name, matches3[2]);
+                  const args = parseArguments(name, matches3[2]);
                   results.push([name].concat(args));
                 } else results.push([name]);
               }
               return results;
             }
             function buildStyle(chalk3, styles3) {
-              let enabled = {};
-              for (let layer of styles3)
-                for (let style of layer.styles)
+              const enabled = {};
+              for (const layer of styles3)
+                for (const style of layer.styles)
                   enabled[style[0]] = layer.inverse ? null : style.slice(1);
               let current = chalk3;
-              for (let [styleName, styles4] of Object.entries(enabled))
+              for (const [styleName, styles4] of Object.entries(enabled))
                 if (Array.isArray(styles4)) {
                   if (!(styleName in current))
                     throw new Error(`Unknown Chalk style: ${styleName}`);
@@ -32820,7 +32834,7 @@
                   (m3, escapeCharacter, inverse, style, close, character) => {
                     if (escapeCharacter) chunk.push(unescape(escapeCharacter));
                     else if (style) {
-                      let string = chunk.join('');
+                      const string = chunk.join('');
                       (chunk = []),
                         chunks.push(
                           0 === styles3.length
@@ -32842,7 +32856,7 @@
                 chunks.push(chunk.join('')),
                 styles3.length > 0)
               ) {
-                let errMsg = `Chalk template literal is missing ${styles3.length} closing bracket${1 === styles3.length ? '' : 's'} (\`}\`)`;
+                const errMsg = `Chalk template literal is missing ${styles3.length} closing bracket${1 === styles3.length ? '' : 's'} (\`}\`)`;
                 throw new Error(errMsg);
               }
               return chunks.join('');
@@ -32866,14 +32880,14 @@
                 }
               },
               chalkFactory = (options) => {
-                let chalk4 = {};
+                const chalk4 = {};
                 return (
                   ((object, options = {}) => {
                     if (options.level > 3 || options.level < 0)
                       throw new Error(
                         'The `level` option should be an integer from 0 to 3',
                       );
-                    let colorLevel = stdoutColor ? stdoutColor.level : 0;
+                    const colorLevel = stdoutColor ? stdoutColor.level : 0;
                     object.level =
                       void 0 === options.level ? colorLevel : options.level;
                   })(chalk4, options),
@@ -32893,10 +32907,10 @@
             function Chalk(options) {
               return chalkFactory(options);
             }
-            for (let [styleName, style] of Object.entries(ansiStyles))
+            for (const [styleName, style] of Object.entries(ansiStyles))
               styles3[styleName] = {
                 get() {
-                  let builder = createBuilder(
+                  const builder = createBuilder(
                     this,
                     createStyler(style.open, style.close, this._styler),
                     this._isEmpty,
@@ -32909,7 +32923,7 @@
               };
             styles3.visible = {
               get() {
-                let builder = createBuilder(this, this._styler, !0);
+                const builder = createBuilder(this, this._styler, !0);
                 return (
                   Object.defineProperty(this, 'visible', { value: builder }),
                   builder
@@ -32926,12 +32940,12 @@
               'ansi',
               'ansi256',
             ];
-            for (let model of usedModels)
+            for (const model of usedModels)
               styles3[model] = {
                 get() {
-                  let { level } = this;
+                  const { level } = this;
                   return function (...arguments_) {
-                    let styler = createStyler(
+                    const styler = createStyler(
                       ansiStyles.color[levelMapping[level]][model](
                         ...arguments_,
                       ),
@@ -32942,12 +32956,12 @@
                   };
                 },
               };
-            for (let model of usedModels) {
+            for (const model of usedModels) {
               styles3['bg' + model[0].toUpperCase() + model.slice(1)] = {
                 get() {
-                  let { level } = this;
+                  const { level } = this;
                   return function (...arguments_) {
-                    let styler = createStyler(
+                    const styler = createStyler(
                       ansiStyles.bgColor[levelMapping[level]][model](
                         ...arguments_,
                       ),
@@ -32983,7 +32997,7 @@
                 );
               },
               createBuilder = (self2, _styler, _isEmpty) => {
-                let builder = (...arguments_) =>
+                const builder = (...arguments_) =>
                   applyStyle(
                     builder,
                     1 === arguments_.length
@@ -33003,7 +33017,7 @@
                   return self2._isEmpty ? '' : string;
                 let styler = self2._styler;
                 if (void 0 === styler) return string;
-                let { openAll, closeAll } = styler;
+                const { openAll, closeAll } = styler;
                 if (-1 !== string.indexOf(''))
                   for (; void 0 !== styler; )
                     (string = stringReplaceAll(
@@ -33012,7 +33026,7 @@
                       styler.open,
                     )),
                       (styler = styler.parent);
-                let lfIndex = string.indexOf('\n');
+                const lfIndex = string.indexOf('\n');
                 return (
                   -1 !== lfIndex &&
                     (string = stringEncaseCRLFWithFirstIndex(
@@ -33025,9 +33039,9 @@
                 );
               },
               chalkTag = (chalk4, ...strings) => {
-                let [firstString] = strings;
+                const [firstString] = strings;
                 if (!Array.isArray(firstString)) return strings.join(' ');
-                let arguments_ = strings.slice(1),
+                const arguments_ = strings.slice(1),
                   parts = [firstString.raw[0]];
                 for (let i = 1; i < firstString.length; i++)
                   parts.push(
@@ -34597,7 +34611,7 @@
             Object.defineProperty(module2, 'exports', {
               enumerable: !0,
               get: function assembleStyles() {
-                let codes = new Map(),
+                const codes = new Map(),
                   styles3 = {
                     modifier: {
                       reset: [0, 0],
@@ -34651,8 +34665,8 @@
                   (styles3.bgColor.bgGray = styles3.bgColor.bgBlackBright),
                   (styles3.color.grey = styles3.color.blackBright),
                   (styles3.bgColor.bgGrey = styles3.bgColor.bgBlackBright);
-                for (let [groupName, group] of Object.entries(styles3)) {
-                  for (let [styleName, style] of Object.entries(group))
+                for (const [groupName, group] of Object.entries(styles3)) {
+                  for (const [styleName, style] of Object.entries(group))
                     (styles3[styleName] = {
                       open: `[${style[0]}m`,
                       close: `[${style[1]}m`,
@@ -34692,7 +34706,7 @@
                     },
                     hexToRgb: {
                       value: (hex3) => {
-                        let matches3 =
+                        const matches3 =
                           /(?<colorString>[a-f\d]{6}|[a-f\d]{3})/i.exec(
                             hex3.toString(16),
                           );
@@ -34703,7 +34717,7 @@
                             .split('')
                             .map((character) => character + character)
                             .join(''));
-                        let integer = Number.parseInt(colorString, 16);
+                        const integer = Number.parseInt(colorString, 16);
                         return [
                           (integer >> 16) & 255,
                           (integer >> 8) & 255,
@@ -34742,7 +34756,7 @@
                   current = iterator.next();
                 if (!current.done) {
                   result += config3.spacingOuter;
-                  let indentationNext = indentation + config3.indent;
+                  const indentationNext = indentation + config3.indent;
                   for (; !current.done; ) {
                     (result +=
                       indentationNext +
@@ -34782,7 +34796,7 @@
                   current = iterator.next();
                 if (!current.done) {
                   result += config3.spacingOuter;
-                  let indentationNext = indentation + config3.indent;
+                  const indentationNext = indentation + config3.indent;
                   for (; !current.done; )
                     (result +=
                       indentationNext +
@@ -34812,7 +34826,7 @@
                 let result = '';
                 if (list.length) {
                   result += config3.spacingOuter;
-                  let indentationNext = indentation + config3.indent;
+                  const indentationNext = indentation + config3.indent;
                   for (let i = 0; i < list.length; i++)
                     (result += indentationNext),
                       i in list &&
@@ -34840,7 +34854,7 @@
               ) {
                 let result = '',
                   keys2 = ((object, compareKeys) => {
-                    let keys2 = Object.keys(object).sort(compareKeys);
+                    const keys2 = Object.keys(object).sort(compareKeys);
                     return (
                       Object.getOwnPropertySymbols &&
                         Object.getOwnPropertySymbols(object).forEach(
@@ -34854,9 +34868,9 @@
                   })(val, config3.compareKeys);
                 if (keys2.length) {
                   result += config3.spacingOuter;
-                  let indentationNext = indentation + config3.indent;
+                  const indentationNext = indentation + config3.indent;
                   for (let i = 0; i < keys2.length; i++) {
-                    let key = keys2[i];
+                    const key = keys2[i];
                     (result +=
                       indentationNext +
                       printer2(key, config3, indentationNext, depth, refs) +
@@ -34908,7 +34922,7 @@
                 refs,
                 printer2,
               ) => {
-                let stringedValue = val.toString();
+                const stringedValue = val.toString();
                 return 'ArrayContaining' === stringedValue ||
                   'ArrayNotContaining' === stringedValue
                   ? ++depth > config3.maxDepth
@@ -34961,7 +34975,7 @@
             module2,
           ) {
             module2.exports = ({ onlyFirst = !1 } = {}) => {
-              let pattern = [
+              const pattern = [
                 '[\\u001B\\u009B][[\\]()#;?]*(?:(?:(?:(?:;[-a-zA-Z\\d\\/#&.:=?%@~_]+)*|[a-zA-Z\\d]+(?:;[-a-zA-Z\\d\\/#&.:=?%@~_]*)*)?\\u0007)',
                 '(?:(?:\\d{1,4}(?:;\\d{0,4})*)?[\\dA-PR-TZcf-ntqry=><~]))',
               ].join('|');
@@ -35076,7 +35090,7 @@
               refs,
               printer2,
             ) => {
-              let name = collection.constructor.name;
+              const name = collection.constructor.name;
               return ++depth > config3.maxDepth
                 ? '[' + name + ']'
                 : (config3.min ? '' : name + ' ') +
@@ -35152,7 +35166,7 @@
               refs,
               printer2,
             ) => {
-              let indentationNext = indentation + config3.indent,
+              const indentationNext = indentation + config3.indent,
                 colors = config3.colors;
               return keys2
                 .map((key) => {
@@ -35206,7 +35220,7 @@
                 )
                 .join('');
             var printText3 = (text, config3) => {
-              let contentColor = config3.colors.content;
+              const contentColor = config3.colors.content;
               return (
                 contentColor.open +
                 (0, _escapeHTML.default)(text) +
@@ -35215,7 +35229,7 @@
             };
             exports.printText = printText3;
             exports.printComment = (comment, config3) => {
-              let commentColor = config3.colors.comment;
+              const commentColor = config3.colors.comment;
               return (
                 commentColor.open +
                 '\x3c!--' +
@@ -35231,7 +35245,7 @@
               config3,
               indentation,
             ) => {
-              let tagColor = config3.colors.tag;
+              const tagColor = config3.colors.tag;
               return (
                 tagColor.open +
                 '<' +
@@ -35257,7 +35271,7 @@
               );
             };
             exports.printElementAsLeaf = (type5, config3) => {
-              let tagColor = config3.colors.tag;
+              const tagColor = config3.colors.tag;
               return (
                 tagColor.open +
                 '<' +
@@ -35288,7 +35302,7 @@
                     ? void 0
                     : _val$constructor.name) &&
                   ((val) => {
-                    let constructorName = val.constructor.name,
+                    const constructorName = val.constructor.name,
                       { nodeType, tagName } = val,
                       isCustomElement3 =
                         ('string' == typeof tagName && tagName.includes('-')) ||
@@ -35338,7 +35352,7 @@
                 })(node)
               )
                 return (0, _markup.printComment)(node.data, config3);
-              let type5 = nodeIsFragment3(node)
+              const type5 = nodeIsFragment3(node)
                 ? 'DocumentFragment'
                 : node.tagName.toLowerCase();
               return ++depth > config3.maxDepth
@@ -35495,7 +35509,7 @@
                               refs,
                               printer2,
                             ) => {
-                              let name = getImmutableName2('Seq');
+                              const name = getImmutableName2('Seq');
                               return ++depth > config3.maxDepth
                                 ? printAsLeaf2(name)
                                 : val['@@__IMMUTABLE_KEYED__@@']
@@ -35537,7 +35551,7 @@
                               refs,
                               printer2,
                             ) => {
-                              let name = getImmutableName2(
+                              const name = getImmutableName2(
                                 val._name || 'Record',
                               );
                               return ++depth > config3.maxDepth
@@ -35550,7 +35564,7 @@
                                         return {
                                           next() {
                                             if (i < val._keys.length) {
-                                              let key = val._keys[i++];
+                                              const key = val._keys[i++];
                                               return {
                                                 done: !1,
                                                 value: [key, val.get(key)],
@@ -35812,7 +35826,7 @@
                 children
               ),
               getType4 = (element) => {
-                let type5 = element.type;
+                const type5 = element.type;
                 if ('string' == typeof type5) return type5;
                 if ('function' == typeof type5)
                   return type5.displayName || type5.name || 'Unknown';
@@ -35825,14 +35839,14 @@
                     return 'Context.Consumer';
                   if (ReactIs.isForwardRef(element)) {
                     if (type5.displayName) return type5.displayName;
-                    let functionName =
+                    const functionName =
                       type5.render.displayName || type5.render.name || '';
                     return '' !== functionName
                       ? 'ForwardRef(' + functionName + ')'
                       : 'ForwardRef';
                   }
                   if (ReactIs.isMemo(element)) {
-                    let functionName =
+                    const functionName =
                       type5.displayName ||
                       type5.type.displayName ||
                       type5.type.name ||
@@ -35858,7 +35872,7 @@
                       getType4(element),
                       (0, _markup.printProps)(
                         ((element) => {
-                          let { props } = element;
+                          const { props } = element;
                           return Object.keys(props)
                             .filter(
                               (key) =>
@@ -35928,7 +35942,7 @@
                       object.props
                         ? (0, _markup.printProps)(
                             ((object) => {
-                              let { props } = object;
+                              const { props } = object;
                               return props
                                 ? Object.keys(props)
                                     .filter((key) => void 0 !== props[key])
@@ -36024,7 +36038,7 @@
               if (!0 === val || !1 === val) return '' + val;
               if (void 0 === val) return 'undefined';
               if (null === val) return 'null';
-              let typeOf = typeof val;
+              const typeOf = typeof val;
               if ('number' === typeOf)
                 return (function printNumber2(val) {
                   return Object.is(val, -0) ? '-0' : String(val);
@@ -36040,7 +36054,7 @@
               if ('function' === typeOf)
                 return printFunction2(val, printFunctionName);
               if ('symbol' === typeOf) return printSymbol2(val);
-              let toStringed = toString4.call(val);
+              const toStringed = toString4.call(val);
               return '[object WeakMap]' === toStringed
                 ? 'WeakMap {}'
                 : '[object WeakSet]' === toStringed
@@ -36076,7 +36090,7 @@
             ) {
               if (-1 !== refs.indexOf(val)) return '[Circular]';
               (refs = refs.slice()).push(val);
-              let hitMaxDepth = ++depth > config3.maxDepth,
+              const hitMaxDepth = ++depth > config3.maxDepth,
                 min = config3.min;
               if (
                 config3.callToJSON &&
@@ -36093,7 +36107,7 @@
                   refs,
                   !0,
                 );
-              let toStringed = toString4.call(val);
+              const toStringed = toString4.call(val);
               return '[object Arguments]' === toStringed
                 ? hitMaxDepth
                   ? '[Arguments]'
@@ -36213,7 +36227,7 @@
                       (valChild) =>
                         printer2(valChild, config3, indentation, depth, refs),
                       (str) => {
-                        let indentationNext = indentation + config3.indent;
+                        const indentationNext = indentation + config3.indent;
                         return (
                           indentationNext +
                           str.replace(NEWLINE_REGEXP2, '\n' + indentationNext)
@@ -36255,7 +36269,7 @@
               refs,
               hasCalledToJSON,
             ) {
-              let plugin2 = findPlugin2(config3.plugins, val);
+              const plugin2 = findPlugin2(config3.plugins, val);
               if (null !== plugin2)
                 return printPlugin2(
                   plugin2,
@@ -36265,7 +36279,7 @@
                   depth,
                   refs,
                 );
-              let basicResult = printBasicValue2(
+              const basicResult = printBasicValue2(
                 val,
                 config3.printFunctionName,
                 config3.escapeRegex,
@@ -36307,7 +36321,7 @@
             exports.DEFAULT_OPTIONS = DEFAULT_OPTIONS2;
             var getColorsHighlight2 = (options) =>
                 DEFAULT_THEME_KEYS2.reduce((colors, key) => {
-                  let value =
+                  const value =
                       options.theme && void 0 !== options.theme[key]
                         ? options.theme[key]
                         : DEFAULT_THEME2[key],
@@ -36417,7 +36431,7 @@
                 })(options),
                 options.plugins)
               ) {
-                let plugin2 = findPlugin2(options.plugins, val);
+                const plugin2 = findPlugin2(options.plugins, val);
                 if (null !== plugin2)
                   return printPlugin2(
                     plugin2,
@@ -36428,7 +36442,7 @@
                     [],
                   );
               }
-              let basicResult = printBasicValue2(
+              const basicResult = printBasicValue2(
                 val,
                 getPrintFunctionName2(options),
                 getEscapeRegex2(options),
@@ -43359,7 +43373,7 @@
               (thrown.constructor === errorLike || thrown instanceof errorLike);
       }
       function compatibleMessage(thrown, errMatcher) {
-        let comparisonString =
+        const comparisonString =
           'string' == typeof thrown ? thrown : thrown.message;
         return isRegExp(errMatcher)
           ? errMatcher.test(comparisonString)
@@ -43400,7 +43414,7 @@
       function type(obj) {
         if (typeof obj > 'u') return 'undefined';
         if (null === obj) return 'null';
-        let stringTag = obj[Symbol.toStringTag];
+        const stringTag = obj[Symbol.toStringTag];
         return 'string' == typeof stringTag
           ? stringTag
           : Object.prototype.toString.call(obj).slice(8, -1);
@@ -43437,7 +43451,7 @@
               super(message),
                 (this.message = message),
                 canElideFrames && Error.captureStackTrace(this, ssf || _a);
-              for (let key in props) key in this || (this[key] = props[key]);
+              for (const key in props) key in this || (this[key] = props[key]);
             }
             toJSON(stack) {
               return {
@@ -43533,7 +43547,7 @@
         },
         truncator = '…';
       function colorise(value, styleType) {
-        let color =
+        const color =
           ansiColors[styles[styleType]] || ansiColors[styleType] || '';
         return color
           ? `[${color[0]}m${String(value)}[${color[1]}m`
@@ -43554,7 +43568,7 @@
         } = {},
         inspect32,
       ) {
-        let options = {
+        const options = {
           showHidden: !!showHidden,
           depth: Number(depth),
           colors: !!colors,
@@ -43574,7 +43588,7 @@
       }
       function truncate(string, length, tail = truncator) {
         string = String(string);
-        let tailLength = tail.length,
+        const tailLength = tail.length,
           stringLength = string.length;
         if (tailLength > length && stringLength > tailLength) return tail;
         if (stringLength > length && stringLength > tailLength) {
@@ -43588,20 +43602,20 @@
       }
       function inspectList(list, options, inspectItem, separator = ', ') {
         inspectItem = inspectItem || options.inspect;
-        let size = list.length;
+        const size = list.length;
         if (0 === size) return '';
         let originalLength = options.truncate,
           output = '',
           peek = '',
           truncated = '';
         for (let i = 0; i < size; i += 1) {
-          let last = i + 1 === list.length,
+          const last = i + 1 === list.length,
             secondToLast = i + 2 === list.length;
           truncated = `${truncator}(${list.length - i})`;
-          let value = list[i];
+          const value = list[i];
           options.truncate =
             originalLength - output.length - (last ? 0 : separator.length);
-          let string =
+          const string =
               peek || inspectItem(value, options) + (last ? '' : separator),
             nextLength = output.length + string.length,
             truncatedLength = nextLength + truncated.length;
@@ -43653,10 +43667,10 @@
         );
       }
       function inspectArray(array, options) {
-        let nonIndexProperties = Object.keys(array).slice(array.length);
+        const nonIndexProperties = Object.keys(array).slice(array.length);
         if (!array.length && !nonIndexProperties.length) return '[]';
         options.truncate -= 4;
-        let listContents = inspectList(array, options);
+        const listContents = inspectList(array, options);
         options.truncate -= listContents.length;
         let propertyContents = '';
         return (
@@ -43687,13 +43701,13 @@
         'getArrayName',
       );
       function inspectTypedArray(array, options) {
-        let name = getArrayName(array);
+        const name = getArrayName(array);
         options.truncate -= name.length + 4;
-        let nonIndexProperties = Object.keys(array).slice(array.length);
+        const nonIndexProperties = Object.keys(array).slice(array.length);
         if (!array.length && !nonIndexProperties.length) return `${name}[]`;
         let output = '';
         for (let i = 0; i < array.length; i++) {
-          let string = `${options.stylize(truncate(array[i], options.truncate), 'number')}${i === array.length - 1 ? '' : ', '}`;
+          const string = `${options.stylize(truncate(array[i], options.truncate), 'number')}${i === array.length - 1 ? '' : ', '}`;
           if (
             ((options.truncate -= string.length),
             array[i] !== array.length && options.truncate <= 3)
@@ -43715,9 +43729,9 @@
         );
       }
       function inspectDate(dateObject, options) {
-        let stringRepresentation = dateObject.toJSON();
+        const stringRepresentation = dateObject.toJSON();
         if (null === stringRepresentation) return 'Invalid Date';
-        let split = stringRepresentation.split('T'),
+        const split = stringRepresentation.split('T'),
           date = split[0];
         return options.stylize(
           `${date}T${truncate(split[1], options.truncate - date.length - 1)}`,
@@ -43725,7 +43739,7 @@
         );
       }
       function inspectFunction(func, options) {
-        let functionType = func[Symbol.toStringTag] || 'Function',
+        const functionType = func[Symbol.toStringTag] || 'Function',
           name = func.name;
         return name
           ? options.stylize(
@@ -43743,7 +43757,7 @@
         );
       }
       function mapToEntries(map) {
-        let entries = [];
+        const entries = [];
         return (
           map.forEach((value, key) => {
             entries.push([key, value]);
@@ -43785,7 +43799,7 @@
         );
       }
       function inspectRegExp(value, options) {
-        let flags = value.toString().split('/')[2],
+        const flags = value.toString().split('/')[2],
           sourceLength = options.truncate - (2 + flags.length),
           source = value.source;
         return options.stylize(
@@ -43794,7 +43808,7 @@
         );
       }
       function arrayFromSet(set2) {
-        let values = [];
+        const values = [];
         return (
           set2.forEach((value) => {
             values.push(value);
@@ -43854,11 +43868,11 @@
         __name(inspectSymbol, 'inspectSymbol');
       var getPromiseValue = __name(() => 'Promise{…}', 'getPromiseValue');
       try {
-        let { getPromiseDetails, kPending, kRejected } =
+        const { getPromiseDetails, kPending, kRejected } =
           process.binding('util');
         Array.isArray(getPromiseDetails(Promise.resolve())) &&
           (getPromiseValue = __name((value, options) => {
-            let [state, innerValue] = getPromiseDetails(value);
+            const [state, innerValue] = getPromiseDetails(value);
             return state === kPending
               ? 'Promise{<pending>}'
               : `Promise${state === kRejected ? '!' : ''}{${options.inspect(innerValue, options)}}`;
@@ -43866,7 +43880,7 @@
       } catch {}
       var promise_default = getPromiseValue;
       function inspectObject(object, options) {
-        let properties = Object.getOwnPropertyNames(object),
+        const properties = Object.getOwnPropertyNames(object),
           symbols = Object.getOwnPropertySymbols
             ? Object.getOwnPropertySymbols(object)
             : [];
@@ -43878,7 +43892,7 @@
         )
           return '[Circular]';
         options.seen.push(object);
-        let propertyContents = inspectList(
+        const propertyContents = inspectList(
             properties.map((key) => [key, object[key]]),
             options,
             inspectProperty,
@@ -43930,7 +43944,7 @@
         'cause',
       ];
       function inspectObject2(error, options) {
-        let properties = Object.getOwnPropertyNames(error).filter(
+        const properties = Object.getOwnPropertyNames(error).filter(
             (key) => -1 === errorKeys.indexOf(key),
           ),
           name = error.name;
@@ -43947,7 +43961,7 @@
         )
           return '[Circular]';
         options.seen.push(error);
-        let propertyContents = inspectList(
+        const propertyContents = inspectList(
           properties.map((key) => [key, error[key]]),
           options,
           inspectProperty,
@@ -43966,7 +43980,7 @@
         return inspectList(collection, options, inspectHTML, '\n');
       }
       function inspectHTML(element, options) {
-        let properties = element.getAttributeNames(),
+        const properties = element.getAttributeNames(),
           name = element.tagName.toLowerCase(),
           head = options.stylize(`<${name}`, 'special'),
           headClose = options.stylize('>', 'special'),
@@ -44001,7 +44015,7 @@
             : '@@chai/inspect',
         nodeInspect = !1;
       try {
-        let nodeUtil = require_util();
+        const nodeUtil = require_util();
         nodeInspect = !!nodeUtil.inspect && nodeUtil.inspect.custom;
       } catch {
         nodeInspect = !1;
@@ -44080,13 +44094,13 @@
         )
           return baseTypesMap[type32](value, options);
         if (customInspect && value) {
-          let output = inspectCustom(value, options, type32);
+          const output = inspectCustom(value, options, type32);
           if (output)
             return 'string' == typeof output
               ? output
               : inspect(output, options);
         }
-        let proto = !!value && Object.getPrototypeOf(value);
+        const proto = !!value && Object.getPrototypeOf(value);
         return proto === Object.prototype || null === proto
           ? inspectObject(value, options)
           : value &&
@@ -44184,7 +44198,7 @@
       function type2(obj) {
         if (typeof obj > 'u') return 'undefined';
         if (null === obj) return 'null';
-        let stringTag = obj[Symbol.toStringTag];
+        const stringTag = obj[Symbol.toStringTag];
         return 'string' == typeof stringTag
           ? stringTag
           : Object.prototype.toString.call(obj).slice(8, -1);
@@ -44570,7 +44584,7 @@
           res = null;
         pathDepth = typeof pathDepth > 'u' ? parsed.length : pathDepth;
         for (let i = 0; i < pathDepth; i++) {
-          let part = parsed[i];
+          const part = parsed[i];
           temporaryValue &&
             ((temporaryValue =
               typeof part.p > 'u'
@@ -44581,7 +44595,7 @@
         return res;
       }
       function getPathInfo(obj, path) {
-        let parsed = parsePath(path),
+        const parsed = parsePath(path),
           last = parsed[parsed.length - 1],
           info = {
             parent:
@@ -45111,7 +45125,7 @@
           article = ~['a', 'e', 'i', 'o', 'u'].indexOf(type32.charAt(0))
             ? 'an '
             : 'a ';
-        let detectedType = type(obj).toLowerCase();
+        const detectedType = type(obj).toLowerCase();
         functionTypes.function.includes(type32)
           ? this.assert(
               functionTypes[type32].includes(detectedType),
@@ -45917,7 +45931,7 @@
             ssfi,
           );
         new Assertion(expected, flagMsg, ssfi, !0).is.numeric;
-        let abs = __name((x2) => (x2 < 0n ? -x2 : x2), 'abs'),
+        const abs = __name((x2) => (x2 < 0n ? -x2 : x2), 'abs'),
           strip = __name(
             (number) => parseFloat(parseFloat(number).toPrecision(12)),
             'strip',
@@ -46162,7 +46176,7 @@
           );
         }),
         Assertion.addProperty('numeric', function () {
-          let object = flag2(this, 'object');
+          const object = flag2(this, 'object');
           this.assert(
             ['Number', 'BigInt'].includes(type(object)),
             'expected #{this} to be numeric',
@@ -46171,7 +46185,7 @@
           );
         }),
         Assertion.addProperty('callable', function () {
-          let val = flag2(this, 'object'),
+          const val = flag2(this, 'object'),
             ssfi = flag2(this, 'ssfi'),
             message = flag2(this, 'message'),
             msg = message ? `${message}: ` : '',
@@ -46515,7 +46529,7 @@
         }),
         __name(compareSubset, 'compareSubset'),
         Assertion.addMethod('containSubset', function (expected) {
-          let actual = flag(this, 'object'),
+          const actual = flag(this, 'object'),
             showDiff = config.showDiff;
           this.assert(
             compareSubset(expected, actual),
@@ -47438,7 +47452,7 @@
         (assert.doesNotContainSubset = function (val, exp, msg) {
           new Assertion(val, msg).to.not.containSubset(exp);
         });
-      for (let [name, as] of [
+      for (const [name, as] of [
         ['isOk', 'ok'],
         ['isNotOk', 'notOk'],
         ['throws', 'throw'],
@@ -47458,7 +47472,7 @@
         assert[as] = assert[name];
       var used = [];
       function use(fn3) {
-        let exports = {
+        const exports = {
           use,
           AssertionError,
           util: utils_exports,
@@ -47583,10 +47597,10 @@
         return str ? str.trim() : '';
       }
       function $d708735ed1303b43$var$addParent(obj, parent) {
-        let isNode = obj && 'string' == typeof obj.type,
+        const isNode = obj && 'string' == typeof obj.type,
           childParent = isNode ? obj : parent;
-        for (let k2 in obj) {
-          let value = obj[k2];
+        for (const k2 in obj) {
+          const value = obj[k2];
           Array.isArray(value)
             ? value.forEach((v) => {
                 $d708735ed1303b43$var$addParent(v, childParent);
@@ -47611,7 +47625,7 @@
           let lineno = 1,
             column = 1;
           function position() {
-            let start = { line: lineno, column };
+            const start = { line: lineno, column };
             return function (node) {
               return (
                 (node.position = new $0865a9fb4cc365fe$export$2e2bcd8739ae039(
@@ -47624,9 +47638,9 @@
               );
             };
           }
-          let errorsList = [];
+          const errorsList = [];
           function error(msg) {
-            let err = new $009ddb00d3ec72b8$export$2e2bcd8739ae039(
+            const err = new $009ddb00d3ec72b8$export$2e2bcd8739ae039(
               options?.source || '',
               msg,
               lineno,
@@ -47656,14 +47670,14 @@
             return rules2;
           }
           function match(re) {
-            let m3 = re.exec(css);
+            const m3 = re.exec(css);
             if (!m3) return;
-            let str = m3[0];
+            const str = m3[0];
             return (
               (function updatePosition(str) {
-                let lines = str.match(/\n/g);
+                const lines = str.match(/\n/g);
                 lines && (lineno += lines.length);
-                let i = str.lastIndexOf('\n');
+                const i = str.lastIndexOf('\n');
                 column = ~i ? str.length - i : column + str.length;
               })(str),
               (css = css.slice(str.length)),
@@ -47679,9 +47693,9 @@
             return rules2;
           }
           function comment() {
-            let pos = position();
+            const pos = position();
             if ('/' !== css.charAt(0) || '*' !== css.charAt(1)) return;
-            let m3 = match(/^\/\*[^]*?\*\//);
+            const m3 = match(/^\/\*[^]*?\*\//);
             return m3
               ? pos({
                   type: $b2e137848b48cf4f$export$9be5dd6e61d5d73a.comment,
@@ -47694,7 +47708,7 @@
               found = !1,
               closeParentheses = str.indexOf(')', ptr);
             for (; !found && -1 !== closeParentheses; ) {
-              let nextParentheses = str.indexOf('(', ptr);
+              const nextParentheses = str.indexOf('(', ptr);
               -1 !== nextParentheses && nextParentheses < closeParentheses
                 ? ((ptr = findClosingParenthese(str, nextParentheses + 1) + 1),
                   (closeParentheses = str.indexOf(')', ptr)))
@@ -47703,7 +47717,7 @@
             return found && -1 !== closeParentheses ? closeParentheses : -1;
           }
           function selector() {
-            let m3 = match(/^([^{]+)/);
+            const m3 = match(/^([^{]+)/);
             if (!m3) return;
             let res = $d708735ed1303b43$var$trim(m3[0]).replace(
               $d708735ed1303b43$var$commentre,
@@ -47713,7 +47727,7 @@
             let ptr = 0,
               startParentheses = res.indexOf('(', ptr);
             for (; -1 !== startParentheses; ) {
-              let closeParentheses = findClosingParenthese(
+              const closeParentheses = findClosingParenthese(
                 res,
                 startParentheses,
               );
@@ -47739,12 +47753,12 @@
             );
           }
           function declaration() {
-            let pos = position(),
+            const pos = position(),
               propMatch = match(/^(\*?[-#/*\\\w]+(\[[0-9a-z_-]+\])?)\s*/);
             if (!propMatch) return;
-            let propValue = $d708735ed1303b43$var$trim(propMatch[0]);
+            const propValue = $d708735ed1303b43$var$trim(propMatch[0]);
             if (!match(/^:\s*/)) return error("property missing ':'");
-            let val = match(
+            const val = match(
                 /^((?:'(?:\\'|.)*?'|"(?:\\"|.)*?"|\([^)]*?\)|[^};])+)/,
               ),
               ret = pos({
@@ -47783,20 +47797,20 @@
                 declarations: declarations() || [],
               });
           }
-          let atimport = _compileAtrule('import'),
+          const atimport = _compileAtrule('import'),
             atcharset = _compileAtrule('charset'),
             atnamespace = _compileAtrule('namespace');
           function _compileAtrule(name) {
-            let re = new RegExp(
+            const re = new RegExp(
               '^@' +
                 name +
                 '\\s*((?::?[^;\'"]|"(?:\\\\"|[^"])*?"|\'(?:\\\\\'|[^\'])*?\')+)(?:;|$)',
             );
             return function () {
-              let pos = position(),
+              const pos = position(),
                 m3 = match(re);
               if (!m3) return;
-              let ret = { type: name };
+              const ret = { type: name };
               return (ret[name] = m3[1].trim()), pos(ret);
             };
           }
@@ -47804,13 +47818,13 @@
             if ('@' === css[0])
               return (
                 (function atkeyframes() {
-                  let pos = position(),
+                  const pos = position(),
                     m1 = match(/^@([-\w]+)?keyframes\s*/);
                   if (!m1) return;
-                  let vendor = m1[1],
+                  const vendor = m1[1],
                     m22 = match(/^([-\w]+)\s*/);
                   if (!m22) return error('@keyframes missing name');
-                  let name = m22[1];
+                  const name = m22[1];
                   if (!open()) return error("@keyframes missing '{'");
                   let frame,
                     frames = comments();
@@ -47826,12 +47840,12 @@
                     : error("@keyframes missing '}'");
                 })() ||
                 (function atmedia() {
-                  let pos = position(),
+                  const pos = position(),
                     m3 = match(/^@media *([^{]+)/);
                   if (!m3) return;
-                  let media = $d708735ed1303b43$var$trim(m3[1]);
+                  const media = $d708735ed1303b43$var$trim(m3[1]);
                   if (!open()) return error("@media missing '{'");
-                  let style = comments().concat(rules());
+                  const style = comments().concat(rules());
                   return close()
                     ? pos({
                         type: $b2e137848b48cf4f$export$9be5dd6e61d5d73a.media,
@@ -47841,7 +47855,7 @@
                     : error("@media missing '}'");
                 })() ||
                 (function atcustommedia() {
-                  let pos = position(),
+                  const pos = position(),
                     m3 = match(/^@custom-media\s+(--\S+)\s*([^{;\s][^{;]*);/);
                   if (m3)
                     return pos({
@@ -47851,12 +47865,12 @@
                     });
                 })() ||
                 (function atsupports() {
-                  let pos = position(),
+                  const pos = position(),
                     m3 = match(/^@supports *([^{]+)/);
                   if (!m3) return;
-                  let supports = $d708735ed1303b43$var$trim(m3[1]);
+                  const supports = $d708735ed1303b43$var$trim(m3[1]);
                   if (!open()) return error("@supports missing '{'");
-                  let style = comments().concat(rules());
+                  const style = comments().concat(rules());
                   return close()
                     ? pos({
                         type: $b2e137848b48cf4f$export$9be5dd6e61d5d73a.supports,
@@ -47869,13 +47883,13 @@
                 atcharset() ||
                 atnamespace() ||
                 (function atdocument() {
-                  let pos = position(),
+                  const pos = position(),
                     m3 = match(/^@([-\w]+)?document *([^{]+)/);
                   if (!m3) return;
-                  let vendor = $d708735ed1303b43$var$trim(m3[1]),
+                  const vendor = $d708735ed1303b43$var$trim(m3[1]),
                     doc = $d708735ed1303b43$var$trim(m3[2]);
                   if (!open()) return error("@document missing '{'");
-                  let style = comments().concat(rules());
+                  const style = comments().concat(rules());
                   return close()
                     ? pos({
                         type: $b2e137848b48cf4f$export$9be5dd6e61d5d73a.document,
@@ -47886,9 +47900,9 @@
                     : error("@document missing '}'");
                 })() ||
                 (function atpage() {
-                  let pos = position();
+                  const pos = position();
                   if (!match(/^@page */)) return;
-                  let sel = selector() || [];
+                  const sel = selector() || [];
                   if (!open()) return error("@page missing '{'");
                   let decl,
                     decls = comments();
@@ -47903,10 +47917,10 @@
                     : error("@page missing '}'");
                 })() ||
                 (function athost() {
-                  let pos = position();
+                  const pos = position();
                   if (!match(/^@host\s*/)) return;
                   if (!open()) return error("@host missing '{'");
-                  let style = comments().concat(rules());
+                  const style = comments().concat(rules());
                   return close()
                     ? pos({
                         type: $b2e137848b48cf4f$export$9be5dd6e61d5d73a.host,
@@ -47915,7 +47929,7 @@
                     : error("@host missing '}'");
                 })() ||
                 (function atfontface() {
-                  let pos = position();
+                  const pos = position();
                   if (!match(/^@font-face\s*/)) return;
                   if (!open()) return error("@font-face missing '{'");
                   let decl,
@@ -47930,12 +47944,12 @@
                     : error("@font-face missing '}'");
                 })() ||
                 (function atcontainer() {
-                  let pos = position(),
+                  const pos = position(),
                     m3 = match(/^@container *([^{]+)/);
                   if (!m3) return;
-                  let container = $d708735ed1303b43$var$trim(m3[1]);
+                  const container = $d708735ed1303b43$var$trim(m3[1]);
                   if (!open()) return error("@container missing '{'");
-                  let style = comments().concat(rules());
+                  const style = comments().concat(rules());
                   return close()
                     ? pos({
                         type: $b2e137848b48cf4f$export$9be5dd6e61d5d73a.container,
@@ -47945,10 +47959,10 @@
                     : error("@container missing '}'");
                 })() ||
                 (function atstartingstyle() {
-                  let pos = position();
+                  const pos = position();
                   if (!match(/^@starting-style\s*/)) return;
                   if (!open()) return error("@starting-style missing '{'");
-                  let style = comments().concat(rules());
+                  const style = comments().concat(rules());
                   return close()
                     ? pos({
                         type: $b2e137848b48cf4f$export$9be5dd6e61d5d73a.startingStyle,
@@ -47957,10 +47971,10 @@
                     : error("@starting-style missing '}'");
                 })() ||
                 (function atlayer() {
-                  let pos = position(),
+                  const pos = position(),
                     m3 = match(/^@layer *([^{;@]+)/);
                   if (!m3) return;
-                  let layer = $d708735ed1303b43$var$trim(m3[1]);
+                  const layer = $d708735ed1303b43$var$trim(m3[1]);
                   if (!open())
                     return (
                       match(/^[;\s]*/),
@@ -47969,7 +47983,7 @@
                         layer,
                       })
                     );
-                  let style = comments().concat(rules());
+                  const style = comments().concat(rules());
                   return close()
                     ? pos({
                         type: $b2e137848b48cf4f$export$9be5dd6e61d5d73a.layer,
@@ -47981,7 +47995,7 @@
               );
           }
           function rule() {
-            let pos = position(),
+            const pos = position(),
               sel = selector();
             return sel
               ? (comments(),
@@ -47994,7 +48008,7 @@
           }
           return $d708735ed1303b43$var$addParent(
             (function stylesheet() {
-              let rulesList = rules();
+              const rulesList = rules();
               return {
                 type: $b2e137848b48cf4f$export$9be5dd6e61d5d73a.stylesheet,
                 stylesheet: {
@@ -49003,7 +49017,7 @@
       }
       function checkHtmlElement(htmlElement, ...args) {
         checkHasWindow(htmlElement, HtmlElementTypeError, ...args);
-        let window2 = htmlElement.ownerDocument.defaultView;
+        const window2 = htmlElement.ownerDocument.defaultView;
         if (
           !(
             htmlElement instanceof window2.HTMLElement ||
@@ -49079,7 +49093,7 @@
               })(element);
             case 'select':
               return (function getSelectValue({ multiple, options }) {
-                let selectedOptions = [...options].filter(
+                const selectedOptions = [...options].filter(
                   (option) => option.selected,
                 );
                 return multiple
@@ -49131,7 +49145,7 @@
       function toBeInTheDocument(element) {
         (null !== element || !this.isNot) &&
           checkHtmlElement(element, toBeInTheDocument, this);
-        let pass =
+        const pass =
             null !== element &&
             element.ownerDocument === element.getRootNode({ composed: !0 }),
           errorFound = () =>
@@ -49224,7 +49238,7 @@
         );
       }
       function getNormalizedHtml(container, htmlText) {
-        let div = container.ownerDocument.createElement('div');
+        const div = container.ownerDocument.createElement('div');
         return (div.innerHTML = htmlText), div.innerHTML;
       }
       function toContainHTML(container, htmlText) {
@@ -49265,7 +49279,7 @@
           )
             throw new NodeTypeError(node, ...args);
         })(node, toHaveTextContent, this);
-        let textContent = options.normalizeWhitespace
+        const textContent = options.normalizeWhitespace
             ? normalize(node.textContent)
             : node.textContent.replace(/\u00a0/g, ' '),
           checkingWithEmptyString = '' !== textContent && '' === checkWith;
@@ -49278,7 +49292,7 @@
               ? matcher.test(textToMatch)
               : textToMatch.includes(String(matcher))),
           message: () => {
-            let to = this.isNot ? 'not to' : 'to';
+            const to = this.isNot ? 'not to' : 'to';
             return getMessage3(
               this,
               this.utils.matcherHint(
@@ -49346,7 +49360,7 @@
           {
             pass,
             message: () => {
-              let to = this.isNot ? 'not to' : 'to';
+              const to = this.isNot ? 'not to' : 'to';
               return getMessage3(
                 this,
                 this.utils.matcherHint(
@@ -49370,7 +49384,7 @@
         expectedAccessibleErrorMessage,
       ) {
         checkHtmlElement(htmlElement, toHaveAccessibleErrorMessage, this);
-        let to = this.isNot ? 'not to' : 'to',
+        const to = this.isNot ? 'not to' : 'to',
           method = this.isNot
             ? '.not.toHaveAccessibleErrorMessage'
             : '.toHaveAccessibleErrorMessage',
@@ -49388,7 +49402,7 @@
                 `aria-errormessage="${errormessageId}"`,
               ),
           };
-        let ariaInvalidVal = htmlElement.getAttribute(ariaInvalidName);
+        const ariaInvalidVal = htmlElement.getAttribute(ariaInvalidName);
         if (
           !htmlElement.hasAttribute(ariaInvalidName) ||
           validStates.includes(ariaInvalidVal)
@@ -49407,7 +49421,7 @@
                   : null,
               ),
           };
-        let error = normalize(
+        const error = normalize(
           htmlElement.ownerDocument.getElementById(errormessageId)
             ?.textContent ?? '',
         );
@@ -49446,7 +49460,7 @@
               ...attributes.slice(0, typeTextIndex),
               ...attributes.slice(typeTextIndex + 1),
             ]);
-          let selector = (function makeElementSelector({ name, attributes }) {
+          const selector = (function makeElementSelector({ name, attributes }) {
             return `${name}${attributes.map(({ name: attributeName, value, constraints = [] }) => (-1 !== constraints.indexOf('undefined') ? `:not([${attributeName}])` : value ? `[${attributeName}="${value}"]` : `[${attributeName}]`)).join('')}`;
           })({ ...element, attributes });
           return (node) =>
@@ -49454,7 +49468,7 @@
             node.matches(selector);
         }
         let result = [];
-        for (let [element, roles3] of elementRolesMap.entries())
+        for (const [element, roles3] of elementRolesMap.entries())
           result = [
             ...result,
             {
@@ -49472,11 +49486,11 @@
       })(import_aria_query.elementRoles);
       function toHaveRole(htmlElement, expectedRole) {
         checkHtmlElement(htmlElement, toHaveRole, this);
-        let actualRoles = (function getExplicitOrImplicitRoles(htmlElement) {
+        const actualRoles = (function getExplicitOrImplicitRoles(htmlElement) {
           return htmlElement.hasAttribute('role')
             ? htmlElement.getAttribute('role').split(' ').filter(Boolean)
             : (function getImplicitAriaRoles(currentNode) {
-                for (let { match, roles: roles3 } of elementRoleList)
+                for (const { match, roles: roles3 } of elementRoleList)
                   if (match(currentNode)) return [...roles3];
                 return [];
               })(htmlElement);
@@ -49484,7 +49498,7 @@
         return {
           pass: actualRoles.some((el) => el === expectedRole),
           message: () => {
-            let to = this.isNot ? 'not to' : 'to';
+            const to = this.isNot ? 'not to' : 'to';
             return getMessage3(
               this,
               this.utils.matcherHint(
@@ -49514,7 +49528,7 @@
           {
             pass,
             message: () => {
-              let to = this.isNot ? 'not to' : 'to';
+              const to = this.isNot ? 'not to' : 'to';
               return getMessage3(
                 this,
                 this.utils.matcherHint(
@@ -49541,7 +49555,7 @@
       }
       function toHaveAttribute(htmlElement, name, expectedValue) {
         checkHtmlElement(htmlElement, toHaveAttribute, this);
-        let isExpectedValuePresent = void 0 !== expectedValue,
+        const isExpectedValuePresent = void 0 !== expectedValue,
           hasAttribute = htmlElement.hasAttribute(name),
           receivedValue = htmlElement.getAttribute(name);
         return {
@@ -49549,7 +49563,7 @@
             ? hasAttribute && this.equals(receivedValue, expectedValue)
             : hasAttribute,
           message: () => {
-            let to = this.isNot ? 'not to' : 'to',
+            const to = this.isNot ? 'not to' : 'to',
               receivedAttribute = hasAttribute
                 ? printAttribute(this.utils.stringify, name, receivedValue)
                 : null;
@@ -49590,7 +49604,7 @@
       }
       function toHaveClass(htmlElement, ...params) {
         checkHtmlElement(htmlElement, toHaveClass, this);
-        let { expectedClassNames, options } =
+        const { expectedClassNames, options } =
             (function getExpectedClassNamesAndOptions(params) {
               let expectedClassNames,
                 options,
@@ -49624,7 +49638,7 @@
                 isSubset$1(expected, received) &&
                 expected.length === received.length,
               message: () => {
-                let to = this.isNot ? 'not to' : 'to';
+                const to = this.isNot ? 'not to' : 'to';
                 return getMessage3(
                   this,
                   this.utils.matcherHint(
@@ -49643,7 +49657,7 @@
             ? {
                 pass: isSubset$1(expected, received),
                 message: () => {
-                  let to = this.isNot ? 'not to' : 'to';
+                  const to = this.isNot ? 'not to' : 'to';
                   return getMessage3(
                     this,
                     this.utils.matcherHint(
@@ -49687,7 +49701,7 @@
           .join('\n');
       }
       function expectedDiff(diffFn, expected, computedStyles) {
-        let received = Array.from(computedStyles)
+        const received = Array.from(computedStyles)
           .filter((prop) => void 0 !== expected[prop])
           .reduce(
             (obj, prop) =>
@@ -49703,16 +49717,16 @@
       }
       function toHaveStyle(htmlElement, css) {
         checkHtmlElement(htmlElement, toHaveStyle, this);
-        let parsedCSS =
+        const parsedCSS =
             'object' == typeof css
               ? css
               : (function parseCSS(css, ...args) {
-                  let ast = $149c1bd638913645$export$98e6a39c04603d36(
+                  const ast = $149c1bd638913645$export$98e6a39c04603d36(
                     `selector { ${css} }`,
                     { silent: !0 },
                   ).stylesheet;
                   if (ast.parsingErrors && ast.parsingErrors.length > 0) {
-                    let { reason, line } = ast.parsingErrors[0];
+                    const { reason, line } = ast.parsingErrors[0];
                     throw new InvalidCSSError(
                       {
                         css,
@@ -49731,7 +49745,7 @@
                 })(css, toHaveStyle, this),
           { getComputedStyle } = htmlElement.ownerDocument.defaultView,
           expected = (function getStyleDeclaration(document2, css) {
-            let styles3 = {},
+            const styles3 = {},
               copy3 = document2.createElement('div');
             return (
               Object.keys(css).forEach((property) => {
@@ -49748,7 +49762,7 @@
             (computedStyle = received),
             !!Object.keys(styles3).length &&
               Object.entries(styles3).every(([prop, value]) => {
-                let isCustomProperty = prop.startsWith('--'),
+                const isCustomProperty = prop.startsWith('--'),
                   spellingVariants = [prop];
                 return (
                   isCustomProperty || spellingVariants.push(prop.toLowerCase()),
@@ -49760,7 +49774,7 @@
                 );
               })),
           message: () => {
-            let matcher = (this.isNot ? '.not' : '') + '.toHaveStyle';
+            const matcher = (this.isNot ? '.not' : '') + '.toHaveStyle';
             return [
               this.utils.matcherHint(matcher, 'element', ''),
               expectedDiff(this.utils.diff, expected, received),
@@ -49798,7 +49812,7 @@
         );
       }
       function getFormValue(container, name) {
-        let elements = [
+        const elements = [
           ...container.querySelectorAll(
             `[name="${(0, import_css.default)(name)}"]`,
           ),
@@ -49806,14 +49820,14 @@
         if (0 !== elements.length) {
           if (1 === elements.length) return getSingleElementValue(elements[0]);
           return (function getMultiElementValue(elements) {
-            let types = [...new Set(elements.map((element) => element.type))];
+            const types = [...new Set(elements.map((element) => element.type))];
             if (1 !== types.length)
               throw new Error(
                 'Multiple form elements with the same name must be of the same type',
               );
             switch (types[0]) {
               case 'radio': {
-                let theChosenOne = elements.find((radio) => radio.checked);
+                const theChosenOne = elements.find((radio) => radio.checked);
                 return theChosenOne ? theChosenOne.value : void 0;
               }
               case 'checkbox':
@@ -49837,7 +49851,7 @@
           throw new Error(
             'toHaveFormValues must be called on a form or a fieldset',
           );
-        let formValues = (function getAllFormValues(container) {
+        const formValues = (function getAllFormValues(container) {
           return Array.from(container.elements)
             .map((element) => element.name)
             .reduce(
@@ -49857,7 +49871,7 @@
             ),
           ),
           message: () => {
-            let to = this.isNot ? 'not to' : 'to',
+            const to = this.isNot ? 'not to' : 'to',
               matcher = (this.isNot ? '.not' : '') + '.toHaveFormValues',
               commonKeyValues = Object.keys(formValues)
                 .filter((key) => expectedValues.hasOwnProperty(key))
@@ -49873,7 +49887,7 @@
       function isElementVisible(element, previousElement) {
         return (
           (function isStyleVisible(element) {
-            let { getComputedStyle } = element.ownerDocument.defaultView,
+            const { getComputedStyle } = element.ownerDocument.defaultView,
               {
                 display: display2,
                 visibility,
@@ -49905,13 +49919,13 @@
       }
       function toBeVisible(element) {
         checkHtmlElement(element, toBeVisible, this);
-        let isInDocument =
+        const isInDocument =
             element.ownerDocument === element.getRootNode({ composed: !0 }),
           isVisible2 = isInDocument && isElementVisible(element);
         return {
           pass: isVisible2,
           message: () => {
-            let is = isVisible2 ? 'is' : 'is not';
+            const is = isVisible2 ? 'is' : 'is not';
             return [
               this.utils.matcherHint(
                 (this.isNot ? '.not' : '') + '.toBeVisible',
@@ -49951,7 +49965,7 @@
         );
       }
       function canElementBeDisabled(element) {
-        let tag = getTag(element);
+        const tag = getTag(element);
         return (
           FORM_TAGS$2.includes(tag) ||
           (function isCustomElement(tag) {
@@ -49965,7 +49979,7 @@
         );
       }
       function isAncestorDisabled(element) {
-        let parent = element.parentElement;
+        const parent = element.parentElement;
         return (
           !!parent &&
           (isElementDisabledByParent(element, parent) ||
@@ -49980,11 +49994,11 @@
       }
       function toBeDisabled(element) {
         checkHtmlElement(element, toBeDisabled, this);
-        let isDisabled3 = isElementOrAncestorDisabled(element);
+        const isDisabled3 = isElementOrAncestorDisabled(element);
         return {
           pass: isDisabled3,
           message: () => {
-            let is = isDisabled3 ? 'is' : 'is not';
+            const is = isDisabled3 ? 'is' : 'is not';
             return [
               this.utils.matcherHint(
                 (this.isNot ? '.not' : '') + '.toBeDisabled',
@@ -50000,11 +50014,11 @@
       }
       function toBeEnabled(element) {
         checkHtmlElement(element, toBeEnabled, this);
-        let isEnabled = !isElementOrAncestorDisabled(element);
+        const isEnabled = !isElementOrAncestorDisabled(element);
         return {
           pass: isEnabled,
           message: () => {
-            let is = isEnabled ? 'is' : 'is not';
+            const is = isEnabled ? 'is' : 'is not';
             return [
               this.utils.matcherHint(
                 (this.isNot ? '.not' : '') + '.toBeEnabled',
@@ -50040,7 +50054,7 @@
         ];
       function toBeRequired(element) {
         checkHtmlElement(element, toBeRequired, this);
-        let isRequired =
+        const isRequired =
           (function isRequiredOnFormTagsExceptInput(element) {
             return (
               FORM_TAGS$1.includes(getTag(element)) &&
@@ -50070,7 +50084,7 @@
         return {
           pass: isRequired,
           message: () => {
-            let is = isRequired ? 'is' : 'is not';
+            const is = isRequired ? 'is' : 'is not';
             return [
               this.utils.matcherHint(
                 (this.isNot ? '.not' : '') + '.toBeRequired',
@@ -50086,7 +50100,9 @@
       }
       var FORM_TAGS = ['form', 'input', 'select', 'textarea'];
       function isElementInvalid(element) {
-        let isHaveAriaInvalid = (function isElementHavingAriaInvalid(element) {
+        const isHaveAriaInvalid = (function isElementHavingAriaInvalid(
+          element,
+        ) {
           return (
             element.hasAttribute('aria-invalid') &&
             'false' !== element.getAttribute('aria-invalid')
@@ -50100,11 +50116,11 @@
       }
       function toBeInvalid(element) {
         checkHtmlElement(element, toBeInvalid, this);
-        let isInvalid = isElementInvalid(element);
+        const isInvalid = isElementInvalid(element);
         return {
           pass: isInvalid,
           message: () => {
-            let is = isInvalid ? 'is' : 'is not';
+            const is = isInvalid ? 'is' : 'is not';
             return [
               this.utils.matcherHint(
                 (this.isNot ? '.not' : '') + '.toBeInvalid',
@@ -50120,11 +50136,11 @@
       }
       function toBeValid(element) {
         checkHtmlElement(element, toBeValid, this);
-        let isValid = !isElementInvalid(element);
+        const isValid = !isElementInvalid(element);
         return {
           pass: isValid,
           message: () => {
-            let is = isValid ? 'is' : 'is not';
+            const is = isValid ? 'is' : 'is not';
             return [
               this.utils.matcherHint(
                 (this.isNot ? '.not' : '') + '.toBeValid',
@@ -50165,7 +50181,7 @@
                 )
               : !!receivedValue,
             message: () => {
-              let to = this.isNot ? 'not to' : 'to';
+              const to = this.isNot ? 'not to' : 'to';
               return getMessage3(
                 this,
                 this.utils.matcherHint(
@@ -50184,7 +50200,7 @@
       }
       function toHaveDisplayValue(htmlElement, expectedValue) {
         checkHtmlElement(htmlElement, toHaveDisplayValue, this);
-        let tagName = htmlElement.tagName.toLowerCase();
+        const tagName = htmlElement.tagName.toLowerCase();
         if (!['select', 'input', 'textarea'].includes(tagName))
           throw new Error(
             '.toHaveDisplayValue() currently supports only input, textarea or select elements, try with another matcher instead.',
@@ -50196,7 +50212,7 @@
           throw new Error(
             `.toHaveDisplayValue() currently does not support input[type="${htmlElement.type}"], try with another matcher instead.`,
           );
-        let values = (function getValues(tagName, htmlElement) {
+        const values = (function getValues(tagName, htmlElement) {
             return 'select' === tagName
               ? Array.from(htmlElement)
                   .filter((option) => option.selected)
@@ -50237,7 +50253,7 @@
       }
       function toBeChecked(element) {
         checkHtmlElement(element, toBeChecked, this);
-        let isValidInput = () =>
+        const isValidInput = () =>
           'input' === element.tagName.toLowerCase() &&
           ['checkbox', 'radio'].includes(element.type);
         if (
@@ -50269,14 +50285,14 @@
                 );
               })()} and a valid aria-checked attribute can be used with .toBeChecked(). Use .toHaveValue() instead`,
           };
-        let isChecked = () =>
+        const isChecked = () =>
           isValidInput()
             ? element.checked
             : 'true' === element.getAttribute('aria-checked');
         return {
           pass: isChecked(),
           message: () => {
-            let is = isChecked() ? 'is' : 'is not';
+            const is = isChecked() ? 'is' : 'is not';
             return [
               this.utils.matcherHint(
                 (this.isNot ? '.not' : '') + '.toBeChecked',
@@ -50297,7 +50313,7 @@
       }
       function toBePartiallyChecked(element) {
         checkHtmlElement(element, toBePartiallyChecked, this);
-        let isValidInput = () =>
+        const isValidInput = () =>
           'input' === element.tagName.toLowerCase() &&
           'checkbox' === element.type;
         if (!isValidInput() && 'checkbox' !== element.getAttribute('role'))
@@ -50306,14 +50322,14 @@
             message: () =>
               'only inputs with type="checkbox" or elements with role="checkbox" and a valid aria-checked attribute can be used with .toBePartiallyChecked(). Use .toHaveValue() instead',
           };
-        let isPartiallyChecked = () => {
-          let isAriaMixed = 'mixed' === element.getAttribute('aria-checked');
+        const isPartiallyChecked = () => {
+          const isAriaMixed = 'mixed' === element.getAttribute('aria-checked');
           return (isValidInput() && element.indeterminate) || isAriaMixed;
         };
         return {
           pass: isPartiallyChecked(),
           message: () => {
-            let is = isPartiallyChecked() ? 'is' : 'is not';
+            const is = isPartiallyChecked() ? 'is' : 'is not';
             return [
               this.utils.matcherHint(
                 (this.isNot ? '.not' : '') + '.toBePartiallyChecked',
@@ -50339,7 +50355,7 @@
             .filter(Boolean),
           description = '';
         if (descriptionIDs.length > 0) {
-          let document2 = htmlElement.ownerDocument,
+          const document2 = htmlElement.ownerDocument,
             descriptionEls = descriptionIDs
               .map((descriptionID) => document2.getElementById(descriptionID))
               .filter(Boolean);
@@ -50354,7 +50370,7 @@
               : this.equals(description, checkWith)
             : !!description,
           message: () => {
-            let to = this.isNot ? 'not to' : 'to';
+            const to = this.isNot ? 'not to' : 'to';
             return getMessage3(
               this,
               this.utils.matcherHint(
@@ -50380,7 +50396,7 @@
           !htmlElement.hasAttribute('aria-invalid') ||
             'false' === htmlElement.getAttribute('aria-invalid'))
         ) {
-          let not = this.isNot ? '.not' : '';
+          const not = this.isNot ? '.not' : '';
           return {
             pass: !1,
             message: () =>
@@ -50408,7 +50424,7 @@
             .filter(Boolean),
           errormessage = '';
         if (errormessageIDs.length > 0) {
-          let document2 = htmlElement.ownerDocument,
+          const document2 = htmlElement.ownerDocument,
             errormessageEls = errormessageIDs
               .map((errormessageID) => document2.getElementById(errormessageID))
               .filter(Boolean);
@@ -50423,7 +50439,7 @@
               : this.equals(errormessage, checkWith)
             : !!errormessage,
           message: () => {
-            let to = this.isNot ? 'not to' : 'to';
+            const to = this.isNot ? 'not to' : 'to';
             return getMessage3(
               this,
               this.utils.matcherHint(
@@ -50440,7 +50456,7 @@
         };
       }
       function assertTypes(value, name, types) {
-        let receivedType = typeof value;
+        const receivedType = typeof value;
         if (!types.includes(receivedType))
           throw new TypeError(
             `${name} value must be ${types.join(' or ')}, received "${receivedType}"`,
@@ -50453,7 +50469,7 @@
         return Object.prototype.toString.apply(value).slice(8, -1);
       }
       function getOwnProperties(obj) {
-        let ownProps = new Set();
+        const ownProps = new Set();
         return (function isFinalObj(obj) {
           return (
             obj === Object.prototype ||
@@ -50463,7 +50479,7 @@
         })(obj)
           ? []
           : ((function collectOwnProperties(obj, collector) {
-              let collect =
+              const collect =
                 'function' == typeof collector
                   ? collector
                   : (key) => collector.add(key);
@@ -50491,11 +50507,11 @@
         }
         if ('[object Object]' === Object.prototype.toString.call(val)) {
           (out = Object.create(Object.getPrototypeOf(val))), seen.set(val, out);
-          let props = getOwnProperties(val);
-          for (let k22 of props) {
-            let descriptor = Object.getOwnPropertyDescriptor(val, k22);
+          const props = getOwnProperties(val);
+          for (const k22 of props) {
+            const descriptor = Object.getOwnPropertyDescriptor(val, k22);
             if (!descriptor) continue;
-            let cloned = clone(val[k22], seen, options);
+            const cloned = clone(val[k22], seen, options);
             options.forceWritable
               ? Object.defineProperty(out, k22, {
                   enumerable: descriptor.enumerable,
@@ -50556,7 +50572,7 @@
           regexp: 'red',
         };
       function colorise2(value, styleType) {
-        let color =
+        const color =
           ansiColors2[styles2[styleType]] || ansiColors2[styleType] || '';
         return color
           ? `[${color[0]}m${String(value)}[${color[1]}m`
@@ -50564,7 +50580,7 @@
       }
       function truncate2(string, length, tail = '…') {
         string = String(string);
-        let tailLength = tail.length,
+        const tailLength = tail.length,
           stringLength = string.length;
         if (tailLength > length && stringLength > tailLength) return tail;
         if (stringLength > length && stringLength > tailLength) {
@@ -50582,20 +50598,20 @@
       }
       function inspectList2(list, options, inspectItem, separator = ', ') {
         inspectItem = inspectItem || options.inspect;
-        let size = list.length;
+        const size = list.length;
         if (0 === size) return '';
         let originalLength = options.truncate,
           output = '',
           peek = '',
           truncated = '';
         for (let i = 0; i < size; i += 1) {
-          let last = i + 1 === list.length,
+          const last = i + 1 === list.length,
             secondToLast = i + 2 === list.length;
           truncated = `…(${list.length - i})`;
-          let value = list[i];
+          const value = list[i];
           options.truncate =
             originalLength - output.length - (last ? 0 : separator.length);
-          let string =
+          const string =
               peek || inspectItem(value, options) + (last ? '' : separator),
             nextLength = output.length + string.length,
             truncatedLength = nextLength + truncated.length;
@@ -50646,18 +50662,18 @@
         );
       }
       function inspectTypedArray2(array, options) {
-        let name = ((array) =>
+        const name = ((array) =>
           'function' == typeof Buffer && array instanceof Buffer
             ? 'Buffer'
             : array[Symbol.toStringTag]
               ? array[Symbol.toStringTag]
               : array.constructor.name)(array);
         options.truncate -= name.length + 4;
-        let nonIndexProperties = Object.keys(array).slice(array.length);
+        const nonIndexProperties = Object.keys(array).slice(array.length);
         if (!array.length && !nonIndexProperties.length) return `${name}[]`;
         let output = '';
         for (let i = 0; i < array.length; i++) {
-          let string = `${options.stylize(truncate2(array[i], options.truncate), 'number')}${i === array.length - 1 ? '' : ', '}`;
+          const string = `${options.stylize(truncate2(array[i], options.truncate), 'number')}${i === array.length - 1 ? '' : ', '}`;
           if (
             ((options.truncate -= string.length),
             array[i] !== array.length && options.truncate <= 3)
@@ -50679,7 +50695,7 @@
         );
       }
       function inspectFunction2(func, options) {
-        let functionType = func[Symbol.toStringTag] || 'Function',
+        const functionType = func[Symbol.toStringTag] || 'Function',
           name = func.name;
         return name
           ? options.stylize(
@@ -50753,11 +50769,11 @@
       }
       var getPromiseValue2 = () => 'Promise{…}';
       try {
-        let { getPromiseDetails, kPending, kRejected } =
+        const { getPromiseDetails, kPending, kRejected } =
           process.binding('util');
         Array.isArray(getPromiseDetails(Promise.resolve())) &&
           (getPromiseValue2 = (value, options) => {
-            let [state, innerValue] = getPromiseDetails(value);
+            const [state, innerValue] = getPromiseDetails(value);
             return state === kPending
               ? 'Promise{<pending>}'
               : `Promise${state === kRejected ? '!' : ''}{${options.inspect(innerValue, options)}}`;
@@ -50765,7 +50781,7 @@
       } catch {}
       var promise_default2 = getPromiseValue2;
       function inspectObject3(object, options) {
-        let properties = Object.getOwnPropertyNames(object),
+        const properties = Object.getOwnPropertyNames(object),
           symbols = Object.getOwnPropertySymbols
             ? Object.getOwnPropertySymbols(object)
             : [];
@@ -50777,7 +50793,7 @@
         )
           return '[Circular]';
         options.seen.push(object);
-        let propertyContents = inspectList2(
+        const propertyContents = inspectList2(
             properties.map((key) => [key, object[key]]),
             options,
             inspectProperty2,
@@ -50821,7 +50837,7 @@
         return inspectList2(collection, options, inspectHTML2, '\n');
       }
       function inspectHTML2(element, options) {
-        let properties = element.getAttributeNames(),
+        const properties = element.getAttributeNames(),
           name = element.tagName.toLowerCase(),
           head = options.stylize(`<${name}`, 'special'),
           headClose = options.stylize('>', 'special'),
@@ -50852,7 +50868,7 @@
             : '@@chai/inspect',
         nodeInspect2 = !1;
       try {
-        let nodeUtil = __require('util');
+        const nodeUtil = __require('util');
         nodeInspect2 = !!nodeUtil.inspect && nodeUtil.inspect.custom;
       } catch {
         nodeInspect2 = !1;
@@ -50878,10 +50894,10 @@
           symbol: inspectSymbol2,
           Symbol: inspectSymbol2,
           Array: function inspectArray2(array, options) {
-            let nonIndexProperties = Object.keys(array).slice(array.length);
+            const nonIndexProperties = Object.keys(array).slice(array.length);
             if (!array.length && !nonIndexProperties.length) return '[]';
             options.truncate -= 4;
-            let listContents = inspectList2(array, options);
+            const listContents = inspectList2(array, options);
             options.truncate -= listContents.length;
             let propertyContents = '';
             return (
@@ -50895,9 +50911,9 @@
             );
           },
           Date: function inspectDate2(dateObject, options) {
-            let stringRepresentation = dateObject.toJSON();
+            const stringRepresentation = dateObject.toJSON();
             if (null === stringRepresentation) return 'Invalid Date';
-            let split = stringRepresentation.split('T'),
+            const split = stringRepresentation.split('T'),
               date = split[0];
             return options.stylize(
               `${date}T${truncate2(split[1], options.truncate - date.length - 1)}`,
@@ -50910,7 +50926,7 @@
               : ((options.truncate -= 7),
                 `Map{ ${inspectList2(
                   (function mapToEntries2(map) {
-                    let entries = [];
+                    const entries = [];
                     return (
                       map.forEach((value, key) => {
                         entries.push([key, value]);
@@ -50928,7 +50944,7 @@
               : ((options.truncate -= 7),
                 `Set{ ${inspectList2(
                   (function arrayFromSet2(set2) {
-                    let values = [];
+                    const values = [];
                     return (
                       set2.forEach((value) => {
                         values.push(value);
@@ -50940,7 +50956,7 @@
                 )} }`);
           },
           RegExp: function inspectRegExp2(value, options) {
-            let flags = value.toString().split('/')[2],
+            const flags = value.toString().split('/')[2],
               sourceLength = options.truncate - (2 + flags.length),
               source = value.source;
             return options.stylize(
@@ -50970,7 +50986,7 @@
           DataView: () => '',
           ArrayBuffer: () => '',
           Error: function inspectObject4(error, options) {
-            let properties = Object.getOwnPropertyNames(error).filter(
+            const properties = Object.getOwnPropertyNames(error).filter(
                 (key) => -1 === errorKeys2.indexOf(key),
               ),
               name = error.name;
@@ -50987,7 +51003,7 @@
             )
               return '[Circular]';
             options.seen.push(error);
-            let propertyContents = inspectList2(
+            const propertyContents = inspectList2(
               properties.map((key) => [key, error[key]]),
               options,
               inspectProperty2,
@@ -51014,7 +51030,7 @@
             } = {},
             inspect5,
           ) {
-            let options = {
+            const options = {
               showHidden: !!showHidden,
               depth: Number(depth),
               colors: !!colors,
@@ -51037,7 +51053,7 @@
         )
           return baseTypesMap2[type5](value, options);
         if (customInspect && value) {
-          let output = ((value, options, type5) =>
+          const output = ((value, options, type5) =>
             chaiInspect2 in value && 'function' == typeof value[chaiInspect2]
               ? value[chaiInspect2](options)
               : nodeInspect2 &&
@@ -51057,7 +51073,7 @@
               ? output
               : inspect3(output, options);
         }
-        let proto = !!value && Object.getPrototypeOf(value);
+        const proto = !!value && Object.getPrototypeOf(value);
         return proto === Object.prototype || null === proto
           ? inspectObject3(value, options)
           : value &&
@@ -51132,8 +51148,8 @@
       }
       (a.open = ''), (a.close = '');
       var f2 = (function p(n = !1) {
-        let e = (function C(n = !1) {
-            let e = typeof process < 'u' ? process : void 0,
+        const e = (function C(n = !1) {
+            const e = typeof process < 'u' ? process : void 0,
               i = e?.env || {},
               g2 = e?.argv || [];
             return (
@@ -51147,8 +51163,8 @@
             );
           })(n),
           g2 = (r, t, c = r) => {
-            let o = (l2) => {
-              let s = String(l2),
+            const o = (l2) => {
+              const s = String(l2),
                 b = s.indexOf(t, r.length);
               return ~b
                 ? r +
@@ -51169,7 +51185,7 @@
           },
           u2 = { isColorSupported: e },
           d2 = (r) => `[${r}m`;
-        for (let [r, t] of h) u2[r] = e ? g2(d2(t[0]), d2(t[1]), t[2]) : a;
+        for (const [r, t] of h) u2[r] = e ? g2(d2(t[0]), d2(t[1]), t[2]) : a;
         return u2;
       })(!1);
       function printIteratorEntries(
@@ -51186,7 +51202,7 @@
           current = iterator.next();
         if (!current.done) {
           result += config3.spacingOuter;
-          let indentationNext = indentation + config3.indent;
+          const indentationNext = indentation + config3.indent;
           for (; !current.done; ) {
             if (((result += indentationNext), width++ === config3.maxWidth)) {
               result += '…';
@@ -51230,7 +51246,7 @@
           current = iterator.next();
         if (!current.done) {
           result += config3.spacingOuter;
-          let indentationNext = indentation + config3.indent;
+          const indentationNext = indentation + config3.indent;
           for (; !current.done; ) {
             if (((result += indentationNext), width++ === config3.maxWidth)) {
               result += '…';
@@ -51269,7 +51285,7 @@
             : list.length;
         if (length > 0) {
           result += config3.spacingOuter;
-          let indentationNext = indentation + config3.indent;
+          const indentationNext = indentation + config3.indent;
           for (let i = 0; i < length; i++) {
             if (((result += indentationNext), i === config3.maxWidth)) {
               result += '…';
@@ -51301,20 +51317,20 @@
       ) {
         let result = '',
           keys2 = (function getKeysOfEnumerableProperties(object, compareKeys) {
-            let rawKeys = Object.keys(object),
+            const rawKeys = Object.keys(object),
               keys2 =
                 null === compareKeys ? rawKeys : rawKeys.sort(compareKeys);
             if (Object.getOwnPropertySymbols)
-              for (let symbol of Object.getOwnPropertySymbols(object))
+              for (const symbol of Object.getOwnPropertySymbols(object))
                 Object.getOwnPropertyDescriptor(object, symbol).enumerable &&
                   keys2.push(symbol);
             return keys2;
           })(val, config3.compareKeys);
         if (keys2.length > 0) {
           result += config3.spacingOuter;
-          let indentationNext = indentation + config3.indent;
+          const indentationNext = indentation + config3.indent;
           for (let i = 0; i < keys2.length; i++) {
-            let key = keys2[i];
+            const key = keys2[i];
             (result += `${indentationNext + printer2(key, config3, indentationNext, depth, refs)}: ${printer2(val[key], config3, indentationNext, depth, refs)}`),
               i < keys2.length - 1
                 ? (result += `,${config3.spacingInner}`)
@@ -51330,7 +51346,7 @@
             : 1267621,
         plugin$5 = {
           serialize: (val, config3, indentation, depth, refs, printer2) => {
-            let stringedValue = val.toString();
+            const stringedValue = val.toString();
             if (
               'ArrayContaining' === stringedValue ||
               'ArrayNotContaining' === stringedValue
@@ -51375,7 +51391,7 @@
           refs,
           printer2,
         ) => {
-          let name = collection.constructor.name;
+          const name = collection.constructor.name;
           return ++depth > config3.maxDepth
             ? `[${name}]`
             : (config3.min ? '' : name + ' ') +
@@ -51419,7 +51435,7 @@
         refs,
         printer2,
       ) {
-        let indentationNext = indentation + config3.indent,
+        const indentationNext = indentation + config3.indent,
           colors = config3.colors;
         return keys2
           .map((key) => {
@@ -51460,7 +51476,7 @@
           .join('');
       }
       function printText(text, config3) {
-        let contentColor = config3.colors.content;
+        const contentColor = config3.colors.content;
         return contentColor.open + escapeHTML(text) + contentColor.close;
       }
       function printElement(
@@ -51470,11 +51486,11 @@
         config3,
         indentation,
       ) {
-        let tagColor = config3.colors.tag;
+        const tagColor = config3.colors.tag;
         return `${tagColor.open}<${type5}${printedProps && tagColor.close + printedProps + config3.spacingOuter + indentation + tagColor.open}${printedChildren ? `>${tagColor.close}${printedChildren}${config3.spacingOuter}${indentation}${tagColor.open}</${type5}` : (printedProps && !config3.min ? '' : ' ') + '/'}>${tagColor.close}`;
       }
       function printElementAsLeaf(type5, config3) {
-        let tagColor = config3.colors.tag;
+        const tagColor = config3.colors.tag;
         return `${tagColor.open}<${type5}${tagColor.close} …${tagColor.open} />${tagColor.close}`;
       }
       var ELEMENT_REGEXP = /^(?:(?:HTML|SVG)\w*)?Element$/;
@@ -51495,10 +51511,10 @@
               })(node)
             )
               return (function printComment(comment, config3) {
-                let commentColor = config3.colors.comment;
+                const commentColor = config3.colors.comment;
                 return `${commentColor.open}\x3c!--${escapeHTML(comment)}--\x3e${commentColor.close}`;
               })(node.data, config3);
-            let type5 = nodeIsFragment(node)
+            const type5 = nodeIsFragment(node)
               ? 'DocumentFragment'
               : node.tagName.toLowerCase();
             return ++depth > config3.maxDepth
@@ -51542,7 +51558,7 @@
             return (
               (null == (_a2 = val?.constructor) ? void 0 : _a2.name) &&
               (function testNode(val) {
-                let constructorName = val.constructor.name,
+                const constructorName = val.constructor.name,
                   { nodeType, tagName } = val,
                   isCustomElement3 =
                     ('string' == typeof tagName && tagName.includes('-')) ||
@@ -51647,7 +51663,7 @@
                           refs,
                           printer2,
                         ) {
-                          let name = getImmutableName('Seq');
+                          const name = getImmutableName('Seq');
                           return ++depth > config3.maxDepth
                             ? printAsLeaf(name)
                             : val['@@__IMMUTABLE_KEYED__@@']
@@ -51662,7 +51678,7 @@
                           refs,
                           printer2,
                         ) {
-                          let name = getImmutableName(val._name || 'Record');
+                          const name = getImmutableName(val._name || 'Record');
                           return ++depth > config3.maxDepth
                             ? printAsLeaf(name)
                             : `${name + ' '}{${printIteratorEntries(
@@ -51671,7 +51687,7 @@
                                   return {
                                     next() {
                                       if (i < val._keys.length) {
-                                        let key = val._keys[i++];
+                                        const key = val._keys[i++];
                                         return {
                                           done: !1,
                                           value: [key, val.get(key)],
@@ -51827,12 +51843,12 @@
       var reactIsExports = reactIs.exports;
       function getChildren(arg, children = []) {
         if (Array.isArray(arg))
-          for (let item of arg) getChildren(item, children);
+          for (const item of arg) getChildren(item, children);
         else null != arg && !1 !== arg && '' !== arg && children.push(arg);
         return children;
       }
       function getType2(element) {
-        let type5 = element.type;
+        const type5 = element.type;
         if ('string' == typeof type5) return type5;
         if ('function' == typeof type5)
           return type5.displayName || type5.name || 'Unknown';
@@ -51845,14 +51861,14 @@
             return 'Context.Consumer';
           if (reactIsExports.isForwardRef(element)) {
             if (type5.displayName) return type5.displayName;
-            let functionName =
+            const functionName =
               type5.render.displayName || type5.render.name || '';
             return '' === functionName
               ? 'ForwardRef'
               : `ForwardRef(${functionName})`;
           }
           if (reactIsExports.isMemo(element)) {
-            let functionName =
+            const functionName =
               type5.displayName ||
               type5.type.displayName ||
               type5.type.name ||
@@ -51870,7 +51886,7 @@
                   getType2(element),
                   printProps(
                     (function getPropKeys$1(element) {
-                      let { props } = element;
+                      const { props } = element;
                       return Object.keys(props)
                         .filter(
                           (key) => 'children' !== key && void 0 !== props[key],
@@ -51910,7 +51926,7 @@
                   object.props
                     ? printProps(
                         (function getPropKeys(object) {
-                          let { props } = object;
+                          const { props } = object;
                           return props
                             ? Object.keys(props)
                                 .filter((key) => void 0 !== props[key])
@@ -51979,7 +51995,7 @@
         if (!0 === val || !1 === val) return `${val}`;
         if (void 0 === val) return 'undefined';
         if (null === val) return 'null';
-        let typeOf = typeof val;
+        const typeOf = typeof val;
         if ('number' === typeOf)
           return (function printNumber(val) {
             return Object.is(val, -0) ? '-0' : String(val);
@@ -51994,7 +52010,7 @@
             : `"${val}"`;
         if ('function' === typeOf) return printFunction(val, printFunctionName);
         if ('symbol' === typeOf) return printSymbol(val);
-        let toStringed = toString3.call(val);
+        const toStringed = toString3.call(val);
         return '[object WeakMap]' === toStringed
           ? 'WeakMap {}'
           : '[object WeakSet]' === toStringed
@@ -52030,7 +52046,7 @@
       ) {
         if (refs.includes(val)) return '[Circular]';
         (refs = [...refs]).push(val);
-        let hitMaxDepth = ++depth > config3.maxDepth,
+        const hitMaxDepth = ++depth > config3.maxDepth,
           min = config3.min;
         if (
           config3.callToJSON &&
@@ -52040,7 +52056,7 @@
           !hasCalledToJSON
         )
           return printer(val.toJSON(), config3, indentation, depth, refs, !0);
-        let toStringed = toString3.call(val);
+        const toStringed = toString3.call(val);
         return '[object Arguments]' === toStringed
           ? hitMaxDepth
             ? '[Arguments]'
@@ -52091,7 +52107,7 @@
                 (valChild) =>
                   printer(valChild, config3, indentation, depth, refs),
                 (str) => {
-                  let indentationNext = indentation + config3.indent;
+                  const indentationNext = indentation + config3.indent;
                   return (
                     indentationNext +
                     str.replaceAll(NEWLINE_REGEXP, `\n${indentationNext}`)
@@ -52114,7 +52130,7 @@
         return printed;
       }
       function findPlugin(plugins22, val) {
-        for (let plugin2 of plugins22)
+        for (const plugin2 of plugins22)
           try {
             if (plugin2.test(val)) return plugin2;
           } catch (error) {
@@ -52130,10 +52146,10 @@
         refs,
         hasCalledToJSON,
       ) {
-        let plugin2 = findPlugin(config3.plugins, val);
+        const plugin2 = findPlugin(config3.plugins, val);
         if (null !== plugin2)
           return printPlugin(plugin2, val, config3, indentation, depth, refs);
-        let basicResult = printBasicValue(
+        const basicResult = printBasicValue(
           val,
           config3.printFunctionName,
           config3.escapeRegex,
@@ -52187,7 +52203,7 @@
           callToJSON: options?.callToJSON ?? DEFAULT_OPTIONS.callToJSON,
           colors: options?.highlight
             ? DEFAULT_THEME_KEYS.reduce((colors, key) => {
-                let value = DEFAULT_THEME[key],
+                const value = DEFAULT_THEME[key],
                   color = value && f2[value];
                 if (
                   !color ||
@@ -52231,7 +52247,7 @@
         if (
           options &&
           ((function validateOptions(options) {
-            for (let key of Object.keys(options))
+            for (const key of Object.keys(options))
               if (!Object.prototype.hasOwnProperty.call(DEFAULT_OPTIONS, key))
                 throw new Error(`pretty-format: Unknown option "${key}".`);
             if (
@@ -52245,11 +52261,11 @@
           })(options),
           options.plugins)
         ) {
-          let plugin2 = findPlugin(options.plugins, val);
+          const plugin2 = findPlugin(options.plugins, val);
           if (null !== plugin2)
             return printPlugin(plugin2, val, getConfig(options), '', 0, []);
         }
-        let basicResult = printBasicValue(
+        const basicResult = printBasicValue(
           val,
           getPrintFunctionName(options),
           getEscapeRegex(options),
@@ -52440,19 +52456,19 @@
           return pointermid;
         },
         diff_commonOverlap_ = function (text1, text2) {
-          let text1_length = text1.length,
+          const text1_length = text1.length,
             text2_length = text2.length;
           if (0 === text1_length || 0 === text2_length) return 0;
           text1_length > text2_length
             ? (text1 = text1.substring(text1_length - text2_length))
             : text1_length < text2_length &&
               (text2 = text2.substring(0, text1_length));
-          let text_length = Math.min(text1_length, text2_length);
+          const text_length = Math.min(text1_length, text2_length);
           if (text1 === text2) return text_length;
           let best = 0,
             length = 1;
           for (;;) {
-            let pattern = text1.substring(text_length - length),
+            const pattern = text1.substring(text_length - length),
               found = text2.indexOf(pattern);
             if (-1 === found) return best;
             (length += found),
@@ -52512,7 +52528,7 @@
               (function diff_cleanupSemanticLossless(diffs) {
                 function diff_cleanupSemanticScore_(one, two) {
                   if (!one || !two) return 6;
-                  let char1 = one.charAt(one.length - 1),
+                  const char1 = one.charAt(one.length - 1),
                     char2 = two.charAt(0),
                     nonAlphaNumeric1 = char1.match(nonAlphaNumericRegex_),
                     nonAlphaNumeric2 = char2.match(nonAlphaNumericRegex_),
@@ -52547,7 +52563,7 @@
                       equality2 = diffs[pointer3 + 1][1],
                       commonOffset = diff_commonSuffix(equality1, edit);
                     if (commonOffset) {
-                      let commonString = edit.substring(
+                      const commonString = edit.substring(
                         edit.length - commonOffset,
                       );
                       (equality1 = equality1.substring(
@@ -52569,7 +52585,7 @@
                       (equality1 += edit.charAt(0)),
                         (edit = edit.substring(1) + equality2.charAt(0)),
                         (equality2 = equality2.substring(1));
-                      let score =
+                      const score =
                         diff_cleanupSemanticScore_(equality1, edit) +
                         diff_cleanupSemanticScore_(edit, equality2);
                       score >= bestScore &&
@@ -52595,7 +52611,7 @@
 
           ) {
             if (-1 === diffs[pointer3 - 1][0] && 1 === diffs[pointer3][0]) {
-              let deletion = diffs[pointer3 - 1][1],
+              const deletion = diffs[pointer3 - 1][1],
                 insertion = diffs[pointer3][1],
                 overlap_length1 = diff_commonOverlap_(deletion, insertion),
                 overlap_length2 = diff_commonOverlap_(insertion, deletion);
@@ -52756,12 +52772,12 @@
             validateLength('bLength', bLength),
             validateCallback('isCommon', isCommon),
             validateCallback('foundSubsequence', foundSubsequence);
-          let nCommonF = countCommonItemsF(0, aLength, 0, bLength, isCommon);
+          const nCommonF = countCommonItemsF(0, aLength, 0, bLength, isCommon);
           if (
             (0 !== nCommonF && foundSubsequence(nCommonF, 0, 0),
             aLength !== nCommonF || bLength !== nCommonF)
           ) {
-            let aStart = nCommonF,
+            const aStart = nCommonF,
               bStart = nCommonF,
               nCommonR = countCommonItemsR(
                 aStart,
@@ -52833,7 +52849,7 @@
             bEnd,
             isCommon,
           );
-          let nF = d2 < iMaxF ? d2 : iMaxF;
+          const nF = d2 < iMaxF ? d2 : iMaxF;
           for (iF += 1, kF += 2; iF <= nF; iF += 1, kF += 2) {
             if (iF !== d2 && aIndexPrev1 < aIndexesF[iF])
               aFirst = aIndexesF[iF];
@@ -52864,7 +52880,7 @@
             bR + aFirst - kR - 1,
             isCommon,
           );
-          let nR = d2 < iMaxR ? d2 : iMaxR;
+          const nR = d2 < iMaxR ? d2 : iMaxR;
           for (iR += 1, kR -= 2; iR <= nR; iR += 1, kR -= 2) {
             if (iR !== d2 && aIndexesR[iR] < aIndexPrev1)
               aFirst = aIndexesR[iR];
@@ -52903,7 +52919,8 @@
             aIndexPrev1 = NOT_YET_SET,
             nF = d2 < iMaxF ? d2 : iMaxF;
           for (let iF = 0, kF = -d2; iF <= nF; iF += 1, kF += 2) {
-            let insert = 0 === iF || (iF !== d2 && aIndexPrev1 < aIndexesF[iF]),
+            const insert =
+                0 === iF || (iF !== d2 && aIndexPrev1 < aIndexesF[iF]),
               aLastPrev = insert ? aIndexesF[iF] : aIndexPrev1,
               aFirst = insert ? aLastPrev : aLastPrev + 1,
               bFirst = bF + aFirst - kF,
@@ -52920,9 +52937,9 @@
               (aIndexesF[iF] = aLast),
               kMinOverlapF <= kF && kF <= kMaxOverlapF)
             ) {
-              let iR = (d2 - 1 - (kF + baDeltaLength)) / 2;
+              const iR = (d2 - 1 - (kF + baDeltaLength)) / 2;
               if (iR <= iMaxR && aIndexesR[iR] - 1 <= aLast) {
-                let bLastPrev = bF + aLastPrev - (insert ? kF + 1 : kF - 1),
+                const bLastPrev = bF + aLastPrev - (insert ? kF + 1 : kF - 1),
                   nCommonR = countCommonItemsR(
                     aStart,
                     aLastPrev,
@@ -52946,7 +52963,7 @@
                   0 !== nCommonF &&
                     ((division.aCommonFollowing = aFirst + 1),
                     (division.bCommonFollowing = bFirst + 1));
-                let aStartFollowing = aLast + 1,
+                const aStartFollowing = aLast + 1,
                   bStartFollowing = bFirst + nCommonF + 1;
                 return (
                   (division.nChangeFollowing = d2 - 1),
@@ -52982,7 +52999,8 @@
             aIndexPrev1 = NOT_YET_SET,
             nR = d2 < iMaxR ? d2 : iMaxR;
           for (let iR = 0, kR = d2; iR <= nR; iR += 1, kR -= 2) {
-            let insert = 0 === iR || (iR !== d2 && aIndexesR[iR] < aIndexPrev1),
+            const insert =
+                0 === iR || (iR !== d2 && aIndexesR[iR] < aIndexPrev1),
               aLastPrev = insert ? aIndexesR[iR] : aIndexPrev1,
               aFirst = insert ? aLastPrev : aLastPrev - 1,
               bFirst = bR + aFirst - kR,
@@ -52999,9 +53017,9 @@
               (aIndexesR[iR] = aLast),
               kMinOverlapR <= kR && kR <= kMaxOverlapR)
             ) {
-              let iF = (d2 + (kR - baDeltaLength)) / 2;
+              const iF = (d2 + (kR - baDeltaLength)) / 2;
               if (iF <= iMaxF && aLast - 1 <= aIndexesF[iF]) {
-                let bLast = bFirst - nCommonR;
+                const bLast = bFirst - nCommonR;
                 if (
                   ((division.nChangePreceding = d2),
                   d2 === aLast + bLast - aStart - bStart
@@ -53020,7 +53038,7 @@
                     (division.aStartFollowing = aEnd),
                     (division.bStartFollowing = bEnd);
                 else {
-                  let bLastPrev = bR + aLastPrev - (insert ? kR - 1 : kR + 1),
+                  const bLastPrev = bR + aLastPrev - (insert ? kR - 1 : kR + 1),
                     nCommonF = countCommonItemsF(
                       aLastPrev,
                       aEnd,
@@ -53032,7 +53050,7 @@
                     0 !== nCommonF &&
                       ((division.aCommonFollowing = aLastPrev),
                       (division.bCommonFollowing = bLastPrev));
-                  let aStartFollowing = aLastPrev + nCommonF,
+                  const aStartFollowing = aLastPrev + nCommonF,
                     bStartFollowing = bLastPrev + nCommonF;
                   d2 - 1 == aEnd + bEnd - aStartFollowing - bStartFollowing
                     ? ((division.aStartFollowing = aEnd),
@@ -53060,8 +53078,10 @@
         ) => {
           if (bEnd - bStart < aEnd - aStart) {
             if ((transposed = !transposed) && 1 === callbacks.length) {
-              let { foundSubsequence: foundSubsequence2, isCommon: isCommon2 } =
-                callbacks[0];
+              const {
+                foundSubsequence: foundSubsequence2,
+                isCommon: isCommon2,
+              } = callbacks[0];
               callbacks[1] = {
                 foundSubsequence: (nCommon, bCommon, aCommon) => {
                   foundSubsequence2(nCommon, aCommon, bCommon);
@@ -53069,11 +53089,11 @@
                 isCommon: (bIndex, aIndex) => isCommon2(aIndex, bIndex),
               };
             }
-            let tStart = aStart,
+            const tStart = aStart,
               tEnd = aEnd;
             (aStart = bStart), (aEnd = bEnd), (bStart = tStart), (bEnd = tEnd);
           }
-          let { foundSubsequence, isCommon } = callbacks[transposed ? 1 : 0];
+          const { foundSubsequence, isCommon } = callbacks[transposed ? 1 : 0];
           ((
             nChange,
             aStart,
@@ -53097,7 +53117,7 @@
               (aIndexesR[0] = aEnd),
               baDeltaLength % 2 == 0)
             ) {
-              let dMin = (nChange || baDeltaLength) / 2,
+              const dMin = (nChange || baDeltaLength) / 2,
                 dMax = (aLength + bLength) / 2;
               for (let d2 = 1; d2 <= dMax; d2 += 1)
                 if (
@@ -53207,7 +53227,7 @@
             aIndexesR,
             division,
           );
-          let {
+          const {
             nChangePreceding,
             aEndPreceding,
             bEndPreceding,
@@ -53277,7 +53297,7 @@
             );
         },
         validateCallback = (name, arg) => {
-          let type5 = typeof arg;
+          const type5 = typeof arg;
           if ('function' !== type5)
             throw new TypeError(
               `${pkg}: ${name} typeof ${type5} is not a function`,
@@ -53432,7 +53452,7 @@
             let aRest = '',
               bRest = '';
             if (includeChangeCounts) {
-              let aCount = String(changeCounts.a),
+              const aCount = String(changeCounts.a),
                 bCount = String(changeCounts.b),
                 baAnnotationLengthDiff =
                   bAnnotation.length - aAnnotation.length,
@@ -53446,7 +53466,7 @@
               (aRest = `${aAnnotationPadding}  ${aIndicator} ${' '.repeat(Math.max(0, baCountLengthDiff))}${aCount}`),
                 (bRest = `${bAnnotationPadding}  ${bIndicator} ${' '.repeat(Math.max(0, -baCountLengthDiff))}${bCount}`);
             }
-            let b = `${bIndicator} ${bAnnotation}${bRest}`;
+            const b = `${bIndicator} ${bAnnotation}${bRest}`;
             return `${aColor(`${aIndicator} ${aAnnotation}${aRest}`)}\n${bColor(b)}\n\n`;
           })(
             options,
@@ -53471,7 +53491,7 @@
             ? (function joinAlignedDiffsExpand(diffs, options) {
                 return diffs
                   .map((diff2, i, diffs2) => {
-                    let line = diff2[1],
+                    const line = diff2[1],
                       isFirstOrLast = 0 === i || i === diffs2.length - 1;
                     switch (diff2[0]) {
                       case -1:
@@ -53493,7 +53513,7 @@
                   nExcessesBetweenChanges = 0,
                   i = 0;
                 for (; i !== iLength; ) {
-                  let iStart = i;
+                  const iStart = i;
                   for (; i !== iLength && 0 === diffs[i][0]; ) i += 1;
                   if (iStart !== i)
                     if (0 === iStart)
@@ -53501,19 +53521,19 @@
                         ((jLength -= i - nContextLines),
                         (hasExcessAtStartOrEnd = !0));
                     else if (i === iLength) {
-                      let n = i - iStart;
+                      const n = i - iStart;
                       n > nContextLines &&
                         ((jLength -= n - nContextLines),
                         (hasExcessAtStartOrEnd = !0));
                     } else {
-                      let n = i - iStart;
+                      const n = i - iStart;
                       n > nContextLines2 &&
                         ((jLength -= n - nContextLines2),
                         (nExcessesBetweenChanges += 1));
                     }
                   for (; i !== iLength && 0 !== diffs[i][0]; ) i += 1;
                 }
-                let hasPatch =
+                const hasPatch =
                   0 !== nExcessesBetweenChanges || hasExcessAtStartOrEnd;
                 0 !== nExcessesBetweenChanges
                   ? (jLength += nExcessesBetweenChanges + 1)
@@ -53527,7 +53547,7 @@
                   aEnd = 0,
                   bEnd = 0,
                   pushCommonLine = (line) => {
-                    let j = lines.length;
+                    const j = lines.length;
                     lines.push(
                       printCommonLine(line, 0 === j || j === jLast, options),
                     ),
@@ -53535,14 +53555,14 @@
                       (bEnd += 1);
                   },
                   pushDeleteLine = (line) => {
-                    let j = lines.length;
+                    const j = lines.length;
                     lines.push(
                       printDeleteLine(line, 0 === j || j === jLast, options),
                     ),
                       (aEnd += 1);
                   },
                   pushInsertLine = (line) => {
-                    let j = lines.length;
+                    const j = lines.length;
                     lines.push(
                       printInsertLine(line, 0 === j || j === jLast, options),
                     ),
@@ -53562,14 +53582,14 @@
                       for (let iCommon = iStart; iCommon !== i; iCommon += 1)
                         pushCommonLine(diffs[iCommon][1]);
                     } else if (i === iLength) {
-                      let iEnd =
+                      const iEnd =
                         i - iStart > nContextLines ? iStart + nContextLines : i;
                       for (let iCommon = iStart; iCommon !== iEnd; iCommon += 1)
                         pushCommonLine(diffs[iCommon][1]);
                     } else {
-                      let nCommon = i - iStart;
+                      const nCommon = i - iStart;
                       if (nCommon > nContextLines2) {
-                        let iEnd = iStart + nContextLines;
+                        const iEnd = iStart + nContextLines;
                         for (
                           let iCommon = iStart;
                           iCommon !== iEnd;
@@ -53585,7 +53605,7 @@
                         )),
                           (jPatchMark = lines.length),
                           lines.push('');
-                        let nOmit = nCommon - nContextLines2;
+                        const nOmit = nCommon - nContextLines2;
                         (aStart = aEnd + nOmit),
                           (bStart = bEnd + nOmit),
                           (aEnd = aStart),
@@ -53623,7 +53643,7 @@
         );
       }
       function diffLinesUnified(aLines, bLines, options) {
-        let normalizedOptions = normalizeDiffOptions(options),
+        const normalizedOptions = normalizeDiffOptions(options),
           [diffs, truncated] = diffLinesRaw(
             isEmptyString(aLines) ? [] : aLines,
             isEmptyString(bLines) ? [] : bLines,
@@ -53717,9 +53737,9 @@
             this.line.push(diff2);
           }
           align(diff2) {
-            let string = diff2[1];
+            const string = diff2[1];
             if (string.includes('\n')) {
-              let substrings = string.split('\n'),
+              const substrings = string.split('\n'),
                 iLast = substrings.length - 1;
               substrings.forEach((substring, i) => {
                 i < iLast
@@ -53747,7 +53767,7 @@
             this.lines.push(diff2);
           }
           pushDiffChangeLines(diff2) {
-            let isDiffEmpty = 0 === diff2[1].length;
+            const isDiffEmpty = 0 === diff2[1].length;
             (!isDiffEmpty || this.deleteBuffer.isLineEmpty()) &&
               this.deleteBuffer.pushDiff(diff2),
               (!isDiffEmpty || this.insertBuffer.isLineEmpty()) &&
@@ -53758,14 +53778,14 @@
               this.insertBuffer.moveLinesTo(this.lines);
           }
           align(diff2) {
-            let op = diff2[0],
+            const op = diff2[0],
               string = diff2[1];
             if (string.includes('\n')) {
-              let substrings = string.split('\n'),
+              const substrings = string.split('\n'),
                 iLast = substrings.length - 1;
               substrings.forEach((substring, i) => {
                 if (0 === i) {
-                  let subdiff = new Diff(op, substring);
+                  const subdiff = new Diff(op, substring);
                   this.deleteBuffer.isLineEmpty() &&
                   this.insertBuffer.isLineEmpty()
                     ? (this.flushChangeLines(),
@@ -53786,7 +53806,7 @@
         };
       function diffStringsUnified(a2, b, options) {
         if (a2 !== b && 0 !== a2.length && 0 !== b.length) {
-          let isMultiline = a2.includes('\n') || b.includes('\n'),
+          const isMultiline = a2.includes('\n') || b.includes('\n'),
             [diffs, truncated] = diffStringsRaw(
               isMultiline ? `${a2}\n` : a2,
               isMultiline ? `${b}\n` : b,
@@ -53796,7 +53816,7 @@
           if (
             (function hasCommonDiff(diffs, isMultiline) {
               if (isMultiline) {
-                let iLast = diffs.length - 1;
+                const iLast = diffs.length - 1;
                 return diffs.some(
                   (diff2, i) =>
                     0 === diff2[0] && (i !== iLast || '\n' !== diff2[1]),
@@ -53805,9 +53825,9 @@
               return diffs.some((diff2) => 0 === diff2[0]);
             })(diffs, isMultiline)
           ) {
-            let optionsNormalized = normalizeDiffOptions(options),
+            const optionsNormalized = normalizeDiffOptions(options),
               lines = (function getAlignedDiffs(diffs, changeColor) {
-                let deleteBuffer = new ChangeBuffer(-1, changeColor),
+                const deleteBuffer = new ChangeBuffer(-1, changeColor),
                   insertBuffer = new ChangeBuffer(1, changeColor),
                   commonBuffer = new CommonBuffer(deleteBuffer, insertBuffer);
                 return (
@@ -53832,7 +53852,7 @@
         return diffLinesUnified(a2.split('\n'), b.split('\n'), options);
       }
       function diffStringsRaw(a2, b, cleanup, options) {
-        let [diffs, truncated] = (function diffStrings(a2, b, options) {
+        const [diffs, truncated] = (function diffStrings(a2, b, options) {
           let truncate3 = options?.truncateThreshold ?? !1,
             truncateThreshold = Math.max(
               Math.floor(options?.truncateThreshold ?? 0),
@@ -53841,7 +53861,7 @@
             aLength = a2.length,
             bLength = b.length;
           if (truncate3) {
-            let aMultipleLines = a2.includes('\n'),
+            const aMultipleLines = a2.includes('\n'),
               bMultipleLines = b.includes('\n'),
               aNewLineSymbol = getNewLineSymbol(a2),
               bNewLineSymbol = getNewLineSymbol(b),
@@ -53880,7 +53900,7 @@
         return cleanup && diff_cleanupSemantic(diffs), [diffs, truncated];
       }
       function getCommonMessage(message, options) {
-        let { commonColor } = normalizeDiffOptions(options);
+        const { commonColor } = normalizeDiffOptions(options);
         return commonColor(message);
       }
       var {
@@ -53920,7 +53940,7 @@
             (omitDifference = 'string' === expectedType);
         }
         if (expectedType !== getType3(b)) {
-          let {
+          const {
               aAnnotation,
               aColor,
               aIndicator,
@@ -53940,7 +53960,7 @@
             case 'boolean':
             case 'number':
               return (function comparePrimitive(a2, b, options) {
-                let aFormat = format(a2, FORMAT_OPTIONS),
+                const aFormat = format(a2, FORMAT_OPTIONS),
                   bFormat = format(b, FORMAT_OPTIONS);
                 return aFormat === bFormat
                   ? ''
@@ -53977,7 +53997,7 @@
         } catch {
           hasThrown = !0;
         }
-        let noDiffMessage = getCommonMessage(
+        const noDiffMessage = getCommonMessage(
           'Compared values have no visual difference.',
           options,
         );
@@ -53995,11 +54015,11 @@
         return difference;
       }
       function getFormatOptions(formatOptions, options) {
-        let { compareKeys } = normalizeDiffOptions(options);
+        const { compareKeys } = normalizeDiffOptions(options);
         return { ...formatOptions, compareKeys };
       }
       function getObjectsDifference(a2, b, formatOptions, options) {
-        let formatOptionsZeroIndent = { ...formatOptions, indent: 0 },
+        const formatOptionsZeroIndent = { ...formatOptions, indent: 0 },
           aCompare = format(a2, formatOptionsZeroIndent),
           bCompare = format(b, formatOptionsZeroIndent);
         if (aCompare === bCompare)
@@ -54008,7 +54028,7 @@
             options,
           );
         {
-          let aDisplay = format(a2, formatOptions),
+          const aDisplay = format(a2, formatOptions),
             bDisplay = format(b, formatOptions);
           return (function diffLinesUnified2(
             aLinesDisplay,
@@ -54068,14 +54088,14 @@
         );
       }
       function isReplaceable(obj1, obj2) {
-        let obj1Type = getType(obj1);
+        const obj1Type = getType(obj1);
         return (
           obj1Type === getType(obj2) &&
           ('Object' === obj1Type || 'Array' === obj1Type)
         );
       }
       function printDiffOrStringify(expected, received, options) {
-        let { aAnnotation, bAnnotation } = normalizeDiffOptions(options);
+        const { aAnnotation, bAnnotation } = normalizeDiffOptions(options);
         if (
           'string' == typeof expected &&
           'string' == typeof received &&
@@ -54087,10 +54107,10 @@
         ) {
           if (expected.includes('\n') || received.includes('\n'))
             return diffStringsUnified(received, expected, options);
-          let [diffs] = diffStringsRaw(received, expected, !0),
+          const [diffs] = diffStringsRaw(received, expected, !0),
             hasCommonDiff2 = diffs.some((diff2) => 0 === diff2[0]),
             printLabel = (function getLabelPrinter(...strings) {
-              let maxLength = strings.reduce(
+              const maxLength = strings.reduce(
                 (max, string) => (string.length > max ? string.length : max),
                 0,
               );
@@ -54109,7 +54129,7 @@
             })(getCommonAndChangedSubstrings(diffs, 1, hasCommonDiff2))
           }`;
         }
-        let clonedExpected = deepClone(expected, { forceWritable: !0 }),
+        const clonedExpected = deepClone(expected, { forceWritable: !0 }),
           clonedReceived = deepClone(received, { forceWritable: !0 }),
           { replacedExpected, replacedActual } = replaceAsymmetricMatcher(
             clonedExpected,
@@ -54129,7 +54149,7 @@
               (actualReplaced.add(actual),
               expectedReplaced.add(expected),
               getOwnProperties(expected).forEach((key) => {
-                let expectedValue = expected[key],
+                const expectedValue = expected[key],
                   actualValue = actual[key];
                 if (isAsymmetricMatcher(expectedValue))
                   expectedValue.asymmetricMatch(actualValue) &&
@@ -54138,7 +54158,7 @@
                   actualValue.asymmetricMatch(expectedValue) &&
                     (expected[key] = actualValue);
                 else if (isReplaceable(actualValue, expectedValue)) {
-                  let replaced = replaceAsymmetricMatcher(
+                  const replaced = replaceAsymmetricMatcher(
                     actualValue,
                     expectedValue,
                     actualReplaced,
@@ -54208,13 +54228,13 @@
           y('function', e) || y('undefined', e),
           'cannot spy on a non-function value',
         );
-        let t = function (...s) {
-          let r = T(t);
+        const t = function (...s) {
+          const r = T(t);
           (r.called = !0), r.callCount++, r.calls.push(s);
-          let S = r.next.shift();
+          const S = r.next.shift();
           if (S) {
             r.results.push(S);
-            let [o, g2] = S;
+            const [o, g2] = S;
             if ('ok' === o) return g2;
             throw g2;
           }
@@ -54230,7 +54250,7 @@
             } catch (o) {
               throw ((p2 = o), (c = 'error'), r.results.push([c, o]), o);
             }
-          let R = [c, p2];
+          const R = [c, p2];
           return (
             (function w(e) {
               return e instanceof Promise;
@@ -54246,7 +54266,7 @@
         l(t, '_isMockFunction', !0),
           l(t, 'length', e ? e.length : 0),
           l(t, 'name', (e && e.name) || 'spy');
-        let n = T(t);
+        const n = T(t);
         return n.reset(), (n.impl = e), t;
       }
       var k = (e, t) => Object.getOwnPropertyDescriptor(e, t),
@@ -54283,14 +54303,14 @@
           a2.get &&
           ((r = 'get'), (R = !0), (n = a2.get())),
           (o = a2 ? a2[r] : 'value' !== r ? () => e[s] : e[s]);
-        let g2 = (v) => {
-          let { value: M, ...h2 } = a2 || { configurable: !0, writable: !0 };
+        const g2 = (v) => {
+          const { value: M, ...h2 } = a2 || { configurable: !0, writable: !0 };
           'value' !== r && delete h2.writable, (h2[r] = v), f3(e, s, h2);
         };
         n || (n = o);
-        let i = m2(n);
+        const i = m2(n);
         'value' === r && O(i, o);
-        let I = i[u];
+        const I = i[u];
         return (
           l(I, 'restore', () => (a2 ? f3(e, s, a2) : g2(o))),
           l(I, 'getOriginal', () => (R ? o() : o)),
@@ -54389,11 +54409,11 @@
             onceImplementations.push(fn22), stub
           )),
           (stub.withImplementation = function withImplementation(fn22, cb) {
-            let originalImplementation = implementation;
+            const originalImplementation = implementation;
             (implementation = fn22),
               state.willCall(mockCall),
               (implementationChangedTemporarily = !0);
-            let reset = () => {
+            const reset = () => {
                 (implementation = originalImplementation),
                   (implementationChangedTemporarily = !1);
               },
@@ -54424,7 +54444,7 @@
         );
       }
       function fn(implementation) {
-        let enhancedSpy = enhanceSpy(
+        const enhancedSpy = enhanceSpy(
           C2({ spy: implementation || function () {} }, 'spy'),
         );
         return (
@@ -54464,7 +54484,7 @@
         if ('function' == typeof val.asymmetricMatch)
           return `${val.toString()} ${(function format2(...args) {
             if ('string' != typeof args[0]) {
-              let objects = [];
+              const objects = [];
               for (let i2 = 0; i2 < args.length; i2++)
                 objects.push(inspect4(args[i2], { depth: 0, colors: !1 }));
               return objects.join(' ');
@@ -54477,7 +54497,7 @@
                 if (i >= len) return x2;
                 switch (x2) {
                   case '%s': {
-                    let value = args[i++];
+                    const value = args[i++];
                     return 'bigint' == typeof value
                       ? `${value.toString()}n`
                       : 'number' == typeof value && 0 === value && 1 / value < 0
@@ -54487,13 +54507,13 @@
                           : String(value);
                   }
                   case '%d': {
-                    let value = args[i++];
+                    const value = args[i++];
                     return 'bigint' == typeof value
                       ? `${value.toString()}n`
                       : Number(value).toString();
                   }
                   case '%i': {
-                    let value = args[i++];
+                    const value = args[i++];
                     return 'bigint' == typeof value
                       ? `${value.toString()}n`
                       : Number.parseInt(String(value)).toString();
@@ -54513,7 +54533,7 @@
                     try {
                       return JSON.stringify(args[i++]);
                     } catch (err) {
-                      let m3 = err.message;
+                      const m3 = err.message;
                       if (
                         m3.includes('circular structure') ||
                         m3.includes('cyclic structures') ||
@@ -54537,7 +54557,7 @@
           return serializeValue(val.toJSON(), seen);
         if (seen.has(val)) return seen.get(val);
         if (Array.isArray(val)) {
-          let clone2 = new Array(val.length);
+          const clone2 = new Array(val.length);
           return (
             seen.set(val, clone2),
             val.forEach((e, i) => {
@@ -54551,7 +54571,7 @@
           );
         }
         {
-          let clone2 = Object.create(null);
+          const clone2 = Object.create(null);
           seen.set(val, clone2);
           let obj = val;
           for (; obj && obj !== OBJECT_PROTO; )
@@ -54570,7 +54590,7 @@
       }
       function processError(_err, diffOptions, seen = new WeakSet()) {
         if (!_err || 'object' != typeof _err) return { message: String(_err) };
-        let err = _err;
+        const err = _err;
         err.stack && (err.stackStr = String(err.stack)),
           err.name && (err.nameStr = String(err.name)),
           (err.showDiff ||
@@ -54615,7 +54635,7 @@
         GLOBAL_EXPECT = Symbol.for('expect-global'),
         ASYMMETRIC_MATCHERS_OBJECT = Symbol.for('asymmetric-matchers-object');
       if (!Object.prototype.hasOwnProperty.call(globalThis, MATCHERS_OBJECT)) {
-        let globalState = new WeakMap();
+        const globalState = new WeakMap();
         Object.defineProperty(globalThis, MATCHERS_OBJECT, {
           get: () => globalState,
         });
@@ -54623,7 +54643,7 @@
       if (
         !Object.prototype.hasOwnProperty.call(globalThis, JEST_MATCHERS_OBJECT)
       ) {
-        let matchers = Object.create(null),
+        const matchers = Object.create(null),
           customEqualityTesters = [];
         Object.defineProperty(globalThis, JEST_MATCHERS_OBJECT, {
           configurable: !0,
@@ -54640,7 +54660,7 @@
           ASYMMETRIC_MATCHERS_OBJECT,
         )
       ) {
-        let assymetricMatchers = Object.create(null);
+        const assymetricMatchers = Object.create(null);
         Object.defineProperty(globalThis, ASYMMETRIC_MATCHERS_OBJECT, {
           get: () => assymetricMatchers,
         });
@@ -54649,7 +54669,7 @@
         return globalThis[MATCHERS_OBJECT].get(expect4);
       }
       function setState(state, expect4) {
-        let map = globalThis[MATCHERS_OBJECT],
+        const map = globalThis[MATCHERS_OBJECT],
           current = map.get(expect4) || {};
         Object.assign(current, state), map.set(expect4, current);
       }
@@ -54747,7 +54767,7 @@
       function eq(a2, b, aStack, bStack, customTesters, hasKey2) {
         let result = !0,
           asymmetricResult = (function asymmetricMatch(a2, b) {
-            let asymmetricA = isAsymmetric(a2),
+            const asymmetricA = isAsymmetric(a2),
               asymmetricB = isAsymmetric(b);
             if (!asymmetricA || !asymmetricB) {
               if (asymmetricA) return a2.asymmetricMatch(b);
@@ -54755,9 +54775,9 @@
             }
           })(a2, b);
         if (void 0 !== asymmetricResult) return asymmetricResult;
-        let testerContext = { equals };
+        const testerContext = { equals };
         for (let i = 0; i < customTesters.length; i++) {
-          let customTesterResult = customTesters[i].call(
+          const customTesterResult = customTesters[i].call(
             testerContext,
             a2,
             b,
@@ -54771,7 +54791,7 @@
           return a2.href === b.href;
         if (Object.is(a2, b)) return !0;
         if (null === a2 || null === b) return a2 === b;
-        let className = Object.prototype.toString.call(a2);
+        const className = Object.prototype.toString.call(a2);
         if (className !== Object.prototype.toString.call(b)) return !1;
         switch (className) {
           case '[object Boolean]':
@@ -54784,7 +54804,7 @@
                 : Object.is(a2.valueOf(), b.valueOf()))
             );
           case '[object Date]': {
-            let numA = +a2,
+            const numA = +a2,
               numB = +b;
             return numA === numB || (Number.isNaN(numA) && Number.isNaN(numB));
           }
@@ -54820,8 +54840,8 @@
         return aStack.pop(), bStack.pop(), result;
       }
       function keys(obj, hasKey2) {
-        let keys2 = [];
-        for (let key in obj) hasKey2(obj, key) && keys2.push(key);
+        const keys2 = [];
+        for (const key in obj) hasKey2(obj, key) && keys2.push(key);
         return keys2.concat(
           Object.getOwnPropertySymbols(obj).filter(
             (symbol) => Object.getOwnPropertyDescriptor(obj, symbol).enumerable,
@@ -54881,7 +54901,7 @@
         for (; length--; )
           if (aStack[length] === a2) return bStack[length] === b;
         aStack.push(a2), bStack.push(b);
-        let filteredCustomTesters = [
+        const filteredCustomTesters = [
           ...customTesters.filter((t) => t !== iterableEquality),
           function iterableEqualityWithStack(a22, b2) {
             return iterableEquality(
@@ -54906,10 +54926,10 @@
             })(a2)
           ) {
             let allFound = !0;
-            for (let aValue of a2)
+            for (const aValue of a2)
               if (!b.has(aValue)) {
                 let has = !1;
-                for (let bValue of b)
+                for (const bValue of b)
                   !0 === equals(aValue, bValue, filteredCustomTesters) &&
                     (has = !0);
                 if (!1 === has) {
@@ -54930,13 +54950,13 @@
             })(a2)
           ) {
             let allFound = !0;
-            for (let aEntry of a2)
+            for (const aEntry of a2)
               if (
                 !b.has(aEntry[0]) ||
                 !equals(aEntry[1], b.get(aEntry[0]), filteredCustomTesters)
               ) {
                 let has = !1;
-                for (let bEntry of b) {
+                for (const bEntry of b) {
                   let matchedValue = !1;
                   !0 === equals(aEntry[0], bEntry[0], filteredCustomTesters) &&
                     (matchedValue = equals(
@@ -54954,9 +54974,9 @@
             return aStack.pop(), bStack.pop(), allFound;
           }
         }
-        let bIterator = b[IteratorSymbol]();
-        for (let aValue of a2) {
-          let nextB = bIterator.next();
+        const bIterator = b[IteratorSymbol]();
+        for (const aValue of a2) {
+          const nextB = bIterator.next();
           if (nextB.done || !equals(aValue, nextB.value, filteredCustomTesters))
             return !1;
         }
@@ -55011,7 +55031,7 @@
         );
       }
       function subsetEquality(object, subset, customTesters = []) {
-        let filteredCustomTesters = customTesters.filter(
+        const filteredCustomTesters = customTesters.filter(
             (t) => t !== subsetEquality,
           ),
           subsetEqualityWithContext =
@@ -55037,7 +55057,7 @@
                       );
                     seenReferences.set(subset2[key], !0);
                   }
-                  let result =
+                  const result =
                     null != object2 &&
                     hasPropertyInObject(object2, key) &&
                     equals(object2[key], subset2[key], [
@@ -55071,7 +55091,7 @@
       }
       function sparseArrayEquality(a2, b, customTesters = []) {
         if (!Array.isArray(a2) || !Array.isArray(b)) return;
-        let aKeys = Object.keys(a2),
+        const aKeys = Object.keys(a2),
           bKeys = Object.keys(b);
         return (
           equals(
@@ -55114,7 +55134,7 @@
             };
           }
           [Symbol.for('chai/inspect')](options) {
-            let result = stringify(this, options.depth, { min: !0 });
+            const result = stringify(this, options.depth, { min: !0 });
             return result.length <= options.truncate
               ? result
               : `${this.toString()}{…}`;
@@ -55127,7 +55147,7 @@
             super(sample, inverse);
           }
           asymmetricMatch(other) {
-            let result = isA('String', other) && other.includes(this.sample);
+            const result = isA('String', other) && other.includes(this.sample);
             return this.inverse ? !result : result;
           }
           toString() {
@@ -55173,7 +55193,7 @@
               );
             let result = !0,
               matcherContext = this.getMatcherContext();
-            for (let property in this.sample)
+            for (const property in this.sample)
               if (
                 !this.hasProperty(other, property) ||
                 !equals(
@@ -55203,7 +55223,7 @@
               throw new TypeError(
                 `You must provide an array to ${this.toString()}, not '${typeof this.sample}'.`,
               );
-            let matcherContext = this.getMatcherContext(),
+            const matcherContext = this.getMatcherContext(),
               result =
                 0 === this.sample.length ||
                 (Array.isArray(other) &&
@@ -55231,7 +55251,7 @@
           }
           fnNameFor(func) {
             if (func.name) return func.name;
-            let matches3 = Function.prototype.toString
+            const matches3 = Function.prototype.toString
               .call(func)
               .match(/^(?:async)?\s*function\s*(?:\*\s*)?([\w$]+)\s*\(/);
             return matches3 ? matches3[1] : '<anonymous>';
@@ -55280,7 +55300,7 @@
             super(new RegExp(sample), inverse);
           }
           asymmetricMatch(other) {
-            let result = isA('String', other) && this.sample.test(other);
+            const result = isA('String', other) && this.sample.test(other);
             return this.inverse ? !result : result;
           }
           toString() {
@@ -55377,7 +55397,7 @@
           test3 &&
             promise instanceof Promise &&
             ((promise = promise.finally(() => {
-              let index = test3.promises.indexOf(promise);
+              const index = test3.promises.indexOf(promise);
               -1 !== index && test3.promises.splice(index, 1);
             })),
             test3.promises || (test3.promises = []),
@@ -55389,7 +55409,7 @@
         return function (...args) {
           var _a2;
           if (!utils.flag(this, 'soft')) return fn3.apply(this, args);
-          let test3 = utils.flag(this, 'vitest-test');
+          const test3 = utils.flag(this, 'vitest-test');
           if (!test3)
             throw new Error('expect.soft() can only be used inside a test');
           try {
@@ -55406,8 +55426,8 @@
         let { AssertionError: AssertionError2 } = chai,
           customTesters = getCustomEqualityTesters();
         function def(name, fn3) {
-          let addMethod2 = (n) => {
-            let softWrapper = wrapSoft(utils, fn3);
+          const addMethod2 = (n) => {
+            const softWrapper = wrapSoft(utils, fn3);
             utils.addMethod(chai.Assertion.prototype, n, softWrapper),
               utils.addMethod(
                 globalThis[JEST_MATCHERS_OBJECT].matchers,
@@ -55425,7 +55445,7 @@
             m3,
             (_super) =>
               function (...args) {
-                let promise = utils.flag(this, 'promise'),
+                const promise = utils.flag(this, 'promise'),
                   object = utils.flag(this, 'object'),
                   isNot = utils.flag(this, 'negate');
                 if ('rejects' === promise)
@@ -55438,7 +55458,7 @@
                 ) {
                   if (isNot) return;
                   {
-                    let message =
+                    const message =
                       utils.flag(this, 'message') ||
                       "expected promise to throw an error, but it didn't";
                     throw new AssertionError2(
@@ -55456,7 +55476,7 @@
             return utils.flag(this, 'vitest-test', test3), this;
           }),
           def('toEqual', function (expected) {
-            let actual = utils.flag(this, 'object'),
+            const actual = utils.flag(this, 'object'),
               equal = equals(actual, expected, [
                 ...customTesters,
                 iterableEquality,
@@ -55470,7 +55490,7 @@
             );
           }),
           def('toStrictEqual', function (expected) {
-            let obj = utils.flag(this, 'object'),
+            const obj = utils.flag(this, 'object'),
               equal = equals(
                 obj,
                 expected,
@@ -55521,7 +55541,7 @@
                   expected = '#{this}',
                   actual = '#{exp}',
                 ) {
-                  let toBeMessage = `expected ${expected} to be ${actual} // Object.is equality`;
+                  const toBeMessage = `expected ${expected} to be ${actual} // Object.is equality`;
                   return ['toStrictEqual', 'toEqual'].includes(deepEqualityName)
                     ? `${toBeMessage}\n\nIf it should pass with deep equality, replace "toBe" with "${deepEqualityName}"\n\nExpected: ${expected}\nReceived: serializes to the same string\n`
                     : toBeMessage;
@@ -55533,7 +55553,7 @@
             );
           }),
           def('toMatchObject', function (expected) {
-            let actual = this._obj,
+            const actual = this._obj,
               pass = equals(actual, expected, [
                 ...customTesters,
                 iterableEquality,
@@ -55571,9 +55591,9 @@
                             ])
                           )
                             return subset2;
-                          let trimmed = {};
+                          const trimmed = {};
                           seenReferences.set(object2, trimmed);
-                          for (let key of getObjectKeys(object2))
+                          for (const key of getObjectKeys(object2))
                             hasPropertyInObject(subset2, key)
                               ? (trimmed[key] = seenReferences.has(object2[key])
                                   ? seenReferences.get(object2[key])
@@ -55602,7 +55622,7 @@
                 };
               })(actual, expected);
             if ((pass && isNot) || (!pass && !isNot)) {
-              let msg = utils.getMessage(this, [
+              const msg = utils.getMessage(this, [
                 pass,
                 'expected #{this} to match object #{exp}',
                 'expected #{this} to not match object #{exp}',
@@ -55619,7 +55639,7 @@
             }
           }),
           def('toMatch', function (expected) {
-            let actual = this._obj;
+            const actual = this._obj;
             if ('string' != typeof actual)
               throw new TypeError(
                 '.toMatch() expects to receive a string, but got ' +
@@ -55636,7 +55656,7 @@
             );
           }),
           def('toContain', function (item) {
-            let actual = this._obj;
+            const actual = this._obj;
             if (typeof Node < 'u' && actual instanceof Node) {
               if (!(item instanceof Node))
                 throw new TypeError(
@@ -55653,7 +55673,7 @@
             }
             if (typeof DOMTokenList < 'u' && actual instanceof DOMTokenList) {
               assertTypes(item, 'class name', ['string']);
-              let expectedClassList = utils.flag(this, 'negate')
+              const expectedClassList = utils.flag(this, 'negate')
                 ? actual.value.replace(item, '').trim()
                 : `${actual.value} ${item}`;
               return this.assert(
@@ -55678,7 +55698,7 @@
                 this.contain(item));
           }),
           def('toContainEqual', function (expected) {
-            let obj = utils.flag(this, 'object'),
+            const obj = utils.flag(this, 'object'),
               index = Array.from(obj).findIndex((item) =>
                 equals(item, expected, customTesters),
               );
@@ -55690,7 +55710,7 @@
             );
           }),
           def('toBeTruthy', function () {
-            let obj = utils.flag(this, 'object');
+            const obj = utils.flag(this, 'object');
             this.assert(
               !!obj,
               'expected #{this} to be truthy',
@@ -55700,7 +55720,7 @@
             );
           }),
           def('toBeFalsy', function () {
-            let obj = utils.flag(this, 'object');
+            const obj = utils.flag(this, 'object');
             this.assert(
               !obj,
               'expected #{this} to be falsy',
@@ -55710,7 +55730,7 @@
             );
           }),
           def('toBeGreaterThan', function (expected) {
-            let actual = this._obj;
+            const actual = this._obj;
             return (
               assertTypes(actual, 'actual', ['number', 'bigint']),
               assertTypes(expected, 'expected', ['number', 'bigint']),
@@ -55725,7 +55745,7 @@
             );
           }),
           def('toBeGreaterThanOrEqual', function (expected) {
-            let actual = this._obj;
+            const actual = this._obj;
             return (
               assertTypes(actual, 'actual', ['number', 'bigint']),
               assertTypes(expected, 'expected', ['number', 'bigint']),
@@ -55740,7 +55760,7 @@
             );
           }),
           def('toBeLessThan', function (expected) {
-            let actual = this._obj;
+            const actual = this._obj;
             return (
               assertTypes(actual, 'actual', ['number', 'bigint']),
               assertTypes(expected, 'expected', ['number', 'bigint']),
@@ -55755,7 +55775,7 @@
             );
           }),
           def('toBeLessThanOrEqual', function (expected) {
-            let actual = this._obj;
+            const actual = this._obj;
             return (
               assertTypes(actual, 'actual', ['number', 'bigint']),
               assertTypes(expected, 'expected', ['number', 'bigint']),
@@ -55779,14 +55799,14 @@
             return this.be.null;
           }),
           def('toBeDefined', function () {
-            let negate = utils.flag(this, 'negate');
+            const negate = utils.flag(this, 'negate');
             return (
               utils.flag(this, 'negate', !1),
               negate ? this.be.undefined : this.not.be.undefined
             );
           }),
           def('toBeTypeOf', function (expected) {
-            let actual = typeof this._obj,
+            const actual = typeof this._obj,
               equal = expected === actual;
             return this.assert(
               equal,
@@ -55807,7 +55827,7 @@
               (args[0] = args[0]
                 .map((key) => String(key).replace(/([.[\]])/g, '\\$1'))
                 .join('.'));
-            let actual = this._obj,
+            const actual = this._obj,
               [propertyName, expected] = args,
               { value, exists } = Object.prototype.hasOwnProperty.call(
                 actual,
@@ -55854,7 +55874,7 @@
               )
             );
           });
-        let getSpy = (assertion) => (
+        const getSpy = (assertion) => (
             ((assertion) => {
               if (!isMockFunction(assertion._obj))
                 throw new TypeError(
@@ -55864,7 +55884,7 @@
             assertion._obj
           ),
           ordinalOf = (i) => {
-            let j = i % 10,
+            const j = i % 10,
               k2 = i % 100;
             return 1 === j && 11 !== k2
               ? `${i}st`
@@ -55902,7 +55922,7 @@
             ))
           );
         def(['toHaveBeenCalledTimes', 'toBeCalledTimes'], function (number) {
-          let spy = getSpy(this),
+          const spy = getSpy(this),
             spyName = spy.getMockName(),
             callCount = spy.mock.calls.length;
           return this.assert(
@@ -55915,7 +55935,7 @@
           );
         }),
           def('toHaveBeenCalledOnce', function () {
-            let spy = getSpy(this),
+            const spy = getSpy(this),
               spyName = spy.getMockName(),
               callCount = spy.mock.calls.length;
             return this.assert(
@@ -55947,7 +55967,7 @@
               throw new AssertionError2(msg);
           }),
           def(['toHaveBeenCalledWith', 'toBeCalledWith'], function (...args) {
-            let spy = getSpy(this),
+            const spy = getSpy(this),
               spyName = spy.getMockName(),
               pass = spy.mock.calls.some((callArg) =>
                 equals(callArg, args, [...customTesters, iterableEquality]),
@@ -55965,7 +55985,7 @@
           def(
             ['toHaveBeenNthCalledWith', 'nthCalledWith'],
             function (times, ...args) {
-              let spy = getSpy(this),
+              const spy = getSpy(this),
                 spyName = spy.getMockName(),
                 nthCall = spy.mock.calls[times - 1],
                 callCount = spy.mock.calls.length,
@@ -55983,7 +56003,7 @@
           def(
             ['toHaveBeenLastCalledWith', 'lastCalledWith'],
             function (...args) {
-              let spy = getSpy(this),
+              const spy = getSpy(this),
                 spyName = spy.getMockName(),
                 lastCall = spy.mock.calls[spy.mock.calls.length - 1];
               this.assert(
@@ -56011,7 +56031,7 @@
               if ('resolves' === promise && 'function' != typeof obj) {
                 if (isNot) return;
                 {
-                  let message =
+                  const message =
                     utils.flag(this, 'message') ||
                     "expected promise to throw an error, but it didn't";
                   throw new AssertionError2(
@@ -56029,7 +56049,7 @@
                   (isThrow = !0), (thrown = err);
                 }
                 if (!isThrow && !isNot) {
-                  let message =
+                  const message =
                     utils.flag(this, 'message') ||
                     "expected function to throw an error, but it didn't";
                   throw new AssertionError2(
@@ -56041,7 +56061,7 @@
               }
             }
             if ('function' == typeof expected) {
-              let name = expected.name || expected.prototype.constructor.name;
+              const name = expected.name || expected.prototype.constructor.name;
               return this.assert(
                 thrown && thrown instanceof expected,
                 `expected error to be instance of ${name}`,
@@ -56063,7 +56083,7 @@
               'asymmetricMatch' in expected &&
               'function' == typeof expected.asymmetricMatch
             ) {
-              let matcher = expected;
+              const matcher = expected;
               return this.assert(
                 thrown && matcher.asymmetricMatch(thrown),
                 'expected error to match asymmetric matcher',
@@ -56095,7 +56115,7 @@
             },
           ].forEach(({ name, condition, action }) => {
             def(name, function () {
-              let spy = getSpy(this),
+              const spy = getSpy(this),
                 spyName = spy.getMockName(),
                 pass = condition(spy);
               this.assert(
@@ -56129,7 +56149,7 @@
             },
           ].forEach(({ name, condition, action }) => {
             def(name, function (times) {
-              let spy = getSpy(this),
+              const spy = getSpy(this),
                 spyName = spy.getMockName(),
                 pass = condition(spy, times);
               this.assert(
@@ -56163,11 +56183,11 @@
             },
           ].forEach(({ name, condition, action }) => {
             def(name, function (value) {
-              let spy = getSpy(this),
+              const spy = getSpy(this),
                 pass = condition(spy, value),
                 isNot = utils.flag(this, 'negate');
               if ((pass && isNot) || (!pass && !isNot)) {
-                let spyName = spy.getMockName(),
+                const spyName = spy.getMockName(),
                   msg = utils.getMessage(this, [
                     pass,
                     `expected "${spyName}" to ${action} with: #{exp} at least once`,
@@ -56214,7 +56234,7 @@
             {
               name: 'toHaveLastResolvedWith',
               condition: (spy, value) => {
-                let result =
+                const result =
                   spy.mock.settledResults[spy.mock.settledResults.length - 1];
                 return (
                   result &&
@@ -56227,7 +56247,7 @@
             {
               name: ['toHaveLastReturnedWith', 'lastReturnedWith'],
               condition: (spy, value) => {
-                let result = spy.mock.results[spy.mock.results.length - 1];
+                const result = spy.mock.results[spy.mock.results.length - 1];
                 return (
                   result &&
                   'return' === result.type &&
@@ -56238,7 +56258,7 @@
             },
           ].forEach(({ name, condition, action }) => {
             def(name, function (value) {
-              let spy = getSpy(this),
+              const spy = getSpy(this),
                 results =
                   'return' === action
                     ? spy.mock.results
@@ -56258,7 +56278,7 @@
             {
               name: 'toHaveNthResolvedWith',
               condition: (spy, index, value) => {
-                let result = spy.mock.settledResults[index - 1];
+                const result = spy.mock.settledResults[index - 1];
                 return (
                   result &&
                   'fulfilled' === result.type &&
@@ -56270,7 +56290,7 @@
             {
               name: ['toHaveNthReturnedWith', 'nthReturnedWith'],
               condition: (spy, index, value) => {
-                let result = spy.mock.results[index - 1];
+                const result = spy.mock.results[index - 1];
                 return (
                   result &&
                   'return' === result.type &&
@@ -56281,7 +56301,7 @@
             },
           ].forEach(({ name, condition, action }) => {
             def(name, function (nthCall, value) {
-              let spy = getSpy(this),
+              const spy = getSpy(this),
                 spyName = spy.getMockName(),
                 result = (
                   'return' === action
@@ -56302,14 +56322,14 @@
             return this.be.satisfy(matcher, message);
           }),
           def('withContext', function (context) {
-            for (let key in context) utils.flag(this, key, context[key]);
+            for (const key in context) utils.flag(this, key, context[key]);
             return this;
           }),
           utils.addProperty(chai.Assertion.prototype, 'resolves', function () {
-            let error = new Error('resolves');
+            const error = new Error('resolves');
             utils.flag(this, 'promise', 'resolves'),
               utils.flag(this, 'error', error);
-            let test3 = utils.flag(this, 'vitest-test'),
+            const test3 = utils.flag(this, 'vitest-test'),
               obj = utils.flag(this, 'object');
             if (utils.flag(this, 'poll'))
               throw new SyntaxError(
@@ -56319,21 +56339,21 @@
               throw new TypeError(
                 `You must provide a Promise to expect() when using .resolves, not '${typeof obj}'.`,
               );
-            let proxy = new Proxy(this, {
+            const proxy = new Proxy(this, {
               get: (target, key, receiver) => {
-                let result = Reflect.get(target, key, receiver);
+                const result = Reflect.get(target, key, receiver);
                 return 'function' != typeof result
                   ? result instanceof chai.Assertion
                     ? proxy
                     : result
                   : async (...args) => {
-                      let promise = obj.then(
+                      const promise = obj.then(
                         (value) => (
                           utils.flag(this, 'object', value),
                           result.call(this, ...args)
                         ),
                         (err) => {
-                          let _error = new AssertionError2(
+                          const _error = new AssertionError2(
                             `promise rejected "${utils.inspect(err)}" instead of resolving`,
                             { showDiff: !1 },
                           );
@@ -56354,10 +56374,10 @@
             return proxy;
           }),
           utils.addProperty(chai.Assertion.prototype, 'rejects', function () {
-            let error = new Error('rejects');
+            const error = new Error('rejects');
             utils.flag(this, 'promise', 'rejects'),
               utils.flag(this, 'error', error);
-            let test3 = utils.flag(this, 'vitest-test'),
+            const test3 = utils.flag(this, 'vitest-test'),
               obj = utils.flag(this, 'object'),
               wrapper = 'function' == typeof obj ? obj() : obj;
             if (utils.flag(this, 'poll'))
@@ -56368,17 +56388,17 @@
               throw new TypeError(
                 `You must provide a Promise to expect() when using .rejects, not '${typeof wrapper}'.`,
               );
-            let proxy = new Proxy(this, {
+            const proxy = new Proxy(this, {
               get: (target, key, receiver) => {
-                let result = Reflect.get(target, key, receiver);
+                const result = Reflect.get(target, key, receiver);
                 return 'function' != typeof result
                   ? result instanceof chai.Assertion
                     ? proxy
                     : result
                   : async (...args) => {
-                      let promise = wrapper.then(
+                      const promise = wrapper.then(
                         (value) => {
-                          let _error = new AssertionError2(
+                          const _error = new AssertionError2(
                             `promise resolved "${utils.inspect(value)}" instead of rejecting`,
                             {
                               showDiff: !0,
@@ -56415,14 +56435,14 @@
         return (_, utils) => {
           Object.entries(matchers).forEach(
             ([expectAssertionName, expectAssertion]) => {
-              let softWrapper = wrapSoft(
+              const softWrapper = wrapSoft(
                 utils,
                 function expectWrapper(...args) {
-                  let { state, isNot, obj } = (function getMatcherState(
+                  const { state, isNot, obj } = (function getMatcherState(
                       assertion,
                       expect4,
                     ) {
-                      let obj = assertion._obj,
+                      const obj = assertion._obj,
                         isNot = utils_exports.flag(assertion, 'negate'),
                         promise =
                           utils_exports.flag(assertion, 'promise') || '',
@@ -56470,7 +56490,7 @@
                           );
                       },
                     );
-                  let { pass, message, actual, expected } = result;
+                  const { pass, message, actual, expected } = result;
                   if ((pass && isNot) || (!pass && !isNot))
                     throw new JestExtendError(message(), actual, expected);
                 },
@@ -56490,7 +56510,7 @@
                   super(sample, inverse);
                 }
                 asymmetricMatch(other) {
-                  let { pass } = expectAssertion.call(
+                  const { pass } = expectAssertion.call(
                     this.getMatcherContext(expect4),
                     other,
                     ...this.sample,
@@ -56507,7 +56527,7 @@
                   return `${this.toString()}<${this.sample.map(String).join(', ')}>`;
                 }
               }
-              let customMatcher = (...sample) =>
+              const customMatcher = (...sample) =>
                 new CustomMatcher(!1, ...sample);
               Object.defineProperty(expect4, expectAssertionName, {
                 configurable: !0,
@@ -56542,8 +56562,8 @@
       };
       var expect2 = (function createExpect() {
         use(JestExtend), use(JestChaiExpect), use(JestAsymmetricMatchers);
-        let expect4 = (value, message) => {
-          let { assertionCalls } = getState(expect4);
+        const expect4 = (value, message) => {
+          const { assertionCalls } = getState(expect4);
           return (
             setState({ assertionCalls: assertionCalls + 1, soft: !1 }, expect4),
             expect(value, message)
@@ -56555,7 +56575,7 @@
           (expect4.setState = (state) => setState(state, expect4)),
           (expect4.extend = (expects) => expect.extend(expect4, expects)),
           (expect4.soft = (...args) => {
-            let assert2 = expect4(...args);
+            const assert2 = expect4(...args);
             return expect4.setState({ soft: !0 }), assert2;
           }),
           (expect4.unreachable = (message) => {
@@ -56577,7 +56597,7 @@
             expect4,
             'assertions',
             function assertions(expected) {
-              let errorGen = () =>
+              const errorGen = () =>
                 new Error(
                   `expected number of assertions to be ${expected}, but got ${expect4.getState().assertionCalls}`,
                 );
@@ -56594,7 +56614,7 @@
             expect4,
             'hasAssertions',
             function hasAssertions() {
-              let error = new Error(
+              const error = new Error(
                 'expected any number of assertion, but got none',
               );
               'captureStackTrace' in Error &&
@@ -56620,7 +56640,7 @@
         return reactiveMock(implementation ? fn(implementation) : fn());
       }
       function reactiveMock(mock) {
-        let reactive = listenWhenCalled(mock),
+        const reactive = listenWhenCalled(mock),
           originalMockImplementation = reactive.mockImplementation.bind(null);
         return (
           (reactive.mockImplementation = (fn3) =>
@@ -56629,7 +56649,7 @@
         );
       }
       function listenWhenCalled(mock) {
-        let state = T(mock),
+        const state = T(mock),
           impl = state.impl;
         return (
           state.willCall(function (...args) {
@@ -57709,7 +57729,7 @@
           refs,
           printer2,
         ) => {
-          let indentationNext = indentation + config3.indent,
+          const indentationNext = indentation + config3.indent,
             colors = config3.colors;
           return keys2
             .map((key) => {
@@ -57754,7 +57774,7 @@
         ) =>
           children
             .map((child) => {
-              let printedChild =
+              const printedChild =
                 'string' == typeof child
                   ? printText2(child, config3)
                   : printer2(child, config3, indentation, depth, refs);
@@ -57767,11 +57787,11 @@
             })
             .join(''),
         printText2 = (text, config3) => {
-          let contentColor = config3.colors.content;
+          const contentColor = config3.colors.content;
           return contentColor.open + escapeHTML2(text) + contentColor.close;
         },
         printComment2 = (comment, config3) => {
-          let commentColor = config3.colors.comment;
+          const commentColor = config3.colors.comment;
           return (
             commentColor.open +
             '\x3c!--' +
@@ -57787,7 +57807,7 @@
           config3,
           indentation,
         ) => {
-          let tagColor = config3.colors.tag;
+          const tagColor = config3.colors.tag;
           return (
             tagColor.open +
             '<' +
@@ -57813,7 +57833,7 @@
           );
         },
         printElementAsLeaf2 = (type5, config3) => {
-          let tagColor = config3.colors.tag;
+          const tagColor = config3.colors.tag;
           return (
             tagColor.open +
             '<' +
@@ -57830,14 +57850,14 @@
         FRAGMENT_NODE2 = 11,
         ELEMENT_REGEXP2 = /^((HTML|SVG)\w*)?Element$/,
         isCustomElement2 = (val) => {
-          let { tagName } = val;
+          const { tagName } = val;
           return !!(
             ('string' == typeof tagName && tagName.includes('-')) ||
             ('function' == typeof val.hasAttribute && val.hasAttribute('is'))
           );
         },
         testNode2 = (val) => {
-          let constructorName = val.constructor.name,
+          const constructorName = val.constructor.name,
             { nodeType } = val;
           return (
             (1 === nodeType &&
@@ -57877,7 +57897,7 @@
               })(node)
             )
               return printComment2(node.data, config3);
-            let type5 = nodeIsFragment2(node)
+            const type5 = nodeIsFragment2(node)
               ? 'DocumentFragment'
               : node.tagName.toLowerCase();
             return ++depth > config3.maxDepth
@@ -57924,7 +57944,7 @@
         readFileSync = null,
         codeFrameColumns = null;
       try {
-        let nodeRequire = module && module.require;
+        const nodeRequire = module && module.require;
         (readFileSync = nodeRequire.call(module, 'fs').readFileSync),
           (codeFrameColumns = nodeRequire.call(
             module,
@@ -57950,7 +57970,7 @@
           } catch {
             return '';
           }
-          let codeFrame = codeFrameColumns(
+          const codeFrame = codeFrameColumns(
             rawFileContents,
             { start: { line, column } },
             { highlightCode: !0, linesBelow: 0 },
@@ -58028,7 +58048,7 @@
           let colors;
           try {
             var _process$env;
-            let colorsJSON =
+            const colorsJSON =
               null == (_process$env = process.env)
                 ? void 0
                 : _process$env.COLORS;
@@ -58084,7 +58104,7 @@
           : debugContent;
       }
       var logDOM = function () {
-          let userCodeFrame = getUserCodeFrame();
+          const userCodeFrame = getUserCodeFrame();
           console.log(
             userCodeFrame
               ? prettyDOM(...arguments) + '\n\n' + userCodeFrame
@@ -58102,7 +58122,7 @@
           showOriginalStackTrace: !1,
           throwSuggestions: !1,
           getElementError(message, container) {
-            let prettifiedDOM = prettyDOM(container),
+            const prettifiedDOM = prettyDOM(container),
               error = new Error(
                 [
                   message,
@@ -58170,16 +58190,16 @@
           })(element)
         )
           return [];
-        let labels = element.ownerDocument.querySelectorAll('label');
+        const labels = element.ownerDocument.querySelectorAll('label');
         return Array.from(labels).filter((label) => label.control === element);
       }
       function getLabels3(container, element, _temp) {
-        let { selector = '*' } = void 0 === _temp ? {} : _temp,
+        const { selector = '*' } = void 0 === _temp ? {} : _temp,
           ariaLabelledBy = element.getAttribute('aria-labelledby'),
           labelsId = ariaLabelledBy ? ariaLabelledBy.split(' ') : [];
         return labelsId.length
           ? labelsId.map((labelId) => {
-              let labellingElement = container.querySelector(
+              const labellingElement = container.querySelector(
                 '[id="' + labelId + '"]',
               );
               return labellingElement
@@ -58213,7 +58233,7 @@
       function fuzzyMatches(textToMatch, node, matcher, normalizer) {
         if ('string' != typeof textToMatch) return !1;
         assertNotNullOrUndefined(matcher);
-        let normalizedText = normalizer(textToMatch);
+        const normalizedText = normalizer(textToMatch);
         return 'string' == typeof matcher || 'number' == typeof matcher
           ? normalizedText
               .toLowerCase()
@@ -58225,7 +58245,7 @@
       function matches2(textToMatch, node, matcher, normalizer) {
         if ('string' != typeof textToMatch) return !1;
         assertNotNullOrUndefined(matcher);
-        let normalizedText = normalizer(textToMatch);
+        const normalizedText = normalizer(textToMatch);
         return matcher instanceof Function
           ? matcher(normalizedText, node)
           : matcher instanceof RegExp
@@ -58233,7 +58253,7 @@
             : normalizedText === String(matcher);
       }
       function getDefaultNormalizer(_temp) {
-        let { trim = !0, collapseWhitespace = !0 } =
+        const { trim = !0, collapseWhitespace = !0 } =
           void 0 === _temp ? {} : _temp;
         return (text) => {
           let normalizedText = text;
@@ -58247,7 +58267,7 @@
         };
       }
       function makeNormalizer(_ref) {
-        let { trim, collapseWhitespace, normalizer } = _ref;
+        const { trim, collapseWhitespace, normalizer } = _ref;
         if (!normalizer)
           return getDefaultNormalizer({ trim, collapseWhitespace });
         if (typeof trim < 'u' || typeof collapseWhitespace < 'u')
@@ -58257,7 +58277,7 @@
         return normalizer;
       }
       function matchRegExp(matcher, text) {
-        let match = matcher.test(text);
+        const match = matcher.test(text);
         return (
           matcher.global &&
             0 !== matcher.lastIndex &&
@@ -58282,7 +58302,7 @@
       }
       var elementRoleList2 = (function buildElementRoleList2(elementRolesMap) {
         function getSelectorSpecificity(_ref3) {
-          let { attributes = [] } = _ref3;
+          const { attributes = [] } = _ref3;
           return attributes.length;
         }
         function match(element) {
@@ -58298,8 +58318,8 @@
               ...attributes.slice(0, typeTextIndex),
               ...attributes.slice(typeTextIndex + 1),
             ]);
-          let selector = (function makeElementSelector(_ref) {
-            let { name, attributes } = _ref;
+          const selector = (function makeElementSelector(_ref) {
+            const { name, attributes } = _ref;
             return (
               '' +
               name +
@@ -58328,7 +58348,7 @@
             node.matches(selector);
         }
         let result = [];
-        for (let [element, roles3] of elementRolesMap.entries())
+        for (const [element, roles3] of elementRolesMap.entries())
           result = [
             ...result,
             {
@@ -58353,7 +58373,7 @@
       }
       function isInaccessible(element, options) {
         void 0 === options && (options = {});
-        let {
+        const {
           isSubtreeInaccessible:
             isSubtreeInaccessibleImpl = isSubtreeInaccessible,
         } = options;
@@ -58370,12 +58390,12 @@
         return !1;
       }
       function getImplicitAriaRoles2(currentNode) {
-        for (let { match, roles: roles3 } of elementRoleList2)
+        for (const { match, roles: roles3 } of elementRoleList2)
           if (match(currentNode)) return [...roles3];
         return [];
       }
       function getRoles(container, _temp) {
-        let { hidden = !1 } = void 0 === _temp ? {} : _temp;
+        const { hidden = !1 } = void 0 === _temp ? {} : _temp;
         return (function flattenDOM(node) {
           return [
             node,
@@ -58407,18 +58427,18 @@
           roles3 = getRoles(dom, { hidden });
         return Object.entries(roles3)
           .filter((_ref7) => {
-            let [role] = _ref7;
+            const [role] = _ref7;
             return 'generic' !== role;
           })
           .map((_ref8) => {
-            let [role, elements] = _ref8,
+            const [role, elements] = _ref8,
               delimiterBar = '-'.repeat(50);
             return (
               role +
               ':\n\n' +
               elements
                 .map((el) => {
-                  let nameString =
+                  const nameString =
                       'Name "' +
                       computeAccessibleName2(el, {
                         computedStyleSupportsPseudoElements:
@@ -58449,11 +58469,11 @@
           .join('\n');
       }
       var logRoles = function (dom, _temp2) {
-        let { hidden = !1 } = void 0 === _temp2 ? {} : _temp2;
+        const { hidden = !1 } = void 0 === _temp2 ? {} : _temp2;
         return console.log(prettyRoles(dom, { hidden }));
       };
       function checkBooleanAttribute(element, attribute) {
-        let attributeValue = element.getAttribute(attribute);
+        const attributeValue = element.getAttribute(attribute);
         return (
           'true' === attributeValue || ('false' !== attributeValue && void 0)
         );
@@ -58483,7 +58503,7 @@
             (warning =
               'Element is inaccessible. This means that the element and all its children are invisible to screen readers.\n    If you are using the aria-hidden prop, make sure this is the right choice for your case.\n    ')),
           Object.keys(queryOptions).length > 0 && queryArgs.push(queryOptions);
-        let queryMethod = variant + 'By' + queryName;
+        const queryMethod = variant + 'By' + queryName;
         return {
           queryName,
           queryMethod,
@@ -58499,7 +58519,7 @@
                 ? ', { ' +
                   Object.entries(options)
                     .map((_ref2) => {
-                      let [k2, v] = _ref2;
+                      const [k2, v] = _ref2;
                       return k2 + ': ' + v;
                     })
                     .join(', ') +
@@ -58524,7 +58544,7 @@
           element.matches(getConfig2().defaultIgnore))
         )
           return;
-        let role =
+        const role =
           null != (_element$getAttribute = element.getAttribute('role'))
             ? _element$getAttribute
             : null == (_getImplicitAriaRoles = getImplicitAriaRoles2(element))
@@ -58538,17 +58558,17 @@
                 getConfig2().computedStyleSupportsPseudoElements,
             }),
           });
-        let labelText = getLabels3(document, element)
+        const labelText = getLabels3(document, element)
           .map((label) => label.content)
           .join(' ');
         if (canSuggest('LabelText', method, labelText))
           return makeSuggestion('LabelText', element, labelText, { variant });
-        let placeholderText = element.getAttribute('placeholder');
+        const placeholderText = element.getAttribute('placeholder');
         if (canSuggest('PlaceholderText', method, placeholderText))
           return makeSuggestion('PlaceholderText', element, placeholderText, {
             variant,
           });
-        let textContent = normalize2(getNodeText(element));
+        const textContent = normalize2(getNodeText(element));
         if (canSuggest('Text', method, textContent))
           return makeSuggestion('Text', element, textContent, { variant });
         if (canSuggest('DisplayValue', method, element.value))
@@ -58558,13 +58578,13 @@
             normalize2(element.value),
             { variant },
           );
-        let alt = element.getAttribute('alt');
+        const alt = element.getAttribute('alt');
         if (canSuggest('AltText', method, alt))
           return makeSuggestion('AltText', element, alt, { variant });
-        let title = element.getAttribute('title');
+        const title = element.getAttribute('title');
         if (canSuggest('Title', method, title))
           return makeSuggestion('Title', element, title, { variant });
-        let testId = element.getAttribute(getConfig2().testIdAttribute);
+        const testId = element.getAttribute(getConfig2().testIdAttribute);
         return canSuggest('TestId', method, testId)
           ? makeSuggestion('TestId', element, testId, { variant })
           : void 0;
@@ -58573,7 +58593,7 @@
         target.stack = source.stack.replace(source.message, target.message);
       }
       function waitFor(callback, _ref) {
-        let {
+        const {
           container = getDocument(),
           timeout = getConfig2().asyncUtilTimeout,
           showOriginalStackTrace = getConfig2().showOriginalStackTrace,
@@ -58615,11 +58635,11 @@
             }, timeout),
             usingJestFakeTimers = jestFakeTimersAreEnabled();
           if (usingJestFakeTimers) {
-            let { unstable_advanceTimersWrapper: advanceTimersWrapper } =
+            const { unstable_advanceTimersWrapper: advanceTimersWrapper } =
               getConfig2();
             for (checkCallback(); !finished; ) {
               if (!jestFakeTimersAreEnabled()) {
-                let error = new Error(
+                const error = new Error(
                   "Changed from using fake timers to real timers while using waitFor. This is not allowed and will result in very strange behavior. Please ensure you're awaiting all async things your test is doing before changing to real timers. For more info, please go to https://github.com/testing-library/dom-testing-library/issues/830",
                 );
                 return (
@@ -58644,7 +58664,7 @@
               return void reject(e);
             }
             intervalId = setInterval(checkRealTimersCallback, interval);
-            let { MutationObserver } = getWindowFromNode(container);
+            const { MutationObserver } = getWindowFromNode(container);
             (observer = new MutationObserver(checkRealTimersCallback)),
               observer.observe(container, mutationObserverOptions),
               checkCallback();
@@ -58658,7 +58678,7 @@
           }
           function checkRealTimersCallback() {
             if (jestFakeTimersAreEnabled()) {
-              let error = new Error(
+              const error = new Error(
                 "Changed from using real timers to fake timers while using waitFor. This is not allowed and will result in very strange behavior. Please ensure you're awaiting all async things your test is doing before changing to fake timers. For more info, please go to https://github.com/testing-library/dom-testing-library/issues/830",
               );
               return (
@@ -58672,18 +58692,17 @@
           function checkCallback() {
             if ('pending' !== promiseStatus)
               try {
-                let result = (function runWithExpensiveErrorDiagnosticsDisabled(
-                  callback,
-                ) {
-                  try {
-                    return (
-                      (config2._disableExpensiveErrorDiagnostics = !0),
-                      callback()
-                    );
-                  } finally {
-                    config2._disableExpensiveErrorDiagnostics = !1;
-                  }
-                })(callback);
+                const result =
+                  (function runWithExpensiveErrorDiagnosticsDisabled(callback) {
+                    try {
+                      return (
+                        (config2._disableExpensiveErrorDiagnostics = !0),
+                        callback()
+                      );
+                    } finally {
+                      config2._disableExpensiveErrorDiagnostics = !1;
+                    }
+                  })(callback);
                 'function' == typeof result?.then
                   ? ((promiseStatus = 'pending'),
                     result.then(
@@ -58704,7 +58723,7 @@
         });
       }
       function waitForWrapper(callback, options) {
-        let stackTraceError = new Error('STACK_TRACE_MESSAGE');
+        const stackTraceError = new Error('STACK_TRACE_MESSAGE');
         return getConfig2().asyncWrapper(() =>
           waitFor(callback, { stackTraceError, ...options }),
         );
@@ -58720,7 +58739,7 @@
         );
       }
       function queryAllByAttribute(attribute, container, text, _temp) {
-        let {
+        const {
             exact = !0,
             collapseWhitespace,
             trim,
@@ -58739,7 +58758,7 @@
         );
       }
       function queryByAttribute(attribute, container, text, options) {
-        let els = queryAllByAttribute(attribute, container, text, options);
+        const els = queryAllByAttribute(attribute, container, text, options);
         if (els.length > 1)
           throw getMultipleElementsFoundError(
             'Found multiple elements by [' + attribute + '=' + text + ']',
@@ -58757,9 +58776,9 @@
             _key++
           )
             args[_key - 1] = arguments[_key];
-          let els = allQuery(container, ...args);
+          const els = allQuery(container, ...args);
           if (els.length > 1) {
-            let elementStrings = els
+            const elementStrings = els
               .map((element) => getElementError(null, element).message)
               .join('\n\n');
             throw getMultipleElementsFoundError(
@@ -58790,7 +58809,7 @@
             _key2++
           )
             args[_key2 - 1] = arguments[_key2];
-          let els = allQuery(container, ...args);
+          const els = allQuery(container, ...args);
           if (!els.length)
             throw getConfig2().getElementError(
               getMissingError2(container, ...args),
@@ -58816,11 +58835,11 @@
               _key3++
             )
               args[_key3 - 1] = arguments[_key3];
-            let element = query(container, ...args),
+            const element = query(container, ...args),
               [{ suggest = getConfig2().throwSuggestions } = {}] =
                 args.slice(-1);
             if (element && suggest) {
-              let suggestion = getSuggestedQuery(element, variant);
+              const suggestion = getSuggestedQuery(element, variant);
               if (suggestion && !queryAllByName.endsWith(suggestion.queryName))
                 throw getSuggestionError(suggestion.toString(), container);
             }
@@ -58836,11 +58855,11 @@
               _key4++
             )
               args[_key4 - 1] = arguments[_key4];
-            let els = query(container, ...args),
+            const els = query(container, ...args),
               [{ suggest = getConfig2().throwSuggestions } = {}] =
                 args.slice(-1);
             if (els.length && suggest) {
-              let uniqueSuggestionMessages = [
+              const uniqueSuggestionMessages = [
                 ...new Set(
                   els.map((element) => {
                     var _getSuggestedQuery;
@@ -58865,7 +58884,7 @@
             return els;
           };
       function buildQueries(queryAllBy, getMultipleError2, getMissingError2) {
-        let queryBy = wrapSingleQueryWithSuggestion(
+        const queryBy = wrapSingleQueryWithSuggestion(
             makeSingleQuery(queryAllBy, getMultipleError2),
             queryAllBy.name,
             'query',
@@ -58907,7 +58926,7 @@
         buildQueries,
       });
       var queryAllLabelsByText = function (container, text, _temp) {
-          let {
+          const {
               exact = !0,
               trim,
               collapseWhitespace,
@@ -58923,21 +58942,21 @@
             return Array.from(container.querySelectorAll('label,input'))
               .map((node) => ({ node, textToMatch: getLabelContent(node) }))
               .filter((_ref) => {
-                let { textToMatch } = _ref;
+                const { textToMatch } = _ref;
                 return null !== textToMatch;
               });
           })(container)
             .filter((_ref2) => {
-              let { node, textToMatch } = _ref2;
+              const { node, textToMatch } = _ref2;
               return matcher(textToMatch, node, text, matchNormalizer);
             })
             .map((_ref3) => {
-              let { node } = _ref3;
+              const { node } = _ref3;
               return node;
             });
         },
         queryAllByLabelText = function (container, text, _temp2) {
-          let {
+          const {
             selector = '*',
             exact = !0,
             collapseWhitespace,
@@ -58945,7 +58964,7 @@
             normalizer,
           } = void 0 === _temp2 ? {} : _temp2;
           checkContainerType(container);
-          let matcher = exact ? matches2 : fuzzyMatches,
+          const matcher = exact ? matches2 : fuzzyMatches,
             matchNormalizer = makeNormalizer({
               collapseWhitespace,
               trim,
@@ -58960,7 +58979,7 @@
                   element.hasAttribute('aria-labelledby'),
               )
               .reduce((labelledElements, labelledElement) => {
-                let labelList = getLabels3(container, labelledElement, {
+                const labelList = getLabels3(container, labelledElement, {
                   selector,
                 });
                 labelList
@@ -58975,7 +58994,7 @@
                       label.formControl &&
                       labelledElements.push(label.formControl);
                   });
-                let labelsValue = labelList
+                const labelsValue = labelList
                   .filter((label) => !!label.content)
                   .map((label) => label.content);
                 return (
@@ -58993,7 +59012,7 @@
                         text,
                         matchNormalizer,
                       ) && labelledElements.push(labelledElement);
-                      let labelsFiltered = [...labelsValue];
+                      const labelsFiltered = [...labelsValue];
                       labelsFiltered.splice(index, 1),
                         labelsFiltered.length > 1 &&
                           matcher(
@@ -59026,19 +59045,19 @@
             _key++
           )
             rest[_key - 2] = arguments[_key];
-          let els = queryAllByLabelText(container, text, ...rest);
+          const els = queryAllByLabelText(container, text, ...rest);
           if (!els.length) {
-            let labels = queryAllLabelsByText(container, text, ...rest);
+            const labels = queryAllLabelsByText(container, text, ...rest);
             if (labels.length) {
-              let tagNames = labels
+              const tagNames = labels
                 .map((label) =>
                   (function getTagNameOfElementAssociatedWithLabelViaFor(
                     container,
                     label,
                   ) {
-                    let htmlFor = label.getAttribute('for');
+                    const htmlFor = label.getAttribute('for');
                     if (!htmlFor) return null;
-                    let element = container.querySelector(
+                    const element = container.querySelector(
                       '[id="' + htmlFor + '"]',
                     );
                     return element ? element.tagName.toLowerCase() : null;
@@ -59143,7 +59162,7 @@
             'Unable to find an element with the placeholder text of: ' + text,
         ),
         queryAllByText = function (container, text, _temp) {
-          let {
+          const {
             selector = '*',
             exact = !0,
             collapseWhitespace,
@@ -59200,14 +59219,14 @@
             },
           ),
         queryAllByDisplayValue = function (container, value, _temp) {
-          let {
+          const {
             exact = !0,
             collapseWhitespace,
             trim,
             normalizer,
           } = void 0 === _temp ? {} : _temp;
           checkContainerType(container);
-          let matcher = exact ? matches2 : fuzzyMatches,
+          const matcher = exact ? matches2 : fuzzyMatches,
             matchNormalizer = makeNormalizer({
               collapseWhitespace,
               trim,
@@ -59275,14 +59294,14 @@
           (c, alt) => 'Unable to find an element with the alt text: ' + alt,
         ),
         queryAllByTitle = function (container, text, _temp) {
-          let {
+          const {
             exact = !0,
             collapseWhitespace,
             trim,
             normalizer,
           } = void 0 === _temp ? {} : _temp;
           checkContainerType(container);
-          let matcher = exact ? matches2 : fuzzyMatches,
+          const matcher = exact ? matches2 : fuzzyMatches,
             matchNormalizer = makeNormalizer({
               collapseWhitespace,
               trim,
@@ -59325,7 +59344,7 @@
               'Unable to find an element with the title: ' + title + '.',
           ),
         queryAllByRole = function (container, role, _temp) {
-          let {
+          const {
             hidden = getConfig2().defaultHidden,
             name,
             description,
@@ -59458,7 +59477,7 @@
             throw new Error(
               '"aria-expanded" is not supported on role "' + role + '".',
             );
-          let subtreeIsInaccessibleCache = new WeakMap();
+          const subtreeIsInaccessibleCache = new WeakMap();
           function cachedIsSubtreeInaccessible(element) {
             return (
               subtreeIsInaccessibleCache.has(element) ||
@@ -59473,7 +59492,7 @@
             container.querySelectorAll(
               (function makeRoleSelector(role) {
                 var _roleElements$get;
-                let explicitRoleSelector = '*[role~="' + role + '"]',
+                const explicitRoleSelector = '*[role~="' + role + '"]',
                   roleRelations =
                     null !=
                     (_roleElements$get =
@@ -59482,7 +59501,7 @@
                       : new Set(),
                   implicitRoleSelectors = new Set(
                     Array.from(roleRelations).map((_ref) => {
-                      let { name } = _ref;
+                      const { name } = _ref;
                       return name;
                     }),
                   );
@@ -59494,13 +59513,13 @@
           )
             .filter((node) => {
               if (node.hasAttribute('role')) {
-                let roleValue = node.getAttribute('role');
+                const roleValue = node.getAttribute('role');
                 if (queryFallbacks)
                   return roleValue
                     .split(' ')
                     .filter(Boolean)
                     .some((roleAttributeToken) => roleAttributeToken === role);
-                let [firstRoleAttributeToken] = roleValue.split(' ');
+                const [firstRoleAttributeToken] = roleValue.split(' ');
                 return firstRoleAttributeToken === role;
               }
               return getImplicitAriaRoles2(node).some(
@@ -59593,7 +59612,7 @@
                     (valueMatches =
                       valueNow ===
                       (function computeAriaValueNow(element) {
-                        let valueNow = element.getAttribute('aria-valuenow');
+                        const valueNow = element.getAttribute('aria-valuenow');
                         return null === valueNow ? void 0 : +valueNow;
                       })(element)),
                   void 0 !== valueMax &&
@@ -59601,7 +59620,7 @@
                     (valueMatches =
                       valueMax ===
                       (function computeAriaValueMax(element) {
-                        let valueMax = element.getAttribute('aria-valuemax');
+                        const valueMax = element.getAttribute('aria-valuemax');
                         return null === valueMax ? void 0 : +valueMax;
                       })(element)),
                   void 0 !== valueMin &&
@@ -59609,7 +59628,7 @@
                     (valueMatches =
                       valueMin ===
                       (function computeAriaValueMin(element) {
-                        let valueMin = element.getAttribute('aria-valuemin');
+                        const valueMin = element.getAttribute('aria-valuemin');
                         return null === valueMin ? void 0 : +valueMin;
                       })(element)),
                   void 0 !== valueText)
@@ -59620,7 +59639,7 @@
                         (_computeAriaValueText = (function computeAriaValueText(
                           element,
                         ) {
-                          let valueText =
+                          const valueText =
                             element.getAttribute('aria-valuetext');
                           return null === valueText ? void 0 : valueText;
                         })(element))
@@ -59690,7 +59709,7 @@
           buildQueries(
             queryAllByRole,
             function (c, role, _temp2) {
-              let { name } = void 0 === _temp2 ? {} : _temp2;
+              const { name } = void 0 === _temp2 ? {} : _temp2;
               return (
                 'Found multiple elements with the role "' +
                 role +
@@ -59699,7 +59718,7 @@
               );
             },
             function (container, role, _temp3) {
-              let {
+              const {
                 hidden = getConfig2().defaultHidden,
                 name,
                 description,
@@ -59852,7 +59871,7 @@
           void 0 === queries$1 && (queries$1 = queries),
           void 0 === initialValue2 && (initialValue2 = {}),
           Object.keys(queries$1).reduce((helpers, key) => {
-            let fn3 = queries$1[key];
+            const fn3 = queries$1[key];
             return (helpers[key] = fn3.bind(null, element)), helpers;
           }, initialValue2)
         );
@@ -59866,10 +59885,12 @@
           );
       }
       async function waitForElementToBeRemoved(callback, options) {
-        let timeoutError = new Error('Timed out in waitForElementToBeRemoved.');
+        const timeoutError = new Error(
+          'Timed out in waitForElementToBeRemoved.',
+        );
         if ('function' != typeof callback) {
           initialCheck(callback);
-          let getRemainingElements = (
+          const getRemainingElements = (
             Array.isArray(callback) ? callback : [callback]
           ).map((element) => {
             let parent = element.parentElement;
@@ -60292,7 +60313,7 @@
         });
       }
       function createEvent(eventName, node, init, _temp) {
-        let { EventType = 'Event', defaultInit = {} } =
+        const { EventType = 'Event', defaultInit = {} } =
           void 0 === _temp ? {} : _temp;
         if (!node)
           throw new Error(
@@ -60304,7 +60325,7 @@
           { target: { value, files, ...targetProperties } = {} } = eventInit;
         void 0 !== value &&
           (function setNativeValue(element, value) {
-            let { set: valueSetter } =
+            const { set: valueSetter } =
                 Object.getOwnPropertyDescriptor(element, 'value') || {},
               prototype = Object.getPrototypeOf(element),
               { set: prototypeValueSetter } =
@@ -60334,7 +60355,7 @@
           event = new EventConstructor(eventName, eventInit);
         else {
           event = window2.document.createEvent(EventType);
-          let { bubbles, cancelable, detail, ...otherInit } = eventInit;
+          const { bubbles, cancelable, detail, ...otherInit } = eventInit;
           event.initEvent(eventName, bubbles, cancelable, detail),
             Object.keys(otherInit).forEach((eventKey) => {
               event[eventKey] = otherInit[eventKey];
@@ -60342,7 +60363,7 @@
         }
         return (
           ['dataTransfer', 'clipboardData'].forEach((dataTransferKey) => {
-            let dataTransferValue = eventInit[dataTransferKey];
+            const dataTransferValue = eventInit[dataTransferKey];
             'object' == typeof dataTransferValue &&
               ('function' == typeof window2.DataTransfer
                 ? Object.defineProperty(event, dataTransferKey, {
@@ -60376,7 +60397,7 @@
         );
       }
       Object.keys(eventMap).forEach((key) => {
-        let { EventType, defaultInit } = eventMap[key],
+        const { EventType, defaultInit } = eventMap[key],
           eventName = key.toLowerCase();
         (createEvent[key] = (node, init) =>
           createEvent(eventName, node, init, { EventType, defaultInit })),
@@ -60384,7 +60405,7 @@
             fireEvent(node, createEvent[key](node, init)));
       }),
         Object.keys(eventAliasMap).forEach((aliasKey) => {
-          let key = eventAliasMap[aliasKey];
+          const key = eventAliasMap[aliasKey];
           fireEvent[aliasKey] = function () {
             return fireEvent[key](...arguments);
           };
@@ -60408,7 +60429,7 @@
               return void console.log(
                 "The provided element doesn't have any children.",
               );
-            let playgroundUrl = getPlaygroundUrl(element.innerHTML);
+            const playgroundUrl = getPlaygroundUrl(element.innerHTML);
             return (
               console.log('Open this URL in your browser\n\n' + playgroundUrl),
               playgroundUrl
@@ -60477,7 +60498,7 @@
       }
       function readBlobText(blob, FileReader) {
         return new Promise((res, rej) => {
-          let fr = new FileReader();
+          const fr = new FileReader();
           (fr.onerror = rej),
             (fr.onabort = rej),
             (fr.onload = () => {
@@ -60487,7 +60508,7 @@
         });
       }
       function createFileList(window2, files) {
-        let list = {
+        const list = {
           ...files,
           length: files.length,
           item: (index) => list[index],
@@ -60551,7 +60572,7 @@
         },
         DataTransferItemListStub = class extends Array {
           add(...args) {
-            let item = new DataTransferItemStub(args[0], args[1]);
+            const item = new DataTransferItemStub(args[0], args[1]);
             return this.push(item), item;
           }
           clear() {
@@ -60562,7 +60583,7 @@
           }
         };
       function getTypeMatcher(type5, exact) {
-        let [group, sub] = type5.split('/'),
+        const [group, sub] = type5.split('/'),
           isGroup = !sub || '*' === sub;
         return (item) =>
           exact
@@ -60572,7 +60593,7 @@
               : item.type === group;
       }
       function createDataTransfer(window2, files = []) {
-        let dt =
+        const dt =
           typeof window2.DataTransfer > 'u'
             ? (function createDataTransferStub(window2) {
                 return new (class {
@@ -60594,7 +60615,7 @@
                     );
                   }
                   setData(format4, data) {
-                    let matchIndex = this.items.findIndex(
+                    const matchIndex = this.items.findIndex(
                         getTypeMatcher(format4, !0),
                       ),
                       item = new DataTransferItemStub(data, format4);
@@ -60604,14 +60625,14 @@
                   }
                   clearData(format4) {
                     if (format4) {
-                      let matchIndex = this.items.findIndex(
+                      const matchIndex = this.items.findIndex(
                         getTypeMatcher(format4, !0),
                       );
                       matchIndex >= 0 && this.items.remove(matchIndex);
                     } else this.items.clear();
                   }
                   get types() {
-                    let t = [];
+                    const t = [];
                     return (
                       this.files.length && t.push('Files'),
                       this.items.forEach((i) => t.push(i.type)),
@@ -60668,7 +60689,7 @@
         );
       }
       function createClipboardItem(window2, ...blobs) {
-        let dataMap = Object.fromEntries(
+        const dataMap = Object.fromEntries(
           blobs.map((b) => [
             'string' == typeof b ? 'text/plain' : b.type,
             Promise.resolve(b),
@@ -60681,7 +60702,7 @@
                 return Array.from(Object.keys(this.data));
               }
               async getType(type5) {
-                let value = await this.data[type5];
+                const value = await this.data[type5];
                 if (!value)
                   throw new Error(
                     `${type5} is not one of the available MIME types on this item.`,
@@ -60704,8 +60725,8 @@
             }
             async readText() {
               let text = '';
-              for (let item of this.items) {
-                let type5 = item.types.includes('text/plain')
+              for (const item of this.items) {
+                const type5 = item.types.includes('text/plain')
                   ? 'text/plain'
                   : item.types.find((t) => t.startsWith('text/'));
                 type5 &&
@@ -60732,11 +60753,11 @@
         return !!clipboard?.[ClipboardStubControl];
       }
       async function writeDataTransferToClipboard(document2, clipboardData) {
-        let window2 = getWindow(document2),
+        const window2 = getWindow(document2),
           clipboard = window2.navigator.clipboard,
           items = [];
         for (let i = 0; i < clipboardData.items.length; i++) {
-          let blob = getBlobFromDataTransferItem(
+          const blob = getBlobFromDataTransferItem(
             window2,
             clipboardData.items[i],
           );
@@ -60764,7 +60785,7 @@
         );
       }
       function getContentEditable(node) {
-        let element = (function getElement(node) {
+        const element = (function getElement(node) {
           return 1 === node.nodeType ? node : node.parentElement;
         })(node);
         return (
@@ -60848,7 +60869,7 @@
         let pos = 0,
           startBracket = text[pos] in bracketDict ? text[pos] : '';
         pos += startBracket.length;
-        let type5 = new RegExp(`^\\${startBracket}{2}`).test(text)
+        const type5 = new RegExp(`^\\${startBracket}{2}`).test(text)
           ? ''
           : startBracket;
         return {
@@ -60859,7 +60880,7 @@
         };
       }
       function readPrintableChar(text, pos, context) {
-        let descriptor = text[pos];
+        const descriptor = text[pos];
         return (
           assertDescriptor(descriptor, text, pos, context),
           {
@@ -60873,11 +60894,11 @@
       }
       function readTag(text, pos, startBracket, context) {
         var _text_slice_match, _text_slice_match1;
-        let releasePreviousModifier = '/' === text[pos] ? '/' : '';
+        const releasePreviousModifier = '/' === text[pos] ? '/' : '';
         pos += releasePreviousModifier.length;
-        let escapedDescriptor = '{' === startBracket && '\\' === text[pos];
+        const escapedDescriptor = '{' === startBracket && '\\' === text[pos];
         pos += Number(escapedDescriptor);
-        let descriptor = escapedDescriptor
+        const descriptor = escapedDescriptor
           ? text[pos]
           : null ===
                 (_text_slice_match = text
@@ -60889,7 +60910,7 @@
         var _text_slice_match_;
         assertDescriptor(descriptor, text, pos, context),
           (pos += descriptor.length);
-        let repeatModifier =
+        const repeatModifier =
             null !==
               (_text_slice_match_ =
                 null ===
@@ -60905,7 +60926,7 @@
               ? text[pos]
               : '';
         pos += releaseSelfModifier.length;
-        let expectedEndBracket = bracketDict[startBracket],
+        const expectedEndBracket = bracketDict[startBracket],
           endBracket =
             text[pos] === expectedEndBracket ? expectedEndBracket : '';
         if (!endBracket)
@@ -60985,7 +61006,7 @@
         return !1;
       }
       function getActiveElement(document2) {
-        let activeElement = document2.activeElement;
+        const activeElement = document2.activeElement;
         return activeElement?.shadowRoot
           ? getActiveElement(activeElement.shadowRoot)
           : isDisabled2(activeElement)
@@ -61011,7 +61032,7 @@
         return getConfig2().eventWrapper(cb);
       }
       function focusElement(element) {
-        let target = (function findClosest(element, callback) {
+        const target = (function findClosest(element, callback) {
             let el = element;
             do {
               if (callback(el)) return el;
@@ -61024,13 +61045,13 @@
             target ? () => target.focus() : () => activeElement?.blur(),
           ),
           (function updateSelectionOnFocus(element) {
-            let selection = element.ownerDocument.getSelection();
+            const selection = element.ownerDocument.getSelection();
             if (selection?.focusNode && hasOwnSelection(element)) {
-              let contenteditable = getContentEditable(selection.focusNode);
+              const contenteditable = getContentEditable(selection.focusNode);
               if (contenteditable) {
                 if (!selection.isCollapsed) {
                   var _contenteditable_firstChild;
-                  let focusNode =
+                  const focusNode =
                     3 ===
                     (null ===
                       (_contenteditable_firstChild =
@@ -61063,7 +61084,7 @@
           'Never');
       var behavior = {};
       behavior.click = (event, target, instance) => {
-        let context = target.closest('button,input,label,select,textarea'),
+        const context = target.closest('button,input,label,select,textarea'),
           control =
             context && isElementType(context, 'label') && context.control;
         return control
@@ -61112,7 +61133,7 @@
         },
         mode = 'replace',
       ) {
-        let valueLength = getUIValue(element).length,
+        const valueLength = getUIValue(element).length,
           sanitizeOffset = (o) => Math.max(0, Math.min(valueLength, o)),
           anchorOffset =
             'replace' === mode || void 0 === element[UISelection]
@@ -61127,7 +61148,7 @@
             element.selectionEnd === endOffset)
         )
           return;
-        let startObj = Object.assign(new Number(startOffset), {
+        const startObj = Object.assign(new Number(startOffset), {
           [UISelection]: !0,
         });
         try {
@@ -61138,7 +61159,7 @@
         var _element_selectionStart,
           _element_selectionEnd,
           _element_UISelection;
-        let sel =
+        const sel =
           null !== (_element_UISelection = element[UISelection]) &&
           void 0 !== _element_UISelection
             ? _element_UISelection
@@ -61165,7 +61186,7 @@
       }
       var parseInt2 = globalThis.parseInt;
       function build2(onlyDigitsValue, index) {
-        let hours = onlyDigitsValue.slice(0, index),
+        const hours = onlyDigitsValue.slice(0, index),
           validHours = Math.min(parseInt2(hours, 10), 23),
           minuteCharacters = onlyDigitsValue.slice(index),
           parsedMinutes = parseInt2(minuteCharacters, 10),
@@ -61173,7 +61194,7 @@
         return `${validHours.toString().padStart(2, '0')}:${validMinutes.toString().padStart(2, '0')}`;
       }
       function isValidDateOrTimeValue(element, value) {
-        let clone2 = element.cloneNode();
+        const clone2 = element.cloneNode();
         return (clone2.value = value), clone2.value === value;
       }
       function getNextCursorPosition(node, offset, direction, inputType) {
@@ -61183,7 +61204,7 @@
           offset + direction <= node.nodeValue.length
         )
           return { node, offset: offset + direction };
-        let nextNode = getNextCharacterContentNode(node, offset, direction);
+        const nextNode = getNextCharacterContentNode(node, offset, direction);
         if (nextNode) {
           if (isTextNode(nextNode))
             return {
@@ -61194,7 +61215,7 @@
                   : Math.max(nextNode.nodeValue.length - 1, 0),
             };
           if (isElementType(nextNode, 'br')) {
-            let nextPlusOne = getNextCharacterContentNode(
+            const nextPlusOne = getNextCharacterContentNode(
               nextNode,
               void 0,
               direction,
@@ -61222,7 +61243,7 @@
         }
       }
       function getNextCharacterContentNode(node, offset, direction) {
-        let nextOffset = Number(offset) + (direction < 0 ? -1 : 0);
+        const nextOffset = Number(offset) + (direction < 0 ? -1 : 0);
         return (
           void 0 !== offset &&
             isElement4(node) &&
@@ -61232,7 +61253,7 @@
           (function walkNodes(node, direction, callback) {
             for (;;) {
               var _node_ownerDocument;
-              let sibling = node[`${direction}Sibling`];
+              const sibling = node[`${direction}Sibling`];
               if (sibling) {
                 if (
                   callback(
@@ -61307,7 +61328,7 @@
       }
       function commitValueAfterInput(element, cursorOffset) {
         var _changes_tracked;
-        let changes = element[TrackChanges];
+        const changes = element[TrackChanges];
         if (
           ((element[TrackChanges] = void 0),
           null == changes ||
@@ -61316,7 +61337,7 @@
             !_changes_tracked.length)
         )
           return;
-        let isJustReactStateUpdate =
+        const isJustReactStateUpdate =
           2 === changes.tracked.length &&
           changes.tracked[0] === changes.previousValue &&
           changes.tracked[1] === element.value;
@@ -61331,12 +61352,12 @@
             });
       }
       function getTargetTypeAndSelection(node) {
-        let element = (function getElement2(node) {
+        const element = (function getElement2(node) {
           return 1 === node.nodeType ? node : node.parentElement;
         })(node);
         if (element && hasOwnSelection(element))
           return { type: 'input', selection: getUISelection(element) };
-        let selection = element?.ownerDocument.getSelection();
+        const selection = element?.ownerDocument.getSelection();
         return {
           type:
             getContentEditable(node) &&
@@ -61376,8 +61397,8 @@
         );
       }
       function input(instance, element, data, inputType = 'insertText') {
-        let inputRange = (function getInputRange(focusNode) {
-          let typeAndSelection = getTargetTypeAndSelection(focusNode);
+        const inputRange = (function getInputRange(focusNode) {
+          const typeAndSelection = getTargetTypeAndSelection(focusNode);
           return 'input' === typeAndSelection.type
             ? typeAndSelection.selection
             : 'contenteditable' === typeAndSelection.type
@@ -61411,7 +61432,7 @@
                         'deleteContentForward',
                       ].includes(inputType)
                     ) {
-                      let nextPosition = getNextCursorPosition(
+                      const nextPosition = getNextCursorPosition(
                         inputRange.startContainer,
                         inputRange.startOffset,
                         'deleteContentBackward' === inputType ? -1 : 1,
@@ -61419,7 +61440,7 @@
                       );
                       if (nextPosition) {
                         del = !0;
-                        let delRange = inputRange.cloneRange();
+                        const delRange = inputRange.cloneRange();
                         delRange.comparePoint(
                           nextPosition.node,
                           nextPosition.offset,
@@ -61438,7 +61459,7 @@
                   } else (del = !0), inputRange.deleteContents();
                   if (data)
                     if (3 === inputRange.endContainer.nodeType) {
-                      let offset = inputRange.endOffset;
+                      const offset = inputRange.endOffset;
                       inputRange.endContainer.insertData(offset, data),
                         inputRange.setStart(
                           inputRange.endContainer,
@@ -61449,7 +61470,7 @@
                           offset + data.length,
                         );
                     } else {
-                      let text = element.ownerDocument.createTextNode(data);
+                      const text = element.ownerDocument.createTextNode(data);
                       inputRange.insertNode(text),
                         inputRange.setStart(text, data.length),
                         inputRange.setEnd(text, data.length);
@@ -61474,9 +61495,9 @@
                       );
                     })(element)
                   ) {
-                    let maxLength = (function getMaxLength(element) {
+                    const maxLength = (function getMaxLength(element) {
                       var _element_getAttribute;
-                      let attr =
+                      const attr =
                         null !==
                           (_element_getAttribute =
                             element.getAttribute('maxlength')) &&
@@ -61488,13 +61509,13 @@
                         : void 0;
                     })(element);
                     if (void 0 !== maxLength && data.length > 0) {
-                      let spaceUntilMaxLength =
+                      const spaceUntilMaxLength =
                         maxLength - element.value.length;
                       if (!(spaceUntilMaxLength > 0)) return;
                       dataToInsert = data.substring(0, spaceUntilMaxLength);
                     }
                   }
-                  let { newValue, newOffset, oldValue } =
+                  const { newValue, newOffset, oldValue } =
                     (function calculateNewValue(
                       inputData,
                       node,
@@ -61521,10 +61542,10 @@
                         newValue = `${prolog}${inputData}${epilog}`,
                         newOffset = prologEnd + inputData.length;
                       if (isElementType(node, 'input', { type: 'time' })) {
-                        let builtValue = (function buildTimeValue(value) {
-                          let onlyDigitsValue = value.replace(/\D/g, '');
+                        const builtValue = (function buildTimeValue(value) {
+                          const onlyDigitsValue = value.replace(/\D/g, '');
                           if (onlyDigitsValue.length < 2) return value;
-                          let firstDigit = parseInt2(onlyDigitsValue[0], 10),
+                          const firstDigit = parseInt2(onlyDigitsValue[0], 10),
                             secondDigit = parseInt2(onlyDigitsValue[1], 10);
                           if (
                             firstDigit >= 3 ||
@@ -61553,7 +61574,7 @@
                     (isElementType(element, 'input', { type: 'number' }) &&
                       !(function isValidNumberInput(value) {
                         var _value_match, _value_match1;
-                        let valueParts = value.split('e', 2);
+                        const valueParts = value.split('e', 2);
                         return !(
                           /[^\d.\-e]/.test(value) ||
                           Number(
@@ -61600,16 +61621,17 @@
           commitValueAfterInput(element, newOffset);
       }
       function isVisible(element) {
-        let window2 = getWindow(element);
+        const window2 = getWindow(element);
         for (let el = element; el?.ownerDocument; el = el.parentElement) {
-          let { display: display2, visibility } = window2.getComputedStyle(el);
+          const { display: display2, visibility } =
+            window2.getComputedStyle(el);
           if ('none' === display2 || 'hidden' === visibility) return !1;
         }
         return !0;
       }
       function moveSelection(node, direction) {
         if (hasOwnSelection(node)) {
-          let selection = getUISelection(node);
+          const selection = getUISelection(node);
           setSelection({
             focusNode: node,
             focusOffset:
@@ -61620,10 +61642,10 @@
                   : selection.endOffset,
           });
         } else {
-          let selection = node.ownerDocument.getSelection();
+          const selection = node.ownerDocument.getSelection();
           if (!selection?.focusNode) return;
           if (selection.isCollapsed) {
-            let nextPosition = getNextCursorPosition(
+            const nextPosition = getNextCursorPosition(
               selection.focusNode,
               selection.focusOffset,
               direction,
@@ -61645,7 +61667,7 @@
             focusOffset: getUIValue(target).length,
           });
         var _getContentEditable;
-        let focusNode =
+        const focusNode =
           null !== (_getContentEditable = getContentEditable(target)) &&
           void 0 !== _getContentEditable
             ? _getContentEditable
@@ -61682,7 +61704,7 @@
         );
       }
       function walkRadio(instance, el, direction) {
-        let window2 = getWindow(el),
+        const window2 = getWindow(el),
           group = Array.from(
             el.ownerDocument.querySelectorAll(
               el.name
@@ -61761,7 +61783,7 @@
             )
               return () => {
                 var _getValueOrTextContent, _getValueOrTextContent_length;
-                let newPos =
+                const newPos =
                   null !==
                     (_getValueOrTextContent_length =
                       null ===
@@ -61793,7 +61815,7 @@
           PageDown: (event, target) => {
             if (isElementType(target, ['input']))
               return () => {
-                let newPos = getUIValue(target).length;
+                const newPos = getUIValue(target).length;
                 setSelectionRange(target, newPos, newPos);
               };
           },
@@ -61804,8 +61826,8 @@
               };
           },
           Tab: (event, target, instance) => () => {
-            let dest = (function getTabDestination(activeElement, shift) {
-              let document2 = activeElement.ownerDocument,
+            const dest = (function getTabDestination(activeElement, shift) {
+              const document2 = activeElement.ownerDocument,
                 focusableElements =
                   document2.querySelectorAll(FOCUSABLE_SELECTOR),
                 enabledElements = Array.from(focusableElements).filter(
@@ -61817,7 +61839,7 @@
                 );
               Number(activeElement.getAttribute('tabindex')) >= 0 &&
                 enabledElements.sort((a2, b) => {
-                  let i = Number(a2.getAttribute('tabindex')),
+                  const i = Number(a2.getAttribute('tabindex')),
                     j = Number(b.getAttribute('tabindex'));
                   return i === j ? 0 : 0 === i ? 1 : 0 === j ? -1 : i - j;
                 });
@@ -61829,7 +61851,7 @@
                   ? activeElement.name
                   : void 0;
               enabledElements.forEach((currentElement) => {
-                let el = currentElement;
+                const el = currentElement;
                 if (isElementType(el, 'input', { type: 'radio' }) && el.name) {
                   if (el === activeElement) return void prunedElements.push(el);
                   if (el.name === activeRadioGroup) return;
@@ -61894,7 +61916,7 @@
               instance.dispatchUIEvent(target, 'click');
             };
           if (isElementType(target, 'input')) {
-            let form = target.form,
+            const form = target.form,
               submit = form?.querySelector(
                 'input[type="submit"], button:not([type]), button[type="submit"]',
               );
@@ -61908,7 +61930,7 @@
           }
         }
         if (isEditable(target)) {
-          let inputType =
+          const inputType =
               'Enter' === event.key
                 ? isContentEditable(target) &&
                   !instance.system.keyboard.modifiers.Shift
@@ -61959,7 +61981,7 @@
         if (isEditable(target))
           return () => {
             var _event_clipboardData;
-            let insertData =
+            const insertData =
               null === (_event_clipboardData = event.clipboardData) ||
               void 0 === _event_clipboardData
                 ? void 0
@@ -62160,95 +62182,95 @@
         ],
       };
       function createEvent2(type5, target, init) {
-        let window2 = getWindow(target),
+        const window2 = getWindow(target),
           { EventType, defaultInit } = eventMap2[type5],
           event = new ((function getEventConstructors(window2) {
             var _window_Event;
-            let Event =
+            const Event =
               null !== (_window_Event = window2.Event) &&
               void 0 !== _window_Event
                 ? _window_Event
                 : class {};
             var _window_AnimationEvent;
-            let AnimationEvent =
+            const AnimationEvent =
               null !== (_window_AnimationEvent = window2.AnimationEvent) &&
               void 0 !== _window_AnimationEvent
                 ? _window_AnimationEvent
                 : class extends Event {};
             var _window_ClipboardEvent;
-            let ClipboardEvent =
+            const ClipboardEvent =
               null !== (_window_ClipboardEvent = window2.ClipboardEvent) &&
               void 0 !== _window_ClipboardEvent
                 ? _window_ClipboardEvent
                 : class extends Event {};
             var _window_PopStateEvent;
-            let PopStateEvent =
+            const PopStateEvent =
               null !== (_window_PopStateEvent = window2.PopStateEvent) &&
               void 0 !== _window_PopStateEvent
                 ? _window_PopStateEvent
                 : class extends Event {};
             var _window_ProgressEvent;
-            let ProgressEvent =
+            const ProgressEvent =
               null !== (_window_ProgressEvent = window2.ProgressEvent) &&
               void 0 !== _window_ProgressEvent
                 ? _window_ProgressEvent
                 : class extends Event {};
             var _window_TransitionEvent;
-            let TransitionEvent =
+            const TransitionEvent =
               null !== (_window_TransitionEvent = window2.TransitionEvent) &&
               void 0 !== _window_TransitionEvent
                 ? _window_TransitionEvent
                 : class extends Event {};
             var _window_UIEvent;
-            let UIEvent =
+            const UIEvent =
               null !== (_window_UIEvent = window2.UIEvent) &&
               void 0 !== _window_UIEvent
                 ? _window_UIEvent
                 : class extends Event {};
             var _window_CompositionEvent;
-            let CompositionEvent =
+            const CompositionEvent =
               null !== (_window_CompositionEvent = window2.CompositionEvent) &&
               void 0 !== _window_CompositionEvent
                 ? _window_CompositionEvent
                 : class extends UIEvent {};
             var _window_FocusEvent;
-            let FocusEvent =
+            const FocusEvent =
               null !== (_window_FocusEvent = window2.FocusEvent) &&
               void 0 !== _window_FocusEvent
                 ? _window_FocusEvent
                 : class extends UIEvent {};
             var _window_InputEvent;
-            let InputEvent =
+            const InputEvent =
               null !== (_window_InputEvent = window2.InputEvent) &&
               void 0 !== _window_InputEvent
                 ? _window_InputEvent
                 : class extends UIEvent {};
             var _window_KeyboardEvent;
-            let KeyboardEvent =
+            const KeyboardEvent =
               null !== (_window_KeyboardEvent = window2.KeyboardEvent) &&
               void 0 !== _window_KeyboardEvent
                 ? _window_KeyboardEvent
                 : class extends UIEvent {};
             var _window_MouseEvent;
-            let MouseEvent =
+            const MouseEvent =
               null !== (_window_MouseEvent = window2.MouseEvent) &&
               void 0 !== _window_MouseEvent
                 ? _window_MouseEvent
                 : class extends UIEvent {};
             var _window_DragEvent;
-            let DragEvent =
+            const DragEvent =
               null !== (_window_DragEvent = window2.DragEvent) &&
               void 0 !== _window_DragEvent
                 ? _window_DragEvent
                 : class extends MouseEvent {};
             var _window_PointerEvent;
-            let PointerEvent =
+            const PointerEvent =
               null !== (_window_PointerEvent = window2.PointerEvent) &&
               void 0 !== _window_PointerEvent
                 ? _window_PointerEvent
                 : class extends MouseEvent {};
             var _window_TouchEvent;
-            let TouchEvent =
+            const TouchEvent =
               null !== (_window_TouchEvent = window2.TouchEvent) &&
               void 0 !== _window_TouchEvent
                 ? _window_TouchEvent
@@ -62277,7 +62299,7 @@
         );
       }
       function assignProps(obj, props) {
-        for (let [key, value] of Object.entries(props))
+        for (const [key, value] of Object.entries(props))
           Object.defineProperty(obj, key, { get: () => value ?? null });
       }
       function sanitizeNumber(n) {
@@ -62359,12 +62381,12 @@
             return 'KeyboardEvent' === getEventClass(type5);
           })(type5)) &&
           (init = { ...init, ...this.system.getUIEventModifiers() });
-        let event = createEvent2(type5, target, init);
+        const event = createEvent2(type5, target, init);
         return dispatchEvent.call(this, target, event, preventDefault);
       }
       function dispatchEvent(target, event, preventDefault = !1) {
         var _behavior_type;
-        let type5 = event.type,
+        const type5 = event.type,
           behaviorImplementation = preventDefault
             ? () => {}
             : null === (_behavior_type = behavior[type5]) ||
@@ -62392,7 +62414,7 @@
       }
       var Interceptor = Symbol('Interceptor for programmatical calls');
       function prepareInterceptor(element, propName, interceptorImpl) {
-        let prototypeDescriptor = Object.getOwnPropertyDescriptor(
+        const prototypeDescriptor = Object.getOwnPropertyDescriptor(
             element.constructor.prototype,
             propName,
           ),
@@ -62406,7 +62428,7 @@
             `Element ${element.tagName} does not implement "${String(propName)}".`,
           );
         function intercept(...args) {
-          let {
+          const {
               applyNative = !1,
               realArgs,
               then,
@@ -62426,7 +62448,7 @@
       }
       function prepareValueInterceptor(element) {
         prepareInterceptor(element, 'value', function (v) {
-          let isUI = (function isUIValue(value) {
+          const isUI = (function isUIValue(value) {
             return 'object' == typeof value && UIValue in value;
           })(v);
           return (
@@ -62467,7 +62489,7 @@
           element,
           'setSelectionRange',
           function (start, ...others) {
-            let isUI = (function isUISelectionStart(start) {
+            const isUI = (function isUISelectionStart(start) {
               return (
                 !!start && 'object' == typeof start && UISelection in start
               );
@@ -62514,14 +62536,14 @@
           document2.addEventListener(
             'blur',
             (e) => {
-              let el = e.target,
+              const el = e.target,
                 initialValue2 = (function getInitialValue(element) {
                   return element[InitialValue];
                 })(el);
               void 0 !== initialValue2 &&
                 (el.value !== initialValue2 &&
                   (function dispatchDOMEvent(target, type5, init) {
-                    let event = createEvent2(type5, target, init);
+                    const event = createEvent2(type5, target, init);
                     wrapEvent(() => target.dispatchEvent(event));
                   })(el, 'change'),
                 clearInitialValue(el));
@@ -62552,7 +62574,7 @@
           (el[isPrepared] = isPrepared));
       }
       function wait(config3) {
-        let delay = config3.delay;
+        const delay = config3.delay;
         if ('number' == typeof delay)
           return Promise.all([
             new Promise((resolve) =>
@@ -62611,7 +62633,7 @@
           }
           async keydown(instance, keyDef) {
             var _this_pressed, _code, _this_pressed_code;
-            let key = String(keyDef.key),
+            const key = String(keyDef.key),
               code = String(keyDef.code),
               target = getActiveElementOrBody(instance.config.document);
             var _;
@@ -62620,7 +62642,7 @@
                 void 0 !== _) ||
                 (_this_pressed[_code] = { keyDef, unpreventedDefault: !1 }),
               isModifierKey(key) && (this.modifiers[key] = !0);
-            let unprevented = instance.dispatchUIEvent(target, 'keydown', {
+            const unprevented = instance.dispatchUIEvent(target, 'keydown', {
               key,
               code,
             });
@@ -62645,7 +62667,7 @@
                 );
           }
           async keyup(instance, keyDef) {
-            let key = String(keyDef.key),
+            const key = String(keyDef.key),
               code = String(keyDef.code),
               unprevented = this.pressed[code].unpreventedDefault;
             delete this.pressed[code],
@@ -62755,18 +62777,18 @@
       var Buttons = class {
           getButtons() {
             let v = 0;
-            for (let button of Object.keys(this.pressed))
+            for (const button of Object.keys(this.pressed))
               v |= 2 ** Number(button);
             return v;
           }
           down(keyDef) {
-            let button = getMouseButtonId(keyDef.button);
+            const button = getMouseButtonId(keyDef.button);
             if (!(button in this.pressed))
               return (this.pressed[button] = [keyDef]), button;
             this.pressed[button].push(keyDef);
           }
           up(keyDef) {
-            let button = getMouseButtonId(keyDef.button);
+            const button = getMouseButtonId(keyDef.button);
             if (
               button in this.pressed &&
               ((this.pressed[button] = this.pressed[button].filter(
@@ -62840,9 +62862,9 @@
         }
       };
       function getTreeDiff(a2, b) {
-        let treeA = [];
+        const treeA = [];
         for (let el = a2; el; el = el.parentElement) treeA.push(el);
-        let treeB = [];
+        const treeB = [];
         for (let el = b; el; el = el.parentElement) treeB.push(el);
         let i = 0;
         for (
@@ -62886,7 +62908,7 @@
         ) {
           if (offset && i === node.childNodes.length)
             throw new Error('The given offset is out of bounds.');
-          let c = node.childNodes.item(i),
+          const c = node.childNodes.item(i),
             text = String(c.textContent);
           if (text.length)
             if (void 0 !== offset && text.length < offset)
@@ -62913,7 +62935,7 @@
           })(target)
         )
           return;
-        let targetHasOwnSelection = hasOwnSelection(target),
+        const targetHasOwnSelection = hasOwnSelection(target),
           text = String(
             targetHasOwnSelection ? getUIValue(target) : target.textContent,
           ),
@@ -62921,7 +62943,7 @@
             ? [offset, offset]
             : (function getTextRange(text, pos, clickCount) {
                 if (clickCount % 3 == 1 || 0 === text.length) return [pos, pos];
-                let textPos = pos ?? text.length;
+                const textPos = pos ?? text.length;
                 return clickCount % 3 == 2
                   ? [
                       textPos -
@@ -62948,11 +62970,13 @@
             { node: target, start: start ?? 0, end: end ?? text.length }
           );
         {
-          let { node: startNode, offset: startOffset } = resolveCaretPosition({
-              target,
-              node,
-              offset: start,
-            }),
+          const { node: startNode, offset: startOffset } = resolveCaretPosition(
+              {
+                target,
+                node,
+                offset: start,
+              },
+            ),
             { node: endNode, offset: endOffset } = resolveCaretPosition({
               target,
               node,
@@ -62965,7 +62989,7 @@
           } catch {
             throw new Error('The given offset is out of bounds.');
           }
-          let selection = document2.getSelection();
+          const selection = document2.getSelection();
           return (
             selection?.removeAllRanges(),
             selection?.addRange(range.cloneRange()),
@@ -63033,14 +63057,14 @@
       }
       var Mouse = class {
         move(instance, position) {
-          let prevPosition = this.position,
+          const prevPosition = this.position,
             prevTarget = this.getTarget(instance);
           if (
             ((this.position = position),
             !isDifferentPointerPosition(prevPosition, position))
           )
             return;
-          let nextTarget = this.getTarget(instance),
+          const nextTarget = this.getTarget(instance),
             init = this.getEventInit('mousemove'),
             [leave, enter] = getTreeDiff(prevTarget, nextTarget);
           return {
@@ -63065,11 +63089,11 @@
           };
         }
         down(instance, keyDef, pointer3) {
-          let button = this.buttons.down(keyDef);
+          const button = this.buttons.down(keyDef);
           if (void 0 === button) return;
-          let target = this.getTarget(instance);
+          const target = this.getTarget(instance);
           this.buttonDownTarget[button] = target;
-          let disabled = isDisabled2(target),
+          const disabled = isDisabled2(target),
             init = this.getEventInit('mousedown', keyDef.button);
           (disabled || instance.dispatchUIEvent(target, 'mousedown', init)) &&
             (this.startSelecting(instance, init.detail), focusElement(target)),
@@ -63082,9 +63106,9 @@
               );
         }
         up(instance, keyDef, pointer3) {
-          let button = this.buttons.up(keyDef);
+          const button = this.buttons.up(keyDef);
           if (void 0 === button) return;
-          let target = this.getTarget(instance);
+          const target = this.getTarget(instance);
           if (!isDisabled2(target)) {
             instance.dispatchUIEvent(
               target,
@@ -63092,12 +63116,12 @@
               this.getEventInit('mouseup', keyDef.button),
             ),
               this.endSelecting();
-            let clickTarget = getTreeDiff(
+            const clickTarget = getTreeDiff(
               this.buttonDownTarget[button],
               target,
             )[2][0];
             if (clickTarget) {
-              let init = this.getEventInit('click', keyDef.button, pointer3);
+              const init = this.getEventInit('click', keyDef.button, pointer3);
               init.detail &&
                 (instance.dispatchUIEvent(
                   clickTarget,
@@ -63117,7 +63141,7 @@
           this.clickCount.reset();
         }
         getEventInit(type5, button, pointer3) {
-          let init = { ...this.position.coords };
+          const init = { ...this.position.coords };
           return (
             pointer3 &&
               ((init.pointerId = pointer3.pointerId),
@@ -63166,14 +63190,14 @@
               selectionRange,
               { document: document2, target, node, offset },
             ) {
-              let selectionFocus = resolveCaretPosition({
+              const selectionFocus = resolveCaretPosition({
                 target,
                 node,
                 offset,
               });
               if ('node' in selectionRange) {
                 if (selectionFocus.node === selectionRange.node) {
-                  let anchorOffset =
+                  const anchorOffset =
                       selectionFocus.offset < selectionRange.start
                         ? selectionRange.end
                         : selectionRange.start,
@@ -63188,7 +63212,7 @@
                   });
                 }
               } else {
-                let range = selectionRange.cloneRange(),
+                const range = selectionRange.cloneRange(),
                   cmp = range.comparePoint(
                     selectionFocus.node,
                     selectionFocus.offset,
@@ -63197,7 +63221,7 @@
                   ? range.setStart(selectionFocus.node, selectionFocus.offset)
                   : cmp > 0 &&
                     range.setEnd(selectionFocus.node, selectionFocus.offset);
-                let selection = document2.getSelection();
+                const selection = document2.getSelection();
                 selection?.removeAllRanges(),
                   selection?.addRange(range.cloneRange());
               }
@@ -63229,7 +63253,7 @@
               'clickCount',
               new (class {
                 incOnClick(button) {
-                  let current =
+                  const current =
                     void 0 === this.down[button]
                       ? void 0
                       : Number(this.down[button]) + 1;
@@ -63290,7 +63314,7 @@
       }
       var PointerEventsCheck = Symbol('Last check for pointer-events');
       function checkPointerEvents(instance, element) {
-        let lastCheck = element[PointerEventsCheck];
+        const lastCheck = element[PointerEventsCheck];
         if (
           instance.config.pointerEventsCheck ===
             PointerEventsCheckLevel.Never ||
@@ -63311,15 +63335,15 @@
           )
         )
           return lastCheck?.result;
-        let declaration = (function closestPointerEventsDeclaration(element) {
-          let window2 = getWindow(element);
+        const declaration = (function closestPointerEventsDeclaration(element) {
+          const window2 = getWindow(element);
           for (
             let el = element, tree = [];
             el?.ownerDocument;
             el = el.parentElement
           ) {
             tree.push(el);
-            let pointerEvents = window2.getComputedStyle(el).pointerEvents;
+            const pointerEvents = window2.getComputedStyle(el).pointerEvents;
             if (pointerEvents && !['inherit', 'unset'].includes(pointerEvents))
               return { pointerEvents, tree };
           }
@@ -63334,7 +63358,7 @@
         );
       }
       function assertPointerEvents(instance, element) {
-        let declaration = checkPointerEvents(instance, element);
+        const declaration = checkPointerEvents(instance, element);
         if ('none' === declaration?.pointerEvents)
           throw new Error(
             [
@@ -63456,14 +63480,14 @@
           );
         }
         move(instance, position) {
-          let prevPosition = this.position,
+          const prevPosition = this.position,
             prevTarget = this.getTarget(instance);
           if (
             ((this.position = position),
             !isDifferentPointerPosition(prevPosition, position))
           )
             return;
-          let nextTarget = this.getTarget(instance),
+          const nextTarget = this.getTarget(instance),
             init = this.getEventInit(),
             [leave, enter] = getTreeDiff(prevTarget, nextTarget);
           return {
@@ -63490,7 +63514,7 @@
         }
         down(instance, _keyDef) {
           if (this.isDown) return;
-          let target = this.getTarget(instance);
+          const target = this.getTarget(instance);
           assertPointerEvents(instance, target),
             (this.isDown = !0),
             (this.isPrevented = !instance.dispatchUIEvent(
@@ -63501,13 +63525,13 @@
         }
         up(instance, _keyDef) {
           if (!this.isDown) return;
-          let target = this.getTarget(instance);
+          const target = this.getTarget(instance);
           assertPointerEvents(instance, target),
             (this.isDown = !1),
             instance.dispatchUIEvent(target, 'pointerup', this.getEventInit());
         }
         release(instance) {
-          let target = this.getTarget(instance),
+          const target = this.getTarget(instance),
             [leave] = getTreeDiff(target, null),
             init = this.getEventInit();
           hasPointerEvents(instance, target) &&
@@ -63565,7 +63589,7 @@
           return this.devices.get(keyDef.pointerType).isPressed(keyDef);
         }
         async press(instance, keyDef, position) {
-          let pointerName = this.getPointerName(keyDef),
+          const pointerName = this.getPointerName(keyDef),
             pointer3 =
               'touch' === keyDef.pointerType
                 ? this.pointers
@@ -63583,7 +63607,7 @@
               this.mouse.down(instance, keyDef, pointer3);
         }
         async move(instance, pointerName, position) {
-          let pointer3 = this.pointers.get(pointerName),
+          const pointer3 = this.pointers.get(pointerName),
             pointermove = pointer3.move(instance, position),
             mousemove =
               'touch' === pointer3.pointerType ||
@@ -63598,9 +63622,9 @@
             mousemove?.move();
         }
         async release(instance, keyDef, position) {
-          let device = this.devices.get(keyDef.pointerType);
+          const device = this.devices.get(keyDef.pointerType);
           device.removePressed(keyDef), this.buttons.up(keyDef);
-          let pointer3 = this.pointers.get(this.getPointerName(keyDef));
+          const pointer3 = this.pointers.get(this.getPointerName(keyDef));
           if (
             ((pointer3.position = position),
             'touch' !== pointer3.pointerType &&
@@ -63610,14 +63634,14 @@
             !pointer3.isPrevented)
           ) {
             if ('touch' === pointer3.pointerType && !pointer3.isMultitouch) {
-              let mousemove = this.mouse.move(instance, pointer3.position);
+              const mousemove = this.mouse.move(instance, pointer3.position);
               mousemove?.leave(),
                 mousemove?.enter(),
                 mousemove?.move(),
                 this.mouse.down(instance, keyDef, pointer3);
             }
             if (!pointer3.isMultitouch) {
-              let mousemove = this.mouse.move(instance, pointer3.position);
+              const mousemove = this.mouse.move(instance, pointer3.position);
               mousemove?.leave(),
                 mousemove?.enter(),
                 mousemove?.move(),
@@ -63678,7 +63702,7 @@
               'pointers',
               new (class {
                 new(pointerName, keyDef) {
-                  let isPrimary =
+                  const isPrimary =
                     'touch' !== keyDef.pointerType ||
                     !Object.values(this.registry).some(
                       (p2) => 'touch' === p2.pointerType && !p2.isCancelled,
@@ -63764,7 +63788,7 @@
         instance,
         { keyDef, releasePrevious, releaseSelf, repeat },
       ) {
-        let { system } = instance;
+        const { system } = instance;
         if (
           (system.keyboard.isKeyPressed(keyDef) &&
             (await system.keyboard.keyup(instance, keyDef)),
@@ -63777,21 +63801,21 @@
         }
       }
       function copySelection(target) {
-        let data = hasOwnSelection(target)
+        const data = hasOwnSelection(target)
             ? { 'text/plain': readSelectedValueFromInput(target) }
             : { 'text/plain': String(target.ownerDocument.getSelection()) },
           dt = createDataTransfer(getWindow(target));
-        for (let type5 in data) data[type5] && dt.setData(type5, data[type5]);
+        for (const type5 in data) data[type5] && dt.setData(type5, data[type5]);
         return dt;
       }
       function readSelectedValueFromInput(target) {
-        let sel = getUISelection(target);
+        const sel = getUISelection(target);
         return getUIValue(target).substring(sel.startOffset, sel.endOffset);
       }
       function parseKeyDef2(pointerMap, keys2) {
-        let defs = [];
+        const defs = [];
         do {
-          let {
+          const {
               descriptor,
               consumedLength,
               releasePrevious,
@@ -63805,7 +63829,7 @@
       }
       async function pointerAction(instance, action) {
         var _previousPosition_caret, _previousPosition_caret1;
-        let pointerName =
+        const pointerName =
             'pointerName' in action && action.pointerName
               ? action.pointerName
               : 'keyDef' in action
@@ -63814,7 +63838,7 @@
           previousPosition =
             instance.system.pointer.getPreviousPosition(pointerName);
         var _action_target, _action_coords, _action_node, _action_offset;
-        let position = {
+        const position = {
           target:
             null !== (_action_target = action.target) &&
             void 0 !== _action_target
@@ -63906,7 +63930,7 @@
             'Unable to deselect an option in a non-multiple select. Use selectOptions to change the selection instead.',
             select,
           );
-        let valArray = Array.isArray(values) ? values : [values],
+        const valArray = Array.isArray(values) ? values : [values],
           allOptions = Array.from(
             select.querySelectorAll('option, [role="option"]'),
           ),
@@ -63915,7 +63939,7 @@
               if ('string' != typeof val && allOptions.includes(val))
                 return val;
               {
-                let matchingOption = allOptions.find(
+                const matchingOption = allOptions.find(
                   (o) => o.value === val || o.innerHTML === val,
                 );
                 if (matchingOption) return matchingOption;
@@ -63927,7 +63951,7 @@
             })
             .filter((option) => !isDisabled2(option));
         if (isDisabled2(select) || !selectedOptions.length) return;
-        let selectOption = (option) => {
+        const selectOption = (option) => {
           (option.selected = newValue),
             this.dispatchUIEvent(select, 'input', {
               bubbles: !0,
@@ -63938,8 +63962,8 @@
         };
         if (isElementType(select, 'select'))
           if (select.multiple)
-            for (let option of selectedOptions) {
-              let withPointerEvents =
+            for (const option of selectedOptions) {
+              const withPointerEvents =
                 0 === this.config.pointerEventsCheck ||
                 hasPointerEvents(this, option);
               withPointerEvents &&
@@ -63966,7 +63990,7 @@
                 select,
               );
             {
-              let withPointerEvents =
+              const withPointerEvents =
                 0 === this.config.pointerEventsCheck ||
                 hasPointerEvents(this, select);
               withPointerEvents
@@ -63990,7 +64014,7 @@
               'Cannot select options on elements that are neither select nor listbox elements',
               select,
             );
-          for (let option of selectedOptions)
+          for (const option of selectedOptions)
             await this.click(option), await this.unhover(option);
         }
       }
@@ -64002,7 +64026,7 @@
       }
       var userEventApi = {
         click: async function click(element) {
-          let pointerIn = [];
+          const pointerIn = [];
           return (
             this.config.skipHover || pointerIn.push({ target: element }),
             pointerIn.push({ keys: '[MouseLeft]', target: element }),
@@ -64037,10 +64061,10 @@
           );
         },
         keyboard: async function keyboard(text) {
-          let actions = (function parseKeyDef(keyboardMap, text) {
-            let defs = [];
+          const actions = (function parseKeyDef(keyboardMap, text) {
+            const defs = [];
             do {
-              let {
+              const {
                 type: type5,
                 descriptor,
                 consumedLength,
@@ -64049,7 +64073,7 @@
                 repeat,
               } = readNextDescriptor(text, 'keyboard');
               var _keyboardMap_find;
-              let keyDef =
+              const keyDef =
                 null !==
                   (_keyboardMap_find = keyboardMap.find((def) => {
                     var _def_code, _def_key;
@@ -64080,9 +64104,9 @@
             await wait(this.config), await keyboardAction(this, actions[i]);
         },
         copy: async function copy() {
-          let doc = this.config.document;
+          const doc = this.config.document;
           var _doc_activeElement;
-          let target =
+          const target =
               null !== (_doc_activeElement = doc.activeElement) &&
               void 0 !== _doc_activeElement
                 ? _doc_activeElement
@@ -64097,9 +64121,9 @@
             );
         },
         cut: async function cut() {
-          let doc = this.config.document;
+          const doc = this.config.document;
           var _doc_activeElement;
-          let target =
+          const target =
               null !== (_doc_activeElement = doc.activeElement) &&
               void 0 !== _doc_activeElement
                 ? _doc_activeElement
@@ -64117,33 +64141,33 @@
             );
         },
         paste: async function paste(clipboardData) {
-          let doc = this.config.document;
+          const doc = this.config.document;
           var _doc_activeElement;
-          let target =
+          const target =
             null !== (_doc_activeElement = doc.activeElement) &&
             void 0 !== _doc_activeElement
               ? _doc_activeElement
               : doc.body;
           var _ref;
-          let dataTransfer =
+          const dataTransfer =
             null !==
               (_ref =
                 'string' == typeof clipboardData
                   ? (function getClipboardDataFromString(doc, text) {
-                      let dt = createDataTransfer(getWindow(doc));
+                      const dt = createDataTransfer(getWindow(doc));
                       return dt.setData('text', text), dt;
                     })(doc, clipboardData)
                   : clipboardData) && void 0 !== _ref
               ? _ref
               : await (async function readDataTransferFromClipboard(document2) {
-                  let window2 = document2.defaultView,
+                  const window2 = document2.defaultView,
                     clipboard = window2?.navigator.clipboard,
                     items = clipboard && (await clipboard.read());
                   if (!items)
                     throw new Error('The Clipboard API is unavailable.');
-                  let dt = createDataTransfer(window2);
-                  for (let item of items)
-                    for (let type5 of item.types)
+                  const dt = createDataTransfer(window2);
+                  for (const item of items)
+                    for (const type5 of item.types)
                       dt.setData(
                         type5,
                         await item
@@ -64161,7 +64185,7 @@
           });
         },
         pointer: async function pointer(input2) {
-          let { pointerMap } = this.config,
+          const { pointerMap } = this.config,
             actions = [];
           (Array.isArray(input2) ? input2 : [input2]).forEach((actionInput) => {
             'string' == typeof actionInput
@@ -64196,7 +64220,7 @@
                   getUISelection(target).endOffset === getUIValue(target).length
                 );
               var _getContentEditable;
-              let focusNode =
+              const focusNode =
                   null !== (_getContentEditable = getContentEditable(target)) &&
                   void 0 !== _getContentEditable
                     ? _getContentEditable
@@ -64242,12 +64266,12 @@
             await this.keyboard(text),
             skipAutoClose ||
               (await (async function releaseAllKeys(instance) {
-                for (let k2 of instance.system.keyboard.getPressedKeys())
+                for (const k2 of instance.system.keyboard.getPressedKeys())
                   await instance.system.keyboard.keyup(instance, k2);
               })(this)));
         },
         upload: async function upload(element, fileOrFiles) {
-          let input2 = isElementType(element, 'label')
+          const input2 = isElementType(element, 'label')
             ? element.control
             : element;
           if (!input2 || !isElementType(input2, 'input', { type: 'file' }))
@@ -64255,13 +64279,15 @@
               `The ${input2 === element ? 'given' : 'associated'} ${input2?.tagName} element does not accept file uploads`,
             );
           if (isDisabled2(element)) return;
-          let files = (Array.isArray(fileOrFiles) ? fileOrFiles : [fileOrFiles])
+          const files = (
+              Array.isArray(fileOrFiles) ? fileOrFiles : [fileOrFiles]
+            )
               .filter(
                 (file) =>
                   !this.config.applyAccept ||
                   (function isAcceptableFile(file, accept) {
                     if (!accept) return !0;
-                    let wildcards = ['audio/*', 'image/*', 'video/*'];
+                    const wildcards = ['audio/*', 'image/*', 'video/*'];
                     return accept
                       .split(',')
                       .some((acceptToken) =>
@@ -64298,7 +64324,7 @@
                   null === (_el_fakeFiles = el[fakeFiles]) ||
                     void 0 === _el_fakeFiles ||
                     _el_fakeFiles.restore();
-                  let typeDescr = Object.getOwnPropertyDescriptor(el, 'type'),
+                  const typeDescr = Object.getOwnPropertyDescriptor(el, 'type'),
                     valueDescr = Object.getOwnPropertyDescriptor(el, 'value'),
                     filesDescr = Object.getOwnPropertyDescriptor(el, 'files');
                   function restore() {
@@ -64367,7 +64393,7 @@
         defaults = defaultOptionsSetup,
         node,
       ) {
-        let document2 = (function getDocument2(options, node, defaults) {
+        const document2 = (function getDocument2(options, node, defaults) {
           var _options_document, _ref;
           return null !==
             (_ref =
@@ -64391,10 +64417,10 @@
         { keyboardState, pointerState, ...options } = {},
         node,
       ) {
-        let config3 = createConfig(options, defaultOptionsDirect, node);
+        const config3 = createConfig(options, defaultOptionsDirect, node);
         var _ref;
         prepareDocument(config3.document);
-        let system =
+        const system =
           null !== (_ref = pointerState ?? keyboardState) && void 0 !== _ref
             ? _ref
             : new System();
@@ -64422,7 +64448,7 @@
         );
       }
       function createInstance(config3, system = new System()) {
-        let instance = {};
+        const instance = {};
         return (
           Object.assign(instance, {
             config: config3,
@@ -64469,11 +64495,11 @@
         return setupDirect(options).api.hover(element);
       }
       async function keyboard2(text, options = {}) {
-        let { api, system } = setupDirect(options);
+        const { api, system } = setupDirect(options);
         return api.keyboard(text).then(() => system);
       }
       async function pointer2(input2, options = {}) {
-        let { api, system } = setupDirect(options);
+        const { api, system } = setupDirect(options);
         return api.pointer(input2).then(() => system);
       }
       function paste2(clipboardData, options) {
@@ -64489,7 +64515,7 @@
         return setupDirect(options, element).api.type(element, text, options);
       }
       function unhover2(element, options = {}) {
-        let { api, system } = setupDirect(options);
+        const { api, system } = setupDirect(options);
         return (
           system.pointer.setMousePosition({ target: element }),
           api.unhover(element)
@@ -64522,7 +64548,7 @@
       var userEvent = {
         ...directApi_exports,
         setup: function setupMain(options = {}) {
-          let config3 = createConfig(options);
+          const config3 = createConfig(options);
           var _config_document_defaultView;
           return (
             prepareDocument(config3.document),
@@ -64728,9 +64754,9 @@
           { expect: expect2 },
           {
             getKeys: (obj, depth) => {
-              let privateApi = ['assert', '__methods', '__flags', '_obj'];
+              const privateApi = ['assert', '__methods', '__flags', '_obj'];
               if (obj.constructor === Assertion) {
-                let keys2 = Object.keys(Object.getPrototypeOf(obj)).filter(
+                const keys2 = Object.keys(Object.getPrototypeOf(obj)).filter(
                   (it) => !privateApi.includes(it),
                 );
                 return depth > 2 ? keys2 : [...keys2, 'not'];
@@ -64749,14 +64775,14 @@
             value.isAction &&
             (!('implicit' in value) || !value.implicit)
           ) {
-            let mock = fn2(value);
+            const mock = fn2(value);
             return key && mock.mockName(key), mock;
           }
           if (Array.isArray(value))
             return depth++, value.map((item) => traverseArgs(item, depth));
           if ('object' == typeof value && value.constructor === Object) {
             depth++;
-            for (let [k2, v] of Object.entries(value))
+            for (const [k2, v] of Object.entries(value))
               Object.getOwnPropertyDescriptor(value, k2)?.writable &&
                 (value[k2] = traverseArgs(v, depth, k2));
             return value;

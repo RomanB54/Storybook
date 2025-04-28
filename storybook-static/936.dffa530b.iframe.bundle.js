@@ -190,7 +190,7 @@
           '../../node_modules/color-convert/conversions.js'(exports, module) {
             var cssKeywords = require_color_name(),
               reverseKeywords = {};
-            for (let key of Object.keys(cssKeywords))
+            for (const key of Object.keys(cssKeywords))
               reverseKeywords[cssKeywords[key]] = key;
             var convert2 = {
               rgb: { channels: 3, labels: 'rgb' },
@@ -210,14 +210,14 @@
               gray: { channels: 1, labels: ['gray'] },
             };
             module.exports = convert2;
-            for (let model of Object.keys(convert2)) {
+            for (const model of Object.keys(convert2)) {
               if (!('channels' in convert2[model]))
                 throw new Error('missing channels property: ' + model);
               if (!('labels' in convert2[model]))
                 throw new Error('missing channel labels property: ' + model);
               if (convert2[model].labels.length !== convert2[model].channels)
                 throw new Error('channel and label counts mismatch: ' + model);
-              let { channels, labels } = convert2[model];
+              const { channels, labels } = convert2[model];
               delete convert2[model].channels,
                 delete convert2[model].labels,
                 Object.defineProperty(convert2[model], 'channels', {
@@ -245,7 +245,7 @@
                     : b2 === max && (h2 = 4 + (r2 - g2) / delta),
                 (h2 = Math.min(60 * h2, 360)),
                 h2 < 0 && (h2 += 360);
-              let l2 = (min + max) / 2;
+              const l2 = (min + max) / 2;
               return (
                 (s2 =
                   max === min
@@ -298,7 +298,7 @@
                 );
               }),
               (convert2.rgb.cmyk = function (rgb) {
-                let r2 = rgb[0] / 255,
+                const r2 = rgb[0] / 255,
                   g2 = rgb[1] / 255,
                   b2 = rgb[2] / 255,
                   k2 = Math.min(1 - r2, 1 - g2, 1 - b2);
@@ -310,12 +310,12 @@
                 ];
               }),
               (convert2.rgb.keyword = function (rgb) {
-                let reversed = reverseKeywords[rgb];
+                const reversed = reverseKeywords[rgb];
                 if (reversed) return reversed;
                 let currentClosestKeyword,
                   currentClosestDistance = 1 / 0;
-                for (let keyword of Object.keys(cssKeywords)) {
-                  let value = cssKeywords[keyword],
+                for (const keyword of Object.keys(cssKeywords)) {
+                  const value = cssKeywords[keyword],
                     distance =
                       ((y2 = value),
                       ((x2 = rgb)[0] - y2[0]) ** 2 +
@@ -373,7 +373,7 @@
                   l2 = hsl[2] / 100;
                 if (0 === s2) return (val = 255 * l2), [val, val, val];
                 t2 = l2 < 0.5 ? l2 * (1 + s2) : l2 + s2 - l2 * s2;
-                let t1 = 2 * l2 - t2,
+                const t1 = 2 * l2 - t2,
                   rgb = [0, 0, 0];
                 for (let i2 = 0; i2 < 3; i2++)
                   (t3 = h2 + (1 / 3) * -(i2 - 1)),
@@ -442,7 +442,7 @@
                   v2 = hsv[2] / 100,
                   vmin = Math.max(v2, 0.01);
                 l2 = (2 - s2) * v2;
-                let lmin = (2 - s2) * vmin;
+                const lmin = (2 - s2) * vmin;
                 return (
                   (sl = s2 * vmin),
                   (sl /= lmin <= 1 ? lmin : 2 - lmin),
@@ -458,7 +458,7 @@
                   bl = hwb[2] / 100,
                   ratio = wh + bl;
                 ratio > 1 && ((wh /= ratio), (bl /= ratio));
-                let i2 = Math.floor(6 * h2),
+                const i2 = Math.floor(6 * h2),
                   v2 = 1 - bl;
                 (f2 = 6 * h2 - i2), 1 & i2 && (f2 = 1 - f2);
                 let r2,
@@ -489,7 +489,7 @@
                 return [255 * r2, 255 * g2, 255 * b2];
               }),
               (convert2.cmyk.rgb = function (cmyk) {
-                let c2 = cmyk[0] / 100,
+                const c2 = cmyk[0] / 100,
                   m2 = cmyk[1] / 100,
                   y2 = cmyk[2] / 100,
                   k2 = cmyk[3] / 100;
@@ -547,7 +547,7 @@
                 (y2 = (lab[0] + 16) / 116),
                   (x2 = lab[1] / 500 + y2),
                   (z2 = y2 - lab[2] / 200);
-                let y22 = y2 ** 3,
+                const y22 = y2 ** 3,
                   x22 = x2 ** 3,
                   z22 = z2 ** 3;
                 return (
@@ -572,7 +572,7 @@
                 );
               }),
               (convert2.lch.lab = function (lch) {
-                let l2 = lch[0],
+                const l2 = lch[0],
                   c2 = lch[1],
                   hr = (lch[2] / 360) * 2 * Math.PI;
                 return [l2, c2 * Math.cos(hr), c2 * Math.sin(hr)];
@@ -595,7 +595,7 @@
                 return convert2.rgb.ansi16(convert2.hsv.rgb(args), args[2]);
               }),
               (convert2.rgb.ansi256 = function (args) {
-                let r2 = args[0],
+                const r2 = args[0],
                   g2 = args[1],
                   b2 = args[2];
                 return r2 === g2 && g2 === b2
@@ -617,7 +617,7 @@
                     (color = (color / 10.5) * 255),
                     [color, color, color]
                   );
-                let mult = 0.5 * (1 + ~~(args > 50));
+                const mult = 0.5 * (1 + ~~(args > 50));
                 return [
                   (1 & color) * mult * 255,
                   ((color >> 1) & 1) * mult * 255,
@@ -626,7 +626,7 @@
               }),
               (convert2.ansi256.rgb = function (args) {
                 if (args >= 232) {
-                  let c2 = 10 * (args - 232) + 8;
+                  const c2 = 10 * (args - 232) + 8;
                   return [c2, c2, c2];
                 }
                 let rem;
@@ -640,7 +640,7 @@
                 );
               }),
               (convert2.rgb.hex = function (args) {
-                let string = (
+                const string = (
                   ((255 & Math.round(args[0])) << 16) +
                   ((255 & Math.round(args[1])) << 8) +
                   (255 & Math.round(args[2]))
@@ -650,7 +650,9 @@
                 return '000000'.substring(string.length) + string;
               }),
               (convert2.hex.rgb = function (args) {
-                let match = args.toString(16).match(/[a-f0-9]{6}|[a-f0-9]{3}/i);
+                const match = args
+                  .toString(16)
+                  .match(/[a-f0-9]{6}|[a-f0-9]{3}/i);
                 if (!match) return [0, 0, 0];
                 let colorString = match[0];
                 3 === match[0].length &&
@@ -658,7 +660,7 @@
                     .split('')
                     .map((char) => char + char)
                     .join(''));
-                let integer = parseInt(colorString, 16);
+                const integer = parseInt(colorString, 16);
                 return [
                   (integer >> 16) & 255,
                   (integer >> 8) & 255,
@@ -710,7 +712,7 @@
                 );
               }),
               (convert2.hcg.rgb = function (hcg) {
-                let h2 = hcg[0] / 360,
+                const h2 = hcg[0] / 360,
                   c2 = hcg[1] / 100,
                   g2 = hcg[2] / 100;
                 if (0 === c2) return [255 * g2, 255 * g2, 255 * g2];
@@ -765,7 +767,7 @@
                 );
               }),
               (convert2.hcg.hwb = function (hcg) {
-                let c2 = hcg[1] / 100,
+                const c2 = hcg[1] / 100,
                   v2 = c2 + (hcg[2] / 100) * (1 - c2);
                 return [hcg[0], 100 * (v2 - c2), 100 * (1 - v2)];
               }),
@@ -814,7 +816,7 @@
                 return [gray[0], 0, 0];
               }),
               (convert2.gray.hex = function (gray) {
-                let val = 255 & Math.round((gray[0] / 100) * 255),
+                const val = 255 & Math.round((gray[0] / 100) * 255),
                   string = ((val << 16) + (val << 8) + val)
                     .toString(16)
                     .toUpperCase();
@@ -830,8 +832,8 @@
           '../../node_modules/color-convert/route.js'(exports, module) {
             var conversions = require_conversions();
             function deriveBFS(fromModel) {
-              let graph = (function buildGraph() {
-                  let graph = {},
+              const graph = (function buildGraph() {
+                  const graph = {},
                     models = Object.keys(conversions);
                   for (let len = models.length, i2 = 0; i2 < len; i2++)
                     graph[models[i2]] = { distance: -1, parent: null };
@@ -839,10 +841,10 @@
                 })(),
                 queue = [fromModel];
               for (graph[fromModel].distance = 0; queue.length; ) {
-                let current = queue.pop(),
+                const current = queue.pop(),
                   adjacents = Object.keys(conversions[current]);
                 for (let len = adjacents.length, i2 = 0; i2 < len; i2++) {
-                  let adjacent = adjacents[i2],
+                  const adjacent = adjacents[i2],
                     node = graph[adjacent];
                   -1 === node.distance &&
                     ((node.distance = graph[current].distance + 1),
@@ -868,11 +870,11 @@
               return (fn.conversion = path), fn;
             }
             module.exports = function (fromModel) {
-              let graph = deriveBFS(fromModel),
+              const graph = deriveBFS(fromModel),
                 conversion = {},
                 models = Object.keys(graph);
               for (let len = models.length, i2 = 0; i2 < len; i2++) {
-                let toModel = models[i2];
+                const toModel = models[i2];
                 null !== graph[toModel].parent &&
                   (conversion[toModel] = wrapConversion(toModel, graph));
               }
@@ -894,15 +896,15 @@
                 Object.defineProperty(convert2[fromModel], 'labels', {
                   value: conversions[fromModel].labels,
                 });
-              let routes = route(fromModel);
+              const routes = route(fromModel);
               Object.keys(routes).forEach((toModel) => {
-                let fn = routes[toModel];
+                const fn = routes[toModel];
                 (convert2[fromModel][toModel] = (function wrapRounded(fn) {
-                  let wrappedFn = function (...args) {
-                    let arg0 = args[0];
+                  const wrappedFn = function (...args) {
+                    const arg0 = args[0];
                     if (null == arg0) return arg0;
                     arg0.length > 1 && (args = arg0);
-                    let result = fn(args);
+                    const result = fn(args);
                     if ('object' == typeof result)
                       for (let len = result.length, i2 = 0; i2 < len; i2++)
                         result[i2] = Math.round(result[i2]);
@@ -915,8 +917,8 @@
                   );
                 })(fn)),
                   (convert2[fromModel][toModel].raw = (function wrapRaw(fn) {
-                    let wrappedFn = function (...args) {
-                      let arg0 = args[0];
+                    const wrappedFn = function (...args) {
+                      const arg0 = args[0];
                       return null == arg0
                         ? arg0
                         : (arg0.length > 1 && (args = arg0), fn(args));
@@ -1561,7 +1563,7 @@
             }),
           ),
         Swatch = ({ value, style, ...props }) => {
-          let backgroundImage = `linear-gradient(${value}, ${value}), url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill-opacity=".05"><path d="M8 0h8v8H8zM0 8h8v8H0z"/></svg>'), linear-gradient(#fff, #fff)`;
+          const backgroundImage = `linear-gradient(${value}, ${value}), url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill-opacity=".05"><path d="M8 0h8v8H8zM0 8h8v8H0z"/></svg>'), linear-gradient(#fff, #fff)`;
           return react__WEBPACK_IMPORTED_MODULE_0__.createElement(SwatchColor, {
             ...props,
             style: { ...style, backgroundImage },
@@ -1631,16 +1633,16 @@
           hsl: 'hsla(0, 0%, 0%, 0)',
         },
         stringToArgs = (value) => {
-          let match = value?.match(COLOR_REGEXP);
+          const match = value?.match(COLOR_REGEXP);
           if (!match) return [0, 0, 0, 1];
-          let [, x2, y2, z2, a2 = 1] = match;
+          const [, x2, y2, z2, a2 = 1] = match;
           return [x2, y2, z2, a2].map(Number);
         },
         parseValue = (value) => {
           if (!value) return;
           let valid = !0;
           if (RGB_REGEXP.test(value)) {
-            let [r2, g2, b2, a2] = stringToArgs(value),
+            const [r2, g2, b2, a2] = stringToArgs(value),
               [h2, s2, l2] = import_color_convert.default.rgb.hsl([
                 r2,
                 g2,
@@ -1657,7 +1659,7 @@
             };
           }
           if (HSL_REGEXP.test(value)) {
-            let [h2, s2, l2, a2] = stringToArgs(value),
+            const [h2, s2, l2, a2] = stringToArgs(value),
               [r2, g2, b2] = import_color_convert.default.hsl.rgb([
                 h2,
                 s2,
@@ -1703,7 +1705,7 @@
           };
         },
         useColorInput = (initialValue, onChange) => {
-          let [value, setValue] = (0,
+          const [value, setValue] = (0,
             react__WEBPACK_IMPORTED_MODULE_0__.useState)(initialValue || ''),
             [color, setColor] = (0,
             react__WEBPACK_IMPORTED_MODULE_0__.useState)(() =>
@@ -1714,13 +1716,13 @@
               color?.colorSpace || 'hex',
             );
           (0, react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-            let nextValue = initialValue || '',
+            const nextValue = initialValue || '',
               nextColor = parseValue(nextValue);
             setValue(nextValue),
               setColor(nextColor),
               setColorSpace(nextColor?.colorSpace || 'hex');
           }, [initialValue]);
-          let realValue = (0, react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(
+          const realValue = (0, react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(
               () =>
                 ((value, color, colorSpace) => {
                   if (!value || !color?.valid) return fallbackColor[colorSpace];
@@ -1732,19 +1734,19 @@
                     } catch {
                       return fallbackColor.hex;
                     }
-                  let short = color.hex.match(SHORTHEX_REGEXP);
+                  const short = color.hex.match(SHORTHEX_REGEXP);
                   if (!short)
                     return HEX_REGEXP.test(color.hex)
                       ? color.hex
                       : fallbackColor.hex;
-                  let [r2, g2, b2] = short[1].split('');
+                  const [r2, g2, b2] = short[1].split('');
                   return `#${r2}${r2}${g2}${g2}${b2}${b2}`;
                 })(value, color, colorSpace).toLowerCase(),
               [value, color, colorSpace],
             ),
             updateValue = (0, react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(
               (update) => {
-                let parsed = parseValue(update),
+                const parsed = parseValue(update),
                   v2 = parsed?.value || update || '';
                 setValue(v2),
                   '' === v2 && (setColor(void 0), onChange(void 0)),
@@ -1760,7 +1762,7 @@
               let next = COLOR_SPACES.indexOf(colorSpace) + 1;
               next >= COLOR_SPACES.length && (next = 0),
                 setColorSpace(COLOR_SPACES[next]);
-              let update = color?.[COLOR_SPACES[next]] || '';
+              const update = color?.[COLOR_SPACES[next]] || '';
               setValue(update), onChange(update);
             }, [color, colorSpace, onChange]);
           return {
@@ -1783,7 +1785,7 @@
           startOpen = !1,
           argType,
         }) => {
-          let debouncedOnChange = (0,
+          const debouncedOnChange = (0,
             react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(
               (0, _chunk_2PTXLE6R_mjs__WEBPACK_IMPORTED_MODULE_1__.sg)(
                 onChange,
@@ -1804,14 +1806,14 @@
               currentColor,
               colorSpace,
             ) => {
-              let [selectedColors, setSelectedColors] = (0,
+              const [selectedColors, setSelectedColors] = (0,
               react__WEBPACK_IMPORTED_MODULE_0__.useState)(
                 currentColor?.valid ? [currentColor] : [],
               );
               (0, react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
                 void 0 === currentColor && setSelectedColors([]);
               }, [currentColor]);
-              let presets = (0, react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(
+              const presets = (0, react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(
                   () =>
                     (presetColors || [])
                       .map((preset) =>

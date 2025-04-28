@@ -20,7 +20,7 @@
         ),
         nodes = new Map();
       var WithCallback = ({ callback, children }) => {
-        let once = react__WEBPACK_IMPORTED_MODULE_0__.useRef();
+        const once = react__WEBPACK_IMPORTED_MODULE_0__.useRef();
         return (
           react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect(() => {
             once.current !== callback &&
@@ -42,14 +42,14 @@
           };
         });
       var renderElement = async (node, el, rootOptions) => {
-          let root = await getReactRoot(el, rootOptions);
+          const root = await getReactRoot(el, rootOptions);
           if (
             (function getIsReactActEnvironment() {
               return globalThis.IS_REACT_ACT_ENVIRONMENT;
             })()
           )
             return void root.render(node);
-          let { promise, resolve } = Promise.withResolvers();
+          const { promise, resolve } = Promise.withResolvers();
           return (
             root.render(
               react__WEBPACK_IMPORTED_MODULE_0__.createElement(
@@ -62,7 +62,7 @@
           );
         },
         unmountElement = (el, shouldUseNewRootApi) => {
-          let root = nodes.get(el);
+          const root = nodes.get(el);
           root && (root.unmount(), nodes.delete(el));
         },
         getReactRoot = async (el, rootOptions) => {

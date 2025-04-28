@@ -56,12 +56,12 @@ try {
       c = 'tag-filters',
       p = 'static-filter';
     n.register(c, (e) => {
-      let i = Object.entries(S.TAGS_OPTIONS ?? {}).reduce((t, r) => {
-        let [o, u] = r;
+      const i = Object.entries(S.TAGS_OPTIONS ?? {}).reduce((t, r) => {
+        const [o, u] = r;
         return u.excludeFromSidebar && (t[o] = !0), t;
       }, {});
       e.experimental_setFilter(p, (t) => {
-        let r = t.tags ?? [];
+        const r = t.tags ?? [];
         return (
           (r.includes('dev') || t.type === 'docs') &&
           r.filter((o) => i[o]).length === 0

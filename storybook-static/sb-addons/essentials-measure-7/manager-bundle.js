@@ -399,7 +399,7 @@ try {
     var i = 'storybook/measure-addon',
       b = `${i}/tool`,
       A = () => {
-        let [r, c] = p(),
+        const [r, c] = p(),
           { measureEnabled: I } = r,
           s = S(),
           a = u(() => c({ measureEnabled: !I }), [c, I]);

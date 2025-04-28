@@ -26,11 +26,11 @@
             return { hasError: !0 };
           }
           componentDidCatch(err) {
-            let { showException } = this.props;
+            const { showException } = this.props;
             showException(err);
           }
           render() {
-            let { hasError } = this.state,
+            const { hasError } = this.state,
               { children } = this.props;
             return hasError
               ? null
@@ -40,7 +40,7 @@
         DocsRenderer = class {
           constructor() {
             (this.render = async (context, docsParameter, element) => {
-              let components = {
+              const components = {
                   ...defaultComponents,
                   ...docsParameter?.components,
                 },

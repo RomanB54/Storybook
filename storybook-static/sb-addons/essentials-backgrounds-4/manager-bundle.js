@@ -23,7 +23,7 @@ try {
     );
     var ue = (e, o, c, r) => {
       if ((o && typeof o == 'object') || typeof o == 'function')
-        for (let i of ae(o))
+        for (const i of ae(o))
           !le.call(e, i) &&
             i !== c &&
             Y(e, i, {
@@ -805,12 +805,12 @@ try {
         dark: { name: 'dark', value: '#333' },
       },
       me = w(function () {
-        let e = P(y),
+        const e = P(y),
           [o, c, r] = L(),
           [i, d] = U(!1),
           { options: l = de, disable: t = !0 } = e || {};
         if (t) return null;
-        let n = o[y] || {},
+        const n = o[y] || {},
           u = n.value,
           a = n.grid || !1,
           I = l[u],
@@ -926,10 +926,10 @@ try {
       fe = (e, o = [], c) => {
         if (e === 'transparent') return 'transparent';
         if (o.find((i) => i.value === e) || e) return e;
-        let r = o.find((i) => i.name === c);
+        const r = o.find((i) => i.name === c);
         if (r) return r.value;
         if (c) {
-          let i = o.map((d) => d.name).join(', ');
+          const i = o.map((d) => d.name).join(', ');
           K.warn(oe`
         Backgrounds Addon: could not find the default color "${c}".
         These are the available colors for your story based on your configuration:
@@ -949,7 +949,7 @@ try {
         active: d,
       })),
       ge = (0, W.default)(10)((e, o, c) => {
-        let r = e.map(({ name: i, value: d }) =>
+        const r = e.map(({ name: i, value: d }) =>
           te(null, i, d, !0, c, d === o),
         );
         return o !== 'transparent'
@@ -958,7 +958,7 @@ try {
       }),
       be = { default: null, disable: !0, values: [] },
       Se = w(function () {
-        let e = P(y, be),
+        const e = P(y, be),
           [o, c] = U(!1),
           [r, i] = L(),
           d = r[y]?.value,
@@ -967,7 +967,7 @@ try {
           K.warn(
             'Addon Backgrounds api has changed in Storybook 6.0. Please refer to the migration guide: https://github.com/storybookjs/storybook/blob/next/MIGRATION.md',
           );
-        let t = G(
+        const t = G(
           (n) => {
             i({ [y]: { ...r[y], value: n } });
           },
@@ -1000,10 +1000,10 @@ try {
             );
       }),
       Ce = w(function () {
-        let [e, o] = L(),
+        const [e, o] = L(),
           { grid: c } = P(y, { grid: { disable: !1 } });
         if (c?.disable) return null;
-        let r = e[y]?.grid || !1;
+        const r = e[y]?.grid || !1;
         return g.createElement(
           B,
           {

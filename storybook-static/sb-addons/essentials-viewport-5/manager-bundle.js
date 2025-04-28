@@ -23,7 +23,7 @@ try {
     );
     var ye = (e, t, a, s) => {
       if ((t && typeof t == 'object') || typeof t == 'function')
-        for (let c of fe(t))
+        for (const c of fe(t))
           !we.call(e, c) &&
             c !== a &&
             J(e, c, {
@@ -753,11 +753,11 @@ try {
       Te = globalThis.FEATURES?.viewportStoryGlobals ? Ce : Ee,
       pe = (e, t) => e.indexOf(t),
       ke = (e, t) => {
-        let a = pe(e, t);
+        const a = pe(e, t);
         return a === e.length - 1 ? e[0] : e[a + 1];
       },
       Re = (e, t) => {
-        let a = pe(e, t);
+        const a = pe(e, t);
         return a < 1 ? e[e.length - 1] : e[a - 1];
       },
       de = async (e, t, a, s) => {
@@ -812,7 +812,7 @@ try {
         other: l.createElement(V, null),
       },
       Le = ({ api: e }) => {
-        let t = F(A),
+        const t = F(A),
           [a, s, c] = G(),
           [b, p] = N(!1),
           { options: o = Ie, disable: i } = t || {},
@@ -837,7 +837,7 @@ try {
             ),
             null
           );
-        let y = d ? r.styles.height : r.styles.width,
+        const y = d ? r.styles.height : r.styles.width,
           R = d ? r.styles.width : r.styles.height;
         return i
           ? null
@@ -999,11 +999,11 @@ try {
       })),
       Ue = (e, t, a) => {
         if (t === null) return;
-        let s = typeof t == 'function' ? t(e) : t;
+        const s = typeof t == 'function' ? t(e) : t;
         return a ? De(s) : s;
       },
       Ge = Q(function () {
-        let [e, t] = G(),
+        const [e, t] = G(),
           {
             viewports: a = Ie,
             defaultOrientation: s,
@@ -1022,11 +1022,11 @@ try {
             de(o, e, t, Object.keys(a));
           }, [a, e, e.viewport, t, o]),
           O(() => {
-            let u = s === 'landscape';
+            const u = s === 'landscape';
             ((c && e.viewport !== c) || (s && e.viewportRotated !== u)) &&
               t({ viewport: c, viewportRotated: u });
           }, [s, c, t]);
-        let n =
+        const n =
             p.find((u) => u.id === e.viewport) ||
             p.find((u) => u.id === c) ||
             p.find((u) => u.default) ||

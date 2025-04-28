@@ -979,7 +979,7 @@ try {
       } = t;
       (function (m) {
         if (document.querySelector('style[data-neoconfetti]')) return;
-        let g = Mt('style');
+        const g = Mt('style');
         (g.dataset.neoconfetti = ''), (g.textContent = m), jt(document.head, g);
       })(Io),
         e.classList.add(Ro),
@@ -989,12 +989,12 @@ try {
         h = () => rt(be() * (No - 1)),
         b = (m, g) => a !== 'rectangles' && (m === 'circles' || ko(g));
       function N(m, g) {
-        let O = h(),
+        const O = h(),
           B = b(a, O),
           P = (te, Ne) => m.style.setProperty(te, Ne + '');
         P('--xlp', Dt(bt(Dn(g, 90) - 180), 0, 180, -u / 2, u / 2) + 'px'),
           P('--dc', r - rt(1e3 * be()) + 'ms');
-        let V = be() < _o ? We(be() * xo, 2) : 0;
+        const V = be() < _o ? We(be() * xo, 2) : 0;
         P('--x1', V),
           P('--x2', -1 * V),
           P('--x3', V),
@@ -1005,7 +1005,7 @@ try {
           P('--y4', We(Ao(Dt(bt(g - 180), 0, 180, o, -o), 0), 4)),
           P('--w', (B ? s : rt(4 * be()) + s / 2) + 'px'),
           P('--h', (B ? s : rt(2 * be()) + s) + 'px');
-        let H = O.toString(2).padStart(3, '0').split('');
+        const H = O.toString(2).padStart(3, '0').split('');
         P('--hr', H.map((te) => +te / 2 + '').join(' ')),
           P('--r', H.join(' ')),
           P('--rd', We(be() * (Po - Ln) + Ln) + 'ms'),
@@ -1017,16 +1017,16 @@ try {
           clearTimeout(v),
           (d = jn(i, n)),
           (f = (function (m, g = [], O) {
-            let B = [];
-            for (let { color: P } of g) {
-              let V = Mt('div');
+            const B = [];
+            for (const { color: P } of g) {
+              const V = Mt('div');
               (V.className = `${wn} ${O}`), V.style.setProperty('--bgc', P);
-              let H = Mt('div');
+              const H = Mt('div');
               jt(V, H), jt(m, V), B.push(V);
             }
             return B;
           })(e, d, c));
-        for (let [m, g] of Fn(f)) N(g, d[+m].degree);
+        for (const [m, g] of Fn(f)) N(g, d[+m].degree);
         v = setTimeout(() => {
           l && (e.innerHTML = '');
         }, r);
@@ -1035,7 +1035,7 @@ try {
         T(),
         {
           update(m) {
-            let g = m.particleCount ?? Cn,
+            const g = m.particleCount ?? Cn,
               O = m.particleShape ?? Pn,
               B = m.particleSize ?? _n,
               P = m.particleClass ?? xn,
@@ -1049,8 +1049,8 @@ try {
             let Be = !1;
             if (g === i) {
               f = Array.from(e.querySelectorAll(`.${wn}`));
-              for (let [Ke, { color: Te }] of Fn(d)) {
-                let Ie = f[+Ke];
+              for (const [Ke, { color: Te }] of Fn(d)) {
+                const Ie = f[+Ke];
                 JSON.stringify(n) !== JSON.stringify(V) &&
                   Ie.style.setProperty('--bgc', Te),
                   O !== a &&
@@ -1080,7 +1080,7 @@ try {
       );
     }
     function Lo({ class: e, ...t }) {
-      let n = At(null),
+      const n = At(null),
         r = At();
       return (
         ae(() => {
@@ -1095,13 +1095,13 @@ try {
     function Bn({ targetSelector: e, pulsating: t = !1 }) {
       return (
         ae(() => {
-          let n = document.querySelector(e);
+          const n = document.querySelector(e);
           if (n)
             if (t) {
               (n.style.animation = 'pulsate 3s infinite'),
                 (n.style.transformOrigin = 'center'),
                 (n.style.animationTimingFunction = 'ease-in-out');
-              let r = `
+              const r = `
         @keyframes pulsate {
           0% {
             box-shadow: rgba(2,156,253,1) 0 0 2px 1px, 0 0 0 0 rgba(2, 156, 253, 0.7), 0 0 0 0 rgba(2, 156, 253, 0.4);
@@ -1120,7 +1120,7 @@ try {
                 document.head.appendChild(o);
             } else n.style.boxShadow = 'rgba(2,156,253,1) 0 0 2px 1px';
           return () => {
-            let r = document.querySelector('#sb-onboarding-pulsating-effect');
+            const r = document.querySelector('#sb-onboarding-pulsating-effect');
             r && r.remove(),
               n && ((n.style.animation = ''), (n.style.boxShadow = ''));
           };
@@ -1132,7 +1132,7 @@ try {
       return (t) => typeof t === e;
     }
     function Wo(e, t) {
-      let { length: n } = e;
+      const { length: n } = e;
       if (n !== t.length) return !1;
       for (let r = n; r-- !== 0; ) if (!oe(e[r], t[r])) return !1;
       return !0;
@@ -1147,13 +1147,13 @@ try {
     }
     function Ho(e, t) {
       if (e.size !== t.size) return !1;
-      for (let n of e.entries()) if (!t.has(n[0])) return !1;
-      for (let n of e.entries()) if (!oe(n[1], t.get(n[0]))) return !1;
+      for (const n of e.entries()) if (!t.has(n[0])) return !1;
+      for (const n of e.entries()) if (!oe(n[1], t.get(n[0]))) return !1;
       return !0;
     }
     function zo(e, t) {
       if (e.size !== t.size) return !1;
-      for (let n of e.entries()) if (!t.has(n[0])) return !1;
+      for (const n of e.entries()) if (!t.has(n[0])) return !1;
       return !0;
     }
     function oe(e, t) {
@@ -1169,13 +1169,13 @@ try {
           return e.valueOf() === t.valueOf();
         if (e.toString !== Object.prototype.toString)
           return e.toString() === t.toString();
-        let n = Object.keys(e),
+        const n = Object.keys(e),
           r = Object.keys(t);
         if (n.length !== r.length) return !1;
         for (let o = n.length; o-- !== 0; )
           if (!Object.prototype.hasOwnProperty.call(t, n[o])) return !1;
         for (let o = n.length; o-- !== 0; ) {
-          let i = n[o];
+          const i = n[o];
           if (!(i === '_owner' && e.$$typeof) && !oe(e[i], t[i])) return !1;
         }
         return !0;
@@ -1183,7 +1183,7 @@ try {
       return Number.isNaN(e) && Number.isNaN(t) ? !0 : e === t;
     }
     function Rt(e) {
-      let t = Object.prototype.toString.call(e).slice(8, -1);
+      const t = Object.prototype.toString.call(e).slice(8, -1);
       if (/HTML\w+Element/.test(t)) return 'HTMLElement';
       if (qo(t)) return t;
     }
@@ -1331,12 +1331,12 @@ try {
         },
         changed: (n, r, o) => {
           try {
-            let i = Ee(e, n),
+            const i = Ee(e, n),
               a = Ee(t, n),
               s = C.defined(r),
               c = C.defined(o);
             if (s || c) {
-              let l = c ? Qe(o, i) : !Qe(r, i),
+              const l = c ? Qe(o, i) : !Qe(r, i),
                 p = Qe(r, a);
               return l && p;
             }
@@ -1350,7 +1350,7 @@ try {
         changedFrom: (n, r, o) => {
           if (!C.defined(n)) return !1;
           try {
-            let i = Ee(e, n),
+            const i = Ee(e, n),
               a = Ee(t, n),
               s = C.defined(o);
             return Qe(r, i) && (s ? Qe(o, a) : !s);
@@ -1373,7 +1373,7 @@ try {
         },
         emptied: (n) => {
           try {
-            let [r, o] = Yn(e, t, { key: n });
+            const [r, o] = Yn(e, t, { key: n });
             return !!r.length && !o.length;
           } catch {
             return !1;
@@ -1381,7 +1381,7 @@ try {
         },
         filled: (n) => {
           try {
-            let [r, o] = Yn(e, t, { key: n });
+            const [r, o] = Yn(e, t, { key: n });
             return !r.length && !!o.length;
           } catch {
             return !1;
@@ -3254,10 +3254,10 @@ try {
       return e ? e.getBoundingClientRect() : null;
     }
     function Ea(e = !0) {
-      let { body: t, documentElement: n } = document;
+      const { body: t, documentElement: n } = document;
       if (!t || !n) return 0;
       if (e) {
-        let r = [
+        const r = [
             t.scrollHeight,
             t.offsetHeight,
             n.clientHeight,
@@ -3283,7 +3283,7 @@ try {
     }
     function _t(e, t, n) {
       if (!e) return je();
-      let r = (0, Ir.default)(e);
+      const r = (0, Ir.default)(e);
       if (r) {
         if (r.isSameNode(je())) return n ? document : je();
         if (!(r.scrollHeight > r.offsetHeight) && !t)
@@ -3293,7 +3293,7 @@ try {
     }
     function dt(e, t) {
       if (!e) return !1;
-      let n = _t(e, t);
+      const n = _t(e, t);
       return n ? !n.isSameNode(je()) : !1;
     }
     function Oa(e) {
@@ -3317,7 +3317,7 @@ try {
       let n = e;
       for (; n && n !== document.body; ) {
         if (n instanceof HTMLElement) {
-          let { display: r, visibility: o } = getComputedStyle(n);
+          const { display: r, visibility: o } = getComputedStyle(n);
           if (r === 'none' || o === 'hidden') return !1;
         }
         n = (t = n.parentElement) != null ? t : null;
@@ -3346,7 +3346,7 @@ try {
           (r = (0, Ir.default)(e)) != null ? r : {},
         a = e.getBoundingClientRect().top + i;
       o && (dt(e, n) || Oa(e)) && (a -= o);
-      let s = Math.floor(a - t);
+      const s = Math.floor(a - t);
       return s < 0 ? 0 : s;
     }
     function je() {
@@ -3356,7 +3356,7 @@ try {
         : document.documentElement;
     }
     function Ra(e, t) {
-      let { duration: n, element: r } = t;
+      const { duration: n, element: r } = t;
       return new Promise((o, i) => {
         let { scrollTop: a } = r,
           s = e > a ? e - a : a - e;
@@ -3389,12 +3389,12 @@ try {
       );
     }
     function Pe(e) {
-      let t = [],
+      const t = [],
         n = (r) => {
           if (typeof r == 'string' || typeof r == 'number') t.push(r);
           else if (Array.isArray(r)) r.forEach((o) => n(o));
           else if (an(r)) {
-            let { children: o } = r.props;
+            const { children: o } = r.props;
             Array.isArray(o) ? o.forEach((i) => n(i)) : n(o);
           }
         };
@@ -3406,7 +3406,7 @@ try {
         : Object.keys(e).every((n) => t.includes(n));
     }
     function Pa(e) {
-      let t = /^#?([\da-f])([\da-f])([\da-f])$/i,
+      const t = /^#?([\da-f])([\da-f])([\da-f])$/i,
         n = e.replace(t, (o, i, a, s) => i + i + a + a + s + s),
         r = /^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i.exec(n);
       return r
@@ -3420,7 +3420,7 @@ try {
       return !['chrome', 'safari', 'firefox', 'opera'].includes(Qr());
     }
     function Ae({ data: e, debug: t = !1, title: n, warn: r = !1 }) {
-      let o = r ? console.warn || console.error : console.log;
+      const o = r ? console.warn || console.error : console.log;
       t &&
         (n && e
           ? (console.groupCollapsed(
@@ -3442,21 +3442,21 @@ try {
     }
     function Zr(e, ...t) {
       if (!C.plainObject(e)) throw new TypeError('Expected an object');
-      let n = {};
-      for (let r in e)
+      const n = {};
+      for (const r in e)
         ({}).hasOwnProperty.call(e, r) && (t.includes(r) || (n[r] = e[r]));
       return n;
     }
     function xa(e, ...t) {
       if (!C.plainObject(e)) throw new TypeError('Expected an object');
       if (!t.length) return e;
-      let n = {};
-      for (let r in e)
+      const n = {};
+      for (const r in e)
         ({}).hasOwnProperty.call(e, r) && t.includes(r) && (n[r] = e[r]);
       return n;
     }
     function Aa(e) {
-      let {
+      const {
         isFirstStep: t,
         lifecycle: n,
         previousLifecycle: r,
@@ -3487,7 +3487,7 @@ try {
             typeof u.width == 'number' && window.innerWidth < u.width
               ? window.innerWidth - 30
               : u.width);
-      let h = {
+      const h = {
           bottom: 0,
           left: 0,
           overflow: 'hidden',
@@ -3628,7 +3628,7 @@ try {
     }
     function Ue(e, t) {
       var n, r, o, i, a, s;
-      let c = t ?? {},
+      const c = t ?? {},
         l = vt.default.all([ka, Da(e), c], {
           isMergeableObject: C.plainObject,
         }),
@@ -3710,7 +3710,7 @@ try {
       });
     }
     function qa({ styles: e, ...t }) {
-      let { color: n, height: r, width: o, ...i } = e;
+      const { color: n, height: r, width: o, ...i } = e;
       return y.createElement(
         'button',
         { style: i, type: 'button', ...t },
@@ -3837,14 +3837,14 @@ try {
       );
     }
     function cs({ step: e, steps: t, onClose: n, onComplete: r }) {
-      let [o, i] = ue(null),
+      const [o, i] = ue(null),
         a = bn();
       return (
         ae(() => {
           let s;
           return (
             i((c) => {
-              let l = t.findIndex(({ key: p }) => p === e);
+              const l = t.findIndex(({ key: p }) => p === e);
               return l === -1
                 ? null
                 : l === c
@@ -3907,7 +3907,7 @@ try {
       );
     }
     function ws({ api: e }) {
-      let [t, n] = ue(!0),
+      const [t, n] = ue(!0),
         [r, o] = ue(!1),
         [i, a] = ue('1:Intro'),
         [s, c] = ue(),
@@ -3917,14 +3917,14 @@ try {
         b = Je(
           (P) => {
             try {
-              let { id: V, refId: H } = e.getCurrentStoryData() || {};
+              const { id: V, refId: H } = e.getCurrentStoryData() || {};
               (V !== P || H !== void 0) && e.selectStory(P);
             } catch {}
           },
           [e],
         ),
         N = Je(() => {
-          let P = new URL(window.location.href),
+          const P = new URL(window.location.href),
             V = decodeURIComponent(P.searchParams.get('path'));
           (P.search = `?path=${V}&onboarding=false`),
             history.replaceState({}, '', P.href),
@@ -3945,7 +3945,7 @@ try {
             e.setSelectedPanel('addon-controls');
         }, [e, b]),
         ae(() => {
-          let P = new MutationObserver(() => {
+          const P = new MutationObserver(() => {
             c(document.getElementById('control-primary')),
               p(document.getElementById('save-from-controls')),
               d(document.getElementById('create-new-story-form'));
@@ -3984,7 +3984,7 @@ try {
         !t)
       )
         return null;
-      let T = f?.sourceFileContent,
+      const T = f?.sourceFileContent,
         m = T?.lastIndexOf(`export const ${f?.newStoryExportName}`),
         g = T?.slice(m).trim(),
         O = T?.slice(0, m).split(`
@@ -4285,7 +4285,7 @@ try {
             }),
           (yo = (e, t, n, r) => {
             if ((t && typeof t == 'object') || typeof t == 'function')
-              for (let o of br(t))
+              for (const o of br(t))
                 !mo.call(e, o) &&
                   o !== n &&
                   gr(e, o, {
@@ -5483,14 +5483,14 @@ Valid keys: ` +
         I.plainFunction = de('Function');
         I.plainObject = (e) => {
           if (Rt(e) !== 'Object') return !1;
-          let t = Object.getPrototypeOf(e);
+          const t = Object.getPrototypeOf(e);
           return t === null || t === Object.getPrototypeOf({});
         };
         I.primitive = (e) => I.null(e) || $o(typeof e);
         I.promise = de('Promise');
         I.propertyOf = (e, t, n) => {
           if (!I.object(e) || !t) return !1;
-          let r = e[t];
+          const r = e[t];
           return I.function(n) ? n(r) : I.defined(r);
         };
         I.regexp = de('RegExp');
@@ -7018,7 +7018,7 @@ Valid keys: ` +
                   this.listener = o;
                 }),
                 _(this, 'setSteps', (o) => {
-                  let { size: i, status: a } = this.getState(),
+                  const { size: i, status: a } = this.getState(),
                     s = { size: o.length, status: a };
                   this.data.set('steps', o),
                     a === j.WAITING && !i && o.length && (s.status = j.RUNNING),
@@ -7036,7 +7036,7 @@ Valid keys: ` +
                   (this.beaconPopper = null), (this.tooltipPopper = null);
                 }),
                 _(this, 'close', (o = null) => {
-                  let { index: i, status: a } = this.getState();
+                  const { index: i, status: a } = this.getState();
                   a === j.RUNNING &&
                     this.setState({
                       ...this.getNextState({
@@ -7047,9 +7047,9 @@ Valid keys: ` +
                     });
                 }),
                 _(this, 'go', (o) => {
-                  let { controlled: i, status: a } = this.getState();
+                  const { controlled: i, status: a } = this.getState();
                   if (i || a !== j.RUNNING) return;
-                  let s = this.getSteps()[o];
+                  const s = this.getSteps()[o];
                   this.setState({
                     ...this.getNextState({ action: $.GO, index: o }),
                     status: s ? a : j.FINISHED,
@@ -7057,14 +7057,14 @@ Valid keys: ` +
                 }),
                 _(this, 'info', () => this.getState()),
                 _(this, 'next', () => {
-                  let { index: o, status: i } = this.getState();
+                  const { index: o, status: i } = this.getState();
                   i === j.RUNNING &&
                     this.setState(
                       this.getNextState({ action: $.NEXT, index: o + 1 }),
                     );
                 }),
                 _(this, 'open', () => {
-                  let { status: o } = this.getState();
+                  const { status: o } = this.getState();
                   o === j.RUNNING &&
                     this.setState({
                       ...this.getNextState({
@@ -7074,14 +7074,14 @@ Valid keys: ` +
                     });
                 }),
                 _(this, 'prev', () => {
-                  let { index: o, status: i } = this.getState();
+                  const { index: o, status: i } = this.getState();
                   i === j.RUNNING &&
                     this.setState({
                       ...this.getNextState({ action: $.PREV, index: o - 1 }),
                     });
                 }),
                 _(this, 'reset', (o = !1) => {
-                  let { controlled: i } = this.getState();
+                  const { controlled: i } = this.getState();
                   i ||
                     this.setState({
                       ...this.getNextState({ action: $.RESET, index: 0 }),
@@ -7089,7 +7089,7 @@ Valid keys: ` +
                     });
                 }),
                 _(this, 'skip', () => {
-                  let { status: o } = this.getState();
+                  const { status: o } = this.getState();
                   o === j.RUNNING &&
                     this.setState({
                       action: $.SKIP,
@@ -7098,7 +7098,7 @@ Valid keys: ` +
                     });
                 }),
                 _(this, 'start', (o) => {
-                  let { index: i, size: a } = this.getState();
+                  const { index: i, size: a } = this.getState();
                   this.setState({
                     ...this.getNextState(
                       { action: $.START, index: C.number(o) ? o : i },
@@ -7108,7 +7108,7 @@ Valid keys: ` +
                   });
                 }),
                 _(this, 'stop', (o = !1) => {
-                  let { index: i, status: a } = this.getState();
+                  const { index: i, status: a } = this.getState();
                   [j.FINISHED, j.SKIPPED].includes(a) ||
                     this.setState({
                       ...this.getNextState({
@@ -7136,7 +7136,11 @@ Valid keys: ` +
                     ),
                   });
                 });
-              let { continuous: t = !1, stepIndex: n, steps: r = [] } = e ?? {};
+              const {
+                continuous: t = !1,
+                stepIndex: n,
+                steps: r = [],
+              } = e ?? {};
               this.setState(
                 {
                   action: $.INIT,
@@ -7169,7 +7173,7 @@ Valid keys: ` +
             }
             getNextState(e, t = !1) {
               var n, r, o, i, a;
-              let {
+              const {
                   action: s,
                   controlled: c,
                   index: l,
@@ -7189,16 +7193,16 @@ Valid keys: ` +
               };
             }
             getSteps() {
-              let e = this.data.get('steps');
+              const e = this.data.get('steps');
               return Array.isArray(e) ? e : [];
             }
             hasUpdatedState(e) {
-              let t = JSON.stringify(e),
+              const t = JSON.stringify(e),
                 n = JSON.stringify(this.getState());
               return t !== n;
             }
             setState(e, t = !1) {
-              let n = this.getState(),
+              const n = this.getState(),
                 {
                   action: r,
                   index: o,
@@ -7247,7 +7251,7 @@ Valid keys: ` +
                   showSpotlight: !0,
                 }),
                 _(this, 'hideSpotlight', () => {
-                  let {
+                  const {
                       continuous: e,
                       disableOverlay: t,
                       lifecycle: n,
@@ -7256,7 +7260,7 @@ Valid keys: ` +
                   return t || (e ? r.includes(n) : n !== k.TOOLTIP);
                 }),
                 _(this, 'handleMouseMove', (e) => {
-                  let { mouseOverSpotlight: t } = this.state,
+                  const { mouseOverSpotlight: t } = this.state,
                     {
                       height: n,
                       left: r,
@@ -7271,10 +7275,10 @@ Valid keys: ` +
                   p !== t && this.updateState({ mouseOverSpotlight: p });
                 }),
                 _(this, 'handleScroll', () => {
-                  let { target: e } = this.props,
+                  const { target: e } = this.props,
                     t = _e(e);
                   if (this.scrollParent !== document) {
-                    let { isScrolling: n } = this.state;
+                    const { isScrolling: n } = this.state;
                     n ||
                       this.updateState({ isScrolling: !0, showSpotlight: !1 }),
                       clearTimeout(this.scrollTimeout),
@@ -7294,7 +7298,7 @@ Valid keys: ` +
                 });
             }
             componentDidMount() {
-              let {
+              const {
                   debug: e,
                   disableScrolling: t,
                   disableScrollParentFix: n = !1,
@@ -7315,7 +7319,7 @@ Valid keys: ` +
             }
             componentDidUpdate(e) {
               var t;
-              let { lifecycle: n, spotlightClicks: r } = this.props,
+              const { lifecycle: n, spotlightClicks: r } = this.props,
                 { changed: o } = Ot(e, this.props);
               o('lifecycle', k.TOOLTIP) &&
                 ((t = this.scrollParent) == null ||
@@ -7323,7 +7327,7 @@ Valid keys: ` +
                     passive: !0,
                   }),
                 setTimeout(() => {
-                  let { isScrolling: i } = this.state;
+                  const { isScrolling: i } = this.state;
                   i || this.updateState({ showSpotlight: !0 });
                 }, 100)),
                 (o('spotlightClicks') ||
@@ -7373,7 +7377,7 @@ Valid keys: ` +
             }
             get spotlightStyles() {
               var e, t, n;
-              let { showSpotlight: r } = this.state,
+              const { showSpotlight: r } = this.state,
                 {
                   disableScrollParentFix: o = !1,
                   spotlightClicks: i,
@@ -7401,7 +7405,7 @@ Valid keys: ` +
               this.isActive && this.setState((t) => ({ ...t, ...e }));
             }
             render() {
-              let { showSpotlight: e } = this.state,
+              const { showSpotlight: e } = this.state,
                 { onClickOverlay: t, placement: n } = this.props,
                 {
                   hideSpotlight: r,
@@ -7411,7 +7415,7 @@ Valid keys: ` +
               if (r()) return null;
               let a = n !== 'center' && e && q(Ua, { styles: i });
               if (Qr() === 'safari') {
-                let { mixBlendMode: s, zIndex: c, ...l } = o;
+                const { mixBlendMode: s, zIndex: c, ...l } = o;
                 (a = q('div', { style: { ...l } }, a)),
                   delete o.backgroundColor;
               }
@@ -7433,7 +7437,7 @@ Valid keys: ` +
               super(...arguments), _(this, 'node', null);
             }
             componentDidMount() {
-              let { id: e } = this.props;
+              const { id: e } = this.props;
               Ce() &&
                 ((this.node = document.createElement('div')),
                 (this.node.id = e),
@@ -7452,12 +7456,12 @@ Valid keys: ` +
             }
             renderReact15() {
               if (!Ce()) return;
-              let { children: e } = this.props;
+              const { children: e } = this.props;
               this.node && cn(this, e, this.node);
             }
             renderReact16() {
               if (!Ce() || !tt) return null;
-              let { children: e } = this.props;
+              const { children: e } = this.props;
               return this.node ? mt(e, this.node) : null;
             }
             render() {
@@ -7470,11 +7474,11 @@ Valid keys: ` +
                 (_(this, 'element'),
                 _(this, 'options'),
                 _(this, 'canBeTabbed', (n) => {
-                  let { tabIndex: r } = n;
+                  const { tabIndex: r } = n;
                   return r === null || r < 0 ? !1 : this.canHaveFocus(n);
                 }),
                 _(this, 'canHaveFocus', (n) => {
-                  let r = /input|select|textarea|button|object/,
+                  const r = /input|select|textarea|button|object/,
                     o = n.nodeName.toLowerCase();
                   return (
                     ((r.test(o) && !n.getAttribute('disabled')) ||
@@ -7488,12 +7492,12 @@ Valid keys: ` +
                     .filter(this.canBeTabbed),
                 ),
                 _(this, 'handleKeyDown', (n) => {
-                  let { code: r = 'Tab' } = this.options;
+                  const { code: r = 'Tab' } = this.options;
                   n.code === r && this.interceptTab(n);
                 }),
                 _(this, 'interceptTab', (n) => {
                   n.preventDefault();
-                  let r = this.findValidTabElements(),
+                  const r = this.findValidTabElements(),
                     { shiftKey: o } = n;
                   if (!r.length) return;
                   let i = document.activeElement
@@ -7507,7 +7511,7 @@ Valid keys: ` +
                     r[i].focus();
                 }),
                 _(this, 'isHidden', (n) => {
-                  let r = n.offsetWidth <= 0 && n.offsetHeight <= 0,
+                  const r = n.offsetWidth <= 0 && n.offsetHeight <= 0,
                     o = window.getComputedStyle(n);
                   return r && !n.innerHTML
                     ? !0
@@ -7533,9 +7537,9 @@ Valid keys: ` +
                     window.requestAnimationFrame(() => this.checkFocus(n)));
                 }),
                 _(this, 'setFocus', () => {
-                  let { selector: n } = this.options;
+                  const { selector: n } = this.options;
                   if (!n) return;
-                  let r = this.element.querySelector(n);
+                  const r = this.element.querySelector(n);
                   r && window.requestAnimationFrame(() => this.checkFocus(r));
                 }),
                 !(e instanceof HTMLElement))
@@ -7560,7 +7564,8 @@ Valid keys: ` +
                 e.beaconComponent)
               )
                 return;
-              let t = document.head || document.getElementsByTagName('head')[0],
+              const t =
+                  document.head || document.getElementsByTagName('head')[0],
                 n = document.createElement('style');
               (n.id = 'joyride-beacon-animation'),
                 e.nonce && n.setAttribute('nonce', e.nonce),
@@ -7596,7 +7601,7 @@ Valid keys: ` +
                 t.appendChild(n);
             }
             componentDidMount() {
-              let { shouldFocus: e } = this.props;
+              const { shouldFocus: e } = this.props;
               C.domElement(this.beacon) ||
                 console.warn('beacon is not a valid DOM element'),
                 setTimeout(() => {
@@ -7604,7 +7609,7 @@ Valid keys: ` +
                 }, 0);
             }
             componentWillUnmount() {
-              let e = document.getElementById('joyride-beacon-animation');
+              const e = document.getElementById('joyride-beacon-animation');
               e?.parentNode && e.parentNode.removeChild(e);
             }
             render() {
@@ -7662,17 +7667,17 @@ Valid keys: ` +
               super(...arguments),
                 _(this, 'handleClickBack', (e) => {
                   e.preventDefault();
-                  let { helpers: t } = this.props;
+                  const { helpers: t } = this.props;
                   t.prev();
                 }),
                 _(this, 'handleClickClose', (e) => {
                   e.preventDefault();
-                  let { helpers: t } = this.props;
+                  const { helpers: t } = this.props;
                   t.close('button_close');
                 }),
                 _(this, 'handleClickPrimary', (e) => {
                   e.preventDefault();
-                  let { continuous: t, helpers: n } = this.props;
+                  const { continuous: t, helpers: n } = this.props;
                   if (!t) {
                     n.close('button_primary');
                     return;
@@ -7681,7 +7686,7 @@ Valid keys: ` +
                 }),
                 _(this, 'handleClickSkip', (e) => {
                   e.preventDefault();
-                  let { helpers: t } = this.props;
+                  const { helpers: t } = this.props;
                   t.skip();
                 }),
                 _(this, 'getElementsProps', () => {
@@ -7749,7 +7754,7 @@ Valid keys: ` +
                 { beaconComponent: a, tooltipComponent: s, ...c } = i,
                 l;
               if (s) {
-                let p = {
+                const p = {
                   ...this.getElementsProps(),
                   continuous: e,
                   index: t,
@@ -7777,7 +7782,7 @@ Valid keys: ` +
                 _(this, 'scope', null),
                 _(this, 'tooltip', null),
                 _(this, 'handleClickHoverBeacon', (e) => {
-                  let { step: t, store: n } = this.props;
+                  const { step: t, store: n } = this.props;
                   (e.type === 'mouseenter' && t.event !== 'hover') ||
                     n.update({ lifecycle: k.TOOLTIP });
                 }),
@@ -7786,7 +7791,7 @@ Valid keys: ` +
                 }),
                 _(this, 'setPopper', (e, t) => {
                   var n;
-                  let {
+                  const {
                     action: r,
                     lifecycle: o,
                     step: i,
@@ -7804,7 +7809,7 @@ Valid keys: ` +
                       i.floaterProps.getPopper(e, t);
                 }),
                 _(this, 'renderTooltip', (e) => {
-                  let {
+                  const {
                     continuous: t,
                     helpers: n,
                     index: r,
@@ -7824,7 +7829,7 @@ Valid keys: ` +
                 });
             }
             componentDidMount() {
-              let { debug: e, index: t } = this.props;
+              const { debug: e, index: t } = this.props;
               Ae({
                 title: `step:${t}`,
                 data: [{ key: 'props', value: this.props }],
@@ -7833,7 +7838,7 @@ Valid keys: ` +
             }
             componentDidUpdate(e) {
               var t;
-              let {
+              const {
                   action: n,
                   callback: r,
                   continuous: o,
@@ -7871,7 +7876,7 @@ Valid keys: ` +
                   d.update({ lifecycle: k.READY }),
                 v)
               ) {
-                let O = _e(u.target),
+                const O = _e(u.target),
                   B = !!O;
                 B && wa(O)
                   ? (h('status', j.READY, j.RUNNING) ||
@@ -7910,11 +7915,11 @@ Valid keys: ` +
               (e = this.scope) == null || e.removeScope();
             }
             get open() {
-              let { lifecycle: e, step: t } = this.props;
+              const { lifecycle: e, step: t } = this.props;
               return pr(t) || e === k.TOOLTIP;
             }
             render() {
-              let {
+              const {
                   continuous: e,
                   debug: t,
                   index: n,
@@ -7967,11 +7972,11 @@ Valid keys: ` +
                 _(this, 'helpers'),
                 _(this, 'store'),
                 _(this, 'callback', (a) => {
-                  let { callback: s } = this.props;
+                  const { callback: s } = this.props;
                   C.function(s) && s(a);
                 }),
                 _(this, 'handleKeyboard', (a) => {
-                  let { index: s, lifecycle: c } = this.state,
+                  const { index: s, lifecycle: c } = this.state,
                     { steps: l } = this.props,
                     p = l[s];
                   c === k.TOOLTIP &&
@@ -7981,7 +7986,7 @@ Valid keys: ` +
                     this.store.close('keyboard');
                 }),
                 _(this, 'handleClickOverlay', () => {
-                  let { index: a } = this.state,
+                  const { index: a } = this.state,
                     { steps: s } = this.props;
                   Ue(this.props, s[a]).disableOverlayClose ||
                     this.helpers.close('overlay');
@@ -7989,10 +7994,10 @@ Valid keys: ` +
                 _(this, 'syncState', (a) => {
                   this.setState(a);
                 });
-              let { debug: t, getHelpers: n, run: r, stepIndex: o } = e;
+              const { debug: t, getHelpers: n, run: r, stepIndex: o } = e;
               (this.store = Ba({ ...e, controlled: r && C.number(o) })),
                 (this.helpers = this.store.getHelpers());
-              let { addListener: i } = this.store;
+              const { addListener: i } = this.store;
               Ae({
                 title: 'init',
                 data: [
@@ -8007,7 +8012,7 @@ Valid keys: ` +
             }
             componentDidMount() {
               if (!Ce()) return;
-              let {
+              const {
                   debug: e,
                   disableCloseOnEsc: t,
                   run: n,
@@ -8024,7 +8029,7 @@ Valid keys: ` +
             }
             componentDidUpdate(e, t) {
               if (!Ce()) return;
-              let {
+              const {
                   action: n,
                   controlled: r,
                   index: o,
@@ -8071,12 +8076,12 @@ Valid keys: ` +
                   type: pe.TARGET_NOT_FOUND,
                   step: O,
                 }));
-              let H = { ...this.state, index: o, step: O };
+              const H = { ...this.state, index: o, step: O };
               if (
                 m('action', [$.NEXT, $.PREV, $.SKIP, $.CLOSE]) &&
                 m('status', j.PAUSED)
               ) {
-                let te = Ue(this.props, p[t.index]);
+                const te = Ue(this.props, p[t.index]);
                 this.callback({
                   ...H,
                   index: t.index,
@@ -8086,7 +8091,7 @@ Valid keys: ` +
                 });
               }
               if (m('status', [j.FINISHED, j.SKIPPED])) {
-                let te = Ue(this.props, p[t.index]);
+                const te = Ue(this.props, p[t.index]);
                 r ||
                   this.callback({
                     ...H,
@@ -8114,7 +8119,7 @@ Valid keys: ` +
                   this.store.update({ lifecycle: k.READY });
             }
             componentWillUnmount() {
-              let { disableCloseOnEsc: e } = this.props;
+              const { disableCloseOnEsc: e } = this.props;
               e ||
                 document.body.removeEventListener(
                   'keydown',
@@ -8122,7 +8127,7 @@ Valid keys: ` +
                 );
             }
             scrollToStep(e) {
-              let { index: t, lifecycle: n, status: r } = this.state,
+              const { index: t, lifecycle: n, status: r } = this.state,
                 {
                   debug: o,
                   disableScrollParentFix: i = !1,
@@ -8154,15 +8159,15 @@ Valid keys: ` +
                   ],
                   debug: o,
                 });
-                let N = this.store.getPopper('beacon'),
+                const N = this.store.getPopper('beacon'),
                   v = this.store.getPopper('tooltip');
                 if (n === k.BEACON && N) {
-                  let { offsets: T, placement: m } = N;
+                  const { offsets: T, placement: m } = N;
                   !['bottom'].includes(m) &&
                     !f &&
                     (b = Math.floor(T.popper.top - s));
                 } else if (n === k.TOOLTIP && v) {
-                  let { flipped: T, offsets: m, placement: g } = v;
+                  const { flipped: T, offsets: m, placement: g } = v;
                   ['top', 'right', 'left'].includes(g) && !T && !f
                     ? (b = Math.floor(m.popper.top - s))
                     : (b -= p.spotlightPadding);
@@ -8180,7 +8185,7 @@ Valid keys: ` +
             }
             render() {
               if (!Ce()) return null;
-              let { index: e, lifecycle: t, status: n } = this.state,
+              const { index: e, lifecycle: t, status: n } = this.state,
                 {
                   continuous: r = !1,
                   debug: o = !1,
@@ -8191,7 +8196,7 @@ Valid keys: ` +
                 c = n === j.RUNNING,
                 l = {};
               if (c && s[e]) {
-                let p = Ue(this.props, s[e]);
+                const p = Ue(this.props, s[e]);
                 (l.step = q(Xa, {
                   ...this.state,
                   callback: this.callback,
@@ -8314,7 +8319,7 @@ Valid keys: ` +
             tooltipProps: i,
           }) => (
             ae(() => {
-              let a = document.createElement('style');
+              const a = document.createElement('style');
               return (
                 (a.id = '#sb-onboarding-arrow-style'),
                 (a.innerHTML = `
@@ -8336,7 +8341,9 @@ Valid keys: ` +
     `),
                 document.head.appendChild(a),
                 () => {
-                  let s = document.querySelector('#sb-onboarding-arrow-style');
+                  const s = document.querySelector(
+                    '#sb-onboarding-arrow-style',
+                  );
                   s && s.remove();
                 }
               );
@@ -8501,18 +8508,18 @@ Valid keys: ` +
             },
           }))),
           (vs = ({ onDismiss: e, duration: t = 6e3 }) => {
-            let [n, r] = ue(-4e5 / t),
+            const [n, r] = ue(-4e5 / t),
               [o, i] = ue(!0),
               a = n >= 100,
               s = Je(() => {
                 i(!1);
-                let c = setTimeout(e, 1500);
+                const c = setTimeout(e, 1500);
                 return () => clearTimeout(c);
               }, [e]);
             return (
               ae(() => {
                 if (!t) return;
-                let c = 1e3 / 50,
+                const c = 1e3 / 50,
                   l = 100 / (t / c),
                   p = setInterval(() => r((u) => u + l), c);
                 return () => clearInterval(p);
@@ -8688,7 +8695,7 @@ Valid keys: ` +
       } = __STORYBOOK_API__;
     var Ts = sn(() => Promise.resolve().then(() => (ao(), io)));
     fn.register('@storybook/addon-onboarding', async (e) => {
-      let t = e.getUrlState(),
+      const t = e.getUrlState(),
         n = t.path === '/onboarding' || t.queryParams.onboarding === 'true';
       e.once(pn, () => {
         if (
@@ -8706,7 +8713,7 @@ Valid keys: ` +
         e.togglePanel(!0),
           e.togglePanelPosition('bottom'),
           e.setSelectedPanel('addon-controls');
-        let r = document.createElement('div');
+        const r = document.createElement('div');
         (r.id = 'storybook-addon-onboarding'),
           document.body.appendChild(r),
           Me.render(

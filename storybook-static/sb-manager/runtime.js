@@ -19,7 +19,7 @@ var a = (e, t) => tn(e, 'name', { value: t, configurable: !0 }),
 var Ee = (e, t) => () => (t || e((t = { exports: {} }).exports, t), t.exports);
 var zd = (e, t, o, i) => {
   if ((t && typeof t == 'object') || typeof t == 'function')
-    for (let n of Fd(t))
+    for (const n of Fd(t))
       !Bd.call(e, n) &&
         n !== o &&
         tn(e, n, {
@@ -496,7 +496,7 @@ var jn = Ee((Wn) => {
       0, 1, 0,
     ]);
   function xm(e) {
-    let t = e.length;
+    const t = e.length;
     if (t === 0) return '';
     let o = '',
       i = 0,
@@ -525,7 +525,7 @@ var jn = Ee((Wn) => {
         continue;
       }
       if ((++n, n >= t)) throw new Error('URI malformed');
-      let l = e.charCodeAt(n) & 1023;
+      const l = e.charCodeAt(n) & 1023;
       (i = n + 1),
         (r = 65536 + (((r & 1023) << 10) | l)),
         (o +=
@@ -596,7 +596,7 @@ var Kn = Ee((cr) => {
   a(_m, 'isPrototypeKey');
   function wm(e, t, o, i, n) {
     if (_m(t)) return e;
-    let r = e[t];
+    const r = e[t];
     return typeof r == 'object' && r !== null
       ? r
       : !i &&
@@ -629,7 +629,7 @@ var Kn = Ee((cr) => {
     let b = '',
       I = !0,
       _ = !1;
-    for (let m in e) {
+    for (const m in e) {
       let v = e[m],
         S;
       i
@@ -759,12 +759,12 @@ var Ll = Ee((ct) => {
     Pt = ur(),
     Al = Lm(Pl()),
     Nm = /* @__PURE__ */ a((e) => {
-      let t = Number(e);
+      const t = Number(e);
       return Number.isNaN(t) ? e : t;
     }, 'numberKeyDeserializer');
   ct.numberKeyDeserializer = Nm;
   var Rm = /* @__PURE__ */ a((e) => {
-    let t = Number(e);
+    const t = Number(e);
     return Number.isNaN(t) ? e : t;
   }, 'numberValueDeserializer');
   ct.numberValueDeserializer = Rm;
@@ -777,7 +777,7 @@ var Ll = Ee((ct) => {
   }
   a(dr, 'computeKeySlice');
   function Fm(e, t) {
-    let {
+    const {
         valueDeserializer: o = Pt.defaultOptions.valueDeserializer,
         keyDeserializer: i = Pt.defaultOptions.keyDeserializer,
         arrayRepeatSyntax: n = Pt.defaultOptions.arrayRepeatSyntax,
@@ -826,9 +826,9 @@ var Ll = Ee((ct) => {
             ((y = e.slice(b + 1, V)),
             k && (y = y.replace(Dl, ' ')),
             T && (y = (0, Al.default)(y) || y));
-          let X = o(y, v);
+          const X = o(y, v);
           if (l) {
-            let H = _[v];
+            const H = _[v];
             H === void 0
               ? M > -1
                 ? (_[v] = [X])
@@ -920,7 +920,7 @@ var Nl = Ee((Un) => {
   var Hm = Kn();
   function Bm(e, t) {
     if (e === null || typeof e != 'object') return '';
-    let o = t ?? {};
+    const o = t ?? {};
     return (0, Hm.stringifyObject)(e, o);
   }
   a(Bm, 'stringify');
@@ -3830,7 +3830,7 @@ var Qe = '@media (min-width: 600px)';
 
 // src/manager/components/hooks/useMedia.tsx
 function Ba(e) {
-  let t = /* @__PURE__ */ a(
+  const t = /* @__PURE__ */ a(
       (r) => (typeof window < 'u' ? window.matchMedia(r).matches : !1),
       'getMatches',
     ),
@@ -3841,7 +3841,7 @@ function Ba(e) {
   return (
     a(n, 'handleChange'),
     j(() => {
-      let r = window.matchMedia(e);
+      const r = window.matchMedia(e);
       return (
         n(),
         r.addEventListener('change', n),
@@ -3867,7 +3867,7 @@ var za = jt({
     isMobile: !1,
   }),
   Wa = /* @__PURE__ */ a(({ children: e }) => {
-    let [t, o] = $(!1),
+    const [t, o] = $(!1),
       [i, n] = $(!1),
       [r, l] = $(!1),
       u = Ba(`(min-width: ${600}px)`),
@@ -4735,7 +4735,7 @@ var Lf = It({
   })),
   Pn = /* @__PURE__ */ a(
     ({ icon: e, content: { headline: t, subHeadline: o } }) => {
-      let i = Ae(),
+      const i = Ae(),
         n = i.base === 'dark' ? i.color.mediumdark : i.color.mediumlight;
       return /* @__PURE__ */ s.createElement(
         s.Fragment,
@@ -4800,7 +4800,7 @@ var Lf = It({
       onDismissNotification: u,
       zIndex: c,
     }) => {
-      let p = A(() => {
+      const p = A(() => {
           u(r), i && i({ dismissed: !1, timeout: !0 });
         }, [r, u, i]),
         d = Y(null);
@@ -4808,7 +4808,7 @@ var Lf = It({
         if (t)
           return (d.current = setTimeout(p, t)), () => clearTimeout(d.current);
       }, [t, p]);
-      let g = A(() => {
+      const g = A(() => {
         clearTimeout(d.current), u(r), i && i({ dismissed: !0, timeout: !1 });
       }, [r, u, i]);
       return o
@@ -4842,7 +4842,7 @@ var Lf = It({
 
 // src/manager/components/notifications/NotificationList.tsx
 var ir = /* @__PURE__ */ a(({ notifications: e, clearNotification: t }) => {
-    let { isMobile: o } = ge();
+    const { isMobile: o } = ge();
     return /* @__PURE__ */ s.createElement(
       Kf,
       { isMobile: o },
@@ -5244,7 +5244,7 @@ var Ct = ut;
 
 // src/manager/components/upgrade/UpgradeBlock.tsx
 var sr = /* @__PURE__ */ a(({ onNavigateToWhatsNew: e }) => {
-    let t = oe(),
+    const t = oe(),
       [o, i] = $('npm');
     return /* @__PURE__ */ s.createElement(
       Gf,
@@ -5331,7 +5331,7 @@ pgrade`,
 
 // src/manager/components/mobile/about/MobileAbout.tsx
 var ul = /* @__PURE__ */ a(() => {
-    let { isMobileAboutOpen: e, setMobileAboutOpen: t } = ge(),
+    const { isMobileAboutOpen: e, setMobileAboutOpen: t } = ge(),
       o = Y(null);
     return /* @__PURE__ */ s.createElement(
       Ct,
@@ -5493,7 +5493,7 @@ cumentation',
 
 // src/manager/components/mobile/navigation/MobileMenuDrawer.tsx
 var cl = /* @__PURE__ */ a(({ children: e }) => {
-    let t = Y(null),
+    const t = Y(null),
       o = Y(null),
       i = Y(null),
       {
@@ -5625,7 +5625,7 @@ var cl = /* @__PURE__ */ a(({ children: e }) => {
 
 // src/manager/components/mobile/navigation/MobileNavigation.tsx
 function rm(e, t) {
-  let o = { ...(e || {}) };
+  const o = { ...(e || {}) };
   return (
     Object.values(t).forEach((i) => {
       i.index && Object.assign(o, i.index);
@@ -5635,7 +5635,7 @@ function rm(e, t) {
 }
 a(rm, 'combineIndexes');
 var nm = /* @__PURE__ */ a(() => {
-    let { index: e, refs: t } = Pe(),
+    const { index: e, refs: t } = Pe(),
       o = oe(),
       i = o.getCurrentStoryData();
     if (!i) return '';
@@ -5647,7 +5647,7 @@ var nm = /* @__PURE__ */ a(() => {
     return r;
   }, 'useFullStoryName'),
   pl = /* @__PURE__ */ a(({ menu: e, panel: t, showPanel: o }) => {
-    let {
+    const {
         isMobileMenuOpen: i,
         isMobilePanelOpen: n,
         setMobileMenuOpen: r,
@@ -5736,7 +5736,7 @@ function hl(e, t, o) {
 }
 a(hl, 'interpolate');
 function gl({ setState: e, isPanelShown: t, isDesktop: o }) {
-  let i = Y(null),
+  const i = Y(null),
     n = Y(null);
   return (
     j(() => {
@@ -5789,7 +5789,7 @@ function gl({ setState: e, isPanelShown: t, isDesktop: o }) {
           }
           e((y) => {
             if (c === l) {
-              let f = h.clientX;
+              const f = h.clientX;
               return f === y.navSize
                 ? y
                 : f <= dl
@@ -5809,7 +5809,7 @@ function gl({ setState: e, isPanelShown: t, isDesktop: o }) {
                       };
             }
             if (c === r) {
-              let f =
+              const f =
                   y.panelPosition === 'bottom'
                     ? 'bottomPanelHeight'
                     : 'rightPanelWidth',
@@ -5830,7 +5830,7 @@ function gl({ setState: e, isPanelShown: t, isDesktop: o }) {
                   ...y,
                   [f]: hl(fl, b, lr),
                 };
-              let I =
+              const I =
                 // @ts-expect-error (non strict)
                 y.panelPosition === 'bottom'
                   ? h.view.innerHeight
@@ -5880,7 +5880,7 @@ var um = 100,
       isDesktop: o,
       hasTab: i,
     }) => {
-      let n = s.useRef(e),
+      const n = s.useRef(e),
         [r, l] = $({
           ...e,
           isDragging: !1,
@@ -5896,7 +5896,7 @@ var um = 100,
             yl(e, r)
           )
             return;
-          let f = {
+          const f = {
             navSize: r.navSize,
             bottomPanelHeight: r.bottomPanelHeight,
             rightPanelWidth: r.rightPanelWidth,
@@ -5907,7 +5907,7 @@ var um = 100,
           }),
             t(f);
         }, [r, t]);
-      let u = e.viewMode !== 'story' && e.viewMode !== 'docs',
+      const u = e.viewMode !== 'story' && e.viewMode !== 'docs',
         c = e.viewMode === 'story' && !i,
         { panelResizerRef: p, sidebarResizerRef: d } = gl({
           setState: l,
@@ -5935,7 +5935,7 @@ var um = 100,
   ),
   vl = /* @__PURE__ */ a(
     ({ managerLayoutState: e, setManagerLayoutState: t, hasTab: o, ...i }) => {
-      let { isDesktop: n, isMobile: r } = ge(),
+      const { isDesktop: n, isMobile: r } = ge(),
         {
           navSize: l,
           rightPanelWidth: u,
@@ -6277,7 +6277,7 @@ var Hn = class Hn extends Re {
   }
   // @ts-expect-error (we know this is broken)
   render() {
-    let { hasError: t } = this.state,
+    const { hasError: t } = this.state,
       { children: o } = this.props;
     return t
       ? /* @__PURE__ */ s.createElement('h1', null, 'Something went wrong.')
@@ -6295,7 +6295,7 @@ var Rn = Hn,
       panelPosition: n = 'right',
       absolute: r = !0,
     }) => {
-      let { isDesktop: l, setMobilePanelOpen: u } = ge();
+      const { isDesktop: l, setMobilePanelOpen: u } = ge();
       return /* @__PURE__ */ s.createElement(
         Ua,
         {
@@ -6388,7 +6388,7 @@ var gm = x.div({
 
 // src/manager/container/Panel.tsx
 var ym = /* @__PURE__ */ a((e) => {
-    let t = oe(),
+    const t = oe(),
       o = Pe(),
       [i, n] = $(t.getCurrentStoryData());
     aa(
@@ -6399,7 +6399,7 @@ var ym = /* @__PURE__ */ a((e) => {
       },
       [],
     );
-    let { parameters: r, type: l } = i ?? {},
+    const { parameters: r, type: l } = i ?? {},
       u = K(
         () => ({
           onSelect: /* @__PURE__ */ a((p) => t.setSelectedPanel(p), 'onSelect'),
@@ -6415,12 +6415,12 @@ var ym = /* @__PURE__ */ a((e) => {
         [t],
       ),
       c = K(() => {
-        let p = t.getElements(Te.PANEL);
+        const p = t.getElements(Te.PANEL);
         if (!p || l !== 'story') return p;
-        let d = {};
+        const d = {};
         return (
           Object.entries(p).forEach(([g, h]) => {
-            let { paramKey: y } = h;
+            const { paramKey: y } = h;
             (y && r && r[y] && r[y].disable) ||
               h.disabled === !0 ||
               (typeof h.disabled == 'function' && h.disabled(r)) ||
@@ -6488,7 +6488,7 @@ a(_l, 'IFrame');
 // src/manager/components/preview/utils/stringifyQueryParams.tsx
 var Fl = ze(Rl(), 1);
 var Hl = /* @__PURE__ */ a((e) => {
-  let t = (0, Fl.stringify)(e);
+  const t = (0, Fl.stringify)(e);
   return t === '' ? '' : `&${t}`;
 }, 'stringifyQueryParams');
 
@@ -6539,7 +6539,7 @@ var Km = /* @__PURE__ */ a(
       baseUrl: r,
       storyId: l = '*',
     }) => {
-      let u = e[i]?.version,
+      const u = e[i]?.version,
         c = Hl({
           ...n,
           ...(u && { version: u }),
@@ -6558,10 +6558,10 @@ var Km = /* @__PURE__ */ a(
             viewMode: o,
           })),
         g.forEach((h) => {
-          let y = `storybook-ref-${h.id}`,
+          const y = `storybook-ref-${h.id}`,
             f = d[y]?.split('/iframe.html')[0];
           if (!f || h.url !== f) {
-            let b = `${h.url}/iframe.html?id=${l}&viewMode=${o}&refId=${h.id}${c}`;
+            const b = `${h.url}/iframe.html?id=${l}&viewMode=${o}&refId=${h.id}${c}`;
             d[y] = b;
           }
         }),
@@ -6756,7 +6756,7 @@ var nh = x(te)(({ theme: e, animating: t, disabled: o }) => ({
     },
   })),
   ih = /* @__PURE__ */ a(({ api: e, state: t }) => {
-    let { storyId: o } = t;
+    const { storyId: o } = t;
     return {
       storyId: o,
       remount: /* @__PURE__ */ a(
@@ -6780,7 +6780,7 @@ var nh = x(te)(({ theme: e, animating: t, disabled: o }) => ({
           he,
           { filter: ih },
           ({ remount: e, storyId: t, api: o }) => {
-            let [i, n] = $(!1),
+            const [i, n] = $(!1),
               r = /* @__PURE__ */ a(() => {
                 t && e();
               }, 'remountComponent');
@@ -6819,7 +6819,7 @@ var go = 1,
       this.set = /* @__PURE__ */ a((o) => this.setState({ value: o }), 'set');
     }
     render() {
-      let { children: o, shouldScale: i } = this.props,
+      const { children: o, shouldScale: i } = this.props,
         { set: n } = this,
         { value: r } = this.state;
       return /* @__PURE__ */ s.createElement(
@@ -6857,7 +6857,7 @@ var fr = Yn,
   );
 var ah = no(
   /* @__PURE__ */ a(function ({ set: t, value: o }) {
-    let i = A(
+    const i = A(
         (l) => {
           l.preventDefault(), t(0.8 * o);
         },
@@ -6926,7 +6926,7 @@ var uh = /* @__PURE__ */ a(
       'match',
     ),
     render: /* @__PURE__ */ a(() => {
-      let { isMobile: e } = ge();
+      const { isMobile: e } = ge();
       return e
         ? null
         : /* @__PURE__ */ s.createElement(
@@ -7033,7 +7033,7 @@ bar',
     }, 'Tools'),
   );
 function ch(e, t) {
-  let o = t?.type === 'story' && t?.prepared ? t?.parameters : {},
+  const o = t?.type === 'story' && t?.prepared ? t?.parameters : {},
     i = 'toolbar' in o ? o.toolbar : void 0,
     { toolbar: n } = Ye.getConfig(),
     r = Bo(n || {}, i || {});
@@ -7041,7 +7041,7 @@ function ch(e, t) {
 }
 a(ch, 'toolbarItemHasBeenExcluded');
 function qn(e, t, o, i, n, r) {
-  let l = /* @__PURE__ */ a(
+  const l = /* @__PURE__ */ a(
     (u) =>
       u &&
       (!u.match ||
@@ -7252,7 +7252,7 @@ var hh = /* @__PURE__ */ a(
           if (u && r) {
             if (l === v.current) return;
             if (((v.current = l), r.match(/docs|story/))) {
-              let { refId: S, id: E } = u;
+              const { refId: S, id: E } = u;
               o.emit(ra, {
                 storyId: E,
                 viewMode: r,
@@ -7321,7 +7321,7 @@ var gh = /* @__PURE__ */ a(
         queryParams: p,
         previewInitialized: d,
       }) => {
-        let g = 'canvas',
+        const g = 'canvas',
           [h, y] = $(void 0);
         j(() => {
           if (se.CONFIG_TYPE === 'DEVELOPMENT')
@@ -7331,7 +7331,7 @@ var gh = /* @__PURE__ */ a(
               });
             } catch {}
         }, []);
-        let f = !!n[u] && !n[u].previewInitialized,
+        const f = !!n[u] && !n[u].previewInitialized,
           b = !(h?.value === 1 || h === void 0),
           I = !u && (!d || b),
           _ = (i && f) || I;
@@ -7373,10 +7373,10 @@ var gh = /* @__PURE__ */ a(
   'Canvas',
 );
 function cu(e, t) {
-  let { previewTabs: o } = Ye.getConfig(),
+  const { previewTabs: o } = Ye.getConfig(),
     i = t ? t.previewTabs : void 0;
   if (o || i) {
-    let n = Bo(o || {}, i || {}),
+    const n = Bo(o || {}, i || {}),
       r = Object.keys(n).map((l, u) => ({
         index: u,
         ...(typeof n[l] == 'string' ? { title: n[l] } : n[l]),
@@ -7384,19 +7384,19 @@ function cu(e, t) {
       }));
     return e
       .filter((l) => {
-        let u = r.find((c) => c.id === l.id);
+        const u = r.find((c) => c.id === l.id);
         return u === void 0 || u.id === 'canvas' || !u.hidden;
       })
       .map((l, u) => ({ ...l, index: u }))
       .sort((l, u) => {
-        let c = r.find((h) => h.id === l.id),
+        const c = r.find((h) => h.id === l.id),
           p = c ? c.index : r.length + l.index,
           d = r.find((h) => h.id === u.id),
           g = d ? d.index : r.length + u.index;
         return p - g;
       })
       .map((l) => {
-        let u = r.find((c) => c.id === l.id);
+        const u = r.find((c) => c.id === l.id);
         return u
           ? {
               ...l,
@@ -7475,7 +7475,7 @@ var bh = [lu()],
   ),
   kh = /* @__PURE__ */ a((e) => {
     if (e?.type === 'story' || e?.type === 'docs') {
-      let { title: t, name: o } = e;
+      const { title: t, name: o } = e;
       return t && o ? Ch(`${t} - ${o} \u22C5 Storybook`) : 'Storybook';
     }
     return e?.name ? `${e.name} \u22C5 Storybook` : 'Storybook';
@@ -7551,10 +7551,10 @@ var bh = [lu()],
 
 // src/manager/hooks/useDebounce.ts
 function fu(e, t) {
-  let [o, i] = $(e);
+  const [o, i] = $(e);
   return (
     j(() => {
-      let n = setTimeout(() => {
+      const n = setTimeout(() => {
         i(e);
       }, t);
       return () => {
@@ -7568,7 +7568,7 @@ a(fu, 'useDebounce');
 
 // src/manager/hooks/useMeasure.tsx
 function mu() {
-  let [e, t] = s.useState({
+  const [e, t] = s.useState({
       width: null,
       height: null,
     }),
@@ -7579,9 +7579,9 @@ function mu() {
         (o.current && (o.current.disconnect(), (o.current = null)),
         n?.nodeType === Node.ELEMENT_NODE)
       ) {
-        let r = new ResizeObserver(([l]) => {
+        const r = new ResizeObserver(([l]) => {
           if (l && l.borderBoxSize) {
-            let { inlineSize: u, blockSize: c } = l.borderBoxSize[0];
+            const { inlineSize: u, blockSize: c } = l.borderBoxSize[0];
             t({ width: u, height: c });
           }
         });
@@ -7601,7 +7601,7 @@ function At(e, t, o) {
     var r, l, u, c;
     let p;
     o.key && (r = o.debug) != null && r.call(o) && (p = Date.now());
-    let d = e();
+    const d = e();
     if (!(d.length !== i.length || d.some((y, f) => i[f] !== y))) return n;
     i = d;
     let h;
@@ -7610,7 +7610,7 @@ function At(e, t, o) {
       (n = t(...d)),
       o.key && (u = o.debug) != null && u.call(o))
     ) {
-      let y = Math.round((Date.now() - p) * 100) / 100,
+      const y = Math.round((Date.now() - p) * 100) / 100,
         f = Math.round((Date.now() - h) * 100) / 100,
         b = f / 16,
         I = /* @__PURE__ */ a((_, m) => {
@@ -7643,25 +7643,25 @@ var hu = /* @__PURE__ */ a((e, t) => Math.abs(e - t) < 1, 'approxEqual');
 // ../node_modules/@tanstack/virtual-core/dist/esm/index.js
 var Ah = /* @__PURE__ */ a((e) => e, 'defaultKeyExtractor'),
   Dh = /* @__PURE__ */ a((e) => {
-    let t = Math.max(e.startIndex - e.overscan, 0),
+    const t = Math.max(e.startIndex - e.overscan, 0),
       o = Math.min(e.endIndex + e.overscan, e.count - 1),
       i = [];
     for (let n = t; n <= o; n++) i.push(n);
     return i;
   }, 'defaultRangeExtractor'),
   gu = /* @__PURE__ */ a((e, t) => {
-    let o = e.scrollElement;
+    const o = e.scrollElement;
     if (!o) return;
-    let i = /* @__PURE__ */ a((r) => {
-      let { width: l, height: u } = r;
+    const i = /* @__PURE__ */ a((r) => {
+      const { width: l, height: u } = r;
       t({ width: Math.round(l), height: Math.round(u) });
     }, 'handler');
     if ((i(o.getBoundingClientRect()), typeof ResizeObserver > 'u'))
       return () => {};
-    let n = new ResizeObserver((r) => {
-      let l = r[0];
+    const n = new ResizeObserver((r) => {
+      const l = r[0];
       if (l?.borderBoxSize) {
-        let u = l.borderBoxSize[0];
+        const u = l.borderBoxSize[0];
         if (u) {
           i({ width: u.inlineSize, height: u.blockSize });
           return;
@@ -7677,9 +7677,9 @@ var Ah = /* @__PURE__ */ a((e) => e, 'defaultKeyExtractor'),
     );
   }, 'observeElementRect');
 var yu = /* @__PURE__ */ a((e, t) => {
-  let o = e.scrollElement;
+  const o = e.scrollElement;
   if (!o) return;
-  let i = /* @__PURE__ */ a(() => {
+  const i = /* @__PURE__ */ a(() => {
     t(o[e.options.horizontal ? 'scrollLeft' : 'scrollTop']);
   }, 'handler');
   return (
@@ -7694,7 +7694,7 @@ var yu = /* @__PURE__ */ a((e, t) => {
 }, 'observeElementOffset');
 var Mh = /* @__PURE__ */ a((e, t, o) => {
   if (t?.borderBoxSize) {
-    let i = t.borderBoxSize[0];
+    const i = t.borderBoxSize[0];
     if (i)
       return Math.round(i[o.options.horizontal ? 'inlineSize' : 'blockSize']);
   }
@@ -7704,7 +7704,7 @@ var Mh = /* @__PURE__ */ a((e, t, o) => {
 }, 'measureElement');
 var bu = /* @__PURE__ */ a((e, { adjustments: t = 0, behavior: o }, i) => {
     var n, r;
-    let l = e + t;
+    const l = e + t;
     (r = (n = i.scrollElement) == null ? void 0 : n.scrollTo) == null ||
       r.call(n, {
         [i.options.horizontal ? 'left' : 'top']: l,
@@ -7821,7 +7821,7 @@ var bu = /* @__PURE__ */ a((e, { adjustments: t = 0, behavior: o }, i) => {
           }
         )),
         (this._willUpdate = () => {
-          let o = this.options.getScrollElement();
+          const o = this.options.getScrollElement();
           this.scrollElement !== o &&
             (this.cleanup(),
             (this.scrollElement = o),
@@ -7878,12 +7878,12 @@ var bu = /* @__PURE__ */ a((e, { adjustments: t = 0, behavior: o }, i) => {
           },
         )),
         (this.getFurthestMeasurement = (o, i) => {
-          let n = /* @__PURE__ */ new Map(),
+          const n = /* @__PURE__ */ new Map(),
             r = /* @__PURE__ */ new Map();
           for (let l = i - 1; l >= 0; l--) {
-            let u = o[l];
+            const u = o[l];
             if (n.has(u.lane)) continue;
-            let c = r.get(u.lane);
+            const c = r.get(u.lane);
             if (
               (c == null || u.end > c.end
                 ? r.set(u.lane, u)
@@ -7904,14 +7904,14 @@ var bu = /* @__PURE__ */ a((e, { adjustments: t = 0, behavior: o }, i) => {
             { count: o, paddingStart: i, scrollMargin: n, getItemKey: r },
             l,
           ) => {
-            let u =
+            const u =
               this.pendingMeasuredCacheIndexes.length > 0
                 ? Math.min(...this.pendingMeasuredCacheIndexes)
                 : 0;
             this.pendingMeasuredCacheIndexes = [];
-            let c = this.measurementsCache.slice(0, u);
+            const c = this.measurementsCache.slice(0, u);
             for (let p = u; p < o; p++) {
-              let d = r(p),
+              const d = r(p),
                 g =
                   this.options.lanes === 1
                     ? c[p - 1]
@@ -7974,7 +7974,7 @@ var bu = /* @__PURE__ */ a((e, { adjustments: t = 0, behavior: o }, i) => {
           },
         )),
         (this.indexFromElement = (o) => {
-          let i = this.options.indexAttribute,
+          const i = this.options.indexAttribute,
             n = o.getAttribute(i);
           return n
             ? parseInt(n, 10)
@@ -7984,7 +7984,7 @@ var bu = /* @__PURE__ */ a((e, { adjustments: t = 0, behavior: o }, i) => {
               -1);
         }),
         (this._measureElement = (o, i) => {
-          let n = this.measurementsCache[this.indexFromElement(o)];
+          const n = this.measurementsCache[this.indexFromElement(o)];
           if (!n || !o.isConnected) {
             this.measureElementCache.forEach((u, c) => {
               u === o &&
@@ -7993,16 +7993,16 @@ var bu = /* @__PURE__ */ a((e, { adjustments: t = 0, behavior: o }, i) => {
             });
             return;
           }
-          let r = this.measureElementCache.get(n.key);
+          const r = this.measureElementCache.get(n.key);
           r !== o &&
             (r && this.observer.unobserve(r),
             this.observer.observe(o),
             this.measureElementCache.set(n.key, o));
-          let l = this.options.measureElement(o, i, this);
+          const l = this.options.measureElement(o, i, this);
           this.resizeItem(n, l);
         }),
         (this.resizeItem = (o, i) => {
-          let n = this.itemSizeCache.get(o.key) ?? o.size,
+          const n = this.itemSizeCache.get(o.key) ?? o.size,
             r = i - n;
           r !== 0 &&
             ((this.shouldAdjustScrollPositionOnItemSizeChange !== void 0
@@ -8022,9 +8022,9 @@ var bu = /* @__PURE__ */ a((e, { adjustments: t = 0, behavior: o }, i) => {
         (this.getVirtualItems = At(
           () => [this.getIndexes(), this.getMeasurements()],
           (o, i) => {
-            let n = [];
+            const n = [];
             for (let r = 0, l = o.length; r < l; r++) {
-              let u = o[r],
+              const u = o[r],
                 c = i[u];
               n.push(c);
             }
@@ -8036,11 +8036,11 @@ var bu = /* @__PURE__ */ a((e, { adjustments: t = 0, behavior: o }, i) => {
           },
         )),
         (this.getVirtualItemForOffset = (o) => {
-          let i = this.getMeasurements();
+          const i = this.getMeasurements();
           return hr(i[vu(0, i.length - 1, (n) => hr(i[n]).start, o)]);
         }),
         (this.getOffsetForAlignment = (o, i) => {
-          let n = this.getSize();
+          const n = this.getSize();
           i === 'auto' &&
             (o <= this.scrollOffset
               ? (i = 'start')
@@ -8052,7 +8052,7 @@ var bu = /* @__PURE__ */ a((e, { adjustments: t = 0, behavior: o }, i) => {
               : i === 'end'
                 ? (o = o - n)
                 : i === 'center' && (o = o - n / 2);
-          let r = this.options.horizontal ? 'scrollWidth' : 'scrollHeight',
+          const r = this.options.horizontal ? 'scrollWidth' : 'scrollHeight',
             u =
               (this.scrollElement
                 ? 'document' in this.scrollElement
@@ -8063,7 +8063,7 @@ var bu = /* @__PURE__ */ a((e, { adjustments: t = 0, behavior: o }, i) => {
         }),
         (this.getOffsetForIndex = (o, i = 'auto') => {
           o = Math.max(0, Math.min(o, this.options.count - 1));
-          let n = hr(this.getMeasurements()[o]);
+          const n = hr(this.getMeasurements()[o]);
           if (i === 'auto')
             if (
               n.end >=
@@ -8076,7 +8076,7 @@ var bu = /* @__PURE__ */ a((e, { adjustments: t = 0, behavior: o }, i) => {
             )
               i = 'start';
             else return [this.scrollOffset, i];
-          let r =
+          const r =
             i === 'end'
               ? n.end + this.options.scrollPaddingEnd
               : n.start - this.options.scrollPaddingStart;
@@ -8111,7 +8111,7 @@ var bu = /* @__PURE__ */ a((e, { adjustments: t = 0, behavior: o }, i) => {
               console.warn(
                 'The `smooth` scroll behavior is not fully supported with dynamic size.',
               );
-          let [r, l] = this.getOffsetForIndex(o, i);
+          const [r, l] = this.getOffsetForIndex(o, i);
           this._scrollToOffset(r, { adjustments: void 0, behavior: n }),
             n !== 'smooth' &&
               this.isDynamicMode() &&
@@ -8120,7 +8120,7 @@ var bu = /* @__PURE__ */ a((e, { adjustments: t = 0, behavior: o }, i) => {
                   ((this.scrollToIndexTimeoutId = null),
                   this.measureElementCache.has(this.options.getItemKey(o)))
                 ) {
-                  let [c] = this.getOffsetForIndex(o, l);
+                  const [c] = this.getOffsetForIndex(o, l);
                   hu(c, this.scrollOffset) ||
                     this.scrollToIndex(o, { align: l, behavior: n });
                 } else this.scrollToIndex(o, { align: l, behavior: n });
@@ -8177,7 +8177,7 @@ a(Qn, 'Virtualizer');
 var gr = Qn,
   vu = /* @__PURE__ */ a((e, t, o, i) => {
     for (; e <= t; ) {
-      let n = ((e + t) / 2) | 0,
+      const n = ((e + t) / 2) | 0,
         r = o(n);
       if (r < i) e = n + 1;
       else if (r > i) t = n - 1;
@@ -8202,7 +8202,7 @@ a(Lh, 'calculateRange');
 // ../node_modules/@tanstack/react-virtual/dist/esm/index.js
 var Nh = typeof document < 'u' ? ft : j;
 function Rh(e) {
-  let t = Vt(() => ({}), {})[1],
+  const t = Vt(() => ({}), {})[1],
     o = {
       ...e,
       onChange: /* @__PURE__ */ a((n, r) => {
@@ -8230,9 +8230,9 @@ a(xu, 'useVirtualizer');
 var Su = /* @__PURE__ */ a(
   ({ parentRef: e, rowVirtualizer: t, selectedItem: o }) => {
     j(() => {
-      let i = /* @__PURE__ */ a((n) => {
+      const i = /* @__PURE__ */ a((n) => {
         if (!e.current) return;
-        let r = t.options.count,
+        const r = t.options.count,
           l = document.activeElement,
           u = parseInt(l.getAttribute('data-index') || '-1', 10),
           c = l.tagName === 'INPUT',
@@ -8569,12 +8569,12 @@ var Bu = x(gs)(({ theme: e }) => ({
       onNewStory: i,
       errorItemId: n,
     }) {
-      let [r, l] = $(null),
+      const [r, l] = $(null),
         u = s.useRef(),
         c = K(
           () =>
             [...(o ?? [])].sort((f, b) => {
-              let I =
+              const I =
                   f.exportedComponents === null ||
                   f.exportedComponents?.length === 0,
                 _ = f.storyFileExists,
@@ -8606,7 +8606,7 @@ var Bu = x(gs)(({ theme: e }) => ({
           overscan: 2,
         });
       Su({ rowVirtualizer: d, parentRef: u, selectedItem: r });
-      let g = A(
+      const g = A(
           ({ virtualItem: f, searchResult: b, itemId: I }) => {
             b?.exportedComponents?.length > 1
               ? l((_) => (_ === f.index ? null : f.index))
@@ -8636,7 +8636,7 @@ var Bu = x(gs)(({ theme: e }) => ({
         ),
         y = A(
           ({ virtualItem: f, selected: b, searchResult: I }) => {
-            let _ = n === I.filepath,
+            const _ = n === I.filepath,
               m = b === f.index;
             return /* @__PURE__ */ s.createElement(
               br,
@@ -8690,7 +8690,7 @@ var Bu = x(gs)(({ theme: e }) => ({
                     },
                   },
                   I.exportedComponents?.map((v, S) => {
-                    let E = n === `${I.filepath}_${S}`,
+                    const E = n === `${I.filepath}_${S}`,
                       T =
                         S === 0
                           ? 'first'
@@ -8782,7 +8782,7 @@ var Bu = x(gs)(({ theme: e }) => ({
                       },
                     },
                     d.getVirtualItems().map((f) => {
-                      let b = c[f.index],
+                      const b = c[f.index],
                         I =
                           b.exportedComponents === null ||
                           b.exportedComponents?.length === 0,
@@ -9015,7 +9015,7 @@ var Wh = 418,
                   autoFocus: !0,
                   value: b,
                   onChange: (_) => {
-                    let m = _.target.value;
+                    const m = _.target.value;
                     I(m),
                       f(() => {
                         i(m);
@@ -9058,7 +9058,7 @@ var Wh = 418,
 // src/manager/components/sidebar/FileSearchModal.utils.tsx
 function ju(e) {
   return Object.keys(e).reduce((o, i) => {
-    let n = e[i];
+    const n = e[i];
     if (typeof n.control == 'object' && 'type' in n.control)
       switch (n.control.type) {
         case 'object':
@@ -9150,7 +9150,7 @@ var Xh = /* @__PURE__ */ a(
     'stringifyArgs',
   ),
   Vu = /* @__PURE__ */ a(({ open: e, onOpenChange: t }) => {
-    let [o, i] = $(!1),
+    const [o, i] = $(!1),
       [n, r] = $(''),
       l = fu(n, 600),
       u = ps(l),
@@ -9187,7 +9187,7 @@ var Xh = /* @__PURE__ */ a(
       }, [g, t]),
       I = A(() => {
         i(!0);
-        let m = Ye.getChannel(),
+        const m = Ye.getChannel(),
           v = /* @__PURE__ */ a((S) => {
             S.id === u &&
               (S.success ? y(S.payload.files) : d({ error: S.error }),
@@ -9218,7 +9218,7 @@ var Xh = /* @__PURE__ */ a(
           selectedItemId: T,
         }) => {
           try {
-            let C = Ye.getChannel(),
+            const C = Ye.getChannel(),
               k = await Ho(C, Xs, Zs, {
                 componentExportName: m,
                 componentFilePath: v,
@@ -9226,10 +9226,10 @@ var Xh = /* @__PURE__ */ a(
                 componentExportCount: E,
               });
             d(null);
-            let w = k.storyId;
+            const w = k.storyId;
             await xr(g.selectStory, w);
             try {
-              let P = (
+              const P = (
                   await Ho(C, Gs, Ys, {
                     storyId: w,
                   })
@@ -9245,7 +9245,7 @@ var Xh = /* @__PURE__ */ a(
           } catch (C) {
             switch (C?.payload?.type) {
               case 'STORY_FILE_EXISTS':
-                let k = C;
+                const k = C;
                 await xr(g.selectStory, k.payload.kind), b();
                 break;
               default:
@@ -9281,7 +9281,7 @@ var Ku = /* @__PURE__ */ a(
   ({ refId: e, itemId: t }) =>
     /* @__PURE__ */ s.createElement(Ut, {
       styles: ({ color: o }) => {
-        let i = we(0.85, o.secondary);
+        const i = we(0.85, o.secondary);
         return {
           [`[data-ref-id="${e}"][data-item-id="${t}"]:not([data-selected="true"])`]:
             {
@@ -9314,19 +9314,19 @@ var { document: Xn, window: Zh } = se,
   );
 var $u = (0, eo.default)(1e3)((e, t) => t[e]),
   Jh = (0, eo.default)(1e3)((e, t) => {
-    let o = $u(e, t);
+    const o = $u(e, t);
     return o && o.type !== 'root' ? $u(o.parent, t) : void 0;
   }),
   Yu = (0, eo.default)(1e3)((e, t) => {
-    let o = Jh(e, t);
+    const o = Jh(e, t);
     return o ? [o, ...Yu(o.id, t)] : [];
   }),
   bo = (0, eo.default)(1e3)((e, t) => Yu(t, e).map((o) => o.id)),
   it = (0, eo.default)(1e3)((e, t, o) => {
-    let i = e[t];
+    const i = e[t];
     return (i.type === 'story' || i.type === 'docs' ? [] : i.children).reduce(
       (r, l) => {
-        let u = e[l];
+        const u = e[l];
         return (
           !u ||
             (o && (u.type === 'story' || u.type === 'docs')) ||
@@ -9338,7 +9338,7 @@ var $u = (0, eo.default)(1e3)((e, t) => t[e]),
     );
   });
 function qu(e, t) {
-  let o = e.type !== 'root' && e.parent ? t.index[e.parent] : null;
+  const o = e.type !== 'root' && e.parent ? t.index[e.parent] : null;
   return o ? [...qu(o, t), o.name] : t.id === st ? [] : [t.title || t.id];
 }
 a(qu, 'getPath');
@@ -9353,9 +9353,9 @@ function Qu(e, t, o) {
 a(Qu, 'cycle');
 var Dt = /* @__PURE__ */ a((e, t = !1) => {
     if (!e) return;
-    let { top: o, bottom: i } = e.getBoundingClientRect();
+    const { top: o, bottom: i } = e.getBoundingClientRect();
     if (!o || !i) return;
-    let n =
+    const n =
       Xn?.querySelector('#sidebar-bottom-wrapper')?.getBoundingClientRect()
         .top ||
       Zh.innerHeight ||
@@ -9423,7 +9423,7 @@ var ec = [0, 0, 1, 1, 2, 3, 3, 3, 1, 1, 1, 2, 2, 2, 3],
     paddingRight: 20,
   }),
   tc = /* @__PURE__ */ a(({ size: e }) => {
-    let t = Math.ceil(e / ec.length),
+    const t = Math.ceil(e / ec.length),
       o = Array.from(Array(t)).fill(ec).flat().slice(0, e);
     return /* @__PURE__ */ s.createElement(
       _e,
@@ -9467,13 +9467,13 @@ var { window: oc } = se,
     }),
   ),
   rc = /* @__PURE__ */ a(({ loginUrl: e, id: t }) => {
-    let [o, i] = $(!1),
+    const [o, i] = $(!1),
       n = A(() => {
         oc.document.location.reload();
       }, []),
       r = A((l) => {
         l.preventDefault();
-        let u = oc.open(e, `storybook_auth_${t}`, 'resizable,scrollbars'),
+        const u = oc.open(e, `storybook_auth_${t}`, 'resizable,scrollbars'),
           c = setInterval(() => {
             u
               ? u.closed && (clearInterval(c), i(!0))
@@ -9760,8 +9760,8 @@ var { document: ig, window: sg } = se,
     },
   })),
   pg = /* @__PURE__ */ a(({ url: e, versions: t }) => {
-    let o = K(() => {
-      let i = Object.entries(t).find(([n, r]) => r === e);
+    const o = K(() => {
+      const i = Object.entries(t).find(([n, r]) => r === e);
       return i && i[0] ? i[0] : 'current';
     }, [e, t]);
     return /* @__PURE__ */ s.createElement(
@@ -9773,7 +9773,7 @@ var { document: ig, window: sg } = se,
   }, 'CurrentVersion'),
   ac = s.memo(
     cs(({ state: e, ...t }, o) => {
-      let i = oe(),
+      const i = oe(),
         n = K(() => Object.values(t.index || {}), [t.index]),
         r = K(() => n.filter((u) => u.type === 'component').length, [n]),
         l = K(
@@ -9865,7 +9865,7 @@ ready' &&
     }),
   ),
   dg = /* @__PURE__ */ a(({ url: e, componentCount: t, leafCount: o }) => {
-    let i = Ae();
+    const i = Ae();
     return /* @__PURE__ */ s.createElement(
       Nt,
       { href: e.replace(/\/?$/, '/index.html'), target: '_blank' },
@@ -9892,7 +9892,7 @@ book',
     );
   }, 'ReadyMessage'),
   fg = /* @__PURE__ */ a(({ url: e }) => {
-    let t = Ae();
+    const t = Ae();
     return /* @__PURE__ */ s.createElement(
       Nt,
       { href: e, target: '_blank' },
@@ -9905,10 +9905,10 @@ book',
     );
   }, 'SourceCodeMessage'),
   mg = /* @__PURE__ */ a(({ loginUrl: e, id: t }) => {
-    let o = Ae(),
+    const o = Ae(),
       i = A((n) => {
         n.preventDefault();
-        let r = sg.open(e, `storybook_auth_${t}`, 'resizable,scrollbars'),
+        const r = sg.open(e, `storybook_auth_${t}`, 'resizable,scrollbars'),
           l = setInterval(() => {
             r
               ? r.closed && (clearInterval(l), ig.location.reload())
@@ -9933,7 +9933,7 @@ book',
     );
   }, 'LoginRequiredMessage'),
   hg = /* @__PURE__ */ a(() => {
-    let e = Ae();
+    const e = Ae();
     return /* @__PURE__ */ s.createElement(
       Nt,
       {
@@ -9959,7 +9959,7 @@ Composition docs',
     );
   }, 'ReadDocsMessage'),
   gg = /* @__PURE__ */ a(({ url: e }) => {
-    let t = Ae();
+    const t = Ae();
     return /* @__PURE__ */ s.createElement(
       Nt,
       { href: e.replace(/\/?$/, '/index.html'), target: '_blank' },
@@ -9977,7 +9977,7 @@ Composition docs',
     );
   }, 'ErrorOccurredMessage'),
   yg = /* @__PURE__ */ a(({ url: e }) => {
-    let t = Ae();
+    const t = Ae();
     return /* @__PURE__ */ s.createElement(
       Nt,
       { href: e.replace(/\/?$/, '/index.html'), target: '_blank' },
@@ -9995,7 +9995,7 @@ Composition docs',
     );
   }, 'LoadingMessage'),
   bg = /* @__PURE__ */ a(() => {
-    let e = Ae();
+    const e = Ae();
     return /* @__PURE__ */ s.createElement(
       Nt,
       {
@@ -10227,7 +10227,7 @@ var xg = x(bs)({
 function Ir(e, t) {
   return Object.values(e).reduce((o, i) => {
     if (i.type === 'group' || i.type === 'component') {
-      let n = it(e, i.id, !1)
+      const n = it(e, i.id, !1)
           .map((l) => e[l])
           .filter((l) => l.type === 'story'),
         r = So(
@@ -10243,7 +10243,7 @@ a(Ir, 'getGroupStatus');
 
 // src/manager/components/sidebar/StatusButton.tsx
 var yc = /* @__PURE__ */ a(({ theme: e, status: t }) => {
-    let o =
+    const o =
       e.base === 'light'
         ? we(0.3, e.color.defaultText)
         : we(0.6, e.color.defaultText);
@@ -10315,7 +10315,7 @@ var Eg = {
     boxShadow: '0 0 5px 5px var(--tree-node-background-hover)',
   }),
   vc = /* @__PURE__ */ a((e, t, o) => {
-    let [i, n] = $(0),
+    const [i, n] = $(0),
       [r, l] = $(!1),
       u = K(
         () => ({
@@ -10333,7 +10333,7 @@ var Eg = {
       ),
       p =
         K(() => {
-          let d = o.getElements(Te.experimental_TEST_PROVIDER);
+          const d = o.getElements(Te.experimental_TEST_PROVIDER);
           return i ? xc(d, e) : [];
         }, [o, e, i]).length > 0 || t.length > 0;
     return K(
@@ -10370,7 +10370,7 @@ var Eg = {
     );
   }, 'useContextMenu'),
   Tg = /* @__PURE__ */ a(({ context: e, links: t, ...o }) => {
-    let { testProviders: i } = Pe(),
+    const { testProviders: i } = Pe(),
       n = xc(i, e),
       l = (Array.isArray(t[0]) ? t : [t]).concat([n]);
     return /* @__PURE__ */ s.createElement(gt, { ...o, links: l });
@@ -10379,7 +10379,7 @@ function xc(e, t) {
   return Object.entries(e)
     .map(([o, i]) => {
       if (!i) return null;
-      let n = i.sidebarContextMenu?.({ context: t, state: i });
+      const n = i.sidebarContextMenu?.({ context: t, state: i });
       return n
         ? {
             id: o,
@@ -10394,7 +10394,7 @@ a(xc, 'generateTestProviderLinks');
 // src/manager/components/sidebar/StatusContext.tsx
 var ei = jt({}),
   Sc = /* @__PURE__ */ a((e) => {
-    let { data: t, status: o, groupStatus: i } = ko(ei),
+    const { data: t, status: o, groupStatus: i } = ko(ei),
       n = {
         counts: { pending: 0, success: 0, error: 0, warn: 0, unknown: 0 },
         statuses: {
@@ -10406,8 +10406,8 @@ var ei = jt({}),
         },
       };
     if (t && o && i && ['pending', 'warn', 'error'].includes(i[e.id]))
-      for (let r of it(t, e.id, !1))
-        for (let l of Object.values(o[r] || {}))
+      for (const r of it(t, e.id, !1))
+        for (const l of Object.values(o[r] || {}))
           n.counts[l.status]++,
             (n.statuses[l.status][r] = n.statuses[l.status][r] || []),
             n.statuses[l.status][r].push(l);
@@ -10655,7 +10655,7 @@ function _r(e, t, { signal: o, edges: i } = {}) {
     b = /* @__PURE__ */ a(function (...I) {
       if (o?.aborted) return;
       (n = this), (r = I);
-      let _ = d == null;
+      const _ = d == null;
       g(), l && _ && c();
     }, 'debounced');
   return (
@@ -10696,7 +10696,7 @@ var kg = {
   },
   Og = { alt: !1, ctrl: !1, meta: !1, shift: !1 },
   vt = /* @__PURE__ */ a((e, t) => {
-    let { alt: o, ctrl: i, meta: n, shift: r } = e === !1 ? Og : e;
+    const { alt: o, ctrl: i, meta: n, shift: r } = e === !1 ? Og : e;
     return !(
       (typeof o == 'boolean' && o !== t.altKey) ||
       (typeof i == 'boolean' && i !== t.ctrlKey) ||
@@ -10719,7 +10719,7 @@ var { document: oi } = se,
       highlightedRef: i,
       rootIds: n,
     }) => {
-      let r = i.current?.refId === e ? bo(t, i.current?.itemId) : [];
+      const r = i.current?.refId === e ? bo(t, i.current?.itemId) : [];
       return [...n, ...r].reduce(
         // @ts-expect-error (non strict)
         (l, u) => Object.assign(l, { [u]: u in o ? o[u] : !0 }),
@@ -10742,7 +10742,7 @@ var { document: oi } = se,
       selectedStoryId: c,
       onSelectStoryId: p,
     }) => {
-      let d = oe(),
+      const d = oe(),
         [g, h] = Vt(
           (m, { ids: v, value: S }) =>
             v.reduce((E, T) => Object.assign(E, { [T]: S }), { ...m }),
@@ -10766,7 +10766,7 @@ var { document: oi } = se,
         b = A(
           ({ ids: m, value: v }) => {
             if ((h({ ids: m, value: v }), m.length === 1)) {
-              let S = e.current?.querySelector(
+              const S = e.current?.querySelector(
                 `[data-item-id="${m[0]}"][data-ref-id="${o}"]`,
               );
               S && f(S);
@@ -10777,8 +10777,8 @@ var { document: oi } = se,
       j(() => {
         h({ ids: bo(i, c), value: !0 });
       }, [i, c]);
-      let I = A(() => {
-          let m = Object.keys(i).filter((v) => !r.includes(v));
+      const I = A(() => {
+          const m = Object.keys(i).filter((v) => !r.includes(v));
           h({ ids: m, value: !1 });
         }, [i, r]),
         _ = A(() => {
@@ -10797,34 +10797,34 @@ var { document: oi } = se,
           [d, I, _],
         ),
         j(() => {
-          let m = oi.getElementById('storybook-explorer-menu'),
+          const m = oi.getElementById('storybook-explorer-menu'),
             v = ti((S) => {
-              let E = l.current?.refId === o && l.current?.itemId;
+              const E = l.current?.refId === o && l.current?.itemId;
               if (!t || !e.current || !E || S.repeat || !vt(!1, S)) return;
-              let T = Ve('Enter', S),
+              const T = Ve('Enter', S),
                 C = Ve('Space', S),
                 k = Ve('ArrowLeft', S),
                 w = Ve('ArrowRight', S);
               if (!(T || C || k || w)) return;
-              let O = y(E);
+              const O = y(E);
               if (!O || O.getAttribute('data-ref-id') !== o) return;
-              let P = S.target;
+              const P = S.target;
               if (!Mt(m, P) && !Mt(P, m)) return;
               if (P.hasAttribute('data-action')) {
                 if (T || C) return;
                 P.blur();
               }
-              let D = O.getAttribute('data-nodetype');
+              const D = O.getAttribute('data-nodetype');
               (T || C) &&
                 ['component', 'story', 'document'].includes(D) &&
                 p(E);
-              let M = O.getAttribute('aria-expanded');
+              const M = O.getAttribute('aria-expanded');
               if (k) {
                 if (M === 'true') {
                   h({ ids: [E], value: !1 });
                   return;
                 }
-                let N = O.getAttribute('data-parent-id'),
+                const N = O.getAttribute('data-parent-id'),
                   Q = N && y(N);
                 if (Q && Q.getAttribute('data-highlightable') === 'true') {
                   f(Q);
@@ -10936,28 +10936,28 @@ var Dg = x.div((e) => ({
     },
   })),
   Ng = /* @__PURE__ */ a((e) => {
-    let t = Ae();
+    const t = Ae();
     return /* @__PURE__ */ s.createElement(Rs, {
       ...e,
       color: t.color.positive,
     });
   }, 'SuccessStatusIcon'),
   Rg = /* @__PURE__ */ a((e) => {
-    let t = Ae();
+    const t = Ae();
     return /* @__PURE__ */ s.createElement(Ns, {
       ...e,
       color: t.color.negative,
     });
   }, 'ErrorStatusIcon'),
   Fg = /* @__PURE__ */ a((e) => {
-    let t = Ae();
+    const t = Ae();
     return /* @__PURE__ */ s.createElement(Fs, {
       ...e,
       color: t.color.warning,
     });
   }, 'WarnStatusIcon'),
   Hg = /* @__PURE__ */ a((e) => {
-    let t = Ae();
+    const t = Ae();
     return /* @__PURE__ */ s.createElement(mt, {
       ...e,
       size: 12,
@@ -10989,10 +10989,10 @@ var Ac = ['success', 'error', 'warn', 'pending', 'unknown'],
       onSelectStoryId: y,
       api: f,
     }) {
-      let { isDesktop: b, isMobile: I, setMobileMenuOpen: _ } = ge(),
+      const { isDesktop: b, isMobile: I, setMobileMenuOpen: _ } = ge(),
         { counts: m, statuses: v } = Sc(t);
       if (!u) return null;
-      let S = K(() => {
+      const S = K(() => {
           if (t.type === 'story' || t.type === 'docs')
             return Object.entries(o || {})
               .filter(([, C]) => C.sidebarContextMenu !== !1)
@@ -11008,7 +11008,7 @@ var Ac = ['success', 'error', 'warn', 'pending', 'unknown'],
                 }, 'onClick'),
               }));
           if (t.type === 'component' || t.type === 'group') {
-            let C = [];
+            const C = [];
             return (
               m.error &&
                 C.push({
@@ -11016,7 +11016,7 @@ var Ac = ['success', 'error', 'warn', 'pending', 'unknown'],
                   icon: ri.error,
                   title: `${m.error} ${m.error === 1 ? 'story' : 'stories'} with errors`,
                   onClick: /* @__PURE__ */ a(() => {
-                    let [k, [w]] = Object.entries(v.error)[0];
+                    const [k, [w]] = Object.entries(v.error)[0];
                     y(k), w.onClick?.();
                   }, 'onClick'),
                 }),
@@ -11026,7 +11026,7 @@ var Ac = ['success', 'error', 'warn', 'pending', 'unknown'],
                   icon: ri.warn,
                   title: `${m.warn} ${m.warn === 1 ? 'story' : 'stories'} with warnings`,
                   onClick: /* @__PURE__ */ a(() => {
-                    let [k, [w]] = Object.entries(v.warn)[0];
+                    const [k, [w]] = Object.entries(v.warn)[0];
                     y(k), w.onClick?.();
                   }, 'onClick'),
                 }),
@@ -11044,7 +11044,7 @@ var Ac = ['success', 'error', 'warn', 'pending', 'unknown'],
                 onMouseEnter: /* @__PURE__ */ a(() => {}, 'onMouseEnter'),
               };
       if (t.type === 'story' || t.type === 'docs') {
-        let C = t.type === 'docs' ? Cc : kc,
+        const C = t.type === 'docs' ? Cc : kc,
           k = So(Object.values(o || {}).map((P) => P.status)),
           [w, O] = xo[k];
         return /* @__PURE__ */ s.createElement(
@@ -11142,7 +11142,7 @@ var Ac = ['success', 'error', 'warn', 'pending', 'unknown'],
             ),
         );
       if (t.type === 'component' || t.type === 'group') {
-        let C = i?.[t.id],
+        const C = i?.[t.id],
           k = C ? xo[C][1] : null,
           w = t.type === 'component' ? Tc : wc;
         return /* @__PURE__ */ s.createElement(
@@ -11213,7 +11213,7 @@ vg',
       expandableDescendants: i,
       ...n
     }) {
-      let r = A(() => t({ ids: i, value: !o }), [t, o, i]);
+      const r = A(() => t({ ids: i, value: !o }), [t, o, i]);
       return /* @__PURE__ */ s.createElement(Dc, {
         ...n,
         setExpanded: t,
@@ -11235,13 +11235,13 @@ vg',
       selectedStoryId: p,
       onSelectStoryId: d,
     }) {
-      let g = Y(null),
+      const g = Y(null),
         h = oe(),
         [y, f, b] = K(
           () =>
             Object.keys(n).reduce(
               (w, O) => {
-                let P = n[O];
+                const P = n[O];
                 return (
                   P.type === 'root' ? w[0].push(O) : P.parent || w[1].push(O),
                   P.type === 'root' && P.startCollapsed && (w[2][O] = !1),
@@ -11268,11 +11268,11 @@ vg',
         _ = K(
           () =>
             Object.keys(n).filter((w) => {
-              let O = n[w];
+              const O = n[w];
               if (O.type !== 'component') return !1;
-              let { children: P = [], name: D } = O;
+              const { children: P = [], name: D } = O;
               if (P.length !== 1) return !1;
-              let M = n[P[0]];
+              const M = n[P[0]];
               return M.type === 'docs'
                 ? !0
                 : M.type === 'story'
@@ -11286,10 +11286,10 @@ vg',
           () =>
             _.reduce(
               (w, O) => {
-                let { children: P, parent: D, name: M } = n[O],
+                const { children: P, parent: D, name: M } = n[O],
                   [N] = P;
                 if (D) {
-                  let Q = [...n[D].children];
+                  const Q = [...n[D].children];
                   (Q[Q.indexOf(O)] = N), (w[D] = { ...n[D], children: Q });
                 }
                 return (
@@ -11327,10 +11327,10 @@ vg',
         k = K(
           () =>
             m.map((w) => {
-              let O = v[w],
+              const O = v[w],
                 P = Sr(w, i);
               if (O.type === 'root') {
-                let M = I[O.id],
+                const M = I[O.id],
                   N = M.every((Q) => E[Q]);
                 return (
                   // @ts-expect-error (TODO)
@@ -11351,7 +11351,7 @@ vg',
                   })
                 );
               }
-              let D = !O.parent || S[w].every((M) => E[M]);
+              const D = !O.parent || S[w].every((M) => E[M]);
               return D === !1
                 ? null
                 : /* @__PURE__ */ s.createElement(Dc, {
@@ -11433,7 +11433,7 @@ var zg = x.div(({ isMain: e }) => ({
   })),
   Lc = s.memo(
     /* @__PURE__ */ a(function (t) {
-      let { docsOptions: o } = Pe(),
+      const { docsOptions: o } = Pe(),
         i = oe(),
         {
           filteredIndex: n,
@@ -11465,7 +11465,7 @@ checked' ||
       j(() => {
         n && p && n[p] && P(!0);
       }, [P, n, p]);
-      let D = A(() => P((Q) => !Q), [P]),
+      const D = A(() => P((Q) => !Q), [P]),
         M = A((Q) => g({ itemId: Q, refId: r }), [g]),
         N = A(
           // @ts-expect-error (non strict)
@@ -11536,7 +11536,7 @@ var { document: wr, window: Nc } = se,
   }, 'scrollToSelector'),
   Hc = /* @__PURE__ */ a(
     ({ containerRef: e, isLoading: t, isBrowsing: o, selected: i }) => {
-      let n = Rc(i),
+      const n = Rc(i),
         r = Y(n),
         [l, u] = $(n),
         c = oe(),
@@ -11548,7 +11548,7 @@ var { document: wr, window: Nc } = se,
         ),
         d = A(
           (g, h = !1) => {
-            let y = g.getAttribute('data-item-id'),
+            const y = g.getAttribute('data-item-id'),
               f = g.getAttribute('data-ref-id');
             !y || !f || (p({ itemId: y, refId: f }), Dt(g, h));
           },
@@ -11556,7 +11556,7 @@ var { document: wr, window: Nc } = se,
         );
       return (
         j(() => {
-          let g = Rc(i);
+          const g = Rc(i);
           p(g),
             g &&
               Fc(`[data-item-id="${g.itemId}"][data-ref-id="${g.refId}"]`, {
@@ -11569,15 +11569,15 @@ var { document: wr, window: Nc } = se,
             h,
             y = /* @__PURE__ */ a((f) => {
               if (t || !o || !e.current || !vt(!1, f)) return;
-              let b = Ve('ArrowUp', f),
+              const b = Ve('ArrowUp', f),
                 I = Ve('ArrowDown', f);
               if (!(b || I)) return;
-              let _ = Nc.requestAnimationFrame(() => {
+              const _ = Nc.requestAnimationFrame(() => {
                 Nc.cancelAnimationFrame(h), (h = _);
-                let m = f.target;
+                const m = f.target;
                 if (!Mt(g, m) && !Mt(m, g)) return;
                 m.hasAttribute('data-action') && m.blur();
-                let v = Array.from(
+                const v = Array.from(
                     e.current?.querySelectorAll('[data-highlightable=true]') ||
                       [],
                   ),
@@ -11592,7 +11592,7 @@ var { document: wr, window: Nc } = se,
                   (d(v[E], T),
                   v[E].getAttribute('data-nodetype') === 'component')
                 ) {
-                  let { itemId: C, refId: k } = r.current,
+                  const { itemId: C, refId: k } = r.current,
                     w = c.resolveStory(
                       C,
                       k === 'storybook_internal' ? void 0 : k,
@@ -11625,7 +11625,7 @@ var Bc = s.memo(
     dataset: i,
     selected: n,
   }) {
-    let r = Y(null),
+    const r = Y(null),
       [l, u, c] = Hc({
         containerRef: r,
         isLoading: t,
@@ -11683,7 +11683,7 @@ var Kg = x(Xo)(({ theme: e }) => ({
     },
   })),
   Wc = ma(({ theme: e }) => {
-    let {
+    const {
         title: t = 'Storybook',
         url: o = './',
         image: i,
@@ -11702,7 +11702,7 @@ var Kg = x(Xo)(({ theme: e }) => ({
           : /* @__PURE__ */ s.createElement('div', {
               dangerouslySetInnerHTML: { __html: t },
             });
-    let l = i
+    const l = i
       ? /* @__PURE__ */ s.createElement($g, { src: i, alt: t })
       : /* @__PURE__ */ s.createElement(Kg, { alt: t });
     return o
@@ -11750,7 +11750,7 @@ var jc = x(te)(({ highlighted: e, theme: t }) => ({
     'SidebarMenuList',
   ),
   Vc = /* @__PURE__ */ a(({ menu: e, isHighlighted: t, onClick: o }) => {
-    let [i, n] = $(!1),
+    const [i, n] = $(!1),
       { isMobile: r, setMobileMenuOpen: l } = ge();
     return r
       ? /* @__PURE__ */ s.createElement(
@@ -11913,12 +11913,12 @@ var qc = /* @__PURE__ */ a(
   ),
   si = /* @__PURE__ */ a((e, t) => {
     if (e.clientHeight < e.scrollHeight || e.clientWidth < e.scrollWidth) {
-      let o = getComputedStyle(e, null);
+      const o = getComputedStyle(e, null);
       return (
         Qc(o.overflowY, t) ||
         Qc(o.overflowX, t) ||
         ((i) => {
-          let n = ((r) => {
+          const n = ((r) => {
             if (!r.ownerDocument || !r.ownerDocument.defaultView) return null;
             try {
               return r.ownerDocument.defaultView.frameElement;
@@ -11947,7 +11947,7 @@ var qc = /* @__PURE__ */ a(
     'o',
   ),
   Jg = /* @__PURE__ */ a((e) => {
-    let t = e.parentElement;
+    const t = e.parentElement;
     return t ?? (e.getRootNode().host || null);
   }, 'l'),
   Xc = /* @__PURE__ */ a((e, t) => {
@@ -11999,7 +11999,7 @@ var qc = /* @__PURE__ */ a(
         bottom: P,
         left: D,
       } = ((V) => {
-        let X = window.getComputedStyle(V);
+        const X = window.getComputedStyle(V);
         return {
           top: parseFloat(X.scrollMarginTop) || 0,
           right: parseFloat(X.scrollMarginRight) || 0,
@@ -12016,7 +12016,7 @@ var qc = /* @__PURE__ */ a(
       N = c === 'center' ? k + S / 2 - D + O : c === 'end' ? T + O : k - D,
       Q = [];
     for (let V = 0; V < y.length; V++) {
-      let X = y[V],
+      const X = y[V],
         {
           height: H,
           width: U,
@@ -12099,7 +12099,7 @@ offsetHeight' in X
                 : c === 'end'
                   ? N - re + ie + ce
                   : Rr(F, re, U, W, ie + ce, N, N + S, S));
-        let { scrollLeft: Oe, scrollTop: fe } = X;
+        const { scrollLeft: Oe, scrollTop: fe } = X;
         (de =
           ye === 0
             ? 0
@@ -15771,19 +15771,19 @@ var { document: $y } = se,
       searchBarContent: l,
       searchFieldContent: u,
     }) {
-      let c = oe(),
+      const c = oe(),
         p = Y(null),
         [d, g] = $('Find components'),
         [h, y] = $(!1),
         f = c ? qe(c.getShortcutKeys().search) : '/',
         b = A(() => {
-          let E = o.entries.reduce((T, [C, { index: k, status: w }]) => {
-            let O = Ir(k || {}, w);
+          const E = o.entries.reduce((T, [C, { index: k, status: w }]) => {
+            const O = Ir(k || {}, w);
             return (
               k &&
                 T.push(
                   ...Object.values(k).map((P) => {
-                    let D =
+                    const D =
                       w && w[P.id]
                         ? So(Object.values(w[P.id] || {}).map((M) => M.status))
                         : null;
@@ -15800,7 +15800,7 @@ var { document: $y } = se,
         }, [o]),
         I = A(
           (E) => {
-            let T = b();
+            const T = b();
             if (!E) return [];
             let C = [],
               k = /* @__PURE__ */ new Set(),
@@ -15832,7 +15832,7 @@ var { document: $y } = se,
         _ = A(
           (E) => {
             if (Xi(E)) {
-              let { id: T, refId: C } = E.item;
+              const { id: T, refId: C } = E.item;
               c?.selectStory(T, void 0, { ref: C !== st && C }),
                 p.current.blur(),
                 y(!1);
@@ -15904,16 +15904,16 @@ var { document: $y } = se,
             H &&
               H.length &&
               (X = H.reduce((R, { storyId: F, refId: L }) => {
-                let W = o.hash[L];
+                const W = o.hash[L];
                 if (W && W.index && W.index[F]) {
-                  let J = W.index[F],
+                  const J = W.index[F],
                     ie = J.type === 'story' ? W.index[J.parent] : J;
                   R.some((ee) => ee.item.refId === L && ee.item.id === ie.id) ||
                     R.push({ item: Zn(ie, o.hash[L]), matches: [], score: 0 });
                 }
                 return R;
               }, []));
-            let U = 'storybook-explorer-searchfield',
+            const U = 'storybook-explorer-searchfield',
               z = O({
                 id: U,
                 ref: p,
@@ -16147,7 +16147,7 @@ var { document: id } = se,
   })),
   db = s.memo(
     /* @__PURE__ */ a(function ({ item: t, matches: o, onClick: i, ...n }) {
-      let r = A(
+      const r = A(
           (d) => {
             d.preventDefault(), i?.(d);
           },
@@ -16164,7 +16164,7 @@ var { document: id } = se,
             { options: { target: t.refId } },
           );
       }, [n.isHighlighted, t]);
-      let u = o.find((d) => d.key === 'name'),
+      const u = o.find((d) => d.key === 'name'),
         c = o.filter((d) => d.key === 'path'),
         [p] = t.status ? xo[t.status] : [];
       return /* @__PURE__ */ s.createElement(
@@ -16254,9 +16254,9 @@ ponent',
       enableShortcuts: c = !0,
       clearLastViewed: p,
     }) {
-      let d = oe();
+      const d = oe();
       j(() => {
-        let y = /* @__PURE__ */ a((f) => {
+        const y = /* @__PURE__ */ a((f) => {
           if (!(!c || u || f.repeat) && vt(!1, f) && Ve('Escape', f)) {
             if (f.target?.id === 'storybook-explorer-searchfield') return;
             f.preventDefault(), i();
@@ -16267,9 +16267,9 @@ ponent',
           () => id.removeEventListener('keydown', y)
         );
       }, [i, c, u]);
-      let g = A((y) => {
+      const g = A((y) => {
           if (!d) return;
-          let f = y.currentTarget,
+          const f = y.currentTarget,
             b = f.getAttribute('data-id'),
             I = f.getAttribute('data-refid'),
             _ = d.resolveStory(
@@ -16399,7 +16399,7 @@ var fb = x.div({
     width: 10,
   }),
   ld = /* @__PURE__ */ a(({ ...e }) => {
-    let t = e.description,
+    const t = e.description,
       o = e.title,
       i = oe();
     return /* @__PURE__ */ s.createElement(
@@ -16610,7 +16610,7 @@ var Ji = 500,
       warningsActive: r,
       setWarningsActive: l,
     }) => {
-      let u = oe(),
+      const u = oe(),
         c = Y(null),
         p = Y(null),
         [d, g] = $(Ji),
@@ -16619,10 +16619,10 @@ var Ji = 500,
       j(() => {
         if (p.current) {
           g(p.current?.getBoundingClientRect().height || Ji);
-          let E = new ResizeObserver(() => {
+          const E = new ResizeObserver(() => {
             requestAnimationFrame(() => {
               if (p.current && !h) {
-                let T = p.current?.getBoundingClientRect().height || Ji;
+                const T = p.current?.getBoundingClientRect().height || Ji;
                 g(T);
               }
             });
@@ -16630,7 +16630,7 @@ var Ji = 500,
           return E.observe(p.current), () => E.disconnect();
         }
       }, [h]);
-      let I = A((E) => {
+      const I = A((E) => {
           E.stopPropagation(),
             b(!0),
             y((T) => !T),
@@ -16671,7 +16671,7 @@ var Ji = 500,
                     _b,
                     { ref: p },
                     e.map((E) => {
-                      let { render: T } = E;
+                      const { render: T } = E;
                       return /* @__PURE__ */ s.createElement(
                         kb,
                         { key: E.id, 'data-module-id': E.id },
@@ -16851,7 +16851,7 @@ error',
   })),
   Hb = /* @__PURE__ */ a(
     ({ api: e, notifications: t = [], status: o = {}, isDevelopment: i }) => {
-      let n = Y(null),
+      const n = Y(null),
         r = Y(null),
         [l, u] = $(!1),
         [c, p] = $(!1),
@@ -16866,7 +16866,7 @@ error',
         f = h.length > 0;
       j(() => {
         if (n.current && r.current) {
-          let I = new ResizeObserver(() => {
+          const I = new ResizeObserver(() => {
             n.current &&
               r.current &&
               (n.current.style.height = `${r.current.scrollHeight}px`);
@@ -16875,11 +16875,11 @@ error',
         }
       }, []),
         j(() => {
-          let I = Nb(y && l, f && c);
+          const I = Nb(y && l, f && c);
           e.experimental_setFilter('sidebar-bottom-filter', I);
         }, [e, y, f, l, c]),
         ft(() => {
-          let I = /* @__PURE__ */ a(({ providerId: m, ...v }) => {
+          const I = /* @__PURE__ */ a(({ providerId: m, ...v }) => {
               e.updateTestProviderState(m, {
                 error: { name: 'Crashed!', message: v.error.message },
                 running: !1,
@@ -16887,7 +16887,7 @@ error',
               });
             }, 'onCrashReport'),
             _ = /* @__PURE__ */ a(async ({ providerId: m, ...v }) => {
-              let S = 'status' in v ? v.status : void 0;
+              const S = 'status' in v ? v.status : void 0;
               e.updateTestProviderState(
                 m,
                 S === 'failed'
@@ -16903,7 +16903,7 @@ error',
             }
           );
         }, [e, d]);
-      let b = Object.values(d || {});
+      const b = Object.values(d || {});
       return !y && !f && !b.length && !t.length
         ? null
         : /* @__PURE__ */ s.createElement(
@@ -16933,7 +16933,7 @@ error',
     'SidebarBottomBase',
   ),
   pd = /* @__PURE__ */ a(({ isDevelopment: e }) => {
-    let t = oe(),
+    const t = oe(),
       { notifications: o, status: i } = Pe();
     return /* @__PURE__ */ s.createElement(Hb, {
       api: t,
@@ -16957,13 +16957,13 @@ var Bb = /* @__PURE__ */ new Set(['play-fn']),
       toggleTag: i,
       isDevelopment: n,
     }) => {
-      let r = t.filter((c) => !Bb.has(c)),
+      const r = t.filter((c) => !Bb.has(c)),
         l = e.getDocsUrl({
           subpath: 'writing-stories/tags#filtering-by-custom-tags',
         }),
         u = [
           t.map((c) => {
-            let p = o.includes(c),
+            const p = o.includes(c),
               d = `tag-${c}`;
             return {
               id: d,
@@ -17048,7 +17048,7 @@ var Wb = 'tags-filter',
       initialSelectedTags: o = [],
       isDevelopment: i,
     }) => {
-      let [n, r] = $(o),
+      const [n, r] = $(o),
         [l, u] = $(!1),
         c = n.length > 0;
       j(() => {
@@ -17056,7 +17056,7 @@ var Wb = 'tags-filter',
           n.length === 0 ? !0 : n.some((f) => y.tags?.includes(f)),
         );
       }, [e, n]);
-      let p = Object.values(t.entries).reduce(
+      const p = Object.values(t.entries).reduce(
           (y, f) => (
             f.tags?.forEach((b) => {
               jb.has(b) || y.add(b);
@@ -17078,7 +17078,7 @@ var Wb = 'tags-filter',
           [l, u],
         );
       if (p.size === 0 && !i) return null;
-      let h = Array.from(p);
+      const h = Array.from(p);
       return (
         h.sort(),
         /* @__PURE__ */ s.createElement(
@@ -17151,8 +17151,8 @@ a(es, 'debounce');
 var Jr = ze(md(), 1);
 var hd = es((e) => Jr.default.set('lastViewedStoryIds', e), 1e3),
   gd = /* @__PURE__ */ a((e) => {
-    let t = K(() => {
-        let n = Jr.default.get('lastViewedStoryIds');
+    const t = K(() => {
+        const n = Jr.default.get('lastViewedStoryIds');
         return !n || !Array.isArray(n)
           ? []
           : n.some((r) => typeof r == 'object' && r.storyId && r.refId)
@@ -17162,7 +17162,7 @@ var hd = es((e) => Jr.default.set('lastViewedStoryIds', e), 1e3),
       o = Y(t),
       i = A(
         (n) => {
-          let r = o.current,
+          const r = o.current,
             l = r.findIndex(
               ({ storyId: u, refId: c }) => u === n.storyId && c === n.refId,
             );
@@ -17223,7 +17223,7 @@ var st = 'storybook_internal',
   })),
   qb = s.memo(
     /* @__PURE__ */ a(function ({ children: t, condition: o }) {
-      let [i, n] = s.Children.toArray(t);
+      const [i, n] = s.Children.toArray(t);
       return /* @__PURE__ */ s.createElement(
         s.Fragment,
         null,
@@ -17241,7 +17241,7 @@ var st = 'storybook_internal',
     }, 'Swap'),
   ),
   Qb = /* @__PURE__ */ a((e, t, o, i, n) => {
-    let r = K(
+    const r = K(
       () => ({
         [st]: {
           index: e,
@@ -17279,7 +17279,7 @@ var st = 'storybook_internal',
       onMenuClick: f,
       showCreateStoryButton: b = h && Xb,
     }) {
-      let [I, _] = $(!1),
+      const [I, _] = $(!1),
         m = K(() => t && { storyId: t, refId: o }, [t, o]),
         v = Qb(i, r, u, l, y),
         S = !i && !r,
@@ -17434,7 +17434,7 @@ var Zb = {
     'Shortcut',
   ),
   bd = /* @__PURE__ */ a((e, t, o, i, n, r, l) => {
-    let u = t.getShortcutKeys(),
+    const u = t.getShortcutKeys(),
       c = K(
         () => ({
           id: 'about',
@@ -17626,7 +17626,7 @@ var Zb = {
         [t, l, u],
       ),
       w = A(() => {
-        let O = t.getAddonsShortcuts(),
+        const O = t.getAddonsShortcuts(),
           P = u;
         return Object.entries(O)
           .filter(([D, { showInMenu: M }]) => M)
@@ -17664,7 +17664,7 @@ var t0 = s.memo(
                 layout: { showToolbar: g },
                 // FIXME: This is the actual `index.json` index where the `index` below
                 // is actually the stories hash. We should fix this up and make it consistent.
-                // eslint-disable-next-line @typescript-eslint/naming-convention
+
                 internal_index: h,
                 filteredIndex: y,
                 status: f,
@@ -17719,7 +17719,7 @@ var xd = /* @__PURE__ */ a(
     pages: o,
     hasTab: i,
   }) => {
-    let { setMobileAboutOpen: n } = ge();
+    const { setMobileAboutOpen: n } = ge();
     return /* @__PURE__ */ s.createElement(
       s.Fragment,
       null,
@@ -17874,18 +17874,18 @@ var o0 = x.div({
 // src/manager/settings/AboutPage.tsx
 var rs = class rs extends Re {
   componentDidMount() {
-    let { api: t, notificationId: o } = this.props;
+    const { api: t, notificationId: o } = this.props;
     t.clearNotification(o);
   }
   render() {
-    let { children: t } = this.props;
+    const { children: t } = this.props;
     return t;
   }
 };
 a(rs, 'NotificationClearer');
 var os = rs,
   Ed = /* @__PURE__ */ a(() => {
-    let e = oe(),
+    const e = oe(),
       t = Pe(),
       o = A(() => {
         e.changeSettingsTab('whats-new');
@@ -18068,11 +18068,11 @@ var is = class is extends Re {
   constructor(o) {
     super(o);
     this.onKeyDown = /* @__PURE__ */ a((o) => {
-      let { activeFeature: i, shortcutKeys: n } = this.state;
+      const { activeFeature: i, shortcutKeys: n } = this.state;
       if (o.key === 'Backspace') return this.restoreDefault();
-      let r = ia(o);
+      const r = ia(o);
       if (!r) return !1;
-      let l = !!Object.entries(n).find(
+      const l = !!Object.entries(n).find(
         ([u, { shortcut: c }]) => u !== i && c && sa(r, c),
       );
       return this.setState({
@@ -18081,7 +18081,7 @@ var is = class is extends Re {
     }, 'onKeyDown');
     this.onFocus = /* @__PURE__ */ a(
       (o) => () => {
-        let { shortcutKeys: i } = this.state;
+        const { shortcutKeys: i } = this.state;
         this.setState({
           activeFeature: o,
           shortcutKeys: {
@@ -18093,25 +18093,25 @@ var is = class is extends Re {
       'onFocus',
     );
     this.onBlur = /* @__PURE__ */ a(async () => {
-      let { shortcutKeys: o, activeFeature: i } = this.state;
+      const { shortcutKeys: o, activeFeature: i } = this.state;
       if (o[i]) {
-        let { shortcut: n, error: r } = o[i];
+        const { shortcut: n, error: r } = o[i];
         return !n || r ? this.restoreDefault() : this.saveShortcut();
       }
       return !1;
     }, 'onBlur');
     this.saveShortcut = /* @__PURE__ */ a(async () => {
-      let { activeFeature: o, shortcutKeys: i } = this.state,
+      const { activeFeature: o, shortcutKeys: i } = this.state,
         { setShortcut: n } = this.props;
       await n(o, i[o].shortcut), this.setState({ successField: o });
     }, 'saveShortcut');
     this.restoreDefaults = /* @__PURE__ */ a(async () => {
-      let { restoreAllDefaultShortcuts: o } = this.props,
+      const { restoreAllDefaultShortcuts: o } = this.props,
         i = await o();
       return this.setState({ shortcutKeys: ns(i) });
     }, 'restoreDefaults');
     this.restoreDefault = /* @__PURE__ */ a(async () => {
-      let { activeFeature: o, shortcutKeys: i } = this.state,
+      const { activeFeature: o, shortcutKeys: i } = this.state,
         { restoreDefaultShortcut: n } = this.props,
         r = await n(o);
       return this.setState({
@@ -18122,15 +18122,15 @@ var is = class is extends Re {
       });
     }, 'restoreDefault');
     this.displaySuccessMessage = /* @__PURE__ */ a((o) => {
-      let { successField: i, shortcutKeys: n } = this.state;
+      const { successField: i, shortcutKeys: n } = this.state;
       return o === i && n[o].error === !1 ? 'valid' : void 0;
     }, 'displaySuccessMessage');
     this.displayError = /* @__PURE__ */ a((o) => {
-      let { activeFeature: i, shortcutKeys: n } = this.state;
+      const { activeFeature: i, shortcutKeys: n } = this.state;
       return o === i && n[o].error === !0 ? 'error' : void 0;
     }, 'displayError');
     this.renderKeyInput = /* @__PURE__ */ a(() => {
-      let { shortcutKeys: o, addonsShortcutLabels: i } = this.state;
+      const { shortcutKeys: o, addonsShortcutLabels: i } = this.state;
       return Object.entries(o).map(([r, { shortcut: l }]) =>
         /* @__PURE__ */ s.createElement(
           c0,
@@ -18182,7 +18182,7 @@ var is = class is extends Re {
     };
   }
   render() {
-    let o = this.renderKeyForm();
+    const o = this.renderKeyForm();
     return /* @__PURE__ */ s.createElement(
       g0,
       null,
@@ -18270,7 +18270,7 @@ var Cd = x.div({
       onToggleNotifications: t,
       onCopyLink: o,
     }) => {
-      let i = Ae(),
+      const i = Ae(),
         [n, r] = $('Copy Link'),
         l = /* @__PURE__ */ a(() => {
           o(), r('Copied!'), setTimeout(() => r('Copy Link'), 4e3);
@@ -18407,20 +18407,20 @@ rnet connection and try again.",
   ),
   C0 = 1e4,
   Od = /* @__PURE__ */ a(() => {
-    let e = oe(),
+    const e = oe(),
       t = Pe(),
       { whatsNewData: o } = t,
       [i, n] = $(!1),
       [r, l] = $(!1);
     if (
       (j(() => {
-        let c = setTimeout(() => !i && l(!0), C0);
+        const c = setTimeout(() => !i && l(!0), C0);
         return () => clearTimeout(c);
       }, [i]),
       o?.status !== 'SUCCESS')
     )
       return null;
-    let u = !o.disableWhatsNewNotifications;
+    const u = !o.disableWhatsNewNotifications;
     return /* @__PURE__ */ s.createElement(T0, {
       didHitMaxWaitTime: r,
       isLoaded: i,
@@ -18462,7 +18462,7 @@ var { document: Ad } = se,
   ss = s.memo(
     /* @__PURE__ */ a(function ({ changeTab: t, id: o, title: i }) {
       return /* @__PURE__ */ s.createElement(Wo, null, ({ path: n }) => {
-        let r = n.includes(`settings/${o}`);
+        const r = n.includes(`settings/${o}`);
         return /* @__PURE__ */ s.createElement(
           Jo,
           {
@@ -18492,7 +18492,7 @@ var { document: Ad } = se,
       enableWhatsNew: i,
     }) => (
       s.useEffect(() => {
-        let n = /* @__PURE__ */ a((r) => {
+        const n = /* @__PURE__ */ a((r) => {
           !o ||
             r.repeat ||
             (vt(!1, r) && Ve('Escape', r) && (r.preventDefault(), t()));
@@ -18567,7 +18567,7 @@ whats-new',
 ages',
   ),
   A0 = /* @__PURE__ */ a(() => {
-    let e = oe(),
+    const e = oe(),
       t = Pe(),
       o = /* @__PURE__ */ a((i) => e.changeSettingsTab(i), 'changeTab');
     return /* @__PURE__ */ s.createElement(P0, {
@@ -18610,7 +18610,7 @@ var D0 = /* @__PURE__ */ a(
     'Root',
   ),
   M0 = /* @__PURE__ */ a(({ provider: e }) => {
-    let t = pa();
+    const t = pa();
     return /* @__PURE__ */ s.createElement(
       Wo,
       { key: 'location.consumer' },
@@ -18675,7 +18675,7 @@ var L0 = 'CORE/WS_DISCONNECTED',
     constructor() {
       super();
       this.wsDisconnected = !1;
-      let o = fs({ page: 'manager' });
+      const o = fs({ page: 'manager' });
       Ye.setChannel(o),
         o.emit(qs),
         (this.addons = Ye),

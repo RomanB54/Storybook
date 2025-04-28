@@ -43,7 +43,7 @@
           (target = null != mod ? __create(__getProtoOf(mod)) : {}),
           ((to, from, except, desc) => {
             if ((from && 'object' == typeof from) || 'function' == typeof from)
-              for (let key of __getOwnPropNames(from))
+              for (const key of __getOwnPropNames(from))
                 !__hasOwnProp.call(to, key) &&
                   key !== except &&
                   __defProp(to, key, {
@@ -86,7 +86,7 @@
           debounced = function (...args) {
             if (signal?.aborted) return;
             (pendingThis = this), (pendingArgs = args);
-            let isFirstCall = null == timeoutId;
+            const isFirstCall = null == timeoutId;
             schedule(), leading && isFirstCall && invoke();
           };
         return (
@@ -136,10 +136,10 @@
         return Array.from(new Set(arr));
       }
       function pickBy(obj, shouldPick) {
-        let result = {},
+        const result = {},
           objEntries = Object.entries(obj);
         for (let i = 0; i < objEntries.length; i++) {
-          let [key, value] = objEntries[i];
+          const [key, value] = objEntries[i];
           shouldPick(value, key) && (result[key] = value);
         }
         return result;
@@ -159,7 +159,7 @@
           return obj;
         if (stack.has(obj)) return stack.get(obj);
         if (Array.isArray(obj)) {
-          let result = new Array(obj.length);
+          const result = new Array(obj.length);
           stack.set(obj, result);
           for (let i = 0; i < obj.length; i++)
             result[i] = cloneDeepImpl(obj[i], stack);
@@ -173,20 +173,20 @@
         }
         if (obj instanceof Date) return new Date(obj.getTime());
         if (obj instanceof RegExp) {
-          let result = new RegExp(obj.source, obj.flags);
+          const result = new RegExp(obj.source, obj.flags);
           return (result.lastIndex = obj.lastIndex), result;
         }
         if (obj instanceof Map) {
-          let result = new Map();
+          const result = new Map();
           stack.set(obj, result);
-          for (let [key, value] of obj.entries())
+          for (const [key, value] of obj.entries())
             result.set(key, cloneDeepImpl(value, stack));
           return result;
         }
         if (obj instanceof Set) {
-          let result = new Set();
+          const result = new Set();
           stack.set(obj, result);
-          for (let value of obj.values())
+          for (const value of obj.values())
             result.add(cloneDeepImpl(value, stack));
           return result;
         }
@@ -196,7 +196,9 @@
             return ArrayBuffer.isView(x) && !(x instanceof DataView);
           })(obj)
         ) {
-          let result = new (Object.getPrototypeOf(obj).constructor)(obj.length);
+          const result = new (Object.getPrototypeOf(obj).constructor)(
+            obj.length,
+          );
           stack.set(obj, result);
           for (let i = 0; i < obj.length; i++)
             result[i] = cloneDeepImpl(obj[i], stack);
@@ -208,7 +210,7 @@
         )
           return obj.slice(0);
         if (obj instanceof DataView) {
-          let result = new DataView(
+          const result = new DataView(
             obj.buffer.slice(0),
             obj.byteOffset,
             obj.byteLength,
@@ -218,19 +220,19 @@
           );
         }
         if (typeof File < 'u' && obj instanceof File) {
-          let result = new File([obj], obj.name, { type: obj.type });
+          const result = new File([obj], obj.name, { type: obj.type });
           return (
             stack.set(obj, result), copyProperties(result, obj, stack), result
           );
         }
         if (obj instanceof Blob) {
-          let result = new Blob([obj], { type: obj.type });
+          const result = new Blob([obj], { type: obj.type });
           return (
             stack.set(obj, result), copyProperties(result, obj, stack), result
           );
         }
         if (obj instanceof Error) {
-          let result = new obj.constructor();
+          const result = new obj.constructor();
           return (
             stack.set(obj, result),
             (result.message = obj.message),
@@ -242,7 +244,7 @@
           );
         }
         if ('object' == typeof obj && null !== obj) {
-          let result = {};
+          const result = {};
           return (
             stack.set(obj, result), copyProperties(result, obj, stack), result
           );
@@ -250,9 +252,9 @@
         return obj;
       }
       function copyProperties(target, source, stack) {
-        let keys = Object.keys(source);
+        const keys = Object.keys(source);
         for (let i = 0; i < keys.length; i++) {
-          let key = keys[i],
+          const key = keys[i],
             descriptor = Object.getOwnPropertyDescriptor(source, key);
           (descriptor?.writable || descriptor?.set) &&
             (target[key] = cloneDeepImpl(source[key], stack));
@@ -268,11 +270,11 @@
           case numberTag:
           case stringTag:
           case booleanTag: {
-            let result = new obj.constructor(obj?.valueOf());
+            const result = new obj.constructor(obj?.valueOf());
             return copyProperties(result, obj), result;
           }
           case argumentsTag: {
-            let result = {};
+            const result = {};
             return (
               copyProperties(result, obj),
               (result.length = obj.length),
@@ -963,7 +965,7 @@
                   (!heading.offsetHeight || !heading.offsetParent)
                 )
                   return null;
-                let headingLabel =
+                const headingLabel =
                   heading.getAttribute('data-heading-label') ||
                   (options2.headingLabelCallback
                     ? String(options2.headingLabelCallback(heading.innerText))
@@ -2254,7 +2256,7 @@
           format: format3 = !1,
           ...rest
         }) => {
-          let { typography } = (0,
+          const { typography } = (0,
           storybook_internal_theming__WEBPACK_IMPORTED_MODULE_6__.DP)();
           if (isLoading)
             return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
@@ -2267,7 +2269,7 @@
               null,
               error,
             );
-          let syntaxHighlighter =
+          const syntaxHighlighter =
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(
               StyledSyntaxHighlighter,
               {
@@ -2281,7 +2283,7 @@
               code,
             );
           if (typeof dark > 'u') return syntaxHighlighter;
-          let overrideTheme = dark
+          const overrideTheme = dark
             ? storybook_internal_theming__WEBPACK_IMPORTED_MODULE_6__.Zj.dark
             : storybook_internal_theming__WEBPACK_IMPORTED_MODULE_6__.Zj.light;
           return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
@@ -2333,7 +2335,7 @@
         DocsContent =
           storybook_internal_theming__WEBPACK_IMPORTED_MODULE_6__.I4.div(
             ({ theme }) => {
-              let reset = {
+              const reset = {
                   fontFamily: theme.typography.fonts.base,
                   fontSize: theme.typography.size.s3,
                   margin: 0,
@@ -2672,11 +2674,11 @@
             super(...arguments), (this.iframe = null);
           }
           componentDidMount() {
-            let { id } = this.props;
+            const { id } = this.props;
             this.iframe = globalWindow.document.getElementById(id);
           }
           shouldComponentUpdate(nextProps) {
-            let { scale } = nextProps;
+            const { scale } = nextProps;
             return (
               scale !== this.props.scale &&
                 this.setIframeBodyStyle({
@@ -2692,7 +2694,7 @@
             return Object.assign(this.iframe.contentDocument.body.style, style);
           }
           render() {
-            let { id, title, src, allowFullScreen, scale, ...rest } =
+            const { id, title, src, allowFullScreen, scale, ...rest } =
               this.props;
             return react__WEBPACK_IMPORTED_MODULE_0__.createElement('iframe', {
               id,
@@ -2712,7 +2714,7 @@
         storyBlockIdFromId = ({ story, primary }) =>
           `story--${story.id}${primary ? '--primary' : ''}`,
         InlineStory = (props) => {
-          let storyRef = (0, react__WEBPACK_IMPORTED_MODULE_0__.useRef)(),
+          const storyRef = (0, react__WEBPACK_IMPORTED_MODULE_0__.useRef)(),
             [showLoader, setShowLoader] = (0,
             react__WEBPACK_IMPORTED_MODULE_0__.useState)(!0),
             [error, setError] = (0,
@@ -2727,7 +2729,7 @@
           return (
             (0, react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
               if (!story || !storyRef.current) return () => {};
-              let element = storyRef.current,
+              const element = storyRef.current,
                 cleanup = renderStoryToElement(
                   story,
                   element,
@@ -2807,7 +2809,7 @@
             ({ theme }) => ({ color: theme.color.orange }),
           ),
         Story = (props) => {
-          let { inline, story } = props;
+          const { inline, story } = props;
           return inline && !props.autoplay && story.usesMount
             ? react__WEBPACK_IMPORTED_MODULE_0__.createElement(
                 ErrorMessage,
@@ -2960,7 +2962,7 @@
           );
       function getStoryId(children) {
         if (1 === react__WEBPACK_IMPORTED_MODULE_0__.Children.count(children)) {
-          let elt = children;
+          const elt = children;
           if (elt.props) return elt.props.id;
         }
         return null;
@@ -3048,7 +3050,7 @@
           layout = 'padded',
           ...props
         }) => {
-          let [expanded, setExpanded] = (0,
+          const [expanded, setExpanded] = (0,
             react__WEBPACK_IMPORTED_MODULE_0__.useState)(isExpanded),
             { source: source2, actionItem } = ((
               withSource,
@@ -3110,14 +3112,15 @@
             { window: globalWindow4 } = globalThis,
             copyToClipboard = (0,
             react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(async (text) => {
-              let { createCopyToClipboardFunction } = await __webpack_require__
-                .e(364)
-                .then(
-                  __webpack_require__.bind(
-                    __webpack_require__,
-                    './node_modules/storybook/core/components/index.js',
-                  ),
-                );
+              const { createCopyToClipboardFunction } =
+                await __webpack_require__
+                  .e(364)
+                  .then(
+                    __webpack_require__.bind(
+                      __webpack_require__,
+                      './node_modules/storybook/core/components/index.js',
+                    ),
+                  );
               createCopyToClipboardFunction();
             }, []);
           return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
@@ -3150,7 +3153,7 @@
                   onCopyCapture:
                     withSource &&
                     ((e2) => {
-                      let selection = globalWindow4.getSelection();
+                      const selection = globalWindow4.getSelection();
                       (selection && 'Range' === selection.type) ||
                         (e2.preventDefault(),
                         0 ===
@@ -3400,7 +3403,7 @@
       var ge = me(1),
         ye = me(2);
       function ke(e2) {
-        let t2 = 1 === e2 ? oe : ce;
+        const t2 = 1 === e2 ? oe : ce;
         return new RegExp(
           '^( *)(' +
             t2 +
@@ -3414,13 +3417,13 @@
       var xe = ke(1),
         be = ke(2);
       function ve(e2, t2) {
-        let n2 = 1 === t2,
+        const n2 = 1 === t2,
           i2 = n2 ? xe : be,
           l2 = n2 ? ge : ye,
           a2 = n2 ? fe : he;
         return {
           match(e3, t3) {
-            let n3 = ae.exec(t3.prevCapture);
+            const n3 = ae.exec(t3.prevCapture);
             return n3 && (t3.list || (!t3.inline && !t3.simple))
               ? i2.exec((e3 = n3[1] + e3))
               : null;
@@ -3432,7 +3435,7 @@
               c2 = !1;
             return {
               items: o2.map(function (e4, n3) {
-                let i4 = a2.exec(e4)[0].length,
+                const i4 = a2.exec(e4)[0].length,
                   l3 = new RegExp('^ {1,' + i4 + '}', 'gm'),
                   s2 = e4.replace(l3, '').replace(a2, ''),
                   d2 = n3 === o2.length - 1,
@@ -3445,7 +3448,7 @@
                   p2
                     ? ((r2.inline = !1), (h2 = s2.replace(le, '\n\n')))
                     : ((r2.inline = !0), (h2 = s2.replace(le, '')));
-                let m2 = t3(h2, r2);
+                const m2 = t3(h2, r2);
                 return (r2.inline = u2), (r2.list = f3), m2;
               }),
               ordered: n2,
@@ -3496,9 +3499,9 @@
               : null;
       }
       function Le(e2, t2, n2, i2) {
-        let l2 = n2.inTable;
+        const l2 = n2.inTable;
         n2.inTable = !0;
-        let a2 = e2
+        const a2 = e2
           .trim()
           .split(/( *(?:`[^`]*`|\\\||\|) *)/)
           .reduce(
@@ -3515,7 +3518,7 @@
             [],
           );
         n2.inTable = l2;
-        let o2 = [[]];
+        const o2 = [[]];
         return (
           a2.forEach(function (e3, t3) {
             e3.type === r_tableSeparator
@@ -3531,7 +3534,7 @@
       }
       function Ae(e2, t2, n2) {
         n2.inline = !0;
-        let i2 = e2[2] ? e2[2].replace(W, '').split('|').map(ze) : [],
+        const i2 = e2[2] ? e2[2].replace(W, '').split('|').map(ze) : [],
           l2 = e2[3]
             ? ((e3 = e2[3]),
               (t3 = t2),
@@ -3582,7 +3585,7 @@
           (e3) =>
             !$e.some((t3) => t3.test(e3)) && ((n2 += e3 + '\n'), e3.trim()),
         );
-        let r2 = n2.trimEnd();
+        const r2 = n2.trimEnd();
         return '' == r2 ? null : [n2, r2];
       }
       function Ue(e2) {
@@ -3602,23 +3605,23 @@
         return e2.replace(ie, '$1');
       }
       function Ne(e2, t2, n2) {
-        let r2 = n2.inline || !1,
+        const r2 = n2.inline || !1,
           i2 = n2.simple || !1;
         (n2.inline = !0), (n2.simple = !0);
-        let l2 = e2(t2, n2);
+        const l2 = e2(t2, n2);
         return (n2.inline = r2), (n2.simple = i2), l2;
       }
       function je(e2, t2, n2) {
-        let r2 = n2.inline || !1,
+        const r2 = n2.inline || !1,
           i2 = n2.simple || !1;
         (n2.inline = !1), (n2.simple = !0);
-        let l2 = e2(t2, n2);
+        const l2 = e2(t2, n2);
         return (n2.inline = r2), (n2.simple = i2), l2;
       }
       function He(e2, t2, n2) {
-        let r2 = n2.inline || !1;
+        const r2 = n2.inline || !1;
         n2.inline = !1;
-        let i2 = e2(t2, n2);
+        const i2 = e2(t2, n2);
         return (n2.inline = r2), i2;
       }
       var Pe = (e2, t2, n2) => ({ children: Ne(t2, e2[1], n2) });
@@ -3652,10 +3655,10 @@
           return react__WEBPACK_IMPORTED_MODULE_0__.cloneElement(
             (function Ze(n2 = '', i2 = {}) {
               function d2(e2, n3, ...r2) {
-                let l2 = We(i2.overrides, `${e2}.props`, {});
+                const l2 = We(i2.overrides, `${e2}.props`, {});
                 return i2.createElement(
                   (function (e3, t2) {
-                    let n4 = We(t2, e3);
+                    const n4 = We(t2, e3);
                     return n4
                       ? 'function' == typeof n4 ||
                         ('object' == typeof n4 && 'render' in n4)
@@ -3675,7 +3678,7 @@
                 i2.forceInline
                   ? (t2 = !0)
                   : i2.forceBlock || (t2 = !1 === _.test(e2));
-                let n3 = le2(
+                const n3 = le2(
                   ie2(t2 ? e2 : `${e2.trimEnd().replace(ne, '')}\n\n`, {
                     inline: t2,
                   }),
@@ -3704,12 +3707,12 @@
                 return i2.createElement(r2, { key: 'outer' }, l2);
               }
               function Z2(e2, t2) {
-                let n3 = t2.match(c);
+                const n3 = t2.match(c);
                 return n3
                   ? n3.reduce(function (t3, n4) {
-                      let r2 = n4.indexOf('=');
+                      const r2 = n4.indexOf('=');
                       if (-1 !== r2) {
-                        let a2 = ((e3 = n4.slice(0, r2)),
+                        const a2 = ((e3 = n4.slice(0, r2)),
                           -1 !== e3.indexOf('-') &&
                             null === e3.match(B) &&
                             (e3 = e3.replace(N, function (e4, t4) {
@@ -3717,7 +3720,7 @@
                             })),
                           e3).trim(),
                           o2 = (function (e3) {
-                            let t4 = e3[0];
+                            const t4 = e3[0];
                             return ('"' === t4 || "'" === t4) &&
                               e3.length >= 2 &&
                               e3[e3.length - 1] === t4
@@ -3726,10 +3729,10 @@
                           })(n4.slice(r2 + 1).trim()),
                           c2 = l[a2] || a2;
                         if ('ref' === c2) return t3;
-                        let s2 = (t3[c2] = (function (e3, t4, n5, r3) {
+                        const s2 = (t3[c2] = (function (e3, t4, n5, r3) {
                           return 'style' === t4
                             ? n5.split(/;\s?/).reduce(function (e4, t5) {
-                                let n6 = t5.slice(0, t5.indexOf(':'));
+                                const n6 = t5.slice(0, t5.indexOf(':'));
                                 return (
                                   (e4[
                                     n6
@@ -3765,18 +3768,18 @@
                 (i2.createElement =
                   i2.createElement ||
                   react__WEBPACK_IMPORTED_MODULE_0__.createElement);
-              let q2 = [],
+              const q2 = [],
                 Q2 = {},
                 V2 = {
                   [r_blockQuote]: {
                     match: Me(p),
                     order: 1,
                     parse(e2, t2, n3) {
-                      let [, r2, i3] = e2[0].replace(u, '').match(f2);
+                      const [, r2, i3] = e2[0].replace(u, '').match(f2);
                       return { alert: r2, children: t2(i3, n3) };
                     },
                     render(e2, t2, n3) {
-                      let l2 = { key: n3.key };
+                      const l2 = { key: n3.key };
                       return (
                         e2.alert &&
                           ((l2.className =
@@ -3913,7 +3916,7 @@
                         a2 =
                           ((c2 = l2), Ee.some((e3) => e3.test(c2)) ? He : Ne);
                       var c2;
-                      let s2 = e2[1].toLowerCase(),
+                      const s2 = e2[1].toLowerCase(),
                         d3 = -1 !== o.indexOf(s2),
                         p2 = (d3 ? s2 : e2[1]).trim(),
                         u2 = {
@@ -3939,7 +3942,7 @@
                     match: Re(M),
                     order: 1,
                     parse(e2) {
-                      let t2 = e2[1].trim();
+                      const t2 = e2[1].trim();
                       return { attrs: Z2(t2, e2[2] || ''), tag: t2 };
                     },
                     render: (e2, n3, r2) =>
@@ -4091,7 +4094,7 @@
                     order: 1,
                     parse: Ae,
                     render(e2, t2, n3) {
-                      let r2 = e2;
+                      const r2 = e2;
                       return d2(
                         'table',
                         { key: n3.key },
@@ -4178,21 +4181,21 @@
                 };
               !0 === i2.disableParsingRawHTML &&
                 (delete V2[r_htmlBlock], delete V2[r_htmlSelfClosing]);
-              let ie2 = (function (e2) {
-                  let t2 = Object.keys(e2);
+              const ie2 = (function (e2) {
+                  const t2 = Object.keys(e2);
                   function n3(r2, i3) {
-                    let l2 = [];
+                    const l2 = [];
                     for (i3.prevCapture = i3.prevCapture || ''; r2; ) {
                       let a2 = 0;
                       for (; a2 < t2.length; ) {
-                        let o2 = t2[a2],
+                        const o2 = t2[a2],
                           c2 = e2[o2],
                           s2 = c2.match(r2, i3);
                         if (s2) {
-                          let e3 = s2[0];
+                          const e3 = s2[0];
                           (i3.prevCapture += e3),
                             (r2 = r2.substring(e3.length));
-                          let t3 = c2.parse(s2, n3, i3);
+                          const t3 = c2.parse(s2, n3, i3);
                           null == t3.type && (t3.type = o2), l2.push(t3);
                           break;
                         }
@@ -4203,7 +4206,7 @@
                   }
                   return (
                     t2.sort(function (t3, n4) {
-                      let r2 = e2[t3].order,
+                      const r2 = e2[t3].order,
                         i3 = e2[n4].order;
                       return r2 !== i3 ? r2 - i3 : t3 < n4 ? -1 : 1;
                     }),
@@ -4218,7 +4221,7 @@
                 le2 =
                   ((ae2 = (function (e2, t2) {
                     return function (n3, r2, i3) {
-                      let l2 = e2[n3.type].render;
+                      const l2 = e2[n3.type].render;
                       return t2
                         ? t2(() => l2(n3, r2, i3), n3, r2, i3)
                         : l2(n3, r2, i3);
@@ -4231,7 +4234,7 @@
                         l2 = !1;
                       for (let r3 = 0; r3 < t2.length; r3++) {
                         n3.key = r3;
-                        let a2 = e2(t2[r3], n3),
+                        const a2 = e2(t2[r3], n3),
                           o2 = 'string' == typeof a2;
                         o2 && l2
                           ? (i3[i3.length - 1] += a2)
@@ -4243,7 +4246,7 @@
                     return ae2(t2, e2, n3);
                   });
               var ae2;
-              let oe2 = W2(n2);
+              const oe2 = W2(n2);
               return q2.length
                 ? d2(
                     'div',
@@ -4371,7 +4374,7 @@
           storybook_internal_components__WEBPACK_IMPORTED_MODULE_7__.lV.Input,
         )(({ readOnly }) => ({ opacity: readOnly ? 0.5 : 1 })),
         selectedKey = (value3, options2) => {
-          let entry =
+          const entry =
             options2 &&
             Object.entries(options2).find(([_key, val]) => val === value3);
           return entry ? entry[0] : void 0;
@@ -4430,12 +4433,12 @@
                 '-',
               )
             );
-          let initial = selectedKeys(value3, options2),
+          const initial = selectedKeys(value3, options2),
             [selected, setSelected] = (0,
             react__WEBPACK_IMPORTED_MODULE_0__.useState)(initial),
             readonly = !!argType?.table?.readonly,
             handleChange = (e2) => {
-              let option = e2.target.value,
+              const option = e2.target.value,
                 updated = [...selected];
               updated.includes(option)
                 ? updated.splice(updated.indexOf(option), 1)
@@ -4446,13 +4449,13 @@
           (0, react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
             setSelected(selectedKeys(value3, options2));
           }, [value3]);
-          let controlId = (0,
+          const controlId = (0,
           _chunk_2PTXLE6R_mjs__WEBPACK_IMPORTED_MODULE_5__.ZA)(name2);
           return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
             Wrapper4,
             { 'aria-readonly': readonly, isInline },
             Object.keys(options2).map((key2, index) => {
-              let id = `${controlId}-${index}`;
+              const id = `${controlId}-${index}`;
               return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
                 Label2,
                 { key: id, htmlFor: id },
@@ -4520,7 +4523,7 @@
                 '-',
               )
             );
-          let selection = selectedKey(value3, options2),
+          const selection = selectedKey(value3, options2),
             controlId = (0,
             _chunk_2PTXLE6R_mjs__WEBPACK_IMPORTED_MODULE_5__.ZA)(name2),
             readonly = !!argType?.table?.readonly;
@@ -4528,7 +4531,7 @@
             Wrapper5,
             { 'aria-readonly': readonly, isInline },
             Object.keys(options2).map((key2, index) => {
-              let id = `${controlId}-${index}`;
+              const id = `${controlId}-${index}`;
               return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
                 Label3,
                 { key: id, htmlFor: id },
@@ -4621,7 +4624,7 @@
           onChange,
           argType,
         }) => {
-          let selection = selectedKey(value3, options2) || 'Choose option...',
+          const selection = selectedKey(value3, options2) || 'Choose option...',
             controlId = (0,
             _chunk_2PTXLE6R_mjs__WEBPACK_IMPORTED_MODULE_5__.ZA)(name2),
             readonly = !!argType?.table?.readonly;
@@ -4664,7 +4667,7 @@
           onChange,
           argType,
         }) => {
-          let selection = selectedKeys(value3, options2),
+          const selection = selectedKeys(value3, options2),
             controlId = (0,
             _chunk_2PTXLE6R_mjs__WEBPACK_IMPORTED_MODULE_5__.ZA)(name2),
             readonly = !!argType?.table?.readonly;
@@ -4679,7 +4682,7 @@
                 multiple: !0,
                 value: selection,
                 onChange: (e2) => {
-                  let selection2 = Array.from(e2.currentTarget.options)
+                  const selection2 = Array.from(e2.currentTarget.options)
                     .filter((option) => option.selected)
                     .map((option) => option.value);
                   onChange(selectedValues(selection2, options2));
@@ -4696,7 +4699,7 @@
           );
         },
         SelectControl = (props) => {
-          let { name: name2, options: options2 } = props;
+          const { name: name2, options: options2 } = props;
           return options2
             ? props.isMulti
               ? react__WEBPACK_IMPORTED_MODULE_0__.createElement(MultiSelect, {
@@ -4756,7 +4759,7 @@
           : 'Iterable';
       }
       function isComponentWillChange(oldValue, newValue) {
-        let oldType = getObjectType(oldValue),
+        const oldType = getObjectType(oldValue),
           newType = getObjectType(newValue);
         return (
           ('Function' === oldType || 'Function' === newType) &&
@@ -4773,7 +4776,7 @@
             (this.onSubmit = this.onSubmit.bind(this));
         }
         componentDidMount() {
-          let { inputRefKey, inputRefValue } = this.state,
+          const { inputRefKey, inputRefValue } = this.state,
             { onlyValue } = this.props;
           inputRefKey &&
             'function' == typeof inputRefKey.focus &&
@@ -4799,7 +4802,7 @@
               (event.preventDefault(), this.props.handleCancel()));
         }
         onSubmit() {
-          let { handleAdd, onlyValue, onSubmitValueParser, keyPath, deep } =
+          const { handleAdd, onlyValue, onSubmitValueParser, keyPath, deep } =
               this.props,
             { inputRefKey, inputRefValue } = this.state,
             result2 = {};
@@ -4849,7 +4852,7 @@
             ),
             inputElementKeyLayout = null;
           if (!onlyValue) {
-            let inputElementKey = inputElementGenerator('key', keyPath, deep);
+            const inputElementKey = inputElementGenerator('key', keyPath, deep);
             inputElementKeyLayout = (0,
             react__WEBPACK_IMPORTED_MODULE_0__.cloneElement)(inputElementKey, {
               placeholder: 'Key',
@@ -4882,7 +4885,7 @@
       var JsonArray = class extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         constructor(props) {
           super(props);
-          let keyPath = [...props.keyPath, props.name];
+          const keyPath = [...props.keyPath, props.name];
           (this.state = {
             data: props.data,
             name: props.name,
@@ -4906,9 +4909,9 @@
           return props.data !== state.data ? { data: props.data } : null;
         }
         onChildUpdate(childKey, childData) {
-          let { data, keyPath } = this.state;
+          const { data, keyPath } = this.state;
           (data[childKey] = childData), this.setState({ data });
-          let { onUpdate } = this.props;
+          const { onUpdate } = this.props;
           onUpdate(keyPath[keyPath.length - 1], data);
         }
         handleAddMode() {
@@ -4919,12 +4922,12 @@
         }
         handleRemoveItem(index) {
           return () => {
-            let { beforeRemoveAction, logger: logger4 } = this.props,
+            const { beforeRemoveAction, logger: logger4 } = this.props,
               { data, keyPath, nextDeep: deep } = this.state,
               oldValue = data[index];
             beforeRemoveAction(index, keyPath, deep, oldValue)
               .then(() => {
-                let deltaUpdateResult = {
+                const deltaUpdateResult = {
                   keyPath,
                   deep,
                   key: index,
@@ -4932,7 +4935,7 @@
                   type: 'REMOVE_DELTA_TYPE',
                 };
                 data.splice(index, 1), this.setState({ data });
-                let { onUpdate, onDeltaUpdate } = this.props;
+                const { onUpdate, onDeltaUpdate } = this.props;
                 onUpdate(keyPath[keyPath.length - 1], data),
                   onDeltaUpdate(deltaUpdateResult);
               })
@@ -4940,13 +4943,13 @@
           };
         }
         handleAddValueAdd({ newValue }) {
-          let { data, keyPath, nextDeep: deep } = this.state,
+          const { data, keyPath, nextDeep: deep } = this.state,
             { beforeAddAction, logger: logger4 } = this.props;
           beforeAddAction(data.length, keyPath, deep, newValue)
             .then(() => {
-              let newData = [...data, newValue];
+              const newData = [...data, newValue];
               this.setState({ data: newData }), this.handleAddValueCancel();
-              let { onUpdate, onDeltaUpdate } = this.props;
+              const { onUpdate, onDeltaUpdate } = this.props;
               onUpdate(keyPath[keyPath.length - 1], newData),
                 onDeltaUpdate({
                   type: 'ADD_DELTA_TYPE',
@@ -4963,13 +4966,13 @@
         }
         handleEditValue({ key: key2, value: value3 }) {
           return new Promise((resolve, reject) => {
-            let { beforeUpdateAction } = this.props,
+            const { beforeUpdateAction } = this.props,
               { data, keyPath, nextDeep: deep } = this.state,
               oldValue = data[key2];
             beforeUpdateAction(key2, keyPath, deep, oldValue, value3)
               .then(() => {
                 (data[key2] = value3), this.setState({ data });
-                let { onUpdate, onDeltaUpdate } = this.props;
+                const { onUpdate, onDeltaUpdate } = this.props;
                 onUpdate(keyPath[keyPath.length - 1], data),
                   onDeltaUpdate({
                     type: 'UPDATE_DELTA_TYPE',
@@ -4985,7 +4988,7 @@
           });
         }
         renderCollapsed() {
-          let { name: name2, data, keyPath, deep } = this.state,
+          const { name: name2, data, keyPath, deep } = this.state,
             { handleRemove, readOnly, getStyle, dataType, minusMenuElement } =
               this.props,
             { minus, collapsed } = getStyle(
@@ -5021,7 +5024,7 @@
           );
         }
         renderNotCollapsed() {
-          let {
+          const {
               name: name2,
               data,
               keyPath,
@@ -5136,7 +5139,7 @@
           );
         }
         render() {
-          let { name: name2, collapsed, data, keyPath, deep } = this.state,
+          const { name: name2, collapsed, data, keyPath, deep } = this.state,
             { dataType, getStyle } = this.props,
             value3 = collapsed
               ? this.renderCollapsed()
@@ -5177,7 +5180,7 @@
       var JsonFunctionValue = class extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         constructor(props) {
           super(props);
-          let keyPath = [...props.keyPath, props.name];
+          const keyPath = [...props.keyPath, props.name];
           (this.state = {
             value: props.value,
             name: props.name,
@@ -5196,7 +5199,7 @@
           return props.value !== state.value ? { value: props.value } : null;
         }
         componentDidUpdate() {
-          let {
+          const {
               editEnabled,
               inputRef,
               name: name2,
@@ -5229,7 +5232,7 @@
               (event.preventDefault(), this.handleCancelEdit()));
         }
         handleEdit() {
-          let {
+          const {
               handleUpdateValue,
               originalValue,
               logger: logger4,
@@ -5238,7 +5241,7 @@
             } = this.props,
             { inputRef, name: name2, deep } = this.state;
           if (!inputRef) return;
-          let newValue = onSubmitValueParser(
+          const newValue = onSubmitValueParser(
             !0,
             keyPath,
             deep,
@@ -5292,7 +5295,7 @@
               dataType,
             );
           if (editEnabled && !resultOnlyResult) {
-            let textareaElement = textareaElementGenerator(
+            const textareaElement = textareaElementGenerator(
                 'value',
                 comeFromKeyPath,
                 deep,
@@ -5334,7 +5337,7 @@
               },
               value3,
             );
-            let minusMenuLayout = (0,
+            const minusMenuLayout = (0,
             react__WEBPACK_IMPORTED_MODULE_0__.cloneElement)(minusMenuElement, {
               onClick: handleRemove,
               className: 'rejt-minus-menu',
@@ -5391,7 +5394,7 @@
           return props.data !== state.data ? { data: props.data } : null;
         }
         render() {
-          let { data, name: name2, keyPath, deep } = this.state,
+          const { data, name: name2, keyPath, deep } = this.state,
             {
               isCollapsed,
               handleRemove,
@@ -5688,7 +5691,8 @@
       var JsonObject = class extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         constructor(props) {
           super(props);
-          let keyPath = -1 === props.deep ? [] : [...props.keyPath, props.name];
+          const keyPath =
+            -1 === props.deep ? [] : [...props.keyPath, props.name];
           (this.state = {
             name: props.name,
             data: props.data,
@@ -5712,9 +5716,9 @@
           return props.data !== state.data ? { data: props.data } : null;
         }
         onChildUpdate(childKey, childData) {
-          let { data, keyPath } = this.state;
+          const { data, keyPath } = this.state;
           (data[childKey] = childData), this.setState({ data });
-          let { onUpdate } = this.props;
+          const { onUpdate } = this.props;
           onUpdate(keyPath[keyPath.length - 1], data);
         }
         handleAddMode() {
@@ -5724,14 +5728,14 @@
           this.setState({ addFormVisible: !1 });
         }
         handleAddValueAdd({ key: key2, newValue }) {
-          let { data, keyPath, nextDeep: deep } = this.state,
+          const { data, keyPath, nextDeep: deep } = this.state,
             { beforeAddAction, logger: logger4 } = this.props;
           beforeAddAction(key2, keyPath, deep, newValue)
             .then(() => {
               (data[key2] = newValue),
                 this.setState({ data }),
                 this.handleAddValueCancel();
-              let { onUpdate, onDeltaUpdate } = this.props;
+              const { onUpdate, onDeltaUpdate } = this.props;
               onUpdate(keyPath[keyPath.length - 1], data),
                 onDeltaUpdate({
                   type: 'ADD_DELTA_TYPE',
@@ -5745,12 +5749,12 @@
         }
         handleRemoveValue(key2) {
           return () => {
-            let { beforeRemoveAction, logger: logger4 } = this.props,
+            const { beforeRemoveAction, logger: logger4 } = this.props,
               { data, keyPath, nextDeep: deep } = this.state,
               oldValue = data[key2];
             beforeRemoveAction(key2, keyPath, deep, oldValue)
               .then(() => {
-                let deltaUpdateResult = {
+                const deltaUpdateResult = {
                   keyPath,
                   deep,
                   key: key2,
@@ -5758,7 +5762,7 @@
                   type: 'REMOVE_DELTA_TYPE',
                 };
                 delete data[key2], this.setState({ data });
-                let { onUpdate, onDeltaUpdate } = this.props;
+                const { onUpdate, onDeltaUpdate } = this.props;
                 onUpdate(keyPath[keyPath.length - 1], data),
                   onDeltaUpdate(deltaUpdateResult);
               })
@@ -5770,13 +5774,13 @@
         }
         handleEditValue({ key: key2, value: value3 }) {
           return new Promise((resolve, reject) => {
-            let { beforeUpdateAction } = this.props,
+            const { beforeUpdateAction } = this.props,
               { data, keyPath, nextDeep: deep } = this.state,
               oldValue = data[key2];
             beforeUpdateAction(key2, keyPath, deep, oldValue, value3)
               .then(() => {
                 (data[key2] = value3), this.setState({ data });
-                let { onUpdate, onDeltaUpdate } = this.props;
+                const { onUpdate, onDeltaUpdate } = this.props;
                 onUpdate(keyPath[keyPath.length - 1], data),
                   onDeltaUpdate({
                     type: 'UPDATE_DELTA_TYPE',
@@ -5792,7 +5796,7 @@
           });
         }
         renderCollapsed() {
-          let { name: name2, keyPath, deep, data } = this.state,
+          const { name: name2, keyPath, deep, data } = this.state,
             { handleRemove, readOnly, dataType, getStyle, minusMenuElement } =
               this.props,
             { minus, collapsed } = getStyle(
@@ -5830,7 +5834,7 @@
           );
         }
         renderNotCollapsed() {
-          let {
+          const {
               name: name2,
               data,
               keyPath,
@@ -5946,7 +5950,7 @@
           );
         }
         render() {
-          let { name: name2, collapsed, data, keyPath, deep } = this.state,
+          const { name: name2, collapsed, data, keyPath, deep } = this.state,
             { getStyle, dataType } = this.props,
             value3 = collapsed
               ? this.renderCollapsed()
@@ -5987,7 +5991,7 @@
       var JsonValue = class extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         constructor(props) {
           super(props);
-          let keyPath = [...props.keyPath, props.name];
+          const keyPath = [...props.keyPath, props.name];
           (this.state = {
             value: props.value,
             name: props.name,
@@ -6006,7 +6010,7 @@
           return props.value !== state.value ? { value: props.value } : null;
         }
         componentDidUpdate() {
-          let {
+          const {
               editEnabled,
               inputRef,
               name: name2,
@@ -6039,7 +6043,7 @@
               (event.preventDefault(), this.handleCancelEdit()));
         }
         handleEdit() {
-          let {
+          const {
               handleUpdateValue,
               originalValue,
               logger: logger4,
@@ -6048,7 +6052,7 @@
             } = this.props,
             { inputRef, name: name2, deep } = this.state;
           if (!inputRef) return;
-          let newValue = onSubmitValueParser(
+          const newValue = onSubmitValueParser(
             !0,
             keyPath,
             deep,
@@ -6072,7 +6076,7 @@
           this.setState({ editEnabled: !1 });
         }
         render() {
-          let {
+          const {
               name: name2,
               value: value3,
               editEnabled,
@@ -6529,7 +6533,7 @@
           li: { outline: 0 },
         }),
         ObjectControl = ({ name: name2, value: value3, onChange, argType }) => {
-          let theme = (0,
+          const theme = (0,
             storybook_internal_theming__WEBPACK_IMPORTED_MODULE_6__.DP)(),
             data = (0, react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(
               () =>
@@ -6579,7 +6583,7 @@
               },
               'Set object',
             );
-          let rawJSONForm = react__WEBPACK_IMPORTED_MODULE_0__.createElement(
+          const rawJSONForm = react__WEBPACK_IMPORTED_MODULE_0__.createElement(
               RawInput,
               {
                 ref: htmlElRef,
@@ -6847,7 +6851,7 @@
             onFocus,
             argType,
           }) => {
-            let onSetFalse = (0,
+            const onSetFalse = (0,
               react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(
                 () => onChange(!1),
                 [onChange],
@@ -6867,7 +6871,7 @@
                 },
                 'Set boolean',
               );
-            let controlId = (0,
+            const controlId = (0,
               _chunk_2PTXLE6R_mjs__WEBPACK_IMPORTED_MODULE_5__.ZA)(name2),
               parsedValue =
                 'string' == typeof value3
@@ -6925,7 +6929,7 @@
             onBlur,
             argType,
           }) => {
-            let [valid, setValid] = (0,
+            const [valid, setValid] = (0,
               react__WEBPACK_IMPORTED_MODULE_0__.useState)(!0),
               dateRef = (0, react__WEBPACK_IMPORTED_MODULE_0__.useRef)(),
               timeRef = (0, react__WEBPACK_IMPORTED_MODULE_0__.useRef)(),
@@ -6936,7 +6940,7 @@
                   dateRef.current &&
                   (dateRef.current.value = value3
                     ? ((value3) => {
-                        let date = new Date(value3);
+                        const date = new Date(value3);
                         return `${`000${date.getFullYear()}`.slice(-4)}-${`0${date.getMonth() + 1}`.slice(-2)}-${`0${date.getDate()}`.slice(-2)}`;
                       })(value3)
                     : ''),
@@ -6944,12 +6948,12 @@
                   timeRef.current &&
                   (timeRef.current.value = value3
                     ? ((value3) => {
-                        let date = new Date(value3);
+                        const date = new Date(value3);
                         return `${`0${date.getHours()}`.slice(-2)}:${`0${date.getMinutes()}`.slice(-2)}`;
                       })(value3)
                     : ''));
             }, [value3]);
-            let controlId = (0,
+            const controlId = (0,
             _chunk_2PTXLE6R_mjs__WEBPACK_IMPORTED_MODULE_5__.ZA)(name2);
             return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
               FlexSpaced,
@@ -6963,8 +6967,8 @@
                 readOnly: readonly,
                 onChange: (e2) => {
                   if (!e2.target.value) return onChange();
-                  let parsed = ((value3) => {
-                      let [year, month, day] = value3.split('-'),
+                  const parsed = ((value3) => {
+                      const [year, month, day] = value3.split('-'),
                         result2 = new Date();
                       return (
                         result2.setFullYear(
@@ -6981,7 +6985,7 @@
                     parsed.getMonth(),
                     parsed.getDate(),
                   );
-                  let time = result2.getTime();
+                  const time = result2.getTime();
                   time && onChange(time), setValid(!!time);
                 },
                 onFocus,
@@ -6994,8 +6998,8 @@
                 ref: timeRef,
                 onChange: (e2) => {
                   if (!e2.target.value) return onChange();
-                  let parsed = ((value3) => {
-                      let [hours, minutes] = value3.split(':'),
+                  const parsed = ((value3) => {
+                      const [hours, minutes] = value3.split(':'),
                         result2 = new Date();
                       return (
                         result2.setHours(parseInt(hours, 10)),
@@ -7006,7 +7010,7 @@
                     result2 = new Date(value3);
                   result2.setHours(parsed.getHours()),
                     result2.setMinutes(parsed.getMinutes());
-                  let time = result2.getTime();
+                  const time = result2.getTime();
                   time && onChange(time), setValid(!!time);
                 },
                 readOnly: readonly,
@@ -7033,7 +7037,7 @@
             onFocus,
             argType,
           }) => {
-            let [inputValue, setInputValue] = (0,
+            const [inputValue, setInputValue] = (0,
               react__WEBPACK_IMPORTED_MODULE_0__.useState)(
                 'number' == typeof value3 ? value3 : '',
               ),
@@ -7046,7 +7050,7 @@
               react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(
                 (event) => {
                   setInputValue(event.target.value);
-                  let result2 = parseFloat(event.target.value);
+                  const result2 = parseFloat(event.target.value);
                   Number.isNaN(result2)
                     ? setParseError(
                         new Error(`'${event.target.value}' is not a number`),
@@ -7130,12 +7134,12 @@
             onFocus,
             argType,
           }) => {
-            let hasValue = void 0 !== value3,
+            const hasValue = void 0 !== value3,
               numberOFDecimalsPlaces = (0,
               react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(
                 () =>
                   (function getNumberOfDecimalPlaces(number) {
-                    let match = number
+                    const match = number
                       .toString()
                       .match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
                     return match
@@ -7166,7 +7170,7 @@
                 onChange: (event) => {
                   onChange(
                     ((value3) => {
-                      let result2 = parseFloat(value3);
+                      const result2 = parseFloat(value3);
                       return Number.isNaN(result2) ? void 0 : result2;
                     })(event.target.value),
                   );
@@ -7197,7 +7201,7 @@
             maxLength,
             argType,
           }) => {
-            let readonly = !!argType?.table?.readonly,
+            const readonly = !!argType?.table?.readonly,
               [forceVisible, setForceVisible] = (0,
               react__WEBPACK_IMPORTED_MODULE_0__.useState)(!1),
               onForceVisible = (0,
@@ -7218,7 +7222,7 @@
                 },
                 'Set string',
               );
-            let isValid = 'string' == typeof value3;
+            const isValid = 'string' == typeof value3;
             return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
               Wrapper7,
               null,
@@ -7261,7 +7265,7 @@
             value: value3,
             argType,
           }) => {
-            let inputElement = (0, react__WEBPACK_IMPORTED_MODULE_0__.useRef)(
+            const inputElement = (0, react__WEBPACK_IMPORTED_MODULE_0__.useRef)(
                 null,
               ),
               readonly = argType?.control?.readOnly;
@@ -7282,7 +7286,7 @@
                 disabled: readonly,
                 onChange: function handleFileChange(e2) {
                   if (!e2.target.files) return;
-                  let fileUrls = Array.from(e2.target.files).map((file) =>
+                  const fileUrls = Array.from(e2.target.files).map((file) =>
                     URL.createObjectURL(file),
                   );
                   onChange(fileUrls),
@@ -7313,7 +7317,7 @@
           (0, react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
             isFocused || setBoxedValue({ value: arg });
           }, [isFocused, arg]);
-          let onChange = (0, react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(
+          const onChange = (0, react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(
               (argVal) => (
                 setBoxedValue({ value: argVal }),
                 updateArgs({ [key2]: argVal }),
@@ -7347,7 +7351,7 @@
                   null,
                 );
           }
-          let props = {
+          const props = {
               name: key2,
               argType: row,
               value: boxedValue.value,
@@ -7399,7 +7403,7 @@
             }),
           ),
         ArgJsDoc = ({ tags }) => {
-          let params = (tags.params || []).filter((x2) => x2.description),
+          const params = (tags.params || []).filter((x2) => x2.description),
             hasDisplayableParams = 0 !== params.length,
             hasDisplayableDeprecated = null != tags.deprecated,
             hasDisplayableReturns =
@@ -7567,7 +7571,7 @@
           ),
         calculateDetailWidth = (0, import_memoizerific.default)(1e3)(
           (detail) => {
-            let lines = detail.split(/\r?\n/);
+            const lines = detail.split(/\r?\n/);
             return `${Math.max(...lines.map((x2) => x2.length))}ch`;
           },
         ),
@@ -7592,7 +7596,7 @@
               initialExpandedArgs || !1,
             );
           if (null == summary) return null;
-          let summaryAsString =
+          const summaryAsString =
             'function' == typeof summary.toString
               ? summary.toString()
               : summary;
@@ -7601,9 +7605,9 @@
               return react__WEBPACK_IMPORTED_MODULE_0__.createElement(ArgText, {
                 text: summaryAsString,
               });
-            let summaryItems = ((summary) => {
+            const summaryItems = ((summary) => {
                 if (!summary) return [summary];
-                let summaryItems = summary
+                const summaryItems = summary
                   .split('|')
                   .map((value3) => value3.trim());
                 return (0, _chunk_2PTXLE6R_mjs__WEBPACK_IMPORTED_MODULE_5__.sb)(
@@ -7733,7 +7737,7 @@
             }),
           ),
         ArgRow = (props) => {
-          let [isHovered, setIsHovered] = (0,
+          const [isHovered, setIsHovered] = (0,
             react__WEBPACK_IMPORTED_MODULE_0__.useState)(!1),
             { row, updateArgs, compact, expandable, initialExpandedArgs } =
               props,
@@ -7867,11 +7871,11 @@
             }),
           ),
         Empty = ({ inAddonPanel }) => {
-          let [isLoading, setIsLoading] = (0,
+          const [isLoading, setIsLoading] = (0,
           react__WEBPACK_IMPORTED_MODULE_0__.useState)(!0);
           return (
             (0, react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-              let load = setTimeout(() => {
+              const load = setTimeout(() => {
                 setIsLoading(!1);
               }, 100);
               return () => clearTimeout(load);
@@ -8052,7 +8056,7 @@
           initialExpanded = !0,
           colSpan = 3,
         }) => {
-          let [expanded, setExpanded] = (0,
+          const [expanded, setExpanded] = (0,
             react__WEBPACK_IMPORTED_MODULE_0__.useState)(initialExpanded),
             Level = 'subsection' === level ? Subsection : Section,
             itemCount = children?.length || 0,
@@ -8389,7 +8393,7 @@
           none: void 0,
         },
         ArgsTable = (props) => {
-          let {
+          const {
             updateArgs,
             resetArgs,
             compact,
@@ -8399,7 +8403,7 @@
             isLoading,
           } = props;
           if ('error' in props) {
-            let { error } = props;
+            const { error } = props;
             return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
               EmptyBlock,
               null,
@@ -8425,35 +8429,35 @@
               Skeleton,
               null,
             );
-          let { rows, args: args2, globals } = 'rows' in props && props,
+          const { rows, args: args2, globals } = 'rows' in props && props,
             groups = ((rows, sort) => {
-              let sections = {
+              const sections = {
                 ungrouped: [],
                 ungroupedSubsections: {},
                 sections: {},
               };
               if (!rows) return sections;
               Object.entries(rows).forEach(([key2, row]) => {
-                let { category, subcategory } = row?.table || {};
+                const { category, subcategory } = row?.table || {};
                 if (category) {
-                  let section = sections.sections[category] || {
+                  const section = sections.sections[category] || {
                     ungrouped: [],
                     subsections: {},
                   };
                   if (subcategory) {
-                    let subsection = section.subsections[subcategory] || [];
+                    const subsection = section.subsections[subcategory] || [];
                     subsection.push({ key: key2, ...row }),
                       (section.subsections[subcategory] = subsection);
                   } else section.ungrouped.push({ key: key2, ...row });
                   sections.sections[category] = section;
                 } else if (subcategory) {
-                  let subsection =
+                  const subsection =
                     sections.ungroupedSubsections[subcategory] || [];
                   subsection.push({ key: key2, ...row }),
                     (sections.ungroupedSubsections[subcategory] = subsection);
                 } else sections.ungrouped.push({ key: key2, ...row });
               });
-              let sortFn = sortFns[sort],
+              const sortFn = sortFns[sort],
                 sortSubsection = (record) =>
                   sortFn
                     ? Object.keys(record).reduce(
@@ -8517,7 +8521,7 @@
             });
           let colSpan = 1;
           updateArgs && (colSpan += 1), compact || (colSpan += 2);
-          let expandable = Object.keys(groups.sections).length > 0,
+          const expandable = Object.keys(groups.sections).length > 0,
             common = { updateArgs, compact, inAddonPanel, initialExpandedArgs };
           return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
             storybook_internal_components__WEBPACK_IMPORTED_MODULE_7__.dL,
@@ -8676,7 +8680,7 @@
           );
         },
         TabbedArgsTable = ({ tabs, ...props }) => {
-          let entries = Object.entries(tabs);
+          const entries = Object.entries(tabs);
           return 1 === entries.length
             ? react__WEBPACK_IMPORTED_MODULE_0__.createElement(ArgsTable, {
                 ...entries[0][1],
@@ -8686,7 +8690,7 @@
                 storybook_internal_components__WEBPACK_IMPORTED_MODULE_7__._j,
                 null,
                 entries.map((entry, index) => {
-                  let [label, table] = entry,
+                  const [label, table] = entry,
                     id = `prop_table_div_${label}`,
                     argsTableProps = 0 === index ? props : { sort: props.sort };
                   return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
@@ -8939,7 +8943,7 @@
           (target = null != mod ? __create(__getProtoOf(mod)) : {}),
           ((to, from, except, desc) => {
             if ((from && 'object' == typeof from) || 'function' == typeof from)
-              for (let key2 of __getOwnPropNames(from))
+              for (const key2 of __getOwnPropNames(from))
                 !__hasOwnProp.call(to, key2) &&
                   key2 !== except &&
                   __defProp(to, key2, {
@@ -9998,7 +10002,7 @@
           typeof Event < 'u' &&
             data instanceof Event &&
             ((result2 = (function extractEventHiddenProperties(event) {
-              let rebuildEvent = eventProperties
+              const rebuildEvent = eventProperties
                 .filter((value3) => void 0 !== event[value3])
                 .reduce(
                   (acc, value3) => ({ ...acc, [value3]: event[value3] }),
@@ -10040,7 +10044,7 @@
           lazyEval: !0,
         },
         stringify = (data, options2 = {}) => {
-          let mergedOptions = { ...defaultOptions, ...options2 };
+          const mergedOptions = { ...defaultOptions, ...options2 };
           return JSON.stringify(
             convertUnconventionalData(data),
             (function (options2) {
@@ -10055,7 +10059,7 @@
                       (stack = []),
                       value22
                     );
-                  let origin = map.get(this) || this;
+                  const origin = map.get(this) || this;
                   for (; stack.length && origin !== stack[0]; )
                     stack.shift(), keys.pop();
                   if ('boolean' == typeof value22) return value22;
@@ -10092,7 +10096,7 @@
                       ? `_function_${name2}|${(() => {}).toString()}`
                       : `_function_${name2}|${cleanCode(
                           (function (key2, stringified) {
-                            let fnHead = stringified.slice(
+                            const fnHead = stringified.slice(
                                 0,
                                 stringified.indexOf('{'),
                               ),
@@ -10117,7 +10121,7 @@
                   }
                   if ((0, import_is_symbol.default)(value22)) {
                     if (!options2.allowSymbol) return;
-                    let globalRegistryKey = Symbol.keyFor(value22);
+                    const globalRegistryKey = Symbol.keyFor(value22);
                     return void 0 !== globalRegistryKey
                       ? `_gsymbol_${globalRegistryKey}`
                       : `_symbol_${value22.toString().slice(7, -1)}`;
@@ -10148,9 +10152,9 @@
                     !options2.allowClass
                   )
                     return;
-                  let found = objects.get(value22);
+                  const found = objects.get(value22);
                   if (!found) {
-                    let converted = Array.isArray(value22)
+                    const converted = Array.isArray(value22)
                       ? value22
                       : convertUnconventionalData(value22);
                     if (
@@ -10189,16 +10193,16 @@
           { sources: {} },
         ),
         SourceContainer = ({ children, channel }) => {
-          let [sources, setSources] = (0,
+          const [sources, setSources] = (0,
           react__WEBPACK_IMPORTED_MODULE_0__.useState)({});
           return (
             (0, react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-              let handleSnippetRendered = (
+              const handleSnippetRendered = (
                 idOrEvent,
                 inputSource = null,
                 inputFormat = !1,
               ) => {
-                let {
+                const {
                     id,
                     args: args2,
                     source: source2,
@@ -10244,7 +10248,7 @@
           typeFromProps,
           transformFromProps,
         }) => {
-          let { __isArgsStory: isArgsStory } = storyContext.parameters,
+          const { __isArgsStory: isArgsStory } = storyContext.parameters,
             sourceParameters = storyContext.parameters.docs?.source || {},
             type =
               typeFromProps ||
@@ -10252,7 +10256,7 @@
               storybook_internal_docs_tools__WEBPACK_IMPORTED_MODULE_10__.Y1
                 .AUTO;
           if (void 0 !== sourceParameters.code) return sourceParameters.code;
-          let code =
+          const code =
             type ===
               storybook_internal_docs_tools__WEBPACK_IMPORTED_MODULE_10__.Y1
                 .DYNAMIC ||
@@ -10290,7 +10294,7 @@
           if (!code && !story)
             return { error: 'Oh no! The source is not available.' };
           if (code) return { code, format: format3, language, dark };
-          let storyContext = docsContext.getStoryContext(story),
+          const storyContext = docsContext.getStoryContext(story),
             argsForSource = props.__forceInitialArgs
               ? storyContext.initialArgs
               : storyContext.unmappedArgs,
@@ -10319,14 +10323,14 @@
           );
         };
       function useStory(storyId, context) {
-        let stories = (function useStories(storyIds, context) {
-          let [storiesById, setStories] = (0,
+        const stories = (function useStories(storyIds, context) {
+          const [storiesById, setStories] = (0,
           react__WEBPACK_IMPORTED_MODULE_0__.useState)({});
           return (
             (0, react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
               Promise.all(
                 storyIds.map(async (storyId) => {
-                  let story = await context.loadStory(storyId);
+                  const story = await context.loadStory(storyId);
                   setStories((current) =>
                     current[storyId] === story
                       ? current
@@ -10348,11 +10352,11 @@
         return stories && stories[0];
       }
       var Story2 = (props = { __forceInitialArgs: !1, __primary: !1 }) => {
-          let context = (0, react__WEBPACK_IMPORTED_MODULE_0__.useContext)(
+          const context = (0, react__WEBPACK_IMPORTED_MODULE_0__.useContext)(
               DocsContext,
             ),
             storyId = ((props, context) => {
-              let { of, meta } = props;
+              const { of, meta } = props;
               if ('of' in props && void 0 === of)
                 throw new Error(
                   'Unexpected `of={undefined}`, did you mistype a CSF file reference?',
@@ -10368,8 +10372,8 @@
               StorySkeleton,
               null,
             );
-          let storyProps = ((props, story, context) => {
-            let { parameters = {} } = story || {},
+          const storyProps = ((props, story, context) => {
+            const { parameters = {} } = story || {},
               { docs = {} } = parameters,
               storyParameters = docs.story || {};
             if (docs.disable) return null;
@@ -10401,9 +10405,8 @@
             : null;
         },
         Canvas = (props) => {
-          let docsContext = (0, react__WEBPACK_IMPORTED_MODULE_0__.useContext)(
-              DocsContext,
-            ),
+          const docsContext = (0,
+            react__WEBPACK_IMPORTED_MODULE_0__.useContext)(DocsContext),
             sourceContext = (0, react__WEBPACK_IMPORTED_MODULE_0__.useContext)(
               SourceContext,
             ),
@@ -10412,7 +10415,7 @@
             throw new Error(
               'Unexpected `of={undefined}`, did you mistype a CSF file reference?',
             );
-          let { story } = useOf(of || 'story', ['story']),
+          const { story } = useOf(of || 'story', ['story']),
             sourceProps = useSourceProps(
               { ...source2, ...(of && { of }) },
               docsContext,
@@ -10454,7 +10457,7 @@
           );
         },
         useArgsIfDefined = (story, context) => {
-          let storyContext = story
+          const storyContext = story
               ? context.getStoryContext(story)
               : { args: {} },
             { id: storyId } = story || { id: 'none' },
@@ -10462,7 +10465,7 @@
               storyContext.args,
             );
           (0, react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-            let onArgsUpdated = (changed) => {
+            const onArgsUpdated = (changed) => {
               changed.storyId === storyId && setArgs(changed.args);
             };
             return (
@@ -10477,7 +10480,8 @@
                 )
             );
           }, [storyId, context.channel]);
-          let updateArgs = (0, react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(
+          const updateArgs = (0,
+            react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(
               (updatedArgs) =>
                 context.channel.emit(
                   storybook_internal_core_events__WEBPACK_IMPORTED_MODULE_3__.UPDATE_STORY_ARGS,
@@ -10496,7 +10500,7 @@
           return story && [args2, updateArgs, resetArgs];
         };
       function extractComponentArgTypes2(component, parameters) {
-        let { extractArgTypes } = parameters.docs || {};
+        const { extractArgTypes } = parameters.docs || {};
         if (!extractArgTypes)
           throw new Error(
             'Args unsupported. See Args documentation for your framework.',
@@ -10504,12 +10508,12 @@
         return extractArgTypes(component);
       }
       var Controls3 = (props) => {
-          let { of } = props;
+          const { of } = props;
           if ('of' in props && void 0 === of)
             throw new Error(
               'Unexpected `of={undefined}`, did you mistype a CSF file reference?',
             );
-          let context = (0, react__WEBPACK_IMPORTED_MODULE_0__.useContext)(
+          const context = (0, react__WEBPACK_IMPORTED_MODULE_0__.useContext)(
               DocsContext,
             ),
             { story } = context.resolveOf(of || 'story', ['story']),
@@ -10519,19 +10523,19 @@
             exclude = props.exclude ?? controlsParameters.exclude,
             sort = props.sort ?? controlsParameters.sort,
             [args2, updateArgs, resetArgs] = ((story, context) => {
-              let result2 = useArgsIfDefined(story, context);
+              const result2 = useArgsIfDefined(story, context);
               if (!result2) throw new Error('No result when story was defined');
               return result2;
             })(story, context),
             [globals] = ((story, context) => {
-              let storyContext = context.getStoryContext(story),
+              const storyContext = context.getStoryContext(story),
                 [globals, setGlobals] = (0,
                 react__WEBPACK_IMPORTED_MODULE_0__.useState)(
                   storyContext.globals,
                 );
               return (
                 (0, react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-                  let onGlobalsUpdated = (changed) => {
+                  const onGlobalsUpdated = (changed) => {
                     setGlobals(changed.globals);
                   };
                   return (
@@ -10567,7 +10571,7 @@
                   resetArgs,
                 })
               : null;
-          let mainComponentName = getComponentName(component),
+          const mainComponentName = getComponentName(component),
             subcomponentTabs = Object.fromEntries(
               Object.entries(subcomponents).map(([key2, comp]) => [
                 key2,
@@ -10602,7 +10606,7 @@
               null,
               children,
             );
-          let language = className && className.split('-');
+          const language = className && className.split('-');
           return react__WEBPACK_IMPORTED_MODULE_0__.createElement(Source, {
             language: (language && language[1]) || 'text',
             format: !1,
@@ -10619,7 +10623,7 @@
       var DescriptionType2,
         A2 = storybook_internal_components__WEBPACK_IMPORTED_MODULE_7__.dK.a,
         AnchorInPage = ({ hash, children }) => {
-          let context = (0, react__WEBPACK_IMPORTED_MODULE_0__.useContext)(
+          const context = (0, react__WEBPACK_IMPORTED_MODULE_0__.useContext)(
             DocsContext,
           );
           return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
@@ -10628,7 +10632,7 @@
               href: hash,
               target: '_self',
               onClick: (event) => {
-                let id = hash.substring(1);
+                const id = hash.substring(1);
                 document2.getElementById(id) && navigate(context, hash);
               },
             },
@@ -10697,7 +10701,7 @@
             color: 'inherit',
           })),
         HeaderWithOcticonAnchor = ({ as, id, children, ...rest }) => {
-          let context = (0, react__WEBPACK_IMPORTED_MODULE_0__.useContext)(
+          const context = (0, react__WEBPACK_IMPORTED_MODULE_0__.useContext)(
               DocsContext,
             ),
             OcticonHeader = OcticonHeaders[as],
@@ -10725,14 +10729,14 @@
           );
         },
         HeaderMdx = (props) => {
-          let { as, id, children, ...rest } = props;
+          const { as, id, children, ...rest } = props;
           if (id)
             return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
               HeaderWithOcticonAnchor,
               { as, id, ...rest },
               children,
             );
-          let Component4 = as,
+          const Component4 = as,
             { as: omittedAs, ...withoutAs } = props;
           return react__WEBPACK_IMPORTED_MODULE_0__.createElement(Component4, {
             ...(0,
@@ -10797,19 +10801,19 @@
           (DescriptionType2.AUTO = 'auto'),
           DescriptionType2),
         DescriptionContainer = (props) => {
-          let { of } = props;
+          const { of } = props;
           if ('of' in props && void 0 === of)
             throw new Error(
               'Unexpected `of={undefined}`, did you mistype a CSF file reference?',
             );
-          let markdown = ((resolvedOf) => {
+          const markdown = ((resolvedOf) => {
             switch (resolvedOf.type) {
               case 'story':
                 return (
                   resolvedOf.story.parameters.docs?.description?.story || null
                 );
               case 'meta': {
-                let { parameters, component } = resolvedOf.preparedMeta,
+                const { parameters, component } = resolvedOf.preparedMeta,
                   metaDescription = parameters.docs?.description?.component;
                 return (
                   metaDescription ||
@@ -10821,7 +10825,7 @@
                 );
               }
               case 'component': {
-                let {
+                const {
                   component,
                   projectAnnotations: { parameters },
                 } = resolvedOf;
@@ -10945,7 +10949,7 @@
         }) => (
           (0, react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
             if (disable) return () => {};
-            let configuration = {
+            const configuration = {
                 tocSelector: '.toc-wrapper',
                 contentSelector: contentsSelector ?? '.sbdocs-content',
                 headingSelector: headingSelector ?? 'h3',
@@ -10958,7 +10962,7 @@
                     (e2.preventDefault(),
                     e2.currentTarget instanceof HTMLAnchorElement)
                   ) {
-                    let [, headerId] = e2.currentTarget.href.split('#');
+                    const [, headerId] = e2.currentTarget.href.split('#');
                     headerId &&
                       channel.emit(
                         storybook_internal_core_events__WEBPACK_IMPORTED_MODULE_3__.NAVIGATE_URL,
@@ -11019,7 +11023,7 @@
                   ((url = new URL(globalWindow3.parent.location.toString())),
                   url.hash)
                 ) {
-                  let element = document3.getElementById(
+                  const element = document3.getElementById(
                     decodeURIComponent(url.hash.substring(1)),
                   );
                   element &&
@@ -11103,7 +11107,7 @@
               null,
               children,
             );
-          let tagID = slugs.slug(children.toLowerCase());
+          const tagID = slugs.slug(children.toLowerCase());
           return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
             HeaderMdx,
             { as: 'h3', id: tagID },
@@ -11117,7 +11121,7 @@
           __forceInitialArgs = !1,
           __primary = !1,
         }) => {
-          let { story } = useOf(of || 'story', ['story']),
+          const { story } = useOf(of || 'story', ['story']),
             withToolbar =
               story.parameters.docs?.canvas?.withToolbar ?? withToolbarProp;
           return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
@@ -11146,12 +11150,12 @@
           );
         },
         Primary = (props) => {
-          let { of } = props;
+          const { of } = props;
           if ('of' in props && void 0 === of)
             throw new Error(
               'Unexpected `of={undefined}`, did you mistype a CSF file reference?',
             );
-          let { csfFile } = useOf(of || 'meta', ['meta']),
+          const { csfFile } = useOf(of || 'meta', ['meta']),
             primaryStory = (0, react__WEBPACK_IMPORTED_MODULE_0__.useContext)(
               DocsContext,
             ).componentStoriesFromCSFFile(csfFile)[0];
@@ -11173,7 +11177,7 @@
                 null,
                 children,
               );
-            let tagID = slugs.slug(children.toLowerCase());
+            const tagID = slugs.slug(children.toLowerCase());
             return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
               HeaderMdx,
               { as: 'h2', id: tagID, ...props },
@@ -11251,13 +11255,13 @@
             )
               throw error;
           }
-          let { componentSubtitle, docs } = preparedMeta?.parameters || {};
+          const { componentSubtitle, docs } = preparedMeta?.parameters || {};
           componentSubtitle &&
             (0,
             storybook_internal_client_logger__WEBPACK_IMPORTED_MODULE_1__.deprecate)(
               "Using 'parameters.componentSubtitle' property to subtitle stories is deprecated. See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#subtitle-block-and-parameterscomponentsubtitle",
             );
-          let content = children || docs?.subtitle || componentSubtitle;
+          const content = children || docs?.subtitle || componentSubtitle;
           return content
             ? react__WEBPACK_IMPORTED_MODULE_0__.createElement(
                 Subtitle,
@@ -11283,10 +11287,10 @@
             )
               throw error;
           }
-          let content =
+          const content =
             children ||
             ((title) => {
-              let groups = title.trim().split(STORY_KIND_PATH_SEPARATOR);
+              const groups = title.trim().split(STORY_KIND_PATH_SEPARATOR);
               return groups?.[groups?.length - 1] || title;
             })(preparedMeta?.title);
           return content
@@ -11298,7 +11302,7 @@
             : null;
         },
         DocsPage = () => {
-          let resolvedOf = useOf('meta', ['meta']),
+          const resolvedOf = useOf('meta', ['meta']),
             { stories } = resolvedOf.csfFile,
             isSingleStory = 1 === Object.keys(stories).length;
           return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
@@ -11324,7 +11328,7 @@
           );
         };
       function Docs({ context, docsParameter }) {
-        let Container = docsParameter.container || DocsContainer,
+        const Container = docsParameter.container || DocsContainer,
           Page = docsParameter.page || DocsPage;
         return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
           Container,
@@ -11345,7 +11349,7 @@
               (this.renderStoryToElement = renderStoryToElement),
               (this.processMetaExports = processMetaExports),
               (this.referenceMeta = (metaExports, attach) => {
-                let csfFile = this.processMetaExports(metaExports);
+                const csfFile = this.processMetaExports(metaExports);
                 this.referenceCSFFile(csfFile),
                   super.referenceMeta(metaExports, attach);
               });
@@ -11365,12 +11369,12 @@
         };
       storybook_internal_preview_api__WEBPACK_IMPORTED_MODULE_2__.Preview;
       var Meta = ({ of }) => {
-        let context = (0, react__WEBPACK_IMPORTED_MODULE_0__.useContext)(
+        const context = (0, react__WEBPACK_IMPORTED_MODULE_0__.useContext)(
           DocsContext,
         );
         of && context.referenceMeta(of, !0);
         try {
-          let primary = context.storyById();
+          const primary = context.storyById();
           return react__WEBPACK_IMPORTED_MODULE_0__.createElement(Anchor, {
             storyId: primary.id,
           });
@@ -11451,7 +11455,7 @@
           (r = null != e ? V3(q3(e)) : {}),
           ((e, t, r, n) => {
             if ((t && 'object' == typeof t) || 'function' == typeof t)
-              for (let a of W3(t))
+              for (const a of W3(t))
                 !U3.call(e, a) &&
                   a !== r &&
                   oi(e, a, {
@@ -16184,9 +16188,9 @@
         );
       }
       function $6(e, t) {
-        let r = { ...t };
-        for (let n in t) {
-          let a = e[n],
+        const r = { ...t };
+        for (const n in t) {
+          const a = e[n],
             i = t[n];
           /^on[A-Z]/.test(n)
             ? a && i
@@ -16219,7 +16223,7 @@
                 a = react__WEBPACK_IMPORTED_MODULE_0__.Children.toArray(r),
                 i = a.find(N6);
               if (i) {
-                let l = i.props.children,
+                const l = i.props.children,
                   u = a.map((c) =>
                     c === i
                       ? react__WEBPACK_IMPORTED_MODULE_0__.Children.count(l) > 1
@@ -16252,9 +16256,9 @@
               );
             })).displayName = 'Slot'),
             ((uu = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef((e, t) => {
-              let { children: r, ...n } = e;
+              const { children: r, ...n } = e;
               if (react__WEBPACK_IMPORTED_MODULE_0__.isValidElement(r)) {
-                let a = V6(r);
+                const a = V6(r);
                 return react__WEBPACK_IMPORTED_MODULE_0__.cloneElement(r, {
                   ...$6(n, r.props),
                   ref: t ? go(t, a) : a,
@@ -16304,17 +16308,20 @@
               'svg',
               'ul',
             ].reduce((e, t) => {
-              let r = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef((n, a) => {
-                let { asChild: i, ...l } = n,
-                  u = i ? cu : t;
-                return (
-                  typeof window < 'u' && (window[Symbol.for('radix-ui')] = !0),
-                  (0, react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(u, {
-                    ...l,
-                    ref: a,
-                  })
-                );
-              });
+              const r = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(
+                (n, a) => {
+                  let { asChild: i, ...l } = n,
+                    u = i ? cu : t;
+                  return (
+                    typeof window < 'u' &&
+                      (window[Symbol.for('radix-ui')] = !0),
+                    (0, react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(u, {
+                      ...l,
+                      ref: a,
+                    })
+                  );
+                },
+              );
               return (r.displayName = `Primitive.${t}`), { ...e, [t]: r };
             }, {})),
             o(V2, 'dispatchDiscreteCustomEvent');
@@ -16331,7 +16338,7 @@
         );
       }
       function U6(e) {
-        let [t, r] = react__WEBPACK_IMPORTED_MODULE_0__.useState(),
+        const [t, r] = react__WEBPACK_IMPORTED_MODULE_0__.useState(),
           n = react__WEBPACK_IMPORTED_MODULE_0__.useRef({}),
           a = react__WEBPACK_IMPORTED_MODULE_0__.useRef(e),
           i = react__WEBPACK_IMPORTED_MODULE_0__.useRef('none'),
@@ -16346,14 +16353,14 @@
           });
         return (
           react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-            let p = xi(n.current);
+            const p = xi(n.current);
             i.current = 'mounted' === u ? p : 'none';
           }, [u]),
           rt(() => {
-            let p = n.current,
+            const p = n.current,
               d = a.current;
             if (d !== e) {
-              let f = i.current,
+              const f = i.current,
                 g = xi(p);
               c(
                 e
@@ -16369,8 +16376,8 @@
           }, [e, c]),
           rt(() => {
             if (t) {
-              let p = o((h) => {
-                  let g = xi(n.current).includes(h.animationName);
+              const p = o((h) => {
+                  const g = xi(n.current).includes(h.animationName);
                   h.target === t &&
                     g &&
                     react_dom__WEBPACK_IMPORTED_MODULE_3__.flushSync(() =>
@@ -16437,7 +16444,7 @@
       function G2(e, t = []) {
         let r = [];
         function n(i, l) {
-          let u = react__WEBPACK_IMPORTED_MODULE_0__.createContext(l),
+          const u = react__WEBPACK_IMPORTED_MODULE_0__.createContext(l),
             c = r.length;
           function p(h) {
             let { scope: f, children: g, ...w } = h,
@@ -16452,7 +16459,7 @@
             );
           }
           function d(h, f) {
-            let g = f?.[e][c] || u,
+            const g = f?.[e][c] || u,
               w = react__WEBPACK_IMPORTED_MODULE_0__.useContext(g);
             if (w) return w;
             if (void 0 !== l) return l;
@@ -16467,12 +16474,12 @@
           );
         }
         o(n, 'createContext3');
-        let a = o(() => {
-          let i = r.map((l) =>
+        const a = o(() => {
+          const i = r.map((l) =>
             react__WEBPACK_IMPORTED_MODULE_0__.createContext(l),
           );
           return o(function (u) {
-            let c = u?.[e] || i;
+            const c = u?.[e] || i;
             return react__WEBPACK_IMPORTED_MODULE_0__.useMemo(
               () => ({ [`__scope${e}`]: { ...u, [e]: c } }),
               [u, c],
@@ -16482,12 +16489,12 @@
         return (a.scopeName = e), [n, X6(a, ...t)];
       }
       function X6(...e) {
-        let t = e[0];
+        const t = e[0];
         if (1 === e.length) return t;
-        let r = o(() => {
-          let n = e.map((a) => ({ useScope: a(), scopeName: a.scopeName }));
+        const r = o(() => {
+          const n = e.map((a) => ({ useScope: a(), scopeName: a.scopeName }));
           return o(function (i) {
-            let l = n.reduce(
+            const l = n.reduce(
               (u, { useScope: c, scopeName: p }) => ({
                 ...u,
                 ...c(i)[`__scope${p}`],
@@ -16506,7 +16513,7 @@
         o(G2, 'createContextScope'), o(X6, 'composeContextScopes');
       });
       function de(e) {
-        let t = react__WEBPACK_IMPORTED_MODULE_0__.useRef(e);
+        const t = react__WEBPACK_IMPORTED_MODULE_0__.useRef(e);
         return (
           react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
             t.current = e;
@@ -16523,7 +16530,7 @@
         o(de, 'useCallbackRef');
       });
       function X2(e) {
-        let t = react__WEBPACK_IMPORTED_MODULE_0__.useContext(K6);
+        const t = react__WEBPACK_IMPORTED_MODULE_0__.useContext(K6);
         return e || t || 'ltr';
       }
       var K6,
@@ -16555,17 +16562,17 @@
         return e ? parseInt(e, 10) : 0;
       }
       function ph(e, t) {
-        let r = e / t;
+        const r = e / t;
         return isNaN(r) ? 0 : r;
       }
       function Ai(e) {
-        let t = ph(e.viewport, e.content),
+        const t = ph(e.viewport, e.content),
           r = e.scrollbar.paddingStart + e.scrollbar.paddingEnd,
           n = (e.scrollbar.size - r) * t;
         return Math.max(n, 18);
       }
       function sb(e, t, r, n = 'ltr') {
-        let a = Ai(r),
+        const a = Ai(r),
           l = t || a / 2,
           u = a - l,
           c = r.scrollbar.paddingStart + l,
@@ -16574,7 +16581,7 @@
         return dh([c, p], 'ltr' === n ? [0, d] : [-1 * d, 0])(e);
       }
       function Q2(e, t, r = 'ltr') {
-        let n = Ai(t),
+        const n = Ai(t),
           a = t.scrollbar.paddingStart + t.scrollbar.paddingEnd,
           i = t.scrollbar.size - a,
           l = t.content - t.viewport,
@@ -16585,7 +16592,7 @@
       function dh(e, t) {
         return (r) => {
           if (e[0] === e[1] || t[0] === t[1]) return t[0];
-          let n = (t[1] - t[0]) / (e[1] - e[0]);
+          const n = (t[1] - t[0]) / (e[1] - e[0]);
           return t[0] + n * (r - e[0]);
         };
       }
@@ -16593,7 +16600,7 @@
         return e > 0 && e < t;
       }
       function Fi(e, t) {
-        let r = de(e),
+        const r = de(e),
           n = react__WEBPACK_IMPORTED_MODULE_0__.useRef(0);
         return (
           react__WEBPACK_IMPORTED_MODULE_0__.useEffect(
@@ -16607,11 +16614,11 @@
         );
       }
       function Sn(e, t) {
-        let r = de(t);
+        const r = de(t);
         rt(() => {
           let n = 0;
           if (e) {
-            let a = new ResizeObserver(() => {
+            const a = new ResizeObserver(() => {
               cancelAnimationFrame(n), (n = window.requestAnimationFrame(r));
             });
             return (
@@ -16624,9 +16631,9 @@
         }, [e, r]);
       }
       function cb(e, t) {
-        let { asChild: r, children: n } = e;
+        const { asChild: r, children: n } = e;
         if (!r) return 'function' == typeof t ? t(n) : t;
-        let a = react__WEBPACK_IMPORTED_MODULE_0__.Children.only(n);
+        const a = react__WEBPACK_IMPORTED_MODULE_0__.Children.only(n);
         return react__WEBPACK_IMPORTED_MODULE_0__.cloneElement(a, {
           children: 'function' == typeof t ? t(a.props.children) : t,
         });
@@ -16850,7 +16857,7 @@
                   let u = a.scrollArea,
                     c = 0;
                   if (u) {
-                    let p = o(() => {
+                    const p = o(() => {
                         window.clearTimeout(c), l(!0);
                       }, 'handlePointerEnter'),
                       d = o(() => {
@@ -16899,7 +16906,7 @@
               return (
                 react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
                   if ('idle' === u) {
-                    let p = window.setTimeout(
+                    const p = window.setTimeout(
                       () => c('HIDE'),
                       a.scrollHideDelay,
                     );
@@ -16907,12 +16914,12 @@
                   }
                 }, [u, a.scrollHideDelay, c]),
                 react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-                  let p = a.viewport,
+                  const p = a.viewport,
                     d = i ? 'scrollLeft' : 'scrollTop';
                   if (p) {
                     let h = p[d],
                       f = o(() => {
-                        let g = p[d];
+                        const g = p[d];
                         h !== g && (c('SCROLL'), l()), (h = g);
                       }, 'handleScroll');
                     return (
@@ -16939,13 +16946,13 @@
               );
             })),
             (ih = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef((e, t) => {
-              let r = nt(St, e.__scopeScrollArea),
+              const r = nt(St, e.__scopeScrollArea),
                 { forceMount: n, ...a } = e,
                 [i, l] = react__WEBPACK_IMPORTED_MODULE_0__.useState(!1),
                 u = 'horizontal' === e.orientation,
                 c = Fi(() => {
                   if (r.viewport) {
-                    let p = r.viewport.offsetWidth < r.viewport.scrollWidth,
+                    const p = r.viewport.offsetWidth < r.viewport.scrollWidth,
                       d = r.viewport.offsetHeight < r.viewport.scrollHeight;
                     l(u ? p : d);
                   }
@@ -17003,7 +17010,7 @@
                         ref: t,
                         onThumbPositionChange: o(() => {
                           if (a.viewport && i.current) {
-                            let g = Q2(a.viewport.scrollLeft, u, a.dir);
+                            const g = Q2(a.viewport.scrollLeft, u, a.dir);
                             i.current.style.transform = `translate3d(${g}px, 0, 0)`;
                           }
                         }, 'onThumbPositionChange'),
@@ -17023,7 +17030,7 @@
                           ref: t,
                           onThumbPositionChange: o(() => {
                             if (a.viewport && i.current) {
-                              let g = Q2(a.viewport.scrollTop, u);
+                              const g = Q2(a.viewport.scrollTop, u);
                               i.current.style.transform = `translate3d(0, ${g}px, 0)`;
                             }
                           }, 'onThumbPositionChange'),
@@ -17073,7 +17080,7 @@
                   onDragScroll: o((d) => e.onDragScroll(d.x), 'onDragScroll'),
                   onWheelScroll: o((d, h) => {
                     if (i.viewport) {
-                      let f = i.viewport.scrollLeft + d.deltaX;
+                      const f = i.viewport.scrollLeft + d.deltaX;
                       e.onWheelScroll(f), fh(f, h) && d.preventDefault();
                     }
                   }, 'onWheelScroll'),
@@ -17124,7 +17131,7 @@
                   onDragScroll: o((d) => e.onDragScroll(d.y), 'onDragScroll'),
                   onWheelScroll: o((d, h) => {
                     if (i.viewport) {
-                      let f = i.viewport.scrollTop + d.deltaY;
+                      const f = i.viewport.scrollTop + d.deltaY;
                       e.onWheelScroll(f), fh(f, h) && d.preventDefault();
                     }
                   }, 'onWheelScroll'),
@@ -17172,7 +17179,7 @@
                 R = Fi(h, 10);
               function F(A) {
                 if (y.current) {
-                  let k = A.clientX - y.current.left,
+                  const k = A.clientX - y.current.left,
                     B = A.clientY - y.current.top;
                   p({ x: k, y: B });
                 }
@@ -17180,8 +17187,8 @@
               return (
                 o(F, 'handleDragScroll'),
                 react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-                  let A = o((k) => {
-                    let B = k.target;
+                  const A = o((k) => {
+                    const B = k.target;
                     w?.contains(B) && C(k, x);
                   }, 'handleWheel');
                   return (
@@ -17218,7 +17225,7 @@
                     }),
                     onPointerMove: be(e.onPointerMove, F),
                     onPointerUp: be(e.onPointerUp, (A) => {
-                      let k = A.target;
+                      const k = A.target;
                       k.hasPointerCapture(A.pointerId) &&
                         k.releasePointerCapture(A.pointerId),
                         (document.body.style.webkitUserSelect = b.current),
@@ -17257,11 +17264,11 @@
                 }, 100);
               return (
                 react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-                  let h = i.viewport;
+                  const h = i.viewport;
                   if (h) {
-                    let f = o(() => {
+                    const f = o(() => {
                       if ((d(), !p.current)) {
-                        let g = ub(h, u);
+                        const g = ub(h, u);
                         (p.current = g), u();
                       }
                     }, 'handleScroll');
@@ -17284,7 +17291,7 @@
                       ...n,
                     },
                     onPointerDownCapture: be(e.onPointerDownCapture, (h) => {
-                      let g = h.target.getBoundingClientRect(),
+                      const g = h.target.getBoundingClientRect(),
                         w = h.clientX - g.left,
                         m = h.clientY - g.top;
                       l.onThumbPointerDown({ x: w, y: m });
@@ -17297,7 +17304,7 @@
             (uh.displayName = Ri),
             (fu = 'ScrollAreaCorner'),
             ((ch = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef((e, t) => {
-              let r = nt(fu, e.__scopeScrollArea),
+              const r = nt(fu, e.__scopeScrollArea),
                 n = !(!r.scrollbarX || !r.scrollbarY);
               return 'scroll' !== r.type && n
                 ? (0, react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(lb, {
@@ -17314,11 +17321,11 @@
                 p = !(!i || !u);
               return (
                 Sn(a.scrollbarX, () => {
-                  let d = a.scrollbarX?.offsetHeight || 0;
+                  const d = a.scrollbarX?.offsetHeight || 0;
                   a.onCornerHeightChange(d), c(d);
                 }),
                 Sn(a.scrollbarY, () => {
-                  let d = a.scrollbarY?.offsetWidth || 0;
+                  const d = a.scrollbarY?.offsetWidth || 0;
                   a.onCornerWidthChange(d), l(d);
                 }),
                 p
@@ -17353,7 +17360,7 @@
                 n = 0;
               return (
                 o(function a() {
-                  let i = { left: e.scrollLeft, top: e.scrollTop },
+                  const i = { left: e.scrollLeft, top: e.scrollTop },
                     l = r.left !== i.left,
                     u = r.top !== i.top;
                   (l || u) && t(),
@@ -17489,7 +17496,7 @@
         return Ch?.clipboard
           ? (e) => Ch.clipboard.writeText(e)
           : async (e) => {
-              let t = vo.createElement('TEXTAREA'),
+              const t = vo.createElement('TEXTAREA'),
                 r = vo.activeElement;
               (t.value = e),
                 vo.body.appendChild(t),
@@ -17618,7 +17625,7 @@
               }),
             )),
             (Sh = o((e) => {
-              let t = [...e.children],
+              const t = [...e.children],
                 r = t[0],
                 n = r.children[0].value,
                 a = {
@@ -17668,13 +17675,13 @@
                 ...p
               }) => {
                 if ('string' != typeof e || !e.trim()) return null;
-                let [d, h] = (0, react__WEBPACK_IMPORTED_MODULE_0__.useState)(
+                const [d, h] = (0, react__WEBPACK_IMPORTED_MODULE_0__.useState)(
                   '',
                 );
                 (0, react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
                   l ? l(i, e).then(h) : h(e.trim());
                 }, [e, i, l]);
-                let [f, g] = (0, react__WEBPACK_IMPORTED_MODULE_0__.useState)(
+                const [f, g] = (0, react__WEBPACK_IMPORTED_MODULE_0__.useState)(
                     !1,
                   ),
                   w = (0, react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(
@@ -17732,17 +17739,17 @@
         if ('string' == typeof e) return d5;
         if (Array.isArray(e)) return f5;
         if (!e) return;
-        let { type: t } = e;
+        const { type: t } = e;
         return b5.has(t) ? t : void 0;
       }
       function jx(e) {
-        let t = null === e ? 'null' : typeof e;
+        const t = null === e ? 'null' : typeof e;
         if ('string' !== t && 'object' !== t)
           return `Unexpected doc '${t}', \nExpected it to be 'string' or 'object'.`;
         if (y5(e)) throw new Error('doc is valid.');
-        let r = Object.prototype.toString.call(e);
+        const r = Object.prototype.toString.call(e);
         if ('[object Object]' !== r) return `Unexpected doc '${r}'.`;
-        let n = Vx([...b5].map((a) => `'${a}'`));
+        const n = Vx([...b5].map((a) => `'${a}'`));
         return `Unexpected doc.type '${e.type}'.\nExpected it to be ${n}.`;
       }
       function kt(e) {
@@ -17787,17 +17794,17 @@
       }
       function sa(e, t) {
         Pr(e), ic(t);
-        let r = [];
+        const r = [];
         for (let n = 0; n < t.length; n++) 0 !== n && r.push(e), r.push(t[n]);
         return r;
       }
       function E5(e, t) {
         if ('string' == typeof e) return t(e);
-        let r = new Map();
+        const r = new Map();
         return n(e);
         function n(i) {
           if (r.has(i)) return r.get(i);
-          let l = (function a(i) {
+          const l = (function a(i) {
             switch (y5(i)) {
               case f5:
                 return t(i.map(n));
@@ -17844,7 +17851,7 @@
           n = r === Ii ? Th : Ii,
           a = 0,
           i = 0;
-        for (let l of e) l === r ? a++ : l === n && i++;
+        for (const l of e) l === r ? a++ : l === n && i++;
         return a > i ? n : r;
       }
       function tC(e) {
@@ -17871,7 +17878,7 @@
             null != (r = e.parameters) &&
             r.children)
         )
-          for (let n of t.parameters.children)
+          for (const n of t.parameters.children)
             cC.has(e.name)
               ? delete n.expression
               : (n.expression = n.expression.trim());
@@ -17881,7 +17888,7 @@
       }
       async function dC(e, t) {
         if ('yaml' === e.language) {
-          let r = e.value.trim(),
+          const r = e.value.trim(),
             n = r ? await t(r, { parser: 'yaml' }) : '';
           return Gx([
             e.startDelimiter,
@@ -17897,7 +17904,7 @@
         return [kt([Te, e]), t ? Te : ''];
       }
       function ua(e, t) {
-        let r =
+        const r =
           'NGRoot' === e.type
             ? 'NGMicrosyntax' === e.node.type &&
               1 === e.node.body.length &&
@@ -17923,7 +17930,7 @@
           (r.__onHtmlBindingRoot = (l, u) => {
             a = n(l, u);
           });
-        let i = await t(e, r, t);
+        const i = await t(e, r, t);
         return a ? fe(i) : Yi(i);
       }
       function hC(e, t, r, n) {
@@ -17938,7 +17945,7 @@
       }
       function Ih(e, t) {
         if (!t) return;
-        let r = gC(t).toLowerCase();
+        const r = gC(t).toLowerCase();
         return (
           e.find(({ filenames: n }) => n?.some((a) => a.toLowerCase() === r)) ??
           e.find(({ extensions: n }) => n?.some((a) => r.endsWith(a)))
@@ -17953,7 +17960,7 @@
           );
       }
       function wC(e, t) {
-        let r = e.plugins.flatMap((a) => a.languages ?? []),
+        const r = e.plugins.flatMap((a) => a.languages ?? []),
           n =
             vC(r, t.language) ??
             Ih(r, t.physicalFile) ??
@@ -18012,7 +18019,7 @@
       }
       function kC(e, t) {
         var r, n;
-        let a = (function i() {
+        const a = (function i() {
           return (
             !Gi(e) &&
             'angularControlFlowBlock' !== e.type &&
@@ -18170,22 +18177,22 @@
           }
       }
       function _C(e, t) {
-        let { name: r, attrMap: n } = e;
+        const { name: r, attrMap: n } = e;
         if ('script' !== r || Object.prototype.hasOwnProperty.call(n, 'src'))
           return;
-        let { type: a, lang: i } = e.attrMap;
+        const { type: a, lang: i } = e.attrMap;
         return i || a ? (Xi(t, { language: i }) ?? M5(a)) : 'babel';
       }
       function PC(e, t) {
         if (!sc(e, t)) return;
-        let { attrMap: r } = e;
+        const { attrMap: r } = e;
         if (Object.prototype.hasOwnProperty.call(r, 'src')) return;
-        let { type: n, lang: a } = r;
+        const { type: n, lang: a } = r;
         return Xi(t, { language: a }) ?? M5(n);
       }
       function HC(e, t) {
         if ('style' !== e.name) return;
-        let { lang: r } = e.attrMap;
+        const { lang: r } = e.attrMap;
         return r ? Xi(t, { language: r }) : 'css';
       }
       function Bh(e, t) {
@@ -18224,7 +18231,7 @@
         var r;
         if (ca(e, t)) return 'block';
         if ('comment' === (null == (r = e.prev) ? void 0 : r.type)) {
-          let a = e.prev.value.match(/^\s*display:\s*([a-z]+)\s*$/u);
+          const a = e.prev.value.match(/^\s*display:\s*([a-z]+)\s*$/u);
           if (a) return a[1];
         }
         let n = !1;
@@ -18254,9 +18261,9 @@
       }
       function qC(e) {
         let t = Number.POSITIVE_INFINITY;
-        for (let r of e.split('\n')) {
+        for (const r of e.split('\n')) {
           if (0 === r.length) continue;
-          let n = Ft.getLeadingWhitespaceCount(r);
+          const n = Ft.getLeadingWhitespaceCount(r);
           if (0 === n) return 0;
           r.length !== n && n < t && (t = n);
         }
@@ -18294,7 +18301,7 @@
         );
       }
       function GC(e) {
-        let t = e.fullName;
+        const t = e.fullName;
         return (
           '#' === t.charAt(0) ||
           'slot-scope' === t ||
@@ -18303,9 +18310,9 @@
         );
       }
       function YC(e, t) {
-        let r = e.parent;
+        const r = e.parent;
         if (!ca(r, t)) return !1;
-        let n = r.fullName,
+        const n = r.fullName,
           a = e.fullName;
         return (
           ('script' === n && 'setup' === a) || ('style' === n && 'vars' === a)
@@ -18322,8 +18329,8 @@
         return ca(e, t) && 'script' === e.name;
       }
       async function XC(e, t) {
-        let r = [];
-        for (let [n, a] of e.split(N5).entries())
+        const r = [];
+        for (const [n, a] of e.split(N5).entries())
           if (n % 2 == 0) r.push(ht(a));
           else
             try {
@@ -18362,7 +18369,7 @@
         )
           return ZC;
         if (n.startsWith('*')) return JC;
-        let a = sr(r);
+        const a = sr(r);
         return /^i18n(?:-.+)?$/u.test(n)
           ? () => Yi(C5(z5(r, a.trim())), !a.includes('@@'))
           : N5.test(a)
@@ -18395,7 +18402,7 @@
           if (m) return ([w] = m), (u += w.length), w;
         }
         o(p, 'p');
-        let d = [];
+        const d = [];
         for (;;) {
           if ((p(aE), u >= t)) {
             if (0 === d.length)
@@ -18479,19 +18486,19 @@
           return () => dE(sr(e.node));
       }
       function dE(e) {
-        let t = uE(e),
+        const t = uE(e),
           r = pE.filter((d) =>
             t.some((h) => Object.prototype.hasOwnProperty.call(h, d)),
           );
         if (r.length > 1)
           throw new Error('Mixed descriptor in srcset is not supported');
-        let [n] = r,
+        const [n] = r,
           a = $5[n],
           i = t.map((d) => d.source.value),
           l = Math.max(...i.map((d) => d.length)),
           u = t.map((d) => (d[n] ? String(d[n].value) : '')),
           c = u.map((d) => {
-            let h = d.indexOf('.');
+            const h = d.indexOf('.');
             return -1 === h ? d.length : h;
           }),
           p = Math.max(...c);
@@ -18499,10 +18506,10 @@
           sa(
             [',', ye],
             i.map((d, h) => {
-              let f = [d],
+              const f = [d],
                 g = u[h];
               if (g) {
-                let w = l - d.length + 1,
+                const w = l - d.length + 1,
                   m = p - c[h],
                   v = ' '.repeat(w + m);
                 f.push(Oi(v, ' '), g + a);
@@ -18520,7 +18527,7 @@
             Yi(await a(n, { parser: 'css', __isHTMLStyleAttribute: !0 }));
       }
       function mE(e, t) {
-        let { root: r } = e;
+        const { root: r } = e;
         return (
           ju.has(r) ||
             ju.set(
@@ -18534,7 +18541,7 @@
         );
       }
       function gE(e, t, r) {
-        let { node: n } = r;
+        const { node: n } = r;
         return mt(
           `type T<${sr(n)}> = any`,
           e,
@@ -18549,7 +18556,7 @@
         });
       }
       async function wE(e, t, r, n) {
-        let a = sr(r.node),
+        const a = sr(r.node),
           { left: i, operator: l, right: u } = bE(a),
           c = cc(r, n);
         return [
@@ -18566,19 +18573,19 @@
         ];
       }
       function bE(e) {
-        let r = /,([^,\]}]*)(?:,([^,\]}]*))?$/u,
+        const r = /,([^,\]}]*)(?:,([^,\]}]*))?$/u,
           a = e.match(/(.*?)\s+(in|of)\s+(.*)/su);
         if (!a) return;
-        let i = {};
+        const i = {};
         if (((i.for = a[3].trim()), !i.for)) return;
-        let l = Xe(!1, a[1].trim(), /^\(|\)$/gu, ''),
+        const l = Xe(!1, a[1].trim(), /^\(|\)$/gu, ''),
           u = l.match(r);
         u
           ? ((i.alias = l.replace(r, '')),
             (i.iterator1 = u[1].trim()),
             u[2] && (i.iterator2 = u[2].trim()))
           : (i.alias = l);
-        let c = [i.alias, i.iterator1, i.iterator2];
+        const c = [i.alias, i.iterator1, i.iterator2];
         return c.some((p, d) => !p && (0 === d || c.slice(d + 1).some(Boolean)))
           ? void 0
           : { left: c.filter(Boolean).join(','), operator: a[2], right: i.for };
@@ -18589,7 +18596,7 @@
           n = r.fullName;
         if ('v-for' === n) return wE;
         if ('generic' === n && O5(r.parent, t)) return gE;
-        let a = sr(r),
+        const a = sr(r),
           i = cc(e, t);
         return GC(r) || YC(r, t)
           ? (l) => vE(a, l, { parseWithTs: i })
@@ -18636,7 +18643,7 @@
         );
       }
       function EE(e, t) {
-        let { node: r } = e;
+        const { node: r } = e;
         if (r.value) {
           if (
             /^PRETTIER_HTML_PLACEHOLDER_\d+_\d+_IN_JS$/u.test(
@@ -18650,8 +18657,8 @@
               r.value.endsWith('}'))
           )
             return [r.rawName, '=', r.value];
-          for (let n of [fE, hE, rE, CE, eE]) {
-            let a = n(e, t);
+          for (const n of [fE, hE, rE, CE, eE]) {
+            const a = n(e, t);
             if (a) return RE(a);
           }
         }
@@ -18763,7 +18770,7 @@
         );
       }
       function LE(e) {
-        let t = e.trim().match(/^prettier-ignore-attribute(?:\s+(.+))?$/su);
+        const t = e.trim().match(/^prettier-ignore-attribute(?:\s+(.+))?$/su);
         return !!t && (!t[1] || t[1].split(/\s+/u));
       }
       function Qi(e) {
@@ -18771,9 +18778,9 @@
       }
       function TE(e, t, r) {
         var n;
-        let { node: a } = e;
+        const { node: a } = e;
         if (!pc(a.attrs)) return a.isSelfClosing ? ' ' : '';
-        let i =
+        const i =
             'comment' === (null == (n = a.prev) ? void 0 : n.type) &&
             LE(a.prev.value),
           l =
@@ -18819,7 +18826,7 @@
         return e.firstChild && Qi(e.firstChild) ? '' : hc(e);
       }
       function Ku(e, t, r) {
-        let { node: n } = e;
+        const { node: n } = e;
         return [So(n, t), TE(e, t, r), n.isSelfClosing ? '' : IE(n)];
       }
       function So(e, t) {
@@ -18839,7 +18846,7 @@
             return '{{';
           case 'docType':
             if ('html' === e.value) {
-              let r = t.filepath ?? '';
+              const r = t.filepath ?? '';
               if (/\.html?$/u.test(r)) return Ph;
             }
             return t.originalText.slice(Io(e), Bo(e)).slice(0, Ph.length);
@@ -18875,12 +18882,12 @@
         );
       }
       function _E(e, t) {
-        let { node: r } = e;
+        const { node: r } = e;
         switch (r.type) {
           case 'element':
             if (Ot(r) || 'interpolation' === r.type) return;
             if (!r.isSelfClosing && sc(r, t)) {
-              let n = Bh(r, t);
+              const n = Bh(r, t);
               return n
                 ? async (a, i) => {
                     let l = U5(r, t),
@@ -18909,10 +18916,10 @@
             break;
           case 'text':
             if (Ot(r.parent)) {
-              let n = Bh(r.parent, t);
+              const n = Bh(r.parent, t);
               if (n)
                 return async (a) => {
-                  let i =
+                  const i =
                       'markdown' === n
                         ? P5(r.value.replace(/^[^\S\n]*\n/u, ''))
                         : r.value,
@@ -18931,7 +18938,7 @@
                 };
             } else if ('interpolation' === r.parent.type)
               return async (n) => {
-                let a = { __isInHtmlInterpolation: !0, __embeddedInHtml: !0 };
+                const a = { __isInHtmlInterpolation: !0, __embeddedInHtml: !0 };
                 return (
                   'angular' === t.parser
                     ? (a.parser = '__ng_interpolation')
@@ -18963,7 +18970,7 @@
       }
       function Ao(e) {
         if (null !== Do && (Do.property, 1)) {
-          let t = Do;
+          const t = Do;
           return (Do = Ao.prototype = null), t;
         }
         return (Do = Ao.prototype = e ?? Object.create(null)), new Ao();
@@ -18973,7 +18980,7 @@
       }
       function OE(e, t = 'type') {
         function r(n) {
-          let a = n[t],
+          const a = n[t],
             i = e[a];
           if (!Array.isArray(i))
             throw Object.assign(new Error(`Missing visitor keys for '${a}'.`), {
@@ -18990,15 +18997,15 @@
         return '\x3c!-- @format --\x3e\n\n' + e;
       }
       function G5(e) {
-        let t = Bo(e);
+        const t = Bo(e);
         return 'element' === e.type && !e.endSourceSpan && pc(e.children)
           ? Math.max(t, G5(Ui(!1, e.children, -1)))
           : t;
       }
       function xo(e, t, r) {
-        let n = e.node;
+        const n = e.node;
         if (Ki(n)) {
-          let a = G5(n);
+          const a = G5(n);
           return [
             Or(n, t),
             ht(
@@ -19045,27 +19052,27 @@
                 : Te;
       }
       function mc(e, t, r) {
-        let { node: n } = e;
+        const { node: n } = e;
         if (k5(n))
           return [
             Lo,
             ...e.map((i) => {
-              let l = i.node,
+              const l = i.node,
                 u = l.prev ? Mi(l.prev, l) : '';
               return [u ? [u, Bi(l.prev) ? J : ''] : '', xo(i, t, r)];
             }, 'children'),
           ];
-        let a = n.children.map(() => Symbol(''));
+        const a = n.children.map(() => Symbol(''));
         return e.map((i, l) => {
-          let u = i.node;
+          const u = i.node;
           if (at(u)) {
             if (u.prev && at(u.prev)) {
-              let w = Mi(u.prev, u);
+              const w = Mi(u.prev, u);
               if (w) return Bi(u.prev) ? [J, J, xo(i, t, r)] : [w, xo(i, t, r)];
             }
             return xo(i, t, r);
           }
-          let c = [],
+          const c = [],
             p = [],
             d = [],
             h = [],
@@ -19097,7 +19104,7 @@
           a.push('@', n.name),
           n.parameters && a.push(' (', fe(r('parameters')), ')'),
           a.push(' {');
-        let i = Y5(n);
+        const i = Y5(n);
         return (
           n.children.length > 0
             ? ((n.firstChild.hasLeadingSpaces = !0),
@@ -19118,14 +19125,14 @@
         );
       }
       function XE(e) {
-        let { previous: t } = e;
+        const { previous: t } = e;
         return 'angularControlFlowBlock' === t?.type && !Ki(t) && !Y5(t);
       }
       function KE(e, t, r) {
         return [kt([Te, sa([';', ye], e.map(r, 'children'))]), Te];
       }
       function ZE(e, t, r) {
-        let { node: n } = e;
+        const { node: n } = e;
         return [
           So(n, t),
           fe([
@@ -19141,7 +19148,7 @@
         ];
       }
       function JE(e, t, r) {
-        let { node: n } = e;
+        const { node: n } = e;
         return [
           n.value,
           ' {',
@@ -19160,7 +19167,7 @@
         ];
       }
       function QE(e, t, r) {
-        let { node: n } = e;
+        const { node: n } = e;
         if (A5(n, t))
           return [
             Or(n, t),
@@ -19169,7 +19176,7 @@
             ...Xu(n, t),
             Hr(n, t),
           ];
-        let a =
+        const a =
             1 === n.children.length &&
             ('interpolation' === n.firstChild.type ||
               'angularIcuExpression' === n.firstChild.type) &&
@@ -19258,7 +19265,7 @@
         return e.replace(tR, (...t) => t[1].toUpperCase());
       }
       function aR(e, t) {
-        for (let r of nR) r(e, t);
+        for (const r of nR) r(e, t);
         return e;
       }
       function oR(e) {
@@ -19270,7 +19277,7 @@
             'text' === t.children[0].type &&
             '\n' === t.children[0].value[0]
           ) {
-            let r = t.children[0];
+            const r = t.children[0];
             1 === r.value.length
               ? t.removeChild(r)
               : (r.value = r.value.slice(1));
@@ -19278,7 +19285,7 @@
         });
       }
       function iR(e) {
-        let t = o((r) => {
+        const t = o((r) => {
           var n, a;
           return (
             'element' === r.type &&
@@ -19294,12 +19301,12 @@
         e.walk((r) => {
           if (r.children)
             for (let n = 0; n < r.children.length; n++) {
-              let a = r.children[n];
+              const a = r.children[n];
               if (!t(a)) continue;
-              let i = a.prev,
+              const i = a.prev,
                 l = a.firstChild;
               r.removeChild(i), n--;
-              let u = new z(i.sourceSpan.start, l.sourceSpan.end),
+              const u = new z(i.sourceSpan.start, l.sourceSpan.end),
                 c = new z(u.start, a.sourceSpan.end);
               (a.condition = i.condition),
                 (a.sourceSpan = c),
@@ -19312,10 +19319,10 @@
         e.walk((n) => {
           if (n.children)
             for (let a = 0; a < n.children.length; a++) {
-              let i = n.children[a];
+              const i = n.children[a];
               if ('text' !== i.type && !t(i)) continue;
               'text' !== i.type && ((i.type = 'text'), (i.value = r(i)));
-              let l = i.prev;
+              const l = i.prev;
               !l ||
                 'text' !== l.type ||
                 ((l.value += i.value),
@@ -19333,7 +19340,7 @@
         );
       }
       function uR(e) {
-        let t = o((r) => {
+        const t = o((r) => {
           var n, a;
           return (
             'element' === r.type &&
@@ -19354,9 +19361,9 @@
         e.walk((r) => {
           if (r.children)
             for (let n = 0; n < r.children.length; n++) {
-              let a = r.children[n];
+              const a = r.children[n];
               if (!t(a)) continue;
-              let i = a.prev,
+              const i = a.prev,
                 l = a.next;
               (i.value +=
                 `<${a.rawName}>` +
@@ -19374,16 +19381,16 @@
       }
       function cR(e, t) {
         if ('html' === t.parser) return;
-        let r = /\{\{(.+?)\}\}/su;
+        const r = /\{\{(.+?)\}\}/su;
         e.walk((n) => {
           if (AC(n))
-            for (let a of n.children) {
+            for (const a of n.children) {
               if ('text' !== a.type) continue;
               let i = a.sourceSpan.start,
                 l = null,
                 u = a.value.split(r);
               for (let c = 0; c < u.length; c++, i = l) {
-                let p = u[c];
+                const p = u[c];
                 c % 2 != 0
                   ? ((l = i.moveBy(p.length + 4)),
                     n.insertChildBefore(a, {
@@ -19425,13 +19432,13 @@
               (t.hasDanglingSpaces = t.children.length > 0),
               void (t.children = [])
             );
-          let r = FC(t),
+          const r = FC(t),
             n = F5(t);
           if (!r)
             for (let a = 0; a < t.children.length; a++) {
-              let i = t.children[a];
+              const i = t.children[a];
               if ('text' !== i.type) continue;
-              let {
+              const {
                   leadingWhitespace: l,
                   text: u,
                   trailingWhitespace: c,
@@ -19490,15 +19497,15 @@
       }
       function mR(e, t) {
         e.walk((r) => {
-          let { children: n } = r;
+          const { children: n } = r;
           if (n) {
             if (0 === n.length)
               return void (r.isDanglingSpaceSensitive = TC(r));
-            for (let a of n)
+            for (const a of n)
               (a.isLeadingSpaceSensitive = kC(a, t)),
                 (a.isTrailingSpaceSensitive = LC(a, t));
             for (let a = 0; a < n.length; a++) {
-              let i = n[a];
+              const i = n[a];
               (i.isLeadingSpaceSensitive =
                 (0 === a || i.prev.isTrailingSpaceSensitive) &&
                 i.isLeadingSpaceSensitive),
@@ -19510,7 +19517,7 @@
         });
       }
       function vR(e, t, r) {
-        let { node: n } = e;
+        const { node: n } = e;
         switch (n.type) {
           case 'front-matter':
             return ht(n.raw);
@@ -19544,11 +19551,11 @@
             return [So(n, t), ...e.map(r, 'children'), Ro(n, t)];
           case 'text': {
             if ('interpolation' === n.parent.type) {
-              let u = /\n[^\S\n]*$/u,
+              const u = /\n[^\S\n]*$/u,
                 c = u.test(n.value);
               return [ht(c ? n.value.replace(u, '') : n.value), c ? J : ''];
             }
-            let a = Or(n, t),
+            const a = Or(n, t),
               i = z5(n),
               l = Hr(n, t);
             return (i[0] = [a, i[0]]), i.push([i.pop(), l]), C5(i);
@@ -19566,7 +19573,7 @@
             return [Or(n, t), ht(t.originalText.slice(Io(n), Bo(n))), Hr(n, t)];
           case 'attribute': {
             if (null === n.value) return n.rawName;
-            let a = H5(n.value),
+            const a = H5(n.value),
               i = eC(a, '"');
             return [
               n.rawName,
@@ -19584,7 +19591,7 @@
       }
       function el(e, t = !0) {
         if (':' != e[0]) return [null, e];
-        let r = e.indexOf(':', 1);
+        const r = e.indexOf(':', 1);
         if (-1 === r) {
           if (t)
             throw new Error(
@@ -19651,7 +19658,7 @@
         );
       }
       function _i(e, t) {
-        for (let r of t) zi[r.toLowerCase()] = e;
+        for (const r of t) zi[r.toLowerCase()] = e;
       }
       function TR(e) {
         switch (e) {
@@ -19802,13 +19809,13 @@
         );
       }
       function Q5(e, t, r = null) {
-        let n = [],
+        const n = [],
           a = e.visit
             ? (i) => e.visit(i, r) || i.visit(e, r)
             : (i) => i.visit(e, r);
         return (
           t.forEach((i) => {
-            let l = a(i);
+            const l = a(i);
             l && n.push(l);
           }),
           n
@@ -19818,7 +19825,7 @@
         if (null != t && (!Array.isArray(t) || 2 != t.length))
           throw new Error(`Expected '${e}' to be an array, [start, end].`);
         if (null != t) {
-          let r = t[0],
+          const r = t[0],
             n = t[1];
           $R.forEach((a) => {
             if (a.test(r) || a.test(n))
@@ -19829,7 +19836,7 @@
         }
       }
       function qR(e, t, r, n = {}) {
-        let a = new YR(new X5(e, t), r, n);
+        const a = new YR(new X5(e, t), r, n);
         return (
           a.tokenize(),
           new WR(eS(a.tokens), a.errors, a.nonNormalizedIcuExpressions)
@@ -19887,7 +19894,7 @@
         let r,
           t = [];
         for (let n = 0; n < e.length; n++) {
-          let a = e[n];
+          const a = e[n];
           (r && 5 === r.type && 5 === a.type) ||
           (r && 16 === r.type && 16 === a.type)
             ? ((r.parts[0] += a.parts[0]),
@@ -19909,7 +19916,7 @@
               : e;
       }
       function o5(e, t = {}) {
-        let {
+        const {
           canSelfClose: r = !1,
           allowHtmComponentClosingTags: n = !1,
           isTagNameCaseSensitive: a = !1,
@@ -19933,15 +19940,15 @@
         );
       }
       function lS(e, t) {
-        let r = new SyntaxError(
+        const r = new SyntaxError(
           e + ' (' + t.loc.start.line + ':' + t.loc.start.column + ')',
         );
         return Object.assign(r, t);
       }
       function uS(e) {
-        let t = e.slice(0, Eo);
+        const t = e.slice(0, Eo);
         if ('---' !== t && '+++' !== t) return;
-        let r = e.indexOf('\n', Eo);
+        const r = e.indexOf('\n', Eo);
         if (-1 === r) return;
         let n = e.slice(Eo, r).trim(),
           a = e.indexOf(`\n${t}`, r),
@@ -19955,10 +19962,10 @@
           -1 === a)
         )
           return;
-        let l = a + 1 + Eo,
+        const l = a + 1 + Eo,
           u = e.charAt(l + 1);
         if (!/\s?/u.test(u)) return;
-        let c = e.slice(0, l);
+        const c = e.slice(0, l);
         return {
           type: 'front-matter',
           language: i,
@@ -19970,22 +19977,22 @@
         };
       }
       function cS(e) {
-        let t = uS(e);
+        const t = uS(e);
         if (!t) return { content: e };
-        let { raw: r } = t;
+        const { raw: r } = t;
         return {
           frontMatter: t,
           content: Xe(!1, r, /[^\n]/gu, ' ') + e.slice(r.length),
         };
       }
       function fS(e, t) {
-        let r = e.map(t);
+        const r = e.map(t);
         return r.some((n, a) => n !== e[a]) ? r : e;
       }
       function mS(e, t) {
         if (e.value)
-          for (let { regex: r, parse: n } of hS) {
-            let a = e.value.match(r);
+          for (const { regex: r, parse: n } of hS) {
+            const a = e.value.match(r);
             if (a) return n(e, t, a);
           }
         return null;
@@ -20016,7 +20023,7 @@
         };
       }
       function vS(e, t, r) {
-        let [, n] = r;
+        const [, n] = r;
         return {
           type: 'ieConditionalStartComment',
           condition: Xe(!1, n.trim(), /\s+/gu, ' '),
@@ -20034,7 +20041,7 @@
             !pc(e.parameters))
           )
             return void delete e.parameters;
-          for (let t of e.parameters)
+          for (const t of e.parameters)
             t.type = 'angularControlFlowBlockParameter';
           e.parameters = {
             type: 'angularControlFlowBlockParameters',
@@ -20111,11 +20118,11 @@
                 ) ?? C,
               'M',
             );
-          for (let [C, E] of d.entries()) {
-            let { endSourceSpan: R, startSourceSpan: F } = E;
+          for (const [C, E] of d.entries()) {
+            const { endSourceSpan: R, startSourceSpan: F } = E;
             if (null === R) (h = D().errors), (d[C] = x(E));
             else if (CS(E, r)) {
-              let A = D().errors.find(
+              const A = D().errors.find(
                 (k) =>
                   k.span.start.offset > F.start.offset &&
                   k.span.start.offset < R.end.offset,
@@ -20125,8 +20132,8 @@
           }
         }
         h.length > 0 && l5(h[0]);
-        let f = o((b) => {
-            let D = b.name.startsWith(':')
+        const f = o((b) => {
+            const D = b.name.startsWith(':')
                 ? b.name.slice(1).split(':')[0]
                 : null,
               x = b.nameSpan.toString(),
@@ -20138,7 +20145,7 @@
             switch (b.type) {
               case 'element':
                 f(b);
-                for (let D of b.attrs)
+                for (const D of b.attrs)
                   f(D),
                     D.valueSpan
                       ? ((D.value = D.valueSpan.toString()),
@@ -20154,7 +20161,7 @@
             }
           }, 'C'),
           w = o((b, D) => {
-            let x = b.toLowerCase();
+            const x = b.toLowerCase();
             return D(x) ? x : b;
           }, 'A'),
           m = o((b) => {
@@ -20167,7 +20174,7 @@
                 (b.name = w(b.name, (D) => bS.has(D))),
               l)
             )
-              for (let D of b.attrs)
+              for (const D of b.attrs)
                 D.namespace ||
                   (D.name = w(
                     D.name,
@@ -20183,7 +20190,7 @@
           }, 'R'),
           y = o((b) => {
             if ('element' === b.type) {
-              let D = Ju(c ? b.name : b.name.toLowerCase());
+              const D = Ju(c ? b.name : b.name.toLowerCase());
               !b.namespace || b.namespace === D.implicitNamespacePrefix || Fo(b)
                 ? (b.tagDefinition = D)
                 : (b.tagDefinition = Ju(''));
@@ -20210,14 +20217,14 @@
       function CS(e, t) {
         var r;
         if ('element' !== e.type || 'template' !== e.name) return !1;
-        let n =
+        const n =
           null == (r = e.attrs.find((a) => 'lang' === a.name))
             ? void 0
             : r.value;
         return !n || 'html' === Xi(t, { language: n });
       }
       function l5(e) {
-        let {
+        const {
           msg: t,
           span: { start: r, end: n },
         } = e;
@@ -20230,7 +20237,7 @@
         });
       }
       function nm(e, t, r = {}, n = !0) {
-        let { frontMatter: a, content: i } = n
+        const { frontMatter: a, content: i } = n
             ? pS(e)
             : { frontMatter: null, content: e },
           l = new X5(e, r.filepath),
@@ -20238,16 +20245,16 @@
           c = u.moveBy(e.length),
           p = { type: 'root', sourceSpan: new z(u, c), children: rm(i, t, r) };
         if (a) {
-          let f = new Zu(l, 0, 0, 0),
+          const f = new Zu(l, 0, 0, 0),
             g = f.moveBy(a.raw.length);
           (a.sourceSpan = new z(f, g)), p.children.unshift(a);
         }
-        let d = new dS(p),
+        const d = new dS(p),
           h = o((f, g) => {
             let { offset: w } = g,
               v = nm(Xe(!1, e.slice(0, w), /[^\n\r]/gu, ' ') + f, t, r, !1);
             v.sourceSpan = new z(g, Ui(!1, v.children, -1).sourceSpan.end);
-            let y = v.children[0];
+            const y = v.children[0];
             return (
               y.length === w
                 ? v.children.shift()
@@ -20262,7 +20269,7 @@
         return (
           d.walk((f) => {
             if ('comment' === f.type) {
-              let g = mS(f, h);
+              const g = mS(f, h);
               g && f.parent.replaceChild(f, g);
             }
             yS(f), DS(f), xS(f);
@@ -20630,11 +20637,11 @@
                   return n;
                 }
                 getLeadingWhitespace(t) {
-                  let r = this.getLeadingWhitespaceCount(t);
+                  const r = this.getLeadingWhitespaceCount(t);
                   return t.slice(0, r);
                 }
                 getTrailingWhitespace(t) {
-                  let r = this.getTrailingWhitespaceCount(t);
+                  const r = this.getTrailingWhitespaceCount(t);
                   return t.slice(t.length - r);
                 }
                 hasLeadingWhitespace(t) {
@@ -20644,31 +20651,31 @@
                   return ar(this, dt).has(Ui(!1, t, -1));
                 }
                 trimStart(t) {
-                  let r = this.getLeadingWhitespaceCount(t);
+                  const r = this.getLeadingWhitespaceCount(t);
                   return t.slice(r);
                 }
                 trimEnd(t) {
-                  let r = this.getTrailingWhitespaceCount(t);
+                  const r = this.getTrailingWhitespaceCount(t);
                   return t.slice(0, t.length - r);
                 }
                 trim(t) {
                   return this.trimEnd(this.trimStart(t));
                 }
                 split(t, r = !1) {
-                  let n = `[${tC([...ar(this, dt)].join(''))}]+`,
+                  const n = `[${tC([...ar(this, dt)].join(''))}]+`,
                     a = new RegExp(r ? `(${n})` : n, 'u');
                   return t.split(a);
                 }
                 hasWhitespaceCharacter(t) {
-                  let r = ar(this, dt);
+                  const r = ar(this, dt);
                   return Array.prototype.some.call(t, (n) => r.has(n));
                 }
                 hasNonWhitespaceCharacter(t) {
-                  let r = ar(this, dt);
+                  const r = ar(this, dt);
                   return Array.prototype.some.call(t, (n) => !r.has(n));
                 }
                 isWhitespaceOnly(t) {
-                  let r = ar(this, dt);
+                  const r = ar(this, dt);
                   return Array.prototype.every.call(t, (n) => r.has(n));
                 }
               }),
@@ -20824,7 +20831,7 @@
               let t = e,
                 r = Ft.getLeadingWhitespace(t);
               r && (t = t.slice(r.length));
-              let n = Ft.getTrailingWhitespace(t);
+              const n = Ft.getTrailingWhitespace(t);
               return (
                 n && (t = t.slice(0, -n.length)),
                 { leadingWhitespace: r, trailingWhitespace: n, text: t }
@@ -21033,11 +21040,11 @@
                   for (; a > 0 && t < 0; )
                     if ((a--, t++, 10 == r.charCodeAt(a))) {
                       i--;
-                      let u = r.substring(0, a - 1).lastIndexOf('\n');
+                      const u = r.substring(0, a - 1).lastIndexOf('\n');
                       l = u > 0 ? a - u : a;
                     } else l--;
                   for (; a < n && t > 0; ) {
-                    let u = r.charCodeAt(a);
+                    const u = r.charCodeAt(a);
                     a++, t--, 10 == u ? (i++, (l = 0)) : l++;
                   }
                   return new Ir(this.file, a, i, l);
@@ -21108,13 +21115,13 @@
                   (this.span = t), (this.msg = r), (this.level = n);
                 }
                 contextualMessage() {
-                  let t = this.span.start.getContext(100, 3);
+                  const t = this.span.start.getContext(100, 3);
                   return t
                     ? `${this.msg} ("${t.before}[${Vi[this.level]} ->]${t.after}")`
                     : this.msg;
                 }
                 toString() {
-                  let t = this.span.details ? `, ${this.span.details}` : '';
+                  const t = this.span.details ? `, ${this.span.details}` : '';
                   return `${this.contextualMessage()}: ${this.span.start}${t}`;
                 }
               }),
@@ -21541,7 +21548,7 @@
                     (this._schema = new Map()),
                     (this._eventSchema = new Map()),
                     FR.forEach((t) => {
-                      let r = new Map(),
+                      const r = new Map(),
                         n = new Set(),
                         [a, i] = t.split('|'),
                         l = i.split(','),
@@ -21550,10 +21557,10 @@
                         this._schema.set(d.toLowerCase(), r),
                           this._eventSchema.set(d.toLowerCase(), n);
                       });
-                      let p = c && this._schema.get(c.toLowerCase());
+                      const p = c && this._schema.get(c.toLowerCase());
                       if (p) {
-                        for (let [d, h] of p) r.set(d, h);
-                        for (let d of this._eventSchema.get(c.toLowerCase()))
+                        for (const [d, h] of p) r.set(d, h);
+                        for (const d of this._eventSchema.get(c.toLowerCase()))
                           n.add(d);
                       }
                       l.forEach((d) => {
@@ -21630,7 +21637,7 @@
                   return Array.from(this._schema.keys());
                 }
                 allKnownAttributesOfElement(t) {
-                  let r =
+                  const r =
                     this._schema.get(t.toLowerCase()) ||
                     this._schema.get('unknown');
                   return Array.from(r.keys()).map((n) => kR.get(n) ?? n);
@@ -21650,7 +21657,7 @@
                   if (TR(t) && 0 !== n && '0' !== n)
                     if ('number' == typeof n) a = 'px';
                     else {
-                      let u = n.match(/^[+-]?[\d\.]+([a-z]*)$/);
+                      const u = n.match(/^[+-]?[\d\.]+([a-z]*)$/);
                       u &&
                         0 == u[1].length &&
                         (l = `Please provide a CSS unit value for ${r}:${n}`);
@@ -21924,7 +21931,7 @@
               visitBlockParameter(t, r) {}
               visitLetDeclaration(t, r) {}
               visitChildren(t, r) {
-                let n = [],
+                const n = [],
                   a = this;
                 function i(l) {
                   l && n.push(Q5(a, l, t));
@@ -24132,7 +24139,7 @@
                     (this._canSelfClose = n.canSelfClose || !1),
                     (this._allowHtmComponentClosingTags =
                       n.allowHtmComponentClosingTags || !1);
-                  let a = n.range || {
+                  const a = n.range || {
                     endPos: t.content.length,
                     startPos: 0,
                     startLine: 0,
@@ -24157,7 +24164,7 @@
                 }
                 tokenize() {
                   for (; 0 !== this._cursor.peek(); ) {
-                    let t = this._cursor.clone();
+                    const t = this._cursor.clone();
                     try {
                       if (this._attemptCharCode(60))
                         if (this._attemptCharCode(33))
@@ -24171,7 +24178,7 @@
                         else if (this._attemptCharCode(47))
                           this._consumeTagClose(t);
                         else {
-                          let r = this._cursor.clone();
+                          const r = this._cursor.clone();
                           this._attemptCharCode(63)
                             ? ((this._cursor = r), this._consumeBogusComment(t))
                             : this._consumeTagOpen(t);
@@ -24216,7 +24223,7 @@
                 }
                 _consumeBlockStart(t) {
                   this._beginToken(25, t);
-                  let r = this._endToken([this._getBlockName()]);
+                  const r = this._endToken([this._getBlockName()]);
                   if (40 === this._cursor.peek()) {
                     if (
                       (this._cursor.advance(),
@@ -24251,7 +24258,7 @@
                       null !== r;
 
                     ) {
-                      let a = this._cursor.peek();
+                      const a = this._cursor.peek();
                       if (92 === a) this._cursor.advance();
                       else if (a === r) r = null;
                       else if (null === r && Wu(a)) r = a;
@@ -24273,7 +24280,7 @@
                     ]).type = 33);
                   }
                   this._attemptCharCodeUntilFn(ue);
-                  let r = this._endToken([this._getLetDeclarationName()]);
+                  const r = this._endToken([this._getLetDeclarationName()]);
                   this._attemptCharCodeUntilFn(ue),
                     this._attemptCharCode(61)
                       ? (this._attemptCharCodeUntilFn((n) => ue(n) && !vc(n)),
@@ -24299,9 +24306,9 @@
                   );
                 }
                 _consumeLetDeclarationValue() {
-                  let t = this._cursor.clone();
+                  const t = this._cursor.clone();
                   for (this._beginToken(31, t); 0 !== this._cursor.peek(); ) {
-                    let r = this._cursor.peek();
+                    const r = this._cursor.peek();
                     if (59 === r) break;
                     Wu(r) &&
                       (this._cursor.advance(),
@@ -24341,7 +24348,7 @@
                       null,
                       this._cursor.getSpan(this._currentTokenStart),
                     );
-                  let n = {
+                  const n = {
                     type: this._currentTokenType,
                     parts: t,
                     sourceSpan: (r ?? this._cursor).getSpan(
@@ -24360,7 +24367,7 @@
                   this._isInExpansionForm() &&
                     (t +=
                       ' (Do you have an unescaped "{" in your template? Use "{{ \'{\' }}") to escape it.)');
-                  let n = new qu(t, this._currentTokenType, r);
+                  const n = new qu(t, this._currentTokenType, r);
                   return (
                     (this._currentTokenStart = null),
                     (this._currentTokenType = null),
@@ -24390,7 +24397,7 @@
                   );
                 }
                 _requireCharCode(t) {
-                  let r = this._cursor.clone();
+                  const r = this._cursor.clone();
                   if (!this._attemptCharCode(t))
                     throw this._createError(
                       kn(this._cursor.peek()),
@@ -24398,9 +24405,9 @@
                     );
                 }
                 _attemptStr(t) {
-                  let r = t.length;
+                  const r = t.length;
                   if (this._cursor.charsLeft() < r) return !1;
-                  let n = this._cursor.clone();
+                  const n = this._cursor.clone();
                   for (let a = 0; a < r; a++)
                     if (!this._attemptCharCode(t.charCodeAt(a)))
                       return (this._cursor = n), !1;
@@ -24413,7 +24420,7 @@
                   return !0;
                 }
                 _requireStr(t) {
-                  let r = this._cursor.clone();
+                  const r = this._cursor.clone();
                   if (!this._attemptStr(t))
                     throw this._createError(
                       kn(this._cursor.peek()),
@@ -24421,7 +24428,7 @@
                     );
                 }
                 _requireStrCaseInsensitive(t) {
-                  let r = this._cursor.clone();
+                  const r = this._cursor.clone();
                   if (!this._attemptStrCaseInsensitive(t))
                     throw this._createError(
                       kn(this._cursor.peek()),
@@ -24432,7 +24439,7 @@
                   for (; !t(this._cursor.peek()); ) this._cursor.advance();
                 }
                 _requireCharCodeUntilFn(t, r) {
-                  let n = this._cursor.clone();
+                  const n = this._cursor.clone();
                   if (
                     (this._attemptCharCodeUntilFn(t), this._cursor.diff(n) < r)
                   )
@@ -24445,14 +24452,14 @@
                   for (; this._cursor.peek() !== t; ) this._cursor.advance();
                 }
                 _readChar() {
-                  let t = String.fromCodePoint(this._cursor.peek());
+                  const t = String.fromCodePoint(this._cursor.peek());
                   return this._cursor.advance(), t;
                 }
                 _consumeEntity(t) {
                   this._beginToken(9);
-                  let r = this._cursor.clone();
+                  const r = this._cursor.clone();
                   if ((this._cursor.advance(), this._attemptCharCode(35))) {
-                    let n =
+                    const n =
                         this._attemptCharCode(120) || this._attemptCharCode(88),
                       a = this._cursor.clone();
                     if (
@@ -24460,16 +24467,16 @@
                       59 != this._cursor.peek())
                     ) {
                       this._cursor.advance();
-                      let l = n ? qi.HEX : qi.DEC;
+                      const l = n ? qi.HEX : qi.DEC;
                       throw this._createError(
                         GR(l, this._cursor.getChars(r)),
                         this._cursor.getSpan(),
                       );
                     }
-                    let i = this._cursor.getChars(a);
+                    const i = this._cursor.getChars(a);
                     this._cursor.advance();
                     try {
-                      let l = parseInt(i, n ? 16 : 10);
+                      const l = parseInt(i, n ? 16 : 10);
                       this._endToken([
                         String.fromCharCode(l),
                         this._cursor.getChars(r),
@@ -24481,7 +24488,7 @@
                       );
                     }
                   } else {
-                    let n = this._cursor.clone();
+                    const n = this._cursor.clone();
                     if (
                       (this._attemptCharCodeUntilFn(ZR),
                       59 != this._cursor.peek())
@@ -24490,9 +24497,9 @@
                         (this._cursor = n),
                         this._endToken(['&']);
                     else {
-                      let a = this._cursor.getChars(n);
+                      const a = this._cursor.getChars(n);
                       this._cursor.advance();
-                      let i = Wi[a];
+                      const i = Wi[a];
                       if (!i)
                         throw this._createError(Jh(a), this._cursor.getSpan(r));
                       this._endToken([i, `&${a};`]);
@@ -24501,9 +24508,9 @@
                 }
                 _consumeRawText(t, r) {
                   this._beginToken(t ? 6 : 7);
-                  let n = [];
+                  const n = [];
                   for (;;) {
-                    let a = this._cursor.clone(),
+                    const a = this._cursor.clone(),
                       i = r();
                     if (((this._cursor = a), i)) break;
                     t && 38 === this._cursor.peek()
@@ -24591,13 +24598,13 @@
                       0 !== this._cursor.peek();
 
                     ) {
-                      let [u, c] = this._consumeAttributeName();
+                      const [u, c] = this._consumeAttributeName();
                       if (
                         (this._attemptCharCodeUntilFn(ue),
                         this._attemptCharCode(61))
                       ) {
                         this._attemptCharCodeUntilFn(ue);
-                        let p = this._consumeAttributeValue();
+                        const p = this._consumeAttributeValue();
                         i.push({ prefix: u, name: c, value: p });
                       } else i.push({ prefix: u, name: c });
                       this._attemptCharCodeUntilFn(ue);
@@ -24615,7 +24622,7 @@
                     2 === this.tokens[this.tokens.length - 1].type
                   )
                     return;
-                  let l = this._getTagContentType(
+                  const l = this._getTagContentType(
                     r,
                     n,
                     this._fullNameStack.length > 0,
@@ -24648,15 +24655,15 @@
                 }
                 _consumeTagOpenStart(t) {
                   this._beginToken(0, t);
-                  let r = this._consumePrefixAndName();
+                  const r = this._consumePrefixAndName();
                   return this._endToken(r);
                 }
                 _consumeAttributeName() {
-                  let t = this._cursor.peek();
+                  const t = this._cursor.peek();
                   if (39 === t || 34 === t)
                     throw this._createError(kn(t), this._cursor.getSpan());
                   this._beginToken(14);
-                  let r = this._consumePrefixAndName();
+                  const r = this._consumePrefixAndName();
                   return this._endToken(r), r;
                 }
                 _consumeAttributeValue() {
@@ -24665,13 +24672,13 @@
                     39 === this._cursor.peek() ||
                     34 === this._cursor.peek()
                   ) {
-                    let r = this._cursor.peek();
+                    const r = this._cursor.peek();
                     this._consumeQuote(r);
-                    let n = o(() => this._cursor.peek() === r, 'n');
+                    const n = o(() => this._cursor.peek() === r, 'n');
                     (t = this._consumeWithInterpolation(16, 17, n, n)),
                       this._consumeQuote(r);
                   } else {
-                    let r = o(() => Qh(this._cursor.peek()), 'r');
+                    const r = o(() => Qh(this._cursor.peek()), 'r');
                     t = this._consumeWithInterpolation(16, 17, r, r);
                   }
                   return t;
@@ -24682,7 +24689,7 @@
                     this._endToken([String.fromCodePoint(t)]);
                 }
                 _consumeTagOpenEnd() {
-                  let t = this._attemptCharCode(47) ? 2 : 1;
+                  const t = this._attemptCharCode(47) ? 2 : 1;
                   this._beginToken(t),
                     this._requireCharCode(62),
                     this._endToken([]);
@@ -24698,7 +24705,7 @@
                       this._requireCharCode(62),
                       this._endToken([]);
                   else {
-                    let [r, n] = this._consumePrefixAndName();
+                    const [r, n] = this._consumePrefixAndName();
                     this._attemptCharCodeUntilFn(ue),
                       this._requireCharCode(62),
                       this._endToken([r, n]),
@@ -24711,24 +24718,24 @@
                     this._endToken([]),
                     this._expansionCaseStack.push(20),
                     this._beginToken(7);
-                  let t = this._readUntil(44),
+                  const t = this._readUntil(44),
                     r = this._processCarriageReturns(t);
                   if (this._i18nNormalizeLineEndingsInICUs) this._endToken([r]);
                   else {
-                    let a = this._endToken([t]);
+                    const a = this._endToken([t]);
                     r !== t && this.nonNormalizedIcuExpressions.push(a);
                   }
                   this._requireCharCode(44),
                     this._attemptCharCodeUntilFn(ue),
                     this._beginToken(7);
-                  let n = this._readUntil(44);
+                  const n = this._readUntil(44);
                   this._endToken([n]),
                     this._requireCharCode(44),
                     this._attemptCharCodeUntilFn(ue);
                 }
                 _consumeExpansionCaseStart() {
                   this._beginToken(21);
-                  let t = this._readUntil(123).trim();
+                  const t = this._readUntil(123).trim();
                   this._endToken([t]),
                     this._attemptCharCodeUntilFn(ue),
                     this._beginToken(22),
@@ -24752,9 +24759,9 @@
                 }
                 _consumeWithInterpolation(t, r, n, a) {
                   this._beginToken(t);
-                  let i = [];
+                  const i = [];
                   for (; !n(); ) {
-                    let u = this._cursor.clone();
+                    const u = this._cursor.clone();
                     this._interpolationConfig &&
                     this._attemptStr(this._interpolationConfig.start)
                       ? (this._endToken(
@@ -24774,18 +24781,18 @@
                         : i.push(this._readChar());
                   }
                   this._inInterpolation = !1;
-                  let l = this._processCarriageReturns(i.join(''));
+                  const l = this._processCarriageReturns(i.join(''));
                   return this._endToken([l]), l;
                 }
                 _consumeInterpolation(t, r, n) {
-                  let a = [];
+                  const a = [];
                   this._beginToken(t, r),
                     a.push(this._interpolationConfig.start);
                   let i = this._cursor.clone(),
                     l = null,
                     u = !1;
                   for (; 0 !== this._cursor.peek() && (null === n || !n()); ) {
-                    let c = this._cursor.clone();
+                    const c = this._cursor.clone();
                     if (this._isTagStart())
                       return (
                         (this._cursor = c),
@@ -24801,7 +24808,7 @@
                         );
                       this._attemptStr('//') && (u = !0);
                     }
-                    let p = this._cursor.peek();
+                    const p = this._cursor.peek();
                     this._cursor.advance(),
                       92 === p
                         ? this._cursor.advance()
@@ -24834,9 +24841,9 @@
                 }
                 _isTagStart() {
                   if (60 === this._cursor.peek()) {
-                    let t = this._cursor.clone();
+                    const t = this._cursor.clone();
                     t.advance();
-                    let r = t.peek();
+                    const r = t.peek();
                     if (
                       (97 <= r && r <= 122) ||
                       (65 <= r && r <= 90) ||
@@ -24849,13 +24856,13 @@
                 }
                 _isBlockStart() {
                   if (this._tokenizeBlocks && 64 === this._cursor.peek()) {
-                    let t = this._cursor.clone();
+                    const t = this._cursor.clone();
                     if ((t.advance(), t5(t.peek()))) return !0;
                   }
                   return !1;
                 }
                 _readUntil(t) {
-                  let r = this._cursor.clone();
+                  const r = this._cursor.clone();
                   return this._attemptUntilChar(t), this._cursor.getChars(r);
                 }
                 _isInExpansion() {
@@ -24882,21 +24889,21 @@
                 isExpansionFormStart() {
                   if (123 !== this._cursor.peek()) return !1;
                   if (this._interpolationConfig) {
-                    let t = this._cursor.clone(),
+                    const t = this._cursor.clone(),
                       r = this._attemptStr(this._interpolationConfig.start);
                     return (this._cursor = t), !r;
                   }
                   return !0;
                 }
                 _handleFullNameStackForTagOpen(t, r) {
-                  let n = ji(t, r);
+                  const n = ji(t, r);
                   (0 === this._fullNameStack.length ||
                     this._fullNameStack[this._fullNameStack.length - 1] ===
                       n) &&
                     this._fullNameStack.push(n);
                 }
                 _handleFullNameStackForTagClose(t, r) {
-                  let n = ji(t, r);
+                  const n = ji(t, r);
                   0 !== this._fullNameStack.length &&
                     this._fullNameStack[this._fullNameStack.length - 1] === n &&
                     this._fullNameStack.pop();
@@ -24923,7 +24930,7 @@
                     (this.file = t.file),
                       (this.input = t.input),
                       (this.end = t.end);
-                    let n = t.state;
+                    const n = t.state;
                     this.state = {
                       peek: n.peek,
                       offset: n.offset,
@@ -24965,11 +24972,11 @@
                   this.updatePeek(this.state);
                 }
                 getSpan(t, r) {
-                  let n = (t = t || this);
+                  const n = (t = t || this);
                   if (r)
                     for (; this.diff(t) > 0 && -1 !== r.indexOf(t.peek()); )
                       n === t && (t = t.clone()), t.advance();
-                  let a = this.locationFromCursor(t),
+                  const a = this.locationFromCursor(t),
                     i = this.locationFromCursor(this),
                     l = n !== t ? this.locationFromCursor(n) : a;
                   return new z(a, i, l);
@@ -24989,7 +24996,7 @@
                       ((this.state = t),
                       new wc('Unexpected character "EOF"', this))
                     );
-                  let r = this.charAt(t.offset);
+                  const r = this.charAt(t.offset);
                   10 === r ? (t.line++, (t.column = 0)) : vc(r) || t.column++,
                     t.offset++,
                     this.updatePeek(t);
@@ -25035,7 +25042,7 @@
                   return n;
                 }
                 processEscapeSequence() {
-                  let t = o(() => this.internalState.peek, 'e');
+                  const t = o(() => this.internalState.peek, 'e');
                   if (92 === t())
                     if (
                       ((this.internalState = { ...this.state }),
@@ -25059,7 +25066,7 @@
                           this.advanceState(this.internalState), n++;
                         this.state.peek = this.decodeHexDigits(r, n);
                       } else {
-                        let r = this.clone();
+                        const r = this.clone();
                         this.advanceState(this.internalState),
                           this.advanceState(this.internalState),
                           this.advanceState(this.internalState),
@@ -25067,7 +25074,7 @@
                       }
                     else if (120 === t()) {
                       this.advanceState(this.internalState);
-                      let r = this.clone();
+                      const r = this.clone();
                       this.advanceState(this.internalState),
                         (this.state.peek = this.decodeHexDigits(r, 2));
                     } else if (Hh(t())) {
@@ -25088,7 +25095,7 @@
                         : (this.state.peek = this.internalState.peek);
                 }
                 decodeHexDigits(t, r) {
-                  let n = this.input.slice(
+                  const n = this.input.slice(
                       t.internalState.offset,
                       t.internalState.offset + r,
                     ),
@@ -25140,7 +25147,7 @@
                   this.getTagDefinition = t;
                 }
                 parse(t, r, n, a = !1, i) {
-                  let l = o(
+                  const l = o(
                       (w) =>
                         (m, ...v) =>
                           w(m.toLowerCase(), ...v),
@@ -25154,7 +25161,7 @@
                       r,
                       i
                         ? (w, m, v, y) => {
-                            let b = p(w, m, v, y);
+                            const b = p(w, m, v, y);
                             return void 0 !== b ? b : c(w);
                           }
                         : c,
@@ -25229,7 +25236,7 @@
                                                 this._advance(),
                                               ))
                                             : this._advance();
-                  for (let t of this._containerStack)
+                  for (const t of this._containerStack)
                     t instanceof Fn &&
                       this.errors.push(
                         _e.create(
@@ -25240,7 +25247,7 @@
                       );
                 }
                 _advance() {
-                  let t = this._peek;
+                  const t = this._peek;
                   return (
                     this._index < this.tokens.length - 1 && this._index++,
                     (this._peek = this.tokens[this._index]),
@@ -25251,7 +25258,7 @@
                   return this._peek.type === t ? this._advance() : null;
                 }
                 _consumeCdata(t) {
-                  let r = this._advance(),
+                  const r = this._advance(),
                     n = this._getText(r),
                     a = this._advanceIf(13);
                   this._addToParent(
@@ -25263,7 +25270,7 @@
                   );
                 }
                 _consumeComment(t) {
-                  let r = this._advanceIf(7),
+                  const r = this._advanceIf(7),
                     n = this._advanceIf(11),
                     a = null != r ? r.parts[0].trim() : null,
                     i =
@@ -25277,18 +25284,18 @@
                   this._addToParent(new HR(a, i));
                 }
                 _consumeDocType(t) {
-                  let r = this._advanceIf(7),
+                  const r = this._advanceIf(7),
                     n = this._advanceIf(19),
                     a = null != r ? r.parts[0].trim() : null,
                     i = new z(t.sourceSpan.start, (n || r || t).sourceSpan.end);
                   this._addToParent(new zR(a, i));
                 }
                 _consumeExpansion(t) {
-                  let r = this._advance(),
+                  const r = this._advance(),
                     n = this._advance(),
                     a = [];
                   for (; 21 === this._peek.type; ) {
-                    let l = this._parseExpansionCase();
+                    const l = this._parseExpansionCase();
                     if (!l) return;
                     a.push(l);
                   }
@@ -25300,7 +25307,7 @@
                         "Invalid ICU message. Missing '}'.",
                       ),
                     );
-                  let i = new z(
+                  const i = new z(
                     t.sourceSpan.start,
                     this._peek.sourceSpan.end,
                     t.sourceSpan.fullStart,
@@ -25311,7 +25318,7 @@
                     this._advance();
                 }
                 _parseExpansionCase() {
-                  let t = this._advance();
+                  const t = this._advance();
                   if (22 !== this._peek.type)
                     return (
                       this.errors.push(
@@ -25323,12 +25330,12 @@
                       ),
                       null
                     );
-                  let r = this._advance(),
+                  const r = this._advance(),
                     n = this._collectExpansionExpTokens(r);
                   if (!n) return null;
-                  let a = this._advance();
+                  const a = this._advance();
                   n.push({ type: 34, parts: [], sourceSpan: a.sourceSpan });
-                  let i = new _r(
+                  const i = new _r(
                     n,
                     this.getTagDefinition,
                     this.canSelfClose,
@@ -25337,7 +25344,7 @@
                   );
                   if ((i.build(), i.errors.length > 0))
                     return (this.errors = this.errors.concat(i.errors)), null;
-                  let l = new z(
+                  const l = new z(
                       t.sourceSpan.start,
                       a.sourceSpan.end,
                       t.sourceSpan.fullStart,
@@ -25350,7 +25357,7 @@
                   return new _R(t.parts[0], i.rootNodes, l, t.sourceSpan, u);
                 }
                 _collectExpansionExpTokens(t) {
-                  let r = [],
+                  const r = [],
                     n = [22];
                   for (;;) {
                     if (
@@ -25402,7 +25409,7 @@
                 _getText(t) {
                   let r = t.parts[0];
                   if (r.length > 0 && '\n' == r[0]) {
-                    let n = this._getClosestParentElement();
+                    const n = this._getClosestParentElement();
                     null != n &&
                       0 == n.children.length &&
                       this.getTagDefinition(n.name).ignoreFirstLf &&
@@ -25415,7 +25422,7 @@
                     n = t.sourceSpan,
                     a = t.parts[0];
                   if (a.length > 0 && '\n' === a[0]) {
-                    let i = this._getContainer();
+                    const i = this._getContainer();
                     null != i &&
                       0 === i.children.length &&
                       this.getTagDefinition(i.name).ignoreFirstLf &&
@@ -25441,7 +25448,7 @@
                           ? (a += t.parts[0])
                           : (a += t.parts.join(''));
                   if (a.length > 0) {
-                    let i = t.sourceSpan;
+                    const i = t.sourceSpan;
                     this._addToParent(
                       new IR(
                         a,
@@ -25452,13 +25459,13 @@
                   }
                 }
                 _closeVoidElement() {
-                  let t = this._getContainer();
+                  const t = this._getContainer();
                   t instanceof or &&
                     this.getTagDefinition(t.name).isVoid &&
                     this._containerStack.pop();
                 }
                 _consumeStartTag(t) {
-                  let [r, n] = t.parts,
+                  const [r, n] = t.parts,
                     a = [];
                   for (; 14 === this._peek.type; )
                     a.push(this._consumeAttr(this._advance()));
@@ -25470,7 +25477,7 @@
                     l = !1;
                   if (2 === this._peek.type) {
                     this._advance(), (l = !0);
-                    let g = this.getTagDefinition(i);
+                    const g = this.getTagDefinition(i);
                     this.canSelfClose ||
                       g.canSelfClose ||
                       null !== Hi(i) ||
@@ -25483,7 +25490,7 @@
                         ),
                       );
                   } else 1 === this._peek.type && (this._advance(), (l = !1));
-                  let u = this._peek.sourceSpan.fullStart,
+                  const u = this._peek.sourceSpan.fullStart,
                     c = new z(t.sourceSpan.start, u, t.sourceSpan.fullStart),
                     p = new z(t.sourceSpan.start, u, t.sourceSpan.fullStart),
                     d = new z(t.sourceSpan.start.moveBy(1), t.sourceSpan.end),
@@ -25508,7 +25515,7 @@
                     this._containerStack.push(t);
                 }
                 _consumeEndTag(t) {
-                  let r =
+                  const r =
                     this.allowHtmComponentClosingTags && 0 === t.parts.length
                       ? null
                       : this._getElementFullName(
@@ -25525,14 +25532,14 @@
                       ),
                     );
                   else if (!this._popContainer(r, or, t.sourceSpan)) {
-                    let n = `Unexpected closing tag "${r}". It may happen when the tag has already been closed by another tag. For more info see https://www.w3.org/TR/html5/syntax.html#closing-elements-that-have-implied-end-tags`;
+                    const n = `Unexpected closing tag "${r}". It may happen when the tag has already been closed by another tag. For more info see https://www.w3.org/TR/html5/syntax.html#closing-elements-that-have-implied-end-tags`;
                     this.errors.push(_e.create(r, t.sourceSpan, n));
                   }
                 }
                 _popContainer(t, r, n) {
                   let a = !1;
                   for (let i = this._containerStack.length - 1; i >= 0; i--) {
-                    let l = this._containerStack[i];
+                    const l = this._containerStack[i];
                     if (
                       Hi(l.name)
                         ? l.name === t
@@ -25574,7 +25581,7 @@
                       9 === this._peek.type;
 
                     ) {
-                      let d = this._advance();
+                      const d = this._advance();
                       l.push(d),
                         17 === d.type
                           ? (i += d.parts.join('').replace(/&([^;]+);/g, a5))
@@ -25585,7 +25592,7 @@
                     }
                   15 === this._peek.type &&
                     (c = n = this._advance().sourceSpan.end);
-                  let p =
+                  const p =
                     u &&
                     c &&
                     new z(
@@ -25604,13 +25611,13 @@
                   );
                 }
                 _consumeBlockOpen(t) {
-                  let r = [];
+                  const r = [];
                   for (; 28 === this._peek.type; ) {
-                    let u = this._advance();
+                    const u = this._advance();
                     r.push(new Kh(u.parts[0], u.sourceSpan));
                   }
                   26 === this._peek.type && this._advance();
-                  let n = this._peek.sourceSpan.fullStart,
+                  const n = this._peek.sourceSpan.fullStart,
                     a = new z(t.sourceSpan.start, n, t.sourceSpan.fullStart),
                     i = new z(t.sourceSpan.start, n, t.sourceSpan.fullStart),
                     l = new Fn(t.parts[0], r, [], a, t.sourceSpan, i);
@@ -25627,12 +25634,12 @@
                     );
                 }
                 _consumeIncompleteBlock(t) {
-                  let r = [];
+                  const r = [];
                   for (; 28 === this._peek.type; ) {
-                    let u = this._advance();
+                    const u = this._advance();
                     r.push(new Kh(u.parts[0], u.sourceSpan));
                   }
-                  let n = this._peek.sourceSpan.fullStart,
+                  const n = this._peek.sourceSpan.fullStart,
                     a = new z(t.sourceSpan.start, n, t.sourceSpan.fullStart),
                     i = new z(t.sourceSpan.start, n, t.sourceSpan.fullStart),
                     l = new Fn(t.parts[0], r, [], a, t.sourceSpan, i);
@@ -25667,7 +25674,7 @@
                       ),
                     );
                   a = this._advance();
-                  let i = a.sourceSpan.fullStart,
+                  const i = a.sourceSpan.fullStart,
                     l = new z(t.sourceSpan.start, i, t.sourceSpan.fullStart),
                     u = t.sourceSpan.toString().lastIndexOf(r),
                     c = t.sourceSpan.start.moveBy(u),
@@ -25676,10 +25683,10 @@
                   this._addToParent(d);
                 }
                 _consumeIncompleteLet(t) {
-                  let r = t.parts[0] ?? '',
+                  const r = t.parts[0] ?? '',
                     n = r ? ` "${r}"` : '';
                   if (r.length > 0) {
-                    let a = t.sourceSpan.toString().lastIndexOf(r),
+                    const a = t.sourceSpan.toString().lastIndexOf(r),
                       i = t.sourceSpan.start.moveBy(a),
                       l = new z(i, t.sourceSpan.end),
                       u = new z(
@@ -25709,7 +25716,7 @@
                   return null;
                 }
                 _addToParent(t) {
-                  let r = this._getContainer();
+                  const r = this._getContainer();
                   null === r ? this.rootNodes.push(t) : r.children.push(t);
                 }
                 _getElementFullName(t, r, n) {
@@ -25721,7 +25728,7 @@
                         '') &&
                     null != n
                   ) {
-                    let a = el(n.name)[1];
+                    const a = el(n.name)[1];
                     this.getTagDefinition(a).preventNamespaceInheritance ||
                       (t = Hi(n.name));
                   }
@@ -25759,7 +25766,7 @@
             o(
               (At = class {
                 constructor(t = {}) {
-                  for (let r of new Set([...i5, ...Object.keys(t)]))
+                  for (const r of new Set([...i5, ...Object.keys(t)]))
                     this.setProperty(r, t[r]);
                 }
                 setProperty(t, r) {
@@ -25778,27 +25785,27 @@
                 }
                 map(t) {
                   let r;
-                  for (let n in Pi) {
-                    let a = this[n];
+                  for (const n in Pi) {
+                    const a = this[n];
                     if (a) {
-                      let i = fS(a, (l) => l.map(t));
+                      const i = fS(a, (l) => l.map(t));
                       r !== a &&
                         (r || (r = new At({ parent: this.parent })),
                         r.setProperty(n, i));
                     }
                   }
-                  if (r) for (let n in this) n in Pi || (r[n] = this[n]);
+                  if (r) for (const n in this) n in Pi || (r[n] = this[n]);
                   return t(r || this);
                 }
                 walk(t) {
-                  for (let r in Pi) {
-                    let n = this[r];
+                  for (const r in Pi) {
+                    const n = this[r];
                     if (n) for (let a = 0; a < n.length; a++) n[a].walk(t);
                   }
                   t(this);
                 }
                 createChild(t) {
-                  let r = t instanceof At ? t.clone() : new At(t);
+                  const r = t instanceof At ? t.clone() : new At(t);
                   return r.setProperty('parent', this), r;
                 }
                 insertChildBefore(t, r) {
@@ -26749,7 +26756,7 @@
         return ul.diff(e, t, r);
       }
       function qS(e) {
-        let t = e.indexOf('\r');
+        const t = e.indexOf('\r');
         return -1 !== t ? ('\n' === e.charAt(t + 1) ? 'crlf' : 'cr') : 'lf';
       }
       function $c(e) {
@@ -26777,7 +26784,7 @@
           default:
             throw new Error(`Unexpected "eol" ${JSON.stringify(t)}.`);
         }
-        let n = e.match(r);
+        const n = e.match(r);
         return n ? n.length : 0;
       }
       function US(e) {
@@ -26787,35 +26794,35 @@
         if ('string' == typeof e) return Ur;
         if (Array.isArray(e)) return $t;
         if (!e) return;
-        let { type: t } = e;
+        const { type: t } = e;
         return Vm.has(t) ? t : void 0;
       }
       function XS(e) {
-        let t = null === e ? 'null' : typeof e;
+        const t = null === e ? 'null' : typeof e;
         if ('string' !== t && 'object' !== t)
           return `Unexpected doc '${t}', \nExpected it to be 'string' or 'object'.`;
         if (Yr(e)) throw new Error('doc is valid.');
-        let r = Object.prototype.toString.call(e);
+        const r = Object.prototype.toString.call(e);
         if ('[object Object]' !== r) return `Unexpected doc '${r}'.`;
-        let n = YS([...Vm].map((a) => `'${a}'`));
+        const n = YS([...Vm].map((a) => `'${a}'`));
         return `Unexpected doc.type '${e.type}'.\nExpected it to be ${n}.`;
       }
       function ZS(e, t, r, n) {
-        let a = [e];
+        const a = [e];
         for (; a.length > 0; ) {
-          let i = a.pop();
+          const i = a.pop();
           if (i === dm) {
             r(a.pop());
             continue;
           }
           r && a.push(i, dm);
-          let l = Yr(i);
+          const l = Yr(i);
           if (!l) throw new Ta(i);
           if (!1 !== t?.(i))
             switch (l) {
               case $t:
               case It: {
-                let u = l === $t ? i : i.parts;
+                const u = l === $t ? i : i.parts;
                 for (let p = u.length - 1; p >= 0; --p) a.push(u[p]);
                 break;
               }
@@ -26898,7 +26905,7 @@
       }
       function Ym(e, t) {
         Tt(e), jc(t);
-        let r = [];
+        const r = [];
         for (let n = 0; n < t.length; n++) 0 !== n && r.push(e), r.push(t[n]);
         return r;
       }
@@ -26918,11 +26925,11 @@
         var t;
         if (!e) return '';
         if (Array.isArray(e)) {
-          let r = [];
-          for (let n of e)
+          const r = [];
+          for (const n of e)
             if (Array.isArray(n)) r.push(...Nt(n));
             else {
-              let a = Nt(n);
+              const a = Nt(n);
               '' !== a && r.push(a);
             }
           return r;
@@ -26947,17 +26954,17 @@
                 : e;
       }
       function uA(e) {
-        let t = Object.create(null),
+        const t = Object.create(null),
           r = new Set();
         return (function n(i, l, u) {
           var c, p;
           if ('string' == typeof i) return JSON.stringify(i);
           if (Array.isArray(i)) {
-            let d = i.map(n).filter(Boolean);
+            const d = i.map(n).filter(Boolean);
             return 1 === d.length ? d[0] : `[${d.join(', ')}]`;
           }
           if (i.type === Ae) {
-            let d = (null == (c = u?.[l + 1]) ? void 0 : c.type) === ot;
+            const d = (null == (c = u?.[l + 1]) ? void 0 : c.type) === ot;
             return i.literal
               ? d
                 ? 'literalline'
@@ -26997,17 +27004,17 @@
               ')'
             );
           if (i.type === qt) {
-            let d = [];
+            const d = [];
             i.negate && d.push('negate: true'),
               i.groupId && d.push(`groupId: ${a(i.groupId)}`);
-            let h = d.length > 0 ? `, { ${d.join(', ')} }` : '';
+            const h = d.length > 0 ? `, { ${d.join(', ')} }` : '';
             return `indentIfBreak(${n(i.contents)}${h})`;
           }
           if (i.type === qe) {
-            let d = [];
+            const d = [];
             i.break && 'propagated' !== i.break && d.push('shouldBreak: true'),
               i.id && d.push(`id: ${a(i.id)}`);
-            let h = d.length > 0 ? `, { ${d.join(', ')} }` : '';
+            const h = d.length > 0 ? `, { ${d.join(', ')} }` : '';
             return i.expandedStates
               ? `conditionalGroup([${i.expandedStates.map((f) => n(f)).join(',')}]${h})`
               : `group(${n(i.contents)}${h})`;
@@ -27023,9 +27030,9 @@
         function a(i) {
           if ('symbol' != typeof i) return JSON.stringify(String(i));
           if (i in t) return t[i];
-          let l = i.description || 'symbol';
+          const l = i.description || 'symbol';
           for (let u = 0; ; u++) {
-            let c = l + (u > 0 ? ` #${u}` : '');
+            const c = l + (u > 0 ? ` #${u}` : '');
             if (!r.has(c))
               return r.add(c), (t[i] = `Symbol.for(${JSON.stringify(c)})`);
           }
@@ -27183,8 +27190,8 @@
         if (!mA.test(e)) return e.length;
         e = e.replace(pA(), '  ');
         let t = 0;
-        for (let r of e) {
-          let n = r.codePointAt(0);
+        for (const r of e) {
+          const n = r.codePointAt(0);
           n <= 31 ||
             (n >= 127 && n <= 159) ||
             (n >= 768 && n <= 879) ||
@@ -27194,11 +27201,11 @@
       }
       function ml(e, t) {
         if ('string' == typeof e) return t(e);
-        let r = new Map();
+        const r = new Map();
         return n(e);
         function n(i) {
           if (r.has(i)) return r.get(i);
-          let l = (function a(i) {
+          const l = (function a(i) {
             switch (Yr(i)) {
               case $t:
                 return t(i.map(n));
@@ -27242,7 +27249,7 @@
           a = !1;
         function i(l) {
           if (a) return !1;
-          let u = t(l);
+          const u = t(l);
           void 0 !== u && ((a = !0), (n = u));
         }
         return o(i, 'i'), Vc(e, i), n;
@@ -27260,13 +27267,13 @@
       }
       function fm(e) {
         if (e.length > 0) {
-          let t = De(!1, e, -1);
+          const t = De(!1, e, -1);
           !t.expandedStates && !t.break && (t.break = 'propagated');
         }
         return null;
       }
       function bA(e) {
-        let t = new Set(),
+        const t = new Set(),
           r = [];
         function n(i) {
           if ((i.type === ot && fm(r), i.type === qe)) {
@@ -27301,7 +27308,7 @@
         )
           e.length -= 2;
         if (e.length > 0) {
-          let t = zo(De(!1, e, -1));
+          const t = zo(De(!1, e, -1));
           e[e.length - 1] = t;
         }
         return e;
@@ -27313,7 +27320,7 @@
           case qe:
           case Ut:
           case Bt: {
-            let t = zo(e.contents);
+            const t = zo(e.contents);
             return { ...e, contents: t };
           }
           case Ke:
@@ -27368,10 +27375,10 @@
             if (!e.flatContents && !e.breakContents) return '';
             break;
           case $t: {
-            let t = [];
-            for (let r of e) {
+            const t = [];
+            for (const r of e) {
               if (!r) continue;
-              let [n, ...a] = Array.isArray(r) ? r : [r];
+              const [n, ...a] = Array.isArray(r) ? r : [r];
               'string' == typeof n && 'string' == typeof De(!1, t, -1)
                 ? (t[t.length - 1] += n)
                 : t.push(n),
@@ -27438,7 +27445,7 @@
           i = 0,
           l = 0,
           u = 0;
-        for (let w of n)
+        for (const w of n)
           switch (w.type) {
             case 'indent':
               d(), r.useTabs ? c(1) : p(r.tabWidth);
@@ -27478,10 +27485,10 @@
           r = 0,
           n = e.length;
         e: for (; n--; ) {
-          let a = e[n];
+          const a = e[n];
           if (a !== da)
             for (let i = a.length - 1; i >= 0; i--) {
-              let l = a[i];
+              const l = a[i];
               if (' ' !== l && '\t' !== l) {
                 e[n] = a.slice(0, i + 1);
                 break e;
@@ -27504,7 +27511,7 @@
             u.push(t[--l]);
             continue;
           }
-          let { mode: p, doc: d } = u.pop(),
+          const { mode: p, doc: d } = u.pop(),
             h = Yr(d);
           switch (h) {
             case Ur:
@@ -27512,7 +27519,7 @@
               break;
             case $t:
             case It: {
-              let f = h === $t ? d : d.parts,
+              const f = h === $t ? d : d.parts,
                 g = d[Lc] ?? 0;
               for (let w = f.length - 1; w >= g; w--)
                 u.push({ mode: p, doc: f[w] });
@@ -27529,7 +27536,7 @@
               break;
             case qe: {
               if (i && d.break) return !1;
-              let f = d.break ? We : p,
+              const f = d.break ? We : p,
                 g =
                   d.expandedStates && f === We
                     ? De(!1, d.expandedStates, -1)
@@ -27538,7 +27545,7 @@
               break;
             }
             case Ke: {
-              let f =
+              const f =
                 (d.groupId ? a[d.groupId] || Lt : p) === We
                   ? d.breakContents
                   : d.flatContents;
@@ -27569,10 +27576,10 @@
           p = [],
           d = 0;
         for (bA(e); l.length > 0; ) {
-          let { ind: f, mode: g, doc: w } = l.pop();
+          const { ind: f, mode: g, doc: w } = l.pop();
           switch (Yr(w)) {
             case Ur: {
-              let m = '\n' !== a ? dl(!1, w, '\n', a) : w;
+              const m = '\n' !== a ? dl(!1, w, '\n', a) : w;
               u.push(m), l.length > 0 && (i += qc(m));
               break;
             }
@@ -27607,12 +27614,12 @@
                   }
                 case We: {
                   c = !1;
-                  let m = { ind: f, mode: Lt, doc: w.contents },
+                  const m = { ind: f, mode: Lt, doc: w.contents },
                     v = n - i,
                     y = p.length > 0;
                   if (!w.break && nl(m, l, v, y, r)) l.push(m);
                   else if (w.expandedStates) {
-                    let b = De(!1, w.expandedStates, -1);
+                    const b = De(!1, w.expandedStates, -1);
                     if (w.break) {
                       l.push({ ind: f, mode: We, doc: b });
                       break;
@@ -27623,7 +27630,7 @@
                         break;
                       }
                       {
-                        let x = w.expandedStates[D],
+                        const x = w.expandedStates[D],
                           C = { ind: f, mode: Lt, doc: x };
                         if (nl(C, l, v, y, r)) {
                           l.push(C);
@@ -27638,12 +27645,12 @@
               w.id && (r[w.id] = De(!1, l, -1).mode);
               break;
             case It: {
-              let m = n - i,
+              const m = n - i,
                 v = w[Lc] ?? 0,
                 { parts: y } = w,
                 b = y.length - v;
               if (0 === b) break;
-              let D = y[v + 0],
+              const D = y[v + 0],
                 x = y[v + 1],
                 C = { ind: f, mode: Lt, doc: D },
                 E = { ind: f, mode: We, doc: D },
@@ -27652,13 +27659,13 @@
                 R ? l.push(C) : l.push(E);
                 break;
               }
-              let F = { ind: f, mode: Lt, doc: x },
+              const F = { ind: f, mode: Lt, doc: x },
                 A = { ind: f, mode: We, doc: x };
               if (2 === b) {
                 R ? l.push(F, C) : l.push(A, E);
                 break;
               }
-              let k = y[v + 2],
+              const k = y[v + 2],
                 B = { ind: f, mode: g, doc: { ...w, [Lc]: v + 2 } };
               nl(
                 { ind: f, mode: Lt, doc: [D, x, k] },
@@ -27676,9 +27683,9 @@
             }
             case Ke:
             case qt: {
-              let m = w.groupId ? r[w.groupId] : g;
+              const m = w.groupId ? r[w.groupId] : g;
               if (m === We) {
-                let v =
+                const v =
                   w.type === Ke
                     ? w.breakContents
                     : w.negate
@@ -27687,7 +27694,7 @@
                 v && l.push({ ind: f, mode: g, doc: v });
               }
               if (m === Lt) {
-                let v =
+                const v =
                   w.type === Ke
                     ? w.flatContents
                     : w.negate
@@ -27736,12 +27743,12 @@
             p.length > 0 &&
             (l.push(...p.reverse()), (p.length = 0));
         }
-        let h = u.indexOf(da);
+        const h = u.indexOf(da);
         if (-1 !== h) {
-          let f = u.indexOf(da, h + 1);
+          const f = u.indexOf(da, h + 1);
           if (-1 === f)
             return { formatted: u.filter((v) => v !== da).join('') };
-          let g = u.slice(0, h).join(''),
+          const g = u.slice(0, h).join(''),
             w = u.slice(h + 1, f).join('');
           return {
             formatted: g + w + u.slice(f + 1).join(''),
@@ -27763,17 +27770,17 @@
       function* vl(e, t) {
         let { getVisitorKeys: r, filter: n = o(() => !0, 'n') } = t,
           a = o((i) => BA(i) && n(i), 'u');
-        for (let i of r(e)) {
-          let l = e[i];
-          if (Array.isArray(l)) for (let u of l) a(u) && (yield u);
+        for (const i of r(e)) {
+          const l = e[i];
+          if (Array.isArray(l)) for (const u of l) a(u) && (yield u);
           else a(l) && (yield l);
         }
       }
       function* MA(e, t) {
-        let r = [e];
+        const r = [e];
         for (let n = 0; n < r.length; n++) {
-          let a = r[n];
-          for (let i of vl(a, t)) yield i, r.push(i);
+          const a = r[n];
+          for (const i of vl(a, t)) yield i, r.push(i);
         }
       }
       function _A(e, t) {
@@ -27781,12 +27788,12 @@
       }
       function No(e) {
         return (t, r, n) => {
-          let a = !(null == n || !n.backwards);
+          const a = !(null == n || !n.backwards);
           if (!1 === r) return !1;
           let { length: i } = t,
             l = r;
           for (; l >= 0 && l < i; ) {
-            let u = t.charAt(l);
+            const u = t.charAt(l);
             if (e instanceof RegExp) {
               if (!e.test(u)) return l;
             } else if (!e.includes(u)) return l;
@@ -27796,9 +27803,9 @@
         };
       }
       function HA(e, t, r) {
-        let n = !(null == r || !r.backwards);
+        const n = !(null == r || !r.backwards);
         if (!1 === t) return !1;
-        let a = e.charAt(t);
+        const a = e.charAt(t);
         if (n) {
           if ('\r' === e.charAt(t - 1) && '\n' === a) return t - 2;
           if ('\n' === a || '\r' === a || '\u2028' === a || '\u2029' === a)
@@ -27811,7 +27818,7 @@
         return t;
       }
       function zA(e, t, r = {}) {
-        let n = cr(e, r.backwards ? t - 1 : t, r);
+        const n = cr(e, r.backwards ? t - 1 : t, r);
         return n !== qr(e, n, r);
       }
       function OA(e) {
@@ -27851,7 +27858,7 @@
       }
       function Xc(e, t) {
         if (bc.has(e)) return bc.get(e);
-        let {
+        const {
           printer: {
             getCommentChildNodes: r,
             canAttachComment: n,
@@ -27861,7 +27868,7 @@
           locEnd: l,
         } = t;
         if (!n) return [];
-        let u = (r?.(e, t) ?? [...vl(e, { getVisitorKeys: wl(a) })]).flatMap(
+        const u = (r?.(e, t) ?? [...vl(e, { getVisitorKeys: wl(a) })]).flatMap(
           (c) => (n(c) ? [c] : Xc(c, t)),
         );
         return u.sort((c, p) => i(c) - i(p) || l(c) - l(p)), bc.set(e, u), u;
@@ -27876,7 +27883,7 @@
           h = 0,
           f = c.length;
         for (; h < f; ) {
-          let g = (h + f) >> 1,
+          const g = (h + f) >> 1,
             w = c[g],
             m = a(w),
             v = i(w);
@@ -27897,9 +27904,9 @@
         return { enclosingNode: n, precedingNode: p, followingNode: d };
       }
       function WA(e, t) {
-        let { comments: r } = e;
+        const { comments: r } = e;
         if ((delete e.comments, !NA(r) || !t.printer.canAttachComment)) return;
-        let n = [],
+        const n = [],
           {
             locStart: a,
             locEnd: i,
@@ -27918,7 +27925,7 @@
             ast: e,
             isLastComment: r.length - 1 === w,
           }));
-        for (let [g, w] of f.entries()) {
+        for (const [g, w] of f.entries()) {
           let R,
             {
               comment: m,
@@ -27964,12 +27971,12 @@
               d(...R) || (v ? ha(v, m) : b ? fa(b, m) : $r(y || C, m));
           else if (((m.placement = 'remaining'), !h(...R)))
             if (v && b) {
-              let F = n.length;
+              const F = n.length;
               F > 0 && n[F - 1].followingNode !== b && mm(n, x), n.push(w);
             } else v ? ha(v, m) : b ? fa(b, m) : $r(y || C, m);
         }
         if ((mm(n, t), !l))
-          for (let g of r)
+          for (const g of r)
             delete g.precedingNode,
               delete g.enclosingNode,
               delete g.followingNode;
@@ -27980,7 +27987,7 @@
           c = l(a);
         if (i)
           for (let p = n - 1; p >= 0; p--) {
-            let { comment: d, precedingNode: h } = r[p];
+            const { comment: d, precedingNode: h } = r[p];
             if (h !== i || !ng(e.slice(u(d), c))) break;
             c = l(d);
           }
@@ -27992,7 +27999,7 @@
           c = u(a);
         if (i)
           for (let p = n + 1; p < r.length; p++) {
-            let { comment: d, followingNode: h } = r[p];
+            const { comment: d, followingNode: h } = r[p];
             if (h !== i || !ng(e.slice(c, l(d)))) break;
             c = u(d);
           }
@@ -28000,15 +28007,15 @@
       }
       function mm(e, t) {
         var r, n;
-        let a = e.length;
+        const a = e.length;
         if (0 === a) return;
         let c,
           { precedingNode: i, followingNode: l } = e[0],
           u = t.locStart(l);
         for (c = a; c > 0; --c) {
-          let { comment: p, precedingNode: d, followingNode: h } = e[c - 1];
+          const { comment: p, precedingNode: d, followingNode: h } = e[c - 1];
           Mc.strictEqual(d, i), Mc.strictEqual(h, l);
-          let f = t.originalText.slice(t.locEnd(p), u);
+          const f = t.originalText.slice(t.locEnd(p), u);
           if (
             !(
               (null == (n = (r = t.printer).isGap)
@@ -28019,16 +28026,16 @@
             break;
           u = t.locStart(p);
         }
-        for (let [p, { comment: d }] of e.entries())
+        for (const [p, { comment: d }] of e.entries())
           p < c ? ha(i, d) : fa(l, d);
-        for (let p of [i, l])
+        for (const p of [i, l])
           p.comments &&
             p.comments.length > 1 &&
             p.comments.sort((d, h) => t.locStart(d) - t.locStart(h));
         e.length = 0;
       }
       function Dc(e, t, r) {
-        let n = r.locStart(t) - 1;
+        const n = r.locStart(t) - 1;
         for (let a = 1; a < e.length; ++a)
           if (n < r.locStart(e[a])) return a - 1;
         return 0;
@@ -28047,23 +28054,23 @@
       }
       function YA(e, t) {
         var r;
-        let n = e.node,
+        const n = e.node,
           a = [ag(e, t)],
           { printer: i, originalText: l, locStart: u, locEnd: c } = t;
         if (null != (r = i.isBlockComment) && r.call(i, n)) {
-          let d = ur(l, c(n))
+          const d = ur(l, c(n))
             ? ur(l, u(n), { backwards: !0 })
               ? Wr
               : Um
             : ' ';
           a.push(d);
         } else a.push(Wr);
-        let p = qr(l, cr(l, c(n)));
+        const p = qr(l, cr(l, c(n)));
         return !1 !== p && ur(l, p) && a.push(Wr), a;
       }
       function XA(e, t, r) {
         var n;
-        let a = e.node,
+        const a = e.node,
           i = ag(e, t),
           { printer: l, originalText: u, locStart: c } = t,
           p = null == (n = l.isBlockComment) ? void 0 : n.call(l, a);
@@ -28071,7 +28078,7 @@
           (null != r && r.hasLineSuffix && (null == r || !r.isBlock)) ||
           ur(u, c(a), { backwards: !0 })
         ) {
-          let d = Kc(u, c(a));
+          const d = Kc(u, c(a));
           return {
             doc: kc([Wr, d ? Wr : '', i]),
             isBlock: p,
@@ -28083,9 +28090,9 @@
           : { doc: [' ', i], isBlock: p, hasLineSuffix: !1 };
       }
       function KA(e, t) {
-        let r = e.node;
+        const r = e.node;
         if (!r) return {};
-        let n = t[Symbol.for('printedComments')];
+        const n = t[Symbol.for('printedComments')];
         if (0 === (r.comments || []).filter((u) => !n.has(u)).length)
           return { leading: '', trailing: '' };
         let l,
@@ -28093,24 +28100,24 @@
           i = [];
         return (
           e.each(() => {
-            let u = e.node;
+            const u = e.node;
             if (null != n && n.has(u)) return;
-            let { leading: c, trailing: p } = u;
+            const { leading: c, trailing: p } = u;
             c ? a.push(YA(e, t)) : p && ((l = XA(e, t, l)), i.push(l.doc));
           }, 'comments'),
           { leading: a, trailing: i }
         );
       }
       function ZA(e, t, r) {
-        let { leading: n, trailing: a } = KA(e, r);
+        const { leading: n, trailing: a } = KA(e, r);
         return n || a ? ol(t, (i) => [n, i, a]) : t;
       }
       function JA(e) {
-        let {
+        const {
           [Symbol.for('comments')]: t,
           [Symbol.for('printedComments')]: r,
         } = e;
-        for (let n of t) {
+        for (const n of t) {
           if (!n.printed && !r.has(n))
             throw new Error(
               'Comment "' +
@@ -28124,9 +28131,9 @@
         return () => {};
       }
       function ig({ plugins: e = [], showDeprecated: t = !1 } = {}) {
-        let r = e.flatMap((a) => a.languages ?? []),
+        const r = e.flatMap((a) => a.languages ?? []),
           n = [];
-        for (let a of nF(
+        for (const a of nF(
           Object.assign({}, ...e.map(({ options: i }) => i), tF),
         ))
           (!t && a.deprecated) ||
@@ -28149,10 +28156,10 @@
         return { languages: r, options: n };
       }
       function* rF(e, t, r) {
-        let n = new Set(e.map((a) => a.value));
-        for (let a of t)
+        const n = new Set(e.map((a) => a.value));
+        for (const a of t)
           if (a.parsers)
-            for (let i of a.parsers)
+            for (const i of a.parsers)
               if (!n.has(i)) {
                 n.add(i);
                 let l = r.find(
@@ -28166,9 +28173,9 @@
               }
       }
       function nF(e) {
-        let t = [];
-        for (let [r, n] of Object.entries(e)) {
-          let a = { name: r, ...n };
+        const t = [];
+        for (const [r, n] of Object.entries(e)) {
+          const a = { name: r, ...n };
           Array.isArray(a.default) && (a.default = De(!1, a.default, -1).value),
             t.push(a);
         }
@@ -28176,7 +28183,7 @@
       }
       function vm(e, t) {
         if (!t) return;
-        let r = aF(t).toLowerCase();
+        const r = aF(t).toLowerCase();
         return (
           e.find(({ filenames: n }) => n?.some((a) => a.toLowerCase() === r)) ??
           e.find(({ extensions: n }) => n?.some((a) => r.endsWith(a)))
@@ -28191,7 +28198,7 @@
           );
       }
       function iF(e, t) {
-        let r = e.plugins.flatMap((a) => a.languages ?? []),
+        const r = e.plugins.flatMap((a) => a.languages ?? []),
           n =
             oF(r, t.language) ??
             vm(r, t.physicalFile) ??
@@ -28207,7 +28214,7 @@
         ].join(' ');
       }
       function sg({ text: e, list: t }, r) {
-        let n = [];
+        const n = [];
         return (
           e && n.push(`- ${ga.default.blue(e)}`),
           t &&
@@ -28225,13 +28232,13 @@
       }
       function ug(e, t) {
         if (1 === e.length) return e[0];
-        let [r, n] = e,
+        const [r, n] = e,
           [a, i] = e.map((l) => l.split('\n', 1)[0].length);
         return a > t && a > i ? n : r;
       }
       function cF(e, t) {
         if (e === t) return 0;
-        let r = e;
+        const r = e;
         e.length > t.length && ((e = t), (t = r));
         let n = e.length,
           a = t.length;
@@ -28254,9 +28261,9 @@
         return u;
       }
       function dF(e, t) {
-        let r = new e(t),
+        const r = new e(t),
           n = Object.create(r);
-        for (let a of pF)
+        for (const a of pF)
           a in t && (n[a] = fF(t[a], r, pr.prototype[a].length));
         return n;
       }
@@ -28269,34 +28276,34 @@
         return { from: [e], to: t };
       }
       function wF(e, t) {
-        let r = Object.create(null);
-        for (let n of e) {
-          let a = n[t];
+        const r = Object.create(null);
+        for (const n of e) {
+          const a = n[t];
           if (r[a]) throw new Error(`Duplicate ${t} ${JSON.stringify(a)}`);
           r[a] = n;
         }
         return r;
       }
       function bF(e, t) {
-        let r = new Map();
-        for (let n of e) {
-          let a = n[t];
+        const r = new Map();
+        for (const n of e) {
+          const a = n[t];
           if (r.has(a)) throw new Error(`Duplicate ${t} ${JSON.stringify(a)}`);
           r.set(a, n);
         }
         return r;
       }
       function yF() {
-        let e = Object.create(null);
+        const e = Object.create(null);
         return (t) => {
-          let r = JSON.stringify(t);
+          const r = JSON.stringify(t);
           return !!e[r] || ((e[r] = !0), !1);
         };
       }
       function DF(e, t) {
-        let r = [],
+        const r = [],
           n = [];
-        for (let a of e) t(a) ? r.push(a) : n.push(a);
+        for (const a of e) t(a) ? r.push(a) : n.push(a);
         return [r, n];
       }
       function xF(e) {
@@ -28304,7 +28311,7 @@
       }
       function CF(e, t) {
         if (e === t) return 0;
-        let r = typeof e,
+        const r = typeof e,
           n = typeof t,
           a = ['undefined', 'object', 'boolean', 'number', 'string'];
         return r !== n
@@ -28315,7 +28322,7 @@
       }
       function EF(e) {
         return (...t) => {
-          let r = e(...t);
+          const r = e(...t);
           return 'string' == typeof r ? new Error(r) : r;
         };
       }
@@ -28324,7 +28331,7 @@
       }
       function pg(e) {
         if ('string' == typeof e) return { text: e };
-        let { text: t, list: r } = e;
+        const { text: t, list: r } = e;
         return (
           RF(
             void 0 !== (t || r),
@@ -28363,7 +28370,10 @@
             : [Am(e, t)];
       }
       function Fm(e, t) {
-        let r = _c('object' == typeof e && 'redirect' in e ? e.redirect : e, t);
+        const r = _c(
+          'object' == typeof e && 'redirect' in e ? e.redirect : e,
+          t,
+        );
         return 0 === r.length
           ? { remain: t, redirect: r }
           : 'object' == typeof e && 'remain' in e
@@ -28388,25 +28398,25 @@
           if (!i) throw new Error("'FlagSchema' option is required.");
           if (!l) throw new Error("'descriptor' option is required.");
         } else l = ma;
-        let u = a
+        const u = a
             ? Array.isArray(a)
               ? (f, g) => (a.includes(f) ? { [f]: g } : void 0)
               : (f, g) => ({ [f]: g })
             : (f, g, w) => {
-                let { _: m, ...v } = w.schemas;
+                const { _: m, ...v } = w.schemas;
                 return cg(f, g, { ...w, schemas: v });
               },
           c = _F(t, { isCLI: n, FlagSchema: i }),
           p = new BF(c, { logger: r, unknown: u, descriptor: l }),
           d = !1 !== r;
         d && Cc && (p._hasDeprecationWarned = Cc);
-        let h = p.normalize(e);
+        const h = p.normalize(e);
         return d && (Cc = p._hasDeprecationWarned), h;
       }
       function _F(e, { isCLI: t, FlagSchema: r }) {
-        let n = [];
+        const n = [];
         t && n.push(mF.create({ name: '_' }));
-        for (let a of e)
+        for (const a of e)
           n.push(PF(a, { isCLI: t, optionInfos: e, FlagSchema: r })),
             a.alias &&
               t &&
@@ -28470,7 +28480,7 @@
           e.deprecated && (u.deprecated = !0),
           t && !e.array)
         ) {
-          let c = i.preprocess || ((p) => p);
+          const c = i.preprocess || ((p) => p);
           i.preprocess = (p, d, h) =>
             d.preprocess(c(Array.isArray(p) ? De(!1, p, -1) : p), h);
         }
@@ -28491,7 +28501,7 @@
       }
       function fg(e, t) {
         if (!t) throw new Error('parserName is required.');
-        let r = dg(
+        const r = dg(
           !1,
           e,
           (a) =>
@@ -28506,7 +28516,7 @@
       }
       function OF(e, t) {
         if (!t) throw new Error('astFormat is required.');
-        let r = dg(
+        const r = dg(
           !1,
           e,
           (a) =>
@@ -28523,16 +28533,16 @@
         return mg(fg(e, t), t);
       }
       function mg(e, t) {
-        let r = e.parsers[t];
+        const r = e.parsers[t];
         return 'function' == typeof r ? r() : r;
       }
       function NF(e, t) {
-        let r = e.printers[t];
+        const r = e.printers[t];
         return 'function' == typeof r ? r() : r;
       }
       async function $F(e, t = {}) {
         var r;
-        let n = { ...e };
+        const n = { ...e };
         if (!n.parser) {
           if (!n.filepath)
             throw new gm(
@@ -28543,7 +28553,7 @@
               `No parser could be inferred for file "${n.filepath}".`,
             );
         }
-        let a = ig({ plugins: e.plugins, showDeprecated: !0 }).options,
+        const a = ig({ plugins: e.plugins, showDeprecated: !0 }).options,
           i = {
             ...Lm,
             ...Object.fromEntries(
@@ -28557,13 +28567,13 @@
         (n.astFormat = u.astFormat),
           (n.locEnd = u.locEnd),
           (n.locStart = u.locStart);
-        let c =
+        const c =
             null != (r = l.printers) && r[u.astFormat]
               ? l
               : OF(n.plugins, u.astFormat),
           p = await NF(c, u.astFormat);
         n.printer = p;
-        let h = {
+        const h = {
           ...i,
           ...(c.defaultOptions
             ? Object.fromEntries(
@@ -28573,7 +28583,7 @@
               )
             : {}),
         };
-        for (let [f, g] of Object.entries(h))
+        for (const [f, g] of Object.entries(h))
           (null === n[f] || void 0 === n[f]) && (n[f] = g);
         return (
           'json' === n.parser && (n.trailingComma = 'none'),
@@ -28593,15 +28603,15 @@
         return { text: n, ast: a };
       }
       function WF(e, t) {
-        let { loc: r } = e;
+        const { loc: r } = e;
         if (r) {
-          let n = (0, VF.codeFrameColumns)(t, r, { highlightCode: !0 });
+          const n = (0, VF.codeFrameColumns)(t, r, { highlightCode: !0 });
           throw ((e.message += '\n' + n), (e.codeFrame = n), e);
         }
         throw e;
       }
       async function qF(e, t, r, n, a) {
-        let {
+        const {
           embeddedLanguageFormatting: i,
           printer: {
             embed: l,
@@ -28614,14 +28624,14 @@
           throw new Error(
             'printer.embed has too many parameters. The API changed in Prettier v3. Please update your plugin. See https://prettier.io/docs/en/plugins.html#optional-embed',
           );
-        let p = wl(l.getVisitorKeys ?? c),
+        const p = wl(l.getVisitorKeys ?? c),
           d = [];
         g();
-        let h = e.stack;
-        for (let { print: w, node: m, pathStack: v } of d)
+        const h = e.stack;
+        for (const { print: w, node: m, pathStack: v } of d)
           try {
             e.stack = v;
-            let y = await w(f, t, e, r);
+            const y = await w(f, t, e, r);
             y && a.set(m, y);
           } catch (y) {
             if (globalThis.PRETTIER_DEBUG) throw y;
@@ -28630,10 +28640,11 @@
           return UF(w, m, r, n);
         }
         function g() {
-          let { node: w } = e;
+          const { node: w } = e;
           if (null === w || 'object' != typeof w || u(e)) return;
-          for (let v of p(w)) Array.isArray(w[v]) ? e.each(g, v) : e.call(g, v);
-          let m = l(e, r);
+          for (const v of p(w))
+            Array.isArray(w[v]) ? e.each(g, v) : e.call(g, v);
+          const m = l(e, r);
           if (m) {
             if ('function' == typeof m)
               return void d.push({
@@ -28647,7 +28658,7 @@
         (e.stack = h), o(f, 'f'), o(g, 'd');
       }
       async function UF(e, t, r, n) {
-        let a = await Ba(
+        const a = await Ba(
             { ...r, ...t, parentParser: r.parser, originalText: e },
             { passThrough: !0 },
           ),
@@ -28665,17 +28676,17 @@
           { node: u } = e,
           c = a(u),
           p = i(u);
-        for (let d of n) a(d) >= c && i(d) <= p && l.add(d);
+        for (const d of n) a(d) >= c && i(d) <= p && l.add(d);
         return r.slice(c, p);
       }
       async function bl(e, t) {
         ({ ast: e } = await gg(e, t));
-        let r = new Map(),
+        const r = new Map(),
           n = new TA(e),
           a = eF(t),
           i = new Map();
         await qF(n, u, t, bl, i);
-        let l = await Tm(n, t, u, void 0, i);
+        const l = await Tm(n, t, u, void 0, i);
         return (
           JA(t),
           t.nodeAfterCursor && !t.nodeBeforeCursor
@@ -28693,11 +28704,11 @@
         }
         function c(p) {
           a(n);
-          let d = n.node;
+          const d = n.node;
           if (null == d) return '';
-          let h = d && 'object' == typeof d && void 0 === p;
+          const h = d && 'object' == typeof d && void 0 === p;
           if (h && r.has(d)) return r.get(d);
-          let f = Tm(n, t, u, p, i);
+          const f = Tm(n, t, u, p, i);
           return h && r.set(d, f), f;
         }
       }
@@ -28732,12 +28743,12 @@
         );
       }
       async function gg(e, t) {
-        let r = e.comments ?? [];
+        const r = e.comments ?? [];
         (t[Symbol.for('comments')] = r),
           (t[Symbol.for('tokens')] = e.tokens ?? []),
           (t[Symbol.for('printedComments')] = new Set()),
           WA(e, t);
-        let {
+        const {
           printer: { preprocess: n },
         } = t;
         return { ast: (e = n ? await n(e, t) : e), comments: r };
@@ -28748,7 +28759,7 @@
           l = o((g) => n(g) <= r && a(g) >= r, 'o'),
           u = e,
           c = [e];
-        for (let g of MA(e, { getVisitorKeys: i, filter: l }))
+        for (const g of MA(e, { getVisitorKeys: i, filter: l }))
           c.push(g), (u = g);
         if (_A(u, { getVisitorKeys: i })) return { cursorNode: u };
         let p,
@@ -28757,15 +28768,15 @@
           f = Number.POSITIVE_INFINITY;
         for (; c.length > 0 && (void 0 === p || void 0 === d); ) {
           u = c.pop();
-          let g = void 0 !== p,
+          const g = void 0 !== p,
             w = void 0 !== d;
-          for (let m of vl(u, { getVisitorKeys: i })) {
+          for (const m of vl(u, { getVisitorKeys: i })) {
             if (!g) {
-              let v = a(m);
+              const v = a(m);
               v <= r && v > h && ((p = m), (h = v));
             }
             if (!w) {
-              let v = n(m);
+              const v = n(m);
               v >= r && v < f && ((d = m), (f = v));
             }
           }
@@ -28773,45 +28784,45 @@
         return { nodeBeforeCursor: p, nodeAfterCursor: d };
       }
       function ZF(e, t) {
-        let {
+        const {
           printer: { massageAstNode: r, getVisitorKeys: n },
         } = t;
         if (!r) return e;
-        let a = wl(n),
+        const a = wl(n),
           i = r.ignoredProperties ?? new Set();
         return (function l(u, c) {
           if (null === u || 'object' != typeof u) return u;
           if (Array.isArray(u)) return u.map((f) => l(f, c)).filter(Boolean);
-          let p = {},
+          const p = {},
             d = new Set(a(u));
-          for (let f in u)
+          for (const f in u)
             !Object.prototype.hasOwnProperty.call(u, f) ||
               i.has(f) ||
               (d.has(f) ? (p[f] = l(u[f], u)) : (p[f] = u[f]));
-          let h = r(u, p, c);
+          const h = r(u, p, c);
           if (null !== h) return h ?? p;
         })(e);
       }
       function rk(e, t) {
-        let r = [e.node, ...e.parentNodes],
+        const r = [e.node, ...e.parentNodes],
           n = new Set([t.node, ...t.parentNodes]);
         return r.find((a) => vg.has(a.type) && n.has(a));
       }
       function Im(e) {
-        let t = ek(!1, e, (r) => 'Program' !== r.type && 'File' !== r.type);
+        const t = ek(!1, e, (r) => 'Program' !== r.type && 'File' !== r.type);
         return -1 === t ? e : e.slice(0, t + 1);
       }
       function nk(e, t, { locStart: r, locEnd: n }) {
         let a = e.node,
           i = t.node;
         if (a === i) return { startNode: a, endNode: i };
-        let l = r(e.node);
-        for (let c of Im(t.parentNodes)) {
+        const l = r(e.node);
+        for (const c of Im(t.parentNodes)) {
           if (!(r(c) >= l)) break;
           i = c;
         }
-        let u = n(t.node);
-        for (let c of Im(e.parentNodes)) {
+        const u = n(t.node);
+        for (const c of Im(e.parentNodes)) {
           if (!(n(c) <= u)) break;
           if (((a = c), a === i)) break;
         }
@@ -28829,8 +28840,8 @@
             ('rangeStart' === i && t === p)
           )
         ) {
-          for (let d of Xc(e, r)) {
-            let h = Pc(d, t, r, n, [e, ...a], i);
+          for (const d of Xc(e, r)) {
+            const h = Pc(d, t, r, n, [e, ...a], i);
             if (h) return h;
           }
           if (!n || n(e, a[0])) return { node: e, parentNodes: a };
@@ -28877,7 +28888,7 @@
       function ik(e, t, r) {
         let { rangeStart: n, rangeEnd: a, locStart: i, locEnd: l } = t;
         Mc.ok(a > n);
-        let u = e.slice(n, a).search(/\S/u),
+        const u = e.slice(n, a).search(/\S/u),
           c = -1 === u;
         if (!c) for (n += u; a > n && !/\S/u.test(e[a - 1]); --a);
         let h,
@@ -28886,7 +28897,7 @@
           d = c ? p : Pc(r, a, t, (g) => Bm(t, g), [], 'rangeEnd');
         if (!p || !d) return { rangeStart: 0, rangeEnd: 0 };
         if (tk(t)) {
-          let g = rk(p, d);
+          const g = rk(p, d);
           (h = g), (f = g);
         } else ({ startNode: h, endNode: f } = nk(p, d, t));
         return {
@@ -28897,13 +28908,13 @@
       async function bg(e, t, r = 0) {
         if (!e || 0 === e.trim().length)
           return { formatted: '', cursorOffset: -1, comments: [] };
-        let { ast: n, text: a } = await $o(e, t);
+        const { ast: n, text: a } = await $o(e, t);
         t.cursorOffset >= 0 && (t = { ...t, ...KF(n, t) });
         let i = await bl(n, t);
         r > 0 && (i = Xm([Wr, i], r, t.tabWidth));
-        let l = gl(i, t);
+        const l = gl(i, t);
         if (r > 0) {
-          let c = l.formatted.trim();
+          const c = l.formatted.trim();
           void 0 !== l.cursorNodeStart &&
             ((l.cursorNodeStart -= l.formatted.indexOf(c)),
             l.cursorNodeStart < 0 &&
@@ -28913,7 +28924,7 @@
               (l.cursorNodeText = l.cursorNodeText.trimEnd())),
             (l.formatted = c + $c(t.endOfLine));
         }
-        let u = t[Symbol.for('comments')];
+        const u = t[Symbol.for('comments')];
         if (t.cursorOffset >= 0) {
           let c, p, d, h;
           if (
@@ -28929,20 +28940,20 @@
                   'Cursor location must contain at least one of cursorNode, nodeBeforeCursor, nodeAfterCursor',
                 );
               c = t.nodeBeforeCursor ? t.locEnd(t.nodeBeforeCursor) : 0;
-              let y = t.nodeAfterCursor
+              const y = t.nodeAfterCursor
                 ? t.locStart(t.nodeAfterCursor)
                 : a.length;
               p = a.slice(c, y);
             }
           else (c = 0), (p = a), (d = 0), (h = l.formatted);
-          let f = t.cursorOffset - c;
+          const f = t.cursorOffset - c;
           if (p === h)
             return { formatted: l.formatted, cursorOffset: d + f, comments: u };
-          let g = p.split('');
+          const g = p.split('');
           g.splice(f, 0, Mm);
           let m = WS(g, h.split('')),
             v = d;
-          for (let y of m)
+          for (const y of m)
             if (y.removed) {
               if (y.value.includes(Mm)) break;
             } else v += y.count;
@@ -28978,7 +28989,7 @@
           : d.cursorOffset >= 0 && (f = d.cursorOffset + a);
         let g = n.slice(0, a) + h + n.slice(i);
         if ('lf' !== t.endOfLine) {
-          let w = $c(t.endOfLine);
+          const w = $c(t.endOfLine);
           f >= 0 && '\r\n' === w && (f += $m(g.slice(0, f), '\n')),
             (g = dl(!1, g, '\n', w));
         }
@@ -29011,7 +29022,7 @@
           'auto' === i && (i = qS(e)),
           e.includes('\r'))
         ) {
-          let u = o((c) => $m(e.slice(0, Math.max(c, 0)), '\r\n'), 's');
+          const u = o((c) => $m(e.slice(0, Math.max(c, 0)), '\r\n'), 's');
           (r -= u(r)), (n -= u(n)), (a -= u(a)), (e = US(e));
         }
         return {
@@ -29027,7 +29038,7 @@
         };
       }
       async function Pm(e, t) {
-        let r = await hg(t);
+        const r = await hg(t);
         return !r.hasPragma || r.hasPragma(e);
       }
       async function Dg(e, t) {
@@ -29050,7 +29061,7 @@
             i);
       }
       async function sk(e, t, r) {
-        let { text: n, options: a } = yg(e, await Ba(t)),
+        const { text: n, options: a } = yg(e, await Ba(t)),
           i = await $o(n, a);
         return (
           r &&
@@ -29063,13 +29074,13 @@
         return (t = await Ba(t)), gl(await bl(e, t), t);
       }
       async function ck(e, t) {
-        let r = uA(e),
+        const r = uA(e),
           { formatted: n } = await Dg(r, { ...t, parser: '__js_expression' });
         return n;
       }
       async function pk(e, t) {
         t = await Ba(t);
-        let { ast: r } = await $o(e, t);
+        const { ast: r } = await $o(e, t);
         return bl(r, t);
       }
       async function dk(e, t) {
@@ -29107,7 +29118,7 @@
         return (n = Jc(e, n)), (n = qr(e, n)), !1 !== n && ur(e, n);
       }
       function Dk(e, t) {
-        let r = e.lastIndexOf('\n');
+        const r = e.lastIndexOf('\n');
         return -1 === r ? 0 : Gc(e.slice(r + 1).match(/^[\t ]*/u)[0], t);
       }
       function Ck(e) {
@@ -29115,13 +29126,13 @@
         return e.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&').replace(/-/g, '\\x2d');
       }
       function Ek(e, t) {
-        let r = e.match(new RegExp(`(${Ck(t)})+`, 'gu'));
+        const r = e.match(new RegExp(`(${Ck(t)})+`, 'gu'));
         return null === r
           ? 0
           : r.reduce((n, a) => Math.max(n, a.length / t.length), 0);
       }
       function Sk(e, t) {
-        let r = Qc(e, t);
+        const r = Qc(e, t);
         return !1 === r ? '' : e.charAt(r);
       }
       function Fk(e, t) {
@@ -29129,7 +29140,7 @@
           n = r === al ? Hm : al,
           a = 0,
           i = 0;
-        for (let l of e) l === r ? a++ : l === n && i++;
+        for (const l of e) l === r ? a++ : l === n && i++;
         return a > i ? n : r;
       }
       function Lk(e, t, r) {
@@ -29140,7 +29151,7 @@
         return cr(e, r.backwards ? t - 1 : t, r) !== t;
       }
       function Mk(e, t, r) {
-        let n = '"' === t ? "'" : '"',
+        const n = '"' === t ? "'" : '"',
           a = dl(!1, e, /\\(.)|(["'])/gsu, (i, l, u) =>
             l === n
               ? l
@@ -29179,7 +29190,7 @@
       }
       function Vr(e, t = 1) {
         return async (...r) => {
-          let n = r[t] ?? {},
+          const n = r[t] ?? {},
             a = n.plugins ?? [];
           return (
             (r[t] = { ...n, plugins: Array.isArray(a) ? a : Object.values(a) }),
@@ -29188,7 +29199,7 @@
         };
       }
       async function Rg(e, t) {
-        let { formatted: r } = await Eg(e, { ...t, cursorOffset: -1 });
+        const { formatted: r } = await Eg(e, { ...t, cursorOffset: -1 });
         return r;
       }
       async function Vk(e, t) {
@@ -29391,7 +29402,7 @@
             }, 'Bt')),
             (MS = o((e, t, r, n) => {
               if ((t && 'object' == typeof t) || 'function' == typeof t)
-                for (let a of TS(t))
+                for (const a of TS(t))
                   !BS.call(e, a) &&
                     a !== r &&
                     Hc(e, a, {
@@ -29444,18 +29455,18 @@
                   v = Math.max(f - (d + 1), 0),
                   y = Math.min(l.length, w + h);
                 -1 === f && (v = 0), -1 === w && (y = l.length);
-                let b = w - f,
+                const b = w - f,
                   D = {};
                 if (b)
                   for (let x = 0; x <= b; x++) {
-                    let C = x + f;
+                    const C = x + f;
                     if (g)
                       if (0 === x) {
-                        let E = l[C - 1].length;
+                        const E = l[C - 1].length;
                         D[C] = [g, E - g + 1];
                       } else if (x === b) D[C] = [0, m];
                       else {
-                        let E = l[C - x].length;
+                        const E = l[C - x].length;
                         D[C] = [0, E];
                       }
                     else D[C] = !0;
@@ -29473,14 +29484,14 @@
                     .split(r, h)
                     .slice(d, h)
                     .map((v, y) => {
-                      let b = d + 1 + y,
+                      const b = d + 1 + y,
                         D = ` ${` ${b}`.slice(-w)} |`,
                         x = f[b],
                         C = !f[b + 1];
                       if (x) {
                         let E = '';
                         if (Array.isArray(x)) {
-                          let R = v
+                          const R = v
                               .slice(0, Math.max(x[0] - 1, 0))
                               .replace(/[^\t]/g, ' '),
                             F = x[1] || 1;
@@ -29977,7 +29988,7 @@
                   PS(this, Nr), (this.stack = [t]);
                 }
                 get key() {
-                  let { stack: t, siblings: r } = this;
+                  const { stack: t, siblings: r } = this;
                   return De(!1, t, null === r ? -2 : -4) ?? null;
                 }
                 get index() {
@@ -29996,23 +30007,23 @@
                   return null !== this.siblings;
                 }
                 get siblings() {
-                  let { stack: t } = this,
+                  const { stack: t } = this,
                     r = De(!1, t, -3);
                   return Array.isArray(r) ? r : null;
                 }
                 get next() {
-                  let { siblings: t } = this;
+                  const { siblings: t } = this;
                   return null === t ? null : t[this.index + 1];
                 }
                 get previous() {
-                  let { siblings: t } = this;
+                  const { siblings: t } = this;
                   return null === t ? null : t[this.index - 1];
                 }
                 get isFirst() {
                   return 0 === this.index;
                 }
                 get isLast() {
-                  let { siblings: t, index: r } = this;
+                  const { siblings: t, index: r } = this;
                   return null !== t && r === t.length - 1;
                 }
                 get isRoot() {
@@ -30025,7 +30036,7 @@
                   return [...Po(this, Nr, il).call(this)];
                 }
                 getName() {
-                  let { stack: t } = this,
+                  const { stack: t } = this,
                     { length: r } = t;
                   return r > 1 ? De(!1, t, -2) : null;
                 }
@@ -30033,7 +30044,7 @@
                   return De(!1, this.stack, -1);
                 }
                 getNode(t = 0) {
-                  let r = Po(this, Nr, Bc).call(this, t);
+                  const r = Po(this, Nr, Bc).call(this, t);
                   return -1 === r ? null : this.stack[r];
                 }
                 getParentNode(t = 0) {
@@ -30043,7 +30054,7 @@
                   let { stack: n } = this,
                     { length: a } = n,
                     i = De(!1, n, -1);
-                  for (let l of r) (i = i[l]), n.push(l, i);
+                  for (const l of r) (i = i[l]), n.push(l, i);
                   try {
                     return t(this);
                   } finally {
@@ -30051,7 +30062,7 @@
                   }
                 }
                 callParent(t, r = 0) {
-                  let n = Po(this, Nr, Bc).call(this, r + 1),
+                  const n = Po(this, Nr, Bc).call(this, r + 1),
                     a = this.stack.splice(n + 1);
                   try {
                     return t(this);
@@ -30063,7 +30074,7 @@
                   let { stack: n } = this,
                     { length: a } = n,
                     i = De(!1, n, -1);
-                  for (let l of r) (i = i[l]), n.push(l, i);
+                  for (const l of r) (i = i[l]), n.push(l, i);
                   try {
                     for (let l = 0; l < i.length; ++l)
                       n.push(l, i[l]), t(this, l, i), (n.length -= 2);
@@ -30072,7 +30083,7 @@
                   }
                 }
                 map(t, ...r) {
-                  let n = [];
+                  const n = [];
                   return (
                     this.each(
                       (a, i, l) => {
@@ -30087,7 +30098,7 @@
                   let r = this.stack.length - 1,
                     n = null,
                     a = this.stack[r--];
-                  for (let i of t) {
+                  for (const i of t) {
                     if (void 0 === a) return !1;
                     let l = null;
                     if (
@@ -30101,10 +30112,11 @@
                   return !0;
                 }
                 findAncestor(t) {
-                  for (let r of Po(this, Nr, il).call(this)) if (t(r)) return r;
+                  for (const r of Po(this, Nr, il).call(this))
+                    if (t(r)) return r;
                 }
                 hasAncestor(t) {
-                  for (let r of Po(this, Nr, il).call(this))
+                  for (const r of Po(this, Nr, il).call(this))
                     if (t(r)) return !0;
                   return !1;
                 }
@@ -30114,15 +30126,15 @@
             (LA = wa),
             (Nr = new WeakSet()),
             (Bc = o(function (e) {
-              let { stack: t } = this;
+              const { stack: t } = this;
               for (let r = t.length - 1; r >= 0; r -= 2)
                 if (!Array.isArray(t[r]) && --e < 0) return r;
               return -1;
             }, 'Yt')),
             (il = o(function* () {
-              let { stack: e } = this;
+              const { stack: e } = this;
               for (let t = e.length - 3; t >= 0; t -= 2) {
-                let r = e[t];
+                const r = e[t];
                 Array.isArray(r) || (yield r);
               }
             }, 'rt')),
@@ -30381,7 +30393,7 @@
                   return JSON.stringify(e);
                 if (Array.isArray(e))
                   return `[${e.map((r) => ma.value(r)).join(', ')}]`;
-                let t = Object.keys(e);
+                const t = Object.keys(e);
                 return 0 === t.length
                   ? '{}'
                   : `{ ${t.map((r) => `${ma.key(r)}: ${ma.value(e[r])}`).join(', ')} }`;
@@ -30390,7 +30402,7 @@
             }),
             (wm = pl(Oc(), 1)),
             (sF = o((e, t, { descriptor: r }) => {
-              let n = [
+              const n = [
                 `${wm.default.yellow('string' == typeof e ? r.key(e) : r.pair(e))} is deprecated`,
               ];
               return (
@@ -30406,7 +30418,7 @@
             (ll = Symbol.for('vnopts.VALUE_UNCHANGED')),
             (bm = ' '.repeat(2)),
             (uF = o((e, t, r) => {
-              let { text: n, list: a } = r.normalizeExpectedResult(
+              const { text: n, list: a } = r.normalizeExpectedResult(
                   r.schemas[e].expected(r),
                 ),
                 i = [];
@@ -30429,7 +30441,7 @@
             (xm = []),
             o(cF, 'zt'),
             (cg = o((e, t, { descriptor: r, logger: n, schemas: a }) => {
-              let i = [
+              const i = [
                   `Ignored unknown option ${Dm.default.yellow(r.pair({ key: e, value: t }))}.`,
                 ],
                 l = Object.keys(a)
@@ -30520,7 +30532,7 @@
                   super({ ...n, name: r }), (this._valueSchema = t);
                 }
                 expected(t) {
-                  let { text: r, list: n } = t.normalizeExpectedResult(
+                  const { text: r, list: n } = t.normalizeExpectedResult(
                     this._valueSchema.expected(t),
                   );
                   return {
@@ -30533,9 +30545,9 @@
                 }
                 validate(t, r) {
                   if (!Array.isArray(t)) return !1;
-                  let n = [];
-                  for (let a of t) {
-                    let i = r.normalizeValidateResult(
+                  const n = [];
+                  for (const a of t) {
+                    const i = r.normalizeValidateResult(
                       this._valueSchema.validate(a, r),
                       a,
                     );
@@ -30544,9 +30556,9 @@
                   return 0 === n.length || { value: n };
                 }
                 deprecated(t, r) {
-                  let n = [];
-                  for (let a of t) {
-                    let i = r.normalizeDeprecatedResult(
+                  const n = [];
+                  for (const a of t) {
+                    const i = r.normalizeDeprecatedResult(
                       this._valueSchema.deprecated(a, r),
                       a,
                     );
@@ -30556,9 +30568,9 @@
                   return n;
                 }
                 forward(t, r) {
-                  let n = [];
-                  for (let a of t) {
-                    let i = r.normalizeForwardResult(
+                  const n = [];
+                  for (const a of t) {
+                    const i = r.normalizeForwardResult(
                       this._valueSchema.forward(a, r),
                       a,
                     );
@@ -30567,10 +30579,10 @@
                   return n;
                 }
                 redirect(t, r) {
-                  let n = [],
+                  const n = [],
                     a = [];
-                  for (let i of t) {
-                    let l = r.normalizeRedirectResult(
+                  for (const i of t) {
+                    const l = r.normalizeRedirectResult(
                       this._valueSchema.redirect(i, r),
                       i,
                     );
@@ -30628,7 +30640,7 @@
                     ));
                 }
                 expected({ descriptor: t }) {
-                  let r = Array.from(this._choices.keys())
+                  const r = Array.from(this._choices.keys())
                       .map((i) => this._choices.get(i))
                       .filter(({ hidden: i }) => !i)
                       .map((i) => i.value)
@@ -30645,15 +30657,15 @@
                   return this._choices.has(t);
                 }
                 deprecated(t) {
-                  let r = this._choices.get(t);
+                  const r = this._choices.get(t);
                   return !(!r || !r.deprecated) && { value: t };
                 }
                 forward(t) {
-                  let r = this._choices.get(t);
+                  const r = this._choices.get(t);
                   return r ? r.forward : void 0;
                 }
                 redirect(t) {
-                  let r = this._choices.get(t);
+                  const r = this._choices.get(t);
                   return r ? r.redirect : void 0;
                 }
               }),
@@ -30706,7 +30718,7 @@
             o(
               (La = class {
                 constructor(t, r) {
-                  let {
+                  const {
                     logger: n = console,
                     loggerPrintWidth: a = 80,
                     descriptor: i = kF,
@@ -30743,27 +30755,27 @@
                   this._hasDeprecationWarned = yF();
                 }
                 normalize(t) {
-                  let r = {},
+                  const r = {},
                     n = [this._preprocess(t, this._utils)],
                     a = o(() => {
                       for (; 0 !== n.length; ) {
-                        let i = n.shift(),
+                        const i = n.shift(),
                           l = this._applyNormalization(i, r);
                         n.push(...l);
                       }
                     }, 'i');
                   a();
-                  for (let i of Object.keys(this._utils.schemas)) {
-                    let l = this._utils.schemas[i];
+                  for (const i of Object.keys(this._utils.schemas)) {
+                    const l = this._utils.schemas[i];
                     if (!(i in r)) {
-                      let u = Em(l.default(this._utils));
+                      const u = Em(l.default(this._utils));
                       'value' in u && n.push({ [i]: u.value });
                     }
                   }
                   a();
-                  for (let i of Object.keys(this._utils.schemas)) {
+                  for (const i of Object.keys(this._utils.schemas)) {
                     if (!(i in r)) continue;
-                    let l = this._utils.schemas[i],
+                    const l = this._utils.schemas[i],
                       u = r[i],
                       c = l.postprocess(u, this._utils);
                     c !== ll && (this._applyValidation(c, i, l), (r[i] = c));
@@ -30773,14 +30785,14 @@
                   );
                 }
                 _applyNormalization(t, r) {
-                  let n = [],
+                  const n = [],
                     { knownKeys: a, unknownKeys: i } =
                       this._partitionOptionKeys(t);
-                  for (let l of a) {
-                    let u = this._utils.schemas[l],
+                  for (const l of a) {
+                    const u = this._utils.schemas[l],
                       c = u.preprocess(t[l], this._utils);
                     this._applyValidation(c, l, u);
-                    let p = o(({ from: f, to: g }) => {
+                    const p = o(({ from: f, to: g }) => {
                         n.push(
                           'string' == typeof g
                             ? { [g]: f }
@@ -30788,7 +30800,7 @@
                         );
                       }, 'D'),
                       d = o(({ value: f, redirectTo: g }) => {
-                        let w = Sm(u.deprecated(f, this._utils), c, !0);
+                        const w = Sm(u.deprecated(f, this._utils), c, !0);
                         if (!1 !== w)
                           if (!0 === w)
                             this._hasDeprecationWarned(l) ||
@@ -30796,10 +30808,10 @@
                                 this._deprecatedHandler(l, g, this._utils),
                               );
                           else
-                            for (let { value: m } of w) {
-                              let v = { key: l, value: m };
+                            for (const { value: m } of w) {
+                              const v = { key: l, value: m };
                               if (!this._hasDeprecationWarned(v)) {
-                                let y =
+                                const y =
                                   'string' == typeof g
                                     ? { key: g, value: m }
                                     : g;
@@ -30810,17 +30822,17 @@
                             }
                       }, 'l');
                     _c(u.forward(c, this._utils), c).forEach(p);
-                    let h = Fm(u.redirect(c, this._utils), c);
+                    const h = Fm(u.redirect(c, this._utils), c);
                     if ((h.redirect.forEach(p), 'remain' in h)) {
-                      let f = h.remain;
+                      const f = h.remain;
                       (r[l] = l in r ? u.overlap(r[l], f, this._utils) : f),
                         d({ value: f });
                     }
-                    for (let { from: f, to: g } of h.redirect)
+                    for (const { from: f, to: g } of h.redirect)
                       d({ value: f, redirectTo: g });
                   }
-                  for (let l of i) {
-                    let u = t[l];
+                  for (const l of i) {
+                    const u = t[l];
                     this._applyUnknownHandler(l, u, r, (c, p) => {
                       n.push({ [c]: p });
                     });
@@ -30828,7 +30840,7 @@
                   return n;
                 }
                 _applyRequiredCheck(t) {
-                  for (let r of Object.keys(this._utils.schemas))
+                  for (const r of Object.keys(this._utils.schemas))
                     if (
                       this._identifyMissing(r, t) &&
                       this._identifyRequired(r)
@@ -30836,42 +30848,42 @@
                       throw this._invalidHandler(r, lg, this._utils);
                 }
                 _partitionOptionKeys(t) {
-                  let [r, n] = DF(
+                  const [r, n] = DF(
                     Object.keys(t).filter((a) => !this._identifyMissing(a, t)),
                     (a) => a in this._utils.schemas,
                   );
                   return { knownKeys: r, unknownKeys: n };
                 }
                 _applyValidation(t, r, n) {
-                  let a = Rm(n.validate(t, this._utils), t);
+                  const a = Rm(n.validate(t, this._utils), t);
                   if (!0 !== a)
                     throw this._invalidHandler(r, a.value, this._utils);
                 }
                 _applyUnknownHandler(t, r, n, a) {
-                  let i = this._unknownHandler(t, r, this._utils);
+                  const i = this._unknownHandler(t, r, this._utils);
                   if (i)
-                    for (let l of Object.keys(i)) {
+                    for (const l of Object.keys(i)) {
                       if (this._identifyMissing(l, i)) continue;
-                      let u = i[l];
+                      const u = i[l];
                       l in this._utils.schemas ? a(l, u) : (n[l] = u);
                     }
                 }
                 _applyPostprocess(t) {
-                  let r = this._postprocess(t, this._utils);
+                  const r = this._postprocess(t, this._utils);
                   if (r !== ll) {
-                    if (r.delete) for (let n of r.delete) delete t[n];
+                    if (r.delete) for (const n of r.delete) delete t[n];
                     if (r.override) {
-                      let { knownKeys: n, unknownKeys: a } =
+                      const { knownKeys: n, unknownKeys: a } =
                         this._partitionOptionKeys(r.override);
-                      for (let i of n) {
-                        let l = r.override[i];
+                      for (const i of n) {
+                        const l = r.override[i];
                         this._applyValidation(l, i, this._utils.schemas[i]),
                           (t[i] = l);
                       }
-                      for (let i of a) {
-                        let l = r.override[i];
+                      for (const i of a) {
+                        const l = r.override[i];
                         this._applyUnknownHandler(i, l, t, (u, c) => {
-                          let p = this._utils.schemas[u];
+                          const p = this._utils.schemas[u];
                           this._applyValidation(c, u, p), (t[u] = c);
                         });
                       }
@@ -30890,7 +30902,7 @@
               if (!e || null != t) {
                 if (t.findLast) return t.findLast(r);
                 for (let n = t.length - 1; n >= 0; n--) {
-                  let a = t[n];
+                  const a = t[n];
                   if (r(a, n, t)) return a;
                 }
               }
@@ -33556,7 +33568,7 @@
                 onVisibleChange: D,
                 ...x
               }) => {
-                let C = e ? DB : yB,
+                const C = e ? DB : yB,
                   {
                     getArrowProps: E,
                     getTooltipProps: R,
@@ -33616,7 +33628,9 @@
               'WithTooltipPure',
             )),
             ($1 = o(({ startOpen: e = !1, onVisibleChange: t, ...r }) => {
-              let [n, a] = (0, react__WEBPACK_IMPORTED_MODULE_0__.useState)(e),
+              const [n, a] = (0, react__WEBPACK_IMPORTED_MODULE_0__.useState)(
+                  e,
+                ),
                 i = (0, react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(
                   (l) => {
                     (t && !1 === t(l)) || a(l);
@@ -33625,13 +33639,13 @@
                 );
               return (
                 (0, react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-                  let l = o(() => i(!1), 'hide');
+                  const l = o(() => i(!1), 'hide');
                   Xl.addEventListener('keydown', l, !1);
-                  let u = Array.from(Xl.getElementsByTagName('iframe')),
+                  const u = Array.from(Xl.getElementsByTagName('iframe')),
                     c = [];
                   return (
                     u.forEach((p) => {
-                      let d = o(() => {
+                      const d = o(() => {
                         try {
                           p.contentWindow.document &&
                             (p.contentWindow.document.addEventListener(
@@ -33671,7 +33685,7 @@
             }, 'WithToolTipState'));
         }),
         te = o(({ ...e }, t) => {
-          let r = [e.class, e.className];
+          const r = [e.class, e.className];
           return (
             delete e.class,
             (e.className = ['sbdocs', `sbdocs-${t}`, ...r]
@@ -34429,7 +34443,7 @@
         $e = { margin: '16px 0' },
         Rp = _storybook_core_theming__WEBPACK_IMPORTED_MODULE_1__.I4.div(N),
         Sp = o(({ href: e = '', ...t }) => {
-          let n = /^\//.test(e) ? `./?path=${e}` : e,
+          const n = /^\//.test(e) ? `./?path=${e}` : e,
             i = /^#.*/.test(e) ? '_self' : '_top';
           return react__WEBPACK_IMPORTED_MODULE_0__.createElement('a', {
             href: n,
@@ -34499,7 +34513,7 @@
           }),
         ),
         gu = o(({ className: e, children: t, ...r }) => {
-          let n = (e || '').match(/lang-(\S+)/),
+          const n = (e || '').match(/lang-(\S+)/),
             a = react__WEBPACK_IMPORTED_MODULE_0__.Children.toArray(t);
           return a.filter(Ah).some((l) => l.match(Lb))
             ? react__WEBPACK_IMPORTED_MODULE_0__.createElement(
@@ -41447,7 +41461,7 @@
           []),
         _a = null,
         Gk = (0, react__WEBPACK_IMPORTED_MODULE_0__.lazy)(async () => {
-          let { SyntaxHighlighter: e } = await Promise.resolve().then(
+          const { SyntaxHighlighter: e } = await Promise.resolve().then(
             () => (yo(), mu),
           );
           return (
@@ -41467,10 +41481,11 @@
           );
         }),
         Yk = (0, react__WEBPACK_IMPORTED_MODULE_0__.lazy)(async () => {
-          let [{ SyntaxHighlighter: e }, { formatter: t }] = await Promise.all([
-            Promise.resolve().then(() => (yo(), mu)),
-            Promise.resolve().then(() => (Ig(), Tg)),
-          ]);
+          const [{ SyntaxHighlighter: e }, { formatter: t }] =
+            await Promise.all([
+              Promise.resolve().then(() => (yo(), mu)),
+              Promise.resolve().then(() => (Ig(), Tg)),
+            ]);
           return (
             Xr.length > 0 &&
               (Xr.forEach((r) => {
@@ -41515,7 +41530,7 @@
         lu();
       var Il = {};
       function Pg(e, t) {
-        let r = react__WEBPACK_IMPORTED_MODULE_0__.createContext(t),
+        const r = react__WEBPACK_IMPORTED_MODULE_0__.createContext(t),
           n = o((i) => {
             let { children: l, ...u } = i,
               c = react__WEBPACK_IMPORTED_MODULE_0__.useMemo(
@@ -41528,7 +41543,7 @@
             );
           }, 'Provider');
         function a(i) {
-          let l = react__WEBPACK_IMPORTED_MODULE_0__.useContext(r);
+          const l = react__WEBPACK_IMPORTED_MODULE_0__.useContext(r);
           if (l) return l;
           if (void 0 !== t) return t;
           throw new Error(`\`${i}\` must be used within \`${e}\``);
@@ -41538,10 +41553,10 @@
       function Hg(e, t = []) {
         let r = [];
         function n(i, l) {
-          let u = react__WEBPACK_IMPORTED_MODULE_0__.createContext(l),
+          const u = react__WEBPACK_IMPORTED_MODULE_0__.createContext(l),
             c = r.length;
           r = [...r, l];
-          let p = o((h) => {
+          const p = o((h) => {
             let { scope: f, children: g, ...w } = h,
               m = f?.[e]?.[c] || u,
               v = react__WEBPACK_IMPORTED_MODULE_0__.useMemo(
@@ -41554,7 +41569,7 @@
             );
           }, 'Provider');
           function d(h, f) {
-            let g = f?.[e]?.[c] || u,
+            const g = f?.[e]?.[c] || u,
               w = react__WEBPACK_IMPORTED_MODULE_0__.useContext(g);
             if (w) return w;
             if (void 0 !== l) return l;
@@ -41563,12 +41578,12 @@
           return (p.displayName = i + 'Provider'), o(d, 'useContext2'), [p, d];
         }
         o(n, 'createContext3');
-        let a = o(() => {
-          let i = r.map((l) =>
+        const a = o(() => {
+          const i = r.map((l) =>
             react__WEBPACK_IMPORTED_MODULE_0__.createContext(l),
           );
           return o(function (u) {
-            let c = u?.[e] || i;
+            const c = u?.[e] || i;
             return react__WEBPACK_IMPORTED_MODULE_0__.useMemo(
               () => ({ [`__scope${e}`]: { ...u, [e]: c } }),
               [u, c],
@@ -41578,12 +41593,12 @@
         return (a.scopeName = e), [n, Xk(a, ...t)];
       }
       function Xk(...e) {
-        let t = e[0];
+        const t = e[0];
         if (1 === e.length) return t;
-        let r = o(() => {
-          let n = e.map((a) => ({ useScope: a(), scopeName: a.scopeName }));
+        const r = o(() => {
+          const n = e.map((a) => ({ useScope: a(), scopeName: a.scopeName }));
           return o(function (i) {
-            let l = n.reduce(
+            const l = n.reduce(
               (u, { useScope: c, scopeName: p }) => ({
                 ...u,
                 ...c(i)[`__scope${p}`],
@@ -41627,7 +41642,7 @@
       var Kk = react__WEBPACK_IMPORTED_MODULE_0__.useId || (() => {}),
         Zk = 0;
       function Dl(e) {
-        let [t, r] = react__WEBPACK_IMPORTED_MODULE_0__.useState(Kk());
+        const [t, r] = react__WEBPACK_IMPORTED_MODULE_0__.useState(Kk());
         return (
           rt(() => {
             e || r((n) => n ?? String(Zk++));
@@ -41640,7 +41655,7 @@
         defaultProp: t,
         onChange: r = o(() => {}, 'onChange'),
       }) {
-        let [n, a] = Jk({ defaultProp: t, onChange: r }),
+        const [n, a] = Jk({ defaultProp: t, onChange: r }),
           i = void 0 !== e,
           l = i ? e : n,
           u = de(r);
@@ -41649,7 +41664,7 @@
           react__WEBPACK_IMPORTED_MODULE_0__.useCallback(
             (p) => {
               if (i) {
-                let h = 'function' == typeof p ? p(e) : p;
+                const h = 'function' == typeof p ? p(e) : p;
                 h !== e && u(h);
               } else a(p);
             },
@@ -41658,7 +41673,7 @@
         ];
       }
       function Jk({ defaultProp: e, onChange: t }) {
-        let r = react__WEBPACK_IMPORTED_MODULE_0__.useState(e),
+        const r = react__WEBPACK_IMPORTED_MODULE_0__.useState(e),
           [n] = r,
           a = react__WEBPACK_IMPORTED_MODULE_0__.useRef(n),
           i = de(t);
@@ -41670,9 +41685,9 @@
         );
       }
       function Ng(e, t = globalThis?.document) {
-        let r = de(e);
+        const r = de(e);
         react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-          let n = o((a) => {
+          const n = o((a) => {
             'Escape' === a.key && r(a);
           }, 'handleKeyDown');
           return (
@@ -41720,12 +41735,12 @@
             D = p.layersWithOutsidePointerEventsDisabled.size > 0,
             x = b >= y,
             C = aL((R) => {
-              let F = R.target,
+              const F = R.target,
                 A = [...p.branches].some((k) => k.contains(F));
               !x || A || (a?.(R), l?.(R), R.defaultPrevented || u?.());
             }, f),
             E = oL((R) => {
-              let F = R.target;
+              const F = R.target;
               [...p.branches].some((k) => k.contains(F)) ||
                 (i?.(R), l?.(R), R.defaultPrevented || u?.());
             }, f);
@@ -41761,7 +41776,7 @@
               [d, p],
             ),
             react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-              let R = o(() => g({}), 'handleUpdate');
+              const R = o(() => g({}), 'handleUpdate');
               return (
                 document.addEventListener(t0, R),
                 () => document.removeEventListener(t0, R)
@@ -41785,19 +41800,19 @@
         });
       r0.displayName = 'DismissableLayer';
       function aL(e, t = globalThis?.document) {
-        let r = de(e),
+        const r = de(e),
           n = react__WEBPACK_IMPORTED_MODULE_0__.useRef(!1),
           a = react__WEBPACK_IMPORTED_MODULE_0__.useRef(() => {});
         return (
           react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-            let i = o((u) => {
+            const i = o((u) => {
                 if (u.target && !n.current) {
-                  let p = o(function () {
+                  const p = o(function () {
                     qg('dismissableLayer.pointerDownOutside', r, d, {
                       discrete: !0,
                     });
                   }, 'handleAndDispatchPointerDownOutsideEvent2');
-                  let d = { originalEvent: u };
+                  const d = { originalEvent: u };
                   'touch' === u.pointerType
                     ? (t.removeEventListener('click', a.current),
                       (a.current = p),
@@ -41824,11 +41839,11 @@
         );
       }
       function oL(e, t = globalThis?.document) {
-        let r = de(e),
+        const r = de(e),
           n = react__WEBPACK_IMPORTED_MODULE_0__.useRef(!1);
         return (
           react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-            let a = o((i) => {
+            const a = o((i) => {
               i.target &&
                 !n.current &&
                 qg(
@@ -41850,22 +41865,22 @@
         );
       }
       function Vg() {
-        let e = new CustomEvent(t0);
+        const e = new CustomEvent(t0);
         document.dispatchEvent(e);
       }
       function qg(e, t, r, { discrete: n }) {
-        let a = r.originalEvent.target,
+        const a = r.originalEvent.target,
           i = new CustomEvent(e, { bubbles: !1, cancelable: !0, detail: r });
         t && a.addEventListener(e, t, { once: !0 }),
           n ? V2(a, i) : a.dispatchEvent(i);
       }
       (react__WEBPACK_IMPORTED_MODULE_0__.forwardRef((e, t) => {
-        let r = react__WEBPACK_IMPORTED_MODULE_0__.useContext(Wg),
+        const r = react__WEBPACK_IMPORTED_MODULE_0__.useContext(Wg),
           n = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null),
           a = se(t, n);
         return (
           react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-            let i = n.current;
+            const i = n.current;
             if (i)
               return (
                 r.branches.add(i),
@@ -41914,26 +41929,26 @@
             }).current;
           react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
             if (n) {
-              let b = o(function (E) {
+              const b = o(function (E) {
                   if (g.paused || !u) return;
-                  let R = E.target;
+                  const R = E.target;
                   u.contains(R)
                     ? (h.current = R)
                     : fr(h.current, { select: !0 });
                 }, 'handleFocusIn2'),
                 D = o(function (E) {
                   if (g.paused || !u) return;
-                  let R = E.relatedTarget;
+                  const R = E.relatedTarget;
                   null !== R &&
                     (u.contains(R) || fr(h.current, { select: !0 }));
                 }, 'handleFocusOut2'),
                 x = o(function (E) {
                   if (document.activeElement === document.body)
-                    for (let F of E) F.removedNodes.length > 0 && fr(u);
+                    for (const F of E) F.removedNodes.length > 0 && fr(u);
                 }, 'handleMutations2');
               document.addEventListener('focusin', b),
                 document.addEventListener('focusout', D);
-              let C = new MutationObserver(x);
+              const C = new MutationObserver(x);
               return (
                 u && C.observe(u, { childList: !0, subtree: !0 }),
                 () => {
@@ -41947,9 +41962,9 @@
             react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
               if (u) {
                 Yg.add(g);
-                let m = document.activeElement;
+                const m = document.activeElement;
                 if (!u.contains(m)) {
-                  let y = new CustomEvent(n0, Ug);
+                  const y = new CustomEvent(n0, Ug);
                   u.addEventListener(n0, p),
                     u.dispatchEvent(y),
                     y.defaultPrevented ||
@@ -41959,7 +41974,7 @@
                 return () => {
                   u.removeEventListener(n0, p),
                     setTimeout(() => {
-                      let y = new CustomEvent(a0, Ug);
+                      const y = new CustomEvent(a0, Ug);
                       u.addEventListener(a0, d),
                         u.dispatchEvent(y),
                         y.defaultPrevented ||
@@ -41970,13 +41985,14 @@
                 };
               }
             }, [u, p, d, g]);
-          let w = react__WEBPACK_IMPORTED_MODULE_0__.useCallback(
+          const w = react__WEBPACK_IMPORTED_MODULE_0__.useCallback(
             (m) => {
               if ((!r && !n) || g.paused) return;
-              let v = 'Tab' === m.key && !m.altKey && !m.ctrlKey && !m.metaKey,
+              const v =
+                  'Tab' === m.key && !m.altKey && !m.ctrlKey && !m.metaKey,
                 y = document.activeElement;
               if (v && y) {
-                let b = m.currentTarget,
+                const b = m.currentTarget,
                   [D, x] = uL(b);
                 D && x
                   ? m.shiftKey || y !== x
@@ -41995,19 +42011,19 @@
           );
         });
       function sL(e, { select: t = !1 } = {}) {
-        let r = document.activeElement;
-        for (let n of e)
+        const r = document.activeElement;
+        for (const n of e)
           if ((fr(n, { select: t }), document.activeElement !== r)) return;
       }
       function uL(e) {
-        let t = Kg(e);
+        const t = Kg(e);
         return [Gg(t, e), Gg(t.reverse(), e)];
       }
       function Kg(e) {
-        let t = [],
+        const t = [],
           r = document.createTreeWalker(e, NodeFilter.SHOW_ELEMENT, {
             acceptNode: o((n) => {
-              let a = 'INPUT' === n.tagName && 'hidden' === n.type;
+              const a = 'INPUT' === n.tagName && 'hidden' === n.type;
               return n.disabled || n.hidden || a
                 ? NodeFilter.FILTER_SKIP
                 : n.tabIndex >= 0
@@ -42019,7 +42035,7 @@
         return t;
       }
       function Gg(e, t) {
-        for (let r of e) if (!cL(r, { upTo: t })) return r;
+        for (const r of e) if (!cL(r, { upTo: t })) return r;
       }
       function cL(e, { upTo: t }) {
         if ('hidden' === getComputedStyle(e).visibility) return !0;
@@ -42035,7 +42051,7 @@
       }
       function fr(e, { select: t = !1 } = {}) {
         if (e && e.focus) {
-          let r = document.activeElement;
+          const r = document.activeElement;
           e.focus({ preventScroll: !0 }), e !== r && pL(e) && t && e.select();
         }
       }
@@ -42052,7 +42068,7 @@
         let e = [];
         return {
           add(t) {
-            let r = e[0];
+            const r = e[0];
             t !== r && r?.pause(), (e = Xg(e, t)), e.unshift(t);
           },
           remove(t) {
@@ -42061,7 +42077,7 @@
         };
       }
       function Xg(e, t) {
-        let r = [...e],
+        const r = [...e],
           n = r.indexOf(t);
         return -1 !== n && r.splice(n, 1), r;
       }
@@ -42077,7 +42093,7 @@
         let { container: r, ...n } = e,
           [a, i] = react__WEBPACK_IMPORTED_MODULE_0__.useState(!1);
         rt(() => i(!0), []);
-        let l = r || (a && globalThis?.document?.body);
+        const l = r || (a && globalThis?.document?.body);
         return l
           ? react_dom__WEBPACK_IMPORTED_MODULE_3__.createPortal(
               (0, react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(pe.div, {
@@ -42108,7 +42124,7 @@
           : null;
       }, 'Presence');
       function wL(e) {
-        let [t, r] = react__WEBPACK_IMPORTED_MODULE_0__.useState(),
+        const [t, r] = react__WEBPACK_IMPORTED_MODULE_0__.useState(),
           n = react__WEBPACK_IMPORTED_MODULE_0__.useRef({}),
           a = react__WEBPACK_IMPORTED_MODULE_0__.useRef(e),
           i = react__WEBPACK_IMPORTED_MODULE_0__.useRef('none'),
@@ -42123,14 +42139,14 @@
           });
         return (
           react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-            let p = Cl(n.current);
+            const p = Cl(n.current);
             i.current = 'mounted' === u ? p : 'none';
           }, [u]),
           rt(() => {
-            let p = n.current,
+            const p = n.current,
               d = a.current;
             if (d !== e) {
-              let f = i.current,
+              const f = i.current,
                 g = Cl(p);
               c(
                 e
@@ -42149,9 +42165,9 @@
               let p,
                 d = t.ownerDocument.defaultView ?? window,
                 h = o((g) => {
-                  let m = Cl(n.current).includes(g.animationName);
+                  const m = Cl(n.current).includes(g.animationName);
                   if (g.target === t && m && (c('ANIMATION_END'), !a.current)) {
-                    let v = t.style.animationFillMode;
+                    const v = t.style.animationFillMode;
                     (t.style.animationFillMode = 'forwards'),
                       (p = d.setTimeout(() => {
                         'forwards' === t.style.animationFillMode &&
@@ -42204,7 +42220,7 @@
       var l0 = 0;
       function e4() {
         react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-          let e = document.querySelectorAll('[data-radix-focus-guard]');
+          const e = document.querySelectorAll('[data-radix-focus-guard]');
           return (
             document.body.insertAdjacentElement('afterbegin', e[0] ?? Jg()),
             document.body.insertAdjacentElement('beforeend', e[1] ?? Jg()),
@@ -42220,7 +42236,7 @@
         }, []);
       }
       function Jg() {
-        let e = document.createElement('span');
+        const e = document.createElement('span');
         return (
           e.setAttribute('data-radix-focus-guard', ''),
           (e.tabIndex = 0),
@@ -43041,7 +43057,7 @@
           a = react__WEBPACK_IMPORTED_MODULE_0__.Children.toArray(r),
           i = a.find(UL);
         if (i) {
-          let l = i.props.children,
+          const l = i.props.children,
             u = a.map((c) =>
               c === i
                 ? react__WEBPACK_IMPORTED_MODULE_0__.Children.count(l) > 1
@@ -43067,9 +43083,9 @@
       });
       R0.displayName = 'Slot';
       var E0 = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef((e, t) => {
-        let { children: r, ...n } = e;
+        const { children: r, ...n } = e;
         if (react__WEBPACK_IMPORTED_MODULE_0__.isValidElement(r)) {
-          let a = YL(r);
+          const a = YL(r);
           return react__WEBPACK_IMPORTED_MODULE_0__.cloneElement(r, {
             ...GL(n, r.props),
             ref: t ? go(t, a) : a,
@@ -43094,9 +43110,9 @@
         );
       }
       function GL(e, t) {
-        let r = { ...t };
-        for (let n in t) {
-          let a = e[n],
+        const r = { ...t };
+        for (const n in t) {
+          const a = e[n],
             i = t[n];
           /^on[A-Z]/.test(n)
             ? a && i
@@ -43202,7 +43218,7 @@
       L0.displayName = k0;
       var Tl = 'DialogOverlay',
         T0 = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef((e, t) => {
-          let r = S4(Tl, e.__scopeDialog),
+          const r = S4(Tl, e.__scopeDialog),
             { forceMount: n = r.forceMount, ...a } = e,
             i = vt(Tl, e.__scopeDialog);
           return i.modal
@@ -43237,7 +43253,7 @@
         }),
         Qr = 'DialogContent',
         I0 = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef((e, t) => {
-          let r = S4(Qr, e.__scopeDialog),
+          const r = S4(Qr, e.__scopeDialog),
             { forceMount: n = r.forceMount, ...a } = e,
             i = vt(Qr, e.__scopeDialog);
           return (0, react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Vo, {
@@ -43255,12 +43271,12 @@
         });
       I0.displayName = Qr;
       var QL = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef((e, t) => {
-          let r = vt(Qr, e.__scopeDialog),
+          const r = vt(Qr, e.__scopeDialog),
             n = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null),
             a = se(t, r.contentRef, n);
           return (
             react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-              let i = n.current;
+              const i = n.current;
               if (i) return D4(i);
             }, []),
             (0, react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(A4, {
@@ -43272,7 +43288,7 @@
                 i.preventDefault(), r.triggerRef.current?.focus();
               }),
               onPointerDownOutside: be(e.onPointerDownOutside, (i) => {
-                let l = i.detail.originalEvent,
+                const l = i.detail.originalEvent,
                   u = 0 === l.button && !0 === l.ctrlKey;
                 (2 === l.button || u) && i.preventDefault();
               }),
@@ -43281,7 +43297,7 @@
           );
         }),
         eT = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef((e, t) => {
-          let r = vt(Qr, e.__scopeDialog),
+          const r = vt(Qr, e.__scopeDialog),
             n = react__WEBPACK_IMPORTED_MODULE_0__.useRef(!1),
             a = react__WEBPACK_IMPORTED_MODULE_0__.useRef(!1);
           return (0, react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(A4, {
@@ -43303,7 +43319,7 @@
                   ((n.current = !0),
                   'pointerdown' === i.detail.originalEvent.type &&
                     (a.current = !0));
-              let l = i.target;
+              const l = i.target;
               r.triggerRef.current?.contains(l) && i.preventDefault(),
                 'focusin' === i.detail.originalEvent.type &&
                   a.current &&
@@ -43412,7 +43428,7 @@
           docsSlug: 'dialog',
         }),
         rT = o(({ titleId: e }) => {
-          let t = T4(L4),
+          const t = T4(L4),
             r = `\`${t.contentName}\` requires a \`${t.titleName}\` for the component to be accessible for screen reader users.\n\nIf you want to hide the \`${t.titleName}\`, you can wrap it with our VisuallyHidden component.\n\nFor more information, see https://radix-ui.com/primitives/docs/components/${t.docsSlug}`;
           return (
             react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
@@ -43422,10 +43438,10 @@
           );
         }, 'TitleWarning'),
         aT = o(({ contentRef: e, descriptionId: t }) => {
-          let n = `Warning: Missing \`Description\` or \`aria-describedby={undefined}\` for {${T4('DialogDescriptionWarning').contentName}}.`;
+          const n = `Warning: Missing \`Description\` or \`aria-describedby={undefined}\` for {${T4('DialogDescriptionWarning').contentName}}.`;
           return (
             react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-              let a = e.current?.getAttribute('aria-describedby');
+              const a = e.current?.getAttribute('aria-describedby');
               t && a && (document.getElementById(t) || console.warn(n));
             }, [n, e, t]),
             null
@@ -43448,13 +43464,13 @@
         return (t) => {
           let r = !1,
             n = e.map((a) => {
-              let i = I4(a, t);
+              const i = I4(a, t);
               return !r && 'function' == typeof i && (r = !0), i;
             });
           if (r)
             return () => {
               for (let a = 0; a < n.length; a++) {
-                let i = n[a];
+                const i = n[a];
                 'function' == typeof i ? i() : I4(e[a], null);
               }
             };
@@ -43481,7 +43497,7 @@
           a = react__WEBPACK_IMPORTED_MODULE_0__.Children.toArray(r),
           i = a.find(uT);
         if (i) {
-          let l = i.props.children,
+          const l = i.props.children,
             u = a.map((c) =>
               c === i
                 ? react__WEBPACK_IMPORTED_MODULE_0__.Children.count(l) > 1
@@ -43507,9 +43523,9 @@
       });
       G0.displayName = 'Slot';
       var U0 = react__WEBPACK_IMPORTED_MODULE_0__.forwardRef((e, t) => {
-        let { children: r, ...n } = e;
+        const { children: r, ...n } = e;
         if (react__WEBPACK_IMPORTED_MODULE_0__.isValidElement(r)) {
-          let a = pT(r),
+          const a = pT(r),
             i = cT(n, r.props);
           return (
             r.type !== react__WEBPACK_IMPORTED_MODULE_0__.Fragment &&
@@ -43536,9 +43552,9 @@
         );
       }
       function cT(e, t) {
-        let r = { ...t };
-        for (let n in t) {
-          let a = e[n],
+        const r = { ...t };
+        for (const n in t) {
+          const a = e[n],
             i = t[n];
           /^on[A-Z]/.test(n)
             ? a && i
@@ -43587,7 +43603,7 @@
             }, 'handleClick');
           if (
             ((0, react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-              let v = setTimeout(() => {
+              const v = setTimeout(() => {
                 g && w(!1);
               }, 1e3);
               return () => clearTimeout(v);
@@ -43605,7 +43621,7 @@
               c.inForm ||
               c.containsIcon)
           ) {
-            let v = react__WEBPACK_IMPORTED_MODULE_0__.Children.toArray(
+            const v = react__WEBPACK_IMPORTED_MODULE_0__.Children.toArray(
               c.children,
             ).filter((y) => 'string' == typeof y && '' !== y);
             (0,
@@ -44114,7 +44130,7 @@
         }),
       );
       function j4({ scale: e, children: t }) {
-        let r = (0, react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null),
+        const r = (0, react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null),
           [n, a] = (0, react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
           i = (0, react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(
             ({ height: l }) => {
@@ -44144,11 +44160,11 @@
           super(...arguments), (this.iframe = null);
         }
         componentDidMount() {
-          let { iFrameRef: r } = this.props;
+          const { iFrameRef: r } = this.props;
           this.iframe = r.current;
         }
         shouldComponentUpdate(r) {
-          let { scale: n, active: a } = this.props;
+          const { scale: n, active: a } = this.props;
           return (
             n !== r.scale && this.setIframeInnerZoom(r.scale),
             a !== r.active &&
@@ -44180,7 +44196,7 @@
           });
         }
         render() {
-          let { children: r } = this.props;
+          const { children: r } = this.props;
           return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
             react__WEBPACK_IMPORTED_MODULE_0__.Fragment,
             null,
@@ -44226,7 +44242,7 @@
             e.message &&
             !t.includes(e.message) &&
             (t = `Error: ${e.message}\n\n${t}`);
-          let r = t.match(tI);
+          const r = t.match(tI);
           if (!r)
             return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
               react__WEBPACK_IMPORTED_MODULE_0__.Fragment,
@@ -44237,7 +44253,7 @@
             i = t.split(/\n/).slice(1),
             [, ...l] = i
               .map((u) => {
-                let c = u.match(rI) || u.match(nI) || u.match(aI);
+                const c = u.match(rI) || u.match(nI) || u.match(aI);
                 return c
                   ? {
                       name: (c[1] || '').replace('/<', ''),
@@ -44861,7 +44877,7 @@
             LinkWrapper: d,
             ...h
           }) => {
-            let f = { active: a, disabled: i },
+            const f = { active: a, disabled: i },
               g = VB(c, u, d);
             return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
               $B,
@@ -44935,7 +44951,7 @@
           });
         }, 'Item'),
         W1 = o(({ links: e, LinkWrapper: t, ...r }) => {
-          let n = Array.isArray(e[0]) ? e : [e],
+          const n = Array.isArray(e[0]) ? e : [e],
             a = n.some((i) => i.some((l) => 'icon' in l && l.icon));
           return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
             UB,
@@ -45024,7 +45040,7 @@
           }),
         ),
         Zl = o(({ children: e, backgroundColor: t, className: r, ...n }) => {
-          let [a, i] = react__WEBPACK_IMPORTED_MODULE_0__.Children.toArray(e);
+          const [a, i] = react__WEBPACK_IMPORTED_MODULE_0__.Children.toArray(e);
           return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
             G1,
             { className: `sb-bar ${r}`, ...n },
@@ -45050,7 +45066,7 @@
       var eM = o((e) => 'string' == typeof e.props.href, 'isLink'),
         tM = o((e) => 'string' != typeof e.props.href, 'isButton');
       function rM({ children: e, ...t }, r) {
-        let n = { props: t, ref: r };
+        const n = { props: t, ref: r };
         if (eM(n))
           return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
             'a',
@@ -45187,7 +45203,7 @@
           (e) =>
             react__WEBPACK_IMPORTED_MODULE_0__.Children.toArray(e).map(
               ({ props: { title: t, id: r, color: n, children: a } }) => {
-                let i = Array.isArray(a) ? a[0] : a;
+                const i = Array.isArray(a) ? a[0] : a;
                 return {
                   title: t,
                   id: r,
@@ -45225,7 +45241,7 @@
             `\n    color: ${r || e ? t.barSelectedColor : t.barTextColor};\n    .addon-collapsible-icon {\n      color: ${r || e ? t.barSelectedColor : t.barTextColor};\n    }\n    &:hover {\n      color: ${t.barHoverColor};\n      .addon-collapsible-icon {\n        color: ${t.barHoverColor};\n      }\n    }\n  `,
         );
       function k3(e) {
-        let t = (0, react__WEBPACK_IMPORTED_MODULE_0__.useRef)(),
+        const t = (0, react__WEBPACK_IMPORTED_MODULE_0__.useRef)(),
           r = (0, react__WEBPACK_IMPORTED_MODULE_0__.useRef)(),
           n = (0, react__WEBPACK_IMPORTED_MODULE_0__.useRef)(new Map()),
           { width: a = 1 } = Ml({ ref: t }),
@@ -45234,7 +45250,7 @@
           p = (0, react__WEBPACK_IMPORTED_MODULE_0__.useRef)(e),
           d = (0, react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(
             ({ menuName: f, actions: g }) => {
-              let w = u.some(({ active: y }) => y),
+              const w = u.some(({ active: y }) => y),
                 [m, v] = (0, react__WEBPACK_IMPORTED_MODULE_0__.useState)(!1);
               return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
                 react__WEBPACK_IMPORTED_MODULE_0__.Fragment,
@@ -45284,7 +45300,7 @@
                   ),
                 ),
                 u.map(({ title: y, id: b, color: D }, x) => {
-                  let C = `index-${x}`;
+                  const C = `index-${x}`;
                   return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
                     cn,
                     {
@@ -45416,7 +45432,7 @@
             emptyState: p,
             showToolsWhenEmpty: d,
           }) => {
-            let h = (0, react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(
+            const h = (0, react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(
                 () =>
                   S3(e).map((y, b) => ({
                     ...y,
@@ -45445,7 +45461,7 @@
                         role: 'tablist',
                       },
                       f.map(({ title: y, id: b, active: D, color: x }, C) => {
-                        let E = `index-${C}`;
+                        const E = `index-${C}`;
                         return react__WEBPACK_IMPORTED_MODULE_0__.createElement(
                           cn,
                           {
@@ -45506,7 +45522,7 @@
             (this.state = { selected: r.initial });
         }
         render() {
-          let {
+          const {
               bordered: r = !1,
               absolute: n = !1,
               children: a,
@@ -45980,17 +45996,17 @@
             },
         );
       function r_(e) {
-        let t = {},
+        const t = {},
           r = e.split('&');
         for (let n = 0; n < r.length; n++) {
-          let a = r[n].split('=');
+          const a = r[n].split('=');
           t[decodeURIComponent(a[0])] = decodeURIComponent(a[1] || '');
         }
         return t;
       }
       o(r_, 'parseQuery');
       var n_ = o((e, t, r = {}) => {
-          let [n, a] = e.split('?'),
+          const [n, a] = e.split('?'),
             i = a ? { ...r_(a), ...r, id: t } : { ...r, id: t };
           return `${n}?${Object.entries(i)
             .map((l) => `${l[0]}=${l[1]}`)
@@ -46064,7 +46080,7 @@
           (t = null != e ? vn(wn(e)) : {}),
           ((e, r, t, n) => {
             if ((r && 'object' == typeof r) || 'function' == typeof r)
-              for (let a of xn(r))
+              for (const a of xn(r))
                 !En.call(e, a) &&
                   a !== t &&
                   nr(e, a, {
@@ -48971,7 +48987,7 @@
         })),
         Ut =
           ((0, Or.default)(1)(({ color: e, background: r, typography: t }) => {
-            let n = Wt({ typography: t });
+            const n = Wt({ typography: t });
             return {
               ...n,
               body: {
@@ -49231,7 +49247,7 @@
           'convertColors',
         ),
         Qt = o(({ colors: e, mono: r }) => {
-          let t = eo(e);
+          const t = eo(e);
           return {
             token: {
               fontFamily: r,
@@ -49332,7 +49348,7 @@
           'createColors',
         ),
         Fr = o((e = _e[Xe()]) => {
-          let {
+          const {
             base: r,
             colorPrimary: t,
             colorSecondary: n,
@@ -49433,7 +49449,7 @@
             e !== r && ne(e) && ne(r)
               ? Object.keys(e).reduce((t, n) => {
                   if (Ie(r, n)) {
-                    let a = en(e[n], r[n]);
+                    const a = en(e[n], r[n]);
                     return (ne(a) && _r(a)) || (t[n] = a), t;
                   }
                   return (t[n] = void 0), t;
@@ -49493,7 +49509,7 @@
       o(rn, 'dedent');
       var $u = o((e) => {
           if (!e) return Fr(xe);
-          let r = Ze(xe, e);
+          const r = Ze(xe, e);
           return (
             Object.keys(r).length &&
               _storybook_core_client_logger__WEBPACK_IMPORTED_MODULE_1__.logger.warn(

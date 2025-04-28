@@ -26,7 +26,7 @@ try {
       },
       Op = (e, t, r, n) => {
         if ((t && typeof t == 'object') || typeof t == 'function')
-          for (let o of Fp(t))
+          for (const o of Fp(t))
             !kp.call(e, o) &&
               o !== r &&
               Un(e, o, {
@@ -77,7 +77,7 @@ try {
         A = function (...v) {
           if (r?.aborted) return;
           (o = this), (a = v);
-          let S = p == null;
+          const S = p == null;
           h(), i && S && l();
         };
       return (
@@ -123,10 +123,10 @@ try {
       return Array.from(new Set(e));
     }
     function ui(e, t) {
-      let r = {},
+      const r = {},
         n = Object.entries(e);
       for (let o = 0; o < n.length; o++) {
-        let [a, i] = n[o];
+        const [a, i] = n[o];
         t(i, a) && (r[a] = i);
       }
       return r;
@@ -144,7 +144,7 @@ try {
       if ($p(e)) return e;
       if (t.has(e)) return t.get(e);
       if (Array.isArray(e)) {
-        let r = new Array(e.length);
+        const r = new Array(e.length);
         t.set(e, r);
         for (let n = 0; n < e.length; n++) r[n] = Jt(e[n], t);
         return (
@@ -157,24 +157,24 @@ try {
       }
       if (e instanceof Date) return new Date(e.getTime());
       if (e instanceof RegExp) {
-        let r = new RegExp(e.source, e.flags);
+        const r = new RegExp(e.source, e.flags);
         return (r.lastIndex = e.lastIndex), r;
       }
       if (e instanceof Map) {
-        let r = new Map();
+        const r = new Map();
         t.set(e, r);
-        for (let [n, o] of e.entries()) r.set(n, Jt(o, t));
+        for (const [n, o] of e.entries()) r.set(n, Jt(o, t));
         return r;
       }
       if (e instanceof Set) {
-        let r = new Set();
+        const r = new Set();
         t.set(e, r);
-        for (let n of e.values()) r.add(Jt(n, t));
+        for (const n of e.values()) r.add(Jt(n, t));
         return r;
       }
       if (typeof Buffer < 'u' && Buffer.isBuffer(e)) return e.subarray();
       if (Up(e)) {
-        let r = new (Object.getPrototypeOf(e).constructor)(e.length);
+        const r = new (Object.getPrototypeOf(e).constructor)(e.length);
         t.set(e, r);
         for (let n = 0; n < e.length; n++) r[n] = Jt(e[n], t);
         return r;
@@ -185,19 +185,19 @@ try {
       )
         return e.slice(0);
       if (e instanceof DataView) {
-        let r = new DataView(e.buffer.slice(0), e.byteOffset, e.byteLength);
+        const r = new DataView(e.buffer.slice(0), e.byteOffset, e.byteLength);
         return t.set(e, r), Ct(r, e, t), r;
       }
       if (typeof File < 'u' && e instanceof File) {
-        let r = new File([e], e.name, { type: e.type });
+        const r = new File([e], e.name, { type: e.type });
         return t.set(e, r), Ct(r, e, t), r;
       }
       if (e instanceof Blob) {
-        let r = new Blob([e], { type: e.type });
+        const r = new Blob([e], { type: e.type });
         return t.set(e, r), Ct(r, e, t), r;
       }
       if (e instanceof Error) {
-        let r = new e.constructor();
+        const r = new e.constructor();
         return (
           t.set(e, r),
           (r.message = e.message),
@@ -209,15 +209,15 @@ try {
         );
       }
       if (typeof e == 'object' && e !== null) {
-        let r = {};
+        const r = {};
         return t.set(e, r), Ct(r, e, t), r;
       }
       return e;
     }
     function Ct(e, t, r) {
-      let n = Object.keys(t);
+      const n = Object.keys(t);
       for (let o = 0; o < n.length; o++) {
-        let a = n[o],
+        const a = n[o],
           i = Object.getOwnPropertyDescriptor(t, a);
         (i?.writable || i?.set) && (e[a] = Jt(t[a], r));
       }
@@ -228,11 +228,11 @@ try {
         case Vp:
         case qp:
         case Jp: {
-          let t = new e.constructor(e?.valueOf());
+          const t = new e.constructor(e?.valueOf());
           return Ct(t, e), t;
         }
         case zp: {
-          let t = {};
+          const t = {};
           return (
             Ct(t, e),
             (t.length = e.length),
@@ -298,7 +298,7 @@ try {
             }),
           (Lp = (e, t, r, n) => {
             if ((t && typeof t == 'object') || typeof t == 'function')
-              for (let o of ii(t))
+              for (const o of ii(t))
                 !jp.call(e, o) &&
                   o !== r &&
                   ai(e, o, {
@@ -1243,7 +1243,7 @@ try {
           if (E !== I) throw new Error('Unterminated String');
           return u.slice(0, m);
         }
-        let s = new RegExp(
+        const s = new RegExp(
             '[$_\\p{ID_Start}]|\\\\u\\p{Hex_Digit}{4}|\\\\u\\{0*(?:\\p{Hex_Digit}{1,5}|10\\p{Hex_Digit}{4})\\}',
             'u',
           ),
@@ -1261,7 +1261,7 @@ try {
           } while (E < u.length);
           return u.slice(0, E);
         }
-        let p = /^(NaN|-?((\d*\.\d+|\d+)([Ee][+-]?\d+)?|Infinity))/;
+        const p = /^(NaN|-?((\d*\.\d+|\d+)([Ee][+-]?\d+)?|Infinity))/;
         function h(u) {
           var m, E;
           return (E =
@@ -1270,24 +1270,24 @@ try {
             ? E
             : null;
         }
-        let d = (u) => {
-          let m = c(u);
+        const d = (u) => {
+          const m = c(u);
           return m == null ? null : { type: 'Identifier', text: m };
         };
         function y(u) {
           return (m) => {
             if (!m.startsWith(u)) return null;
-            let E = m[u.length];
+            const E = m[u.length];
             return E !== void 0 && l.test(E) ? null : { type: u, text: u };
           };
         }
-        let g = (u) => {
-            let m = i(u);
+        const g = (u) => {
+            const m = i(u);
             return m == null ? null : { type: 'StringValue', text: m };
           },
           A = (u) => (u.length > 0 ? null : { type: 'EOF', text: '' }),
           v = (u) => {
-            let m = h(u);
+            const m = h(u);
             return m === null ? null : { type: 'Number', text: m };
           },
           S = [
@@ -1338,9 +1338,9 @@ try {
           w = /^\s*\n\s*/;
         class x {
           static create(m) {
-            let E = this.read(m);
+            const E = this.read(m);
             m = E.text;
-            let I = this.read(m);
+            const I = this.read(m);
             return (m = I.text), new x(m, void 0, E.token, I.token);
           }
           constructor(m, E, I, N) {
@@ -1352,17 +1352,19 @@ try {
           }
           static read(m, E = !1) {
             (E = E || w.test(m)), (m = m.trim());
-            for (let I of S) {
-              let N = I(m);
+            for (const I of S) {
+              const N = I(m);
               if (N !== null) {
-                let H = Object.assign(Object.assign({}, N), { startOfLine: E });
+                const H = Object.assign(Object.assign({}, N), {
+                  startOfLine: E,
+                });
                 return (m = m.slice(H.text.length)), { text: m, token: H };
               }
             }
             throw new Error('Unexpected Token ' + m);
           }
           advance() {
-            let m = x.read(this.text);
+            const m = x.read(this.text);
             return new x(m.text, this.current, this.next, m.token);
           }
         }
@@ -1447,7 +1449,7 @@ try {
             return this._lexer;
           }
           parse() {
-            let m = this.parseType(P.ALL);
+            const m = this.parseType(P.ALL);
             if (this.lexer.current.type !== 'EOF')
               throw new n(this.lexer.current);
             return m;
@@ -1456,7 +1458,7 @@ try {
             return C(this.parseIntermediateType(m));
           }
           parseIntermediateType(m) {
-            let E = this.tryParslets(null, m);
+            const E = this.tryParslets(null, m);
             if (E === null) throw new r(this.lexer.current);
             return this.parseInfixIntermediateType(E, m);
           }
@@ -1466,8 +1468,8 @@ try {
             return m;
           }
           tryParslets(m, E) {
-            for (let I of this.grammar) {
-              let N = I(this, E, m);
+            for (const I of this.grammar) {
+              const N = I(this, E, m);
               if (N !== null) return N;
             }
             return null;
@@ -1489,8 +1491,8 @@ try {
             u === 'EOF' || u === '|' || u === ',' || u === ')' || u === '>'
           );
         }
-        let z = (u, m, E) => {
-          let I = u.lexer.current.type,
+        const z = (u, m, E) => {
+          const I = u.lexer.current.type,
             N = u.lexer.next.type;
           return (E == null && I === '?' && !L(N)) || (E != null && I === '?')
             ? (u.consume('?'),
@@ -1508,8 +1510,8 @@ try {
             : null;
         };
         function D(u) {
-          let m = (E, I, N) => {
-            let H = E.lexer.current.type,
+          const m = (E, I, N) => {
+            const H = E.lexer.current.type,
               Y = E.lexer.next.type;
             if (N === null) {
               if ('parsePrefix' in u && u.accept(H, Y)) return u.parsePrefix(E);
@@ -1519,7 +1521,7 @@ try {
           };
           return Object.defineProperty(m, 'name', { value: u.name }), m;
         }
-        let T = D({
+        const T = D({
             name: 'optionalParslet',
             accept: (u) => u === '=',
             precedence: P.OPTIONAL,
@@ -1544,7 +1546,7 @@ try {
             name: 'numberParslet',
             accept: (u) => u === 'Number',
             parsePrefix: (u) => {
-              let m = parseFloat(u.lexer.current.text);
+              const m = parseFloat(u.lexer.current.text);
               return u.consume('Number'), { type: 'JsdocTypeNumber', value: m };
             },
           }),
@@ -1554,7 +1556,7 @@ try {
             parsePrefix: (u) => {
               if ((u.consume('('), u.consume(')')))
                 return { type: 'JsdocTypeParameterList', elements: [] };
-              let m = u.parseIntermediateType(P.ALL);
+              const m = u.parseIntermediateType(P.ALL);
               if (!u.consume(')')) throw new Error('Unterminated parenthesis');
               return m.type === 'JsdocTypeParameterList'
                 ? m
@@ -1605,11 +1607,11 @@ try {
             accept: (m) => m === ',',
             precedence: P.PARAMETER_LIST,
             parseInfix: (m, E) => {
-              let I = [k(E)];
+              const I = [k(E)];
               m.consume(',');
               do
                 try {
-                  let N = m.parseIntermediateType(P.PARAMETER_LIST);
+                  const N = m.parseIntermediateType(P.PARAMETER_LIST);
                   I.push(k(N));
                 } catch (N) {
                   if (u && N instanceof r) break;
@@ -1627,14 +1629,14 @@ try {
             },
           });
         }
-        let te = D({
+        const te = D({
             name: 'genericParslet',
             accept: (u, m) => u === '<' || (u === '.' && m === '<'),
             precedence: P.GENERIC,
             parseInfix: (u, m) => {
-              let E = u.consume('.');
+              const E = u.consume('.');
               u.consume('<');
-              let I = [];
+              const I = [];
               do I.push(u.parseType(P.PARAMETER_LIST));
               while (u.consume(','));
               if (!u.consume('>'))
@@ -1653,7 +1655,7 @@ try {
             precedence: P.UNION,
             parseInfix: (u, m) => {
               u.consume('|');
-              let E = [];
+              const E = [];
               do E.push(u.parseType(P.UNION));
               while (u.consume('|'));
               return { type: 'JsdocTypeUnion', elements: [C(m), ...E] };
@@ -1667,7 +1669,7 @@ try {
         }) {
           return function (N, H, Y) {
             if (Y == null || H >= P.NAME_PATH) return null;
-            let ne = N.lexer.current.type,
+            const ne = N.lexer.current.type,
               ke = N.lexer.next.type;
             if (
               !(
@@ -1686,7 +1688,7 @@ try {
                 : N.consume('~')
                   ? (qe = 'inner')
                   : (N.consume('#'), (qe = 'instance'));
-            let ti = E !== null ? new W(E, N.lexer, N) : N,
+            const ti = E !== null ? new W(E, N.lexer, N) : N,
               tt = ti.parseIntermediateType(P.NAME_PATH);
             N.acceptLexerState(ti);
             let fr;
@@ -1727,7 +1729,7 @@ try {
                 );
             }
             if (Lr && !N.consume(']')) {
-              let ri = N.lexer.current;
+              const ri = N.lexer.current;
               throw new Error(
                 `Unterminated square brackets. Next token is '${ri.type}' with text '${ri.text}'`,
               );
@@ -1749,16 +1751,16 @@ try {
               m === 'new' ||
               u.includes(m),
             parsePrefix: (m) => {
-              let { type: E, text: I } = m.lexer.current;
+              const { type: E, text: I } = m.lexer.current;
               return m.consume(E), { type: 'JsdocTypeName', value: I };
             },
           });
         }
-        let Fe = D({
+        const Fe = D({
           name: 'stringValueParslet',
           accept: (u) => u === 'StringValue',
           parsePrefix: (u) => {
-            let m = u.lexer.current.text;
+            const m = u.lexer.current.text;
             return (
               u.consume('StringValue'),
               {
@@ -1774,7 +1776,7 @@ try {
             name: 'specialNamePathParslet',
             accept: (E) => m.includes(E),
             parsePrefix: (E) => {
-              let I = E.lexer.current.type;
+              const I = E.lexer.current.type;
               if ((E.consume(I), !E.consume(':')))
                 return { type: 'JsdocTypeName', value: I };
               let N,
@@ -1798,13 +1800,13 @@ try {
                   meta: { quote: void 0 },
                 };
               }
-              let Y = new W(u, E.lexer, E),
+              const Y = new W(u, E.lexer, E),
                 ne = Y.parseInfixIntermediateType(N, P.ALL);
               return E.acceptLexerState(Y), C(ne);
             },
           });
         }
-        let He = [
+        const He = [
             de({ allowedAdditionalTokens: ['external', 'module'] }),
             Fe,
             O,
@@ -1823,7 +1825,7 @@ try {
           return m.map((E) => k(E));
         }
         function dr(u) {
-          let m = et(u);
+          const m = et(u);
           if (m.some((E) => E.type === 'JsdocTypeKeyValue'))
             throw new Error('No parameter should be named');
           return m;
@@ -1839,9 +1841,9 @@ try {
             accept: (N, H) =>
               N === 'function' || (I && N === 'new' && H === '('),
             parsePrefix: (N) => {
-              let H = N.consume('new');
+              const H = N.consume('new');
               N.consume('function');
-              let Y = N.lexer.current.type === '(';
+              const Y = N.lexer.current.type === '(';
               if (!Y) {
                 if (!E) throw new Error('function is missing parameter list');
                 return { type: 'JsdocTypeName', value: 'function' };
@@ -1859,7 +1861,7 @@ try {
                 if (H && ke.type === 'JsdocTypeFunction' && ke.arrow)
                   return (ne = ke), (ne.constructor = !0), ne;
                 ne.parameters = et(ke);
-                for (let we of ne.parameters)
+                for (const we of ne.parameters)
                   if (we.type === 'JsdocTypeKeyValue' && !u.includes(we.key))
                     throw new Error(
                       `only allowed named parameters are ${u.join(', ')} but got ${we.type}`,
@@ -1878,9 +1880,9 @@ try {
             precedence: P.PREFIX,
             parsePrefix: (E) => {
               E.consume('...');
-              let I = m && E.consume('[');
+              const I = m && E.consume('[');
               try {
-                let N = E.parseType(P.PREFIX);
+                const N = E.parseType(P.PREFIX);
                 if (I && !E.consume(']'))
                   throw new Error("Unterminated variadic type. Missing ']'");
                 return {
@@ -1913,7 +1915,7 @@ try {
               : void 0,
           });
         }
-        let Pr = D({
+        const Pr = D({
             name: 'symbolParslet',
             accept: (u) => u === '(',
             precedence: P.SYMBOL,
@@ -1923,9 +1925,9 @@ try {
                   "Symbol expects a name on the left side. (Reacting on '(')",
                 );
               u.consume('(');
-              let E = { type: 'JsdocTypeSymbol', value: m.value };
+              const E = { type: 'JsdocTypeSymbol', value: m.value };
               if (!u.consume(')')) {
-                let I = u.parseIntermediateType(P.SYMBOL);
+                const I = u.parseIntermediateType(P.SYMBOL);
                 if (((E.element = j(I)), !u.consume(')')))
                   throw new Error('Symbol does not end after value');
               }
@@ -1953,7 +1955,7 @@ try {
             accept: (E) => E === '{',
             parsePrefix: (E) => {
               E.consume('{');
-              let I = {
+              const I = {
                 type: 'JsdocTypeObject',
                 meta: { separator: 'comma' },
                 elements: [],
@@ -2025,7 +2027,7 @@ try {
                 E &&
                   H.type === 'JsdocTypeReadonlyProperty' &&
                   ((ke = !0), (H = H.element));
-              let we = (Y = N.baseParser) !== null && Y !== void 0 ? Y : N;
+              const we = (Y = N.baseParser) !== null && Y !== void 0 ? Y : N;
               if (
                 (we.acceptLexerState(N),
                 H.type === 'JsdocTypeNumber' ||
@@ -2037,7 +2039,7 @@ try {
                 we.consume(':');
                 let qe;
                 H.type === 'JsdocTypeStringValue' && (qe = H.meta.quote);
-                let Lr = we.parseType(P.KEY_VALUE);
+                const Lr = we.parseType(P.KEY_VALUE);
                 return (
                   N.acceptLexerState(we),
                   {
@@ -2052,7 +2054,7 @@ try {
               } else {
                 if (!m) throw new o(H);
                 we.consume(':');
-                let qe = we.parseType(P.KEY_VALUE);
+                const qe = we.parseType(P.KEY_VALUE);
                 return (
                   N.acceptLexerState(we),
                   { type: 'JsdocTypeJsdocObjectField', left: C(H), right: qe }
@@ -2081,7 +2083,7 @@ try {
               )
                 throw new o(I);
               E.consume(':');
-              let Y = E.parseType(P.KEY_VALUE);
+              const Y = E.parseType(P.KEY_VALUE);
               return {
                 type: 'JsdocTypeKeyValue',
                 key: I.value,
@@ -2092,7 +2094,7 @@ try {
             },
           });
         }
-        let Nr = [
+        const Nr = [
             ...re,
             $t({
               allowWithoutParenthesis: !0,
@@ -2191,7 +2193,7 @@ try {
             accept: (u) => u === 'asserts',
             parsePrefix: (u) => {
               u.consume('asserts');
-              let m = u.parseIntermediateType(P.SYMBOL);
+              const m = u.parseIntermediateType(P.SYMBOL);
               if (m.type !== 'JsdocTypeName')
                 throw new o(
                   m,
@@ -2213,9 +2215,9 @@ try {
             accept: (m) => m === '[',
             parsePrefix: (m) => {
               m.consume('[');
-              let E = { type: 'JsdocTypeTuple', elements: [] };
+              const E = { type: 'JsdocTypeTuple', elements: [] };
               if (m.consume(']')) return E;
-              let I = m.parseIntermediateType(P.ALL);
+              const I = m.parseIntermediateType(P.ALL);
               if (
                 (I.type === 'JsdocTypeParameterList'
                   ? I.elements[0].type === 'JsdocTypeKeyValue'
@@ -2233,7 +2235,7 @@ try {
             },
           });
         }
-        let ip = D({
+        const ip = D({
             name: 'keyOfParslet',
             accept: (u) => u === 'keyof',
             parsePrefix: (u) => (
@@ -2250,7 +2252,7 @@ try {
             parsePrefix: (u) => {
               if ((u.consume('import'), !u.consume('(')))
                 throw new Error('Missing parenthesis after import keyword');
-              let m = u.parseType(P.PREFIX);
+              const m = u.parseType(P.PREFIX);
               if (m.type !== 'JsdocTypeStringValue')
                 throw new Error(
                   'Only string values are allowed as paths for imports',
@@ -2295,7 +2297,7 @@ try {
             precedence: P.INTERSECTION,
             parseInfix: (u, m) => {
               u.consume('&');
-              let E = [];
+              const E = [];
               do E.push(u.parseType(P.INTERSECTION));
               while (u.consume('&'));
               return { type: 'JsdocTypeIntersection', elements: [C(m), ...E] };
@@ -2328,11 +2330,11 @@ try {
               if (u.baseParser === void 0)
                 throw new Error('Only allowed inside object grammar');
               u.consume('[');
-              let m = u.lexer.current.text;
+              const m = u.lexer.current.text;
               u.consume('Identifier');
               let E;
               if (u.consume(':')) {
-                let I = u.baseParser;
+                const I = u.baseParser;
                 I.acceptLexerState(u),
                   (E = {
                     type: 'JsdocTypeIndexSignature',
@@ -2341,7 +2343,7 @@ try {
                   }),
                   u.acceptLexerState(I);
               } else if (u.consume('in')) {
-                let I = u.baseParser;
+                const I = u.baseParser;
                 I.acceptLexerState(u),
                   (E = {
                     type: 'JsdocTypeMappedType',
@@ -2423,7 +2425,7 @@ try {
         }
         function mp(u, m = ['typescript', 'closure', 'jsdoc']) {
           let E;
-          for (let I of m)
+          for (const I of m)
             try {
               return Xa(u, I);
             } catch (N) {
@@ -2432,7 +2434,7 @@ try {
           throw E;
         }
         function hr(u, m) {
-          let E = u[m.type];
+          const E = u[m.type];
           if (E === void 0)
             throw new Error(
               `In this set of transform rules exists no rule for type ${m.type}.`,
@@ -2445,8 +2447,8 @@ try {
           );
         }
         function Qa(u) {
-          let m = { params: [] };
-          for (let E of u.parameters)
+          const m = { params: [] };
+          for (const E of u.parameters)
             E.type === 'JsdocTypeKeyValue'
               ? E.key === 'this'
                 ? (m.this = E.right)
@@ -2497,7 +2499,7 @@ try {
                 ? '...'
                 : jr(u.meta.position, m(u.element), '...'),
             JsdocTypeNamePath: (u, m) => {
-              let E = m(u.left),
+              const E = m(u.left),
                 I = m(u.right);
               switch (u.pathType) {
                 case 'inner':
@@ -2514,7 +2516,7 @@ try {
             JsdocTypeAny: () => '*',
             JsdocTypeGeneric: (u, m) => {
               if (u.meta.brackets === 'square') {
-                let E = u.elements[0],
+                const E = u.elements[0],
                   I = m(E);
                 return E.type === 'JsdocTypeUnion' ||
                   E.type === 'JsdocTypeIntersection'
@@ -2568,11 +2570,11 @@ try {
             JsdocTypeAsserts: (u, m) => `asserts ${m(u.left)} is ${m(u.right)}`,
           };
         }
-        let yp = Za();
+        const yp = Za();
         function gp(u) {
           return hr(yp, u);
         }
-        let bp = [
+        const bp = [
           'null',
           'true',
           'false',
@@ -2611,20 +2613,20 @@ try {
           'yield',
         ];
         function ct(u) {
-          let m = { type: 'NameExpression', name: u };
+          const m = { type: 'NameExpression', name: u };
           return bp.includes(u) && (m.reservedWord = !0), m;
         }
-        let Ep = {
+        const Ep = {
           JsdocTypeOptional: (u, m) => {
-            let E = m(u.element);
+            const E = m(u.element);
             return (E.optional = !0), E;
           },
           JsdocTypeNullable: (u, m) => {
-            let E = m(u.element);
+            const E = m(u.element);
             return (E.nullable = !0), E;
           },
           JsdocTypeNotNullable: (u, m) => {
-            let E = m(u.element);
+            const E = m(u.element);
             return (E.nullable = !1), E;
           },
           JsdocTypeVariadic: (u, m) => {
@@ -2632,7 +2634,7 @@ try {
               throw new Error(
                 'dots without value are not allowed in catharsis mode',
               );
-            let E = m(u.element);
+            const E = m(u.element);
             return (E.repeatable = !0), E;
           },
           JsdocTypeAny: () => ({ type: 'AllLiteral' }),
@@ -2641,7 +2643,7 @@ try {
           JsdocTypeUndefined: () => ({ type: 'UndefinedLiteral' }),
           JsdocTypeUnknown: () => ({ type: 'UnknownLiteral' }),
           JsdocTypeFunction: (u, m) => {
-            let E = Qa(u),
+            const E = Qa(u),
               I = { type: 'FunctionType', params: E.params.map(m) };
             return (
               E.this !== void 0 && (I.this = m(E.this)),
@@ -2663,8 +2665,8 @@ try {
               : { type: 'FunctionType', params: [] },
           JsdocTypeNumber: (u) => ct(u.value.toString()),
           JsdocTypeObject: (u, m) => {
-            let E = { type: 'RecordType', fields: [] };
-            for (let I of u.elements)
+            const E = { type: 'RecordType', fields: [] };
+            for (const I of u.elements)
               I.type !== 'JsdocTypeObjectField' &&
               I.type !== 'JsdocTypeJsdocObjectField'
                 ? E.fields.push({ type: 'FieldType', key: m(I), value: void 0 })
@@ -2702,7 +2704,7 @@ try {
             u.right.type === 'JsdocTypeSpecialNamePath'
               ? (I = m(u.right).name)
               : (I = ut(u.right.value, u.right.meta.quote));
-            let N =
+            const N =
               u.pathType === 'inner'
                 ? '~'
                 : u.pathType === 'instance'
@@ -2767,7 +2769,7 @@ try {
             ? { type: u, left: m[0], right: m[1] }
             : { type: u, left: m[0], right: Ln(u, m.slice(1)) };
         }
-        let Dp = {
+        const Dp = {
           JsdocTypeOptional: (u, m) => ({
             type: 'OPTIONAL',
             value: m(u.element),
@@ -2797,7 +2799,7 @@ try {
             },
           }),
           JsdocTypeVariadic: (u, m) => {
-            let E = {
+            const E = {
               type: 'VARIADIC',
               meta: {
                 syntax:
@@ -2834,7 +2836,7 @@ try {
           JsdocTypeUndefined: () => ({ type: 'NAME', name: 'undefined' }),
           JsdocTypeAny: () => ({ type: 'ANY' }),
           JsdocTypeFunction: (u, m) => {
-            let E = Qa(u),
+            const E = Qa(u),
               I = {
                 type: u.arrow ? 'ARROW' : 'FUNCTION',
                 params: E.params.map((N) => {
@@ -2863,7 +2865,7 @@ try {
             );
           },
           JsdocTypeGeneric: (u, m) => {
-            let E = {
+            const E = {
               type: 'GENERIC',
               subject: m(u.left),
               objects: u.elements.map(m),
@@ -2944,8 +2946,8 @@ try {
             );
           },
           JsdocTypeObject: (u, m) => {
-            let E = [];
-            for (let I of u.elements)
+            const E = [];
+            for (const I of u.elements)
               (I.type === 'JsdocTypeObjectField' ||
                 I.type === 'JsdocTypeJsdocObjectField') &&
                 E.push(m(I));
@@ -2973,7 +2975,7 @@ try {
             u.right.specialType === 'event'
               ? ((E = !0), (I = u.right.value), (N = wt(u.right.meta.quote)))
               : ((I = u.right.value), (N = wt(u.right.meta.quote)));
-            let H = {
+            const H = {
               type: Ap(u.pathType),
               owner: m(u.left),
               name: I,
@@ -2981,7 +2983,7 @@ try {
               hasEventPrefix: E,
             };
             if (H.owner.type === 'MODULE') {
-              let Y = H.owner;
+              const Y = H.owner;
               return (H.owner = H.owner.value), (Y.value = H), Y;
             } else return H;
           },
@@ -3037,7 +3039,7 @@ try {
               element: m(u.element),
             }),
             JsdocTypeSymbol: (u, m) => {
-              let E = { type: 'JsdocTypeSymbol', value: u.value };
+              const E = { type: 'JsdocTypeSymbol', value: u.value };
               return u.element !== void 0 && (E.element = m(u.element)), E;
             },
             JsdocTypeOptional: (u, m) => ({
@@ -3086,7 +3088,7 @@ try {
             JsdocTypeStringValue: (u) => u,
             JsdocTypeNamePath: (u) => u,
             JsdocTypeVariadic: (u, m) => {
-              let E = {
+              const E = {
                 type: 'JsdocTypeVariadic',
                 meta: {
                   position: u.meta.position,
@@ -3101,7 +3103,7 @@ try {
             }),
             JsdocTypeName: (u) => u,
             JsdocTypeFunction: (u, m) => {
-              let E = {
+              const E = {
                 type: 'JsdocTypeFunction',
                 arrow: u.arrow,
                 parameters: u.parameters.map(m),
@@ -3143,7 +3145,7 @@ try {
             }),
           };
         }
-        let ei = {
+        const ei = {
           JsdocTypeAny: [],
           JsdocTypeFunction: ['parameters', 'returnType'],
           JsdocTypeGeneric: ['left', 'elements'],
@@ -3179,11 +3181,11 @@ try {
         };
         function Mn(u, m, E, I, N) {
           I?.(u, m, E);
-          let H = ei[u.type];
-          for (let Y of H) {
-            let ne = u[Y];
+          const H = ei[u.type];
+          for (const Y of H) {
+            const ne = u[Y];
             if (ne !== void 0)
-              if (Array.isArray(ne)) for (let ke of ne) Mn(ke, u, Y, I, N);
+              if (Array.isArray(ne)) for (const ke of ne) Mn(ke, u, Y, I, N);
               else Mn(ne, u, Y, I, N);
           }
           N?.(u, m, E);
@@ -3508,7 +3510,7 @@ try {
             '../../node_modules/color-convert/conversions.js'(e, t) {
               var r = Oy(),
                 n = {};
-              for (let i of Object.keys(r)) n[r[i]] = i;
+              for (const i of Object.keys(r)) n[r[i]] = i;
               var o = {
                 rgb: { channels: 3, labels: 'rgb' },
                 hsl: { channels: 3, labels: 'hsl' },
@@ -3527,14 +3529,14 @@ try {
                 gray: { channels: 1, labels: ['gray'] },
               };
               t.exports = o;
-              for (let i of Object.keys(o)) {
+              for (const i of Object.keys(o)) {
                 if (!('channels' in o[i]))
                   throw new Error('missing channels property: ' + i);
                 if (!('labels' in o[i]))
                   throw new Error('missing channel labels property: ' + i);
                 if (o[i].labels.length !== o[i].channels)
                   throw new Error('channel and label counts mismatch: ' + i);
-                let { channels: s, labels: l } = o[i];
+                const { channels: s, labels: l } = o[i];
                 delete o[i].channels,
                   delete o[i].labels,
                   Object.defineProperty(o[i], 'channels', { value: s }),
@@ -3558,7 +3560,7 @@ try {
                       : c === h && (y = 4 + (s - l) / d),
                   (y = Math.min(y * 60, 360)),
                   y < 0 && (y += 360);
-                let A = (p + h) / 2;
+                const A = (p + h) / 2;
                 return (
                   h === p
                     ? (g = 0)
@@ -3610,7 +3612,7 @@ try {
                   );
                 }),
                 (o.rgb.cmyk = function (i) {
-                  let s = i[0] / 255,
+                  const s = i[0] / 255,
                     l = i[1] / 255,
                     c = i[2] / 255,
                     p = Math.min(1 - s, 1 - l, 1 - c),
@@ -3625,12 +3627,12 @@ try {
                 );
               }
               (o.rgb.keyword = function (i) {
-                let s = n[i];
+                const s = n[i];
                 if (s) return s;
                 let l = 1 / 0,
                   c;
-                for (let p of Object.keys(r)) {
-                  let h = r[p],
+                for (const p of Object.keys(r)) {
+                  const h = r[p],
                     d = a(i, h);
                   d < l && ((l = d), (c = p));
                 }
@@ -3648,7 +3650,7 @@ try {
                       l > 0.04045 ? ((l + 0.055) / 1.055) ** 2.4 : l / 12.92),
                     (c =
                       c > 0.04045 ? ((c + 0.055) / 1.055) ** 2.4 : c / 12.92);
-                  let p = s * 0.4124 + l * 0.3576 + c * 0.1805,
+                  const p = s * 0.4124 + l * 0.3576 + c * 0.1805,
                     h = s * 0.2126 + l * 0.7152 + c * 0.0722,
                     d = s * 0.0193 + l * 0.1192 + c * 0.9505;
                   return [p * 100, h * 100, d * 100];
@@ -3664,7 +3666,7 @@ try {
                     (l = l > 0.008856 ? l ** (1 / 3) : 7.787 * l + 16 / 116),
                     (c = c > 0.008856 ? c ** (1 / 3) : 7.787 * c + 16 / 116),
                     (p = p > 0.008856 ? p ** (1 / 3) : 7.787 * p + 16 / 116);
-                  let h = 116 * c - 16,
+                  const h = 116 * c - 16,
                     d = 500 * (l - c),
                     y = 200 * (c - p);
                   return [h, d, y];
@@ -3678,7 +3680,7 @@ try {
                     d;
                   if (l === 0) return (d = c * 255), [d, d, d];
                   c < 0.5 ? (p = c * (1 + l)) : (p = c + l - c * l);
-                  let y = 2 * c - p,
+                  const y = 2 * c - p,
                     g = [0, 0, 0];
                   for (let A = 0; A < 3; A++)
                     (h = s + (1 / 3) * -(A - 1)),
@@ -3703,7 +3705,7 @@ try {
                   (c *= 2),
                     (l *= c <= 1 ? c : 2 - c),
                     (p *= h <= 1 ? h : 2 - h);
-                  let d = (c + l) / 2,
+                  const d = (c + l) / 2,
                     y = c === 0 ? (2 * p) / (h + p) : (2 * l) / (c + l);
                   return [s, y * 100, d * 100];
                 }),
@@ -3739,7 +3741,7 @@ try {
                     h,
                     d;
                   d = (2 - l) * c;
-                  let y = (2 - l) * p;
+                  const y = (2 - l) * p;
                   return (
                     (h = l * p),
                     (h /= y <= 1 ? y : 2 - y),
@@ -3755,7 +3757,7 @@ try {
                     p = l + c,
                     h;
                   p > 1 && ((l /= p), (c /= p));
-                  let d = Math.floor(6 * s),
+                  const d = Math.floor(6 * s),
                     y = 1 - c;
                   (h = 6 * s - d), (d & 1) !== 0 && (h = 1 - h);
                   let g = l + h * (y - l),
@@ -3787,7 +3789,7 @@ try {
                   return [A * 255, v * 255, S * 255];
                 }),
                 (o.cmyk.rgb = function (i) {
-                  let s = i[0] / 100,
+                  const s = i[0] / 100,
                     l = i[1] / 100,
                     c = i[2] / 100,
                     p = i[3] / 100,
@@ -3835,7 +3837,7 @@ try {
                     (s = s > 0.008856 ? s ** (1 / 3) : 7.787 * s + 16 / 116),
                     (l = l > 0.008856 ? l ** (1 / 3) : 7.787 * l + 16 / 116),
                     (c = c > 0.008856 ? c ** (1 / 3) : 7.787 * c + 16 / 116);
-                  let p = 116 * l - 16,
+                  const p = 116 * l - 16,
                     h = 500 * (s - l),
                     d = 200 * (l - c);
                   return [p, h, d];
@@ -3848,7 +3850,7 @@ try {
                     h,
                     d;
                   (h = (s + 16) / 116), (p = l / 500 + h), (d = h - c / 200);
-                  let y = h ** 3,
+                  const y = h ** 3,
                     g = p ** 3,
                     A = d ** 3;
                   return (
@@ -3868,11 +3870,11 @@ try {
                     p;
                   (p = (Math.atan2(c, l) * 360) / 2 / Math.PI),
                     p < 0 && (p += 360);
-                  let h = Math.sqrt(l * l + c * c);
+                  const h = Math.sqrt(l * l + c * c);
                   return [s, h, p];
                 }),
                 (o.lch.lab = function (i) {
-                  let s = i[0],
+                  const s = i[0],
                     l = i[1],
                     c = (i[2] / 360) * 2 * Math.PI,
                     p = l * Math.cos(c),
@@ -3894,7 +3896,7 @@ try {
                   return o.rgb.ansi16(o.hsv.rgb(i), i[2]);
                 }),
                 (o.rgb.ansi256 = function (i) {
-                  let s = i[0],
+                  const s = i[0],
                     l = i[1],
                     c = i[2];
                   return s === l && l === c
@@ -3914,7 +3916,7 @@ try {
                     return (
                       i > 50 && (s += 3.5), (s = (s / 10.5) * 255), [s, s, s]
                     );
-                  let l = (~~(i > 50) + 1) * 0.5,
+                  const l = (~~(i > 50) + 1) * 0.5,
                     c = (s & 1) * l * 255,
                     p = ((s >> 1) & 1) * l * 255,
                     h = ((s >> 2) & 1) * l * 255;
@@ -3922,7 +3924,7 @@ try {
                 }),
                 (o.ansi256.rgb = function (i) {
                   if (i >= 232) {
-                    let h = (i - 232) * 10 + 8;
+                    const h = (i - 232) * 10 + 8;
                     return [h, h, h];
                   }
                   i -= 16;
@@ -3933,7 +3935,7 @@ try {
                   return [l, c, p];
                 }),
                 (o.rgb.hex = function (i) {
-                  let s = (
+                  const s = (
                     ((Math.round(i[0]) & 255) << 16) +
                     ((Math.round(i[1]) & 255) << 8) +
                     (Math.round(i[2]) & 255)
@@ -3943,7 +3945,7 @@ try {
                   return '000000'.substring(s.length) + s;
                 }),
                 (o.hex.rgb = function (i) {
-                  let s = i.toString(16).match(/[a-f0-9]{6}|[a-f0-9]{3}/i);
+                  const s = i.toString(16).match(/[a-f0-9]{6}|[a-f0-9]{3}/i);
                   if (!s) return [0, 0, 0];
                   let l = s[0];
                   s[0].length === 3 &&
@@ -3951,7 +3953,7 @@ try {
                       .split('')
                       .map((y) => y + y)
                       .join(''));
-                  let c = parseInt(l, 16),
+                  const c = parseInt(l, 16),
                     p = (c >> 16) & 255,
                     h = (c >> 8) & 255,
                     d = c & 255;
@@ -4000,7 +4002,7 @@ try {
                   );
                 }),
                 (o.hcg.rgb = function (i) {
-                  let s = i[0] / 360,
+                  const s = i[0] / 360,
                     l = i[1] / 100,
                     c = i[2] / 100;
                   if (l === 0) return [c * 255, c * 255, c * 255];
@@ -4056,7 +4058,7 @@ try {
                   );
                 }),
                 (o.hcg.hwb = function (i) {
-                  let s = i[1] / 100,
+                  const s = i[1] / 100,
                     l = i[2] / 100,
                     c = s + l * (1 - s);
                   return [i[0], (c - s) * 100, (1 - c) * 100];
@@ -4105,7 +4107,7 @@ try {
                   return [i[0], 0, 0];
                 }),
                 (o.gray.hex = function (i) {
-                  let s = Math.round((i[0] / 100) * 255) & 255,
+                  const s = Math.round((i[0] / 100) * 255) & 255,
                     l = ((s << 16) + (s << 8) + s).toString(16).toUpperCase();
                   return '000000'.substring(l.length) + l;
                 }),
@@ -4118,20 +4120,20 @@ try {
             '../../node_modules/color-convert/route.js'(e, t) {
               var r = gc();
               function n() {
-                let s = {},
+                const s = {},
                   l = Object.keys(r);
                 for (let c = l.length, p = 0; p < c; p++)
                   s[l[p]] = { distance: -1, parent: null };
                 return s;
               }
               function o(s) {
-                let l = n(),
+                const l = n(),
                   c = [s];
                 for (l[s].distance = 0; c.length; ) {
-                  let p = c.pop(),
+                  const p = c.pop(),
                     h = Object.keys(r[p]);
                   for (let d = h.length, y = 0; y < d; y++) {
-                    let g = h[y],
+                    const g = h[y],
                       A = l[g];
                     A.distance === -1 &&
                       ((A.distance = l[p].distance + 1),
@@ -4157,11 +4159,11 @@ try {
                 return (p.conversion = c), p;
               }
               t.exports = function (s) {
-                let l = o(s),
+                const l = o(s),
                   c = {},
                   p = Object.keys(l);
                 for (let h = p.length, d = 0; d < h; d++) {
-                  let y = p[d];
+                  const y = p[d];
                   l[y].parent !== null && (c[y] = i(y, l));
                 }
                 return c;
@@ -4175,18 +4177,18 @@ try {
                 o = {},
                 a = Object.keys(r);
               function i(l) {
-                let c = function (...p) {
-                  let h = p[0];
+                const c = function (...p) {
+                  const h = p[0];
                   return h == null ? h : (h.length > 1 && (p = h), l(p));
                 };
                 return 'conversion' in l && (c.conversion = l.conversion), c;
               }
               function s(l) {
-                let c = function (...p) {
-                  let h = p[0];
+                const c = function (...p) {
+                  const h = p[0];
                   if (h == null) return h;
                   h.length > 1 && (p = h);
-                  let d = l(p);
+                  const d = l(p);
                   if (typeof d == 'object')
                     for (let y = d.length, g = 0; g < y; g++)
                       d[g] = Math.round(d[g]);
@@ -4200,9 +4202,9 @@ try {
                     value: r[l].channels,
                   }),
                   Object.defineProperty(o[l], 'labels', { value: r[l].labels });
-                let c = n(l);
+                const c = n(l);
                 Object.keys(c).forEach((p) => {
-                  let h = c[p];
+                  const h = c[p];
                   (o[l][p] = s(h)), (o[l][p].raw = i(h));
                 });
               }),
@@ -4760,7 +4762,7 @@ try {
           }))),
           (ig = `url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill-opacity=".05"><path d="M8 0h8v8H8zM0 8h8v8H0z"/></svg>')`),
           (mc = ({ value: e, style: t, ...r }) => {
-            let n = `linear-gradient(${e}, ${e}), ${ig}, linear-gradient(#fff, #fff)`;
+            const n = `linear-gradient(${e}, ${e}), ${ig}, linear-gradient(#fff, #fff)`;
             return f.createElement(ag, {
               ...r,
               style: { ...t, backgroundImage: n },
@@ -4803,16 +4805,16 @@ try {
             hsl: 'hsla(0, 0%, 0%, 0)',
           }),
           (yc = (e) => {
-            let t = e?.match(ug);
+            const t = e?.match(ug);
             if (!t) return [0, 0, 0, 1];
-            let [, r, n, o, a = 1] = t;
+            const [, r, n, o, a = 1] = t;
             return [r, n, o, a].map(Number);
           }),
           (nr = (e) => {
             if (!e) return;
             let t = !0;
             if (cg.test(e)) {
-              let [i, s, l, c] = yc(e),
+              const [i, s, l, c] = yc(e),
                 [p, h, d] = Je.default.rgb.hsl([i, s, l]) || [0, 0, 0];
               return {
                 valid: t,
@@ -4825,7 +4827,7 @@ try {
               };
             }
             if (dg.test(e)) {
-              let [i, s, l, c] = yc(e),
+              const [i, s, l, c] = yc(e),
                 [p, h, d] = Je.default.hsl.rgb([i, s, l]) || [0, 0, 0];
               return {
                 valid: t,
@@ -4871,24 +4873,24 @@ try {
               } catch {
                 return vn.hex;
               }
-            let n = t.hex.match(pg);
+            const n = t.hex.match(pg);
             if (!n) return ya.test(t.hex) ? t.hex : vn.hex;
-            let [o, a, i] = n[1].split('');
+            const [o, a, i] = n[1].split('');
             return `#${o}${o}${a}${a}${i}${i}`;
           }),
           (mg = (e, t) => {
-            let [r, n] = Z(e || ''),
+            const [r, n] = Z(e || ''),
               [o, a] = Z(() => nr(r)),
               [i, s] = Z(o?.colorSpace || 'hex');
             xe(() => {
-              let h = e || '',
+              const h = e || '',
                 d = nr(h);
               n(h), a(d), s(d?.colorSpace || 'hex');
             }, [e]);
-            let l = pt(() => fg(r, o, i).toLowerCase(), [r, o, i]),
+            const l = pt(() => fg(r, o, i).toLowerCase(), [r, o, i]),
               c = Ce(
                 (h) => {
-                  let d = nr(h),
+                  const d = nr(h),
                     y = d?.value || h || '';
                   n(y),
                     y === '' && (a(void 0), t(void 0)),
@@ -4899,7 +4901,7 @@ try {
               p = Ce(() => {
                 let h = En.indexOf(i) + 1;
                 h >= En.length && (h = 0), s(En[h]);
-                let d = o?.[En[h]] || '';
+                const d = o?.[En[h]] || '';
                 n(d), t(d);
               }, [o, i, t]);
             return {
@@ -4913,11 +4915,11 @@ try {
           }),
           (Dn = (e) => e.replace(/\s*/, '').toLowerCase()),
           (yg = (e, t, r) => {
-            let [n, o] = Z(t?.valid ? [t] : []);
+            const [n, o] = Z(t?.valid ? [t] : []);
             xe(() => {
               t === void 0 && o([]);
             }, [t]);
-            let a = pt(
+            const a = pt(
                 () =>
                   (e || [])
                     .map((s) =>
@@ -4952,7 +4954,7 @@ try {
             startOpen: i = !1,
             argType: s,
           }) => {
-            let l = Ce(si(r, 200), [r]),
+            const l = Ce(si(r, 200), [r]),
               {
                 value: c,
                 realValue: p,
@@ -5321,7 +5323,7 @@ try {
     }
     he(fe, 'dedent');
     function go({ code: e, category: t }) {
-      let r = String(e).padStart(4, '0');
+      const r = String(e).padStart(4, '0');
       return `SB_${t}_${r}`;
     }
     he(go, 'parseErrorCode');
@@ -5338,7 +5340,7 @@ try {
         return go({ code: this.code, category: this.category });
       }
       get name() {
-        let t = this.constructor.name;
+        const t = this.constructor.name;
         return `${this.fullErrorCode} (${t})`;
       }
       static getFullMessage({
@@ -5751,7 +5753,7 @@ This is deprecated and won't work in Storybook 8 anymore.
       ),
       Xh = (e, t, r, n) => {
         if ((t && typeof t == 'object') || typeof t == 'function')
-          for (let o of Wh(t))
+          for (const o of Wh(t))
             !Yh.call(e, o) &&
               o !== r &&
               Mo(e, o, {
@@ -6028,7 +6030,7 @@ This is deprecated and won't work in Storybook 8 anymore.
             1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0,
           ]);
         function n(o) {
-          let a = o.length;
+          const a = o.length;
           if (a === 0) return '';
           let i = '',
             s = 0,
@@ -6057,7 +6059,7 @@ This is deprecated and won't work in Storybook 8 anymore.
               continue;
             }
             if ((++l, l >= a)) throw new Error('URI malformed');
-            let p = o.charCodeAt(l) & 1023;
+            const p = o.charCodeAt(l) & 1023;
             (s = l + 1),
               (c = 65536 + (((c & 1023) << 10) | p)),
               (i +=
@@ -6123,7 +6125,7 @@ This is deprecated and won't work in Storybook 8 anymore.
         b(n, 'isPrototypeKey');
         function o(h, d, y, g, A) {
           if (n(d)) return h;
-          let v = h[d];
+          const v = h[d];
           return typeof v == 'object' && v !== null
             ? v
             : !g &&
@@ -6158,7 +6160,7 @@ This is deprecated and won't work in Storybook 8 anymore.
           let P = '',
             W = !0,
             L = !1;
-          for (let z in h) {
+          for (const z in h) {
             let D = h[z],
               T;
             g
@@ -6282,12 +6284,12 @@ This is deprecated and won't work in Storybook 8 anymore.
           n = Uo(),
           o = t(Qh()),
           a = b((h) => {
-            let d = Number(h);
+            const d = Number(h);
             return Number.isNaN(d) ? h : d;
           }, 'numberKeyDeserializer');
         e.numberKeyDeserializer = a;
         var i = b((h) => {
-          let d = Number(h);
+          const d = Number(h);
           return Number.isNaN(d) ? h : d;
         }, 'numberValueDeserializer');
         e.numberValueDeserializer = i;
@@ -6302,7 +6304,7 @@ This is deprecated and won't work in Storybook 8 anymore.
         }
         b(c, 'computeKeySlice');
         function p(h, d) {
-          let {
+          const {
               valueDeserializer: y = n.defaultOptions.valueDeserializer,
               keyDeserializer: g = n.defaultOptions.keyDeserializer,
               arrayRepeatSyntax: A = n.defaultOptions.arrayRepeatSyntax,
@@ -6351,9 +6353,9 @@ This is deprecated and won't work in Storybook 8 anymore.
                   ((j = h.slice(P + 1, le)),
                   X && (j = j.replace(s, ' ')),
                   U && (j = (0, o.default)(j) || j));
-                let He = y(j, D);
+                const He = y(j, D);
                 if (S) {
-                  let Ue = L[D];
+                  const Ue = L[D];
                   Ue === void 0
                     ? ve > -1
                       ? (L[D] = [He])
@@ -6446,7 +6448,7 @@ This is deprecated and won't work in Storybook 8 anymore.
         var t = Qs();
         function r(n, o) {
           if (n === null || typeof n != 'object') return '';
-          let a = o ?? {};
+          const a = o ?? {};
           return (0, t.stringifyObject)(n, a);
         }
         b(r, 'stringify');
@@ -9590,7 +9592,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         );
       })();
     function tl() {
-      let e = {
+      const e = {
         setHandler: b(() => {}, 'setHandler'),
         send: b(() => {}, 'send'),
       };
@@ -9601,7 +9603,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       constructor() {
         (this.getChannel = b(() => {
           if (!this.channel) {
-            let t = tl();
+            const t = tl();
             return this.setChannel(t), t;
           }
           return this.channel;
@@ -9670,7 +9672,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
           this.removeRenderListeners();
       }
       getNextHook() {
-        let t = this.currentHooks[this.nextHookIndex];
+        const t = this.currentHooks[this.nextHookIndex];
         return (this.nextHookIndex += 1), t;
       }
       triggerEffects() {
@@ -9694,8 +9696,8 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     b(ol, 'HooksContext');
     var al = ol;
     function Co(e) {
-      let t = b((...r) => {
-        let { hooks: n } = typeof r[0] == 'function' ? r[1] : r[0],
+      const t = b((...r) => {
+        const { hooks: n } = typeof r[0] == 'function' ? r[1] : r[0],
           o = n.currentPhase,
           a = n.currentHooks,
           i = n.nextHookIndex,
@@ -9709,9 +9711,9 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
               n.hookListsMap.set(e, n.currentHooks),
               n.prevMountedDecorators.add(e)),
           (n.nextHookIndex = 0);
-        let l = De.STORYBOOK_HOOKS_CONTEXT;
+        const l = De.STORYBOOK_HOOKS_CONTEXT;
         De.STORYBOOK_HOOKS_CONTEXT = n;
-        let c = e(...r);
+        const c = e(...r);
         if (
           ((De.STORYBOOK_HOOKS_CONTEXT = l),
           n.currentPhase === 'UPDATE' && n.getNextHook() != null)
@@ -9734,12 +9736,12 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       uf = 25,
       cf = b(
         (e) => (t, r) => {
-          let n = e(
+          const n = e(
             Co(t),
             r.map((o) => Co(o)),
           );
           return (o) => {
-            let { hooks: a } = o;
+            const { hooks: a } = o;
             (a.prevMountedDecorators ??= new Set()),
               (a.mountedDecorators = new Set([t, ...r])),
               (a.currentContext = o),
@@ -9777,24 +9779,24 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     }
     b(Vo, 'getHooksContextOrNull');
     function dn() {
-      let e = Vo();
+      const e = Vo();
       if (e == null) throw qo();
       return e;
     }
     b(dn, 'getHooksContextOrThrow');
     function il(e, t, r) {
-      let n = dn();
+      const n = dn();
       if (n.currentPhase === 'MOUNT') {
         r != null &&
           !Array.isArray(r) &&
           ee.warn(
             `${e} received a final argument that is not an array (instead, received ${r}). When specified, the final argument must be an array.`,
           );
-        let o = { name: e, deps: r };
+        const o = { name: e, deps: r };
         return n.currentHooks.push(o), t(o), o;
       }
       if (n.currentPhase === 'UPDATE') {
-        let o = n.getNextHook();
+        const o = n.getNextHook();
         if (o == null)
           throw new Error(
             'Rendered more hooks than during the previous render.',
@@ -9824,7 +9826,7 @@ Incoming: ${r}`),
     }
     b(il, 'useHook');
     function Dr(e, t, r) {
-      let { memoizedState: n } = il(
+      const { memoizedState: n } = il(
         e,
         (o) => {
           o.memoizedState = t();
@@ -9851,7 +9853,7 @@ Incoming: ${r}`),
     }
     b(hf, 'useRef');
     function sl() {
-      let e = Vo();
+      const e = Vo();
       if (e != null && e.currentPhase !== 'NONE') e.hasUpdates = !0;
       else
         try {
@@ -9864,7 +9866,7 @@ Incoming: ${r}`),
     }
     b(sl, 'triggerUpdate');
     function zo(e, t) {
-      let r = Jo(e, typeof t == 'function' ? t() : t),
+      const r = Jo(e, typeof t == 'function' ? t() : t),
         n = b((o) => {
           (r.current = typeof o == 'function' ? o(r.current) : o), sl();
         }, 'setState');
@@ -9876,19 +9878,19 @@ Incoming: ${r}`),
     }
     b(Ho, 'useState');
     function ff(e, t, r) {
-      let n = r != null ? () => r(t) : t,
+      const n = r != null ? () => r(t) : t,
         [o, a] = zo('useReducer', n);
       return [o, b((i) => a((s) => e(s, i)), 'dispatch')];
     }
     b(ff, 'useReducer');
     function pn(e, t) {
-      let r = dn(),
+      const r = dn(),
         n = Dr('useEffect', () => ({ create: e }), t);
       r.currentEffects.includes(n) || r.currentEffects.push(n);
     }
     b(pn, 'useEffect');
     function mf(e, t = []) {
-      let r = Rt.getChannel();
+      const r = Rt.getChannel();
       return (
         pn(
           () => (
@@ -9904,18 +9906,18 @@ Incoming: ${r}`),
     }
     b(mf, 'useChannel');
     function hn() {
-      let { currentContext: e } = dn();
+      const { currentContext: e } = dn();
       if (e == null) throw qo();
       return e;
     }
     b(hn, 'useStoryContext');
     function yf(e, t) {
-      let { parameters: r } = hn();
+      const { parameters: r } = hn();
       if (e) return r[e] ?? t;
     }
     b(yf, 'useParameter');
     function gf() {
-      let e = Rt.getChannel(),
+      const e = Rt.getChannel(),
         { id: t, args: r } = hn(),
         n = Ar((a) => e.emit(Gr, { storyId: t, updatedArgs: a }), [e, t]),
         o = Ar((a) => e.emit(Jr, { storyId: t, argNames: a }), [e, t]);
@@ -9923,7 +9925,7 @@ Incoming: ${r}`),
     }
     b(gf, 'useArgs');
     function bf() {
-      let e = Rt.getChannel(),
+      const e = Rt.getChannel(),
         { globals: t } = hn(),
         r = Ar((n) => e.emit(Hr, { globals: n }), [e]);
       return [t, r];
@@ -9936,9 +9938,9 @@ Incoming: ${r}`),
         wrapper: r,
         skipIfNoParametersOrOptions: n = !1,
       }) => {
-        let o = b(
+        const o = b(
           (a) => (i, s) => {
-            let l = s.parameters && s.parameters[t];
+            const l = s.parameters && s.parameters[t];
             return (l && l.disable) || (n && !a && !l)
               ? i(s)
               : r(i, s, { options: a, parameters: l });
@@ -10033,7 +10035,7 @@ Incoming: ${r}`),
               'getState',
             )),
             (this.subscribe = b((n, o) => {
-              let a = typeof n == 'function',
+              const a = typeof n == 'function',
                 i = a ? '*' : n,
                 s = a ? n : o;
               if ((this.debug('subscribe', { eventType: i, listener: s }), !s))
@@ -10174,7 +10176,7 @@ Incoming: ${r}`),
         create`,
               { options: t },
             );
-          let r = js.get(t.id);
+          const r = js.get(t.id);
           if (r)
             return (
               console.warn(me`UniversalStore with id "${t.id}" already exists in this environment, re-using existing.
@@ -10182,7 +10184,7 @@ Incoming: ${r}`),
               r
             );
           K.isInternalConstructing = !0;
-          let n = new K(t);
+          const n = new K(t);
           return js.set(t.id, n), n;
         }
         static __prepare(t, r) {
@@ -10191,7 +10193,7 @@ Incoming: ${r}`),
             K.preparation.resolve({ channel: t, environment: r });
         }
         setState(t) {
-          let r = this.state,
+          const r = this.state,
             n = typeof t == 'function' ? t(r) : t;
           if (
             (this.debug('setState', {
@@ -10205,7 +10207,7 @@ Incoming: ${r}`),
         or await store.readyPromise to wait for the store to be ready before sending events.
         ${JSON.stringify({ newState: n, id: this.id, actor: this.actor, environment: this.environment }, null, 2)}`);
           this.state = n;
-          let o = {
+          const o = {
             type: K.InternalEventType.SET_STATE,
             payload: { state: n, previousState: r },
           };
@@ -10261,7 +10263,7 @@ Incoming: ${r}`),
                 }, 1e3));
         }
         emitToListeners(t, r) {
-          let n = this.listeners.get(t.type),
+          const n = this.listeners.get(t.type),
             o = this.listeners.get('*');
           this.debug('emitToListeners', {
             event: t,
@@ -10272,7 +10274,7 @@ Incoming: ${r}`),
             [...(n ?? []), ...(o ?? [])].forEach((a) => a(t, r));
         }
         handleChannelEvents(t) {
-          let { event: r, eventInfo: n } = t;
+          const { event: r, eventInfo: n } = t;
           if ([n.actor.id, n.forwardingActor?.id].includes(this.actor.id)) {
             this.debug('handleChannelEvents: Ignoring event from self', {
               channelEvent: t,
@@ -10295,7 +10297,7 @@ Incoming: ${r}`),
             switch (r.type) {
               case K.InternalEventType.EXISTING_STATE_REQUEST:
                 o = !1;
-                let a = {
+                const a = {
                   type: K.InternalEventType.EXISTING_STATE_RESPONSE,
                   payload: this.state,
                 };
@@ -10340,7 +10342,7 @@ Incoming: ${r}`),
                 )
                   break;
                 this.syncing.resolve?.();
-                let o = {
+                const o = {
                   type: K.InternalEventType.SET_STATE,
                   payload: { state: r.payload, previousState: this.state },
                 };
@@ -10404,29 +10406,29 @@ Incoming: ${r}`),
       yt.setupPreparationPromise();
     var rn = yt;
     function ll(e, t) {
-      let r = {},
+      const r = {},
         n = Object.entries(e);
       for (let o = 0; o < n.length; o++) {
-        let [a, i] = n[o];
+        const [a, i] = n[o];
         t(i, a) || (r[a] = i);
       }
       return r;
     }
     b(ll, 'omitBy');
     function ul(e, t) {
-      let r = {};
+      const r = {};
       for (let n = 0; n < t.length; n++) {
-        let o = t[n];
+        const o = t[n];
         Object.prototype.hasOwnProperty.call(e, o) && (r[o] = e[o]);
       }
       return r;
     }
     b(ul, 'pick');
     function cl(e, t) {
-      let r = {},
+      const r = {},
         n = Object.entries(e);
       for (let o = 0; o < n.length; o++) {
-        let [a, i] = n[o];
+        const [a, i] = n[o];
         t(i, a) && (r[a] = i);
       }
       return r;
@@ -10442,10 +10444,10 @@ Incoming: ${r}`),
     }
     b(We, 'isPlainObject');
     function Ot(e, t) {
-      let r = {},
+      const r = {},
         n = Object.keys(e);
       for (let o = 0; o < n.length; o++) {
-        let a = n[o],
+        const a = n[o],
           i = e[a];
         r[a] = t(i, a, e);
       }
@@ -10520,7 +10522,7 @@ Incoming: ${r}`),
         case Df:
           return e.toString() === t.toString();
         case Sf: {
-          let s = e.valueOf(),
+          const s = e.valueOf(),
             l = t.valueOf();
           return s === l || (Number.isNaN(s) && Number.isNaN(l));
         }
@@ -10534,7 +10536,7 @@ Incoming: ${r}`),
           return e === t;
       }
       r = r ?? new Map();
-      let a = r.get(e),
+      const a = r.get(e),
         i = r.get(t);
       if (a != null && i != null) return a === t;
       r.set(e, t), r.set(t, e);
@@ -10542,16 +10544,16 @@ Incoming: ${r}`),
         switch (n) {
           case Tf: {
             if (e.size !== t.size) return !1;
-            for (let [s, l] of e.entries())
+            for (const [s, l] of e.entries())
               if (!t.has(s) || !Xe(l, t.get(s), r)) return !1;
             return !0;
           }
           case Ff: {
             if (e.size !== t.size) return !1;
-            let s = Array.from(e.values()),
+            const s = Array.from(e.values()),
               l = Array.from(t.values());
             for (let c = 0; c < s.length; c++) {
-              let p = s[c],
+              const p = s[c],
                 h = l.findIndex((d) => Xe(p, d, r));
               if (h === -1) return !1;
               l.splice(h, 1);
@@ -10594,14 +10596,14 @@ Incoming: ${r}`),
           case vo: {
             if (!(Xe(e.constructor, t.constructor, r) || (We(e) && We(t))))
               return !1;
-            let s = [...Object.keys(e), ...xo(e)],
+            const s = [...Object.keys(e), ...xo(e)],
               l = [...Object.keys(t), ...xo(t)];
             if (s.length !== l.length) return !1;
             for (let c = 0; c < s.length; c++) {
-              let p = s[c],
+              const p = s[c],
                 h = e[p];
               if (!Object.prototype.hasOwnProperty.call(t, p)) return !1;
-              let d = t[p];
+              const d = t[p];
               if (!Xe(h, d, r)) return !1;
             }
             return !0;
@@ -10615,7 +10617,7 @@ Incoming: ${r}`),
     }
     b(Xe, 'areObjectsEqual');
     var BF = b((e, t) => {
-        let [r, n] = Ho(t ? t(e.getState()) : e.getState());
+        const [r, n] = Ho(t ? t(e.getState()) : e.getState());
         return (
           pn(
             () =>
@@ -10624,7 +10626,7 @@ Incoming: ${r}`),
                   n(o);
                   return;
                 }
-                let i = t(o),
+                const i = t(o),
                   s = t(a);
                 !Go(i, s) && n(i);
               }),
@@ -10656,7 +10658,7 @@ Incoming: ${r}`),
           if (!this.testUtils)
             throw new Error(Ef`Cannot call unsubscribeAll on a store that does not have testUtils.
         Please provide testUtils as the second argument when creating the store.`);
-          let t = b((r) => {
+          const t = b((r) => {
             try {
               r.value();
             } catch {}
@@ -10669,7 +10671,7 @@ Incoming: ${r}`),
     var Ao = tr(Ys(), 1),
       Yt = Symbol('incompatible'),
       Fo = b((e, t) => {
-        let r = t.type;
+        const r = t.type;
         if (e == null || !r || t.mapping) return e;
         switch (r.name) {
           case 'string':
@@ -10684,7 +10686,7 @@ Incoming: ${r}`),
             return !r.value || !Array.isArray(e)
               ? Yt
               : e.reduce((n, o, a) => {
-                  let i = Fo(o, { type: r.value });
+                  const i = Fo(o, { type: r.value });
                   return i !== Yt && (n[a] = i), n;
                 }, new Array(e.length));
           case 'object':
@@ -10693,7 +10695,7 @@ Incoming: ${r}`),
               : !r.value || typeof e != 'object'
                 ? Yt
                 : Object.entries(e).reduce((n, [o, a]) => {
-                    let i = Fo(a, { type: r.value[o] });
+                    const i = Fo(a, { type: r.value[o] });
                     return i === Yt ? n : Object.assign(n, { [o]: i });
                   }, {});
           default:
@@ -10704,7 +10706,7 @@ Incoming: ${r}`),
         (e, t) =>
           Object.entries(e).reduce((r, [n, o]) => {
             if (!t[n]) return r;
-            let a = Fo(o, t[n]);
+            const a = Fo(o, t[n]);
             return a === Yt ? r : Object.assign(r, { [n]: a });
           }, {}),
         'mapArgsToTypes',
@@ -10719,7 +10721,7 @@ Incoming: ${r}`),
               ? t
               : Object.keys({ ...e, ...t }).reduce((r, n) => {
                   if (n in t) {
-                    let o = Io(e[n], t[n]);
+                    const o = Io(e[n], t[n]);
                     o !== void 0 && (r[n] = o);
                   } else r[n] = e[n];
                   return r;
@@ -10751,11 +10753,11 @@ Incoming: ${r}`),
       `),
                 a()
               );
-            let i = Array.isArray(e[n]),
+            const i = Array.isArray(e[n]),
               s = i && e[n].findIndex((h) => !o.includes(h)),
               l = i && s === -1;
             if (e[n] === void 0 || o.includes(e[n]) || l) return a();
-            let c = i ? `${n}[${s}]` : n,
+            const c = i ? `${n}[${s}]` : n,
               p = o
                 .map((h) => (typeof h == 'string' ? `'${h}'` : String(h)))
                 .join(', ');
@@ -10773,8 +10775,8 @@ Incoming: ${r}`),
         if (typeof e != typeof t) return t;
         if (Go(e, t)) return Er;
         if (Array.isArray(e) && Array.isArray(t)) {
-          let r = t.reduce((n, o, a) => {
-            let i = sn(e[a], o);
+          const r = t.reduce((n, o, a) => {
+            const i = sn(e[a], o);
             return i !== Er && (n[a] = i), n;
           }, new Array(t.length));
           return t.length >= e.length
@@ -10783,17 +10785,17 @@ Incoming: ${r}`),
         }
         return We(e) && We(t)
           ? Object.keys({ ...e, ...t }).reduce((r, n) => {
-              let o = sn(e?.[n], t?.[n]);
+              const o = sn(e?.[n], t?.[n]);
               return o === Er ? r : Object.assign(r, { [n]: o });
             }, {})
           : t;
       }, 'deepDiff'),
       pl = 'UNTARGETED';
     function hl({ args: e, argTypes: t }) {
-      let r = {};
+      const r = {};
       return (
         Object.entries(e).forEach(([n, o]) => {
-          let { target: a = pl } = t[n] || {};
+          const { target: a = pl } = t[n] || {};
           (r[a] = r[a] || {}), (r[a][n] = o);
         }),
         r
@@ -10820,18 +10822,21 @@ Incoming: ${r}`),
           (this.initialArgsByStoryId[t.id] = t.initialArgs),
             (this.argsByStoryId[t.id] = t.initialArgs);
         else if (this.initialArgsByStoryId[t.id] !== t.initialArgs) {
-          let r = sn(this.initialArgsByStoryId[t.id], this.argsByStoryId[t.id]);
+          const r = sn(
+            this.initialArgsByStoryId[t.id],
+            this.argsByStoryId[t.id],
+          );
           (this.initialArgsByStoryId[t.id] = t.initialArgs),
             (this.argsByStoryId[t.id] = t.initialArgs),
             r !== Er && this.updateFromDelta(t, r);
         }
       }
       updateFromDelta(t, r) {
-        let n = Gf(r, t.argTypes);
+        const n = Gf(r, t.argTypes);
         this.argsByStoryId[t.id] = Io(this.argsByStoryId[t.id], n);
       }
       updateFromPersisted(t, r) {
-        let n = Hf(r, t.argTypes);
+        const n = Hf(r, t.argTypes);
         return this.updateFromDelta(t, n);
       }
       update(t, r) {
@@ -10857,12 +10862,13 @@ Incoming: ${r}`),
           this.set({ globals: t, globalTypes: r });
         }
         set({ globals: t = {}, globalTypes: r = {} }) {
-          let n = this.initialGlobals && sn(this.initialGlobals, this.globals);
+          const n =
+            this.initialGlobals && sn(this.initialGlobals, this.globals);
           this.allowedGlobalNames = new Set([
             ...Object.keys(t),
             ...Object.keys(r),
           ]);
-          let o = yl(r);
+          const o = yl(r);
           (this.initialGlobals = { ...o, ...t }),
             (this.globals = this.initialGlobals),
             n && n !== Er && this.updateFromPersisted(n);
@@ -10881,7 +10887,7 @@ Incoming: ${r}`),
           );
         }
         updateFromPersisted(t) {
-          let r = this.filterAllowedGlobals(t);
+          const r = this.filterAllowedGlobals(t);
           this.globals = { ...this.globals, ...r };
         }
         get() {
@@ -10905,17 +10911,17 @@ Incoming: ${r}`),
           this.entries = t;
         }
         entryFromSpecifier(t) {
-          let r = Object.values(this.entries);
+          const r = Object.values(this.entries);
           if (t === '*') return r[0];
           if (typeof t == 'string')
             return this.entries[t]
               ? this.entries[t]
               : r.find((a) => a.id.startsWith(t));
-          let { name: n, title: o } = t;
+          const { name: n, title: o } = t;
           return r.find((a) => a.name === n && a.title === o);
         }
         storyIdToEntry(t) {
-          let r = this.entries[t];
+          const r = this.entries[t];
           if (!r) throw new ds({ storyId: t });
           return r;
         }
@@ -10948,11 +10954,11 @@ CSF .story annotations deprecated; annotate story functions directly:
 See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-annotations for details and codemod.
 `;
     function un(e, t, r) {
-      let n = t,
+      const n = t,
         o = typeof t == 'function' ? t : null,
         { story: a } = n;
       a && (ee.debug('deprecated story', a), nt(rm));
-      let i = au(e),
+      const i = au(e),
         s = (typeof n != 'function' && n.name) || n.storyName || a?.name || i,
         l = [...ue(n.decorators), ...ue(a?.decorators)],
         c = { ...a?.parameters, ...n.parameters },
@@ -10983,7 +10989,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     }
     b(un, 'normalizeStory');
     function cn(e, t = e.title, r) {
-      let { id: n, argTypes: o } = e;
+      const { id: n, argTypes: o } = e;
       return {
         id: Qo(n || t),
         ...e,
@@ -10994,7 +11000,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     }
     b(cn, 'normalizeComponentAnnotations');
     var nm = b((e) => {
-        let { globals: t, globalTypes: r } = e;
+        const { globals: t, globalTypes: r } = e;
         (t || r) &&
           ee.error(
             'Global args/argTypes can only be set globally',
@@ -11002,7 +11008,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
           );
       }, 'checkGlobals'),
       om = b((e) => {
-        let { options: t } = e;
+        const { options: t } = e;
         t?.storySort &&
           ee.error('The storySort option parameter can only be set globally');
       }, 'checkStorySort'),
@@ -11013,13 +11019,13 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
       let { default: n, __namedExportsOrder: o, ...a } = e,
         i = Object.values(a)[0];
       if (Bt(i)) {
-        let c = cn(i.meta.input, r, t);
+        const c = cn(i.meta.input, r, t);
         nn(c.parameters);
-        let p = { meta: c, stories: {}, moduleExports: e };
+        const p = { meta: c, stories: {}, moduleExports: e };
         return (
           Object.keys(a).forEach((h) => {
             if (er(h, c)) {
-              let d = un(h, a[h].input, c);
+              const d = un(h, a[h].input, c);
               nn(d.parameters), (p.stories[d.id] = d);
             }
           }),
@@ -11027,13 +11033,13 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
           p
         );
       }
-      let s = cn(n, r, t);
+      const s = cn(n, r, t);
       nn(s.parameters);
-      let l = { meta: s, stories: {}, moduleExports: e };
+      const l = { meta: s, stories: {}, moduleExports: e };
       return (
         Object.keys(a).forEach((c) => {
           if (er(c, s)) {
-            let p = un(c, a[c], s);
+            const p = un(c, a[c], s);
             nn(p.parameters), (l.stories[p.id] = p);
           }
         }),
@@ -11046,11 +11052,11 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     }
     b(vl, 'mountDestructured');
     function Al(e) {
-      let t = e.toString().match(/[^(]*\(([^)]*)/);
+      const t = e.toString().match(/[^(]*\(([^)]*)/);
       if (!t) return [];
-      let r = ko(t[1]);
+      const r = ko(t[1]);
       if (!r.length) return [];
-      let n = r[0];
+      const n = r[0];
       return n.startsWith('{') && n.endsWith('}')
         ? ko(n.slice(1, -1).replace(/\s/g, '')).map((o) =>
             o.replace(/:.*|=.*/g, ''),
@@ -11066,15 +11072,15 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
         if (e[a] === '{' || e[a] === '[') r.push(e[a] === '{' ? '}' : ']');
         else if (e[a] === r[r.length - 1]) r.pop();
         else if (!r.length && e[a] === ',') {
-          let i = e.substring(n, a).trim();
+          const i = e.substring(n, a).trim();
           i && t.push(i), (n = a + 1);
         }
-      let o = e.substring(n).trim();
+      const o = e.substring(n).trim();
       return o && t.push(o), t;
     }
     b(ko, 'splitByComma');
     function Dl(e, t, r) {
-      let n = r(e);
+      const n = r(e);
       return (o) => t(n, o);
     }
     b(Dl, 'decorateStory');
@@ -11094,7 +11100,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     }
     b(Sl, 'sanitizeStoryContextUpdate');
     function wl(e, t) {
-      let r = {},
+      const r = {},
         n = b(
           (a) => (i) => {
             if (!r.value)
@@ -11108,12 +11114,12 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     }
     b(wl, 'defaultDecorateStory');
     var at = b((...e) => {
-      let t = {},
+      const t = {},
         r = e.filter(Boolean),
         n = r.reduce(
           (o, a) => (
             Object.entries(a).forEach(([i, s]) => {
-              let l = o[i];
+              const l = o[i];
               Array.isArray(s) || typeof l > 'u'
                 ? (o[i] = s)
                 : We(s) && We(l)
@@ -11126,7 +11132,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
         );
       return (
         Object.keys(t).forEach((o) => {
-          let a = r
+          const a = r
             .filter(Boolean)
             .map((i) => i[o])
             .filter((i) => typeof i < 'u');
@@ -11136,11 +11142,11 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
       );
     }, 'combineParameters');
     function Wo(e, t, r) {
-      let { moduleExport: n, id: o, name: a } = e || {},
+      const { moduleExport: n, id: o, name: a } = e || {},
         i = Ko(e, t, r),
         s = b(async (F) => {
-          let _ = {};
-          for (let j of [
+          const _ = {};
+          for (const j of [
             ...('__STORYBOOK_TEST_LOADERS__' in De &&
             Array.isArray(De.__STORYBOOK_TEST_LOADERS__)
               ? [De.__STORYBOOK_TEST_LOADERS__]
@@ -11150,31 +11156,31 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
             ue(e.loaders),
           ]) {
             if (F.abortSignal.aborted) return _;
-            let M = await Promise.all(j.map((P) => P(F)));
+            const M = await Promise.all(j.map((P) => P(F)));
             Object.assign(_, ...M);
           }
           return _;
         }, 'applyLoaders'),
         l = b(async (F) => {
-          let _ = new Array();
-          for (let j of [
+          const _ = [];
+          for (const j of [
             ...ue(r.beforeEach),
             ...ue(t.beforeEach),
             ...ue(e.beforeEach),
           ]) {
             if (F.abortSignal.aborted) return _;
-            let M = await j(F);
+            const M = await j(F);
             M && _.push(M);
           }
           return _;
         }, 'applyBeforeEach'),
         c = b(async (F) => {
-          let _ = [
+          const _ = [
             ...ue(r.experimental_afterEach),
             ...ue(t.experimental_afterEach),
             ...ue(e.experimental_afterEach),
           ].reverse();
-          for (let j of _) {
+          for (const j of _) {
             if (F.abortSignal.aborted) return;
             await j(F);
           }
@@ -11188,7 +11194,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
         S = e?.play ?? t?.play,
         w = vl(S);
       if (!g && !w) throw new Rs({ id: o });
-      let x = b(
+      const x = b(
           (F) => async () => (await F.renderToCanvas(), F.canvas),
           'defaultMount',
         ),
@@ -11221,7 +11227,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     }
     b(Cl, 'prepareMeta');
     function Ko(e, t, r) {
-      let n = ['dev', 'test'],
+      const n = ['dev', 'test'],
         o = De.DOCS_OPTIONS?.autodocs === !0 ? ['autodocs'] : [],
         a = iu(
           ...n,
@@ -11234,10 +11240,10 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
         { argTypesEnhancers: s = [], argsEnhancers: l = [] } = r,
         c = at(r.argTypes, t.argTypes, e?.argTypes);
       if (e) {
-        let S = e?.userStoryFn || e?.render || t.render || r.render;
+        const S = e?.userStoryFn || e?.render || t.render || r.render;
         i.__isArgsStory = S && S.length > 0;
       }
-      let p = { ...r.args, ...t.args, ...e?.args },
+      const p = { ...r.args, ...t.args, ...e?.args },
         h = { ...t.globals, ...e?.globals },
         d = {
           componentId: t.id,
@@ -11255,12 +11261,12 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
           storyGlobals: h,
         };
       d.argTypes = s.reduce((S, w) => w({ ...d, argTypes: S }), d.argTypes);
-      let y = { ...p };
+      const y = { ...p };
       d.initialArgs = l.reduce(
         (S, w) => ({ ...S, ...w({ ...d, initialArgs: S }) }),
         y,
       );
-      let { name: g, story: A, ...v } = d;
+      const { name: g, story: A, ...v } = d;
       return v;
     }
     b(Ko, 'preparePartialAnnotations');
@@ -11268,26 +11274,26 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
       let { args: t } = e,
         r = { ...e, allArgs: void 0, argsByTarget: void 0 };
       if (De.FEATURES?.argTypeTargetsV7) {
-        let a = hl(e);
+        const a = hl(e);
         r = { ...e, allArgs: e.args, argsByTarget: a, args: a[pl] || {} };
       }
-      let n = Object.entries(r.args).reduce((a, [i, s]) => {
+      const n = Object.entries(r.args).reduce((a, [i, s]) => {
           if (!r.argTypes[i]?.mapping) return (a[i] = s), a;
-          let l = b((c) => {
-            let p = r.argTypes[i].mapping;
+          const l = b((c) => {
+            const p = r.argTypes[i].mapping;
             return p && c in p ? p[c] : c;
           }, 'mappingFn');
           return (a[i] = Array.isArray(s) ? s.map(l) : l(s)), a;
         }, {}),
         o = Object.entries(n).reduce((a, [i, s]) => {
-          let l = r.argTypes[i] || {};
+          const l = r.argTypes[i] || {};
           return mn(l, n, r.globals) && (a[i] = s), a;
         }, {});
       return { ...r, unmappedArgs: t, args: o };
     }
     b(Yo, 'prepareContext');
     var Ro = b((e, t, r) => {
-        let n = typeof e;
+        const n = typeof e;
         switch (n) {
           case 'boolean':
           case 'string':
@@ -11340,16 +11346,16 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
             ? e
             : e &&
               cl(e, (n, o) => {
-                let a = n.name || o.toString();
+                const a = n.name || o.toString();
                 return !!(!t || Ms(a, t)) && (!r || !Ms(a, r));
               }),
         'filterArgTypes',
       ),
       im = b((e, t, r) => {
-        let { type: n, options: o } = e;
+        const { type: n, options: o } = e;
         if (n) {
           if (r.color && r.color.test(t)) {
-            let a = n.name;
+            const a = n.name;
             if (a === 'string') return { control: { type: 'color' } };
             a !== 'enum' &&
               ee.warn(
@@ -11367,7 +11373,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
             case 'number':
               return { control: { type: 'number' } };
             case 'enum': {
-              let { value: a } = n;
+              const { value: a } = n;
               return {
                 control: { type: a?.length <= 5 ? 'radio' : 'select' },
                 options: a,
@@ -11382,7 +11388,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
         }
       }, 'inferControl'),
       Tl = b((e) => {
-        let {
+        const {
           argTypes: t,
           parameters: {
             __isArgsStory: r,
@@ -11394,7 +11400,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
           },
         } = e;
         if (!r) return t;
-        let i = am(t, n, o),
+        const i = am(t, n, o),
           s = Ot(i, (l, c) => l?.type && im(l, c.toString(), a));
         return at(s, i);
       }, 'inferControls');
@@ -11436,13 +11442,13 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     b(Qt, 'normalizeProjectAnnotations');
     var sm = b(
       (e) => async () => {
-        let t = [];
-        for (let r of e) {
-          let n = await r();
+        const t = [];
+        for (const r of e) {
+          const n = await r();
           n && t.unshift(n);
         }
         return async () => {
-          for (let r of t) await r();
+          for (const r of t) await r();
         };
       },
       'composeBeforeAllHooks',
@@ -11462,7 +11468,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     b(Zt, 'getField');
     function ot(e, t, r = {}) {
       return Zt(e, t).reduce((n, o) => {
-        let a = ue(o);
+        const a = ue(o);
         return r.reverseFileOrder ? [...a, ...n] : [...n, ...a];
       }, []);
     }
@@ -11476,7 +11482,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     }
     b(It, 'getSingletonField');
     function _t(e) {
-      let t = ot(e, 'argTypesEnhancers'),
+      const t = ot(e, 'argTypesEnhancers'),
         r = Zt(e, 'runStep'),
         n = ot(e, 'beforeAll');
       return {
@@ -11540,7 +11546,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     }
     b(Ol, 'extractAnnotation');
     function dm(e) {
-      let t = Array.isArray(e) ? e : [e];
+      const t = Array.isArray(e) ? e : [e];
       return (
         (globalThis.globalProjectAnnotations = _t([
           globalThis.defaultProjectAnnotations ?? {},
@@ -11563,7 +11569,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
         p = { ...yl(l.globalTypes), ...l.initialGlobals, ...c.storyGlobals },
         h = new kl(),
         d = b(() => {
-          let S = Yo({
+          const S = Yo({
             hooks: new al(),
             globals: p,
             args: { ...c.initialArgs },
@@ -11584,7 +11590,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
             (S.context = S),
             c.renderToCanvas &&
               (S.renderToCanvas = async () => {
-                let w = await c.renderToCanvas?.(
+                const w = await c.renderToCanvas?.(
                   {
                     componentId: c.componentId,
                     title: c.title,
@@ -11614,7 +11620,7 @@ ${x.description}`);
         }, 'initializeContext'),
         y,
         g = b(async (S) => {
-          let w = d();
+          const w = d();
           return (
             (w.canvasElement ??= globalThis?.document?.body),
             y && (w.loaded = y.loaded),
@@ -11623,13 +11629,13 @@ ${x.description}`);
           );
         }, 'play'),
         A = b((S) => {
-          let w = d();
+          const w = d();
           return Object.assign(w, S), Bl(c, w);
         }, 'run'),
         v = c.playFunction ? g : void 0;
       return Object.assign(
         b(function (S) {
-          let w = d();
+          const w = d();
           return (
             y && (w.loaded = y.loaded),
             (w.args = { ...w.initialArgs, ...S }),
@@ -11640,9 +11646,9 @@ ${x.description}`);
           id: c.id,
           storyName: i,
           load: b(async () => {
-            for (let w of [...gt].reverse()) await w();
+            for (const w of [...gt].reverse()) await w();
             gt.length = 0;
-            let S = d();
+            const S = d();
             (S.loaded = await c.applyLoaders(S)),
               gt.push(...(await c.applyBeforeEach(S)).filter(Boolean)),
               (y = S);
@@ -11664,7 +11670,7 @@ ${x.description}`);
       let { default: n, __esModule: o, __namedExportsOrder: a, ...i } = e,
         s = n;
       return Object.entries(i).reduce((l, [c, p]) => {
-        let { story: h, meta: d } = Rl(p);
+        const { story: h, meta: d } = Rl(p);
         return (
           !s && d && (s = d),
           er(c, s) ? Object.assign(l, { [c]: r(h, s, t, c) }) : l
@@ -11693,13 +11699,13 @@ ${x.description}`);
               More info: https://storybook.js.org/docs/api/portable-stories-playwright
             `);
             await r.evaluate(async (s) => {
-              let l = await globalThis.__pwUnwrapObject?.(s);
+              const l = await globalThis.__pwUnwrapObject?.(s);
               return ('__pw_type' in l ? l.type : l)?.load?.();
             }, o);
-            let i = await t(o, ...a);
+            const i = await t(o, ...a);
             return (
               await r.evaluate(async (s) => {
-                let l = await globalThis.__pwUnwrapObject?.(s),
+                const l = await globalThis.__pwUnwrapObject?.(s),
                   c = '__pw_type' in l ? l.type : l,
                   p = document.querySelector('#root');
                 return c?.play?.({ canvasElement: p });
@@ -11712,9 +11718,9 @@ ${x.description}`);
     }
     b(fm, 'createPlaywrightTest');
     async function Bl(e, t) {
-      for (let o of [...gt].reverse()) await o();
+      for (const o of [...gt].reverse()) await o();
       if (((gt.length = 0), !t.canvasElement)) {
-        let o = document.createElement('div');
+        const o = document.createElement('div');
         globalThis?.document?.body?.appendChild(o),
           (t.canvasElement = o),
           gt.push(() => {
@@ -11724,7 +11730,7 @@ ${x.description}`);
       }
       if (((t.loaded = await e.applyLoaders(t)), t.abortSignal.aborted)) return;
       gt.push(...(await e.applyBeforeEach(t)).filter(Boolean));
-      let r = e.playFunction,
+      const r = e.playFunction,
         n = e.usesMount;
       n || (await t.mount()),
         !t.abortSignal.aborted &&
@@ -11747,7 +11753,7 @@ ${x.description}`);
         constructor(t, r, n) {
           (this.importFn = r),
             (this.getStoriesJsonData = b(() => {
-              let i = this.getSetStoriesPayload(),
+              const i = this.getSetStoriesPayload(),
                 s = [
                   'fileName',
                   'docsOnly',
@@ -11758,7 +11764,7 @@ ${x.description}`);
               return {
                 v: 3,
                 stories: Ot(i.stories, (l) => {
-                  let { importPath: c } = this.storyIndex.entries[l.id];
+                  const { importPath: c } = this.storyIndex.entries[l.id];
                   return {
                     ...Oo(l, ['id', 'name', 'title']),
                     importPath: c,
@@ -11771,7 +11777,7 @@ ${x.description}`);
             }, 'getStoriesJsonData')),
             (this.storyIndex = new Qf(t)),
             (this.projectAnnotations = Qt(n));
-          let { initialGlobals: o, globalTypes: a } = this.projectAnnotations;
+          const { initialGlobals: o, globalTypes: a } = this.projectAnnotations;
           (this.args = new Wf()),
             (this.userGlobals = new Kf({ globals: o, globalTypes: a })),
             (this.hooks = {}),
@@ -11782,7 +11788,7 @@ ${x.description}`);
         }
         setProjectAnnotations(t) {
           this.projectAnnotations = Qt(t);
-          let { initialGlobals: r, globalTypes: n } = t;
+          const { initialGlobals: r, globalTypes: n } = t;
           this.userGlobals.set({ globals: r, globalTypes: n });
         }
         async onStoriesChanged({ importFn: t, storyIndex: r }) {
@@ -11794,12 +11800,12 @@ ${x.description}`);
           return this.storyIndex.storyIdToEntry(t);
         }
         async loadCSFFileByStoryId(t) {
-          let { importPath: r, title: n } = this.storyIndex.storyIdToEntry(t),
+          const { importPath: r, title: n } = this.storyIndex.storyIdToEntry(t),
             o = await this.importFn(r);
           return this.processCSFFileWithCache(o, r, n);
         }
         async loadAllCSFFiles() {
-          let t = {};
+          const t = {};
           return (
             Object.entries(this.storyIndex.entries).forEach(
               ([r, { importPath: n }]) => {
@@ -11820,7 +11826,7 @@ ${x.description}`);
           this.cachedCSFFiles = await this.loadAllCSFFiles();
         }
         preparedMetaFromCSFFile({ csfFile: t }) {
-          let r = t.meta;
+          const r = t.meta;
           return this.prepareMetaWithCache(
             r,
             this.projectAnnotations,
@@ -11828,13 +11834,13 @@ ${x.description}`);
           );
         }
         async loadStory({ storyId: t }) {
-          let r = await this.loadCSFFileByStoryId(t);
+          const r = await this.loadCSFFileByStoryId(t);
           return this.storyFromCSFFile({ storyId: t, csfFile: r });
         }
         storyFromCSFFile({ storyId: t, csfFile: r }) {
-          let n = r.stories[t];
+          const n = r.stories[t];
           if (!n) throw new xs({ storyId: t });
-          let o = r.meta,
+          const o = r.meta,
             a = this.prepareStoryWithCache(
               n,
               o,
@@ -11852,19 +11858,19 @@ ${x.description}`);
             .map((r) => this.storyFromCSFFile({ storyId: r, csfFile: t }));
         }
         async loadEntry(t) {
-          let r = await this.storyIdToEntry(t),
+          const r = await this.storyIdToEntry(t),
             n = r.type === 'docs' ? r.storiesImports : [],
             [o, ...a] = await Promise.all([
               this.importFn(r.importPath),
               ...n.map((i) => {
-                let s = this.storyIndex.importPathToEntry(i);
+                const s = this.storyIndex.importPathToEntry(i);
                 return this.loadCSFFileByStoryId(s.id);
               }),
             ]);
           return { entryExports: o, csfFiles: a };
         }
         getStoryContext(t, { forceInitialArgs: r = !1 } = {}) {
-          let n = this.userGlobals.get(),
+          const n = this.userGlobals.get(),
             { initialGlobals: o } = this.userGlobals,
             a = new kl();
           return Yo({
@@ -11883,17 +11889,17 @@ ${x.description}`);
         }
         async cleanupStory(t) {
           this.hooks[t.id].clean();
-          let r = this.cleanupCallbacks[t.id];
-          if (r) for (let n of [...r].reverse()) await n();
+          const r = this.cleanupCallbacks[t.id];
+          if (r) for (const n of [...r].reverse()) await n();
           delete this.cleanupCallbacks[t.id];
         }
         extract(t = { includeDocsOnly: !1 }) {
-          let { cachedCSFFiles: r } = this;
+          const { cachedCSFFiles: r } = this;
           if (!r) throw new hs();
           return Object.entries(this.storyIndex.entries).reduce(
             (n, [o, { type: a, importPath: i }]) => {
               if (a === 'docs') return n;
-              let s = r[i],
+              const s = r[i],
                 l = this.storyFromCSFFile({ storyId: o, csfFile: s });
               return (
                 (!t.includeDocsOnly && l.parameters.docsOnly) ||
@@ -11920,7 +11926,7 @@ ${x.description}`);
           );
         }
         getSetStoriesPayload() {
-          let t = this.extract({ includeDocsOnly: !0 }),
+          const t = this.extract({ includeDocsOnly: !0 }),
             r = Object.values(t).reduce(
               (n, { title: o }) => ((n[o] = {}), n),
               {},
@@ -11959,12 +11965,12 @@ ${x.description}`);
           } catch {
             return null;
           }
-          let n = this.cachedCSFFiles[r],
+          const n = this.cachedCSFFiles[r],
             o = this.storyFromCSFFile({ storyId: t, csfFile: n });
           return {
             ...o,
             storyFn: b((a) => {
-              let i = {
+              const i = {
                 ...this.getStoryContext(o),
                 abortSignal: new AbortController().signal,
                 canvasElement: null,
@@ -11988,10 +11994,10 @@ ${x.description}`);
     b(Nl, 'slash');
     var gm = b((e) => {
       if (e.length === 0) return e;
-      let t = e[e.length - 1],
+      const t = e[e.length - 1],
         r = t?.replace(/(?:[.](?:story|stories))?([.][^.]+)$/i, '');
       if (e.length === 1) return [r];
-      let n = e[e.length - 2];
+      const n = e[e.length - 2];
       return r && n && r.toLowerCase() === n.toLowerCase()
         ? [...e.slice(0, -2), r]
         : r && (/^(story|stories)([.][^.]+)$/i.test(t) || /^index$/i.test(r))
@@ -12006,7 +12012,7 @@ ${x.description}`);
     }
     b(_o, 'pathJoin');
     var bm = b((e, t, r) => {
-        let {
+        const {
           directory: n,
           importPathMatcher: o,
           titlePrefix: a = '',
@@ -12017,7 +12023,7 @@ ${x.description}`);
       webpack is mis-configured in production mode. To force webpack to produce
       filenames, set optimization.moduleIds = "named" in your webpack config.
     `);
-        let i = Nl(String(e));
+        const i = Nl(String(e));
         if (o.exec(i)) {
           if (!r) {
             let s = i.replace(n, ''),
@@ -12029,7 +12035,7 @@ ${x.description}`);
       }, 'userOrAutoTitleFromSpecifier'),
       i5 = b((e, t, r) => {
         for (let n = 0; n < t.length; n += 1) {
-          let o = bm(e, t[n], r);
+          const o = bm(e, t[n], r);
           if (o) return o;
         }
         return r || void 0;
@@ -12048,7 +12054,7 @@ ${x.description}`);
             for (; a[s] || i[s]; ) {
               if (!a[s]) return -1;
               if (!i[s]) return 1;
-              let l = a[s],
+              const l = a[s],
                 c = i[s];
               if (l !== c) {
                 let h = o.indexOf(l),
@@ -12101,7 +12107,7 @@ ${x.description}`);
       { AbortController: qs } = globalThis;
     function Bo(e) {
       try {
-        let { name: t = 'Error', message: r = String(e), stack: n } = e;
+        const { name: t = 'Error', message: r = String(e), stack: n } = e;
         return { name: t, message: r, stack: n };
       } catch {
         return { name: 'Error', message: String(e) };
@@ -12184,15 +12190,15 @@ ${x.description}`);
       storyContext() {
         if (!this.story)
           throw new Error('Cannot call storyContext before preparing');
-        let { forceInitialArgs: t } = this.renderOptions;
+        const { forceInitialArgs: t } = this.renderOptions;
         return this.store.getStoryContext(this.story, { forceInitialArgs: t });
       }
       async render({ initial: t = !1, forceRemount: r = !1 } = {}) {
-        let { canvasElement: n } = this;
+        const { canvasElement: n } = this;
         if (!this.story) throw new Error('cannot render when not prepared');
-        let o = this.story;
+        const o = this.story;
         if (!n) throw new Error('cannot render when canvasElement is unset');
-        let {
+        const {
           id: a,
           componentId: i,
           title: s,
@@ -12210,7 +12216,7 @@ ${x.description}`);
           S = !1,
           w = o.usesMount;
         try {
-          let x = {
+          const x = {
             ...this.storyContext(),
             viewMode: this.viewMode,
             abortSignal: v,
@@ -12220,7 +12226,7 @@ ${x.description}`);
             context: null,
             canvas: {},
             renderToCanvas: b(async () => {
-              let L = await this.renderToScreen(C, n);
+              const L = await this.renderToScreen(C, n);
               (this.teardownRender = L || (() => {})), (S = !0);
             }, 'renderToCanvas'),
             mount: b(async (...L) => {
@@ -12236,7 +12242,7 @@ ${x.description}`);
             }, 'mount'),
           };
           x.context = x;
-          let C = {
+          const C = {
             componentId: i,
             title: s,
             kind: s,
@@ -12267,7 +12273,7 @@ ${x.description}`);
             v.aborted)
           )
             return;
-          let k = await h(x);
+          const k = await h(x);
           if (
             (this.store.addCleanupCallbacks(o, k),
             this.checkIfAborted(v) ||
@@ -12276,7 +12282,7 @@ ${x.description}`);
               v.aborted))
           )
             return;
-          let F =
+          const F =
               this.story.parameters?.test?.dangerouslyIgnoreUnhandledErrors ===
               !0,
             _ = new Set(),
@@ -12332,7 +12338,7 @@ ${x.description}`);
               (await this.runPhase(v, 'afterEach', async () => {
                 await d(x);
               }));
-          let M = !F && _.size > 0,
+          const M = !F && _.size > 0,
             P = x.reporting.reports.some((L) => L.status === 'failed'),
             W = M || P;
           await this.runPhase(v, 'finished', async () =>
@@ -12416,7 +12422,7 @@ ${x.description}`);
         async initialize() {
           this.setupListeners();
           try {
-            let t = await this.getProjectAnnotationsOrRenderError();
+            const t = await this.getProjectAnnotationsOrRenderError();
             await this.runBeforeAllHook(t),
               await this.initializeWithProjectAnnotations(t);
           } catch (t) {
@@ -12437,7 +12443,7 @@ ${x.description}`);
         }
         async getProjectAnnotationsOrRenderError() {
           try {
-            let t = await this.getProjectAnnotations();
+            const t = await this.getProjectAnnotations();
             if (
               ((this.renderToCanvas = t.renderToCanvas), !this.renderToCanvas)
             )
@@ -12452,7 +12458,7 @@ ${x.description}`);
         async initializeWithProjectAnnotations(t) {
           this.projectAnnotationsBeforeInitialization = t;
           try {
-            let r = await this.getStoryIndexFromServer();
+            const r = await this.getStoryIndexFromServer();
             return this.initializeWithStoryIndex(r);
           } catch (r) {
             throw (
@@ -12471,7 +12477,7 @@ ${x.description}`);
           }
         }
         async getStoryIndexFromServer() {
-          let t = await Am(Dm);
+          const t = await Am(Dm);
           if (t.status === 200) return t.json();
           throw new bs({ text: await t.text() });
         }
@@ -12495,7 +12501,7 @@ ${x.description}`);
         emitGlobals() {
           if (!this.storyStoreValue)
             throw new Me({ methodName: 'emitGlobals' });
-          let t = {
+          const t = {
             globals: this.storyStoreValue.userGlobals.get() || {},
             globalTypes:
               this.storyStoreValue.projectAnnotations.globalTypes || {},
@@ -12504,7 +12510,7 @@ ${x.description}`);
         }
         async onGetProjectAnnotationsChanged({ getProjectAnnotations: t }) {
           delete this.previewEntryError, (this.getProjectAnnotations = t);
-          let r = await this.getProjectAnnotationsOrRenderError();
+          const r = await this.getProjectAnnotationsOrRenderError();
           if ((await this.runBeforeAllHook(r), !this.storyStoreValue)) {
             await this.initializeWithProjectAnnotations(r);
             return;
@@ -12520,7 +12526,7 @@ ${x.description}`);
             ))
           )
             try {
-              let t = await this.getStoryIndexFromServer();
+              const t = await this.getStoryIndexFromServer();
               if (this.projectAnnotationsBeforeInitialization) {
                 this.initializeWithStoryIndex(t);
                 return;
@@ -12548,7 +12554,7 @@ ${x.description}`);
           )
             throw new Me({ methodName: 'onUpdateGlobals' });
           if ((this.storyStoreValue.userGlobals.update(t), r)) {
-            let {
+            const {
               initialGlobals: n,
               storyGlobals: o,
               userGlobals: a,
@@ -12561,7 +12567,7 @@ ${x.description}`);
               globals: i,
             });
           } else {
-            let { initialGlobals: n, globals: o } =
+            const { initialGlobals: n, globals: o } =
               this.storyStoreValue.userGlobals;
             this.channel.emit(Wt, {
               initialGlobals: n,
@@ -12591,7 +12597,7 @@ ${x.description}`);
         async onRequestArgTypesInfo({ id: t, payload: r }) {
           try {
             await this.storeInitializationPromise;
-            let n = await this.storyStoreValue?.loadStory(r);
+            const n = await this.storyStoreValue?.loadStory(r);
             this.channel.emit(to, {
               id: t,
               success: !0,
@@ -12605,7 +12611,7 @@ ${x.description}`);
         async onResetArgs({ storyId: t, argNames: r }) {
           if (!this.storyStoreValue)
             throw new Me({ methodName: 'onResetArgs' });
-          let n =
+          const n =
               this.storyRenders.find((a) => a.id === t)?.story ||
               (await this.storyStoreValue.loadStory({ storyId: t })),
             o = (
@@ -12629,7 +12635,7 @@ ${x.description}`);
         renderStoryToElement(t, r, n, o) {
           if (!this.renderToCanvas || !this.storyStoreValue)
             throw new Me({ methodName: 'renderStoryToElement' });
-          let a = new Po(
+          const a = new Po(
             this.channel,
             this.storyStoreValue,
             this.renderToCanvas,
@@ -12696,7 +12702,7 @@ ${x.description}`);
           (this.store = r),
           (this.renderStoryToElement = n),
           (this.storyIdByName = b((a) => {
-            let i = this.nameToStoryId.get(a);
+            const i = this.nameToStoryId.get(a);
             if (i) return i;
             throw new Error(`No story found with that name: ${a}`);
           }, 'storyIdByName')),
@@ -12716,7 +12722,7 @@ ${x.description}`);
                 );
               return this.primaryStory;
             }
-            let i = this.storyIdToCSFFile.get(a);
+            const i = this.storyIdToCSFFile.get(a);
             if (!i)
               throw new Error(
                 `Called \`storyById\` for story that was never loaded: ${a}`,
@@ -12751,7 +12757,7 @@ ${x.description}`);
           this.store
             .componentStoriesFromCSFFile({ csfFile: t })
             .forEach((r) => {
-              let n = t.stories[r.id];
+              const n = t.stories[r.id];
               this.storyIdToCSFFile.set(n.id, t),
                 this.exportToStory.set(n.moduleExport, r);
             });
@@ -12772,7 +12778,7 @@ ${x.description}`);
             }));
       }
       referenceMeta(t, r) {
-        let n = this.resolveModuleExport(t);
+        const n = this.resolveModuleExport(t);
         if (n.type !== 'meta')
           throw new Error(
             '<Meta of={} /> must reference a CSF file module export or meta export. Did you mistakenly reference your component instead of your CSF file?',
@@ -12780,7 +12786,7 @@ ${x.description}`);
         r && this.attachCSFFile(n.csfFile);
       }
       get projectAnnotations() {
-        let { projectAnnotations: t } = this.store;
+        const { projectAnnotations: t } = this.store;
         if (!t)
           throw new Error(
             "Can't get projectAnnotations from DocsContext before they are initialized",
@@ -12799,9 +12805,9 @@ ${x.description}`);
           throw new Error(
             'No CSF file attached to this docs file, did you forget to use <Meta of={} />?',
           );
-        let r = Array.from(this.attachedCSFFiles)[0];
+        const r = Array.from(this.attachedCSFFiles)[0];
         if (t === 'meta') return { type: 'meta', csfFile: r };
-        let { component: n } = r.meta;
+        const { component: n } = r.meta;
         if (!n)
           throw new Error(
             'Attached CSF file does not defined a component, did you forget to export one?',
@@ -12809,9 +12815,9 @@ ${x.description}`);
         return { type: 'component', component: n };
       }
       resolveModuleExport(t) {
-        let r = this.exportsToCSFFile.get(t);
+        const r = this.exportsToCSFFile.get(t);
         if (r) return { type: 'meta', csfFile: r };
-        let n = this.exportToStory.get(Bt(t) ? t.input : t);
+        const n = this.exportToStory.get(Bt(t) ? t.input : t);
         return n
           ? { type: 'story', story: n }
           : { type: 'component', component: t };
@@ -12819,11 +12825,11 @@ ${x.description}`);
       resolveOf(t, r = []) {
         let n;
         if (['component', 'meta', 'story'].includes(t)) {
-          let o = t;
+          const o = t;
           n = this.resolveAttachedModuleExportType(o);
         } else n = this.resolveModuleExport(t);
         if (r.length && !r.includes(n.type)) {
-          let o = n.type === 'component' ? 'component or unknown' : n.type;
+          const o = n.type === 'component' ? 'component or unknown' : n.type;
           throw new Error(me`Invalid value passed to the 'of' prop. The value was resolved to a '${o}' type but the only types for this block are: ${r.join(', ')}.
         - Did you pass a component to the 'of' prop when the block only supports a story or a meta?
         - ... or vice versa?
@@ -12865,10 +12871,10 @@ ${x.description}`);
         }
         async prepare() {
           this.preparing = !0;
-          let { entryExports: t, csfFiles: r = [] } =
+          const { entryExports: t, csfFiles: r = [] } =
             await this.store.loadEntry(this.id);
           if (this.torndown) throw fn;
-          let { importPath: n, title: o } = this.entry,
+          const { importPath: n, title: o } = this.entry,
             a = this.store.processCSFFileWithCache(t, n, o),
             i = Object.keys(a.stories)[0];
           (this.story = this.store.storyFromCSFFile({
@@ -12884,19 +12890,19 @@ ${x.description}`);
         docsContext(t) {
           if (!this.csfFiles)
             throw new Error('Cannot render docs before preparing');
-          let r = new Ul(this.channel, this.store, t, this.csfFiles);
+          const r = new Ul(this.channel, this.store, t, this.csfFiles);
           return this.csfFiles.forEach((n) => r.attachCSFFile(n)), r;
         }
         async renderToElement(t, r) {
           if (!this.story || !this.csfFiles)
             throw new Error('Cannot render docs before preparing');
-          let n = this.docsContext(r),
+          const n = this.docsContext(r),
             { docs: o } = this.story.parameters || {};
           if (!o)
             throw new Error(
               'Cannot render a story in viewMode=docs if `@storybook/addon-docs` is not installed',
             );
-          let a = await o.renderer(),
+          const a = await o.renderer(),
             { render: i } = a,
             s = b(async () => {
               try {
@@ -12937,7 +12943,7 @@ ${x.description}`);
         }
         async prepare() {
           this.preparing = !0;
-          let { entryExports: t, csfFiles: r = [] } =
+          const { entryExports: t, csfFiles: r = [] } =
             await this.store.loadEntry(this.id);
           if (this.torndown) throw fn;
           (this.csfFiles = r), (this.exports = t), (this.preparing = !1);
@@ -12957,13 +12963,13 @@ ${x.description}`);
         async renderToElement(t, r) {
           if (!this.exports || !this.csfFiles || !this.store.projectAnnotations)
             throw new Error('Cannot render docs before preparing');
-          let n = this.docsContext(r),
+          const n = this.docsContext(r),
             { docs: o } = this.store.projectAnnotations.parameters || {};
           if (!o)
             throw new Error(
               'Cannot render a story in viewMode=docs if `@storybook/addon-docs` is not installed',
             );
-          let a = { ...o, page: this.exports.default },
+          const a = { ...o, page: this.exports.default },
             i = await o.renderer(),
             { render: s } = i,
             l = b(async () => {
@@ -12989,7 +12995,7 @@ ${x.description}`);
     var Js = ql,
       Cm = globalThis;
     function Vl(e) {
-      let t = (e.composedPath && e.composedPath()[0]) || e.target;
+      const t = (e.composedPath && e.composedPath()[0]) || e.target;
       return (
         /input|textarea/i.test(t.tagName) ||
         t.getAttribute('contenteditable') !== null
@@ -13033,7 +13039,7 @@ ${x.description}`);
       async setInitialGlobals() {
         if (!this.storyStoreValue)
           throw new Me({ methodName: 'setInitialGlobals' });
-        let { globals: t } = this.selectionStore.selectionSpecifier || {};
+        const { globals: t } = this.selectionStore.selectionSpecifier || {};
         t && this.storyStoreValue.userGlobals.updateFromPersisted(t),
           this.emitGlobals();
       }
@@ -13053,7 +13059,7 @@ ${x.description}`);
           this.renderMissingStory();
           return;
         }
-        let { storySpecifier: t, args: r } =
+        const { storySpecifier: t, args: r } =
             this.selectionStore.selectionSpecifier,
           n = this.storyStoreValue.storyIndex.entryFromSpecifier(t);
         if (!n) {
@@ -13065,7 +13071,7 @@ ${x.description}`);
               );
           return;
         }
-        let { id: o, type: a } = n;
+        const { id: o, type: a } = n;
         this.selectionStore.setSelection({ storyId: o, viewMode: a }),
           this.channel.emit(_i, this.selectionStore.selection),
           this.channel.emit(ro, this.selectionStore.selection),
@@ -13085,7 +13091,7 @@ ${x.description}`);
       }
       onKeydown(t) {
         if (!this.storyRenders.find((r) => r.disableKeyListeners) && !Vl(t)) {
-          let {
+          const {
             altKey: r,
             ctrlKey: n,
             metaKey: o,
@@ -13117,7 +13123,7 @@ ${x.description}`);
         this.selectionStore.setQueryParams(t);
       }
       async onUpdateGlobals({ globals: t }) {
-        let r =
+        const r =
           (this.currentRender instanceof Po && this.currentRender.story) ||
           void 0;
         super.onUpdateGlobals({ globals: t, currentStory: r }),
@@ -13136,10 +13142,10 @@ ${x.description}`);
             ));
       }
       async renderSelection({ persistedArgs: t } = {}) {
-        let { renderToCanvas: r } = this;
+        const { renderToCanvas: r } = this;
         if (!this.storyStoreValue || !r)
           throw new Me({ methodName: 'renderSelection' });
-        let { selection: n } = this.selectionStore;
+        const { selection: n } = this.selectionStore;
         if (!n)
           throw new Error(
             'Cannot call renderSelection as no selection was made',
@@ -13153,7 +13159,7 @@ ${x.description}`);
             this.renderStoryLoadingException(o, d);
           return;
         }
-        let i = this.currentSelection?.storyId !== o,
+        const i = this.currentSelection?.storyId !== o,
           s = this.currentRender?.type !== a.type;
         a.type === 'story'
           ? this.view.showPreparingStory({ immediate: s })
@@ -13183,9 +13189,9 @@ ${x.description}`);
                 a,
                 this.mainStoryCallbacks(o),
               ));
-        let c = this.currentSelection;
+        const c = this.currentSelection;
         this.currentSelection = n;
-        let p = this.currentRender;
+        const p = this.currentRender;
         this.currentRender = l;
         try {
           await l.prepare();
@@ -13194,7 +13200,7 @@ ${x.description}`);
             d !== fn && this.renderStoryLoadingException(o, d);
           return;
         }
-        let h = !i && p && !l.isEqual(p);
+        const h = !i && p && !l.isEqual(p);
         if (
           (t &&
             an(l) &&
@@ -13213,7 +13219,7 @@ ${x.description}`);
           an(l))
         ) {
           on(!!l.story);
-          let {
+          const {
             parameters: d,
             initialArgs: y,
             argTypes: g,
@@ -13292,7 +13298,7 @@ ${x.description}`);
         ee.error(r), this.view.showErrorDisplay(r), this.channel.emit(ao, t);
       }
       renderException(t, r) {
-        let { name: n = 'Error', message: o = String(r), stack: a } = r;
+        const { name: n = 'Error', message: o = String(r), stack: a } = r;
         this.channel.emit(Bi, { name: n, message: o, stack: a }),
           this.channel.emit(Kt, { newPhase: 'errored', storyId: t }),
           this.view.showErrorDisplay(r),
@@ -13349,7 +13355,7 @@ ${x.description}`);
               return new Date(e.replaceAll(' ', '+').slice(6, -1));
             if (e.startsWith('!hex(') && e.endsWith(')'))
               return `#${e.slice(5, -1)}`;
-            let t = e.slice(1).match(Yl);
+            const t = e.slice(1).match(Yl);
             if (t)
               return e.startsWith('!rgba') || e.startsWith('!RGBA')
                 ? `${t[1]}(${t[2]}, ${t[3]}, ${t[4]}, ${t[5]})`
@@ -13363,7 +13369,9 @@ ${x.description}`);
         },
       },
       Hs = b((e) => {
-        let t = e.split(';').map((r) => r.replace('=', '~').replace(':', '='));
+        const t = e
+          .split(';')
+          .map((r) => r.replace('=', '~').replace(':', '='));
         return Object.entries((0, Fm.parse)(t.join(';'), km)).reduce(
           (r, [n, o]) =>
             jo(n, o)
@@ -13379,14 +13387,14 @@ ${x.description}`);
       }, 'parseArgsParam'),
       { history: Xl, document: bt } = De;
     function Ql(e) {
-      let t = (e || '').match(/^\/story\/(.+)/);
+      const t = (e || '').match(/^\/story\/(.+)/);
       if (!t)
         throw new Error(`Invalid path '${e}',  must start with '/story/'`);
       return t[1];
     }
     b(Ql, 'pathToId');
     var Zl = b(({ selection: e, extraParams: t }) => {
-        let r = bt?.location.search.slice(1),
+        const r = bt?.location.search.slice(1),
           {
             path: n,
             selectedKind: o,
@@ -13397,7 +13405,7 @@ ${x.description}`);
       }, 'getQueryString'),
       Rm = b((e) => {
         if (!e) return;
-        let t = Zl({ selection: e }),
+        const t = Zl({ selection: e }),
           { hash: r = '' } = bt.location;
         (bt.title = e.storyId),
           Xl.replaceState({}, '', `${bt.location.pathname}${t}${r}`);
@@ -13421,7 +13429,7 @@ ${x.description}`);
             n = typeof t.globals == 'string' ? Hs(t.globals) : void 0,
             o = vr(t.viewMode);
           (typeof o != 'string' || !o.match(/docs|story/)) && (o = 'story');
-          let a = vr(t.path),
+          const a = vr(t.path),
             i = a ? Ql(a) : vr(t.id);
           if (i) return { storySpecifier: i, args: r, globals: n, viewMode: o };
         }
@@ -13435,7 +13443,7 @@ ${x.description}`);
           (this.selection = t), Rm(this.selection);
         }
         setQueryParams(t) {
-          let r = Zl({ extraParams: t }),
+          const r = Zl({ extraParams: t }),
             { hash: n = '' } = bt.location;
           Xl.replaceState({}, '', `${bt.location.pathname}${r}${n}`);
         }
@@ -13470,7 +13478,7 @@ ${x.description}`);
       ru = class {
         constructor() {
           if (((this.testing = !1), typeof Re < 'u')) {
-            let { __SPECIAL_TEST_PARAMETER__: t } = (0, Nm.parse)(
+            const { __SPECIAL_TEST_PARAMETER__: t } = (0, Nm.parse)(
               Re.location.search.slice(1),
             );
             switch (t) {
@@ -13518,7 +13526,7 @@ ${x.description}`);
             return;
           }
           this.checkIfLayoutExists(t);
-          let r = wo[t];
+          const r = wo[t];
           Re.body.classList.remove(this.currentLayoutClass),
             Re.body.classList.add(r),
             (this.currentLayoutClass = r);
@@ -13629,12 +13637,12 @@ ${x.description}`);
       Um = 'script',
       Ks = 'scripts-root';
     function Lo() {
-      let e = kt.createEvent('Event');
+      const e = kt.createEvent('Event');
       e.initEvent('DOMContentLoaded', !0, !0), kt.dispatchEvent(e);
     }
     b(Lo, 'simulateDOMContentLoaded');
     function nu(e, t, r) {
-      let n = kt.createElement('script');
+      const n = kt.createElement('script');
       (n.type = e.type === 'module' ? 'module' : 'text/javascript'),
         e.src
           ? ((n.onload = t), (n.onerror = t), (n.src = e.src))
@@ -13655,11 +13663,11 @@ ${x.description}`);
       t
         ? (t.innerHTML = '')
         : ((t = kt.createElement('div')), (t.id = Ks), kt.body.appendChild(t));
-      let r = Array.from(e.querySelectorAll(Um));
+      const r = Array.from(e.querySelectorAll(Um));
       if (r.length) {
-        let n = [];
+        const n = [];
         r.forEach((o) => {
-          let a = o.getAttribute('type');
+          const a = o.getAttribute('type');
           (!a || Mm.includes(a)) && n.push((i) => nu(o, i, t));
         }),
           n.length && Xo(n, Lo, void 0);
@@ -13678,7 +13686,7 @@ ${x.description}`);
       ),
       Wm = (e, t, r, n) => {
         if ((t && typeof t == 'object') || typeof t == 'function')
-          for (let o of Jm(t))
+          for (const o of Jm(t))
             !Hm.call(e, o) &&
               o !== r &&
               ea(e, o, {
@@ -13801,7 +13809,7 @@ ${x.description}`);
         'count',
       ),
       Xm = ye((e, t) => {
-        let { exists: r, eq: n, neq: o, truthy: a } = e;
+        const { exists: r, eq: n, neq: o, truthy: a } = e;
         if (cu([r, n, o, a]) > 1)
           throw new Error(
             `Invalid conditional test ${JSON.stringify({ exists: r, eq: n, neq: o })}`,
@@ -13809,19 +13817,19 @@ ${x.description}`);
         if (typeof n < 'u') return (0, su.isEqual)(t, n);
         if (typeof o < 'u') return !(0, su.isEqual)(t, o);
         if (typeof r < 'u') {
-          let i = typeof t < 'u';
+          const i = typeof t < 'u';
           return r ? i : !i;
         }
         return typeof a > 'u' || a ? !!t : !t;
       }, 'testValue'),
       mn = ye((e, t, r) => {
         if (!e.if) return !0;
-        let { arg: n, global: o } = e.if;
+        const { arg: n, global: o } = e.if;
         if (cu([n, o]) !== 1)
           throw new Error(
             `Invalid conditional value ${JSON.stringify({ arg: n, global: o })}`,
           );
-        let a = n ? t[n] : r[o];
+        const a = n ? t[n] : r[o];
         return Xm(e.if, a);
       }, 'includeConditionalArg');
     function Qm(e) {
@@ -13831,7 +13839,7 @@ ${x.description}`);
           input: e,
           get composed() {
             if (t) return t;
-            let { addons: n, ...o } = e;
+            const { addons: n, ...o } = e;
             return (t = Qt(_t([...(n ?? []), o]))), t;
           },
           meta(n) {
@@ -13898,7 +13906,7 @@ ${x.description}`);
         'sanitize',
       ),
       lu = ye((e, t) => {
-        let r = Qo(e);
+        const r = Qo(e);
         if (r === '')
           throw new Error(
             `Invalid ${t} '${e}', must include alphanumeric characters`,
@@ -13919,12 +13927,12 @@ ${x.description}`);
     }
     ye(er, 'isExportStory');
     var N5 = ye((e, { rootSeparator: t, groupSeparator: r }) => {
-        let [n, o] = e.split(t, 2),
+        const [n, o] = e.split(t, 2),
           a = (o || e).split(r).filter((i) => !!i);
         return { root: o ? n : null, groups: a };
       }, 'parseKind'),
       iu = ye((...e) => {
-        let t = e.reduce(
+        const t = e.reduce(
           (r, n) => (n.startsWith('!') ? r.delete(n.slice(1)) : r.add(n), r),
           new Set(),
         );
@@ -13949,7 +13957,7 @@ ${x.description}`);
           case 'function':
             return { name: 'function' };
           case 'object':
-            let t = {};
+            const t = {};
             return (
               e.signature.properties.forEach((r) => {
                 t[r.key] = wr(r.value);
@@ -13986,10 +13994,10 @@ ${x.description}`);
         }
       }, 'convert');
     function mu(e, t) {
-      let r = {},
+      const r = {},
         n = Object.keys(e);
       for (let o = 0; o < n.length; o++) {
-        let a = n[o],
+        const a = n[o],
           i = e[a];
         r[a] = t(i, a, e);
       }
@@ -14000,7 +14008,7 @@ ${x.description}`);
       ay = B((e) => e.replace(yu, ''), 'trimQuotes'),
       iy = B((e) => yu.test(e), 'includesQuotes'),
       gu = B((e) => {
-        let t = ay(e);
+        const t = ay(e);
         return iy(e) || Number.isNaN(Number(t)) ? t : Number(t);
       }, 'parseLiteral'),
       sy = /^\(.*\) => /,
@@ -14009,7 +14017,7 @@ ${x.description}`);
           a = {};
         switch ((typeof r < 'u' && (a.raw = r), t)) {
           case 'enum': {
-            let s = n ? o : o.map((l) => gu(l.value));
+            const s = n ? o : o.map((l) => gu(l.value));
             return { ...a, name: t, value: s };
           }
           case 'string':
@@ -14030,7 +14038,7 @@ ${x.description}`);
             return { ...a, name: t, value: Sr(o) };
           case 'shape':
           case 'exact':
-            let i = mu(o, (s) => Sr(s));
+            const i = mu(o, (s) => Sr(s));
             return { ...a, name: 'object', value: i };
           case 'union':
             return { ...a, name: 'union', value: o.map((s) => Sr(s)) };
@@ -14040,10 +14048,10 @@ ${x.description}`);
           default: {
             if (t?.indexOf('|') > 0)
               try {
-                let c = t.split('|').map((p) => JSON.parse(p));
+                const c = t.split('|').map((p) => JSON.parse(p));
                 return { ...a, name: 'enum', value: c };
               } catch {}
-            let s = o ? `${t}(${o})` : t,
+            const s = o ? `${t}(${o})` : t,
               l = sy.test(t) ? 'function' : 'other';
             return { ...a, name: l, value: s };
           }
@@ -14054,7 +14062,7 @@ ${x.description}`);
           case 'function':
             return { name: 'function' };
           case 'object':
-            let t = {};
+            const t = {};
             return (
               e.signature.properties.forEach((r) => {
                 t[r.key] = Cr(r.value);
@@ -14097,7 +14105,7 @@ ${x.description}`);
         }
       }, 'convert'),
       ta = B((e) => {
-        let { type: t, tsType: r, flowType: n } = e;
+        const { type: t, tsType: r, flowType: n } = e;
         try {
           if (t != null) return Sr(t);
           if (r != null) return Cr(r);
@@ -14151,14 +14159,14 @@ ${x.description}`);
     }
     B(Au, 'isSpace');
     function Du(e) {
-      let t = e.match(/\r+$/);
+      const t = e.match(/\r+$/);
       return t == null
         ? ['', e]
         : [e.slice(-t[0].length), e.slice(0, -t[0].length)];
     }
     B(Du, 'splitCR');
     function Pt(e) {
-      let t = e.match(/^\s+/);
+      const t = e.match(/^\s+/);
       return t == null
         ? ['', e]
         : [e.slice(0, t[0].length), e.slice(t[0].length)];
@@ -14205,12 +14213,12 @@ ${x.description}`);
     B(Cu, 'seedTokens');
     var py = /^@\S+/;
     function xu({ fence: e = '```' } = {}) {
-      let t = Tu(e),
+      const t = Tu(e),
         r = B((n, o) => (t(n) ? !o : o), 'toggleFence');
       return B(function (n) {
         let o = [[]],
           a = !1;
-        for (let i of n)
+        for (const i of n)
           py.test(i.tokens.description) && !a
             ? o.push([i])
             : o[o.length - 1].push(i),
@@ -14242,7 +14250,7 @@ ${x.description}`);
           r === null)
         )
           return n++, null;
-        let s = a.trimRight().endsWith(t.end);
+        const s = a.trimRight().endsWith(t.end);
         if (
           (i.delimiter === '' &&
             a.startsWith(t.delim) &&
@@ -14252,7 +14260,7 @@ ${x.description}`);
             ([i.postDelimiter, a] = Pt(a))),
           s)
         ) {
-          let l = a.trimRight();
+          const l = a.trimRight();
           (i.end = a.slice(l.length - t.end.length)),
             (a = l.slice(0, -t.end.length));
         }
@@ -14262,7 +14270,7 @@ ${x.description}`);
           n++,
           s)
         ) {
-          let l = r.slice();
+          const l = r.slice();
           return (r = null), l;
         }
         return null;
@@ -14273,7 +14281,7 @@ ${x.description}`);
       return B(function (t) {
         var r;
         let n = wu({ source: t });
-        for (let o of e)
+        for (const o of e)
           if (
             ((n = o(n)),
             !(
@@ -14287,7 +14295,7 @@ ${x.description}`);
     B(Iu, 'getParser');
     function ku() {
       return (e) => {
-        let { tokens: t } = e.source[0],
+        const { tokens: t } = e.source[0],
           r = t.description.match(/\s*(@(\S+))(\s*)/);
         return r === null
           ? (e.problems.push({
@@ -14306,14 +14314,14 @@ ${x.description}`);
     }
     B(ku, 'tagTokenizer');
     function Ru(e = 'compact') {
-      let t = Ou(e);
+      const t = Ou(e);
       return (r) => {
         let n = 0,
           o = [];
-        for (let [s, { tokens: l }] of r.source.entries()) {
+        for (const [s, { tokens: l }] of r.source.entries()) {
           let c = '';
           if (s === 0 && l.description[0] !== '{') return r;
-          for (let p of l.description)
+          for (const p of l.description)
             if ((p === '{' && n++, p === '}' && n--, (c += p), n === 0)) break;
           if ((o.push([l, c]), n === 0)) break;
         }
@@ -14327,9 +14335,9 @@ ${x.description}`);
             }),
             r
           );
-        let a = [],
+        const a = [],
           i = o[0][0].postDelimiter.length;
-        for (let [s, [l, c]] of o.entries())
+        for (const [s, [l, c]] of o.entries())
           (l.type = c),
             s > 0 &&
               ((l.type = l.postDelimiter.slice(i) + c),
@@ -14358,9 +14366,9 @@ ${x.description}`);
     B(Ou, 'getJoiner');
     var fy = B((e) => e && e.startsWith('"') && e.endsWith('"'), 'isQuoted');
     function _u() {
-      let e = B((t, { tokens: r }, n) => (r.type === '' ? t : n), 'typeEnd');
+      const e = B((t, { tokens: r }, n) => (r.type === '' ? t : n), 'typeEnd');
       return (t) => {
-        let { tokens: r } = t.source[t.source.reduce(e, 0)],
+        const { tokens: r } = t.source[t.source.reduce(e, 0)],
           n = r.description.trimLeft(),
           o = n.split('"');
         if (o.length > 1 && o[0] === '' && o.length % 2 === 1)
@@ -14374,7 +14382,7 @@ ${x.description}`);
           i = '',
           s = !1,
           l;
-        for (let p of n) {
+        for (const p of n) {
           if (a === 0 && Au(p)) break;
           p === '[' && a++, p === ']' && a--, (i += p);
         }
@@ -14388,10 +14396,10 @@ ${x.description}`);
             }),
             t
           );
-        let c = i;
+        const c = i;
         if (i[0] === '[' && i[i.length - 1] === ']') {
           (s = !0), (i = i.slice(1, -1));
-          let p = i.split('=');
+          const p = i.split('=');
           if (
             ((i = p[0].trim()),
             p[1] !== void 0 && (l = p.slice(1).join('=').trim()),
@@ -14439,7 +14447,7 @@ ${x.description}`);
     }
     B(_u, 'nameTokenizer');
     function Bu(e = 'compact', t = Et) {
-      let r = na(e);
+      const r = na(e);
       return (n) => ((n.description = r(n.source, t)), n);
     }
     B(Bu, 'descriptionTokenizer');
@@ -14466,7 +14474,7 @@ ${x.description}`);
       e[0].tokens.description === '' &&
         e[0].tokens.delimiter === t.start &&
         (e = e.slice(1));
-      let r = e[e.length - 1];
+      const r = e[e.length - 1];
       return (
         r !== void 0 &&
           r.tokens.description === '' &&
@@ -14486,16 +14494,16 @@ ${x.description}`);
       tokenizers: o = [ku(), Ru(r), _u(), Bu(r)],
     } = {}) {
       if (e < 0 || e % 1 > 0) throw new Error('Invalid startLine');
-      let a = Fu({ startLine: e, markers: n }),
+      const a = Fu({ startLine: e, markers: n }),
         i = xu({ fence: t }),
         s = Iu({ tokenizers: o }),
         l = na(r);
       return function (c) {
-        let p = [];
-        for (let h of Su(c)) {
-          let d = a(h);
+        const p = [];
+        for (const h of Su(c)) {
+          const d = a(h);
           if (d === null) continue;
-          let y = i(d),
+          const y = i(d),
             g = y.slice(1).map(s);
           p.push({
             description: l(y[0], n),
@@ -14557,7 +14565,7 @@ ${x.description}`);
     }
     B($u, 'containsJsDoc');
     function qu(e) {
-      let t =
+      const t =
           `/**
 ` +
           (e ?? '')
@@ -14579,7 +14587,7 @@ ${x.description}`);
       },
       Ey = B((e, t = by) => {
         if (!$u(e)) return { includesJsDoc: !1, ignore: !1 };
-        let r = qu(e),
+        const r = qu(e),
           n = Vu(r, t.tags);
         return n.ignore
           ? { includesJsDoc: !0, ignore: !0 }
@@ -14591,8 +14599,8 @@ ${x.description}`);
             };
       }, 'parseJsDoc');
     function Vu(e, t) {
-      let r = { params: null, deprecated: null, returns: null, ignore: !1 };
-      for (let n of e.tags)
+      const r = { params: null, deprecated: null, returns: null, ignore: !1 };
+      for (const n of e.tags)
         if (!(t !== void 0 && !t.includes(n.tag)))
           if (n.tag === 'ignore') {
             r.ignore = !0;
@@ -14602,18 +14610,18 @@ ${x.description}`);
               case 'param':
               case 'arg':
               case 'argument': {
-                let o = zu(n);
+                const o = zu(n);
                 o != null &&
                   (r.params == null && (r.params = []), r.params.push(o));
                 break;
               }
               case 'deprecated': {
-                let o = Hu(n);
+                const o = Hu(n);
                 o != null && (r.deprecated = o);
                 break;
               }
               case 'returns': {
-                let o = Gu(n);
+                const o = Gu(n);
                 o != null && (r.returns = o);
                 break;
               }
@@ -14629,7 +14637,7 @@ ${x.description}`);
     B(Ju, 'normaliseParamName');
     function zu(e) {
       if (!e.name || e.name === '-') return null;
-      let t = ia(e.type);
+      const t = ia(e.type);
       return {
         name: e.name,
         type: t,
@@ -14644,17 +14652,17 @@ ${x.description}`);
     }
     B(Hu, 'extractDeprecated');
     function oa(e, t) {
-      let r = e === '' ? t : `${e} ${t}`;
+      const r = e === '' ? t : `${e} ${t}`;
       return aa(r);
     }
     B(oa, 'joinNameAndDescription');
     function aa(e) {
-      let t = e.replace(/^- /g, '').trim();
+      const t = e.replace(/^- /g, '').trim();
       return t === '' ? null : t;
     }
     B(aa, 'normaliseDescription');
     function Gu(e) {
-      let t = ia(e.type);
+      const t = ia(e.type);
       return t
         ? {
             type: t,
@@ -14699,7 +14707,7 @@ ${x.description}`);
     var oI = B((e) => e.replace(/\\r\\n/g, '\\n'), 'normalizeNewlines');
     function Ku(e, t) {
       if (e != null) {
-        let { value: r } = e;
+        const { value: r } = e;
         if (!gn(r)) return Wu(r) ? ge(t?.name, r) : ge(r);
       }
       return null;
@@ -14726,7 +14734,7 @@ ${x.description}`);
     }
     B(Qu, 'generateObjectSignature');
     function Zu(e) {
-      let { type: t } = e;
+      const { type: t } = e;
       return t === 'object' ? Qu(e) : Xu(e);
     }
     B(Zu, 'generateSignature');
@@ -14747,7 +14755,7 @@ ${x.description}`);
     }
     B(tc, 'createType');
     var Ay = B((e, t) => {
-      let { flowType: r, description: n, required: o, defaultValue: a } = t;
+      const { flowType: r, description: n, required: o, defaultValue: a } = t;
       return {
         name: e,
         type: tc(r),
@@ -14758,7 +14766,7 @@ ${x.description}`);
     }, 'createFlowPropDef');
     function rc({ defaultValue: e }) {
       if (e != null) {
-        let { value: t } = e;
+        const { value: t } = e;
         if (!gn(t)) return ge(t);
       }
       return null;
@@ -14774,7 +14782,7 @@ ${x.description}`);
     }
     B(nc, 'createType');
     var Dy = B((e, t) => {
-      let { description: r, required: n } = t;
+      const { description: r, required: n } = t;
       return {
         name: e,
         type: nc(t),
@@ -14788,7 +14796,7 @@ ${x.description}`);
     }
     B(oc, 'createType');
     function ac(e) {
-      let { computed: t, func: r } = e;
+      const { computed: t, func: r } = e;
       return typeof t > 'u' && typeof r > 'u';
     }
     B(ac, 'isReactDocgenTypescript');
@@ -14810,14 +14818,14 @@ ${x.description}`);
     B(ic, 'isStringValued');
     function sc(e, t) {
       if (e != null) {
-        let { value: r } = e;
+        const { value: r } = e;
         if (!gn(r)) return ac(e) && ic(t) ? ge(JSON.stringify(r)) : ge(r);
       }
       return null;
     }
     B(sc, 'createDefaultValue');
     function ca(e, t, r) {
-      let { description: n, required: o, defaultValue: a } = r;
+      const { description: n, required: o, defaultValue: a } = r;
       return {
         name: e,
         type: oc(t),
@@ -14829,9 +14837,9 @@ ${x.description}`);
     B(ca, 'createBasicPropDef');
     function xr(e, t) {
       if (t?.includesJsDoc) {
-        let { description: r, extractedTags: n } = t;
+        const { description: r, extractedTags: n } = t;
         r != null && (e.description = t.description);
-        let o = {
+        const o = {
           ...n,
           params: n?.params?.map((a) => ({
             name: a.getPrettyName(),
@@ -14844,19 +14852,19 @@ ${x.description}`);
     }
     B(xr, 'applyJsDocResult');
     var Sy = B((e, t, r) => {
-        let n = ca(e, t.type, t);
+        const n = ca(e, t.type, t);
         return (n.sbType = ta(t)), xr(n, r);
       }, 'javaScriptFactory'),
       wy = B((e, t, r) => {
-        let n = Dy(e, t);
+        const n = Dy(e, t);
         return (n.sbType = ta(t)), xr(n, r);
       }, 'tsFactory'),
       Cy = B((e, t, r) => {
-        let n = Ay(e, t);
+        const n = Ay(e, t);
         return (n.sbType = ta(t)), xr(n, r);
       }, 'flowFactory'),
       xy = B((e, t, r) => {
-        let n = ca(e, { name: 'unknown' }, t);
+        const n = ca(e, { name: 'unknown' }, t);
         return xr(n, r);
       }, 'unknownFactory'),
       lc = B((e) => {
@@ -14883,7 +14891,7 @@ ${x.description}`);
         'getTypeSystem',
       ),
       Ty = B((e) => {
-        let t = uc(e[0]),
+        const t = uc(e[0]),
           r = lc(t);
         return e.map((n) => {
           let o = n;
@@ -14895,22 +14903,22 @@ ${x.description}`);
         });
       }, 'extractComponentSectionArray'),
       Fy = B((e) => {
-        let t = Object.keys(e),
+        const t = Object.keys(e),
           r = uc(e[t[0]]),
           n = lc(r);
         return t
           .map((o) => {
-            let a = e[o];
+            const a = e[o];
             return a != null ? da(o, a, r, n) : null;
           })
           .filter(Boolean);
       }, 'extractComponentSectionObject'),
       aI = B((e, t) => {
-        let r = Eu(e, t);
+        const r = Eu(e, t);
         return bu(r) ? (Array.isArray(r) ? Ty(r) : Fy(r)) : [];
       }, 'extractComponentProps');
     function da(e, t, r, n) {
-      let o = Ey(t.description);
+      const o = Ey(t.description);
       return o.includesJsDoc && o.ignore
         ? null
         : {
@@ -15486,7 +15494,7 @@ ${x.description}`);
                 (!h.offsetHeight || !h.offsetParent)
               )
                 return null;
-              let d =
+              const d =
                 h.getAttribute('data-heading-label') ||
                 (r.headingLabelCallback
                   ? String(r.headingLabelCallback(h.innerText))
@@ -16789,10 +16797,10 @@ To pass a single animation please supply them in simple values, e.g. animation('
         format: a = !1,
         ...i
       }) => {
-        let { typography: s } = co();
+        const { typography: s } = co();
         if (e) return f.createElement(a0, null);
         if (t) return f.createElement(dd, null, t);
-        let l = f.createElement(
+        const l = f.createElement(
           n0,
           {
             bordered: !0,
@@ -16805,7 +16813,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
           n,
         );
         if (typeof o > 'u') return l;
-        let c = o ? uo.dark : uo.light;
+        const c = o ? uo.dark : uo.light;
         return f.createElement(
           Vi,
           {
@@ -16842,7 +16850,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
       color: ce(0.25, e.color.defaultText),
     }));
     R.div(({ theme: e }) => {
-      let t = {
+      const t = {
           fontFamily: e.typography.fonts.base,
           fontSize: e.typography.size.s3,
           margin: 0,
@@ -17331,7 +17339,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
       };
     function m0(e) {
       if (di.count(e) === 1) {
-        let t = e;
+        const t = e;
         if (t.props) return t.props.id;
       }
       return null;
@@ -17357,7 +17365,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         layout: c = 'padded',
         ...p
       }) => {
-        let [h, d] = Z(i),
+        const [h, d] = Z(i),
           { source: y, actionItem: g } = f0(o, h, d),
           [A, v] = Z(1),
           S = [l].concat(['sbdocs', 'sbdocs-preview', 'sb-unstyled']),
@@ -17366,12 +17374,12 @@ To pass a single animation please supply them in simple values, e.g. animation('
           k = [...w, ...x],
           { window: F } = globalThis,
           _ = Ce(async (M) => {
-            let { createCopyToClipboardFunction: P } =
+            const { createCopyToClipboardFunction: P } =
               await Promise.resolve().then(() => ($r(), gi));
             P();
           }, []),
           j = (M) => {
-            let P = F.getSelection();
+            const P = F.getSelection();
             (P && P.type === 'Range') ||
               (M.preventDefault(),
               x.filter((W) => W.title === 'Copied').length === 0 &&
@@ -17616,7 +17624,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
     var Cd = wd(1),
       xd = wd(2);
     function Td(e) {
-      let t = e === 1 ? qa : Va;
+      const t = e === 1 ? qa : Va;
       return new RegExp(
         '^( *)(' +
           t +
@@ -17630,13 +17638,13 @@ To pass a single animation please supply them in simple values, e.g. animation('
     var Fd = Td(1),
       Id = Td(2);
     function Lc(e, t) {
-      let r = t === 1,
+      const r = t === 1,
         n = r ? Fd : Id,
         o = r ? Cd : xd,
         a = r ? l2 : u2;
       return {
         match(i, s) {
-          let l = s2.exec(s.prevCapture);
+          const l = s2.exec(s.prevCapture);
           return l && (s.list || (!s.inline && !s.simple))
             ? n.exec((i = l[1] + i))
             : null;
@@ -17654,7 +17662,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
             h = !1;
           return {
             items: p.map(function (d, y) {
-              let g = a.exec(d)[0].length,
+              const g = a.exec(d)[0].length,
                 A = new RegExp('^ {1,' + g + '}', 'gm'),
                 v = d.replace(A, '').replace(a, ''),
                 S = y === p.length - 1,
@@ -17677,7 +17685,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
 `,
                     )))
                   : ((l.inline = !0), (k = v.replace(jc, '')));
-              let F = s(k, l);
+              const F = s(k, l);
               return (l.inline = x), (l.list = C), F;
             }),
             ordered: r,
@@ -17725,9 +17733,9 @@ To pass a single animation please supply them in simple values, e.g. animation('
             : null;
     }
     function Mc(e, t, r, n) {
-      let o = r.inTable;
+      const o = r.inTable;
       r.inTable = !0;
-      let a = e
+      const a = e
         .trim()
         .split(/( *(?:`[^`]*`|\\\||\|) *)/)
         .reduce(
@@ -17742,7 +17750,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
           [],
         );
       r.inTable = o;
-      let i = [[]];
+      const i = [[]];
       return (
         a.forEach(function (s, l) {
           s.type === G.tableSeparator
@@ -17757,7 +17765,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
     }
     function f2(e, t, r) {
       r.inline = !0;
-      let n = e[2] ? e[2].replace(W0, '').split('|').map(h2) : [],
+      const n = e[2] ? e[2].replace(W0, '').split('|').map(h2) : [],
         o = e[3]
           ? (function (i, s, l) {
               return i
@@ -17817,7 +17825,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
 `),
           o.trim()),
       );
-      let n = r.trimEnd();
+      const n = r.trimEnd();
       return n == '' ? null : [r, n];
     }
     function y2(e) {
@@ -17837,23 +17845,23 @@ To pass a single animation please supply them in simple values, e.g. animation('
       return e.replace(i2, '$1');
     }
     function Tn(e, t, r) {
-      let n = r.inline || !1,
+      const n = r.inline || !1,
         o = r.simple || !1;
       (r.inline = !0), (r.simple = !0);
-      let a = e(t, r);
+      const a = e(t, r);
       return (r.inline = n), (r.simple = o), a;
     }
     function g2(e, t, r) {
-      let n = r.inline || !1,
+      const n = r.inline || !1,
         o = r.simple || !1;
       (r.inline = !1), (r.simple = !0);
-      let a = e(t, r);
+      const a = e(t, r);
       return (r.inline = n), (r.simple = o), a;
     }
     function b2(e, t, r) {
-      let n = r.inline || !1;
+      const n = r.inline || !1;
       r.inline = !1;
-      let o = e(t, r);
+      const o = e(t, r);
       return (r.inline = n), o;
     }
     var Sa = (e, t, r) => ({ children: Tn(t, e[1], r) });
@@ -17874,10 +17882,10 @@ To pass a single animation please supply them in simple values, e.g. animation('
     }
     function v2(e = '', t = {}) {
       function r(d, y, ...g) {
-        let A = xa(t.overrides, `${d}.props`, {});
+        const A = xa(t.overrides, `${d}.props`, {});
         return t.createElement(
           (function (v, S) {
-            let w = xa(S, v);
+            const w = xa(S, v);
             return w
               ? typeof w == 'function' ||
                 (typeof w == 'object' && 'render' in w)
@@ -17893,7 +17901,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         d = d.replace(B0, '');
         let y = !1;
         t.forceInline ? (y = !0) : t.forceBlock || (y = H0.test(d) === !1);
-        let g = c(
+        const g = c(
           l(
             y
               ? d
@@ -17920,12 +17928,12 @@ To pass a single animation please supply them in simple values, e.g. animation('
         return t.createElement(A, { key: 'outer' }, v);
       }
       function o(d, y) {
-        let g = y.match(A0);
+        const g = y.match(A0);
         return g
           ? g.reduce(function (A, v) {
-              let S = v.indexOf('=');
+              const S = v.indexOf('=');
               if (S !== -1) {
-                let w = (function (F) {
+                const w = (function (F) {
                     return (
                       F.indexOf('-') !== -1 &&
                         F.match(j0) === null &&
@@ -17936,7 +17944,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
                     );
                   })(v.slice(0, S)).trim(),
                   x = (function (F) {
-                    let _ = F[0];
+                    const _ = F[0];
                     return (_ === '"' || _ === "'") &&
                       F.length >= 2 &&
                       F[F.length - 1] === _
@@ -17945,10 +17953,10 @@ To pass a single animation please supply them in simple values, e.g. animation('
                   })(v.slice(S + 1).trim()),
                   C = Pc[w] || w;
                 if (C === 'ref') return A;
-                let k = (A[C] = (function (F, _, j, M) {
+                const k = (A[C] = (function (F, _, j, M) {
                   return _ === 'style'
                     ? j.split(/;\s?/).reduce(function (P, W) {
-                        let L = W.slice(0, W.indexOf(':'));
+                        const L = W.slice(0, W.indexOf(':'));
                         return (
                           (P[
                             L.trim().replace(/(-[a-z])/g, (z) =>
@@ -17978,18 +17986,18 @@ To pass a single animation please supply them in simple values, e.g. animation('
           ? Mt({}, Nc, t.namedCodesToUnicode)
           : Nc),
         (t.createElement = t.createElement || hi);
-      let a = [],
+      const a = [],
         i = {},
         s = {
           [G.blockQuote]: {
             match: it(pd),
             order: 1,
             parse(d, y, g) {
-              let [, A, v] = d[0].replace(w0, '').match(C0);
+              const [, A, v] = d[0].replace(w0, '').match(C0);
               return { alert: A, children: y(v, g) };
             },
             render(d, y, g) {
-              let A = { key: g.key };
+              const A = { key: g.key };
               return (
                 d.alert &&
                   ((A.className =
@@ -18111,7 +18119,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
                 S = d[3].replace(v, ''),
                 w = ((x = S), p2.some((j) => j.test(x)) ? b2 : Tn);
               var x;
-              let C = d[1].toLowerCase(),
+              const C = d[1].toLowerCase(),
                 k = v0.indexOf(C) !== -1,
                 F = (k ? C : d[1]).trim(),
                 _ = { attrs: o(F, d[2]), noInnerParse: k, tag: F };
@@ -18133,7 +18141,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
             match: kr(ja),
             order: 1,
             parse(d) {
-              let y = d[1].trim();
+              const y = d[1].trim();
               return { attrs: o(y, d[2] || ''), tag: y };
             },
             render: (d, y, g) => r(d.tag, Mt({}, d.attrs, { key: g.key })),
@@ -18272,7 +18280,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
             order: 1,
             parse: f2,
             render(d, y, g) {
-              let A = d;
+              const A = d;
               return r(
                 'table',
                 { key: g.key },
@@ -18345,20 +18353,20 @@ To pass a single animation please supply them in simple values, e.g. animation('
         };
       t.disableParsingRawHTML === !0 &&
         (delete s[G.htmlBlock], delete s[G.htmlSelfClosing]);
-      let l = (function (d) {
-          let y = Object.keys(d);
+      const l = (function (d) {
+          const y = Object.keys(d);
           function g(A, v) {
-            let S = [];
+            const S = [];
             for (v.prevCapture = v.prevCapture || ''; A; ) {
               let w = 0;
               for (; w < y.length; ) {
-                let x = y[w],
+                const x = y[w],
                   C = d[x],
                   k = C.match(A, v);
                 if (k) {
-                  let F = k[0];
+                  const F = k[0];
                   (v.prevCapture += F), (A = A.substring(F.length));
-                  let _ = C.parse(k, g, v);
+                  const _ = C.parse(k, g, v);
                   _.type == null && (_.type = x), S.push(_);
                   break;
                 }
@@ -18369,7 +18377,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
           }
           return (
             y.sort(function (A, v) {
-              let S = d[A].order,
+              const S = d[A].order,
                 w = d[v].order;
               return S !== w ? S - w : A < v ? -1 : 1;
             }),
@@ -18392,7 +18400,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         c =
           ((p = (function (d, y) {
             return function (g, A, v) {
-              let S = d[g.type].render;
+              const S = d[g.type].render;
               return y ? y(() => S(g, A, v), g, A, v) : S(g, A, v);
             };
           })(s, t.renderRule)),
@@ -18403,7 +18411,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
                 S = !1;
               for (let w = 0; w < y.length; w++) {
                 g.key = w;
-                let x = d(y[w], g),
+                const x = d(y[w], g),
                   C = typeof x == 'string';
                 C && S ? (v[v.length - 1] += x) : x !== null && v.push(x),
                   (S = C);
@@ -18413,7 +18421,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
             return p(y, d, g);
           });
       var p;
-      let h = n(e);
+      const h = n(e);
       return a.length
         ? r(
             'div',
@@ -18523,7 +18531,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         onFocus: o,
         argType: a,
       }) => {
-        let i = Ce(() => r(!1), [r]),
+        const i = Ce(() => r(!1), [r]),
           s = !!a?.table?.readonly;
         if (t === void 0)
           return f.createElement(
@@ -18537,7 +18545,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
             },
             'Set boolean',
           );
-        let l = Le(e),
+        const l = Le(e),
           c = typeof t == 'string' ? S2(t) : t;
         return f.createElement(
           D2,
@@ -18558,7 +18566,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         );
       },
       C2 = (e) => {
-        let [t, r, n] = e.split('-'),
+        const [t, r, n] = e.split('-'),
           o = new Date();
         return (
           o.setFullYear(parseInt(t, 10), parseInt(r, 10) - 1, parseInt(n, 10)),
@@ -18566,19 +18574,19 @@ To pass a single animation please supply them in simple values, e.g. animation('
         );
       },
       x2 = (e) => {
-        let [t, r] = e.split(':'),
+        const [t, r] = e.split(':'),
           n = new Date();
         return n.setHours(parseInt(t, 10)), n.setMinutes(parseInt(r, 10)), n;
       },
       T2 = (e) => {
-        let t = new Date(e),
+        const t = new Date(e),
           r = `000${t.getFullYear()}`.slice(-4),
           n = `0${t.getMonth() + 1}`.slice(-2),
           o = `0${t.getDate()}`.slice(-2);
         return `${r}-${n}-${o}`;
       },
       F2 = (e) => {
-        let t = new Date(e),
+        const t = new Date(e),
           r = `0${t.getHours()}`.slice(-2),
           n = `0${t.getMinutes()}`.slice(-2);
         return `${r}:${n}`;
@@ -18608,7 +18616,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         onBlur: o,
         argType: a,
       }) => {
-        let [i, s] = Z(!0),
+        const [i, s] = Z(!0),
           l = Pe(),
           c = Pe(),
           p = !!a?.table?.readonly;
@@ -18617,20 +18625,20 @@ To pass a single animation please supply them in simple values, e.g. animation('
             (l && l.current && (l.current.value = t ? T2(t) : ''),
             c && c.current && (c.current.value = t ? F2(t) : ''));
         }, [t]);
-        let h = (g) => {
+        const h = (g) => {
             if (!g.target.value) return r();
-            let A = C2(g.target.value),
+            const A = C2(g.target.value),
               v = new Date(t);
             v.setFullYear(A.getFullYear(), A.getMonth(), A.getDate());
-            let S = v.getTime();
+            const S = v.getTime();
             S && r(S), s(!!S);
           },
           d = (g) => {
             if (!g.target.value) return r();
-            let A = x2(g.target.value),
+            const A = x2(g.target.value),
               v = new Date(t);
             v.setHours(A.getHours()), v.setMinutes(A.getMinutes());
-            let S = v.getTime();
+            const S = v.getTime();
             S && r(S), s(!!S);
           },
           y = Le(e);
@@ -18663,7 +18671,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
       },
       R2 = R.label({ display: 'flex' }),
       O2 = (e) => {
-        let t = parseFloat(e);
+        const t = parseFloat(e);
         return Number.isNaN(t) ? void 0 : t;
       },
       _2 = R(Ge.Input)(({ readOnly: e }) => ({ opacity: e ? 0.5 : 1 })),
@@ -18678,14 +18686,14 @@ To pass a single animation please supply them in simple values, e.g. animation('
         onFocus: s,
         argType: l,
       }) => {
-        let [c, p] = Z(typeof t == 'number' ? t : ''),
+        const [c, p] = Z(typeof t == 'number' ? t : ''),
           [h, d] = Z(!1),
           [y, g] = Z(null),
           A = !!l?.table?.readonly,
           v = Ce(
             (x) => {
               p(x.target.value);
-              let C = parseFloat(x.target.value);
+              const C = parseFloat(x.target.value);
               Number.isNaN(C)
                 ? g(new Error(`'${x.target.value}' is not a number`))
                 : (r(C), g(null));
@@ -18740,7 +18748,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         );
       },
       Rd = (e, t) => {
-        let r = t && Object.entries(t).find(([n, o]) => o === e);
+        const r = t && Object.entries(t).find(([n, o]) => o === e);
         return r ? r[0] : void 0;
       },
       La = (e, t) =>
@@ -18786,11 +18794,11 @@ To pass a single animation please supply them in simple values, e.g. animation('
             Xr.warn(`Checkbox with no options: ${e}`),
             f.createElement(f.Fragment, null, '-')
           );
-        let i = La(r, t),
+        const i = La(r, t),
           [s, l] = Z(i),
           c = !!a?.table?.readonly,
           p = (d) => {
-            let y = d.target.value,
+            const y = d.target.value,
               g = [...s];
             g.includes(y) ? g.splice(g.indexOf(y), 1) : g.push(y),
               n(Od(g, t)),
@@ -18799,12 +18807,12 @@ To pass a single animation please supply them in simple values, e.g. animation('
         xe(() => {
           l(La(r, t));
         }, [r]);
-        let h = Le(e);
+        const h = Le(e);
         return f.createElement(
           P2,
           { 'aria-readonly': c, isInline: o },
           Object.keys(t).map((d, y) => {
-            let g = `${h}-${y}`;
+            const g = `${h}-${y}`;
             return f.createElement(
               j2,
               { key: g, htmlFor: g },
@@ -18858,14 +18866,14 @@ To pass a single animation please supply them in simple values, e.g. animation('
             Xr.warn(`Radio with no options: ${e}`),
             f.createElement(f.Fragment, null, '-')
           );
-        let i = Rd(r, t),
+        const i = Rd(r, t),
           s = Le(e),
           l = !!a?.table?.readonly;
         return f.createElement(
           L2,
           { 'aria-readonly': l, isInline: o },
           Object.keys(t).map((c, p) => {
-            let h = `${s}-${p}`;
+            const h = `${s}-${p}`;
             return f.createElement(
               U2,
               { key: h, htmlFor: h },
@@ -18943,7 +18951,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
       })),
       zc = 'Choose option...',
       q2 = ({ name: e, value: t, options: r, onChange: n, argType: o }) => {
-        let a = (c) => {
+        const a = (c) => {
             n(r[c.currentTarget.value]);
           },
           i = Rd(t, r) || zc,
@@ -18968,8 +18976,8 @@ To pass a single animation please supply them in simple values, e.g. animation('
         );
       },
       V2 = ({ name: e, value: t, options: r, onChange: n, argType: o }) => {
-        let a = (c) => {
-            let p = Array.from(c.currentTarget.options)
+        const a = (c) => {
+            const p = Array.from(c.currentTarget.options)
               .filter((h) => h.selected)
               .map((h) => h.value);
             n(Od(p, r));
@@ -18990,7 +18998,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         );
       },
       Hc = (e) => {
-        let { name: t, options: r } = e;
+        const { name: t, options: r } = e;
         return r
           ? e.isMulti
             ? f.createElement(V2, { ...e })
@@ -19048,7 +19056,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         : Object.prototype.toString.call(e).slice(8, -1);
     }
     function Ld(e, t) {
-      let r = Ut(e),
+      const r = Ut(e),
         n = Ut(t);
       return (r === 'Function' || n === 'Function') && n !== r;
     }
@@ -19062,7 +19070,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
           (this.onSubmit = this.onSubmit.bind(this));
       }
       componentDidMount() {
-        let { inputRefKey: e, inputRefValue: t } = this.state,
+        const { inputRefKey: e, inputRefValue: t } = this.state,
           { onlyValue: r } = this.props;
         e && typeof e.focus == 'function' && e.focus(),
           r && t && typeof t.focus == 'function' && t.focus(),
@@ -19083,7 +19091,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
             (e.preventDefault(), this.props.handleCancel()));
       }
       onSubmit() {
-        let {
+        const {
             handleAdd: e,
             onlyValue: t,
             onSubmitValueParser: r,
@@ -19120,7 +19128,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
           p = pe(c, { placeholder: 'Value', ref: this.refInputValue }),
           h = null;
         if (!t) {
-          let d = o(n1, a, i);
+          const d = o(n1, a, i);
           h = pe(d, { placeholder: 'Key', ref: this.refInputKey });
         }
         return f.createElement(
@@ -19141,7 +19149,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
     var Md = class extends dt {
       constructor(e) {
         super(e);
-        let t = [...e.keyPath, e.name];
+        const t = [...e.keyPath, e.name];
         (this.state = {
           data: e.data,
           name: e.name,
@@ -19165,9 +19173,9 @@ To pass a single animation please supply them in simple values, e.g. animation('
         return e.data !== t.data ? { data: e.data } : null;
       }
       onChildUpdate(e, t) {
-        let { data: r, keyPath: n } = this.state;
+        const { data: r, keyPath: n } = this.state;
         (r[e] = t), this.setState({ data: r });
-        let { onUpdate: o } = this.props,
+        const { onUpdate: o } = this.props,
           a = n.length;
         o(n[a - 1], r);
       }
@@ -19179,27 +19187,27 @@ To pass a single animation please supply them in simple values, e.g. animation('
       }
       handleRemoveItem(e) {
         return () => {
-          let { beforeRemoveAction: t, logger: r } = this.props,
+          const { beforeRemoveAction: t, logger: r } = this.props,
             { data: n, keyPath: o, nextDeep: a } = this.state,
             i = n[e];
           t(e, o, a, i)
             .then(() => {
-              let s = { keyPath: o, deep: a, key: e, oldValue: i, type: Nd };
+              const s = { keyPath: o, deep: a, key: e, oldValue: i, type: Nd };
               n.splice(e, 1), this.setState({ data: n });
-              let { onUpdate: l, onDeltaUpdate: c } = this.props;
+              const { onUpdate: l, onDeltaUpdate: c } = this.props;
               l(o[o.length - 1], n), c(s);
             })
             .catch(r.error);
         };
       }
       handleAddValueAdd({ newValue: e }) {
-        let { data: t, keyPath: r, nextDeep: n } = this.state,
+        const { data: t, keyPath: r, nextDeep: n } = this.state,
           { beforeAddAction: o, logger: a } = this.props;
         o(t.length, r, n, e)
           .then(() => {
-            let i = [...t, e];
+            const i = [...t, e];
             this.setState({ data: i }), this.handleAddValueCancel();
-            let { onUpdate: s, onDeltaUpdate: l } = this.props;
+            const { onUpdate: s, onDeltaUpdate: l } = this.props;
             s(r[r.length - 1], i),
               l({
                 type: Pd,
@@ -19216,13 +19224,13 @@ To pass a single animation please supply them in simple values, e.g. animation('
       }
       handleEditValue({ key: e, value: t }) {
         return new Promise((r, n) => {
-          let { beforeUpdateAction: o } = this.props,
+          const { beforeUpdateAction: o } = this.props,
             { data: a, keyPath: i, nextDeep: s } = this.state,
             l = a[e];
           o(e, i, s, l, t)
             .then(() => {
               (a[e] = t), this.setState({ data: a });
-              let { onUpdate: c, onDeltaUpdate: p } = this.props;
+              const { onUpdate: c, onDeltaUpdate: p } = this.props;
               c(i[i.length - 1], a),
                 p({
                   type: jd,
@@ -19238,7 +19246,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         });
       }
       renderCollapsed() {
-        let { name: e, data: t, keyPath: r, deep: n } = this.state,
+        const { name: e, data: t, keyPath: r, deep: n } = this.state,
           {
             handleRemove: o,
             readOnly: a,
@@ -19268,7 +19276,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         );
       }
       renderNotCollapsed() {
-        let {
+        const {
             name: e,
             data: t,
             keyPath: r,
@@ -19377,7 +19385,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         );
       }
       render() {
-        let {
+        const {
             name: e,
             collapsed: t,
             data: r,
@@ -19414,7 +19422,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
     var Ud = class extends dt {
       constructor(e) {
         super(e);
-        let t = [...e.keyPath, e.name];
+        const t = [...e.keyPath, e.name];
         (this.state = {
           value: e.value,
           name: e.name,
@@ -19433,7 +19441,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         return e.value !== t.value ? { value: e.value } : null;
       }
       componentDidUpdate() {
-        let {
+        const {
             editEnabled: e,
             inputRef: t,
             name: r,
@@ -19463,7 +19471,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
             (e.preventDefault(), this.handleCancelEdit()));
       }
       handleEdit() {
-        let {
+        const {
             handleUpdateValue: e,
             originalValue: t,
             logger: r,
@@ -19472,7 +19480,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
           } = this.props,
           { inputRef: a, name: i, deep: s } = this.state;
         if (!a) return;
-        let l = n(!0, o, s, i, a.value);
+        const l = n(!0, o, s, i, a.value);
         e({ value: l, key: i })
           .then(() => {
             Ld(t, l) || this.handleCancelEdit();
@@ -19513,7 +19521,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
           S = null,
           w = s(e, i, n, o, l);
         if (r && !w) {
-          let x = d(Ja, g, o, e, i, l),
+          const x = d(Ja, g, o, e, i, l),
             C = pe(p, { onClick: this.handleEdit }),
             k = pe(h, { onClick: this.handleCancelEdit }),
             F = pe(x, { ref: this.refInput, defaultValue: i });
@@ -19536,7 +19544,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
             },
             t,
           );
-          let x = pe(y, {
+          const x = pe(y, {
             onClick: a,
             className: 'rejt-minus-menu',
             style: A.minus,
@@ -19580,7 +19588,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         return e.data !== t.data ? { data: e.data } : null;
       }
       render() {
-        let { data: e, name: t, keyPath: r, deep: n } = this.state,
+        const { data: e, name: t, keyPath: r, deep: n } = this.state,
           {
             isCollapsed: o,
             handleRemove: a,
@@ -19844,7 +19852,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
     var Ma = class extends dt {
       constructor(e) {
         super(e);
-        let t = e.deep === -1 ? [] : [...e.keyPath, e.name];
+        const t = e.deep === -1 ? [] : [...e.keyPath, e.name];
         (this.state = {
           name: e.name,
           data: e.data,
@@ -19868,9 +19876,9 @@ To pass a single animation please supply them in simple values, e.g. animation('
         return e.data !== t.data ? { data: e.data } : null;
       }
       onChildUpdate(e, t) {
-        let { data: r, keyPath: n } = this.state;
+        const { data: r, keyPath: n } = this.state;
         (r[e] = t), this.setState({ data: r });
-        let { onUpdate: o } = this.props,
+        const { onUpdate: o } = this.props,
           a = n.length;
         o(n[a - 1], r);
       }
@@ -19881,12 +19889,12 @@ To pass a single animation please supply them in simple values, e.g. animation('
         this.setState({ addFormVisible: !1 });
       }
       handleAddValueAdd({ key: e, newValue: t }) {
-        let { data: r, keyPath: n, nextDeep: o } = this.state,
+        const { data: r, keyPath: n, nextDeep: o } = this.state,
           { beforeAddAction: a, logger: i } = this.props;
         a(e, n, o, t)
           .then(() => {
             (r[e] = t), this.setState({ data: r }), this.handleAddValueCancel();
-            let { onUpdate: s, onDeltaUpdate: l } = this.props;
+            const { onUpdate: s, onDeltaUpdate: l } = this.props;
             s(n[n.length - 1], r),
               l({ type: Pd, keyPath: n, deep: o, key: e, newValue: t });
           })
@@ -19894,14 +19902,14 @@ To pass a single animation please supply them in simple values, e.g. animation('
       }
       handleRemoveValue(e) {
         return () => {
-          let { beforeRemoveAction: t, logger: r } = this.props,
+          const { beforeRemoveAction: t, logger: r } = this.props,
             { data: n, keyPath: o, nextDeep: a } = this.state,
             i = n[e];
           t(e, o, a, i)
             .then(() => {
-              let s = { keyPath: o, deep: a, key: e, oldValue: i, type: Nd };
+              const s = { keyPath: o, deep: a, key: e, oldValue: i, type: Nd };
               delete n[e], this.setState({ data: n });
-              let { onUpdate: l, onDeltaUpdate: c } = this.props;
+              const { onUpdate: l, onDeltaUpdate: c } = this.props;
               l(o[o.length - 1], n), c(s);
             })
             .catch(r.error);
@@ -19912,13 +19920,13 @@ To pass a single animation please supply them in simple values, e.g. animation('
       }
       handleEditValue({ key: e, value: t }) {
         return new Promise((r, n) => {
-          let { beforeUpdateAction: o } = this.props,
+          const { beforeUpdateAction: o } = this.props,
             { data: a, keyPath: i, nextDeep: s } = this.state,
             l = a[e];
           o(e, i, s, l, t)
             .then(() => {
               (a[e] = t), this.setState({ data: a });
-              let { onUpdate: c, onDeltaUpdate: p } = this.props;
+              const { onUpdate: c, onDeltaUpdate: p } = this.props;
               c(i[i.length - 1], a),
                 p({
                   type: jd,
@@ -19934,7 +19942,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         });
       }
       renderCollapsed() {
-        let { name: e, keyPath: t, deep: r, data: n } = this.state,
+        const { name: e, keyPath: t, deep: r, data: n } = this.state,
           {
             handleRemove: o,
             readOnly: a,
@@ -19966,7 +19974,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         );
       }
       renderNotCollapsed() {
-        let {
+        const {
             name: e,
             data: t,
             keyPath: r,
@@ -20076,7 +20084,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         );
       }
       render() {
-        let {
+        const {
             name: e,
             collapsed: t,
             data: r,
@@ -20113,7 +20121,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
     var St = class extends dt {
       constructor(e) {
         super(e);
-        let t = [...e.keyPath, e.name];
+        const t = [...e.keyPath, e.name];
         (this.state = {
           value: e.value,
           name: e.name,
@@ -20132,7 +20140,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         return e.value !== t.value ? { value: e.value } : null;
       }
       componentDidUpdate() {
-        let {
+        const {
             editEnabled: e,
             inputRef: t,
             name: r,
@@ -20162,7 +20170,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
             (e.preventDefault(), this.handleCancelEdit()));
       }
       handleEdit() {
-        let {
+        const {
             handleUpdateValue: e,
             originalValue: t,
             logger: r,
@@ -20171,7 +20179,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
           } = this.props,
           { inputRef: a, name: i, deep: s } = this.state;
         if (!a) return;
-        let l = n(!0, o, s, i, a.value);
+        const l = n(!0, o, s, i, a.value);
         e({ value: l, key: i })
           .then(() => {
             Ld(t, l) || this.handleCancelEdit();
@@ -20188,7 +20196,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         this.setState({ editEnabled: !1 });
       }
       render() {
-        let {
+        const {
             name: e,
             value: t,
             editEnabled: r,
@@ -20575,7 +20583,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         li: { outline: 0 },
       }),
       Wc = ({ name: e, value: t, onChange: r, argType: n }) => {
-        let o = co(),
+        const o = co(),
           a = pt(() => t && ci(t), [t]),
           i = a != null,
           [s, l] = Z(!i),
@@ -20607,7 +20615,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
             { disabled: h, id: yr(e), onClick: A },
             'Set object',
           );
-        let S = f.createElement(h1, {
+        const S = f.createElement(h1, {
             ref: v,
             id: Le(e),
             name: e,
@@ -20810,7 +20818,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
       })),
       v1 = R.div({ display: 'flex', alignItems: 'center', width: '100%' });
     function A1(e) {
-      let t = e.toString().match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+      const t = e.toString().match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
       return t ? Math.max(0, (t[1] ? t[1].length : 0) - (t[2] ? +t[2] : 0)) : 0;
     }
     var D1 = ({
@@ -20824,7 +20832,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         onFocus: s,
         argType: l,
       }) => {
-        let c = (y) => {
+        const c = (y) => {
             r(O2(y.target.value));
           },
           p = t !== void 0,
@@ -20871,7 +20879,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         maxLength: a,
         argType: i,
       }) => {
-        let s = (y) => {
+        const s = (y) => {
             r(y.target.value);
           },
           l = !!i?.table?.readonly,
@@ -20891,7 +20899,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
             },
             'Set string',
           );
-        let d = typeof t == 'string';
+        const d = typeof t == 'string';
         return f.createElement(
           S1,
           null,
@@ -20932,11 +20940,13 @@ To pass a single animation please supply them in simple values, e.g. animation('
         value: n,
         argType: o,
       }) => {
-        let a = Pe(null),
+        const a = Pe(null),
           i = o?.control?.readOnly;
         function s(l) {
           if (!l.target.files) return;
-          let c = Array.from(l.target.files).map((p) => URL.createObjectURL(p));
+          const c = Array.from(l.target.files).map((p) =>
+            URL.createObjectURL(p),
+          );
           e(c), T1(n);
         }
         return (
@@ -20988,11 +20998,11 @@ To pass a single animation please supply them in simple values, e.g. animation('
         xe(() => {
           i || c({ value: t });
         }, [i, t]);
-        let p = Ce((A) => (c({ value: A }), r({ [o]: A }), A), [r, o]),
+        const p = Ce((A) => (c({ value: A }), r({ [o]: A }), A), [r, o]),
           h = Ce(() => s(!1), []),
           d = Ce(() => s(!0), []);
         if (!a || a.disable) {
-          let A = a?.disable !== !0 && e?.type?.name !== 'function';
+          const A = a?.disable !== !0 && e?.type?.name !== 'function';
           return n && A
             ? f.createElement(
                 xt,
@@ -21005,7 +21015,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
               )
             : f.createElement(Kc, null);
         }
-        let y = {
+        const y = {
             name: o,
             argType: e,
             value: l.value,
@@ -21043,7 +21053,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         },
       })),
       B1 = ({ tags: e }) => {
-        let t = (e.params || []).filter((a) => a.description),
+        const t = (e.params || []).filter((a) => a.description),
           r = t.length !== 0,
           n = e.deprecated != null,
           o = e.returns != null && e.returns.description != null;
@@ -21158,12 +21168,12 @@ To pass a single animation please supply them in simple values, e.g. animation('
       q1 = () => f.createElement('span', null, '-'),
       Vd = ({ text: e, simple: t }) => f.createElement(N1, { simple: t }, e),
       V1 = (0, P1.default)(1e3)((e) => {
-        let t = e.split(/\r?\n/);
+        const t = e.split(/\r?\n/);
         return `${Math.max(...t.map((r) => r.length))}ch`;
       }),
       J1 = (e) => {
         if (!e) return [e];
-        let t = e.split('|').map((r) => r.trim());
+        const t = e.split('|').map((r) => r.trim());
         return li(t);
       },
       Xc = (e, t = !0) => {
@@ -21180,10 +21190,10 @@ To pass a single animation please supply them in simple values, e.g. animation('
           [o, a] = Z(!1),
           [i, s] = Z(t || !1);
         if (r == null) return null;
-        let l = typeof r.toString == 'function' ? r.toString() : r;
+        const l = typeof r.toString == 'function' ? r.toString() : r;
         if (n == null) {
           if (/[(){}[\]<>]/.test(l)) return f.createElement(Vd, { text: l });
-          let c = J1(l),
+          const c = J1(l),
             p = c.length;
           return p > Ua
             ? f.createElement(
@@ -21261,7 +21271,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
       })),
       Q1 = (e) => e && { summary: typeof e == 'string' ? e : e.name },
       Cn = (e) => {
-        let [t, r] = Z(!1),
+        const [t, r] = Z(!1),
           {
             row: n,
             updateArgs: o,
@@ -21350,10 +21360,10 @@ To pass a single animation please supply them in simple values, e.g. animation('
         backgroundColor: e.appBorderColor,
       })),
       rb = ({ inAddonPanel: e }) => {
-        let [t, r] = Z(!0);
+        const [t, r] = Z(!0);
         return (
           xe(() => {
-            let n = setTimeout(() => {
+            const n = setTimeout(() => {
               r(!1);
             }, 100);
             return () => clearTimeout(n);
@@ -21497,7 +21507,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         initialExpanded: n = !0,
         colSpan: o = 3,
       }) => {
-        let [a, i] = Z(n),
+        const [a, i] = Z(n),
           s = e === 'subsection' ? sb : ib,
           l = r?.length || 0,
           c = e === 'subsection' ? `${l} item${l !== 1 ? 's' : ''}` : '',
@@ -21760,24 +21770,24 @@ To pass a single animation please supply them in simple values, e.g. animation('
         none: void 0,
       },
       mb = (e, t) => {
-        let r = { ungrouped: [], ungroupedSubsections: {}, sections: {} };
+        const r = { ungrouped: [], ungroupedSubsections: {}, sections: {} };
         if (!e) return r;
         Object.entries(e).forEach(([a, i]) => {
-          let { category: s, subcategory: l } = i?.table || {};
+          const { category: s, subcategory: l } = i?.table || {};
           if (s) {
-            let c = r.sections[s] || { ungrouped: [], subsections: {} };
+            const c = r.sections[s] || { ungrouped: [], subsections: {} };
             if (!l) c.ungrouped.push({ key: a, ...i });
             else {
-              let p = c.subsections[l] || [];
+              const p = c.subsections[l] || [];
               p.push({ key: a, ...i }), (c.subsections[l] = p);
             }
             r.sections[s] = c;
           } else if (l) {
-            let c = r.ungroupedSubsections[l] || [];
+            const c = r.ungroupedSubsections[l] || [];
             c.push({ key: a, ...i }), (r.ungroupedSubsections[l] = c);
           } else r.ungrouped.push({ key: a, ...i });
         });
-        let n = fb[t],
+        const n = fb[t],
           o = (a) =>
             n
               ? Object.keys(a).reduce(
@@ -21808,7 +21818,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         }
       },
       gb = (e) => {
-        let {
+        const {
           updateArgs: t,
           resetArgs: r,
           compact: n,
@@ -21818,7 +21828,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
           isLoading: s,
         } = e;
         if ('error' in e) {
-          let { error: w } = e;
+          const { error: w } = e;
           return f.createElement(
             dd,
             null,
@@ -21837,7 +21847,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
           );
         }
         if (s) return f.createElement(cb, null);
-        let { rows: l, args: c, globals: p } = 'rows' in e && e,
+        const { rows: l, args: c, globals: p } = 'rows' in e && e,
           h = mb(
             ui(l || {}, (w) => !w?.table?.disable && yb(w, c || {}, p || {})),
             i,
@@ -21848,7 +21858,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         if (d && y && g) return f.createElement(rb, { inAddonPanel: o });
         let A = 1;
         t && (A += 1), n || (A += 2);
-        let v = Object.keys(h.sections).length > 0,
+        const v = Object.keys(h.sections).length > 0,
           S = {
             updateArgs: t,
             compact: n,
@@ -22124,7 +22134,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         },
       Sb = (e, t, r, n) => {
         if ((t && typeof t == 'object') || typeof t == 'function')
-          for (let o of zd(t))
+          for (const o of zd(t))
             !Db.call(e, o) &&
               o !== r &&
               Jd(e, o, {
@@ -23086,7 +23096,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         color: 'inherit',
       })),
       Fv = ({ as: e, id: t, children: r, ...n }) => {
-        let o = mi(bb),
+        const o = mi(bb),
           a = xv[e],
           i = `#${t}`;
         return f.createElement(
@@ -23109,9 +23119,9 @@ To pass a single animation please supply them in simple values, e.g. animation('
         );
       },
       ep = (e) => {
-        let { as: t, id: r, children: n, ...o } = e;
+        const { as: t, id: r, children: n, ...o } = e;
         if (r) return f.createElement(Fv, { as: t, id: r, ...o }, n);
-        let a = t,
+        const a = t,
           { as: i, ...s } = e;
         return f.createElement(a, { ...eo(s, t) });
       };
@@ -23221,7 +23231,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
     var Bv = new Ov(),
       Pv = ({ children: e, disableAnchor: t, ...r }) => {
         if (t || typeof e != 'string') return f.createElement(Wn, null, e);
-        let n = Bv.slug(e.toLowerCase());
+        const n = Bv.slug(e.toLowerCase());
         return f.createElement(ep, { as: 'h2', id: n, ...r }, e);
       };
     R(Pv)(({ theme: e }) => ({
@@ -23300,7 +23310,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         },
       })),
       Vv = ({ saveStory: e, createStory: t, resetArgs: r }) => {
-        let n = f.useRef(null),
+        const n = f.useRef(null),
           [o, a] = f.useState(!1),
           [i, s] = f.useState(!1),
           [l, c] = f.useState(''),
@@ -23312,7 +23322,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
             s(!0), c(''), setTimeout(() => n.current?.focus(), 0);
           },
           g = (A) => {
-            let v = A.target.value
+            const v = A.target.value
               .replace(/^[^a-z]/i, '')
               .replace(/[^a-z0-9-_ ]/gi, '')
               .replaceAll(/([-_ ]+[a-z0-9])/gi, (S) =>
@@ -23492,7 +23502,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         overflowY: 'auto',
       }),
       zv = ({ saveStory: e, createStory: t }) => {
-        let [r, n] = Z(!0),
+        const [r, n] = Z(!0),
           [o, a, i, s] = Mi(),
           [l] = Ui(),
           c = so(),
@@ -23506,9 +23516,9 @@ To pass a single animation please supply them in simple values, e.g. animation('
         xe(() => {
           A && n(!1);
         }, [A]);
-        let v = Object.values(c).some((x) => x?.control),
+        const v = Object.values(c).some((x) => x?.control),
           S = Object.entries(c).reduce((x, [C, k]) => {
-            let F = k?.control;
+            const F = k?.control;
             return (
               typeof F != 'object' || F?.type !== 'color' || F?.presetColors
                 ? (x[C] = k)
@@ -23540,7 +23550,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
         );
       };
     function Hv() {
-      let e = so(),
+      const e = so(),
         t = Object.values(e).filter(
           (r) => r?.control && !r?.table?.disable,
         ).length;
@@ -23564,12 +23574,12 @@ To pass a single animation please supply them in simple values, e.g. animation('
         typeof r == 'function' ? '__sb_empty_function_arg__' : r,
       );
     Wr.register(nd, (e) => {
-      let t = Wr.getChannel(),
+      const t = Wr.getChannel(),
         r = async () => {
-          let o = e.getCurrentStoryData();
+          const o = e.getCurrentStoryData();
           if (o.type !== 'story') throw new Error('Not a story');
           try {
-            let a = await io(t, no, zr, {
+            const a = await io(t, no, zr, {
               args: ad(
                 Object.entries(o.args || {}).reduce(
                   (i, [s, l]) => (Ft(l, o.initialArgs?.[s]) || (i[s] = l), i),
@@ -23612,9 +23622,9 @@ To pass a single animation please supply them in simple values, e.g. animation('
           }
         },
         n = async (o) => {
-          let a = e.getCurrentStoryData();
+          const a = e.getCurrentStoryData();
           if (a.type !== 'story') throw new Error('Not a story');
-          let i = await io(t, no, zr, {
+          const i = await io(t, no, zr, {
             args: a.args && ad(a.args),
             csfId: a.id,
             importPath: a.importPath,
@@ -23656,7 +23666,7 @@ To pass a single animation please supply them in simple values, e.g. animation('
       }),
         t.on(zr, (o) => {
           if (!o.success) return;
-          let a = e.getCurrentStoryData();
+          const a = e.getCurrentStoryData();
           a.type === 'story' &&
             (e.resetStoryArgs(a),
             o.payload.newStoryId && e.selectStory(o.payload.newStoryId));

@@ -399,7 +399,7 @@ try {
     var i = 'storybook/outline',
       _ = 'outline',
       b = u(function () {
-        let [c, r] = S(),
+        const [c, r] = S(),
           s = C(),
           I = [!0, 'true'].includes(c[_]),
           a = d(() => r({ [_]: !I }), [I]);

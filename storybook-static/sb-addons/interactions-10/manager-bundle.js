@@ -327,7 +327,7 @@ try {
     }
     oe(ie, 'dedent');
     function Tr({ code: t, category: e }) {
-      let r = String(t).padStart(4, '0');
+      const r = String(t).padStart(4, '0');
       return `SB_${e}_${r}`;
     }
     oe(Tr, 'parseErrorCode');
@@ -344,7 +344,7 @@ try {
         return Tr({ code: this.code, category: this.category });
       }
       get name() {
-        let e = this.constructor.name;
+        const e = this.constructor.name;
         return `${this.fullErrorCode} (${e})`;
       }
       static getFullMessage({
@@ -747,7 +747,7 @@ This is deprecated and won't work in Storybook 8 anymore.
       ),
       Zi = (t, e, r, n) => {
         if ((e && typeof e == 'object') || typeof e == 'function')
-          for (let o of Ki(e))
+          for (const o of Ki(e))
             !Ji.call(t, o) &&
               o !== r &&
               _r(t, o, {
@@ -870,7 +870,7 @@ This is deprecated and won't work in Storybook 8 anymore.
         'count',
       ),
       rs = se((t, e) => {
-        let { exists: r, eq: n, neq: o, truthy: a } = t;
+        const { exists: r, eq: n, neq: o, truthy: a } = t;
         if (Vo([r, n, o, a]) > 1)
           throw new Error(
             `Invalid conditional test ${JSON.stringify({ exists: r, eq: n, neq: o })}`,
@@ -878,19 +878,19 @@ This is deprecated and won't work in Storybook 8 anymore.
         if (typeof n < 'u') return (0, zo.isEqual)(e, n);
         if (typeof o < 'u') return !(0, zo.isEqual)(e, o);
         if (typeof r < 'u') {
-          let u = typeof e < 'u';
+          const u = typeof e < 'u';
           return r ? u : !u;
         }
         return typeof a > 'u' || a ? !!e : !e;
       }, 'testValue'),
       Wo = se((t, e, r) => {
         if (!t.if) return !0;
-        let { arg: n, global: o } = t.if;
+        const { arg: n, global: o } = t.if;
         if (Vo([n, o]) !== 1)
           throw new Error(
             `Invalid conditional value ${JSON.stringify({ arg: n, global: o })}`,
           );
-        let a = n ? e[n] : r[o];
+        const a = n ? e[n] : r[o];
         return rs(t.if, a);
       }, 'includeConditionalArg');
     function ns(t) {
@@ -900,7 +900,7 @@ This is deprecated and won't work in Storybook 8 anymore.
           input: t,
           get composed() {
             if (e) return e;
-            let { addons: n, ...o } = t;
+            const { addons: n, ...o } = t;
             return (e = ut(Xe([...(n ?? []), o]))), e;
           },
           meta(n) {
@@ -967,7 +967,7 @@ This is deprecated and won't work in Storybook 8 anymore.
         'sanitize',
       ),
       Ho = se((t, e) => {
-        let r = Or(t);
+        const r = Or(t);
         if (r === '')
           throw new Error(
             `Invalid ${e} '${t}', must include alphanumeric characters`,
@@ -988,12 +988,12 @@ This is deprecated and won't work in Storybook 8 anymore.
     }
     se(at, 'isExportStory');
     var Ug = se((t, { rootSeparator: e, groupSeparator: r }) => {
-        let [n, o] = t.split(e, 2),
+        const [n, o] = t.split(e, 2),
           a = (o || t).split(r).filter((u) => !!u);
         return { root: o ? n : null, groups: a };
       }, 'parseKind'),
       Qo = se((...t) => {
-        let e = t.reduce(
+        const e = t.reduce(
           (r, n) => (n.startsWith('!') ? r.delete(n.slice(1)) : r.add(n), r),
           new Set(),
         );
@@ -1020,7 +1020,7 @@ This is deprecated and won't work in Storybook 8 anymore.
       ),
       ps = (t, e, r, n) => {
         if ((e && typeof e == 'object') || typeof e == 'function')
-          for (let o of ss(e))
+          for (const o of ss(e))
             !cs.call(t, o) &&
               o !== r &&
               Qr(t, o, {
@@ -1297,7 +1297,7 @@ This is deprecated and won't work in Storybook 8 anymore.
             1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0,
           ]);
         function n(o) {
-          let a = o.length;
+          const a = o.length;
           if (a === 0) return '';
           let u = '',
             i = 0,
@@ -1326,7 +1326,7 @@ This is deprecated and won't work in Storybook 8 anymore.
               continue;
             }
             if ((++s, s >= a)) throw new Error('URI malformed');
-            let h = o.charCodeAt(s) & 1023;
+            const h = o.charCodeAt(s) & 1023;
             (i = s + 1),
               (l = 65536 + (((l & 1023) << 10) | h)),
               (u +=
@@ -1392,7 +1392,7 @@ This is deprecated and won't work in Storybook 8 anymore.
         c(n, 'isPrototypeKey');
         function o(f, g, E, C, v) {
           if (n(g)) return f;
-          let b = f[g];
+          const b = f[g];
           return typeof b == 'object' && b !== null
             ? b
             : !C &&
@@ -1427,7 +1427,7 @@ This is deprecated and won't work in Storybook 8 anymore.
           let j = '',
             M = !0,
             L = !1;
-          for (let q in f) {
+          for (const q in f) {
             let p = f[q],
               d;
             C
@@ -1551,12 +1551,12 @@ This is deprecated and won't work in Storybook 8 anymore.
           n = Zr(),
           o = e(ds()),
           a = c((f) => {
-            let g = Number(f);
+            const g = Number(f);
             return Number.isNaN(g) ? f : g;
           }, 'numberKeyDeserializer');
         t.numberKeyDeserializer = a;
         var u = c((f) => {
-          let g = Number(f);
+          const g = Number(f);
           return Number.isNaN(g) ? f : g;
         }, 'numberValueDeserializer');
         t.numberValueDeserializer = u;
@@ -1571,7 +1571,7 @@ This is deprecated and won't work in Storybook 8 anymore.
         }
         c(l, 'computeKeySlice');
         function h(f, g) {
-          let {
+          const {
               valueDeserializer: E = n.defaultOptions.valueDeserializer,
               keyDeserializer: C = n.defaultOptions.keyDeserializer,
               arrayRepeatSyntax: v = n.defaultOptions.arrayRepeatSyntax,
@@ -1620,9 +1620,9 @@ This is deprecated and won't work in Storybook 8 anymore.
                   ((O = f.slice(j + 1, G)),
                   F && (O = O.replace(i, ' ')),
                   x && (O = (0, o.default)(O) || O));
-                let ce = E(O, p);
+                const ce = E(O, p);
                 if (S) {
-                  let ve = L[p];
+                  const ve = L[p];
                   ve === void 0
                     ? te > -1
                       ? (L[p] = [ce])
@@ -1715,7 +1715,7 @@ This is deprecated and won't work in Storybook 8 anymore.
         var e = ga();
         function r(n, o) {
           if (n === null || typeof n != 'object') return '';
-          let a = o ?? {};
+          const a = o ?? {};
           return (0, e.stringifyObject)(n, a);
         }
         c(r, 'stringify');
@@ -4862,7 +4862,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         );
       })();
     function Ea() {
-      let t = {
+      const t = {
         setHandler: c(() => {}, 'setHandler'),
         send: c(() => {}, 'send'),
       };
@@ -4873,7 +4873,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       constructor() {
         (this.getChannel = c(() => {
           if (!this.channel) {
-            let e = Ea();
+            const e = Ea();
             return this.setChannel(e), e;
           }
           return this.channel;
@@ -4942,7 +4942,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
           this.removeRenderListeners();
       }
       getNextHook() {
-        let e = this.currentHooks[this.nextHookIndex];
+        const e = this.currentHooks[this.nextHookIndex];
         return (this.nextHookIndex += 1), e;
       }
       triggerEffects() {
@@ -4966,8 +4966,8 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     c(Ca, 'HooksContext');
     var wa = Ca;
     function kr(t) {
-      let e = c((...r) => {
-        let { hooks: n } = typeof r[0] == 'function' ? r[1] : r[0],
+      const e = c((...r) => {
+        const { hooks: n } = typeof r[0] == 'function' ? r[1] : r[0],
           o = n.currentPhase,
           a = n.currentHooks,
           u = n.nextHookIndex,
@@ -4981,9 +4981,9 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
               n.hookListsMap.set(t, n.currentHooks),
               n.prevMountedDecorators.add(t)),
           (n.nextHookIndex = 0);
-        let s = de.STORYBOOK_HOOKS_CONTEXT;
+        const s = de.STORYBOOK_HOOKS_CONTEXT;
         de.STORYBOOK_HOOKS_CONTEXT = n;
-        let l = t(...r);
+        const l = t(...r);
         if (
           ((de.STORYBOOK_HOOKS_CONTEXT = s),
           n.currentPhase === 'UPDATE' && n.getNextHook() != null)
@@ -5006,12 +5006,12 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       Cs = 25,
       ws = c(
         (t) => (e, r) => {
-          let n = t(
+          const n = t(
             kr(e),
             r.map((o) => kr(o)),
           );
           return (o) => {
-            let { hooks: a } = o;
+            const { hooks: a } = o;
             (a.prevMountedDecorators ??= new Set()),
               (a.mountedDecorators = new Set([e, ...r])),
               (a.currentContext = o),
@@ -5049,24 +5049,24 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     }
     c(rn, 'getHooksContextOrNull');
     function Qt() {
-      let t = rn();
+      const t = rn();
       if (t == null) throw tn();
       return t;
     }
     c(Qt, 'getHooksContextOrThrow');
     function va(t, e, r) {
-      let n = Qt();
+      const n = Qt();
       if (n.currentPhase === 'MOUNT') {
         r != null &&
           !Array.isArray(r) &&
           X.warn(
             `${t} received a final argument that is not an array (instead, received ${r}). When specified, the final argument must be an array.`,
           );
-        let o = { name: t, deps: r };
+        const o = { name: t, deps: r };
         return n.currentHooks.push(o), e(o), o;
       }
       if (n.currentPhase === 'UPDATE') {
-        let o = n.getNextHook();
+        const o = n.getNextHook();
         if (o == null)
           throw new Error(
             'Rendered more hooks than during the previous render.',
@@ -5096,7 +5096,7 @@ Incoming: ${r}`),
     }
     c(va, 'useHook');
     function vt(t, e, r) {
-      let { memoizedState: n } = va(
+      const { memoizedState: n } = va(
         t,
         (o) => {
           o.memoizedState = e();
@@ -5123,7 +5123,7 @@ Incoming: ${r}`),
     }
     c(xs, 'useRef');
     function Da() {
-      let t = rn();
+      const t = rn();
       if (t != null && t.currentPhase !== 'NONE') t.hasUpdates = !0;
       else
         try {
@@ -5136,7 +5136,7 @@ Incoming: ${r}`),
     }
     c(Da, 'triggerUpdate');
     function on(t, e) {
-      let r = nn(t, typeof e == 'function' ? e() : e),
+      const r = nn(t, typeof e == 'function' ? e() : e),
         n = c((o) => {
           (r.current = typeof o == 'function' ? o(r.current) : o), Da();
         }, 'setState');
@@ -5148,19 +5148,19 @@ Incoming: ${r}`),
     }
     c(an, 'useState');
     function Ts(t, e, r) {
-      let n = r != null ? () => r(e) : e,
+      const n = r != null ? () => r(e) : e,
         [o, a] = on('useReducer', n);
       return [o, c((u) => a((i) => t(i, u)), 'dispatch')];
     }
     c(Ts, 'useReducer');
     function Zt(t, e) {
-      let r = Qt(),
+      const r = Qt(),
         n = vt('useEffect', () => ({ create: t }), e);
       r.currentEffects.includes(n) || r.currentEffects.push(n);
     }
     c(Zt, 'useEffect');
     function Rs(t, e = []) {
-      let r = ze.getChannel();
+      const r = ze.getChannel();
       return (
         Zt(
           () => (
@@ -5176,18 +5176,18 @@ Incoming: ${r}`),
     }
     c(Rs, 'useChannel');
     function er() {
-      let { currentContext: t } = Qt();
+      const { currentContext: t } = Qt();
       if (t == null) throw tn();
       return t;
     }
     c(er, 'useStoryContext');
     function _s(t, e) {
-      let { parameters: r } = er();
+      const { parameters: r } = er();
       if (t) return r[t] ?? e;
     }
     c(_s, 'useParameter');
     function Os() {
-      let t = ze.getChannel(),
+      const t = ze.getChannel(),
         { id: e, args: r } = er(),
         n = wt((a) => t.emit(qt, { storyId: e, updatedArgs: a }), [t, e]),
         o = wt((a) => t.emit(Lt, { storyId: e, argNames: a }), [t, e]);
@@ -5195,7 +5195,7 @@ Incoming: ${r}`),
     }
     c(Os, 'useArgs');
     function Fs() {
-      let t = ze.getChannel(),
+      const t = ze.getChannel(),
         { globals: e } = er(),
         r = wt((n) => t.emit(Mt, { globals: n }), [t]);
       return [e, r];
@@ -5208,9 +5208,9 @@ Incoming: ${r}`),
         wrapper: r,
         skipIfNoParametersOrOptions: n = !1,
       }) => {
-        let o = c(
+        const o = c(
           (a) => (u, i) => {
-            let s = i.parameters && i.parameters[e];
+            const s = i.parameters && i.parameters[e];
             return (s && s.disable) || (n && !a && !s)
               ? u(i)
               : r(u, i, { options: a, parameters: s });
@@ -5305,7 +5305,7 @@ Incoming: ${r}`),
               'getState',
             )),
             (this.subscribe = c((n, o) => {
-              let a = typeof n == 'function',
+              const a = typeof n == 'function',
                 u = a ? '*' : n,
                 i = a ? n : o;
               if ((this.debug('subscribe', { eventType: u, listener: i }), !i))
@@ -5446,7 +5446,7 @@ Incoming: ${r}`),
         create`,
               { options: e },
             );
-          let r = ta.get(e.id);
+          const r = ta.get(e.id);
           if (r)
             return (
               console.warn(le`UniversalStore with id "${e.id}" already exists in this environment, re-using existing.
@@ -5454,7 +5454,7 @@ Incoming: ${r}`),
               r
             );
           $.isInternalConstructing = !0;
-          let n = new $(e);
+          const n = new $(e);
           return ta.set(e.id, n), n;
         }
         static __prepare(e, r) {
@@ -5463,7 +5463,7 @@ Incoming: ${r}`),
             $.preparation.resolve({ channel: e, environment: r });
         }
         setState(e) {
-          let r = this.state,
+          const r = this.state,
             n = typeof e == 'function' ? e(r) : e;
           if (
             (this.debug('setState', {
@@ -5477,7 +5477,7 @@ Incoming: ${r}`),
         or await store.readyPromise to wait for the store to be ready before sending events.
         ${JSON.stringify({ newState: n, id: this.id, actor: this.actor, environment: this.environment }, null, 2)}`);
           this.state = n;
-          let o = {
+          const o = {
             type: $.InternalEventType.SET_STATE,
             payload: { state: n, previousState: r },
           };
@@ -5533,7 +5533,7 @@ Incoming: ${r}`),
                 }, 1e3));
         }
         emitToListeners(e, r) {
-          let n = this.listeners.get(e.type),
+          const n = this.listeners.get(e.type),
             o = this.listeners.get('*');
           this.debug('emitToListeners', {
             event: e,
@@ -5544,7 +5544,7 @@ Incoming: ${r}`),
             [...(n ?? []), ...(o ?? [])].forEach((a) => a(e, r));
         }
         handleChannelEvents(e) {
-          let { event: r, eventInfo: n } = e;
+          const { event: r, eventInfo: n } = e;
           if ([n.actor.id, n.forwardingActor?.id].includes(this.actor.id)) {
             this.debug('handleChannelEvents: Ignoring event from self', {
               channelEvent: e,
@@ -5567,7 +5567,7 @@ Incoming: ${r}`),
             switch (r.type) {
               case $.InternalEventType.EXISTING_STATE_REQUEST:
                 o = !1;
-                let a = {
+                const a = {
                   type: $.InternalEventType.EXISTING_STATE_RESPONSE,
                   payload: this.state,
                 };
@@ -5612,7 +5612,7 @@ Incoming: ${r}`),
                 )
                   break;
                 this.syncing.resolve?.();
-                let o = {
+                const o = {
                   type: $.InternalEventType.SET_STATE,
                   payload: { state: r.payload, previousState: this.state },
                 };
@@ -5676,29 +5676,29 @@ Incoming: ${r}`),
       qe.setupPreparationPromise();
     var Ht = qe;
     function xa(t, e) {
-      let r = {},
+      const r = {},
         n = Object.entries(t);
       for (let o = 0; o < n.length; o++) {
-        let [a, u] = n[o];
+        const [a, u] = n[o];
         e(u, a) || (r[a] = u);
       }
       return r;
     }
     c(xa, 'omitBy');
     function Ta(t, e) {
-      let r = {};
+      const r = {};
       for (let n = 0; n < e.length; n++) {
-        let o = e[n];
+        const o = e[n];
         Object.prototype.hasOwnProperty.call(t, o) && (r[o] = t[o]);
       }
       return r;
     }
     c(Ta, 'pick');
     function Ra(t, e) {
-      let r = {},
+      const r = {},
         n = Object.entries(t);
       for (let o = 0; o < n.length; o++) {
-        let [a, u] = n[o];
+        const [a, u] = n[o];
         e(u, a) && (r[a] = u);
       }
       return r;
@@ -5714,10 +5714,10 @@ Incoming: ${r}`),
     }
     c(Re, 'isPlainObject');
     function Ze(t, e) {
-      let r = {},
+      const r = {},
         n = Object.keys(t);
       for (let o = 0; o < n.length; o++) {
-        let a = n[o],
+        const a = n[o],
           u = t[a];
         r[a] = e(u, a, t);
       }
@@ -5792,7 +5792,7 @@ Incoming: ${r}`),
         case Ns:
           return t.toString() === e.toString();
         case Ls: {
-          let i = t.valueOf(),
+          const i = t.valueOf(),
             s = e.valueOf();
           return i === s || (Number.isNaN(i) && Number.isNaN(s));
         }
@@ -5806,7 +5806,7 @@ Incoming: ${r}`),
           return t === e;
       }
       r = r ?? new Map();
-      let a = r.get(t),
+      const a = r.get(t),
         u = r.get(e);
       if (a != null && u != null) return a === e;
       r.set(t, e), r.set(e, t);
@@ -5814,16 +5814,16 @@ Incoming: ${r}`),
         switch (n) {
           case qs: {
             if (t.size !== e.size) return !1;
-            for (let [i, s] of t.entries())
+            for (const [i, s] of t.entries())
               if (!e.has(i) || !Oe(s, e.get(i), r)) return !1;
             return !0;
           }
           case $s: {
             if (t.size !== e.size) return !1;
-            let i = Array.from(t.values()),
+            const i = Array.from(t.values()),
               s = Array.from(e.values());
             for (let l = 0; l < i.length; l++) {
-              let h = i[l],
+              const h = i[l],
                 f = s.findIndex((g) => Oe(h, g, r));
               if (f === -1) return !1;
               s.splice(f, 1);
@@ -5866,14 +5866,14 @@ Incoming: ${r}`),
           case Br: {
             if (!(Oe(t.constructor, e.constructor, r) || (Re(t) && Re(e))))
               return !1;
-            let i = [...Object.keys(t), ...Mr(t)],
+            const i = [...Object.keys(t), ...Mr(t)],
               s = [...Object.keys(e), ...Mr(e)];
             if (i.length !== s.length) return !1;
             for (let l = 0; l < i.length; l++) {
-              let h = i[l],
+              const h = i[l],
                 f = t[h];
               if (!Object.prototype.hasOwnProperty.call(e, h)) return !1;
-              let g = e[h];
+              const g = e[h];
               if (!Oe(f, g, r)) return !1;
             }
             return !0;
@@ -5887,7 +5887,7 @@ Incoming: ${r}`),
     }
     c(Oe, 'areObjectsEqual');
     var e0 = c((t, e) => {
-        let [r, n] = an(e ? e(t.getState()) : t.getState());
+        const [r, n] = an(e ? e(t.getState()) : t.getState());
         return (
           Zt(
             () =>
@@ -5896,7 +5896,7 @@ Incoming: ${r}`),
                   n(o);
                   return;
                 }
-                let u = e(o),
+                const u = e(o),
                   i = e(a);
                 !un(u, i) && n(u);
               }),
@@ -5928,7 +5928,7 @@ Incoming: ${r}`),
           if (!this.testUtils)
             throw new Error(Is`Cannot call unsubscribeAll on a store that does not have testUtils.
         Please provide testUtils as the second argument when creating the store.`);
-          let e = c((r) => {
+          const e = c((r) => {
             try {
               r.value();
             } catch {}
@@ -5941,7 +5941,7 @@ Incoming: ${r}`),
     var Pr = ct(fa(), 1),
       it = Symbol('incompatible'),
       $r = c((t, e) => {
-        let r = e.type;
+        const r = e.type;
         if (t == null || !r || e.mapping) return t;
         switch (r.name) {
           case 'string':
@@ -5956,7 +5956,7 @@ Incoming: ${r}`),
             return !r.value || !Array.isArray(t)
               ? it
               : t.reduce((n, o, a) => {
-                  let u = $r(o, { type: r.value });
+                  const u = $r(o, { type: r.value });
                   return u !== it && (n[a] = u), n;
                 }, new Array(t.length));
           case 'object':
@@ -5965,7 +5965,7 @@ Incoming: ${r}`),
               : !r.value || typeof t != 'object'
                 ? it
                 : Object.entries(t).reduce((n, [o, a]) => {
-                    let u = $r(a, { type: r.value[o] });
+                    const u = $r(a, { type: r.value[o] });
                     return u === it ? n : Object.assign(n, { [o]: u });
                   }, {});
           default:
@@ -5976,7 +5976,7 @@ Incoming: ${r}`),
         (t, e) =>
           Object.entries(t).reduce((r, [n, o]) => {
             if (!e[n]) return r;
-            let a = $r(o, e[n]);
+            const a = $r(o, e[n]);
             return a === it ? r : Object.assign(r, { [n]: a });
           }, {}),
         'mapArgsToTypes',
@@ -5991,7 +5991,7 @@ Incoming: ${r}`),
               ? e
               : Object.keys({ ...t, ...e }).reduce((r, n) => {
                   if (n in e) {
-                    let o = Ur(t[n], e[n]);
+                    const o = Ur(t[n], e[n]);
                     o !== void 0 && (r[n] = o);
                   } else r[n] = t[n];
                   return r;
@@ -6023,11 +6023,11 @@ Incoming: ${r}`),
       `),
                 a()
               );
-            let u = Array.isArray(t[n]),
+            const u = Array.isArray(t[n]),
               i = u && t[n].findIndex((f) => !o.includes(f)),
               s = u && i === -1;
             if (t[n] === void 0 || o.includes(t[n]) || s) return a();
-            let l = u ? `${n}[${i}]` : n,
+            const l = u ? `${n}[${i}]` : n,
               h = o
                 .map((f) => (typeof f == 'string' ? `'${f}'` : String(f)))
                 .join(', ');
@@ -6045,8 +6045,8 @@ Incoming: ${r}`),
         if (typeof t != typeof e) return e;
         if (un(t, e)) return St;
         if (Array.isArray(t) && Array.isArray(e)) {
-          let r = e.reduce((n, o, a) => {
-            let u = Yt(t[a], o);
+          const r = e.reduce((n, o, a) => {
+            const u = Yt(t[a], o);
             return u !== St && (n[a] = u), n;
           }, new Array(e.length));
           return e.length >= t.length
@@ -6055,17 +6055,17 @@ Incoming: ${r}`),
         }
         return Re(t) && Re(e)
           ? Object.keys({ ...t, ...e }).reduce((r, n) => {
-              let o = Yt(t?.[n], e?.[n]);
+              const o = Yt(t?.[n], e?.[n]);
               return o === St ? r : Object.assign(r, { [n]: o });
             }, {})
           : e;
       }, 'deepDiff'),
       Oa = 'UNTARGETED';
     function Fa({ args: t, argTypes: e }) {
-      let r = {};
+      const r = {};
       return (
         Object.entries(t).forEach(([n, o]) => {
-          let { target: a = Oa } = e[n] || {};
+          const { target: a = Oa } = e[n] || {};
           (r[a] = r[a] || {}), (r[a][n] = o);
         }),
         r
@@ -6092,18 +6092,21 @@ Incoming: ${r}`),
           (this.initialArgsByStoryId[e.id] = e.initialArgs),
             (this.argsByStoryId[e.id] = e.initialArgs);
         else if (this.initialArgsByStoryId[e.id] !== e.initialArgs) {
-          let r = Yt(this.initialArgsByStoryId[e.id], this.argsByStoryId[e.id]);
+          const r = Yt(
+            this.initialArgsByStoryId[e.id],
+            this.argsByStoryId[e.id],
+          );
           (this.initialArgsByStoryId[e.id] = e.initialArgs),
             (this.argsByStoryId[e.id] = e.initialArgs),
             r !== St && this.updateFromDelta(e, r);
         }
       }
       updateFromDelta(e, r) {
-        let n = ul(r, e.argTypes);
+        const n = ul(r, e.argTypes);
         this.argsByStoryId[e.id] = Ur(this.argsByStoryId[e.id], n);
       }
       updateFromPersisted(e, r) {
-        let n = al(r, e.argTypes);
+        const n = al(r, e.argTypes);
         return this.updateFromDelta(e, n);
       }
       update(e, r) {
@@ -6129,12 +6132,13 @@ Incoming: ${r}`),
           this.set({ globals: e, globalTypes: r });
         }
         set({ globals: e = {}, globalTypes: r = {} }) {
-          let n = this.initialGlobals && Yt(this.initialGlobals, this.globals);
+          const n =
+            this.initialGlobals && Yt(this.initialGlobals, this.globals);
           this.allowedGlobalNames = new Set([
             ...Object.keys(e),
             ...Object.keys(r),
           ]);
-          let o = Pa(r);
+          const o = Pa(r);
           (this.initialGlobals = { ...o, ...e }),
             (this.globals = this.initialGlobals),
             n && n !== St && this.updateFromPersisted(n);
@@ -6153,7 +6157,7 @@ Incoming: ${r}`),
           );
         }
         updateFromPersisted(e) {
-          let r = this.filterAllowedGlobals(e);
+          const r = this.filterAllowedGlobals(e);
           this.globals = { ...this.globals, ...r };
         }
         get() {
@@ -6177,17 +6181,17 @@ Incoming: ${r}`),
           this.entries = e;
         }
         entryFromSpecifier(e) {
-          let r = Object.values(this.entries);
+          const r = Object.values(this.entries);
           if (e === '*') return r[0];
           if (typeof e == 'string')
             return this.entries[e]
               ? this.entries[e]
               : r.find((a) => a.id.startsWith(e));
-          let { name: n, title: o } = e;
+          const { name: n, title: o } = e;
           return r.find((a) => a.name === n && a.title === o);
         }
         storyIdToEntry(e) {
-          let r = this.entries[e];
+          const r = this.entries[e];
           if (!r) throw new Ao({ storyId: e });
           return r;
         }
@@ -6220,11 +6224,11 @@ CSF .story annotations deprecated; annotate story functions directly:
 See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-annotations for details and codemod.
 `;
     function Xt(t, e, r) {
-      let n = e,
+      const n = e,
         o = typeof e == 'function' ? e : null,
         { story: a } = n;
       a && (X.debug('deprecated story', a), Ne(ml));
-      let u = Jo(t),
+      const u = Jo(t),
         i = (typeof n != 'function' && n.name) || n.storyName || a?.name || u,
         s = [...ee(n.decorators), ...ee(a?.decorators)],
         l = { ...a?.parameters, ...n.parameters },
@@ -6255,7 +6259,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     }
     c(Xt, 'normalizeStory');
     function Jt(t, e = t.title, r) {
-      let { id: n, argTypes: o } = t;
+      const { id: n, argTypes: o } = t;
       return {
         id: Or(n || e),
         ...t,
@@ -6266,7 +6270,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     }
     c(Jt, 'normalizeComponentAnnotations');
     var gl = c((t) => {
-        let { globals: e, globalTypes: r } = t;
+        const { globals: e, globalTypes: r } = t;
         (e || r) &&
           X.error(
             'Global args/argTypes can only be set globally',
@@ -6274,7 +6278,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
           );
       }, 'checkGlobals'),
       yl = c((t) => {
-        let { options: e } = t;
+        const { options: e } = t;
         e?.storySort &&
           X.error('The storySort option parameter can only be set globally');
       }, 'checkStorySort'),
@@ -6285,13 +6289,13 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
       let { default: n, __namedExportsOrder: o, ...a } = t,
         u = Object.values(a)[0];
       if (Ke(u)) {
-        let l = Jt(u.meta.input, r, e);
+        const l = Jt(u.meta.input, r, e);
         Gt(l.parameters);
-        let h = { meta: l, stories: {}, moduleExports: t };
+        const h = { meta: l, stories: {}, moduleExports: t };
         return (
           Object.keys(a).forEach((f) => {
             if (at(f, l)) {
-              let g = Xt(f, a[f].input, l);
+              const g = Xt(f, a[f].input, l);
               Gt(g.parameters), (h.stories[g.id] = g);
             }
           }),
@@ -6299,13 +6303,13 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
           h
         );
       }
-      let i = Jt(n, r, e);
+      const i = Jt(n, r, e);
       Gt(i.parameters);
-      let s = { meta: i, stories: {}, moduleExports: t };
+      const s = { meta: i, stories: {}, moduleExports: t };
       return (
         Object.keys(a).forEach((l) => {
           if (at(l, i)) {
-            let h = Xt(l, a[l], i);
+            const h = Xt(l, a[l], i);
             Gt(h.parameters), (s.stories[h.id] = h);
           }
         }),
@@ -6318,11 +6322,11 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     }
     c(ka, 'mountDestructured');
     function Ma(t) {
-      let e = t.toString().match(/[^(]*\(([^)]*)/);
+      const e = t.toString().match(/[^(]*\(([^)]*)/);
       if (!e) return [];
-      let r = zr(e[1]);
+      const r = zr(e[1]);
       if (!r.length) return [];
-      let n = r[0];
+      const n = r[0];
       return n.startsWith('{') && n.endsWith('}')
         ? zr(n.slice(1, -1).replace(/\s/g, '')).map((o) =>
             o.replace(/:.*|=.*/g, ''),
@@ -6338,15 +6342,15 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
         if (t[a] === '{' || t[a] === '[') r.push(t[a] === '{' ? '}' : ']');
         else if (t[a] === r[r.length - 1]) r.pop();
         else if (!r.length && t[a] === ',') {
-          let u = t.substring(n, a).trim();
+          const u = t.substring(n, a).trim();
           u && e.push(u), (n = a + 1);
         }
-      let o = t.substring(n).trim();
+      const o = t.substring(n).trim();
       return o && e.push(o), e;
     }
     c(zr, 'splitByComma');
     function qa(t, e, r) {
-      let n = r(t);
+      const n = r(t);
       return (o) => e(n, o);
     }
     c(qa, 'decorateStory');
@@ -6366,7 +6370,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     }
     c($a, 'sanitizeStoryContextUpdate');
     function Ua(t, e) {
-      let r = {},
+      const r = {},
         n = c(
           (a) => (u) => {
             if (!r.value)
@@ -6380,12 +6384,12 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     }
     c(Ua, 'defaultDecorateStory');
     var et = c((...t) => {
-      let e = {},
+      const e = {},
         r = t.filter(Boolean),
         n = r.reduce(
           (o, a) => (
             Object.entries(a).forEach(([u, i]) => {
-              let s = o[u];
+              const s = o[u];
               Array.isArray(i) || typeof s > 'u'
                 ? (o[u] = i)
                 : Re(i) && Re(s)
@@ -6398,7 +6402,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
         );
       return (
         Object.keys(e).forEach((o) => {
-          let a = r
+          const a = r
             .filter(Boolean)
             .map((u) => u[o])
             .filter((u) => typeof u < 'u');
@@ -6408,11 +6412,11 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
       );
     }, 'combineParameters');
     function sn(t, e, r) {
-      let { moduleExport: n, id: o, name: a } = t || {},
+      const { moduleExport: n, id: o, name: a } = t || {},
         u = ln(t, e, r),
         i = c(async (R) => {
-          let T = {};
-          for (let O of [
+          const T = {};
+          for (const O of [
             ...('__STORYBOOK_TEST_LOADERS__' in de &&
             Array.isArray(de.__STORYBOOK_TEST_LOADERS__)
               ? [de.__STORYBOOK_TEST_LOADERS__]
@@ -6422,31 +6426,31 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
             ee(t.loaders),
           ]) {
             if (R.abortSignal.aborted) return T;
-            let B = await Promise.all(O.map((j) => j(R)));
+            const B = await Promise.all(O.map((j) => j(R)));
             Object.assign(T, ...B);
           }
           return T;
         }, 'applyLoaders'),
         s = c(async (R) => {
-          let T = new Array();
-          for (let O of [
+          const T = [];
+          for (const O of [
             ...ee(r.beforeEach),
             ...ee(e.beforeEach),
             ...ee(t.beforeEach),
           ]) {
             if (R.abortSignal.aborted) return T;
-            let B = await O(R);
+            const B = await O(R);
             B && T.push(B);
           }
           return T;
         }, 'applyBeforeEach'),
         l = c(async (R) => {
-          let T = [
+          const T = [
             ...ee(r.experimental_afterEach),
             ...ee(e.experimental_afterEach),
             ...ee(t.experimental_afterEach),
           ].reverse();
-          for (let O of T) {
+          for (const O of T) {
             if (R.abortSignal.aborted) return;
             await O(R);
           }
@@ -6460,7 +6464,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
         S = t?.play ?? e?.play,
         A = ka(S);
       if (!C && !A) throw new qo({ id: o });
-      let D = c(
+      const D = c(
           (R) => async () => (await R.renderToCanvas(), R.canvas),
           'defaultMount',
         ),
@@ -6493,7 +6497,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     }
     c(za, 'prepareMeta');
     function ln(t, e, r) {
-      let n = ['dev', 'test'],
+      const n = ['dev', 'test'],
         o = de.DOCS_OPTIONS?.autodocs === !0 ? ['autodocs'] : [],
         a = Qo(
           ...n,
@@ -6506,10 +6510,10 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
         { argTypesEnhancers: i = [], argsEnhancers: s = [] } = r,
         l = et(r.argTypes, e.argTypes, t?.argTypes);
       if (t) {
-        let S = t?.userStoryFn || t?.render || e.render || r.render;
+        const S = t?.userStoryFn || t?.render || e.render || r.render;
         u.__isArgsStory = S && S.length > 0;
       }
-      let h = { ...r.args, ...e.args, ...t?.args },
+      const h = { ...r.args, ...e.args, ...t?.args },
         f = { ...e.globals, ...t?.globals },
         g = {
           componentId: e.id,
@@ -6527,12 +6531,12 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
           storyGlobals: f,
         };
       g.argTypes = i.reduce((S, A) => A({ ...g, argTypes: S }), g.argTypes);
-      let E = { ...h };
+      const E = { ...h };
       g.initialArgs = s.reduce(
         (S, A) => ({ ...S, ...A({ ...g, initialArgs: S }) }),
         E,
       );
-      let { name: C, story: v, ...b } = g;
+      const { name: C, story: v, ...b } = g;
       return b;
     }
     c(ln, 'preparePartialAnnotations');
@@ -6540,26 +6544,26 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
       let { args: e } = t,
         r = { ...t, allArgs: void 0, argsByTarget: void 0 };
       if (de.FEATURES?.argTypeTargetsV7) {
-        let a = Fa(t);
+        const a = Fa(t);
         r = { ...t, allArgs: t.args, argsByTarget: a, args: a[Oa] || {} };
       }
-      let n = Object.entries(r.args).reduce((a, [u, i]) => {
+      const n = Object.entries(r.args).reduce((a, [u, i]) => {
           if (!r.argTypes[u]?.mapping) return (a[u] = i), a;
-          let s = c((l) => {
-            let h = r.argTypes[u].mapping;
+          const s = c((l) => {
+            const h = r.argTypes[u].mapping;
             return h && l in h ? h[l] : l;
           }, 'mappingFn');
           return (a[u] = Array.isArray(i) ? i.map(s) : s(i)), a;
         }, {}),
         o = Object.entries(n).reduce((a, [u, i]) => {
-          let s = r.argTypes[u] || {};
+          const s = r.argTypes[u] || {};
           return Wo(s, n, r.globals) && (a[u] = i), a;
         }, {});
       return { ...r, unmappedArgs: e, args: o };
     }
     c(cn, 'prepareContext');
     var Hr = c((t, e, r) => {
-        let n = typeof t;
+        const n = typeof t;
         switch (n) {
           case 'boolean':
           case 'string':
@@ -6612,16 +6616,16 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
             ? t
             : t &&
               Ra(t, (n, o) => {
-                let a = n.name || o.toString();
+                const a = n.name || o.toString();
                 return !!(!e || na(a, e)) && (!r || !na(a, r));
               }),
         'filterArgTypes',
       ),
       El = c((t, e, r) => {
-        let { type: n, options: o } = t;
+        const { type: n, options: o } = t;
         if (n) {
           if (r.color && r.color.test(e)) {
-            let a = n.name;
+            const a = n.name;
             if (a === 'string') return { control: { type: 'color' } };
             a !== 'enum' &&
               X.warn(
@@ -6639,7 +6643,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
             case 'number':
               return { control: { type: 'number' } };
             case 'enum': {
-              let { value: a } = n;
+              const { value: a } = n;
               return {
                 control: { type: a?.length <= 5 ? 'radio' : 'select' },
                 options: a,
@@ -6654,7 +6658,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
         }
       }, 'inferControl'),
       Ga = c((t) => {
-        let {
+        const {
           argTypes: e,
           parameters: {
             __isArgsStory: r,
@@ -6666,7 +6670,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
           },
         } = t;
         if (!r) return e;
-        let u = bl(e, n, o),
+        const u = bl(e, n, o),
           i = Ze(u, (s, l) => s?.type && El(s, l.toString(), a));
         return et(i, u);
       }, 'inferControls');
@@ -6708,13 +6712,13 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     c(ut, 'normalizeProjectAnnotations');
     var Al = c(
       (t) => async () => {
-        let e = [];
-        for (let r of t) {
-          let n = await r();
+        const e = [];
+        for (const r of t) {
+          const n = await r();
           n && e.unshift(n);
         }
         return async () => {
-          for (let r of e) await r();
+          for (const r of e) await r();
         };
       },
       'composeBeforeAllHooks',
@@ -6734,7 +6738,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     c(lt, 'getField');
     function Le(t, e, r = {}) {
       return lt(t, e).reduce((n, o) => {
-        let a = ee(o);
+        const a = ee(o);
         return r.reverseFileOrder ? [...a, ...n] : [...n, ...a];
       }, []);
     }
@@ -6748,7 +6752,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     }
     c(Je, 'getSingletonField');
     function Xe(t) {
-      let e = Le(t, 'argTypesEnhancers'),
+      const e = Le(t, 'argTypesEnhancers'),
         r = lt(t, 'runStep'),
         n = Le(t, 'beforeAll');
       return {
@@ -6812,7 +6816,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
     }
     c(Xa, 'extractAnnotation');
     function vl(t) {
-      let e = Array.isArray(t) ? t : [t];
+      const e = Array.isArray(t) ? t : [t];
       return (
         (globalThis.globalProjectAnnotations = Xe([
           globalThis.defaultProjectAnnotations ?? {},
@@ -6835,7 +6839,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
         h = { ...Pa(s.globalTypes), ...s.initialGlobals, ...l.storyGlobals },
         f = new Ya(),
         g = c(() => {
-          let S = cn({
+          const S = cn({
             hooks: new wa(),
             globals: h,
             args: { ...l.initialArgs },
@@ -6856,7 +6860,7 @@ See https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#hoisted-csf-
             (S.context = S),
             l.renderToCanvas &&
               (S.renderToCanvas = async () => {
-                let A = await l.renderToCanvas?.(
+                const A = await l.renderToCanvas?.(
                   {
                     componentId: l.componentId,
                     title: l.title,
@@ -6886,7 +6890,7 @@ ${D.description}`);
         }, 'initializeContext'),
         E,
         C = c(async (S) => {
-          let A = g();
+          const A = g();
           return (
             (A.canvasElement ??= globalThis?.document?.body),
             E && (A.loaded = E.loaded),
@@ -6895,13 +6899,13 @@ ${D.description}`);
           );
         }, 'play'),
         v = c((S) => {
-          let A = g();
+          const A = g();
           return Object.assign(A, S), Qa(l, A);
         }, 'run'),
         b = l.playFunction ? C : void 0;
       return Object.assign(
         c(function (S) {
-          let A = g();
+          const A = g();
           return (
             E && (A.loaded = E.loaded),
             (A.args = { ...A.initialArgs, ...S }),
@@ -6912,9 +6916,9 @@ ${D.description}`);
           id: l.id,
           storyName: u,
           load: c(async () => {
-            for (let A of [...$e].reverse()) await A();
+            for (const A of [...$e].reverse()) await A();
             $e.length = 0;
-            let S = g();
+            const S = g();
             (S.loaded = await l.applyLoaders(S)),
               $e.push(...(await l.applyBeforeEach(S)).filter(Boolean)),
               (E = S);
@@ -6936,7 +6940,7 @@ ${D.description}`);
       let { default: n, __esModule: o, __namedExportsOrder: a, ...u } = t,
         i = n;
       return Object.entries(u).reduce((s, [l, h]) => {
-        let { story: f, meta: g } = Ka(h);
+        const { story: f, meta: g } = Ka(h);
         return (
           !i && g && (i = g),
           at(l, i) ? Object.assign(s, { [l]: r(f, i, e, l) }) : s
@@ -6965,13 +6969,13 @@ ${D.description}`);
               More info: https://storybook.js.org/docs/api/portable-stories-playwright
             `);
             await r.evaluate(async (i) => {
-              let s = await globalThis.__pwUnwrapObject?.(i);
+              const s = await globalThis.__pwUnwrapObject?.(i);
               return ('__pw_type' in s ? s.type : s)?.load?.();
             }, o);
-            let u = await e(o, ...a);
+            const u = await e(o, ...a);
             return (
               await r.evaluate(async (i) => {
-                let s = await globalThis.__pwUnwrapObject?.(i),
+                const s = await globalThis.__pwUnwrapObject?.(i),
                   l = '__pw_type' in s ? s.type : s,
                   h = document.querySelector('#root');
                 return l?.play?.({ canvasElement: h });
@@ -6984,9 +6988,9 @@ ${D.description}`);
     }
     c(Tl, 'createPlaywrightTest');
     async function Qa(t, e) {
-      for (let o of [...$e].reverse()) await o();
+      for (const o of [...$e].reverse()) await o();
       if ((($e.length = 0), !e.canvasElement)) {
-        let o = document.createElement('div');
+        const o = document.createElement('div');
         globalThis?.document?.body?.appendChild(o),
           (e.canvasElement = o),
           $e.push(() => {
@@ -6996,7 +7000,7 @@ ${D.description}`);
       }
       if (((e.loaded = await t.applyLoaders(e)), e.abortSignal.aborted)) return;
       $e.push(...(await t.applyBeforeEach(e)).filter(Boolean));
-      let r = t.playFunction,
+      const r = t.playFunction,
         n = t.usesMount;
       n || (await e.mount()),
         !e.abortSignal.aborted &&
@@ -7019,7 +7023,7 @@ ${D.description}`);
         constructor(e, r, n) {
           (this.importFn = r),
             (this.getStoriesJsonData = c(() => {
-              let u = this.getSetStoriesPayload(),
+              const u = this.getSetStoriesPayload(),
                 i = [
                   'fileName',
                   'docsOnly',
@@ -7030,7 +7034,7 @@ ${D.description}`);
               return {
                 v: 3,
                 stories: Ze(u.stories, (s) => {
-                  let { importPath: l } = this.storyIndex.entries[s.id];
+                  const { importPath: l } = this.storyIndex.entries[s.id];
                   return {
                     ...Gr(s, ['id', 'name', 'title']),
                     importPath: l,
@@ -7043,7 +7047,7 @@ ${D.description}`);
             }, 'getStoriesJsonData')),
             (this.storyIndex = new pl(e)),
             (this.projectAnnotations = ut(n));
-          let { initialGlobals: o, globalTypes: a } = this.projectAnnotations;
+          const { initialGlobals: o, globalTypes: a } = this.projectAnnotations;
           (this.args = new il()),
             (this.userGlobals = new sl({ globals: o, globalTypes: a })),
             (this.hooks = {}),
@@ -7054,7 +7058,7 @@ ${D.description}`);
         }
         setProjectAnnotations(e) {
           this.projectAnnotations = ut(e);
-          let { initialGlobals: r, globalTypes: n } = e;
+          const { initialGlobals: r, globalTypes: n } = e;
           this.userGlobals.set({ globals: r, globalTypes: n });
         }
         async onStoriesChanged({ importFn: e, storyIndex: r }) {
@@ -7066,12 +7070,12 @@ ${D.description}`);
           return this.storyIndex.storyIdToEntry(e);
         }
         async loadCSFFileByStoryId(e) {
-          let { importPath: r, title: n } = this.storyIndex.storyIdToEntry(e),
+          const { importPath: r, title: n } = this.storyIndex.storyIdToEntry(e),
             o = await this.importFn(r);
           return this.processCSFFileWithCache(o, r, n);
         }
         async loadAllCSFFiles() {
-          let e = {};
+          const e = {};
           return (
             Object.entries(this.storyIndex.entries).forEach(
               ([r, { importPath: n }]) => {
@@ -7092,7 +7096,7 @@ ${D.description}`);
           this.cachedCSFFiles = await this.loadAllCSFFiles();
         }
         preparedMetaFromCSFFile({ csfFile: e }) {
-          let r = e.meta;
+          const r = e.meta;
           return this.prepareMetaWithCache(
             r,
             this.projectAnnotations,
@@ -7100,13 +7104,13 @@ ${D.description}`);
           );
         }
         async loadStory({ storyId: e }) {
-          let r = await this.loadCSFFileByStoryId(e);
+          const r = await this.loadCSFFileByStoryId(e);
           return this.storyFromCSFFile({ storyId: e, csfFile: r });
         }
         storyFromCSFFile({ storyId: e, csfFile: r }) {
-          let n = r.stories[e];
+          const n = r.stories[e];
           if (!n) throw new No({ storyId: e });
-          let o = r.meta,
+          const o = r.meta,
             a = this.prepareStoryWithCache(
               n,
               o,
@@ -7124,19 +7128,19 @@ ${D.description}`);
             .map((r) => this.storyFromCSFFile({ storyId: r, csfFile: e }));
         }
         async loadEntry(e) {
-          let r = await this.storyIdToEntry(e),
+          const r = await this.storyIdToEntry(e),
             n = r.type === 'docs' ? r.storiesImports : [],
             [o, ...a] = await Promise.all([
               this.importFn(r.importPath),
               ...n.map((u) => {
-                let i = this.storyIndex.importPathToEntry(u);
+                const i = this.storyIndex.importPathToEntry(u);
                 return this.loadCSFFileByStoryId(i.id);
               }),
             ]);
           return { entryExports: o, csfFiles: a };
         }
         getStoryContext(e, { forceInitialArgs: r = !1 } = {}) {
-          let n = this.userGlobals.get(),
+          const n = this.userGlobals.get(),
             { initialGlobals: o } = this.userGlobals,
             a = new Ya();
           return cn({
@@ -7155,17 +7159,17 @@ ${D.description}`);
         }
         async cleanupStory(e) {
           this.hooks[e.id].clean();
-          let r = this.cleanupCallbacks[e.id];
-          if (r) for (let n of [...r].reverse()) await n();
+          const r = this.cleanupCallbacks[e.id];
+          if (r) for (const n of [...r].reverse()) await n();
           delete this.cleanupCallbacks[e.id];
         }
         extract(e = { includeDocsOnly: !1 }) {
-          let { cachedCSFFiles: r } = this;
+          const { cachedCSFFiles: r } = this;
           if (!r) throw new Co();
           return Object.entries(this.storyIndex.entries).reduce(
             (n, [o, { type: a, importPath: u }]) => {
               if (a === 'docs') return n;
-              let i = r[u],
+              const i = r[u],
                 s = this.storyFromCSFFile({ storyId: o, csfFile: i });
               return (
                 (!e.includeDocsOnly && s.parameters.docsOnly) ||
@@ -7192,7 +7196,7 @@ ${D.description}`);
           );
         }
         getSetStoriesPayload() {
-          let e = this.extract({ includeDocsOnly: !0 }),
+          const e = this.extract({ includeDocsOnly: !0 }),
             r = Object.values(e).reduce(
               (n, { title: o }) => ((n[o] = {}), n),
               {},
@@ -7231,12 +7235,12 @@ ${D.description}`);
           } catch {
             return null;
           }
-          let n = this.cachedCSFFiles[r],
+          const n = this.cachedCSFFiles[r],
             o = this.storyFromCSFFile({ storyId: e, csfFile: n });
           return {
             ...o,
             storyFn: c((a) => {
-              let u = {
+              const u = {
                 ...this.getStoryContext(o),
                 abortSignal: new AbortController().signal,
                 canvasElement: null,
@@ -7260,10 +7264,10 @@ ${D.description}`);
     c(eu, 'slash');
     var Ol = c((t) => {
       if (t.length === 0) return t;
-      let e = t[t.length - 1],
+      const e = t[t.length - 1],
         r = e?.replace(/(?:[.](?:story|stories))?([.][^.]+)$/i, '');
       if (t.length === 1) return [r];
-      let n = t[t.length - 2];
+      const n = t[t.length - 2];
       return r && n && r.toLowerCase() === n.toLowerCase()
         ? [...t.slice(0, -2), r]
         : r && (/^(story|stories)([.][^.]+)$/i.test(e) || /^index$/i.test(r))
@@ -7278,7 +7282,7 @@ ${D.description}`);
     }
     c(Vr, 'pathJoin');
     var Fl = c((t, e, r) => {
-        let {
+        const {
           directory: n,
           importPathMatcher: o,
           titlePrefix: a = '',
@@ -7289,7 +7293,7 @@ ${D.description}`);
       webpack is mis-configured in production mode. To force webpack to produce
       filenames, set optimization.moduleIds = "named" in your webpack config.
     `);
-        let u = eu(String(t));
+        const u = eu(String(t));
         if (o.exec(u)) {
           if (!r) {
             let i = u.replace(n, ''),
@@ -7301,7 +7305,7 @@ ${D.description}`);
       }, 'userOrAutoTitleFromSpecifier'),
       x0 = c((t, e, r) => {
         for (let n = 0; n < e.length; n += 1) {
-          let o = Fl(t, e[n], r);
+          const o = Fl(t, e[n], r);
           if (o) return o;
         }
         return r || void 0;
@@ -7320,7 +7324,7 @@ ${D.description}`);
             for (; a[i] || u[i]; ) {
               if (!a[i]) return -1;
               if (!u[i]) return 1;
-              let s = a[i],
+              const s = a[i],
                 l = u[i];
               if (s !== l) {
                 let f = o.indexOf(s),
@@ -7373,7 +7377,7 @@ ${D.description}`);
       { AbortController: ua } = globalThis;
     function Wr(t) {
       try {
-        let { name: e = 'Error', message: r = String(t), stack: n } = t;
+        const { name: e = 'Error', message: r = String(t), stack: n } = t;
         return { name: e, message: r, stack: n };
       } catch {
         return { name: 'Error', message: String(t) };
@@ -7456,15 +7460,15 @@ ${D.description}`);
       storyContext() {
         if (!this.story)
           throw new Error('Cannot call storyContext before preparing');
-        let { forceInitialArgs: e } = this.renderOptions;
+        const { forceInitialArgs: e } = this.renderOptions;
         return this.store.getStoryContext(this.story, { forceInitialArgs: e });
       }
       async render({ initial: e = !1, forceRemount: r = !1 } = {}) {
-        let { canvasElement: n } = this;
+        const { canvasElement: n } = this;
         if (!this.story) throw new Error('cannot render when not prepared');
-        let o = this.story;
+        const o = this.story;
         if (!n) throw new Error('cannot render when canvasElement is unset');
-        let {
+        const {
           id: a,
           componentId: u,
           title: i,
@@ -7482,7 +7486,7 @@ ${D.description}`);
           S = !1,
           A = o.usesMount;
         try {
-          let D = {
+          const D = {
             ...this.storyContext(),
             viewMode: this.viewMode,
             abortSignal: b,
@@ -7492,7 +7496,7 @@ ${D.description}`);
             context: null,
             canvas: {},
             renderToCanvas: c(async () => {
-              let L = await this.renderToScreen(_, n);
+              const L = await this.renderToScreen(_, n);
               (this.teardownRender = L || (() => {})), (S = !0);
             }, 'renderToCanvas'),
             mount: c(async (...L) => {
@@ -7508,7 +7512,7 @@ ${D.description}`);
             }, 'mount'),
           };
           D.context = D;
-          let _ = {
+          const _ = {
             componentId: u,
             title: i,
             kind: i,
@@ -7539,7 +7543,7 @@ ${D.description}`);
             b.aborted)
           )
             return;
-          let P = await f(D);
+          const P = await f(D);
           if (
             (this.store.addCleanupCallbacks(o, P),
             this.checkIfAborted(b) ||
@@ -7548,7 +7552,7 @@ ${D.description}`);
               b.aborted))
           )
             return;
-          let R =
+          const R =
               this.story.parameters?.test?.dangerouslyIgnoreUnhandledErrors ===
               !0,
             T = new Set(),
@@ -7604,7 +7608,7 @@ ${D.description}`);
               (await this.runPhase(b, 'afterEach', async () => {
                 await g(D);
               }));
-          let B = !R && T.size > 0,
+          const B = !R && T.size > 0,
             j = D.reporting.reports.some((L) => L.status === 'failed'),
             M = B || j;
           await this.runPhase(b, 'finished', async () =>
@@ -7688,7 +7692,7 @@ ${D.description}`);
         async initialize() {
           this.setupListeners();
           try {
-            let e = await this.getProjectAnnotationsOrRenderError();
+            const e = await this.getProjectAnnotationsOrRenderError();
             await this.runBeforeAllHook(e),
               await this.initializeWithProjectAnnotations(e);
           } catch (e) {
@@ -7709,7 +7713,7 @@ ${D.description}`);
         }
         async getProjectAnnotationsOrRenderError() {
           try {
-            let e = await this.getProjectAnnotations();
+            const e = await this.getProjectAnnotations();
             if (
               ((this.renderToCanvas = e.renderToCanvas), !this.renderToCanvas)
             )
@@ -7724,7 +7728,7 @@ ${D.description}`);
         async initializeWithProjectAnnotations(e) {
           this.projectAnnotationsBeforeInitialization = e;
           try {
-            let r = await this.getStoryIndexFromServer();
+            const r = await this.getStoryIndexFromServer();
             return this.initializeWithStoryIndex(r);
           } catch (r) {
             throw (
@@ -7743,7 +7747,7 @@ ${D.description}`);
           }
         }
         async getStoryIndexFromServer() {
-          let e = await Pl(Nl);
+          const e = await Pl(Nl);
           if (e.status === 200) return e.json();
           throw new To({ text: await e.text() });
         }
@@ -7767,7 +7771,7 @@ ${D.description}`);
         emitGlobals() {
           if (!this.storyStoreValue)
             throw new Ee({ methodName: 'emitGlobals' });
-          let e = {
+          const e = {
             globals: this.storyStoreValue.userGlobals.get() || {},
             globalTypes:
               this.storyStoreValue.projectAnnotations.globalTypes || {},
@@ -7776,7 +7780,7 @@ ${D.description}`);
         }
         async onGetProjectAnnotationsChanged({ getProjectAnnotations: e }) {
           delete this.previewEntryError, (this.getProjectAnnotations = e);
-          let r = await this.getProjectAnnotationsOrRenderError();
+          const r = await this.getProjectAnnotationsOrRenderError();
           if ((await this.runBeforeAllHook(r), !this.storyStoreValue)) {
             await this.initializeWithProjectAnnotations(r);
             return;
@@ -7792,7 +7796,7 @@ ${D.description}`);
             ))
           )
             try {
-              let e = await this.getStoryIndexFromServer();
+              const e = await this.getStoryIndexFromServer();
               if (this.projectAnnotationsBeforeInitialization) {
                 this.initializeWithStoryIndex(e);
                 return;
@@ -7820,7 +7824,7 @@ ${D.description}`);
           )
             throw new Ee({ methodName: 'onUpdateGlobals' });
           if ((this.storyStoreValue.userGlobals.update(e), r)) {
-            let {
+            const {
               initialGlobals: n,
               storyGlobals: o,
               userGlobals: a,
@@ -7833,7 +7837,7 @@ ${D.description}`);
               globals: u,
             });
           } else {
-            let { initialGlobals: n, globals: o } =
+            const { initialGlobals: n, globals: o } =
               this.storyStoreValue.userGlobals;
             this.channel.emit(ot, {
               initialGlobals: n,
@@ -7863,7 +7867,7 @@ ${D.description}`);
         async onRequestArgTypesInfo({ id: e, payload: r }) {
           try {
             await this.storeInitializationPromise;
-            let n = await this.storyStoreValue?.loadStory(r);
+            const n = await this.storyStoreValue?.loadStory(r);
             this.channel.emit(Cr, {
               id: e,
               success: !0,
@@ -7877,7 +7881,7 @@ ${D.description}`);
         async onResetArgs({ storyId: e, argNames: r }) {
           if (!this.storyStoreValue)
             throw new Ee({ methodName: 'onResetArgs' });
-          let n =
+          const n =
               this.storyRenders.find((a) => a.id === e)?.story ||
               (await this.storyStoreValue.loadStory({ storyId: e })),
             o = (
@@ -7901,7 +7905,7 @@ ${D.description}`);
         renderStoryToElement(e, r, n, o) {
           if (!this.renderToCanvas || !this.storyStoreValue)
             throw new Ee({ methodName: 'renderStoryToElement' });
-          let a = new Yr(
+          const a = new Yr(
             this.channel,
             this.storyStoreValue,
             this.renderToCanvas,
@@ -7968,7 +7972,7 @@ ${D.description}`);
           (this.store = r),
           (this.renderStoryToElement = n),
           (this.storyIdByName = c((a) => {
-            let u = this.nameToStoryId.get(a);
+            const u = this.nameToStoryId.get(a);
             if (u) return u;
             throw new Error(`No story found with that name: ${a}`);
           }, 'storyIdByName')),
@@ -7988,7 +7992,7 @@ ${D.description}`);
                 );
               return this.primaryStory;
             }
-            let u = this.storyIdToCSFFile.get(a);
+            const u = this.storyIdToCSFFile.get(a);
             if (!u)
               throw new Error(
                 `Called \`storyById\` for story that was never loaded: ${a}`,
@@ -8023,7 +8027,7 @@ ${D.description}`);
           this.store
             .componentStoriesFromCSFFile({ csfFile: e })
             .forEach((r) => {
-              let n = e.stories[r.id];
+              const n = e.stories[r.id];
               this.storyIdToCSFFile.set(n.id, e),
                 this.exportToStory.set(n.moduleExport, r);
             });
@@ -8044,7 +8048,7 @@ ${D.description}`);
             }));
       }
       referenceMeta(e, r) {
-        let n = this.resolveModuleExport(e);
+        const n = this.resolveModuleExport(e);
         if (n.type !== 'meta')
           throw new Error(
             '<Meta of={} /> must reference a CSF file module export or meta export. Did you mistakenly reference your component instead of your CSF file?',
@@ -8052,7 +8056,7 @@ ${D.description}`);
         r && this.attachCSFFile(n.csfFile);
       }
       get projectAnnotations() {
-        let { projectAnnotations: e } = this.store;
+        const { projectAnnotations: e } = this.store;
         if (!e)
           throw new Error(
             "Can't get projectAnnotations from DocsContext before they are initialized",
@@ -8071,9 +8075,9 @@ ${D.description}`);
           throw new Error(
             'No CSF file attached to this docs file, did you forget to use <Meta of={} />?',
           );
-        let r = Array.from(this.attachedCSFFiles)[0];
+        const r = Array.from(this.attachedCSFFiles)[0];
         if (e === 'meta') return { type: 'meta', csfFile: r };
-        let { component: n } = r.meta;
+        const { component: n } = r.meta;
         if (!n)
           throw new Error(
             'Attached CSF file does not defined a component, did you forget to export one?',
@@ -8081,9 +8085,9 @@ ${D.description}`);
         return { type: 'component', component: n };
       }
       resolveModuleExport(e) {
-        let r = this.exportsToCSFFile.get(e);
+        const r = this.exportsToCSFFile.get(e);
         if (r) return { type: 'meta', csfFile: r };
-        let n = this.exportToStory.get(Ke(e) ? e.input : e);
+        const n = this.exportToStory.get(Ke(e) ? e.input : e);
         return n
           ? { type: 'story', story: n }
           : { type: 'component', component: e };
@@ -8091,11 +8095,11 @@ ${D.description}`);
       resolveOf(e, r = []) {
         let n;
         if (['component', 'meta', 'story'].includes(e)) {
-          let o = e;
+          const o = e;
           n = this.resolveAttachedModuleExportType(o);
         } else n = this.resolveModuleExport(e);
         if (r.length && !r.includes(n.type)) {
-          let o = n.type === 'component' ? 'component or unknown' : n.type;
+          const o = n.type === 'component' ? 'component or unknown' : n.type;
           throw new Error(le`Invalid value passed to the 'of' prop. The value was resolved to a '${o}' type but the only types for this block are: ${r.join(', ')}.
         - Did you pass a component to the 'of' prop when the block only supports a story or a meta?
         - ... or vice versa?
@@ -8137,10 +8141,10 @@ ${D.description}`);
         }
         async prepare() {
           this.preparing = !0;
-          let { entryExports: e, csfFiles: r = [] } =
+          const { entryExports: e, csfFiles: r = [] } =
             await this.store.loadEntry(this.id);
           if (this.torndown) throw tr;
-          let { importPath: n, title: o } = this.entry,
+          const { importPath: n, title: o } = this.entry,
             a = this.store.processCSFFileWithCache(e, n, o),
             u = Object.keys(a.stories)[0];
           (this.story = this.store.storyFromCSFFile({
@@ -8156,19 +8160,19 @@ ${D.description}`);
         docsContext(e) {
           if (!this.csfFiles)
             throw new Error('Cannot render docs before preparing');
-          let r = new ou(this.channel, this.store, e, this.csfFiles);
+          const r = new ou(this.channel, this.store, e, this.csfFiles);
           return this.csfFiles.forEach((n) => r.attachCSFFile(n)), r;
         }
         async renderToElement(e, r) {
           if (!this.story || !this.csfFiles)
             throw new Error('Cannot render docs before preparing');
-          let n = this.docsContext(r),
+          const n = this.docsContext(r),
             { docs: o } = this.story.parameters || {};
           if (!o)
             throw new Error(
               'Cannot render a story in viewMode=docs if `@storybook/addon-docs` is not installed',
             );
-          let a = await o.renderer(),
+          const a = await o.renderer(),
             { render: u } = a,
             i = c(async () => {
               try {
@@ -8209,7 +8213,7 @@ ${D.description}`);
         }
         async prepare() {
           this.preparing = !0;
-          let { entryExports: e, csfFiles: r = [] } =
+          const { entryExports: e, csfFiles: r = [] } =
             await this.store.loadEntry(this.id);
           if (this.torndown) throw tr;
           (this.csfFiles = r), (this.exports = e), (this.preparing = !1);
@@ -8229,13 +8233,13 @@ ${D.description}`);
         async renderToElement(e, r) {
           if (!this.exports || !this.csfFiles || !this.store.projectAnnotations)
             throw new Error('Cannot render docs before preparing');
-          let n = this.docsContext(r),
+          const n = this.docsContext(r),
             { docs: o } = this.store.projectAnnotations.parameters || {};
           if (!o)
             throw new Error(
               'Cannot render a story in viewMode=docs if `@storybook/addon-docs` is not installed',
             );
-          let a = { ...o, page: this.exports.default },
+          const a = { ...o, page: this.exports.default },
             u = await o.renderer(),
             { render: i } = u,
             s = c(async () => {
@@ -8261,7 +8265,7 @@ ${D.description}`);
     var sa = uu,
       kl = globalThis;
     function iu(t) {
-      let e = (t.composedPath && t.composedPath()[0]) || t.target;
+      const e = (t.composedPath && t.composedPath()[0]) || t.target;
       return (
         /input|textarea/i.test(e.tagName) ||
         e.getAttribute('contenteditable') !== null
@@ -8305,7 +8309,7 @@ ${D.description}`);
       async setInitialGlobals() {
         if (!this.storyStoreValue)
           throw new Ee({ methodName: 'setInitialGlobals' });
-        let { globals: e } = this.selectionStore.selectionSpecifier || {};
+        const { globals: e } = this.selectionStore.selectionSpecifier || {};
         e && this.storyStoreValue.userGlobals.updateFromPersisted(e),
           this.emitGlobals();
       }
@@ -8325,7 +8329,7 @@ ${D.description}`);
           this.renderMissingStory();
           return;
         }
-        let { storySpecifier: e, args: r } =
+        const { storySpecifier: e, args: r } =
             this.selectionStore.selectionSpecifier,
           n = this.storyStoreValue.storyIndex.entryFromSpecifier(e);
         if (!n) {
@@ -8337,7 +8341,7 @@ ${D.description}`);
               );
           return;
         }
-        let { id: o, type: a } = n;
+        const { id: o, type: a } = n;
         this.selectionStore.setSelection({ storyId: o, viewMode: a }),
           this.channel.emit(fo, this.selectionStore.selection),
           this.channel.emit(wr, this.selectionStore.selection),
@@ -8357,7 +8361,7 @@ ${D.description}`);
       }
       onKeydown(e) {
         if (!this.storyRenders.find((r) => r.disableKeyListeners) && !iu(e)) {
-          let {
+          const {
             altKey: r,
             ctrlKey: n,
             metaKey: o,
@@ -8389,7 +8393,7 @@ ${D.description}`);
         this.selectionStore.setQueryParams(e);
       }
       async onUpdateGlobals({ globals: e }) {
-        let r =
+        const r =
           (this.currentRender instanceof Yr && this.currentRender.story) ||
           void 0;
         super.onUpdateGlobals({ globals: e, currentStory: r }),
@@ -8408,10 +8412,10 @@ ${D.description}`);
             ));
       }
       async renderSelection({ persistedArgs: e } = {}) {
-        let { renderToCanvas: r } = this;
+        const { renderToCanvas: r } = this;
         if (!this.storyStoreValue || !r)
           throw new Ee({ methodName: 'renderSelection' });
-        let { selection: n } = this.selectionStore;
+        const { selection: n } = this.selectionStore;
         if (!n)
           throw new Error(
             'Cannot call renderSelection as no selection was made',
@@ -8425,7 +8429,7 @@ ${D.description}`);
             this.renderStoryLoadingException(o, g);
           return;
         }
-        let u = this.currentSelection?.storyId !== o,
+        const u = this.currentSelection?.storyId !== o,
           i = this.currentRender?.type !== a.type;
         a.type === 'story'
           ? this.view.showPreparingStory({ immediate: i })
@@ -8455,9 +8459,9 @@ ${D.description}`);
                 a,
                 this.mainStoryCallbacks(o),
               ));
-        let l = this.currentSelection;
+        const l = this.currentSelection;
         this.currentSelection = n;
-        let h = this.currentRender;
+        const h = this.currentRender;
         this.currentRender = s;
         try {
           await s.prepare();
@@ -8466,7 +8470,7 @@ ${D.description}`);
             g !== tr && this.renderStoryLoadingException(o, g);
           return;
         }
-        let f = !u && h && !s.isEqual(h);
+        const f = !u && h && !s.isEqual(h);
         if (
           (e &&
             Wt(s) &&
@@ -8485,7 +8489,7 @@ ${D.description}`);
           Wt(s))
         ) {
           Vt(!!s.story);
-          let {
+          const {
             parameters: g,
             initialArgs: E,
             argTypes: C,
@@ -8564,7 +8568,7 @@ ${D.description}`);
         X.error(r), this.view.showErrorDisplay(r), this.channel.emit(xr, e);
       }
       renderException(e, r) {
-        let { name: n = 'Error', message: o = String(r), stack: a } = r;
+        const { name: n = 'Error', message: o = String(r), stack: a } = r;
         this.channel.emit(jt, { name: n, message: o, stack: a }),
           this.channel.emit(Pe, { newPhase: 'errored', storyId: e }),
           this.view.showErrorDisplay(r),
@@ -8621,7 +8625,7 @@ ${D.description}`);
               return new Date(t.replaceAll(' ', '+').slice(6, -1));
             if (t.startsWith('!hex(') && t.endsWith(')'))
               return `#${t.slice(5, -1)}`;
-            let e = t.slice(1).match(fu);
+            const e = t.slice(1).match(fu);
             if (e)
               return t.startsWith('!rgba') || t.startsWith('!RGBA')
                 ? `${e[1]}(${e[2]}, ${e[3]}, ${e[4]}, ${e[5]})`
@@ -8635,7 +8639,9 @@ ${D.description}`);
         },
       },
       ca = c((t) => {
-        let e = t.split(';').map((r) => r.replace('=', '~').replace(':', '='));
+        const e = t
+          .split(';')
+          .map((r) => r.replace('=', '~').replace(':', '='));
         return Object.entries((0, $l.parse)(e.join(';'), zl)).reduce(
           (r, [n, o]) =>
             Xr(n, o)
@@ -8651,14 +8657,14 @@ ${D.description}`);
       }, 'parseArgsParam'),
       { history: mu, document: Ue } = de;
     function gu(t) {
-      let e = (t || '').match(/^\/story\/(.+)/);
+      const e = (t || '').match(/^\/story\/(.+)/);
       if (!e)
         throw new Error(`Invalid path '${t}',  must start with '/story/'`);
       return e[1];
     }
     c(gu, 'pathToId');
     var yu = c(({ selection: t, extraParams: e }) => {
-        let r = Ue?.location.search.slice(1),
+        const r = Ue?.location.search.slice(1),
           {
             path: n,
             selectedKind: o,
@@ -8669,7 +8675,7 @@ ${D.description}`);
       }, 'getQueryString'),
       Hl = c((t) => {
         if (!t) return;
-        let e = yu({ selection: t }),
+        const e = yu({ selection: t }),
           { hash: r = '' } = Ue.location;
         (Ue.title = t.storyId),
           mu.replaceState({}, '', `${Ue.location.pathname}${e}${r}`);
@@ -8693,7 +8699,7 @@ ${D.description}`);
             n = typeof e.globals == 'string' ? ca(e.globals) : void 0,
             o = Ct(e.viewMode);
           (typeof o != 'string' || !o.match(/docs|story/)) && (o = 'story');
-          let a = Ct(e.path),
+          const a = Ct(e.path),
             u = a ? gu(a) : Ct(e.id);
           if (u) return { storySpecifier: u, args: r, globals: n, viewMode: o };
         }
@@ -8707,7 +8713,7 @@ ${D.description}`);
           (this.selection = e), Hl(this.selection);
         }
         setQueryParams(e) {
-          let r = yu({ extraParams: e }),
+          const r = yu({ extraParams: e }),
             { hash: n = '' } = Ue.location;
           mu.replaceState({}, '', `${Ue.location.pathname}${r}${n}`);
         }
@@ -8742,7 +8748,7 @@ ${D.description}`);
       Au = class {
         constructor() {
           if (((this.testing = !1), typeof me < 'u')) {
-            let { __SPECIAL_TEST_PARAMETER__: e } = (0, Kl.parse)(
+            const { __SPECIAL_TEST_PARAMETER__: e } = (0, Kl.parse)(
               me.location.search.slice(1),
             );
             switch (e) {
@@ -8790,7 +8796,7 @@ ${D.description}`);
             return;
           }
           this.checkIfLayoutExists(e);
-          let r = jr[e];
+          const r = jr[e];
           me.body.classList.remove(this.currentLayoutClass),
             me.body.classList.add(r),
             (this.currentLayoutClass = r);
@@ -8901,12 +8907,12 @@ ${D.description}`);
       Zl = 'script',
       ha = 'scripts-root';
     function Jr() {
-      let t = Qe.createEvent('Event');
+      const t = Qe.createEvent('Event');
       t.initEvent('DOMContentLoaded', !0, !0), Qe.dispatchEvent(t);
     }
     c(Jr, 'simulateDOMContentLoaded');
     function Su(t, e, r) {
-      let n = Qe.createElement('script');
+      const n = Qe.createElement('script');
       (n.type = t.type === 'module' ? 'module' : 'text/javascript'),
         t.src
           ? ((n.onload = e), (n.onerror = e), (n.src = t.src))
@@ -8927,11 +8933,11 @@ ${D.description}`);
       e
         ? (e.innerHTML = '')
         : ((e = Qe.createElement('div')), (e.id = ha), Qe.body.appendChild(e));
-      let r = Array.from(t.querySelectorAll(Zl));
+      const r = Array.from(t.querySelectorAll(Zl));
       if (r.length) {
-        let n = [];
+        const n = [];
         r.forEach((o) => {
-          let a = o.getAttribute('type');
+          const a = o.getAttribute('type');
           (!a || Ql.includes(a)) && n.push((u) => Su(o, u, e));
         }),
           n.length && pn(n, Jr, void 0);
@@ -8997,7 +9003,7 @@ ${D.description}`);
     mn.open = '';
     mn.close = '';
     function oc(t = !1) {
-      let e = typeof process < 'u' ? process : void 0,
+      const e = typeof process < 'u' ? process : void 0,
         r = e?.env || {},
         n = e?.argv || [];
       return (
@@ -9011,7 +9017,7 @@ ${D.description}`);
       );
     }
     function ac(t = !1) {
-      let e = oc(t),
+      const e = oc(t),
         r = (u, i, s, l) => {
           let h = '',
             f = 0;
@@ -9023,8 +9029,8 @@ ${D.description}`);
           return h + u.substring(f);
         },
         n = (u, i, s = u) => {
-          let l = (h) => {
-            let f = String(h),
+          const l = (h) => {
+            const f = String(h),
               g = f.indexOf(i, u.length);
             return ~g ? u + r(f, i, s, g) + i : u + f + i;
           };
@@ -9032,15 +9038,15 @@ ${D.description}`);
         },
         o = { isColorSupported: e },
         a = (u) => `\x1B[${u}m`;
-      for (let [u, i] of nc) o[u] = e ? n(a(i[0]), a(i[1]), i[2]) : mn;
+      for (const [u, i] of nc) o[u] = e ? n(a(i[0]), a(i[1]), i[2]) : mn;
       return o;
     }
     var cy = ac(!1);
     function uc(t, e) {
-      let r = Object.keys(t),
+      const r = Object.keys(t),
         n = e === null ? r : r.sort(e);
       if (Object.getOwnPropertySymbols)
-        for (let o of Object.getOwnPropertySymbols(t))
+        for (const o of Object.getOwnPropertySymbols(t))
           Object.getOwnPropertyDescriptor(t, o).enumerable && n.push(o);
       return n;
     }
@@ -9050,13 +9056,13 @@ ${D.description}`);
         l = t.next();
       if (!l.done) {
         i += e.spacingOuter;
-        let h = r + e.indent;
+        const h = r + e.indent;
         for (; !l.done; ) {
           if (((i += h), s++ === e.maxWidth)) {
             i += '\u2026';
             break;
           }
-          let f = a(l.value[0], e, h, n, o),
+          const f = a(l.value[0], e, h, n, o),
             g = a(l.value[1], e, h, n, o);
           (i += f + u + g),
             (l = t.next()),
@@ -9072,7 +9078,7 @@ ${D.description}`);
         s = t.next();
       if (!s.done) {
         u += e.spacingOuter;
-        let l = r + e.indent;
+        const l = r + e.indent;
         for (; !s.done; ) {
           if (((u += l), i++ === e.maxWidth)) {
             u += '\u2026';
@@ -9089,11 +9095,11 @@ ${D.description}`);
     function Fu(t, e, r, n, o, a) {
       let u = '';
       t = t instanceof ArrayBuffer ? new DataView(t) : t;
-      let i = (l) => l instanceof DataView,
+      const i = (l) => l instanceof DataView,
         s = i(t) ? t.byteLength : t.length;
       if (s > 0) {
         u += e.spacingOuter;
-        let l = r + e.indent;
+        const l = r + e.indent;
         for (let h = 0; h < s; h++) {
           if (((u += l), h === e.maxWidth)) {
             u += '\u2026';
@@ -9111,9 +9117,9 @@ ${D.description}`);
         i = uc(t, e.compareKeys);
       if (i.length > 0) {
         u += e.spacingOuter;
-        let s = r + e.indent;
+        const s = r + e.indent;
         for (let l = 0; l < i.length; l++) {
-          let h = i[l],
+          const h = i[l],
             f = a(h, e, s, n, o),
             g = a(t[h], e, s, n, o);
           (u += `${s + f}: ${g}`),
@@ -9131,7 +9137,7 @@ ${D.description}`);
           : 1267621,
       dn = ' ',
       sc = (t, e, r, n, o, a) => {
-        let u = t.toString();
+        const u = t.toString();
         if (u === 'ArrayContaining' || u === 'ArrayNotContaining')
           return ++n > e.maxDepth
             ? `[${u}]`
@@ -9167,7 +9173,7 @@ ${D.description}`);
       return t.constructor.name === 'NamedNodeMap';
     }
     var gc = (t, e, r, n, o, a) => {
-        let u = t.constructor.name;
+        const u = t.constructor.name;
         return ++n > e.maxDepth
           ? `[${u}]`
           : (e.min ? '' : u + pc) +
@@ -9180,7 +9186,7 @@ ${D.description}`);
       return t.replaceAll('<', '&lt;').replaceAll('>', '&gt;');
     }
     function yn(t, e, r, n, o, a, u) {
-      let i = n + r.indent,
+      const i = n + r.indent,
         s = r.colors;
       return t
         .map((l) => {
@@ -9207,19 +9213,19 @@ ${D.description}`);
         .join('');
     }
     function Nu(t, e) {
-      let r = e.colors.content;
+      const r = e.colors.content;
       return r.open + Pu(t) + r.close;
     }
     function bc(t, e) {
-      let r = e.colors.comment;
+      const r = e.colors.comment;
       return `${r.open}<!--${Pu(t)}-->${r.close}`;
     }
     function En(t, e, r, n, o) {
-      let a = n.colors.tag;
+      const a = n.colors.tag;
       return `${a.open}<${t}${e && a.close + e + n.spacingOuter + o + a.open}${r ? `>${a.close}${r}${n.spacingOuter}${o}${a.open}</${t}` : `${e && !n.min ? '' : ' '}/`}>${a.close}`;
     }
     function An(t, e) {
-      let r = e.colors.tag;
+      const r = e.colors.tag;
       return `${r.open}<${t}${r.close} \u2026${r.open} />${r.close}`;
     }
     var Ec = 1,
@@ -9235,7 +9241,7 @@ ${D.description}`);
       }
     }
     function Cc(t) {
-      let e = t.constructor.name,
+      const e = t.constructor.name,
         { nodeType: r, tagName: n } = t,
         o = (typeof n == 'string' && n.includes('-')) || Sc(t);
       return (
@@ -9261,7 +9267,7 @@ ${D.description}`);
     var xc = (t, e, r, n, o, a) => {
         if (vc(t)) return Nu(t.data, e);
         if (Dc(t)) return bc(t.data, e);
-        let u = hn(t) ? 'DocumentFragment' : t.tagName.toLowerCase();
+        const u = hn(t) ? 'DocumentFragment' : t.tagName.toLowerCase();
         return ++n > e.maxDepth
           ? An(u, e)
           : En(
@@ -9316,7 +9322,7 @@ ${D.description}`);
       return {
         next() {
           if (e < t._keys.length) {
-            let r = t._keys[e++];
+            const r = t._keys[e++];
             return { done: !1, value: [r, t.get(r)] };
           }
           return { done: !0, value: void 0 };
@@ -9324,13 +9330,13 @@ ${D.description}`);
       };
     }
     function kc(t, e, r, n, o, a) {
-      let u = pt(t._name || 'Record');
+      const u = pt(t._name || 'Record');
       return ++n > e.maxDepth
         ? nr(u)
         : `${u + Dt}{${gn(jc(t), e, r, n, o, a)}}`;
     }
     function Mc(t, e, r, n, o, a) {
-      let u = pt('Seq');
+      const u = pt('Seq');
       return ++n > e.maxDepth
         ? nr(u)
         : t[Oc]
@@ -9494,12 +9500,12 @@ ${D.description}`);
     }
     var tt = Hc();
     function Mu(t, e = []) {
-      if (Array.isArray(t)) for (let r of t) Mu(r, e);
+      if (Array.isArray(t)) for (const r of t) Mu(r, e);
       else t != null && t !== !1 && t !== '' && e.push(t);
       return e;
     }
     function Tu(t) {
-      let e = t.type;
+      const e = t.type;
       if (typeof e == 'string') return e;
       if (typeof e == 'function') return e.displayName || e.name || 'Unknown';
       if (tt.isFragment(t)) return 'React.Fragment';
@@ -9509,18 +9515,18 @@ ${D.description}`);
         if (tt.isContextConsumer(t)) return 'Context.Consumer';
         if (tt.isForwardRef(t)) {
           if (e.displayName) return e.displayName;
-          let r = e.render.displayName || e.render.name || '';
+          const r = e.render.displayName || e.render.name || '';
           return r === '' ? 'ForwardRef' : `ForwardRef(${r})`;
         }
         if (tt.isMemo(t)) {
-          let r = e.displayName || e.type.displayName || e.type.name || '';
+          const r = e.displayName || e.type.displayName || e.type.name || '';
           return r === '' ? 'Memo' : `Memo(${r})`;
         }
       }
       return 'UNDEFINED';
     }
     function Gc(t) {
-      let { props: e } = t;
+      const { props: e } = t;
       return Object.keys(e)
         .filter((r) => r !== 'children' && e[r] !== void 0)
         .sort();
@@ -9542,7 +9548,7 @@ ${D.description}`);
           ? Symbol.for('react.test.json')
           : 245830487;
     function Xc(t) {
-      let { props: e } = t;
+      const { props: e } = t;
       return e
         ? Object.keys(e)
             .filter((r) => e[r] !== void 0)
@@ -9602,14 +9608,14 @@ ${D.description}`);
     );
     var e2 = () => 'Promise{\u2026}';
     try {
-      let {
+      const {
         getPromiseDetails: t,
         kPending: e,
         kRejected: r,
       } = process.binding('util');
       Array.isArray(t(Promise.resolve())) &&
         (e2 = (n, o) => {
-          let [a, u] = t(n);
+          const [a, u] = t(n);
           return a === e
             ? 'Promise{<pending>}'
             : `Promise${a === r ? '!' : ''}{${o.inspect(u, o)}}`;
@@ -9619,7 +9625,7 @@ ${D.description}`);
       by = t2 ? Symbol.for('chai/inspect') : '@@chai/inspect',
       Ru = !1;
     try {
-      let t = tc('util');
+      const t = tc('util');
       Ru = t.inspect ? t.inspect.custom : !1;
     } catch {
       Ru = !1;
@@ -9646,7 +9652,7 @@ ${D.description}`);
       (_u = 1),
         Object.defineProperty(rr, '__esModule', { value: !0 }),
         (rr.default = g);
-      let t = 'diff-sequences',
+      const t = 'diff-sequences',
         e = 0,
         r = (E, C, v, b, S) => {
           let A = 0;
@@ -9664,7 +9670,7 @@ ${D.description}`);
             R = A[_],
             T = R;
           A[_] += r(R + 1, C, b + R - P + 1, v, S);
-          let O = E < D ? E : D;
+          const O = E < D ? E : D;
           for (_ += 1, P += 2; _ <= O; _ += 1, P += 2) {
             if (_ !== E && T < A[_]) R = A[_];
             else if (((R = T + 1), C <= R)) return _ - 1;
@@ -9678,7 +9684,7 @@ ${D.description}`);
             R = A[_],
             T = R;
           A[_] -= n(C, R - 1, v, b + R - P - 1, S);
-          let O = E < D ? E : D;
+          const O = E < D ? E : D;
           for (_ += 1, P -= 2; _ <= O; _ += 1, P -= 2) {
             if (_ !== E && A[_] < T) R = A[_];
             else if (((R = T - 1), R < C)) return _ - 1;
@@ -9695,16 +9701,16 @@ ${D.description}`);
             q = e,
             p = E < _ ? E : _;
           for (let d = 0, y = -E; d <= p; d += 1, y += 2) {
-            let x = d === 0 || (d !== E && q < D[d]),
+            const x = d === 0 || (d !== E && q < D[d]),
               w = x ? D[d] : q,
               F = x ? w : w + 1,
               I = O + F - y,
               N = r(F + 1, v, I + 1, S, A),
               k = F + N;
             if (((q = D[d]), (D[d] = k), M <= y && y <= L)) {
-              let Z = (E - 1 - (y + j)) / 2;
+              const Z = (E - 1 - (y + j)) / 2;
               if (Z <= R && P[Z] - 1 <= k) {
-                let te = O + w - (x ? y + 1 : y - 1),
+                const te = O + w - (x ? y + 1 : y - 1),
                   J = n(C, w, b, te, A),
                   ue = w - J,
                   G = te - J,
@@ -9721,7 +9727,7 @@ ${D.description}`);
                   N !== 0 &&
                     ((T.aCommonFollowing = F + 1),
                     (T.bCommonFollowing = I + 1));
-                let ye = k + 1,
+                const ye = k + 1,
                   _e = I + N + 1;
                 return (
                   (T.nChangeFollowing = E - 1),
@@ -9744,16 +9750,16 @@ ${D.description}`);
             q = e,
             p = E < R ? E : R;
           for (let d = 0, y = E; d <= p; d += 1, y -= 2) {
-            let x = d === 0 || (d !== E && P[d] < q),
+            const x = d === 0 || (d !== E && P[d] < q),
               w = x ? P[d] : q,
               F = x ? w : w - 1,
               I = O + F - y,
               N = n(C, F - 1, b, I - 1, A),
               k = F - N;
             if (((q = P[d]), (P[d] = k), M <= y && y <= L)) {
-              let Z = (E + (y - j)) / 2;
+              const Z = (E + (y - j)) / 2;
               if (Z <= _ && k - 1 <= D[Z]) {
-                let te = I - N;
+                const te = I - N;
                 if (
                   ((T.nChangePreceding = E),
                   E === k + te - C - b
@@ -9769,12 +9775,12 @@ ${D.description}`);
                     (T.aStartFollowing = v),
                     (T.bStartFollowing = S);
                 else {
-                  let J = O + w - (x ? y - 1 : y + 1),
+                  const J = O + w - (x ? y - 1 : y + 1),
                     ue = r(w, v, J, S, A);
                   (T.nCommonFollowing = ue),
                     ue !== 0 &&
                       ((T.aCommonFollowing = w), (T.bCommonFollowing = J));
-                  let G = w + ue,
+                  const G = w + ue,
                     ce = J + ue;
                   E - 1 === v + S - G - ce
                     ? ((T.aStartFollowing = v), (T.bStartFollowing = S))
@@ -9795,7 +9801,7 @@ ${D.description}`);
             M = O,
             L = O;
           if (((D[0] = C - 1), (_[0] = v), j % 2 === 0)) {
-            let q = (E || j) / 2,
+            const q = (E || j) / 2,
               p = (O + B) / 2;
             for (let d = 1; d <= p; d += 1)
               if (((M = o(d, v, S, R, A, D, M)), d < q))
@@ -9817,7 +9823,7 @@ ${D.description}`);
         l = (E, C, v, b, S, A, D, _, P, R) => {
           if (S - b < v - C) {
             if (((A = !A), A && D.length === 1)) {
-              let { foundSubsequence: Z, isCommon: te } = D[0];
+              const { foundSubsequence: Z, isCommon: te } = D[0];
               D[1] = {
                 foundSubsequence: (J, ue, G) => {
                   Z(J, G, ue);
@@ -9825,13 +9831,13 @@ ${D.description}`);
                 isCommon: (J, ue) => te(ue, J),
               };
             }
-            let N = C,
+            const N = C,
               k = v;
             (C = b), (v = S), (b = N), (S = k);
           }
-          let { foundSubsequence: T, isCommon: O } = D[A ? 1 : 0];
+          const { foundSubsequence: T, isCommon: O } = D[A ? 1 : 0];
           s(E, C, v, b, S, O, _, P, R);
-          let {
+          const {
             nChangePreceding: B,
             aEndPreceding: j,
             bEndPreceding: M,
@@ -9861,7 +9867,7 @@ ${D.description}`);
             throw new RangeError(`${t}: ${E} value ${C} is a negative integer`);
         },
         f = (E, C) => {
-          let v = typeof C;
+          const v = typeof C;
           if (v !== 'function')
             throw new TypeError(`${t}: ${E} typeof ${v} is not a function`);
         };
@@ -9870,9 +9876,9 @@ ${D.description}`);
           h('bLength', C),
           f('isCommon', v),
           f('foundSubsequence', b);
-        let S = r(0, E, 0, C, v);
+        const S = r(0, E, 0, C, v);
         if ((S !== 0 && b(S, 0, 0), E !== S || C !== S)) {
-          let A = S,
+          const A = S,
             D = S,
             _ = n(A, E - 1, D, C - 1, v),
             P = E - _,
@@ -10944,7 +10950,7 @@ ${D.description}`);
         },
       H2 = (t, e, r, n) => {
         if ((e && typeof e == 'object') || typeof e == 'function')
-          for (let o of Di(e))
+          for (const o of Di(e))
             !z2.call(t, o) &&
               o !== r &&
               vi(t, o, {
@@ -14363,7 +14369,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       });
     }
     function kn() {
-      let t = dt();
+      const t = dt();
       return sp(t);
     }
     var cr = 'storybook/interactions',
@@ -14381,11 +14387,11 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         backgroundColor: t.appBorderColor,
       })),
       fp = () => {
-        let [t, e] = Te(!0),
+        const [t, e] = Te(!0),
           r = to().getDocsUrl({ subpath: pp, versioned: !0, renderer: !0 });
         return (
           ke(() => {
-            let n = setTimeout(() => {
+            const n = setTimeout(() => {
               e(!1);
             }, 100);
             return () => clearTimeout(n);
@@ -14453,26 +14459,26 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       yp = (t) =>
         Oi(t) || Mn(t) || typeof t == 'function' || t instanceof Promise,
       Fi = (t) => {
-        let e = /unique/;
+        const e = /unique/;
         return Promise.race([t, e]).then(
           (r) => (r === e ? ['pending'] : ['fulfilled', r]),
           (r) => ['rejected', r],
         );
       },
       Fe = async (t, e, r, n, o, a) => {
-        let u = { key: t, depth: r, value: e, type: 'value', parent: void 0 };
+        const u = { key: t, depth: r, value: e, type: 'value', parent: void 0 };
         if (e && yp(e) && r < 100) {
           let i = [],
             s = 'object';
           if (Mn(e)) {
             for (let l = 0; l < e.length; l++)
               i.push(async () => {
-                let h = await Fe(l.toString(), e[l], r + 1, n);
+                const h = await Fe(l.toString(), e[l], r + 1, n);
                 return (h.parent = u), h;
               });
             s = 'array';
           } else {
-            let l = Object.getOwnPropertyNames(e);
+            const l = Object.getOwnPropertyNames(e);
             n && l.sort();
             for (let h = 0; h < l.length; h++) {
               let f;
@@ -14480,48 +14486,48 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                 f = e[l[h]];
               } catch {}
               i.push(async () => {
-                let g = await Fe(l[h], f, r + 1, n);
+                const g = await Fe(l[h], f, r + 1, n);
                 return (g.parent = u), g;
               });
             }
             if (
               (typeof e == 'function' && (s = 'function'), e instanceof Promise)
             ) {
-              let [h, f] = await Fi(e);
+              const [h, f] = await Fi(e);
               i.push(async () => {
-                let g = await Fe('<state>', h, r + 1, n);
+                const g = await Fe('<state>', h, r + 1, n);
                 return (g.parent = u), g;
               }),
                 h !== 'pending' &&
                   i.push(async () => {
-                    let g = await Fe('<value>', f, r + 1, n);
+                    const g = await Fe('<value>', f, r + 1, n);
                     return (g.parent = u), g;
                   }),
                 (s = 'promise');
             }
             if (e instanceof Map) {
-              let h = Array.from(e.entries()).map((f) => {
-                let [g, E] = f;
+              const h = Array.from(e.entries()).map((f) => {
+                const [g, E] = f;
                 return { '<key>': g, '<value>': E };
               });
               i.push(async () => {
-                let f = await Fe('<entries>', h, r + 1, n);
+                const f = await Fe('<entries>', h, r + 1, n);
                 return (f.parent = u), f;
               }),
                 i.push(async () => {
-                  let f = await Fe('size', e.size, r + 1, n);
+                  const f = await Fe('size', e.size, r + 1, n);
                   return (f.parent = u), f;
                 }),
                 (s = 'map');
             }
             if (e instanceof Set) {
-              let h = Array.from(e.entries()).map((f) => f[1]);
+              const h = Array.from(e.entries()).map((f) => f[1]);
               i.push(async () => {
-                let f = await Fe('<entries>', h, r + 1, n);
+                const f = await Fe('<entries>', h, r + 1, n);
                 return (f.parent = u), f;
               }),
                 i.push(async () => {
-                  let f = await Fe('size', e.size, r + 1, n);
+                  const f = await Fe('size', e.size, r + 1, n);
                   return (f.parent = u), f;
                 }),
                 (s = 'set');
@@ -14530,7 +14536,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
           e !== Object.prototype &&
             a &&
             i.push(async () => {
-              let l = await Fe(
+              const l = await Fe(
                 '<prototype>',
                 Object.getPrototypeOf(e),
                 r + 1,
@@ -14562,7 +14568,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         );
       },
       pr = (t, e = {}) => {
-        let r = m.useContext(Nn),
+        const r = m.useContext(Nn),
           n = t.theme || r.theme || 'chrome',
           o = t.colorScheme || r.colorScheme || 'light',
           a = Ie(e[n], e[o]);
@@ -14618,7 +14624,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         ke(() => {
           C(l);
         }, [l]);
-        let v = (w) => {
+        const v = (w) => {
             C(w), i && i(w);
           },
           b = m.Children.count(o) > 0,
@@ -14637,20 +14643,20 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             return null;
           },
           D = (w) => {
-            let F = A(w, 'tree');
+            const F = A(w, 'tree');
             return F ? Array.from(F.querySelectorAll('li')) : [];
           },
           _ = (w) => {
-            let F = A(w, 'group'),
+            const F = A(w, 'group'),
               I = F?.previousElementSibling;
             if (I && I.getAttribute('tabindex') === '-1') {
-              let N = I.parentElement,
+              const N = I.parentElement,
                 k = w.parentElement;
               S(N, k);
             }
           },
           P = (w, F) => {
-            let I = D(w);
+            const I = D(w);
             I.forEach((N) => {
               N.removeAttribute('aria-selected');
             }),
@@ -14658,9 +14664,9 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
               F === 'end' && I[I.length - 1] && S(I[I.length - 1]);
           },
           R = (w, F) => {
-            let I = D(w) || [];
+            const I = D(w) || [];
             for (let N = 0; N < I.length; N++) {
-              let k = I[N];
+              const k = I[N];
               if (k.getAttribute('aria-selected') === 'true') {
                 F === 'up' && I[N - 1]
                   ? S(I[N - 1], k)
@@ -14671,7 +14677,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             S(I[0]);
           },
           T = (w, F) => {
-            let I = w.target;
+            const I = w.target;
             (w.key === 'Enter' || w.key === ' ') && v(!E),
               w.key === 'ArrowRight' && E && !F
                 ? R(I, 'down')
@@ -14690,7 +14696,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
               k = D(I) || [],
               Z = !1;
             for (let te = 0; te < k.length; te++) {
-              let J = k[te];
+              const J = k[te];
               if (J.getAttribute('aria-selected') === 'true') {
                 N && ((Z = !0), S(N, J));
                 break;
@@ -14699,15 +14705,15 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             !Z && N && S(N), F || v(!E);
           },
           B = (w) => {
-            let F = w.currentTarget;
+            const F = w.currentTarget;
             !F.contains(document.activeElement) &&
               F.getAttribute('role') === 'tree' &&
               F.setAttribute('tabindex', '0');
           },
           j = (w) => {
-            let F = w.target;
+            const F = w.target;
             if (F.getAttribute('role') === 'tree') {
-              let I = F.querySelector('[aria-selected="true"]');
+              const I = F.querySelector('[aria-selected="true"]');
               I ? S(I) : R(F, 'down'), F.setAttribute('tabindex', '-1');
             }
           },
@@ -14715,7 +14721,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             s?.();
           },
           L = (w) => {
-            let F = w * 0.9 + 0.3;
+            const F = w * 0.9 + 0.3;
             return { paddingLeft: `${F}em`, width: `calc(100% - ${F}em)` };
           },
           { isChild: q, depth: p, hasHover: d } = m.useContext(Rn),
@@ -14762,7 +14768,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
               m.createElement('span', null, a),
             ),
           );
-        let x = Ie(Se.arrow, { [Se.open]: E });
+        const x = Ie(Se.arrow, { [Se.open]: E });
         return m.createElement(
           'li',
           { role: 'treeitem', 'aria-expanded': E, className: Se.item },
@@ -14829,7 +14835,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       },
       Tp = ['ast', 'theme', 'showKey', 'colorScheme', 'className'],
       Ce = (t, e, r, n, o) => {
-        let a = t.includes('-') ? `"${t}"` : t,
+        const a = t.includes('-') ? `"${t}"` : t,
           u = o <= 0;
         return m.createElement(
           'span',
@@ -14934,9 +14940,9 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
       Rp = xe(jn()),
       _p = ['ast', 'theme', 'previewMax', 'open', 'colorScheme', 'className'],
       _t = (t, e, r) => {
-        let n = [];
+        const n = [];
         for (let o = 0; o < t.length; o++) {
-          let a = t[o];
+          const a = t[o];
           if (
             (a.isPrototype ||
               (n.push(m.createElement(Bi, { key: a.key, ast: a, showKey: r })),
@@ -14951,7 +14957,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         return n;
       },
       Op = (t, e, r, n) => {
-        let o = t.value.length;
+        const o = t.value.length;
         return e
           ? m.createElement('span', null, 'Array(', o, ')')
           : m.createElement(
@@ -15001,7 +15007,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
               m.createElement('span', null, '}'),
             ),
       Bp = (t, e, r, n) => {
-        let { size: o } = t.value;
+        const { size: o } = t.value;
         return e
           ? m.createElement('span', null, `Map(${o})`)
           : m.createElement(
@@ -15017,7 +15023,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             );
       },
       Pp = (t, e, r) => {
-        let { size: n } = t.value;
+        const { size: n } = t.value;
         return e
           ? m.createElement('span', null, 'Set(', n, ')')
           : m.createElement(
@@ -15113,7 +15119,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
           ke(() => {
             (async () => {
               if (e.type !== 'value') {
-                let s = e.children.map((f) => f()),
+                const s = e.children.map((f) => f()),
                   l = await Promise.all(s),
                   h = (0, hi.default)(
                     (0, hi.default)({}, e),
@@ -15241,7 +15247,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         method: '#5EC1FF',
       },
       fe = () => {
-        let { base: t } = dt();
+        const { base: t } = dt();
         return t === 'dark' ? Mp : kp;
       },
       qp = /[^A-Z0-9]/i,
@@ -15315,7 +15321,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         }
       },
       Up = (t) => {
-        let e = fe();
+        const e = fe();
         return m.createElement(
           'span',
           { style: { color: e.nullish }, ...t },
@@ -15323,7 +15329,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         );
       },
       zp = (t) => {
-        let e = fe();
+        const e = fe();
         return m.createElement(
           'span',
           { style: { color: e.nullish }, ...t },
@@ -15331,7 +15337,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         );
       },
       Hp = ({ value: t, ...e }) => {
-        let r = fe();
+        const r = fe();
         return m.createElement(
           'span',
           { style: { color: r.string }, ...e },
@@ -15339,11 +15345,11 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         );
       },
       Gp = ({ value: t, ...e }) => {
-        let r = fe();
+        const r = fe();
         return m.createElement('span', { style: { color: r.number }, ...e }, t);
       },
       Vp = ({ value: t, ...e }) => {
-        let r = fe();
+        const r = fe();
         return m.createElement(
           'span',
           { style: { color: r.boolean }, ...e },
@@ -15351,14 +15357,14 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         );
       },
       Wp = ({ value: t, nested: e = !1, callsById: r }) => {
-        let n = fe();
+        const n = fe();
         if (e)
           return m.createElement(
             'span',
             { style: { color: n.base } },
             '[\u2026]',
           );
-        let o = t.slice(0, 3).map((u, i) =>
+        const o = t.slice(0, 3).map((u, i) =>
             m.createElement(nt, {
               key: `${i}--${JSON.stringify(u)}`,
               value: u,
@@ -15380,7 +15386,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             );
       },
       Yp = ({ showInspector: t, value: e, callsById: r, nested: n = !1 }) => {
-        let o = dt().base === 'dark',
+        const o = dt().base === 'dark',
           a = fe();
         if (t)
           return m.createElement(
@@ -15399,7 +15405,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             { style: { color: a.base } },
             '{\u2026}',
           );
-        let u = ji(
+        const u = ji(
           Object.entries(e)
             .slice(0, 2)
             .map(([i, s]) =>
@@ -15431,11 +15437,11 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             );
       },
       Kp = ({ name: t }) => {
-        let e = fe();
+        const e = fe();
         return m.createElement('span', { style: { color: e.instance } }, t);
       },
       Xp = ({ name: t }) => {
-        let e = fe();
+        const e = fe();
         return t
           ? m.createElement('span', { style: { color: e.function } }, t)
           : m.createElement(
@@ -15451,7 +15457,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         classNames: n = [],
         innerText: o,
       }) => {
-        let a = t ? `${t}:${e}` : e,
+        const a = t ? `${t}:${e}` : e,
           u = fe();
         return m.createElement(
           'span',
@@ -15503,7 +15509,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         );
       },
       Qp = ({ value: t }) => {
-        let e = t instanceof Date ? t.toISOString() : t,
+        const e = t instanceof Date ? t.toISOString() : t,
           [r, n, o] = e.split(/[T.Z]/),
           a = fe();
         return m.createElement(
@@ -15521,7 +15527,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         );
       },
       Zp = ({ name: t, message: e }) => {
-        let r = fe();
+        const r = fe();
         return m.createElement(
           'span',
           { style: { color: r.error.name } },
@@ -15539,7 +15545,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         );
       },
       ed = ({ flags: t, source: e }) => {
-        let r = fe();
+        const r = fe();
         return m.createElement(
           'span',
           { style: { whiteSpace: 'nowrap', color: r.regex.flags } },
@@ -15550,7 +15556,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         );
       },
       td = ({ description: t }) => {
-        let e = fe();
+        const e = fe();
         return m.createElement(
           'span',
           { style: { whiteSpace: 'nowrap', color: e.instance } },
@@ -15561,11 +15567,11 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         );
       },
       rd = ({ value: t }) => {
-        let e = fe();
+        const e = fe();
         return m.createElement('span', { style: { color: e.meta } }, $p(t));
       },
       nd = ({ label: t }) => {
-        let e = fe(),
+        const e = fe(),
           { typography: r } = dt();
         return m.createElement(
           'span',
@@ -15583,8 +15589,8 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         if (!t) return null;
         if (t.method === 'step' && t.path.length === 0)
           return m.createElement(nd, { label: t.args[0] });
-        let r = t.path?.flatMap((a, u) => {
-            let i = a.__callId__;
+        const r = t.path?.flatMap((a, u) => {
+            const i = a.__callId__;
             return [
               i
                 ? m.createElement($n, {
@@ -15598,7 +15604,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
             ];
           }),
           n = t.args?.flatMap((a, u, i) => {
-            let s = m.createElement(nt, {
+            const s = m.createElement(nt, {
               key: `node${u}`,
               value: a,
               callsById: e,
@@ -15666,7 +15672,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
               })
           : m.createElement(od, null, t),
       gi = ({ message: t, style: e = {} }) => {
-        let r = kn(),
+        const r = kn(),
           n = t.split(`
 `);
         return m.createElement(
@@ -15681,11 +15687,11 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
           },
           n.flatMap((o, a) => {
             if (o.startsWith('expect(')) {
-              let f = mi(o, 7),
+              const f = mi(o, 7),
                 g = f && 7 + f.length,
                 E = f && o.slice(g).match(/\.(to|last|nth)[A-Z]\w+\(/);
               if (E) {
-                let C = g + E.index + E[0].length,
+                const C = g + E.index + E[0].length,
                   v = mi(o, C);
                 if (v)
                   return [
@@ -15708,7 +15714,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                 m.createElement(On, { key: o + a, value: o }),
                 m.createElement('br', { key: `br${a}` }),
               ];
-            let [, u, i] = o.match(/^(Expected|Received): (.*)$/) || [];
+            const [, u, i] = o.match(/^(Expected|Received): (.*)$/) || [];
             if (u && i)
               return u === 'Expected'
                 ? [
@@ -15729,7 +15735,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                     }),
                     m.createElement('br', { key: `br${a}` }),
                   ];
-            let [, s, l] =
+            const [, s, l] =
               o.match(
                 /(Expected number|Received number|Number) of calls: (\d+)$/i,
               ) || [];
@@ -15739,7 +15745,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                 m.createElement(nt, { key: o + a, value: Number(l) }),
                 m.createElement('br', { key: `br${a}` }),
               ];
-            let [, h] = o.match(/^Received has value: (.+)$/) || [];
+            const [, h] = o.match(/^Received has value: (.+)$/) || [];
             return h
               ? [
                   'Received has value: ',
@@ -15764,7 +15770,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         justifyContent: 'center',
       }),
       id = ({ status: t }) => {
-        let e = dt();
+        const e = dt();
         switch (t) {
           case V.DONE:
             return m.createElement(Qu, {
@@ -15875,7 +15881,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
         pre: { margin: 0, padding: 0 },
       })),
       md = ({ exception: t }) => {
-        let e = kn();
+        const e = kn();
         if (_i(t)) return U(gi, { ...t });
         if (Ri(t))
           return U(
@@ -15893,7 +15899,7 @@ ${t.diff}`
             }),
             U('p', null, 'See the full stack trace in the browser console.'),
           );
-        let r = t.message.split(`
+        const r = t.message.split(`
 
 `),
           n = r.length > 1;
@@ -15915,7 +15921,7 @@ ${t.diff}`
         toggleCollapsed: i,
         pausedAt: s,
       }) => {
-        let [l, h] = Te(!1),
+        const [l, h] = Te(!1),
           f = !n.goto || !t.interceptable || !!t.ancestors?.length;
         return a
           ? null
@@ -15982,7 +15988,7 @@ ${t.diff}`
         textAlign: 'center',
       })),
       bd = ({ status: t }) => {
-        let e = {
+        const e = {
           [V.DONE]: 'Pass',
           [V.ERROR]: 'Fail',
           [V.ACTIVE]: 'Runs',
@@ -16051,7 +16057,7 @@ ${t.diff}`
         storyFileName: n,
         onScrollToEnd: o,
       }) => {
-        let a = r === V.ERROR ? 'Scroll to error' : 'Scroll to end';
+        const a = r === V.ERROR ? 'Scroll to error' : 'Scroll to end';
         return m.createElement(
           Ed,
           null,
@@ -16198,7 +16204,7 @@ ${t.diff}`
         onScrollToEnd: h,
         endRef: f,
       }) {
-        let g = kn();
+        const g = kn();
         return U(
           Rd,
           null,
@@ -16278,7 +16284,7 @@ ${t.diff}`
     }
     var Bn = { start: !1, back: !1, goto: !1, next: !1, end: !1 },
       wi = ({ log: t, calls: e, collapsed: r, setCollapsed: n }) => {
-        let o = new Map(),
+        const o = new Map(),
           a = new Map();
         return t
           .map(({ callId: u, ancestors: i, status: s }) => {
@@ -16291,7 +16297,7 @@ ${t.diff}`
             );
           })
           .map((u) => {
-            let i =
+            const i =
               u.status === V.ERROR &&
               o.get(u.ancestors.slice(-1)[0])?.status === V.ACTIVE
                 ? V.ACTIVE
@@ -16314,7 +16320,7 @@ ${t.diff}`
           });
       },
       Fd = Ft(function ({ storyId: t }) {
-        let [e, r] = Sr(cr, {
+        const [e, r] = Sr(cr, {
             controlStates: Bn,
             isErrored: !1,
             pausedAt: void 0,
@@ -16352,12 +16358,12 @@ ${t.diff}`
             () => O?.disconnect()
           );
         }, []);
-        let A = Zn(
+        const A = Zn(
           {
             [He.CALL]: b,
             [He.SYNC]: (O) => {
               r((B) => {
-                let j = wi({
+                const j = wi({
                   log: O.logItems,
                   calls: v.current,
                   collapsed: a,
@@ -16412,7 +16418,7 @@ ${t.diff}`
         );
         ke(() => {
           r((O) => {
-            let B = wi({
+            const B = wi({
               log: C.current,
               calls: v.current,
               collapsed: a,
@@ -16426,7 +16432,7 @@ ${t.diff}`
             };
           });
         }, [a]);
-        let D = zn(
+        const D = zn(
             () => ({
               start: () => A(He.START, { storyId: t }),
               back: () => A(He.BACK, { storyId: t }),
@@ -16465,7 +16471,7 @@ ${t.diff}`
             );
       });
     function Id() {
-      let [t = {}] = Sr(cr),
+      const [t = {}] = Sr(cr),
         { hasException: e, interactionsCount: r } = t;
       return m.createElement(
         'div',
@@ -16489,7 +16495,7 @@ ${t.diff}`
         title: Id,
         match: ({ viewMode: e }) => e === 'story',
         render: ({ active: e }) => {
-          let r = Un(({ state: n }) => ({ storyId: n.storyId }), []);
+          const r = Un(({ state: n }) => ({ storyId: n.storyId }), []);
           return m.createElement(
             Hn,
             { active: e },
