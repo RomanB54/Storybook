@@ -3,7 +3,7 @@ name: GitHub Pages
 on:
   push:
     branches:
-      - 'config_react_webpack'
+      - 'github-pages'
 
 permissions:
   contents: read
