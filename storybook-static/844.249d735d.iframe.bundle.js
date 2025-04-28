@@ -12438,14 +12438,12 @@
                   V = { type: 'text', value: ''.concat(k, '\n') };
                 if (0 === B) {
                   var I = v(
-                    d
-                      .slice(f + 1, g)
-                      .concat(
-                        fi({
-                          children: [V],
-                          className: E.properties.className,
-                        }),
-                      ),
+                    d.slice(f + 1, g).concat(
+                      fi({
+                        children: [V],
+                        className: E.properties.className,
+                      }),
+                    ),
                     j,
                   );
                   h.push(I);

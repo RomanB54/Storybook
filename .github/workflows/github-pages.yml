@@ -1,7 +1,9 @@
 name: GitHub Pages
 
 on:
-  pull_request:
+  push:
+    branches:
+      - 'config_react_webpack'
 
 permissions:
   contents: read
