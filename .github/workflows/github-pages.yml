@@ -1,7 +1,9 @@
-name: GitHub Pages
+name: Deploy Storybook
 
 on:
-  pull_request:
+  push:
+    branches:
+      - master
 
 permissions:
   contents: read
