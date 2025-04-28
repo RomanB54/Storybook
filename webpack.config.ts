@@ -1,58 +1,33 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-module.exports = {
+import type { Configuration } from 'webpack';
+
+const config: Configuration = {
   mode: 'development',
-  entry: ['./src/index.ts'],
+  entry: './src/index.tsx',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js', '.jsx'],
   },
   module: {
     rules: [
       {
-        test: /\.(?:js|mjs|cjs|ts)$/,
+        test: /\.(ts|tsx|js|jsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            targets: 'defaults',
-            presets: [
-              ['@babel/preset-env', { targets: 'defaults' }],
-              '@babel/preset-typescript',
-            ],
-          },
-        },
+        use: 'babel-loader',
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
-        generator: {
-          filename: 'img/[name][ext]',
-        },
-      },
-      {
-        exclude: /node_modules/,
-        test: /\.css$/i,
+        test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
+      { test: /\.(png|jpe?g|gif)$/i, use: ['file-loader'] },
     ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: 'src/index.html',
-    }),
-    // new MiniCssExtractPlugin(),
-  ],
-  devServer: {
-    static: {
-      directory: path.join(__dirname, 'public'),
-    },
-    compress: true,
-    port: 9000,
-  },
+  plugins: [new HtmlWebpackPlugin({ template: 'public/index.html' })],
 };
+
+export default config;

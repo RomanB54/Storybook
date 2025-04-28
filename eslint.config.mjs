@@ -23,4 +23,7 @@ export default tseslint.config(
     files: ['srcjs/*.js'],
     ...jest.configs['flat/recommended'],
   },
+  {
+    ignores: ['storybook-static/*'],
+  },
 );
